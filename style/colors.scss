@@ -1,19 +1,19 @@
 @mixin theme-2-cores($theme-name, $angulo, $color1, $color2) {
-    $color: str_slice("#{$color1}", 2, 7);
     .theme-#{$theme-name} #page #page-header::before,
     .theme-#{$theme-name} .block div.header,
     .theme-#{$theme-name} .navbar .btn-navbar,
     .theme-select-#{$theme-name} .preview,
     .theme-#{$theme-name} #loginone-wrapper #loginbtn {
-        background: "##{$color}";
+        background: $color1;
         background: -moz-linear-gradient($angulo, $color1, $color2);
         background: -webkit-linear-gradient($angulo, $color1, $color2);
         background: linear-gradient($angulo, $color1, $color2);
     }
     .theme-#{$theme-name} #loginone-wrapper .login-icone i {
-        color: "##{$color}";
+        color: $color1;
     }
     .theme-#{$theme-name} #loginone-wrapper {
+        $color: str_slice("#{$color1}", 2, 7);
         background: #fff url(../../../degrade/pix/background/#{$color}.jpg) no-repeat fixed 50%;
     }
 }
@@ -70,7 +70,7 @@
 
 @include theme-2-cores('red7', 30deg, #fc354c, #0abfbc);
 
-@include theme-2-cores('red8', 30deg, #86377b 20%, #27273c 80%);
+@include theme-2-cores('red8', 30deg, #86377b, #27273c);
 
 @include theme-3-cores('black1', 135deg, #070000, #4c0001, #070000);
 
