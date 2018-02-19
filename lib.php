@@ -93,6 +93,10 @@ function theme_degrade_set_customcss($css, $customcss) {
     return $css;
 }
 
+/**
+ * @param $css
+ * @return mixed
+ */
 function theme_degrade_set_awesome($css) {
     global $CFG;
 
@@ -145,28 +149,34 @@ function theme_degrade_get_html_for_settings(renderer_base $output, moodle_page 
 }
 
 /**
- * All theme functions should start with theme_degrade_
- *
- * @deprecated since 2.5.1
+ * @return string
  */
-function degrade_process_css() {
-    throw new coding_exception('Please call theme_' . __FUNCTION__ . ' instead of ' . __FUNCTION__);
+function theme_degrade_get_favicon() {
+    global $PAGE, $OUTPUT;
+    if (!empty($PAGE->theme->settings->favicon)) {
+        return $PAGE->theme->setting_file_url('favicon', 'favicon');
+    } else {
+        return $OUTPUT->image_url('favicon', 'theme');
+    }
 }
 
 /**
- * All theme functions should start with theme_degrade_
- *
- * @deprecated since 2.5.1
+ * @param $startclass
+ * @param $course
+ * @return array
  */
-function degrade_set_logo() {
-    throw new coding_exception('Please call theme_' . __FUNCTION__ . ' instead of ' . __FUNCTION__);
-}
+function theme_degrade_get_classes($startclass, $course) {
+    global $CFG;
+    $additionalclasses = array($startclass);
 
-/**
- * All theme functions should start with theme_degrade_
- *
- * @deprecated since 2.5.1
- */
-function degrade_set_customcss() {
-    throw new coding_exception('Please call theme_' . __FUNCTION__ . ' instead of ' . __FUNCTION__);
+    if (isloggedin()) {
+        $additionalclasses[] = 'logado';
+    }
+    if (isset($course->id) && $course->id != $CFG->defaulthomepage && $course->id > 1) {
+        $additionalclasses[] = 'area-courses';
+    }
+
+    $additionalclasses[] = 'theme-' . $this->page->theme->settings->background_color;
+
+    return $additionalclasses;
 }

@@ -27,11 +27,6 @@ defined('MOODLE_INTERNAL') || die;
 // Get the HTML for the settings bits.
 $html = theme_degrade_get_html_for_settings($OUTPUT, $PAGE);
 
-if (!empty($PAGE->theme->settings->favicon)) {
-    $favicon = $PAGE->theme->setting_file_url('favicon', 'favicon');
-} else {
-    $favicon = $OUTPUT->favicon();
-}
 
 $PAGE->requires->jquery();
 $PAGE->requires->js('/theme/degrade/js/degrade.js');
@@ -40,26 +35,14 @@ echo $OUTPUT->doctype() ?>
 <html <?php echo $OUTPUT->htmlattributes(); ?>>
 <head>
     <title><?php echo $OUTPUT->page_title(); ?></title>
-    <link rel="shortcut icon" href="<?php echo $favicon; ?>"/>
+    <link rel="shortcut icon" href="<?php echo theme_degrade_get_favicon(); ?>"/>
     <?php echo $OUTPUT->standard_head_html() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600"/>
 </head>
 
 
-<?php
-$additionalclasses = array('one-column');
-if (isloggedin()) {
-    $additionalclasses[] = 'logado';
-}
-if (isset($COURSE->id) && $COURSE->id != $CFG->defaulthomepage && $COURSE->id > 1) {
-    $additionalclasses[] = 'area-courses';
-}
-
-$additionalclasses[] = 'theme-' . $this->page->theme->settings->background_color;
-
-?>
-<body <?php echo $OUTPUT->body_attributes($additionalclasses); ?>>
+<body <?php echo $OUTPUT->body_attributes(theme_degrade_get_classes('one-column', $COURSE)); ?>>
 
 <?php
 echo $OUTPUT->standard_top_of_body_html();
