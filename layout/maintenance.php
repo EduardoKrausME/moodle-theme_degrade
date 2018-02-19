@@ -22,13 +22,16 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 // Get the HTML for the settings bits.
 $html = theme_degrade_get_html_for_settings($OUTPUT, $PAGE);
 
-if (!empty($PAGE->theme->settings->favicon))
+if (!empty($PAGE->theme->settings->favicon)) {
     $favicon = $PAGE->theme->setting_file_url('favicon', 'favicon');
-else
+} else {
     $favicon = $OUTPUT->favicon();
+}
 
 $PAGE->requires->jquery();
 $PAGE->requires->js('/theme/degrade/js/degrade.js');
@@ -61,7 +64,7 @@ echo $OUTPUT->doctype() ?>
 
     <footer id="page-footer">
         <?php
-        require 'ui/footer.php';
+        require('ui/footer.php');
         ?>
     </footer>
 

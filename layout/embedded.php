@@ -22,10 +22,13 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-if (!empty($PAGE->theme->settings->favicon))
+defined('MOODLE_INTERNAL') || die;
+
+if (!empty($PAGE->theme->settings->favicon)) {
     $favicon = $PAGE->theme->setting_file_url('favicon', 'favicon');
-else
+} else {
     $favicon = $OUTPUT->favicon();
+}
 
 echo $OUTPUT->doctype() ?>
 <html <?php echo $OUTPUT->htmlattributes(); ?>>

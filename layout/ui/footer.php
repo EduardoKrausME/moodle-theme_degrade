@@ -1,9 +1,34 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-if (empty($PAGE->theme->settings->footnote))
+/**
+ * The Footer layout.
+ *
+ * @package   theme_degrade
+ * @copyright 2018 Eduardo Kraus
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+defined('MOODLE_INTERNAL') || die;
+
+if (empty($PAGE->theme->settings->footnote)) {
     $class1 = 'span6';
-else
+} else {
     $class1 = 'span3';
+}
 ?>
 
     <div class="row-fluid">
@@ -14,7 +39,6 @@ else
                 <div class="region-content">
                     <?php
                     echo $OUTPUT->login_info();
-                    //echo $OUTPUT->home_link();
                     echo $OUTPUT->standard_footer_html();
                     ?>
                 </div>
@@ -41,39 +65,50 @@ else
 
                     <?php
 
-                    if (!empty($PAGE->theme->settings->android))
+                    if (!empty($PAGE->theme->settings->android)) {
                         echo '<a target="_blank" href="' . $PAGE->theme->settings->android . '"><span
                         class="footer-icon android"><i class="fa fa-android"></i></span></a>';
-                    if (!empty($PAGE->theme->settings->apple))
+                    }
+                    if (!empty($PAGE->theme->settings->apple)) {
                         echo '<a target="_blank" href="' . $PAGE->theme->settings->apple . '"><span
                         class="footer-icon apple"><i class="fa fa-apple"></i></span></a> ';
-                    if (!empty($PAGE->theme->settings->youtube))
+                    }
+                    if (!empty($PAGE->theme->settings->youtube)) {
                         echo '<a target="_blank" href="' . $PAGE->theme->settings->youtube . '"><span
                         class="footer-icon youtube"><i class="fa fa-youtube"></i></span></a> ';
-                    if (!empty($PAGE->theme->settings->pinterest))
+                    }
+                    if (!empty($PAGE->theme->settings->pinterest)) {
                         echo '<a target="_blank" href="' . $PAGE->theme->settings->pinterest . '"><span
                         class="footer-icon pinterest"><i class="fa fa-pinterest"></i></span></a> ';
-                    if (!empty($PAGE->theme->settings->linkedin))
+                    }
+                    if (!empty($PAGE->theme->settings->linkedin)) {
                         echo '<a target="_blank" href="' . $PAGE->theme->settings->linkedin . '"><span
                         class="footer-icon linkedin"><i class="fa fa-linkedin"></i></span></a> ';
-                    if (!empty($PAGE->theme->settings->instagram))
+                    }
+                    if (!empty($PAGE->theme->settings->instagram)) {
                         echo '<a target="_blank" href="' . $PAGE->theme->settings->instagram . '"><span
                         class="footer-icon instagram"><i class="fa fa-instagram"></i></span></a> ';
-                    if (!empty($PAGE->theme->settings->flickr))
+                    }
+                    if (!empty($PAGE->theme->settings->flickr)) {
                         echo '<a target="_blank" href="' . $PAGE->theme->settings->flickr . '"><span
                         class="footer-icon flickr"><i class="fa fa-flickr"></i></span></a> ';
-                    if (!empty($PAGE->theme->settings->googleplus))
+                    }
+                    if (!empty($PAGE->theme->settings->googleplus)) {
                         echo '<a target="_blank" href="' . $PAGE->theme->settings->googleplus . '"><span
                         class="footer-icon googleplus"><i class="fa fa-google-plus"></i></span></a> ';
-                    if (!empty($PAGE->theme->settings->twitter))
+                    }
+                    if (!empty($PAGE->theme->settings->twitter)) {
                         echo '<a target="_blank" href="' . $PAGE->theme->settings->twitter . '"><span
                         class="footer-icon twitter"><i class="fa fa-twitter"></i></span></a> ';
-                    if (!empty($PAGE->theme->settings->facebook))
+                    }
+                    if (!empty($PAGE->theme->settings->facebook)) {
                         echo '<a target="_blank" href="' . $PAGE->theme->settings->facebook . '"><span
                         class="footer-icon facebook"><i class="fa fa-facebook"></i></span></a> ';
-                    if (!empty($PAGE->theme->settings->website))
+                    }
+                    if (!empty($PAGE->theme->settings->website)) {
                         echo '<a target="_blank" href="' . $PAGE->theme->settings->website . '"><span
                         class="footer-icon website"><i class="fa fa-globe"></i></span></a> ';
+                    }
                     ?>
 
                 </div>
@@ -89,5 +124,5 @@ if (!empty($PAGE->theme->settings->footdeveloper)) { ?>
             Desenvolvido com <span class="heart">♥︎</span> por
             <a target="_blank" href="https://www.eduardokraus.com/">Eduardo Kraus</a>
         </p>
-    </div>
-<?php } ?>
+    </div><?php
+}

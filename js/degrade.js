@@ -2,7 +2,6 @@
     "use strict";
     var win = $(window);
 
-
     var navbar = $('.navbar');
     win.scroll(function () {
         var scroll_top = $(this).scrollTop();
@@ -13,7 +12,6 @@
         }
     });
 }(jQuery));
-
 
 function themeSelectTest(teme) {
     removeClassRegex($('body'), /^theme-/);
@@ -28,4 +26,3 @@ function removeClassRegex(element, regex) {
         }).join(' ');
     });
 };
-

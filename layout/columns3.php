@@ -20,6 +20,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 // Get the HTML for the settings bits.
 $html = theme_degrade_get_html_for_settings($OUTPUT, $PAGE);
 
@@ -36,10 +38,11 @@ if (right_to_left()) {
     $sidepost = 'span3 desktop-first-column';
 }
 
-if (!empty($PAGE->theme->settings->favicon))
+if (!empty($PAGE->theme->settings->favicon)) {
     $favicon = $PAGE->theme->setting_file_url('favicon', 'favicon');
-else
+} else {
     $favicon = $OUTPUT->favicon();
+}
 
 $PAGE->requires->jquery();
 $PAGE->requires->js('/theme/degrade/js/degrade.js');
@@ -54,13 +57,14 @@ echo $OUTPUT->doctype() ?>
     <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600"/>
 </head>
 
-
 <?php
 $additionalclasses = array('three-column');
-if (isloggedin())
+if (isloggedin()) {
     $additionalclasses[] = 'logado';
-if (isset($COURSE->id) && $COURSE->id != $CFG->defaulthomepage && $COURSE->id > 1)
+}
+if (isset($COURSE->id) && $COURSE->id != $CFG->defaulthomepage && $COURSE->id > 1) {
     $additionalclasses[] = 'area-courses';
+}
 
 $additionalclasses[] = 'theme-' . $this->page->theme->settings->background_color;
 
@@ -78,13 +82,14 @@ echo $OUTPUT->standard_top_of_body_html();
             <?php
             echo $OUTPUT->navbar_home();
             echo $OUTPUT->navbar_button();
-            if (!isloggedin())
+            if (!isloggedin()) {
                 echo $OUTPUT->user_menu();
+            }
             echo $OUTPUT->search_box(); ?>
             <div class="nav-collapse collapse">
                 <?php echo $OUTPUT->custom_menu(); ?>
                 <ul class="nav pull-right">
-                    <?php require_once 'ui/user-right.php' ?>
+                    <?php require('ui/user-right.php') ?>
                     <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
                 </ul>
             </div>
@@ -114,7 +119,7 @@ echo $OUTPUT->standard_top_of_body_html();
 
     <footer id="page-footer">
         <?php
-        require 'ui/footer.php';
+        require('ui/footer.php');
         ?>
     </footer>
 
