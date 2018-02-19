@@ -2,27 +2,7 @@
 
 ## instalando
 
-#### No Linux via GIT
-
-Vá na pasta [pasta_instalacao_moodle]/theme e execute:
-
-```
-git clone https://github.com/EduardoKrausME/moodle-theme_degrade degrade
-```
-
-Após vá em _Administração do site_ >> _Avisos_ e instale o tema Degrade
-
-#### Via instalador de plugins do Moodle
-
-Baixe o arquivo degrade.zip em https://github.com/EduardoKrausME/moodle-theme_degrade/releases/latest e envie ele no instalador de plugins do Moodle
-
-Após vá em _Administração do site_ >> _Avisos_ e instale o Degrade
-
-#### Por FTP
-
-Baixe o arquivo degrade.zip em https://github.com/EduardoKrausME/moodle-theme_degrade/releases/latest descompacte e envie todos os arquivos baixados para a pasta ``[pasta_instalacao_moodle]/theme/``
-
-Após vá em _Administração do site_ >> _Avisos_ e instale o Degrade
+[Veja na Wiki o manual de instalação](https://github.com/EduardoKrausME/moodle-theme_degrade/wiki/Instalando)
 
 ## prints
 
