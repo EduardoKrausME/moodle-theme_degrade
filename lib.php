@@ -166,7 +166,7 @@ function theme_degrade_get_favicon() {
  * @return array
  */
 function theme_degrade_get_classes($startclass, $course) {
-    global $CFG;
+    global $CFG, $PAGE;
     $additionalclasses = array($startclass);
 
     if (isloggedin()) {
@@ -176,7 +176,7 @@ function theme_degrade_get_classes($startclass, $course) {
         $additionalclasses[] = 'area-courses';
     }
 
-    $additionalclasses[] = 'theme-' . $this->page->theme->settings->background_color;
+    $additionalclasses[] = 'theme-' . $PAGE->theme->settings->background_color;
 
     return $additionalclasses;
 }
