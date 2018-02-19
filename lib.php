@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * The lib file.
+ *
  * @package   theme_degrade
  * @copyright 2018 Eduardo Kraus
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -94,7 +96,10 @@ function theme_degrade_set_customcss($css, $customcss) {
 }
 
 /**
- * @param $css
+ * Set Awesome link.
+ *
+ * @param string $css The return link css
+ *
  * @return mixed
  */
 function theme_degrade_set_awesome($css) {
@@ -123,7 +128,6 @@ function theme_degrade_set_awesome($css) {
  *      - footnote HTML to use as a footnote. By default ''.
  */
 function theme_degrade_get_html_for_settings(renderer_base $output, moodle_page $page) {
-    global $CFG;
     $return = new stdClass;
 
     $return->navbarclass = '';
@@ -149,6 +153,8 @@ function theme_degrade_get_html_for_settings(renderer_base $output, moodle_page 
 }
 
 /**
+ * get Favicon URL.
+ *
  * @return string
  */
 function theme_degrade_get_favicon() {
@@ -161,8 +167,11 @@ function theme_degrade_get_favicon() {
 }
 
 /**
- * @param $startclass
- * @param $course
+ * Get Classes body.
+ *
+ * @param string $startclass The start Class
+ * @param stdClass $course The course
+ *
  * @return array
  */
 function theme_degrade_get_classes($startclass, $course) {

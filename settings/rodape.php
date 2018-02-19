@@ -17,9 +17,9 @@
 /**
  * The Setting rodapé layout..
  *
- * User: Eduardo Kraus
- * Date: 30/01/2018
- * Time: 09:11
+ * @package    theme_degrade
+ * @copyright  2018 Eduardo Kraus
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();

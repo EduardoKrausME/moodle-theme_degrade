@@ -10,7 +10,12 @@ body {
 *:focus {
     outline: none;
 }
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     line-height: 2.46rem;
     font-weight: 400;
 }
@@ -120,7 +125,8 @@ header.navbar {
         background: transparent;
         box-shadow: none;
         color: #fff;
-        a, span {
+        a,
+        span {
             color: rgba(255, 255, 255, 0.85);
         }
         .nologo {
@@ -202,7 +208,8 @@ header.navbar {
             background-color: rgba(245, 245, 245, 0.15);
             > li {
                 text-shadow: none;
-                a, span {
+                a,
+                span {
                     color: #fff;
                 }
                 img.icon {
@@ -477,7 +484,8 @@ header.navbar {
     fieldset {
         min-width: 200px;
     }
-    textarea[cols], input[size] {
+    textarea[cols],
+    input[size] {
         max-width: 95%;
     }
 }
