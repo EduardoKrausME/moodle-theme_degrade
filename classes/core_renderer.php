@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-require_once ( $CFG->dirroot . '/theme/bootstrapbase/renderers.php' );
+require_once($CFG->dirroot . '/theme/bootstrapbase/renderers.php');
 
 /**
  * Degrade core renderers.
@@ -23,29 +23,28 @@ require_once ( $CFG->dirroot . '/theme/bootstrapbase/renderers.php' );
  * @copyright  2015 Frédéric Massart - FMCorz.net
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class theme_degrade_core_renderer extends theme_bootstrapbase_core_renderer
-{
+class theme_degrade_core_renderer extends theme_bootstrapbase_core_renderer {
 
     /**
      * Either returns the parent version of the header bar, or a version with the logo replacing the header.
      *
      * @since Moodle 2.9
      *
-     * @param array $headerinfo   An array of header information, dependant on what type of header is being displayed.
+     * @param array $headerinfo An array of header information, dependant on what type of header is being displayed.
      *                            The following array example is user specific. heading => Override the page heading.
      *                            user => User object. usercontext => user context.
-     * @param int   $headinglevel What level the 'h' tag will be.
+     * @param int $headinglevel What level the 'h' tag will be.
      *
      * @return string HTML for the header bar.
      */
-    public function context_header ( $headerinfo = null, $headinglevel = 1 )
-    {
-        if ( $this->should_render_logo ( $headinglevel ) ) {
-            return html_writer::tag ( 'div', '', array( 'class' => 'logo' ) );
+    public function context_header($headerinfo = null, $headinglevel = 1) {
+        if ($this->should_render_logo($headinglevel)) {
+            return html_writer::tag('div', '', array('class' => 'logo'));
         }
-        $headerinfo = null; $headinglevel = 1;
+        $headerinfo = null;
+        $headinglevel = 1;
 
-        return parent::context_header ( $headerinfo, $headinglevel );
+        return parent::context_header($headerinfo, $headinglevel);
     }
 
     /**
@@ -55,14 +54,13 @@ class theme_degrade_core_renderer extends theme_bootstrapbase_core_renderer
      *
      * @return bool Should the logo be rendered.
      */
-    protected function should_render_logo ( $headinglevel = 1 )
-    {
+    protected function should_render_logo($headinglevel = 1) {
         global $PAGE;
 
         // Only render the logo if we're on the front page or login page
         // and the theme has a logo.
-        if ( $headinglevel == 1 && !empty( $this->page->theme->settings->logo ) ) {
-            if ( $PAGE->pagelayout == 'frontpage' || $PAGE->pagelayout == 'login' ) {
+        if ($headinglevel == 1 && !empty($this->page->theme->settings->logo)) {
+            if ($PAGE->pagelayout == 'frontpage' || $PAGE->pagelayout == 'login') {
                 return true;
             }
         }
@@ -79,29 +77,28 @@ class theme_degrade_core_renderer extends theme_bootstrapbase_core_renderer
      *
      * @return string The site name, the small logo or both depending on the theme settings.
      */
-    public function navbar_home ( $returnlink = true )
-    {
+    public function navbar_home($returnlink = true) {
         global $CFG, $SITE;
 
-        $imageurl = $this->page->theme->setting_file_url ( 'logo', 'logo' );
-        if ( !empty( $imageurl ) ) {
-            $image = html_writer::img ( $imageurl, get_string ( 'sitelogo', 'theme_' . $this->page->theme->name ),
-                array( 'class' => 'logo-title' ) );
+        $imageurl = $this->page->theme->setting_file_url('logo', 'logo');
+        if (!empty($imageurl)) {
+            $image = html_writer::img($imageurl, get_string('sitelogo', 'theme_' . $this->page->theme->name),
+                array('class' => 'logo-title'));
 
-            if ( $returnlink ) {
-                return html_writer::link ( $CFG->wwwroot, $image,
-                    array( 'class' => 'logo-container', 'title' => get_string ( 'home' ) ) );
+            if ($returnlink) {
+                return html_writer::link($CFG->wwwroot, $image,
+                    array('class' => 'logo-container', 'title' => get_string('home')));
             } else {
-                return html_writer::tag ( 'span', $image, array( 'class' => 'logo-container' ) );
+                return html_writer::tag('span', $image, array('class' => 'logo-container'));
             }
         }
 
-        if ( $returnlink ) {
-            return html_writer::link ( $CFG->wwwroot, $SITE->fullname,
-                array( 'class' => 'fullname-container', 'title' => get_string ( 'home' ) ) );
+        if ($returnlink) {
+            return html_writer::link($CFG->wwwroot, $SITE->fullname,
+                array('class' => 'fullname-container', 'title' => get_string('home')));
         } else {
-            return html_writer::tag ( 'span', $SITE->fullname,
-                array( 'class' => 'fullname-container' ) );
+            return html_writer::tag('span', $SITE->fullname,
+                array('class' => 'fullname-container'));
         }
     }
 }

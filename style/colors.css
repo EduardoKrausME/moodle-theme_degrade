@@ -3,314 +3,315 @@
 .theme-default .navbar .btn-navbar,
 .theme-select-default .preview,
 .theme-default #loginone-wrapper #loginbtn {
-  background: #FD81B5;
-  background: -moz-linear-gradient(45deg, #FD81B5, #C961F7, #8089FF);
-  background: -webkit-linear-gradient(45deg, #FD81B5, #C961F7, #8089FF);
-  background: linear-gradient(45deg, #FD81B5, #C961F7, #8089FF); }
-
+    background: #fd81b5;
+    background: -moz-linear-gradient(45deg, #fd81b5, #c961f7, #8089ff);
+    background: -webkit-linear-gradient(45deg, #fd81b5, #c961f7, #8089ff);
+    background: linear-gradient(45deg, #fd81b5, #c961f7, #8089ff);
+}
 .theme-default #loginone-wrapper .login-icone i {
-  color: #C961F7; }
-
+    color: #c961f7;
+}
 .theme-default #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/C961F7.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/C961F7.jpg) no-repeat fixed 50%;
+}
 .theme-green1 #page #page-header::before,
 .theme-green1 .block div.header,
 .theme-green1 .navbar .btn-navbar,
 .theme-select-green1 .preview,
 .theme-green1 #loginone-wrapper #loginbtn {
-  background: #00C3B0;
-  background: -moz-linear-gradient(30deg, #00C3B0, #339625);
-  background: -webkit-linear-gradient(30deg, #00C3B0, #339625);
-  background: linear-gradient(30deg, #00C3B0, #339625); }
-
+    background: #00c3b0;
+    background: -moz-linear-gradient(30deg, #00c3b0, #339625);
+    background: -webkit-linear-gradient(30deg, #00c3b0, #339625);
+    background: linear-gradient(30deg, #00c3b0, #339625);
+}
 .theme-green1 #loginone-wrapper .login-icone i {
-  color: #00C3B0; }
-
+    color: #00c3b0;
+}
 .theme-green1 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/00C3B0.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/00C3B0.jpg) no-repeat fixed 50%;
+}
 .theme-green2 #page #page-header::before,
 .theme-green2 .block div.header,
 .theme-green2 .navbar .btn-navbar,
 .theme-select-green2 .preview,
 .theme-green2 #loginone-wrapper #loginbtn {
-  background: #30E8BF;
-  background: -moz-linear-gradient(-45deg, #30E8BF, #FF8235);
-  background: -webkit-linear-gradient(-45deg, #30E8BF, #FF8235);
-  background: linear-gradient(-45deg, #30E8BF, #FF8235); }
-
+    background: #30e8bf;
+    background: -moz-linear-gradient(-45deg, #30e8bf, #ff8235);
+    background: -webkit-linear-gradient(-45deg, #30e8bf, #ff8235);
+    background: linear-gradient(-45deg, #30e8bf, #ff8235);
+}
 .theme-green2 #loginone-wrapper .login-icone i {
-  color: #30E8BF; }
-
+    color: #30e8bf;
+}
 .theme-green2 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/30E8BF.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/30E8BF.jpg) no-repeat fixed 50%;
+}
 .theme-green3 #page #page-header::before,
 .theme-green3 .block div.header,
 .theme-green3 .navbar .btn-navbar,
 .theme-select-green3 .preview,
 .theme-green3 #loginone-wrapper #loginbtn {
-  background: #00BF8F;
-  background: -moz-linear-gradient(-45deg, #00BF8F, #001510);
-  background: -webkit-linear-gradient(-45deg, #00BF8F, #001510);
-  background: linear-gradient(-45deg, #00BF8F, #001510); }
-
+    background: #00bf8f;
+    background: -moz-linear-gradient(-45deg, #00bf8f, #001510);
+    background: -webkit-linear-gradient(-45deg, #00bf8f, #001510);
+    background: linear-gradient(-45deg, #00bf8f, #001510);
+}
 .theme-green3 #loginone-wrapper .login-icone i {
-  color: #00BF8F; }
-
+    color: #00bf8f;
+}
 .theme-green3 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/00BF8F.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/00BF8F.jpg) no-repeat fixed 50%;
+}
 .theme-blue1 #page #page-header::before,
 .theme-blue1 .block div.header,
 .theme-blue1 .navbar .btn-navbar,
 .theme-select-blue1 .preview,
 .theme-blue1 #loginone-wrapper #loginbtn {
-  background: #007BC3;
-  background: -moz-linear-gradient(30deg, #007BC3, #2EB8B7);
-  background: -webkit-linear-gradient(30deg, #007BC3, #2EB8B7);
-  background: linear-gradient(30deg, #007BC3, #2EB8B7); }
-
+    background: #007bc3;
+    background: -moz-linear-gradient(30deg, #007bc3, #2eb8b7);
+    background: -webkit-linear-gradient(30deg, #007bc3, #2eb8b7);
+    background: linear-gradient(30deg, #007bc3, #2eb8b7);
+}
 .theme-blue1 #loginone-wrapper .login-icone i {
-  color: #007BC3; }
-
+    color: #007bc3;
+}
 .theme-blue1 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/007BC3.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/007BC3.jpg) no-repeat fixed 50%;
+}
 .theme-blue2 #page #page-header::before,
 .theme-blue2 .block div.header,
 .theme-blue2 .navbar .btn-navbar,
 .theme-select-blue2 .preview,
 .theme-blue2 #loginone-wrapper #loginbtn {
-  background: #000428;
-  background: -moz-linear-gradient(-45deg, #000428, #0074DA);
-  background: -webkit-linear-gradient(-45deg, #000428, #0074DA);
-  background: linear-gradient(-45deg, #000428, #0074DA); }
-
+    background: #000428;
+    background: -moz-linear-gradient(-45deg, #000428, #0074da);
+    background: -webkit-linear-gradient(-45deg, #000428, #0074da);
+    background: linear-gradient(-45deg, #000428, #0074da);
+}
 .theme-blue2 #loginone-wrapper .login-icone i {
-  color: #000428; }
-
+    color: #000428;
+}
 .theme-blue2 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/000428.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/000428.jpg) no-repeat fixed 50%;
+}
 .theme-blue3 #page #page-header::before,
 .theme-blue3 .block div.header,
 .theme-blue3 .navbar .btn-navbar,
 .theme-select-blue3 .preview,
 .theme-blue3 #loginone-wrapper #loginbtn {
-  background: #314755;
-  background: -moz-linear-gradient(30deg, #314755, #26A0DA);
-  background: -webkit-linear-gradient(30deg, #314755, #26A0DA);
-  background: linear-gradient(30deg, #314755, #26A0DA); }
-
+    background: #314755;
+    background: -moz-linear-gradient(30deg, #314755, #26a0da);
+    background: -webkit-linear-gradient(30deg, #314755, #26a0da);
+    background: linear-gradient(30deg, #314755, #26a0da);
+}
 .theme-blue3 #loginone-wrapper .login-icone i {
-  color: #314755; }
-
+    color: #314755;
+}
 .theme-blue3 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/314755.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/314755.jpg) no-repeat fixed 50%;
+}
 .theme-blue4 #page #page-header::before,
 .theme-blue4 .block div.header,
 .theme-blue4 .navbar .btn-navbar,
 .theme-select-blue4 .preview,
 .theme-blue4 #loginone-wrapper #loginbtn {
-  background: #03001E;
-  background: -moz-linear-gradient(30deg, #03001E, #7303C0, #EC38BC);
-  background: -webkit-linear-gradient(30deg, #03001E, #7303C0, #EC38BC);
-  background: linear-gradient(30deg, #03001E, #7303C0, #EC38BC); }
-
+    background: #03001e;
+    background: -moz-linear-gradient(30deg, #03001e, #7303c0, #ec38bc);
+    background: -webkit-linear-gradient(30deg, #03001e, #7303c0, #ec38bc);
+    background: linear-gradient(30deg, #03001e, #7303c0, #ec38bc);
+}
 .theme-blue4 #loginone-wrapper .login-icone i {
-  color: #7303C0; }
-
+    color: #7303c0;
+}
 .theme-blue4 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/7303C0.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/7303C0.jpg) no-repeat fixed 50%;
+}
 .theme-blue5 #page #page-header::before,
 .theme-blue5 .block div.header,
 .theme-blue5 .navbar .btn-navbar,
 .theme-select-blue5 .preview,
 .theme-blue5 #loginone-wrapper #loginbtn {
-  background: #00F0FF;
-  background: -moz-linear-gradient(30deg, #00F0FF, #FF00F6);
-  background: -webkit-linear-gradient(30deg, #00F0FF, #FF00F6);
-  background: linear-gradient(30deg, #00F0FF, #FF00F6); }
-
+    background: #00f0ff;
+    background: -moz-linear-gradient(30deg, #00f0ff, #ff00f6);
+    background: -webkit-linear-gradient(30deg, #00f0ff, #ff00f6);
+    background: linear-gradient(30deg, #00f0ff, #ff00f6);
+}
 .theme-blue5 #loginone-wrapper .login-icone i {
-  color: #00F0FF; }
-
+    color: #00f0ff;
+}
 .theme-blue5 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/00F0FF.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/00F0FF.jpg) no-repeat fixed 50%;
+}
 .theme-blue6 #page #page-header::before,
 .theme-blue6 .block div.header,
 .theme-blue6 .navbar .btn-navbar,
 .theme-select-blue6 .preview,
 .theme-blue6 #loginone-wrapper #loginbtn {
-  background: #83A4D4;
-  background: -moz-linear-gradient(30deg, #83A4D4, #B6FBFF);
-  background: -webkit-linear-gradient(30deg, #83A4D4, #B6FBFF);
-  background: linear-gradient(30deg, #83A4D4, #B6FBFF); }
-
+    background: #83a4d4;
+    background: -moz-linear-gradient(30deg, #83a4d4, #b6fbff);
+    background: -webkit-linear-gradient(30deg, #83a4d4, #b6fbff);
+    background: linear-gradient(30deg, #83a4d4, #b6fbff);
+}
 .theme-blue6 #loginone-wrapper .login-icone i {
-  color: #83A4D4; }
-
+    color: #83a4d4;
+}
 .theme-blue6 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/83A4D4.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/83A4D4.jpg) no-repeat fixed 50%;
+}
 .theme-red1 #page #page-header::before,
 .theme-red1 .block div.header,
 .theme-red1 .navbar .btn-navbar,
 .theme-select-red1 .preview,
 .theme-red1 #loginone-wrapper #loginbtn {
-  background: #C10F41;
-  background: -moz-linear-gradient(30deg, #C10F41, #233B88);
-  background: -webkit-linear-gradient(30deg, #C10F41, #233B88);
-  background: linear-gradient(30deg, #C10F41, #233B88); }
-
+    background: #c10f41;
+    background: -moz-linear-gradient(30deg, #c10f41, #233b88);
+    background: -webkit-linear-gradient(30deg, #c10f41, #233b88);
+    background: linear-gradient(30deg, #c10f41, #233b88);
+}
 .theme-red1 #loginone-wrapper .login-icone i {
-  color: #C10F41; }
-
+    color: #c10f41;
+}
 .theme-red1 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/C10F41.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/C10F41.jpg) no-repeat fixed 50%;
+}
 .theme-red2 #page #page-header::before,
 .theme-red2 .block div.header,
 .theme-red2 .navbar .btn-navbar,
 .theme-select-red2 .preview,
 .theme-red2 #loginone-wrapper #loginbtn {
-  background: #1A2A6C;
-  background: -moz-linear-gradient(135deg, #1A2A6C, #B21F1F, #FDBB2D);
-  background: -webkit-linear-gradient(135deg, #1A2A6C, #B21F1F, #FDBB2D);
-  background: linear-gradient(135deg, #1A2A6C, #B21F1F, #FDBB2D); }
-
+    background: #1a2a6c;
+    background: -moz-linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    background: -webkit-linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+}
 .theme-red2 #loginone-wrapper .login-icone i {
-  color: #B21F1F; }
-
+    color: #b21f1f;
+}
 .theme-red2 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/B21F1F.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/B21F1F.jpg) no-repeat fixed 50%;
+}
 .theme-red3 #page #page-header::before,
 .theme-red3 .block div.header,
 .theme-red3 .navbar .btn-navbar,
 .theme-select-red3 .preview,
 .theme-red3 #loginone-wrapper #loginbtn {
-  background: #CEAC7A;
-  background: -moz-linear-gradient(-45deg, #CEAC7A, #EF629F);
-  background: -webkit-linear-gradient(-45deg, #CEAC7A, #EF629F);
-  background: linear-gradient(-45deg, #CEAC7A, #EF629F); }
-
+    background: #ceac7a;
+    background: -moz-linear-gradient(-45deg, #ceac7a, #ef629f);
+    background: -webkit-linear-gradient(-45deg, #ceac7a, #ef629f);
+    background: linear-gradient(-45deg, #ceac7a, #ef629f);
+}
 .theme-red3 #loginone-wrapper .login-icone i {
-  color: #CEAC7A; }
-
+    color: #ceac7a;
+}
 .theme-red3 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/CEAC7A.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/CEAC7A.jpg) no-repeat fixed 50%;
+}
 .theme-red4 #page #page-header::before,
 .theme-red4 .block div.header,
 .theme-red4 .navbar .btn-navbar,
 .theme-select-red4 .preview,
 .theme-red4 #loginone-wrapper #loginbtn {
-  background: #E65C00;
-  background: -moz-linear-gradient(30deg, #E65C00, #F9D423);
-  background: -webkit-linear-gradient(30deg, #E65C00, #F9D423);
-  background: linear-gradient(30deg, #E65C00, #F9D423); }
-
+    background: #e65c00;
+    background: -moz-linear-gradient(30deg, #e65c00, #f9d423);
+    background: -webkit-linear-gradient(30deg, #e65c00, #f9d423);
+    background: linear-gradient(30deg, #e65c00, #f9d423);
+}
 .theme-red4 #loginone-wrapper .login-icone i {
-  color: #E65C00; }
-
+    color: #e65c00;
+}
 .theme-red4 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/E65C00.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/E65C00.jpg) no-repeat fixed 50%;
+}
 .theme-red5 #page #page-header::before,
 .theme-red5 .block div.header,
 .theme-red5 .navbar .btn-navbar,
 .theme-select-red5 .preview,
 .theme-red5 #loginone-wrapper #loginbtn {
-  background: #D12924;
-  background: -moz-linear-gradient(30deg, #D12924, #60090C);
-  background: -webkit-linear-gradient(30deg, #D12924, #60090C);
-  background: linear-gradient(30deg, #D12924, #60090C); }
-
+    background: #d12924;
+    background: -moz-linear-gradient(30deg, #d12924, #60090c);
+    background: -webkit-linear-gradient(30deg, #d12924, #60090c);
+    background: linear-gradient(30deg, #d12924, #60090c);
+}
 .theme-red5 #loginone-wrapper .login-icone i {
-  color: #D12924; }
-
+    color: #d12924;
+}
 .theme-red5 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/D12924.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/D12924.jpg) no-repeat fixed 50%;
+}
 .theme-red6 #page #page-header::before,
 .theme-red6 .block div.header,
 .theme-red6 .navbar .btn-navbar,
 .theme-select-red6 .preview,
 .theme-red6 #loginone-wrapper #loginbtn {
-  background: #FF512F;
-  background: -moz-linear-gradient(30deg, #FF512F, #DD2476);
-  background: -webkit-linear-gradient(30deg, #FF512F, #DD2476);
-  background: linear-gradient(30deg, #FF512F, #DD2476); }
-
+    background: #ff512f;
+    background: -moz-linear-gradient(30deg, #ff512f, #dd2476);
+    background: -webkit-linear-gradient(30deg, #ff512f, #dd2476);
+    background: linear-gradient(30deg, #ff512f, #dd2476);
+}
 .theme-red6 #loginone-wrapper .login-icone i {
-  color: #FF512F; }
-
+    color: #ff512f;
+}
 .theme-red6 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/FF512F.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/FF512F.jpg) no-repeat fixed 50%;
+}
 .theme-red7 #page #page-header::before,
 .theme-red7 .block div.header,
 .theme-red7 .navbar .btn-navbar,
 .theme-select-red7 .preview,
 .theme-red7 #loginone-wrapper #loginbtn {
-  background: #FC354C;
-  background: -moz-linear-gradient(30deg, #FC354C, #0ABFBC);
-  background: -webkit-linear-gradient(30deg, #FC354C, #0ABFBC);
-  background: linear-gradient(30deg, #FC354C, #0ABFBC); }
-
+    background: #fc354c;
+    background: -moz-linear-gradient(30deg, #fc354c, #0abfbc);
+    background: -webkit-linear-gradient(30deg, #fc354c, #0abfbc);
+    background: linear-gradient(30deg, #fc354c, #0abfbc);
+}
 .theme-red7 #loginone-wrapper .login-icone i {
-  color: #FC354C; }
-
+    color: #fc354c;
+}
 .theme-red7 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/FC354C.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/FC354C.jpg) no-repeat fixed 50%;
+}
 .theme-red8 #page #page-header::before,
 .theme-red8 .block div.header,
 .theme-red8 .navbar .btn-navbar,
 .theme-select-red8 .preview,
 .theme-red8 #loginone-wrapper #loginbtn {
-  background: #86377B 20%;
-  background: -moz-linear-gradient(30deg, #86377B 20%, #27273C 80%);
-  background: -webkit-linear-gradient(30deg, #86377B 20%, #27273C 80%);
-  background: linear-gradient(30deg, #86377B 20%, #27273C 80%); }
-
+    background: #86377b 20%;
+    background: -moz-linear-gradient(30deg, #86377b 20%, #27273c 80%);
+    background: -webkit-linear-gradient(30deg, #86377b 20%, #27273c 80%);
+    background: linear-gradient(30deg, #86377b 20%, #27273c 80%);
+}
 .theme-red8 #loginone-wrapper .login-icone i {
-  color: #86377B 20%; }
-
+    color: #86377b 20%;
+}
 .theme-red8 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/86377B.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/86377B.jpg) no-repeat fixed 50%;
+}
 .theme-black1 #page #page-header::before,
 .theme-black1 .block div.header,
 .theme-black1 .navbar .btn-navbar,
 .theme-select-black1 .preview,
 .theme-black1 #loginone-wrapper #loginbtn {
-  background: #070000;
-  background: -moz-linear-gradient(135deg, #070000, #4C0001, #070000);
-  background: -webkit-linear-gradient(135deg, #070000, #4C0001, #070000);
-  background: linear-gradient(135deg, #070000, #4C0001, #070000); }
-
+    background: #070000;
+    background: -moz-linear-gradient(135deg, #070000, #4c0001, #070000);
+    background: -webkit-linear-gradient(135deg, #070000, #4c0001, #070000);
+    background: linear-gradient(135deg, #070000, #4c0001, #070000);
+}
 .theme-black1 #loginone-wrapper .login-icone i {
-  color: #4C0001; }
-
+    color: #4c0001;
+}
 .theme-black1 #loginone-wrapper {
-  background: #FFFFFF url(../../../degrade/pix/background/4C0001.jpg) no-repeat fixed 50%; }
-
+    background: #fff url(../../../degrade/pix/background/4C0001.jpg) no-repeat fixed 50%;
+}
 .theme-select-item {
-  float: left; }
-  .theme-select-item .preview {
+    float: left;
+}
+.theme-select-item .preview {
     width: 50px;
     height: 50px;
     margin: 1.5px;
     border-radius: 6px;
     cursor: pointer;
     -webkit-transition: .3s ease-out;
-    transition: .3s ease-out; }
-
+    transition: .3s ease-out;
+}
 /*# sourceMappingURL=colors.css.map */

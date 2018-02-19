@@ -20,11 +20,13 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined ( 'MOODLE_INTERNAL' ) || die;
+defined('MOODLE_INTERNAL') || die;
 
-$plugin->version      = 2018021807; // V-.....
-$plugin->requires     = 2016051900;
-$plugin->component    = 'theme_degrade';
+$plugin->version = 2018021807; // V-.....
+$plugin->requires = 2016051900;
+$plugin->release = 'V2.7';
+$plugin->component = 'theme_degrade';
+$plugin->maturity = MATURITY_STABLE;
 $plugin->dependencies = array(
     'theme_bootstrapbase' => 2016051900
 );

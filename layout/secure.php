@@ -27,38 +27,38 @@ $html = theme_degrade_get_html_for_settings($OUTPUT, $PAGE);
 
 // Set default (LTR) layout mark-up for a three column page.
 $regionmainbox = 'span9 desktop-first-column';
-$regionmain    = 'span8 pull-right';
-$sidepre       = 'span4 desktop-first-column';
-$sidepost      = 'span3 pull-right';
+$regionmain = 'span8 pull-right';
+$sidepre = 'span4 desktop-first-column';
+$sidepost = 'span3 pull-right';
 // Reset layout mark-up for RTL languages.
-if ( right_to_left () ) {
+if (right_to_left()) {
     $regionmainbox = 'span9 pull-right';
-    $regionmain    = 'span8';
-    $sidepre       = 'span4 pull-right';
-    $sidepost      = 'span3 desktop-first-column';
+    $regionmain = 'span8';
+    $sidepre = 'span4 pull-right';
+    $sidepost = 'span3 desktop-first-column';
 }
 
-if ( !empty( $PAGE->theme->settings->favicon ) )
-    $favicon = $PAGE->theme->setting_file_url ( 'favicon', 'favicon' );
+if (!empty($PAGE->theme->settings->favicon))
+    $favicon = $PAGE->theme->setting_file_url('favicon', 'favicon');
 else
-    $favicon = $OUTPUT->favicon ();
+    $favicon = $OUTPUT->favicon();
 
 echo $OUTPUT->doctype() ?>
 <html <?php echo $OUTPUT->htmlattributes(); ?>>
 <head>
     <title><?php echo $OUTPUT->page_title(); ?></title>
-    <link rel="shortcut icon" href="<?php echo $favicon; ?>" />
+    <link rel="shortcut icon" href="<?php echo $favicon; ?>"/>
     <?php echo $OUTPUT->standard_head_html() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600" />
+    <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600"/>
 </head>
 
 
 <?php
 $additionalclasses = array();
-if ( isloggedin () )
+if (isloggedin())
     $additionalclasses[] = 'logado';
-if ( isset( $COURSE->id ) && $COURSE->id != $CFG->defaulthomepage && $COURSE->id > 1 )
+if (isset($COURSE->id) && $COURSE->id != $CFG->defaulthomepage && $COURSE->id > 1)
     $additionalclasses[] = 'area-courses';
 ?>
 <body <?php echo $OUTPUT->body_attributes(); ?>>

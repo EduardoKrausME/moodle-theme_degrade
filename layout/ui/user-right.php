@@ -1,9 +1,9 @@
 <?php
-if ( isloggedin () ) {
+if (isloggedin()) {
 
-    $userpicture       = new \user_picture( $USER );
+    $userpicture = new \user_picture($USER);
     $userpicture->size = 1;
-    $profileimageurl   = $userpicture->get_url ( $PAGE )->out ( false );
+    $profileimageurl = $userpicture->get_url($PAGE)->out(false);
     ?>
 
     <li class="icons">
@@ -14,7 +14,7 @@ if ( isloggedin () ) {
     </li>
     <li class="usericon">
         <a href="<?php echo $CFG->wwwroot ?>/user/profile.php">
-            <img src="<?php echo $profileimageurl ?>" alt="<?php echo fullname ( $USER ) ?>">
+            <img src="<?php echo $profileimageurl ?>" alt="<?php echo fullname($USER) ?>">
         </a>
     </li>
 
