@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/EduardoKrausME/moodle-theme_boost_training.svg?branch=master)](https://travis-ci.org/EduardoKrausME/moodle-theme_degrade)
+[![Build Status](https://travis-ci.org/EduardoKrausME/moodle-theme_degrade.svg?branch=master)](https://travis-ci.org/EduardoKrausME/moodle-theme_degrade)
 
 ## instalando
 
