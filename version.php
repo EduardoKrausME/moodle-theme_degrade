@@ -22,7 +22,7 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version = 2018021901; // V-.....
+$plugin->version = 2018021902; // V-.....
 $plugin->requires = 2016051900;
 $plugin->release = 'V2.9';
 $plugin->component = 'theme_degrade';

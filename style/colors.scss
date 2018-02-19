@@ -1,19 +1,19 @@
 @mixin theme-2-cores($theme-name, $angulo, $color1, $color2) {
+    $color: str_slice("#{$color1}", 2, 7);
     .theme-#{$theme-name} #page #page-header::before,
     .theme-#{$theme-name} .block div.header,
     .theme-#{$theme-name} .navbar .btn-navbar,
     .theme-select-#{$theme-name} .preview,
     .theme-#{$theme-name} #loginone-wrapper #loginbtn {
-        background: $color1;
+        background: "##{$color}";
         background: -moz-linear-gradient($angulo, $color1, $color2);
         background: -webkit-linear-gradient($angulo, $color1, $color2);
         background: linear-gradient($angulo, $color1, $color2);
     }
     .theme-#{$theme-name} #loginone-wrapper .login-icone i {
-        color: $color1;
+        color: "##{$color}";
     }
     .theme-#{$theme-name} #loginone-wrapper {
-        $color: str_slice("#{$color1}", 2, 7);
         background: #fff url(../../../degrade/pix/background/#{$color}.jpg) no-repeat fixed 50%;
     }
 }
