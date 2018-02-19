@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * The Setting cores layout.
+ *
  * User: Eduardo Kraus
  * Date: 30/01/2018
  * Time: 09:08

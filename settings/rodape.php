@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Rodapé.
+ * The Setting rodapé layout..
  *
  * User: Eduardo Kraus
  * Date: 30/01/2018

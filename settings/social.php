@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Redes Sociais.
+ * The Setting Redes Sociais layout.
  *
  * User: Eduardo Kraus
  * Date: 30/01/2018
