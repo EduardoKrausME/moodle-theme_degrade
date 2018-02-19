@@ -425,4 +425,17 @@ header.navbar.transparent li.dropdown > .dropdown-toggle .caret {
 #page-footer .developer .heart {
     color: #af010a;
 }
+@media (max-width: 767px) {
+    fieldset {
+        min-width: 200px;
+    }
+    textarea[cols], input[size] {
+        max-width: 95%;
+    }
+}
+@media (max-width: 460px) {
+    .jsenabled .admin_colourpicker {
+        width: 384px;
+    }
+}
 /*# sourceMappingURL=style.css.map */
