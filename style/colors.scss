@@ -1,0 +1,90 @@
+@mixin theme-2-cores($theme-name, $angulo, $color1, $color2) {
+    .theme-#{$theme-name} #page #page-header::before,
+    .theme-#{$theme-name} .block div.header,
+    .theme-#{$theme-name} .navbar .btn-navbar,
+    .theme-select-#{$theme-name} .preview,
+    .theme-#{$theme-name} #loginone-wrapper #loginbtn {
+        background : $color1;
+        background : -moz-linear-gradient($angulo, $color1, $color2);
+        background : -webkit-linear-gradient($angulo, $color1, $color2);
+        background : linear-gradient($angulo, $color1, $color2);
+    }
+    .theme-#{$theme-name} #loginone-wrapper .login-icone i {
+        color : $color1;
+    }
+    .theme-#{$theme-name} #loginone-wrapper{
+        $color : str_slice("#{$color1}", 2, 7);
+        background      : #FFFFFF url(../../../degrade/pix/background/#{$color}.jpg) no-repeat fixed 50%;
+    }
+}
+
+@mixin theme-3-cores($theme-name, $angulo, $color1, $color2, $color3) {
+    .theme-#{$theme-name} #page #page-header::before,
+    .theme-#{$theme-name} .block div.header,
+    .theme-#{$theme-name} .navbar .btn-navbar,
+    .theme-select-#{$theme-name} .preview,
+    .theme-#{$theme-name} #loginone-wrapper #loginbtn {
+        background : $color1;
+        background : -moz-linear-gradient($angulo, $color1, $color2, $color3);
+        background : -webkit-linear-gradient($angulo, $color1, $color2, $color3);
+        background : linear-gradient($angulo, $color1, $color2, $color3);
+    }
+    .theme-#{$theme-name} #loginone-wrapper .login-icone i {
+        color : $color2;
+    }
+    .theme-#{$theme-name} #loginone-wrapper{
+        $color : str_slice("#{$color2}", 2, 7);
+        background      : #FFFFFF url(../../../degrade/pix/background/#{$color}.jpg) no-repeat fixed 50%;
+    }
+}
+
+@include theme-3-cores('default', 45deg, #FD81B5, #C961F7, #8089FF);
+
+@include theme-2-cores('green1', 30deg, #00C3B0, #339625);
+
+@include theme-2-cores('green2', -45deg, #30E8BF, #FF8235);
+
+@include theme-2-cores('green3', -45deg, #00BF8F, #001510);
+
+@include theme-2-cores('blue1', 30deg, #007BC3, #2EB8B7);
+
+@include theme-2-cores('blue2', -45deg, #000428, #0074DA);
+
+@include theme-2-cores('blue3', 30deg, #314755, #26A0DA);
+
+@include theme-3-cores('blue4', 30deg, #03001E, #7303C0, #EC38BC);
+
+@include theme-2-cores('blue5', 30deg, #00F0FF, #FF00F6);
+
+@include theme-2-cores('blue6', 30deg, #83A4D4, #B6FBFF);
+
+@include theme-2-cores('red1', 30deg, #C10F41, #233B88);
+
+@include theme-3-cores('red2', 135deg, #1A2A6C, #B21F1F, #FDBB2D);
+
+@include theme-2-cores('red3', -45deg, #CEAC7A, #EF629F);
+
+@include theme-2-cores('red4', 30deg, #E65C00, #F9D423);
+
+@include theme-2-cores('red5', 30deg, #D12924, #60090C);
+
+@include theme-2-cores('red6', 30deg, #FF512F, #DD2476);
+
+@include theme-2-cores('red7', 30deg, #FC354C, #0ABFBC);
+
+@include theme-2-cores('red8', 30deg, #86377B 20%, #27273C 80%);
+
+@include theme-3-cores('black1', 135deg, #070000, #4C0001, #070000);
+
+.theme-select-item {
+    float : left;
+    .preview {
+        width              : 50px;
+        height             : 50px;
+        margin             : 1.5px;
+        border-radius      : 6px;
+        cursor             : pointer;
+        -webkit-transition : .3s ease-out;
+        transition         : .3s ease-out;
+    }
+}

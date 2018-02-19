@@ -1,0 +1,316 @@
+.theme-default #page #page-header::before,
+.theme-default .block div.header,
+.theme-default .navbar .btn-navbar,
+.theme-select-default .preview,
+.theme-default #loginone-wrapper #loginbtn {
+  background: #FD81B5;
+  background: -moz-linear-gradient(45deg, #FD81B5, #C961F7, #8089FF);
+  background: -webkit-linear-gradient(45deg, #FD81B5, #C961F7, #8089FF);
+  background: linear-gradient(45deg, #FD81B5, #C961F7, #8089FF); }
+
+.theme-default #loginone-wrapper .login-icone i {
+  color: #C961F7; }
+
+.theme-default #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/C961F7.jpg) no-repeat fixed 50%; }
+
+.theme-green1 #page #page-header::before,
+.theme-green1 .block div.header,
+.theme-green1 .navbar .btn-navbar,
+.theme-select-green1 .preview,
+.theme-green1 #loginone-wrapper #loginbtn {
+  background: #00C3B0;
+  background: -moz-linear-gradient(30deg, #00C3B0, #339625);
+  background: -webkit-linear-gradient(30deg, #00C3B0, #339625);
+  background: linear-gradient(30deg, #00C3B0, #339625); }
+
+.theme-green1 #loginone-wrapper .login-icone i {
+  color: #00C3B0; }
+
+.theme-green1 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/00C3B0.jpg) no-repeat fixed 50%; }
+
+.theme-green2 #page #page-header::before,
+.theme-green2 .block div.header,
+.theme-green2 .navbar .btn-navbar,
+.theme-select-green2 .preview,
+.theme-green2 #loginone-wrapper #loginbtn {
+  background: #30E8BF;
+  background: -moz-linear-gradient(-45deg, #30E8BF, #FF8235);
+  background: -webkit-linear-gradient(-45deg, #30E8BF, #FF8235);
+  background: linear-gradient(-45deg, #30E8BF, #FF8235); }
+
+.theme-green2 #loginone-wrapper .login-icone i {
+  color: #30E8BF; }
+
+.theme-green2 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/30E8BF.jpg) no-repeat fixed 50%; }
+
+.theme-green3 #page #page-header::before,
+.theme-green3 .block div.header,
+.theme-green3 .navbar .btn-navbar,
+.theme-select-green3 .preview,
+.theme-green3 #loginone-wrapper #loginbtn {
+  background: #00BF8F;
+  background: -moz-linear-gradient(-45deg, #00BF8F, #001510);
+  background: -webkit-linear-gradient(-45deg, #00BF8F, #001510);
+  background: linear-gradient(-45deg, #00BF8F, #001510); }
+
+.theme-green3 #loginone-wrapper .login-icone i {
+  color: #00BF8F; }
+
+.theme-green3 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/00BF8F.jpg) no-repeat fixed 50%; }
+
+.theme-blue1 #page #page-header::before,
+.theme-blue1 .block div.header,
+.theme-blue1 .navbar .btn-navbar,
+.theme-select-blue1 .preview,
+.theme-blue1 #loginone-wrapper #loginbtn {
+  background: #007BC3;
+  background: -moz-linear-gradient(30deg, #007BC3, #2EB8B7);
+  background: -webkit-linear-gradient(30deg, #007BC3, #2EB8B7);
+  background: linear-gradient(30deg, #007BC3, #2EB8B7); }
+
+.theme-blue1 #loginone-wrapper .login-icone i {
+  color: #007BC3; }
+
+.theme-blue1 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/007BC3.jpg) no-repeat fixed 50%; }
+
+.theme-blue2 #page #page-header::before,
+.theme-blue2 .block div.header,
+.theme-blue2 .navbar .btn-navbar,
+.theme-select-blue2 .preview,
+.theme-blue2 #loginone-wrapper #loginbtn {
+  background: #000428;
+  background: -moz-linear-gradient(-45deg, #000428, #0074DA);
+  background: -webkit-linear-gradient(-45deg, #000428, #0074DA);
+  background: linear-gradient(-45deg, #000428, #0074DA); }
+
+.theme-blue2 #loginone-wrapper .login-icone i {
+  color: #000428; }
+
+.theme-blue2 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/000428.jpg) no-repeat fixed 50%; }
+
+.theme-blue3 #page #page-header::before,
+.theme-blue3 .block div.header,
+.theme-blue3 .navbar .btn-navbar,
+.theme-select-blue3 .preview,
+.theme-blue3 #loginone-wrapper #loginbtn {
+  background: #314755;
+  background: -moz-linear-gradient(30deg, #314755, #26A0DA);
+  background: -webkit-linear-gradient(30deg, #314755, #26A0DA);
+  background: linear-gradient(30deg, #314755, #26A0DA); }
+
+.theme-blue3 #loginone-wrapper .login-icone i {
+  color: #314755; }
+
+.theme-blue3 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/314755.jpg) no-repeat fixed 50%; }
+
+.theme-blue4 #page #page-header::before,
+.theme-blue4 .block div.header,
+.theme-blue4 .navbar .btn-navbar,
+.theme-select-blue4 .preview,
+.theme-blue4 #loginone-wrapper #loginbtn {
+  background: #03001E;
+  background: -moz-linear-gradient(30deg, #03001E, #7303C0, #EC38BC);
+  background: -webkit-linear-gradient(30deg, #03001E, #7303C0, #EC38BC);
+  background: linear-gradient(30deg, #03001E, #7303C0, #EC38BC); }
+
+.theme-blue4 #loginone-wrapper .login-icone i {
+  color: #7303C0; }
+
+.theme-blue4 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/7303C0.jpg) no-repeat fixed 50%; }
+
+.theme-blue5 #page #page-header::before,
+.theme-blue5 .block div.header,
+.theme-blue5 .navbar .btn-navbar,
+.theme-select-blue5 .preview,
+.theme-blue5 #loginone-wrapper #loginbtn {
+  background: #00F0FF;
+  background: -moz-linear-gradient(30deg, #00F0FF, #FF00F6);
+  background: -webkit-linear-gradient(30deg, #00F0FF, #FF00F6);
+  background: linear-gradient(30deg, #00F0FF, #FF00F6); }
+
+.theme-blue5 #loginone-wrapper .login-icone i {
+  color: #00F0FF; }
+
+.theme-blue5 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/00F0FF.jpg) no-repeat fixed 50%; }
+
+.theme-blue6 #page #page-header::before,
+.theme-blue6 .block div.header,
+.theme-blue6 .navbar .btn-navbar,
+.theme-select-blue6 .preview,
+.theme-blue6 #loginone-wrapper #loginbtn {
+  background: #83A4D4;
+  background: -moz-linear-gradient(30deg, #83A4D4, #B6FBFF);
+  background: -webkit-linear-gradient(30deg, #83A4D4, #B6FBFF);
+  background: linear-gradient(30deg, #83A4D4, #B6FBFF); }
+
+.theme-blue6 #loginone-wrapper .login-icone i {
+  color: #83A4D4; }
+
+.theme-blue6 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/83A4D4.jpg) no-repeat fixed 50%; }
+
+.theme-red1 #page #page-header::before,
+.theme-red1 .block div.header,
+.theme-red1 .navbar .btn-navbar,
+.theme-select-red1 .preview,
+.theme-red1 #loginone-wrapper #loginbtn {
+  background: #C10F41;
+  background: -moz-linear-gradient(30deg, #C10F41, #233B88);
+  background: -webkit-linear-gradient(30deg, #C10F41, #233B88);
+  background: linear-gradient(30deg, #C10F41, #233B88); }
+
+.theme-red1 #loginone-wrapper .login-icone i {
+  color: #C10F41; }
+
+.theme-red1 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/C10F41.jpg) no-repeat fixed 50%; }
+
+.theme-red2 #page #page-header::before,
+.theme-red2 .block div.header,
+.theme-red2 .navbar .btn-navbar,
+.theme-select-red2 .preview,
+.theme-red2 #loginone-wrapper #loginbtn {
+  background: #1A2A6C;
+  background: -moz-linear-gradient(135deg, #1A2A6C, #B21F1F, #FDBB2D);
+  background: -webkit-linear-gradient(135deg, #1A2A6C, #B21F1F, #FDBB2D);
+  background: linear-gradient(135deg, #1A2A6C, #B21F1F, #FDBB2D); }
+
+.theme-red2 #loginone-wrapper .login-icone i {
+  color: #B21F1F; }
+
+.theme-red2 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/B21F1F.jpg) no-repeat fixed 50%; }
+
+.theme-red3 #page #page-header::before,
+.theme-red3 .block div.header,
+.theme-red3 .navbar .btn-navbar,
+.theme-select-red3 .preview,
+.theme-red3 #loginone-wrapper #loginbtn {
+  background: #CEAC7A;
+  background: -moz-linear-gradient(-45deg, #CEAC7A, #EF629F);
+  background: -webkit-linear-gradient(-45deg, #CEAC7A, #EF629F);
+  background: linear-gradient(-45deg, #CEAC7A, #EF629F); }
+
+.theme-red3 #loginone-wrapper .login-icone i {
+  color: #CEAC7A; }
+
+.theme-red3 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/CEAC7A.jpg) no-repeat fixed 50%; }
+
+.theme-red4 #page #page-header::before,
+.theme-red4 .block div.header,
+.theme-red4 .navbar .btn-navbar,
+.theme-select-red4 .preview,
+.theme-red4 #loginone-wrapper #loginbtn {
+  background: #E65C00;
+  background: -moz-linear-gradient(30deg, #E65C00, #F9D423);
+  background: -webkit-linear-gradient(30deg, #E65C00, #F9D423);
+  background: linear-gradient(30deg, #E65C00, #F9D423); }
+
+.theme-red4 #loginone-wrapper .login-icone i {
+  color: #E65C00; }
+
+.theme-red4 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/E65C00.jpg) no-repeat fixed 50%; }
+
+.theme-red5 #page #page-header::before,
+.theme-red5 .block div.header,
+.theme-red5 .navbar .btn-navbar,
+.theme-select-red5 .preview,
+.theme-red5 #loginone-wrapper #loginbtn {
+  background: #D12924;
+  background: -moz-linear-gradient(30deg, #D12924, #60090C);
+  background: -webkit-linear-gradient(30deg, #D12924, #60090C);
+  background: linear-gradient(30deg, #D12924, #60090C); }
+
+.theme-red5 #loginone-wrapper .login-icone i {
+  color: #D12924; }
+
+.theme-red5 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/D12924.jpg) no-repeat fixed 50%; }
+
+.theme-red6 #page #page-header::before,
+.theme-red6 .block div.header,
+.theme-red6 .navbar .btn-navbar,
+.theme-select-red6 .preview,
+.theme-red6 #loginone-wrapper #loginbtn {
+  background: #FF512F;
+  background: -moz-linear-gradient(30deg, #FF512F, #DD2476);
+  background: -webkit-linear-gradient(30deg, #FF512F, #DD2476);
+  background: linear-gradient(30deg, #FF512F, #DD2476); }
+
+.theme-red6 #loginone-wrapper .login-icone i {
+  color: #FF512F; }
+
+.theme-red6 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/FF512F.jpg) no-repeat fixed 50%; }
+
+.theme-red7 #page #page-header::before,
+.theme-red7 .block div.header,
+.theme-red7 .navbar .btn-navbar,
+.theme-select-red7 .preview,
+.theme-red7 #loginone-wrapper #loginbtn {
+  background: #FC354C;
+  background: -moz-linear-gradient(30deg, #FC354C, #0ABFBC);
+  background: -webkit-linear-gradient(30deg, #FC354C, #0ABFBC);
+  background: linear-gradient(30deg, #FC354C, #0ABFBC); }
+
+.theme-red7 #loginone-wrapper .login-icone i {
+  color: #FC354C; }
+
+.theme-red7 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/FC354C.jpg) no-repeat fixed 50%; }
+
+.theme-red8 #page #page-header::before,
+.theme-red8 .block div.header,
+.theme-red8 .navbar .btn-navbar,
+.theme-select-red8 .preview,
+.theme-red8 #loginone-wrapper #loginbtn {
+  background: #86377B 20%;
+  background: -moz-linear-gradient(30deg, #86377B 20%, #27273C 80%);
+  background: -webkit-linear-gradient(30deg, #86377B 20%, #27273C 80%);
+  background: linear-gradient(30deg, #86377B 20%, #27273C 80%); }
+
+.theme-red8 #loginone-wrapper .login-icone i {
+  color: #86377B 20%; }
+
+.theme-red8 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/86377B.jpg) no-repeat fixed 50%; }
+
+.theme-black1 #page #page-header::before,
+.theme-black1 .block div.header,
+.theme-black1 .navbar .btn-navbar,
+.theme-select-black1 .preview,
+.theme-black1 #loginone-wrapper #loginbtn {
+  background: #070000;
+  background: -moz-linear-gradient(135deg, #070000, #4C0001, #070000);
+  background: -webkit-linear-gradient(135deg, #070000, #4C0001, #070000);
+  background: linear-gradient(135deg, #070000, #4C0001, #070000); }
+
+.theme-black1 #loginone-wrapper .login-icone i {
+  color: #4C0001; }
+
+.theme-black1 #loginone-wrapper {
+  background: #FFFFFF url(../../../degrade/pix/background/4C0001.jpg) no-repeat fixed 50%; }
+
+.theme-select-item {
+  float: left; }
+  .theme-select-item .preview {
+    width: 50px;
+    height: 50px;
+    margin: 1.5px;
+    border-radius: 6px;
+    cursor: pointer;
+    -webkit-transition: .3s ease-out;
+    transition: .3s ease-out; }
+
+/*# sourceMappingURL=colors.css.map */
