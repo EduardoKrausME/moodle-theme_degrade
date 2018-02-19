@@ -2,7 +2,12 @@
 
 ## instalando
 
-[Veja na Wiki o manual de instalação](https://github.com/EduardoKrausME/moodle-theme_degrade/wiki/Instalando)
+### Português
+
+[Veja na Wiki o manual de instalação](https://github.com/EduardoKrausME/moodle-theme_degrade/wiki/BR-Instalando)
+
+### Inglês
+[See the installation guide on the Wiki](https://github.com/EduardoKrausME/moodle-theme_degrade/wiki/EN-Installing)
 
 ## prints
 
