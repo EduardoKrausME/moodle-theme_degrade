@@ -27,10 +27,6 @@ defined('MOODLE_INTERNAL') || die;
 // Get the HTML for the settings bits.
 $html = theme_degrade_get_html_for_settings($OUTPUT, $PAGE);
 
-//$PAGE->requires->css('/theme/degrade/style/login.css');
-//$PAGE->requires->css('/theme/degrade/style/colors.css');
-//$PAGE->requires->css('/theme/degrade/style/font-awesome.css');
-
 echo $OUTPUT->doctype() ?>
 <html <?php echo $OUTPUT->htmlattributes(); ?>>
 <head>
