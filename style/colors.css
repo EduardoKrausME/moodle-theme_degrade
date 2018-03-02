@@ -12,7 +12,7 @@
     color: #c961f7;
 }
 .theme-default #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/c961f7.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/c961f7]]);
 }
 .theme-green1 #page #page-header::before,
 .theme-green1 .block div.header,
@@ -28,7 +28,7 @@
     color: #00c3b0;
 }
 .theme-green1 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/00c3b0.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/00c3b0]]);
 }
 .theme-green2 #page #page-header::before,
 .theme-green2 .block div.header,
@@ -44,7 +44,7 @@
     color: #30e8bf;
 }
 .theme-green2 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/30e8bf.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/30e8bf]]);
 }
 .theme-green3 #page #page-header::before,
 .theme-green3 .block div.header,
@@ -60,7 +60,7 @@
     color: #00bf8f;
 }
 .theme-green3 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/00bf8f.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/00bf8f]]);
 }
 .theme-blue1 #page #page-header::before,
 .theme-blue1 .block div.header,
@@ -76,7 +76,7 @@
     color: #007bc3;
 }
 .theme-blue1 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/007bc3.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/007bc3]]);
 }
 .theme-blue2 #page #page-header::before,
 .theme-blue2 .block div.header,
@@ -92,7 +92,7 @@
     color: #000428;
 }
 .theme-blue2 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/000428.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/000428]]);
 }
 .theme-blue3 #page #page-header::before,
 .theme-blue3 .block div.header,
@@ -108,7 +108,7 @@
     color: #314755;
 }
 .theme-blue3 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/314755.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/314755]]);
 }
 .theme-blue4 #page #page-header::before,
 .theme-blue4 .block div.header,
@@ -124,7 +124,7 @@
     color: #7303c0;
 }
 .theme-blue4 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/7303c0.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/7303c0]]);
 }
 .theme-blue5 #page #page-header::before,
 .theme-blue5 .block div.header,
@@ -140,7 +140,7 @@
     color: #00f0ff;
 }
 .theme-blue5 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/00f0ff.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/00f0ff]]);
 }
 .theme-blue6 #page #page-header::before,
 .theme-blue6 .block div.header,
@@ -156,7 +156,7 @@
     color: #83a4d4;
 }
 .theme-blue6 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/83a4d4.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/83a4d4]]);
 }
 .theme-red1 #page #page-header::before,
 .theme-red1 .block div.header,
@@ -172,7 +172,7 @@
     color: #c10f41;
 }
 .theme-red1 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/c10f41.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/c10f41]]);
 }
 .theme-red2 #page #page-header::before,
 .theme-red2 .block div.header,
@@ -188,7 +188,7 @@
     color: #b21f1f;
 }
 .theme-red2 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/b21f1f.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/b21f1f]]);
 }
 .theme-red3 #page #page-header::before,
 .theme-red3 .block div.header,
@@ -204,7 +204,7 @@
     color: #ceac7a;
 }
 .theme-red3 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/ceac7a.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/ceac7a]]);
 }
 .theme-red4 #page #page-header::before,
 .theme-red4 .block div.header,
@@ -220,7 +220,7 @@
     color: #e65c00;
 }
 .theme-red4 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/e65c00.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/e65c00]]);
 }
 .theme-red5 #page #page-header::before,
 .theme-red5 .block div.header,
@@ -236,7 +236,7 @@
     color: #d12924;
 }
 .theme-red5 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/d12924.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/d12924]]);
 }
 .theme-red6 #page #page-header::before,
 .theme-red6 .block div.header,
@@ -252,7 +252,7 @@
     color: #ff512f;
 }
 .theme-red6 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/ff512f.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/ff512f]]);
 }
 .theme-red7 #page #page-header::before,
 .theme-red7 .block div.header,
@@ -268,7 +268,7 @@
     color: #fc354c;
 }
 .theme-red7 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/fc354c.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/fc354c]]);
 }
 .theme-red8 #page #page-header::before,
 .theme-red8 .block div.header,
@@ -284,7 +284,7 @@
     color: #86377b;
 }
 .theme-red8 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/86377b.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/86377b]]);
 }
 .theme-black1 #page #page-header::before,
 .theme-black1 .block div.header,
@@ -300,7 +300,7 @@
     color: #4c0001;
 }
 .theme-black1 #loginone-wrapper {
-    background: #fff url(../../../degrade/pix/background/4c0001.jpg) no-repeat fixed 50%;
+    background-image: url([[pix:theme|background/4c0001]]);
 }
 .theme-select-item {
     float: left;

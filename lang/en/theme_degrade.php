@@ -40,33 +40,33 @@ $string['region-side-post'] = 'Right';
 $string['region-side-pre'] = 'Left';
 
 
-$string['coresheading'] = 'Cores e logos';
-$string['coresheading_desc'] = 'Cores e logos';
+$string['coresheading'] = 'Colors and logos';
+$string['coresheading_desc'] = 'Colors and logos';
 
 $string['sitelogo'] = 'Site logo';
 
 $string['favicon'] = 'Favicon';
-$string['favicon_desc'] = 'Alterar o favicon do tema. Uma imagem .png com fundo transparente e altura de 32px terá o melhor funcionamento.';
+$string['favicon_desc'] = 'Change the favicon of the theme. A .png image with transparent background and 32px height will work best. ';
 
-$string['background_color'] = 'Cor de fundo';
-$string['background_color_desc'] = 'Cor dos cabechalhos!';
-$string['background_color_default'] = 'Tema padrão';
-$string['background_color_green'] = 'Tema Verde {$a}';
-$string['background_color_blue'] = 'Tema Azul {$a}';
-$string['background_color_red'] = 'Tema Vermelho {$a}';
-$string['background_color_black'] = 'Tema Preto {$a}';
-$string['background_color_random'] = 'Tema Randômico {$a}';
-
-
-$string['cssheading'] = 'CSS avançado';
-$string['cssheading_desc'] = 'CSS avançado';
+$string['background_color'] = 'Background color';
+$string['background_color_desc'] = 'Color of sprite!';
+$string['background_color_default'] = 'Default theme';
+$string['background_color_green'] = 'Green Theme {$a}';
+$string['background_color_blue'] = 'Blue Theme {$a}';
+$string['background_color_red'] = 'Red Theme {$a}';
+$string['background_color_black'] = 'Black Theme {$a}';
+$string['background_color_random'] = 'Random Theme {$a}';
 
 
-$string['footerheading'] = 'Rodapé';
-$string['footerheading_desc'] = 'Configurações do Rodapé do tema';
+$string['cssheading'] = 'CSS advanced';
+$string['cssheading_desc'] = 'Advanced CSS';
 
-$string['footdeveloper'] = 'Mostrar Desenvolvedor';
-$string['footdeveloper_desc'] = 'Mostre que é Desenvolvido com ♥︎ por Eduardo Kraus no rodapé';
+
+$string['footerheading'] = 'Footer';
+$string['footerheading_desc'] = 'Theme Footer Settings';
+
+$string['footdeveloper'] = 'Show Developer';
+$string['footdeveloper_desc'] = 'Show that is Developed with ♥ ︎ by Eduardo Kraus in the footer';
 
 /*****************
  * Redes Sociais

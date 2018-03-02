@@ -14,7 +14,8 @@
     }
     .theme-#{$theme-name} #loginone-wrapper {
         $color: str_slice("#{$color1}", 2, 7);
-        background: #fff url(../../../degrade/pix/background/#{$color}.jpg) no-repeat fixed 50%;
+        background-image: url([[pix:theme|background/#{$color}]]);
+         //background-image: url(../../degrade/pix/background/#{$color}.jpg);
     }
 }
 @mixin theme-3-cores($theme-name, $angulo, $color1, $color2, $color3) {
@@ -33,7 +34,8 @@
     }
     .theme-#{$theme-name} #loginone-wrapper {
         $color: str_slice("#{$color2}", 2, 7);
-        background: #fff url(../../../degrade/pix/background/#{$color}.jpg) no-repeat fixed 50%;
+        background-image: url([[pix:theme|background/#{$color}]]);
+        //background-image: url(../../degrade/pix/background/#{$color}.jpg);
     }
 }
 @include theme-3-cores('default', 45deg, #fd81b5, #c961f7, #8089ff);

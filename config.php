@@ -30,7 +30,7 @@ $CFG->defaultblocks_override = ' ';
 
 $THEME->doctype = 'html5';
 $THEME->parents = array('bootstrapbase');
-$THEME->sheets = array('font-awesome', 'blockicons', 'style', 'colors');
+$THEME->sheets = array('font-awesome', 'blockicons', 'style', 'colors', 'login');
 $THEME->supportscssoptimisation = false;
 $THEME->yuicssmodules = array();
 $THEME->enable_dock = true;
