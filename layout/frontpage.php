@@ -69,10 +69,7 @@ echo $OUTPUT->standard_top_of_body_html();
             echo $OUTPUT->search_box(); ?>
             <div class="nav-collapse collapse">
                 <?php echo $OUTPUT->custom_menu(); ?>
-                <ul class="nav pull-right">
-                    <?php require('ui/user-right.php') ?>
-                    <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
-                </ul>
+                <?php require('ui/user-right.php'); ?>
             </div>
         </div>
     </nav>

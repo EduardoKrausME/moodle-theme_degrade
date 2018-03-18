@@ -30,18 +30,72 @@ if (isloggedin()) {
     $userpicture->size = 1;
     $profileimageurl = $userpicture->get_url($PAGE)->out(false);
     ?>
+    <ul class="nav pull-right">
+        <li class="icons">
+            <a href="<?php echo $CFG->wwwroot ?>/message">
+                <i class="fa fa-comment"></i>
+            </a>
+        </li>
+        <li class="dropdown usericon">
+            <a href="<?php echo $CFG->wwwroot ?>/user/profile.php"
+               class="dropdown-toggle" data-toggle="dropdown"
+               title="<?php echo fullname($USER) ?>">
+                <img src="<?php echo $profileimageurl ?>" alt="<?php echo fullname($USER) ?>">
+            </a>
+            <ul class="dropdown-menu dropdown-user-menu">
+                <li>
+                    <a href="<?php echo $CFG->wwwroot . '/user/profile.php' ?>"><?php echo get_string('viewprofile') ?></a>
+                </li>
+                <li>
+                    <a href="<?php echo $CFG->wwwroot . 'user/edit.php' ?>"><?php echo get_string('editmyprofile') ?></a>
+                </li>
+                <li>
+                    <a href="<?php echo $CFG->wwwroot . '/user/preferences.php' ?>"><?php echo get_string('preferences') ?></a>
+                </li>
+                <?php
+                $items = user_convert_text_to_menu_items($CFG->customusermenuitems, $PAGE);
+                foreach ($items as $item) {
+                    echo "<li><a title=\"{$item->title}\"
+                                 href=\"{$item->url->out(true)}\">{$item->title}</a></li>";
+                }
+                if ($CFG->version > 2016120500 &&
+                    !is_role_switched($COURSE->id) &&
+                    has_capability('moodle/role:switchroles', context_course::instance($COURSE->id))) {
+                    $returnurl = get_current_page_url();
+                    $url = $CFG->wwwroot . '/course/switchrole.php?id=' . $COURSE->id . '&switchrole=-1&returnurl=' . $returnurl;
+                    $text = get_string('switchroleto');
 
-    <li class="icons">
-        <a href="<?php echo $CFG->wwwroot ?>/message">
-            <i class="fa fa-comment"></i>
-        </a>
-    </li>
-    <li class="usericon">
-        <a href="<?php echo $CFG->wwwroot ?>/user/profile.php">
-            <img src="<?php echo $profileimageurl ?>" alt="<?php echo fullname($USER) ?>">
-        </a>
-    </li>
+                    echo "<li>
+                              <a href=\"{$url}\">{$text}</a>
+                          </li>";
+                } ?>
+                <li>
+                    <a href="<?php echo $CFG->wwwroot . '/login/logout.php?sesskey=' . sesskey() ?>"><?php echo get_string('logout') ?></a>
+                </li>
+            </ul>
+        </li>
 
+        <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
 
+    </ul>
     <?php
+}
+
+function get_current_page_url() {
+    global $CFG;
+    $pageurl = 'http';
+
+    if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on") {
+        $pageurl .= "s";
+    }
+
+    $pageurl .= "://";
+
+    if ($_SERVER["SERVER_PORT"] != "80") {
+        $pageurl .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
+    } else {
+        $pageurl .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+    }
+
+    return str_replace($CFG->wwwroot, '', $pageurl);
 }

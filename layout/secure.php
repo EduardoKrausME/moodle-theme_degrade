@@ -70,11 +70,7 @@ if (isset($COURSE->id) && $COURSE->id != $CFG->defaulthomepage && $COURSE->id > 
             <?php echo $OUTPUT->navbar_home(false); ?>
             <?php echo $OUTPUT->navbar_button(); ?>
             <div class="nav-collapse collapse">
-                <ul class="nav pull-right">
-                    <?php require('ui/user-right.php') ?>
-                    <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
-                    <li class="navbar-text"><?php echo $OUTPUT->login_info(false) ?></li>
-                </ul>
+                <?php require('ui/user-right.php') ?>
             </div>
         </div>
     </nav>
