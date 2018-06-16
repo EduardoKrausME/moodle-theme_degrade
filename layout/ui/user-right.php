@@ -53,6 +53,9 @@ if (isloggedin()) {
                     <a href="<?php echo $CFG->wwwroot . '/user/preferences.php' ?>"><?php echo get_string('preferences') ?></a>
                 </li>
                 <?php
+                if ( !function_exists ( "user_convert_text_to_menu_items" ) ) {
+                    require ( "{$CFG->dirroot}/user/lib.php" );
+                }
                 $items = user_convert_text_to_menu_items($CFG->customusermenuitems, $PAGE);
                 foreach ($items as $item) {
                     echo "<li><a title=\"{$item->title}\"
