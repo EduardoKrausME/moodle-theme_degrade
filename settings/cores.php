@@ -58,9 +58,9 @@ $choices = [
 $htmlselect = "";
 foreach ($choices as $choice => $lang) {
     $htmlselect
-        .= "<div class=\"theme-select-{$choice} theme-select-item\" onclick=\"themeSelectTest('{$choice}')\">
-                    <div class=\"preview\"></div>
-                </div>";
+        .= "<div id=\"theme-select-{$choice}\" class=\"theme-select-{$choice} theme-select-item\" data-teme=\"{$choice}\">
+                <div class=\"preview\"></div>
+            </div>";
 }
 
 $setting = new admin_setting_configselect($name, $title, $description . $htmlselect, $default, $choices);

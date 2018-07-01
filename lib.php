@@ -191,6 +191,8 @@ function theme_degrade_get_classes($startclass, $course) {
 }
 
 /**
+ * Get current page.
+ *
  * @return mixed
  */
 function theme_degrade_get_current_page_url() {

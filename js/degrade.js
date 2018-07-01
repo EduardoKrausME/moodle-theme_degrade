@@ -11,6 +11,12 @@ require(['jquery'], function($) {
             navbar.addClass('transparent');
         }
     });
+
+    $('.theme-select-item').click(function(event) {
+        console.log(event.currentTarget);
+        var teme = $(event.currentTarget).attr('data-teme');
+        themeSelectTest(teme);
+    })
 });
 
 /**
