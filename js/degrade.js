@@ -15,7 +15,7 @@ require(['jquery'], function($) {
     $('.theme-select-item').click(function(event) {
         var theme = $(event.currentTarget).attr('data-theme');
         themeSelectTest(theme);
-    })
+    });
 });
 
 /**
