@@ -304,7 +304,8 @@ header.navbar.transparent li.dropdown > .dropdown-toggle .caret {
     padding: 0 !important;
 }
 .block div.header .moodle-actionmenu .menu {
-    width: 129%;
+    width: 270px;
+    right: -23px;
 }
 .block div.header .moodle-actionmenu .menu img {
     filter: none;

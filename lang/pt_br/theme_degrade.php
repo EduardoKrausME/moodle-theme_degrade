@@ -58,11 +58,11 @@ $string['background_color_red'] = 'Tema Vermelho {$a}';
 $string['background_color_black'] = 'Tema Preto {$a}';
 $string['background_color_random'] = 'Tema Randômico {$a}';
 
-$string['logocolor'] ='Logo topo colorida';
-$string['logocolor_desc'] ='Logo colorida do topo. Esta imagem será usada com fundo branco quando houver rolagem. Formatos aceitos: GIF, PNG, JPG e SVG';
+$string['logocolor'] = 'Logo topo colorida';
+$string['logocolor_desc'] = 'Logo colorida do topo. Esta imagem será usada com fundo branco quando houver rolagem. Formatos aceitos: GIF, PNG, JPG e SVG';
 
-$string['logowhite'] ='Logo topo branco';
-$string['logowhite_desc'] ='Logo preto e branco do topo. Esta imagem será usada com fundo colorido quando não houver rolagem. Formatos aceitos: GIF, PNG, JPG e SVG';
+$string['logowhite'] = 'Logo topo branco';
+$string['logowhite_desc'] = 'Logo preto e branco do topo. Esta imagem será usada com fundo colorido quando não houver rolagem. Formatos aceitos: GIF, PNG, JPG e SVG';
 
 $string['cssheading'] = 'CSS avançado';
 $string['cssheading_desc'] = 'Adição de CSS que sobrepões o CSS do site';

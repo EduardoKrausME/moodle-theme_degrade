@@ -54,7 +54,7 @@ if (isloggedin()) {
                 </li>
                 <?php
                 if ( !function_exists ( "user_convert_text_to_menu_items" ) ) {
-                    require ("{$CFG->dirroot}/user/lib.php");
+                    require("{$CFG->dirroot}/user/lib.php");
                 }
                 $items = user_convert_text_to_menu_items($CFG->customusermenuitems, $PAGE);
                 foreach ($items as $item) {

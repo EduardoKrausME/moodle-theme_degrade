@@ -97,9 +97,9 @@ class theme_degrade_core_renderer extends theme_bootstrapbase_core_renderer {
 
             $imageurl2 = $this->page->theme->setting_file_url('logowhite', 'logowhite');
             if (!empty($imageurl2)) {
-                $image2 = html_writer::img ( $imageurl2, get_string ( 'sitelogo', 'theme_' . $this->page->theme->name ),
-                    array( 'class' => 'logowhite-title' ) );
-            }else{
+                $image2 = html_writer::img($imageurl2, get_string('sitelogo', 'theme_' . $this->page->theme->name),
+                    array('class' => 'logowhite-title'));
+            } else {
                 $image2 = html_writer::img($imageurl1, get_string('sitelogo', 'theme_' . $this->page->theme->name),
                     array('class' => 'logowhite-title'));
             }
