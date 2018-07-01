@@ -44,7 +44,7 @@ echo $OUTPUT->doctype() ?>
 
 <?php echo $OUTPUT->standard_top_of_body_html() ?>
 
-<div id="page" class="container-fluid">
+<div class="container-fluid">
 
     <header id="page-header" class="clearfix">
         <?php echo $html->heading; ?>
@@ -55,12 +55,6 @@ echo $OUTPUT->doctype() ?>
             <?php echo $OUTPUT->main_content(); ?>
         </section>
     </div>
-
-    <footer id="page-footer">
-        <?php
-        require('ui/footer.php');
-        ?>
-    </footer>
 
     <?php echo $OUTPUT->standard_end_of_body_html() ?>
 

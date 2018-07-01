@@ -189,3 +189,25 @@ function theme_degrade_get_classes($startclass, $course) {
 
     return $additionalclasses;
 }
+
+/**
+ * @return mixed
+ */
+function theme_degrade_get_current_page_url() {
+    global $CFG;
+    $pageurl = 'http';
+
+    if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on") {
+        $pageurl .= "s";
+    }
+
+    $pageurl .= "://";
+
+    if ($_SERVER["SERVER_PORT"] != "80") {
+        $pageurl .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
+    } else {
+        $pageurl .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+    }
+
+    return str_replace($CFG->wwwroot, '', $pageurl);
+}

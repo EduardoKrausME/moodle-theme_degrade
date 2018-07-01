@@ -90,16 +90,25 @@ class theme_degrade_core_renderer extends theme_bootstrapbase_core_renderer {
     public function navbar_home($returnlink = true) {
         global $CFG, $SITE;
 
-        $imageurl = $this->page->theme->setting_file_url('logo', 'logo');
-        if (!empty($imageurl)) {
-            $image = html_writer::img($imageurl, get_string('sitelogo', 'theme_' . $this->page->theme->name),
+        $imageurl1 = $this->page->theme->setting_file_url('logo', 'logo');
+        if (!empty($imageurl1)) {
+            $image1 = html_writer::img($imageurl1, get_string('sitelogo', 'theme_' . $this->page->theme->name),
                 array('class' => 'logo-title'));
 
+            $imageurl2 = $this->page->theme->setting_file_url('logowhite', 'logowhite');
+            if (!empty($imageurl2)) {
+                $image2 = html_writer::img ( $imageurl2, get_string ( 'sitelogo', 'theme_' . $this->page->theme->name ),
+                    array( 'class' => 'logowhite-title' ) );
+            }else{
+                $image2 = html_writer::img($imageurl1, get_string('sitelogo', 'theme_' . $this->page->theme->name),
+                    array('class' => 'logowhite-title'));
+            }
+
             if ($returnlink) {
-                return html_writer::link($CFG->wwwroot, $image,
+                return html_writer::link($CFG->wwwroot, $image1.$image2,
                     array('class' => 'logo-container', 'title' => get_string('home')));
             } else {
-                return html_writer::tag('span', $image, array('class' => 'logo-container'));
+                return html_writer::tag('span', $image1.$image2, array('class' => 'logo-container'));
             }
         }
 

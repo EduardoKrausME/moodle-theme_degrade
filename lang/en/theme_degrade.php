@@ -57,6 +57,11 @@ $string['background_color_red'] = 'Red Theme {$a}';
 $string['background_color_black'] = 'Black Theme {$a}';
 $string['background_color_random'] = 'Random Theme {$a}';
 
+$string['logocolor'] = 'Colored logo top';
+$string['logocolor_desc'] = 'Colored top logo. This image will be used with white background when scrolling. Supported formats: GIF, PNG, JPG and SVG ';
+
+$string['logowhite'] = 'Logo top white';
+$string['logowhite_desc'] = 'Black and white top logo. This image will be used with colored background when there is no scrolling. Supported formats: GIF, PNG, JPG and SVG ';
 
 $string['cssheading'] = 'CSS advanced';
 $string['cssheading_desc'] = 'Advanced CSS';

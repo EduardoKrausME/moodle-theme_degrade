@@ -68,10 +68,17 @@ $setting->set_updatedcallback('theme_reset_all_caches');
 $pagesettings->add($setting);
 
 // Logo file setting.
-$title = get_string('logocompact', 'admin');
-$description = get_string('logocompact_desc', 'admin');
+$title = get_string('logocolor', 'theme_degrade');
+$description = get_string('logocolor_desc', 'theme_degrade');
 $setting = new admin_setting_configstoredfile('theme_degrade/logo', $title, $description, 'logo', 0,
-    ['maxfiles' => 1, 'accepted_types' => ['.jpg', '.png']]);
+    ['maxfiles' => 1, 'accepted_types' => ['.jpg', '.png', '.svg', '.gif']]);
+$setting->set_updatedcallback('theme_reset_all_caches');
+$pagesettings->add($setting);
+
+$title = get_string('logowhite', 'theme_degrade');
+$description = get_string('logowhite_desc', 'theme_degrade');
+$setting = new admin_setting_configstoredfile('theme_degrade/logowhite', $title, $description, 'logowhite', 0,
+    ['maxfiles' => 1, 'accepted_types' => ['.jpg', '.png', '.svg', '.gif']]);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $pagesettings->add($setting);
 

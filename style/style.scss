@@ -58,11 +58,16 @@ header.navbar {
                 img {
                     max-height: 36px;
                     margin: -8px 0;
+                    &.logo-title{
+                        display: inline;
+                    }
+                    &.logowhite-title{
+                        display: none;
+                    }
                 }
             }
         }
     }
-    
     .fullname-container {
         float: left;
     }
@@ -124,7 +129,6 @@ header.navbar {
             }
         }
     }
-    
     &.transparent {
         background: transparent;
         box-shadow: none;
@@ -136,6 +140,16 @@ header.navbar {
         .nologo {
             .fullname-container {
                 display: none;
+            }
+        }
+        .haslogo {
+            img {
+                &.logo-title{
+                    display: none !important;
+                }
+                &.logowhite-title{
+                    display: inline !important;
+                }
             }
         }
         .nav {
@@ -302,7 +316,7 @@ header.navbar {
                 background-size: contain;
             }
         }
-        
+
         .moodle-actionmenu {
             position: absolute;
             top: 2px;
@@ -498,3 +512,5 @@ header.navbar {
         width: 384px;
     }
 }
+
+/*setting:customcss*/

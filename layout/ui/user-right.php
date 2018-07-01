@@ -54,7 +54,7 @@ if (isloggedin()) {
                 </li>
                 <?php
                 if ( !function_exists ( "user_convert_text_to_menu_items" ) ) {
-                    require ( "{$CFG->dirroot}/user/lib.php" );
+                    require ("{$CFG->dirroot}/user/lib.php");
                 }
                 $items = user_convert_text_to_menu_items($CFG->customusermenuitems, $PAGE);
                 foreach ($items as $item) {
@@ -64,7 +64,7 @@ if (isloggedin()) {
                 if ($CFG->version > 2016120500 &&
                     !is_role_switched($COURSE->id) &&
                     has_capability('moodle/role:switchroles', context_course::instance($COURSE->id))) {
-                    $returnurl = get_current_page_url();
+                    $returnurl = theme_degrade_get_current_page_url();
                     $url = $CFG->wwwroot . '/course/switchrole.php?id=' . $COURSE->id . '&switchrole=-1&returnurl=' . $returnurl;
                     $text = get_string('switchroleto');
 
@@ -73,7 +73,8 @@ if (isloggedin()) {
                           </li>";
                 } ?>
                 <li>
-                    <a href="<?php echo $CFG->wwwroot . '/login/logout.php?sesskey=' . sesskey() ?>"><?php echo get_string('logout') ?></a>
+                    <?php $link = $CFG->wwwroot . '/login/logout.php?sesskey=' . sesskey()?>
+                    <a href="<?php echo $link ?>"><?php echo get_string('logout') ?></a>
                 </li>
             </ul>
         </li>
@@ -82,23 +83,4 @@ if (isloggedin()) {
 
     </ul>
     <?php
-}
-
-function get_current_page_url() {
-    global $CFG;
-    $pageurl = 'http';
-
-    if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on") {
-        $pageurl .= "s";
-    }
-
-    $pageurl .= "://";
-
-    if ($_SERVER["SERVER_PORT"] != "80") {
-        $pageurl .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
-    } else {
-        $pageurl .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
-    }
-
-    return str_replace($CFG->wwwroot, '', $pageurl);
 }

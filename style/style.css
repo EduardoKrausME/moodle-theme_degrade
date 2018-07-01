@@ -63,6 +63,12 @@ header.navbar .navbar-inner .container-fluid.haslogo img {
     max-height: 36px;
     margin: -8px 0;
 }
+header.navbar .navbar-inner .container-fluid.haslogo img.logo-title {
+    display: inline;
+}
+header.navbar .navbar-inner .container-fluid.haslogo img.logowhite-title {
+    display: none;
+}
 header.navbar .fullname-container {
     float: left;
 }
@@ -133,6 +139,12 @@ header.navbar.transparent span {
 }
 header.navbar.transparent .nologo .fullname-container {
     display: none;
+}
+header.navbar.transparent .haslogo img.logo-title {
+    display: none !important;
+}
+header.navbar.transparent .haslogo img.logowhite-title {
+    display: inline !important;
 }
 header.navbar.transparent .nav > li > a:focus, header.navbar.transparent .nav > li > a:hover {
     color: rgba(255, 255, 255, 0.85);
@@ -450,4 +462,6 @@ header.navbar.transparent li.dropdown > .dropdown-toggle .caret {
         width: 384px;
     }
 }
+/*setting:customcss*/
+
 /*# sourceMappingURL=style.css.map */
