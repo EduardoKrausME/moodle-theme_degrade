@@ -58,7 +58,7 @@ $choices = [
 $htmlselect = "";
 foreach ($choices as $choice => $lang) {
     $htmlselect
-        .= "<div id=\"theme-select-{$choice}\" class=\"theme-select-{$choice} theme-select-item\" data-teme=\"{$choice}\">
+        .= "<div id=\"theme-select-{$choice}\" class=\"theme-select-{$choice} theme-select-item\" data-theme=\"{$choice}\">
                 <div class=\"preview\"></div>
             </div>";
 }

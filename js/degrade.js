@@ -13,32 +13,31 @@ require(['jquery'], function($) {
     });
 
     $('.theme-select-item').click(function(event) {
-        console.log(event.currentTarget);
-        var teme = $(event.currentTarget).attr('data-teme');
-        themeSelectTest(teme);
+        var theme = $(event.currentTarget).attr('data-theme');
+        themeSelectTest(theme);
     })
 });
 
 /**
  * Theme Select Test for theme
  *
- * @param teme
+ * @param {string} theme
  */
-function themeSelectTest(teme) {
+function themeSelectTest(theme) {
     require(['jquery'], function($) {
         removeClassRegex($('body'), /^theme-/);
-        $('body').addClass('theme-' + teme);
-        $('#id_s_theme_degrade_background_color').val(teme);
+        $('body').addClass('theme-' + theme);
+        $('#id_s_theme_degrade_background_color').val(theme);
     });
 }
 
 /**
  * Remove Class Regex for Selector.
  *
- * @param element
- * @param regex
+ * @param {string} element
+ * @param {string} regex
  *
- * @return string
+ * @return {string} new class
  */
 function removeClassRegex(element, regex) {
     return element.removeClass(function(index, classes) {
