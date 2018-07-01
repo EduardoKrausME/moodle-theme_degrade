@@ -1,17 +1,17 @@
-(function($) {
+require(['jquery'], function($) {
     "use strict";
     var win = $(window);
 
     var navbar = $('.navbar');
     win.scroll(function() {
-        var scrolltop = $(this).scrollTop();
+        var scrolltop = win.scrollTop();
         if (scrolltop >= 24) {
             navbar.removeClass('transparent');
         } else {
             navbar.addClass('transparent');
         }
     });
-}(jQuery));
+});
 
 /**
  * Theme Select Test for theme
@@ -19,9 +19,11 @@
  * @param teme
  */
 function themeSelectTest(teme) {
-    removeClassRegex(jQuery('body'), /^theme-/);
-    jQuery('body').addClass('theme-' + teme);
-    jQuery('#id_s_theme_degrade_background_color').val(teme);
+    require(['jquery'], function($) {
+        removeClassRegex($('body'), /^theme-/);
+        $('body').addClass('theme-' + teme);
+        $('#id_s_theme_degrade_background_color').val(teme);
+    });
 }
 
 /**
