@@ -17,7 +17,7 @@
  * The Setting Redes Sociais layout.
  *
  * @package    theme_degrade
- * @copyright  2018 Eduardo Kraus
+ * @copyright  2020 Eduardo Kraus (https://www.eduardokraus.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -25,7 +25,6 @@ defined('MOODLE_INTERNAL') || die();
 
 
 $pagesettings = new admin_settingpage('theme_degrade_social', get_string('socialiconsheading', 'theme_degrade'));
-$pagesettings->add(new admin_setting_heading('theme_degrade_social', get_string('socialiconsheading_desc', 'theme_degrade'), ''));
 
 // Website url setting.
 $name = 'theme_degrade/website';
@@ -116,4 +115,4 @@ $setting = new admin_setting_configtext($name, $title, $description, $default);
 $pagesettings->add($setting);
 
 
-$ADMIN->add('theme_degrade', $pagesettings);
+$settings->add($pagesettings);

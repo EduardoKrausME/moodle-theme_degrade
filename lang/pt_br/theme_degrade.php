@@ -18,7 +18,7 @@
  * Strings for component 'theme_degrade', language 'pt_br', branch 'MOODLE_31_STABLE'
  *
  * @package   theme_degrade
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  2020 Eduardo Kraus (https://www.eduardokraus.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,6 +27,8 @@ defined('MOODLE_INTERNAL') || die();
 $string['choosereadme'] = '';
 
 $string['configtitle'] = 'Degrade';
+
+$string['viewall'] = 'Ver todos';
 
 $string['customcss'] = 'CSS personalizado';
 $string['customcss_desc'] = 'Seja qual for a regra CSS que você adicione a esta área de texto, a mesma será refletida em todas as páginas, tornando mais fácil a personalização deste tema.';
@@ -40,7 +42,6 @@ $string['region-side-post'] = 'Direita';
 $string['region-side-pre'] = 'Esquerda';
 
 $string['coresheading'] = 'Cores e logos';
-$string['coresheading_desc'] = 'Cores e logos';
 
 $string['sitelogo'] = 'Logotipo do site';
 $string['sitename'] = 'Exibir nome do site ao lado do logotipo pequeno';
@@ -51,25 +52,19 @@ $string['favicon_desc'] = 'Alterar o favicon do tema. Uma imagem .png com fundo 
 
 $string['background_color'] = 'Cor de fundo';
 $string['background_color_desc'] = 'Cor dos cabechalhos!';
-$string['background_color_default'] = 'Tema padrão';
+$string['background_color_default'] = 'Tema padrão {$a}';
 $string['background_color_green'] = 'Tema Verde {$a}';
 $string['background_color_blue'] = 'Tema Azul {$a}';
 $string['background_color_red'] = 'Tema Vermelho {$a}';
 $string['background_color_black'] = 'Tema Preto {$a}';
 $string['background_color_random'] = 'Tema Randômico {$a}';
 
-$string['logocolor'] = 'Logo topo colorida';
-$string['logocolor_desc'] = 'Logo colorida do topo. Esta imagem será usada com fundo branco quando houver rolagem. Formatos aceitos: GIF, PNG, JPG e SVG';
-
 $string['logowhite'] = 'Logo topo branco';
 $string['logowhite_desc'] = 'Logo preto e branco do topo. Esta imagem será usada com fundo colorido quando não houver rolagem. Formatos aceitos: GIF, PNG, JPG e SVG';
 
 $string['cssheading'] = 'CSS avançado';
-$string['cssheading_desc'] = 'Adição de CSS que sobrepões o CSS do site';
-
 
 $string['footerheading'] = 'Rodapé';
-$string['footerheading_desc'] = 'Configurações do Rodapé do tema';
 
 $string['footdeveloper'] = 'Mostrar Desenvolvedor';
 $string['footdeveloper_desc'] = 'Mostre que é Desenvolvido com ♥︎ por Eduardo Kraus no rodapé';
@@ -80,7 +75,6 @@ $string['footdeveloper_desc'] = 'Mostre que é Desenvolvido com ♥︎ por Eduar
  *****************/
 
 $string['socialiconsheading'] = 'Ícones de redes socials';
-$string['socialiconsheading_desc'] = 'Customizar ícones de redes sociais.';
 
 $string['facebook'] = 'URL do Facebook';
 $string['facebook_desc'] = 'Digite a URL de sua página no Facebook. (por exemplo,  http://www.facebook.com/mycollege)';

@@ -14,59 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+defined('MOODLE_INTERNAL') || die();
+
 /**
- * The login layout.
+ * A login page layout for the boost theme.
  *
  * @package   theme_degrade
- * @copyright 2018 Eduardo Kraus
+ * @copyright  2020 Eduardo Kraus (https://www.eduardokraus.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+$bodyattributes = $OUTPUT->body_attributes([
+    "theme-{$PAGE->theme->settings->background_color}",
+    'loginbody'
+]);
 
-// Get the HTML for the settings bits.
-$html = theme_degrade_get_html_for_settings($OUTPUT, $PAGE);
+$templatecontext = [
+    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
+    'output' => $OUTPUT,
+    'bodyattributes' => $bodyattributes
+];
 
-echo $OUTPUT->doctype() ?>
-<html <?php echo $OUTPUT->htmlattributes(); ?>>
-<head>
-    <title><?php echo $OUTPUT->page_title(); ?></title>
-    <link rel="shortcut icon" href="<?php echo theme_degrade_get_favicon(); ?>"/>
-    <?php echo $OUTPUT->standard_head_html() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600"/>
-</head>
+echo $OUTPUT->render_from_template('theme_degrade/login', $templatecontext);
 
-<body <?php echo $OUTPUT->body_attributes(theme_degrade_get_classes('one-column', $COURSE)); ?>>
-
-<div id="loginone-wrapper">
-    <div class="login-content text-center">
-        <div class="login-inner-wrapper-2">
-            <div class="mb-2">
-                <span class="login-icone"><i class="fa fa-graduation-cap"></i></span>
-            </div>
-            <div role="main"><span id="maincontent"></span>
-                <div class="m-y-3 hidden-sm-down"></div>
-                <div class="row">
-                    <div class="col-xl-6 push-xl-3 m-2-md col-sm-8 push-sm-2">
-                        <div class="card">
-                            <div class="card-block">
-                                <section id="region-main" class="span12">
-                                    <?php
-                                    echo $OUTPUT->course_content_header();
-                                    echo $OUTPUT->main_content();
-                                    echo $OUTPUT->course_content_footer();
-                                    ?>
-                                </section>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-</body>
-</html>

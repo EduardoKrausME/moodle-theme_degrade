@@ -18,23 +18,20 @@
  * The Setting layout.
  *
  * @package   theme_degrade
- * @copyright 2018 Eduardo Kraus
+ * @copyright  2020 Eduardo Kraus (https://www.eduardokraus.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$settings = null;
+if ($ADMIN->fulltree) {
 
-defined('MOODLE_INTERNAL') || die;
-
-if (is_siteadmin()) {
-    global $PAGE;
-    $ADMIN->add('themes', new admin_category('theme_degrade', get_string('configtitle', 'theme_degrade')));
+    $settings = new theme_boost_admin_settingspage_tabs('themesettingdegrade',
+        get_string('configtitle', 'theme_degrade'));
 
     require(dirname(__FILE__) . "/settings/cores.php");
     require(dirname(__FILE__) . "/settings/css.php");
-    require(dirname(__FILE__) . "/settings/social.php");
+//    require(dirname(__FILE__) . "/settings/social.php");
     require(dirname(__FILE__) . "/settings/rodape.php");
 }
 

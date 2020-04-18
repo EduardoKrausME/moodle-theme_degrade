@@ -15,49 +15,20 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The maintenance layout.
+ * A maintenance layout for the boost theme.
  *
  * @package   theme_degrade
- * @copyright 2018 Eduardo Kraus
+ * @copyright  2020 Eduardo Kraus (https://www.eduardokraus.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
 
-// Get the HTML for the settings bits.
-$html = theme_degrade_get_html_for_settings($OUTPUT, $PAGE);
+$templatecontext = [
+    // We cannot pass the context to format_string, this layout can be used during
+    // installation. At that stage database tables do not exist yet.
+    'sitename' => format_string($SITE->shortname, true, ["escape" => false]),
+    'output' => $OUTPUT
+];
 
-$PAGE->requires->jquery();
-$PAGE->requires->js('/theme/degrade/js/degrade.js');
-
-echo $OUTPUT->doctype() ?>
-<html <?php echo $OUTPUT->htmlattributes(); ?>>
-<head>
-    <title><?php echo $OUTPUT->page_title(); ?></title>
-    <link rel="shortcut icon" href="<?php echo theme_degrade_get_favicon(); ?>"/>
-    <?php echo $OUTPUT->standard_head_html() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600"/>
-</head>
-
-<body <?php echo $OUTPUT->body_attributes(); ?>>
-
-<?php echo $OUTPUT->standard_top_of_body_html() ?>
-
-<div class="container-fluid">
-
-    <header id="page-header" class="clearfix">
-        <?php echo $html->heading; ?>
-    </header>
-
-    <div id="page-content" class="row-fluid">
-        <section id="region-main" class="span12">
-            <?php echo $OUTPUT->main_content(); ?>
-        </section>
-    </div>
-
-    <?php echo $OUTPUT->standard_end_of_body_html() ?>
-
-</div>
-</body>
-</html>
+echo $OUTPUT->render_from_template('theme_degrade/maintenance', $templatecontext);

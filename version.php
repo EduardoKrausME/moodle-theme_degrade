@@ -15,20 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The versiob file.
- *
+ * Theme version page.
  * @package    theme_degrade
- * @copyright  2018 Eduardo Kraus
+ * @copyright  2020 Eduardo Kraus (https://www.eduardokraus.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version  = 2018070108; // V-.....
-$plugin->requires = 2016051900;
-$plugin->release  = 'v2.11.5';
-$plugin->component = 'theme_degrade';
+$plugin->version = 2020041802; // v2
 $plugin->maturity = MATURITY_STABLE;
-$plugin->dependencies = array(
-    'theme_bootstrapbase' => 2016051900
-);
+$plugin->requires  = 2019051100;
+$plugin->release = 'v3.0.1';
+$plugin->component = 'theme_degrade';
+$plugin->dependencies = [
+    'theme_boost' => 2019022600
+];

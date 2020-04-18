@@ -15,87 +15,60 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The two column layout.
+ * A two column layout for the boost theme.
  *
  * @package   theme_degrade
- * @copyright 2018 Eduardo Kraus
+ * @copyright  2020 Eduardo Kraus (https://www.eduardokraus.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
 
-// Get the HTML for the settings bits.
-$html = theme_degrade_get_html_for_settings($OUTPUT, $PAGE);
+user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
+require_once($CFG->libdir . '/behat/lib.php');
 
-// Set default (LTR) layout mark-up for a two column page (side-pre-only).
-$regionmain = 'span9 pull-right';
-$sidepre = 'span3 desktop-first-column';
-// Reset layout mark-up for RTL languages.
-if (right_to_left()) {
-    $regionmain = 'span9 desktop-first-column';
-    $sidepre = 'span3 pull-right';
+if (isloggedin()) {
+    $navdraweropen = (get_user_preferences('drawer-open-nav', 'true') == 'true');
+} else {
+    $navdraweropen = false;
+}
+$extraclasses = [];
+if ($navdraweropen) {
+    $extraclasses[] = 'drawer-open-left';
+}
+$extraclasses[] = "theme-{$PAGE->theme->settings->background_color}";
+
+$bodyattributes = $OUTPUT->body_attributes($extraclasses);
+$blockshtml = $OUTPUT->blocks('side-pre');
+$hasblocks = strpos($blockshtml, 'data-block=') !== false;
+// If the settings menu will be included in the header then don't add it here.
+$regionmainsettingsmenu = $OUTPUT->region_main_settings_menu();
+
+
+if (isloggedin()) {
+    $userpicture = new \user_picture($USER);
+    $userpicture->size = 90;
+    $usericon = $userpicture->get_url($PAGE)->out(false);
+} else {
+    $usericon = 'nada';
 }
 
-$PAGE->requires->jquery();
-$PAGE->requires->js('/theme/degrade/js/degrade.js');
+$templatecontext = [
+    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
+    'output' => $OUTPUT,
+    'sidepreblocks' => $blockshtml,
+    'hasblocks' => $hasblocks,
+    'bodyattributes' => $bodyattributes,
+    'navdraweropen' => $navdraweropen,
+    'regionmainsettingsmenu' => $regionmainsettingsmenu,
+    'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
+    'islogin' => isloggedin(),
+    'usericon' => $usericon,
+    'user' => $USER
+];
 
-echo $OUTPUT->doctype() ?>
-<html <?php echo $OUTPUT->htmlattributes(); ?>>
-<head>
-    <title><?php echo $OUTPUT->page_title(); ?></title>
-    <link rel="shortcut icon" href="<?php echo theme_degrade_get_favicon(); ?>"/>
-    <?php echo $OUTPUT->standard_head_html() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600"/>
-</head>
+$nav = $PAGE->flatnav;
+$templatecontext['flatnavigation'] = $nav;
+$templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
+echo $OUTPUT->render_from_template('theme_degrade/columns2', $templatecontext);
 
-
-<body <?php echo $OUTPUT->body_attributes(theme_degrade_get_classes('two-column', $COURSE)); ?>>
-
-<?php
-echo $OUTPUT->standard_top_of_body_html();
-?>
-
-<header role="banner" class="navbar <?php echo $html->navbarclass ?> moodle-has-zindex transparent">
-    <nav role="navigation" class="navbar-inner">
-        <div class="container-fluid <?php echo empty($this->page->theme->settings->logo) ? 'nologo' : 'haslogo'; ?>">
-            <?php
-            echo $OUTPUT->navbar_home();
-            echo $OUTPUT->navbar_button();
-            if (!isloggedin()) {
-                echo $OUTPUT->user_menu();
-            }
-            echo $OUTPUT->search_box(); ?>
-            <div class="nav-collapse collapse">
-                <?php echo $OUTPUT->custom_menu(); ?>
-                <?php require('ui/user-right.php'); ?>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<div id="page" class="container-fluid">
-    <?php echo $OUTPUT->full_header(); ?>
-    <div id="page-content" class="row-fluid">
-        <section id="region-main" class="<?php echo $regionmain; ?>">
-            <?php
-            echo $OUTPUT->course_content_header();
-            echo $OUTPUT->main_content();
-            echo $OUTPUT->course_content_footer();
-            ?>
-        </section>
-        <?php echo $OUTPUT->blocks('side-pre', $sidepre);
-        ?>
-    </div>
-
-    <footer id="page-footer">
-        <?php
-        require('ui/footer.php');
-        ?>
-    </footer>
-
-    <?php echo $OUTPUT->standard_end_of_body_html() ?>
-
-</div>
-</body>
-</html>

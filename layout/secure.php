@@ -15,87 +15,26 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The secure layout.
+ * A secure layout for the boost theme.
  *
  * @package   theme_degrade
- * @copyright 2018 Eduardo Kraus
+ * @copyright  2020 Eduardo Kraus (https://www.eduardokraus.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
 
-// Get the HTML for the settings bits.
-$html = theme_degrade_get_html_for_settings($OUTPUT, $PAGE);
+$blockshtml = $OUTPUT->blocks('side-pre');
+$hasblocks = strpos($blockshtml, 'data-block=') !== false;
+$bodyattributes = $OUTPUT->body_attributes(["theme-{$PAGE->theme->settings->background_color}"]);
 
-// Set default (LTR) layout mark-up for a three column page.
-$regionmainbox = 'span9 desktop-first-column';
-$regionmain = 'span8 pull-right';
-$sidepre = 'span4 desktop-first-column';
-$sidepost = 'span3 pull-right';
-// Reset layout mark-up for RTL languages.
-if (right_to_left()) {
-    $regionmainbox = 'span9 pull-right';
-    $regionmain = 'span8';
-    $sidepre = 'span4 pull-right';
-    $sidepost = 'span3 desktop-first-column';
-}
+$templatecontext = [
+    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
+    'output' => $OUTPUT,
+    'bodyattributes' => $bodyattributes,
+    'sidepreblocks' => $blockshtml,
+    'hasblocks' => $hasblocks
+];
 
-echo $OUTPUT->doctype() ?>
-<html <?php echo $OUTPUT->htmlattributes(); ?>>
-<head>
-    <title><?php echo $OUTPUT->page_title(); ?></title>
-    <link rel="shortcut icon" href="<?php echo theme_degrade_get_favicon(); ?>"/>
-    <?php echo $OUTPUT->standard_head_html() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600"/>
-</head>
+echo $OUTPUT->render_from_template('theme_degrade/secure', $templatecontext);
 
-
-<?php
-$additionalclasses = array();
-if (isloggedin()) {
-    $additionalclasses[] = 'logado';
-}
-if (isset($COURSE->id) && $COURSE->id != $CFG->defaulthomepage && $COURSE->id > 1) {
-    $additionalclasses[] = 'area-courses';
-}
-?>
-<body <?php echo $OUTPUT->body_attributes(); ?>>
-
-<?php echo $OUTPUT->standard_top_of_body_html() ?>
-
-<header role="banner" class="navbar moodle-has-zindex transparent">
-    <nav role="navigation" class="navbar-inner">
-        <div class="container-fluid">
-            <?php echo $OUTPUT->navbar_home(false); ?>
-            <?php echo $OUTPUT->navbar_button(); ?>
-            <div class="nav-collapse collapse">
-                <?php require('ui/user-right.php') ?>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<div id="page" class="container-fluid">
-
-    <header id="page-header" class="clearfix">
-        <?php echo $html->heading; ?>
-    </header>
-
-    <div id="page-content" class="row-fluid">
-        <div id="region-main-box" class="<?php echo $regionmainbox; ?>">
-            <div class="row-fluid">
-                <section id="region-main" class="<?php echo $regionmain; ?>">
-                    <?php echo $OUTPUT->main_content(); ?>
-                </section>
-                <?php echo $OUTPUT->blocks('side-pre', $sidepre); ?>
-            </div>
-        </div>
-        <?php echo $OUTPUT->blocks('side-post', $sidepost); ?>
-    </div>
-
-    <?php echo $OUTPUT->standard_end_of_body_html() ?>
-
-</div>
-</body>
-</html>

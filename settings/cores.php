@@ -24,9 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+
 $pagesettings = new admin_settingpage('theme_degrade_cores', get_string('coresheading', 'theme_degrade'));
-$pagesettings->add(new admin_setting_heading('theme_degrade_cores',
-    get_string('coresheading_desc', 'theme_degrade'), ''));
 
 // Top Background.
 $name = 'theme_degrade/background_color';
@@ -34,7 +33,8 @@ $title = get_string('background_color', 'theme_degrade');
 $description = get_string('background_color_desc', 'theme_degrade');
 $default = 'default';
 $choices = [
-    'default' => get_string('background_color_default', 'theme_degrade'),
+    'default1' => get_string('background_color_default', 'theme_degrade', 1),
+    'default2' => get_string('background_color_default', 'theme_degrade', 2),
     'green1' => get_string('background_color_green', 'theme_degrade', 1),
     'green2' => get_string('background_color_green', 'theme_degrade', 2),
     'green3' => get_string('background_color_green', 'theme_degrade', 3),
@@ -57,27 +57,25 @@ $choices = [
 
 $htmlselect = "";
 foreach ($choices as $choice => $lang) {
+    $onclick = "$('#id_s_theme_degrade_background_color').val('{$choice}');";
+    $onclick .= "$('body').attr('class',function(i,c){return c.replace(/(^|\s)theme-\S+/g,'')+' theme-{$choice}';})";
     $htmlselect
-        .= "<div id=\"theme-select-{$choice}\" class=\"theme-select-{$choice} theme-select-item\" data-theme=\"{$choice}\">
+        .= "<div id=\"theme-select-{$choice}\" class=\"theme-select-{$choice} theme-select-item\" data-theme=\"{$choice}\"
+                 onclick=\"{$onclick}\">
                 <div class=\"preview\"></div>
             </div>";
 }
+
 
 $setting = new admin_setting_configselect($name, $title, $description . $htmlselect, $default, $choices);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $pagesettings->add($setting);
 
-// Logo file setting.
-$title = get_string('logocolor', 'theme_degrade');
-$description = get_string('logocolor_desc', 'theme_degrade');
-$setting = new admin_setting_configstoredfile('theme_degrade/logo', $title, $description, 'logo', 0,
-    ['maxfiles' => 1, 'accepted_types' => ['.jpg', '.png', '.svg', '.gif']]);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$pagesettings->add($setting);
 
+$name ='core_admin/logo';
 $title = get_string('logowhite', 'theme_degrade');
 $description = get_string('logowhite_desc', 'theme_degrade');
-$setting = new admin_setting_configstoredfile('theme_degrade/logowhite', $title, $description, 'logowhite', 0,
+$setting = new admin_setting_configstoredfile($name, $title, $description, 'logowhite', 0,
     ['maxfiles' => 1, 'accepted_types' => ['.jpg', '.png', '.svg', '.gif']]);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $pagesettings->add($setting);
@@ -92,4 +90,4 @@ $setting->set_updatedcallback('theme_reset_all_caches');
 $pagesettings->add($setting);
 
 
-$ADMIN->add('theme_degrade', $pagesettings);
+$settings->add($pagesettings);

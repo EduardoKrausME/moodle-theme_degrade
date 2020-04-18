@@ -18,21 +18,13 @@
  * The Setting rodapé layout..
  *
  * @package    theme_degrade
- * @copyright  2018 Eduardo Kraus
+ * @copyright  2020 Eduardo Kraus (https://www.eduardokraus.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 $pagesettings = new admin_settingpage('theme_degrade_rodape', get_string('footerheading', 'theme_degrade'));
-$pagesettings->add(new admin_setting_heading('theme_degrade_rodape',
-    get_string('footerheading_desc', 'theme_degrade'), ''));
-
-$name = 'theme_degrade/footerheading';
-$heading = get_string('footerheading', 'theme_degrade');
-$information = get_string('footerheading_desc', 'theme_degrade');
-$setting = new admin_setting_heading($name, $heading, $information);
-$pagesettings->add($setting);
 
 // Footnote setting.
 $name = 'theme_degrade/footnote';
@@ -51,4 +43,4 @@ $setting = new admin_setting_configcheckbox($name, $title, $description, 1);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $pagesettings->add($setting);
 
-$ADMIN->add('theme_degrade', $pagesettings);
+$settings->add($pagesettings);

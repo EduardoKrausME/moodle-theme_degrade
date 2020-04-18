@@ -15,35 +15,30 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The lib file.
+ * The Library file for theme degrade.
  *
- * @package   theme_degrade
- * @copyright 2018 Eduardo Kraus
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    theme_degrade
+ * @copyright  2020 Eduardo Kraus (https://www.eduardokraus.com)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
 
 /**
- * Parses CSS before it is cached.
+ * Loads the CSS Styles and replace the background images.
+ * If background image not available in the settings take the default images.
  *
- * This function can make alterations and replace patterns within the CSS.
- *
- * @param string $css The CSS
- * @param theme_config $theme The theme config object.
- *
- * @return string The parsed CSS The parsed CSS.
+ * @param string $css
+ * @param string $theme
+ * @return string
  */
 function theme_degrade_process_css($css, $theme) {
-    // Set custom CSS.
-    if (!empty($theme->settings->customcss)) {
-        $customcss = $theme->settings->customcss;
-    } else {
-        $customcss = null;
-    }
-    $css = theme_degrade_set_customcss($css, $customcss);
+    global $CFG, $PAGE;
 
-    $css = theme_degrade_set_awesome($css);
+    $css .= $PAGE->theme->settings->customcss;
+
+    // Replace Theme Path
+    $css = str_replace('[[setting:themewww]]', "{$CFG->wwwroot}/theme/degrade/", $css);
 
     return $css;
 }
@@ -58,158 +53,97 @@ function theme_degrade_process_css($css, $theme) {
  * @param array $args
  * @param bool $forcedownload
  * @param array $options
- *
  * @return bool
+ * @throws coding_exception
  */
 function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
-    if ($context->contextlevel == CONTEXT_SYSTEM) {
-        $theme = theme_config::load('degrade');
-        // By default, theme files must be cache-able by both browsers and proxies.
-        if (!array_key_exists('cacheability', $options)) {
-            $options['cacheability'] = 'public';
-        }
+    static $theme;
 
-        return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
+    if (empty($theme)) {
+        $theme = theme_config::load('degrade');
+    }
+    if ($context->contextlevel == CONTEXT_SYSTEM) {
+
+        if ($filearea === 'logo') {
+            return $theme->setting_file_serve('logo', $args, $forcedownload, $options);
+        } else if ($filearea === 'style') {
+            theme_degrade_serve_css($args[1]);
+        } else {
+            send_file_not_found();
+        }
     } else {
         send_file_not_found();
     }
 }
 
 /**
- * Adds any custom CSS to the CSS before it is cached.
+ * Serves CSS for image file updated to styles.
  *
- * @param string $css The original CSS.
- * @param string $customcss The custom CSS to add.
- *
- * @return string The CSS which now contains our custom CSS.
- */
-function theme_degrade_set_customcss($css, $customcss) {
-    $tag = '/*setting:customcss*/';
-    $replacement = $customcss;
-    if (is_null($replacement)) {
-        $replacement = '';
-    }
-
-    $css = str_replace($tag, $replacement, $css);
-
-    return $css;
-}
-
-/**
- * Set Awesome link.
- *
- * @param string $css The return link css
- *
- * @return mixed
- */
-function theme_degrade_set_awesome($css) {
-    global $CFG;
-
-    $wwwroot = str_replace('http://', '//', $CFG->wwwroot);
-    $wwwroot = str_replace('https://', '//', $wwwroot);
-
-    $css = str_replace('fonts/fontawesome', $wwwroot . '/theme/degrade/style/fonts/fontawesome', $css);
-
-    return $css;
-}
-
-/**
- * Returns an object containing HTML for the areas affected by settings.
- *
- * Do not add Degrade specific logic in here, child themes should be able to
- * rely on that function just by declaring settings with similar names.
- *
- * @param renderer_base $output Pass in $OUTPUT.
- * @param moodle_page $page Pass in $PAGE.
- *
- * @return stdClass An object with the following properties:
- *      - navbarclass A CSS class to use on the navbar. By default ''.
- *      - heading HTML to use for the heading. A logo if one is selected or the default heading.
- *      - footnote HTML to use as a footnote. By default ''.
- */
-function theme_degrade_get_html_for_settings(renderer_base $output, moodle_page $page) {
-    $return = new stdClass;
-
-    $return->navbarclass = '';
-    if (!empty($page->theme->settings->invert)) {
-        $return->navbarclass .= ' navbar-inverse';
-    }
-
-    // Only display the logo on the front page and login page, if one is defined.
-    if (!empty($page->theme->settings->logo) &&
-        ($page->pagelayout == 'frontpage' || $page->pagelayout == 'login')
-    ) {
-        $return->heading = html_writer::tag('div', '', array('class' => 'logo'));
-    } else {
-        $return->heading = $output->page_heading();
-    }
-
-    $return->footnote = '';
-    if (!empty($page->theme->settings->footnote)) {
-        $return->footnote = '<div class="footnote text-center">' . format_text($page->theme->settings->footnote) . '</div>';
-    }
-
-    return $return;
-}
-
-/**
- * get Favicon URL.
- *
+ * @param string $filename
  * @return string
  */
-function theme_degrade_get_favicon() {
-    global $PAGE, $OUTPUT;
-    if (!empty($PAGE->theme->settings->favicon)) {
-        return $PAGE->theme->setting_file_url('favicon', 'favicon');
-    } else {
-        return $OUTPUT->image_url('favicon', 'theme');
-    }
-}
-
-/**
- * Get Classes body.
- *
- * @param string $startclass The start Class
- * @param stdClass $course The course
- *
- * @return array
- */
-function theme_degrade_get_classes($startclass, $course) {
-    global $CFG, $PAGE;
-    $additionalclasses = array($startclass);
-
-    if (isloggedin()) {
-        $additionalclasses[] = 'logado';
-    }
-    if (isset($course->id) && $course->id != $CFG->defaulthomepage && $course->id > 1) {
-        $additionalclasses[] = 'area-courses';
-    }
-
-    $additionalclasses[] = 'theme-' . $PAGE->theme->settings->background_color;
-
-    return $additionalclasses;
-}
-
-/**
- * Get current page.
- *
- * @return mixed
- */
-function theme_degrade_get_current_page_url() {
+function theme_degrade_serve_css($filename) {
     global $CFG;
-    $pageurl = 'http';
+    $thestylepath = $CFG->dirroot . '/theme/degrade/style/';
+    $thesheet = $thestylepath . $filename;
 
-    if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on") {
-        $pageurl .= "s";
+    $etagfile = md5_file($thesheet);
+    // File.
+    $lastmodified = filemtime($thesheet);
+    // Header.
+    $ifmodifiedsince = (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? $_SERVER['HTTP_IF_MODIFIED_SINCE'] : false);
+    $etagheader = (isset($_SERVER['HTTP_IF_NONE_MATCH']) ? trim($_SERVER['HTTP_IF_NONE_MATCH']) : false);
+
+    if ((($ifmodifiedsince) && (strtotime($ifmodifiedsince) == $lastmodified)) || $etagheader == $etagfile) {
+        theme_degrade_send_unmodified($lastmodified, $etagfile);
+    }
+    theme_degrade_send_cached_css($thestylepath, $filename, $lastmodified, $etagfile);
+}
+
+/**
+ * Set browser cache used in php header.
+ * @param string $lastmodified
+ * @param string $etag
+ *
+ */
+function theme_degrade_send_unmodified($lastmodified, $etag) {
+    $lifetime = 60 * 60 * 24 * 60;
+    header('HTTP/1.1 304 Not Modified');
+    header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $lifetime) . ' GMT');
+    header('Cache-Control: public, max-age=' . $lifetime);
+    header('Content-Type: text/css; charset=utf-8');
+    header('Etag: "' . $etag . '"');
+    if ($lastmodified) {
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $lastmodified) . ' GMT');
+    }
+    die;
+}
+
+/**
+ * Cached css.
+ * @param string $path
+ * @param string $filename
+ * @param integer $lastmodified
+ * @param string $etag
+ */
+function theme_degrade_send_cached_css($path, $filename, $lastmodified, $etag) {
+    global $CFG;
+    require_once($CFG->dirroot . '/lib/configonlylib.php');
+    // 60 days only - the revision may get incremented quite often.
+    $lifetime = 60 * 60 * 24 * 60;
+
+    header('Etag: "' . $etag . '"');
+    header('Content-Disposition: inline; filename="' . $filename . '"');
+    header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $lastmodified) . ' GMT');
+    header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $lifetime) . ' GMT');
+    header('Pragma: ');
+    header('Cache-Control: public, max-age=' . $lifetime);
+    header('Accept-Ranges: none');
+    header('Content-Type: text/css; charset=utf-8');
+    if (!min_enable_zlib_compression()) {
+        header('Content-Length: ' . filesize($path . $filename));
     }
 
-    $pageurl .= "://";
-
-    if ($_SERVER["SERVER_PORT"] != "80") {
-        $pageurl .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
-    } else {
-        $pageurl .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
-    }
-
-    return str_replace($CFG->wwwroot, '', $pageurl);
+    readfile($path . $filename);
+    die;
 }

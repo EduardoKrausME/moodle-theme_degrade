@@ -18,7 +18,7 @@
  * Strings for component 'theme_degrade', language 'en'
  *
  * @package   theme_degrade
- * @copyright 2018 Eduardo Kraus
+ * @copyright  2020 Eduardo Kraus (https://www.eduardokraus.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,6 +27,8 @@ defined('MOODLE_INTERNAL') || die();
 $string['choosereadme'] = '';
 
 $string['configtitle'] = 'Degrade';
+
+$string['viewall'] = 'View all';
 
 $string['customcss'] = 'Custom CSS';
 $string['customcss_desc'] = 'Whatever CSS rules you add to this textarea will be reflected in every page, making for easier customization of this theme.';
@@ -41,7 +43,6 @@ $string['region-side-pre'] = 'Left';
 
 
 $string['coresheading'] = 'Colors and logos';
-$string['coresheading_desc'] = 'Colors and logos';
 
 $string['sitelogo'] = 'Site logo';
 
@@ -50,25 +51,19 @@ $string['favicon_desc'] = 'Change the favicon of the theme. A .png image with tr
 
 $string['background_color'] = 'Background color';
 $string['background_color_desc'] = 'Color of sprite!';
-$string['background_color_default'] = 'Default theme';
+$string['background_color_default'] = 'Default theme {$a}';
 $string['background_color_green'] = 'Green Theme {$a}';
 $string['background_color_blue'] = 'Blue Theme {$a}';
 $string['background_color_red'] = 'Red Theme {$a}';
 $string['background_color_black'] = 'Black Theme {$a}';
 $string['background_color_random'] = 'Random Theme {$a}';
 
-$string['logocolor'] = 'Colored logo top';
-$string['logocolor_desc'] = 'Colored top logo. This image will be used with white background when scrolling. Supported formats: GIF, PNG, JPG and SVG ';
-
 $string['logowhite'] = 'Logo top white';
 $string['logowhite_desc'] = 'Black and white top logo. This image will be used with colored background when there is no scrolling. Supported formats: GIF, PNG, JPG and SVG ';
 
 $string['cssheading'] = 'CSS advanced';
-$string['cssheading_desc'] = 'Advanced CSS';
-
 
 $string['footerheading'] = 'Footer';
-$string['footerheading_desc'] = 'Theme Footer Settings';
 
 $string['footdeveloper'] = 'Show Developer';
 $string['footdeveloper_desc'] = 'Show that is Developed with ♥ ︎ by Eduardo Kraus in the footer';
@@ -78,7 +73,6 @@ $string['footdeveloper_desc'] = 'Show that is Developed with ♥ ︎ by Eduardo 
  *****************/
 
 $string['socialiconsheading'] = 'Social Icons';
-$string['socialiconsheading_desc'] = 'Customise social network icons.';
 
 $string['facebook'] = 'Facebook URL';
 $string['facebook_desc'] = 'Enter the URL of your Facebook page. (i.e http://www.facebook.com/mycollege)';
