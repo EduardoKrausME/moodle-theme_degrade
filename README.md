@@ -15,8 +15,6 @@
 
 ![print-03.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/print-03.png)
 
-![print-04.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/print-04.png)
-
 ## setting
 
 ![setting-01.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/setting-01.png)
