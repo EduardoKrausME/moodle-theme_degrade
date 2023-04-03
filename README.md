@@ -9,10 +9,26 @@
 
 ## prints
 
-![theme-01.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/print-01.png)
+![print-01.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/print-01.png)
 
-![theme-02.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/print-02.png)
+![print-02.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/print-02.png)
 
-![theme-03.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/print-03.png)
+![print-03.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/print-03.png)
 
-![theme-04.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/print-04.png)
+![print-04.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/print-04.png)
+
+## setting
+
+![setting-01.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/setting-01.png)
+
+![setting-02.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/setting-02.png)
+
+![setting-03.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/setting-03.png)
+
+![setting-04.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/setting-04.png)
+
+![setting-05.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/setting-05.png)
+
+![setting-06.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/setting-06.png)
+
+![setting-07.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/setting-07.png)
