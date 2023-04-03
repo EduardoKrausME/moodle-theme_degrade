@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_degrade/maintenance
+    @template theme_boost/maintenance
 
     Boost maintenance layout template.
 
@@ -32,55 +32,45 @@
          }
     }
 }}
-{{{ output.doctype }}}
-<html {{{ output.htmlattributes }}}>
+{{{output.doctype}}}
+<html {{{output.htmlattributes}}}>
 <head>
-    <title>{{{ output.page_title }}}</title>
-    <link rel="shortcut icon" href="{{{ output.favicon }}}" />
-    {{{ output.standard_head_html }}}
+    <title>{{{output.page_title}}}</title>
+    <link rel="shortcut icon" href="{{{output.favicon}}}"/>
+    {{{output.standard_head_html}}}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body {{{ output.body_attributes }}}>
-
+<body data-templates="maintenance" {{{output.body_attributes}}}>
+{{> core/local/toast/wrapper}}
 <div id="page-wrapper">
 
-    {{{ output.standard_top_of_body_html }}}
+    {{{output.standard_top_of_body_html}}}
+    <div class="header-main ">
+        <div class="container">
+            <nav class="navbar navbar-light bg-faded ">
+                <a href="{{{config.wwwroot}}}/?redirect=0" class="navbar-brand">
+                    <span class="site-name hidden-sm-down">{{{sitename}}}</span>
+                </a>
+            </nav>
+        </div>
+    </div>
 
     <div id="page" class="container pb-3">
-
-        <div class="row">
+        <div class="row ">
             <div class="col-12 py-3">
-                {{{ output.page_heading }}}
+                {{{output.page_heading}}}
             </div>
         </div>
 
         <div id="page-content" class="row">
             <section id="region-main" class="col-12" aria-label="{{#str}}content{{/str}}">
-                {{{ output.main_content }}}
+                {{{output.main_content}}}
             </section>
         </div>
-
     </div>
-    <footer id="page-footer" class="py-3 bg-dark text-light">
-        <div class="container">
-            {{{ output.standard_footer_html }}}
-            {{{ output.standard_end_of_body_html }}}
-        </div>
-    </footer>
+    {{> theme_degrade/footer}}
 </div>
 
 </body>
 </html>
-{{#js}}
-M.util.js_pending('theme_boost/loader');
-require(['theme_boost/loader'], function() {
-  M.util.js_complete('theme_boost/loader');
-});
-
-M.util.js_pending('theme_degrade/header');
-require(['theme_degrade/header'], function(mod) {
-mod.updateScroll();
-M.util.js_complete('theme_degrade/header');
-});
-{{/js}}

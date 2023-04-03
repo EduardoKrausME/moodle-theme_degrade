@@ -1,0 +1,76 @@
+<div class="{{couse_class}}">
+    <div class="frontpage-course-box">
+        <div class="course-item">
+            <div class="course-item-img">
+                <a href="{{courseurl}}">
+                    <img width="768" height="512" src="{{imgurl}}" alt="">
+                </a>
+                {{^is_enrolled}}
+                    {{#freename}}
+                        <div class="price">
+                            <h3 class="free-color">{{{freename}}}</h3>
+                        </div>
+                    {{/freename}}
+                    {{#priceval}}
+                        <div class="price">
+                            <h3 class="price-color">{{{priceval}}}</h3>
+                        </div>
+                    {{/priceval}}
+                {{/is_enrolled}}
+                {{#has_course_create}}
+                    <a class="edit-icon" href="{{edit_course}}" target="_blank"
+                       title="Edit Course">
+                        {{#pix}}edit, theme_degrade{{/pix}}
+                    </a>
+                {{/has_course_create}}
+            </div>
+            <div class="course-content">
+
+                <h3 class="title instructor-text">
+                    <a href="{{courseurl}}">{{coursename}}</a>
+                </h3>
+                <div class="course-info d-flex align-items-center">
+                    <div class="lesson-group d-flex align-items-center" style="width: 100%;">
+                        {{#pix}}lessons, theme_degrade{{/pix}}
+                        <p>{{countlessons}}</p>
+                    </div>
+                </div>
+                {{#showinstructor}}
+                    <div class="instructor-group d-flex">
+                        {{#instructor}}
+                            <div class="instructor-group-img d-flex">
+                                <a href="#">
+                                    <img alt="{{instructorname}}" src="{{instructorurl}}" height="50" width="50">
+                                </a>
+                                <div class="instructor-name">
+                                    <h4><a href="#">{{instructorname}}</a></h4>
+                                    <p>{{instructortitle}}</p>
+                                </div>
+                            </div>
+                        {{/instructor}}
+                    </div>
+                {{/showinstructor}}
+
+                <div class="course-info d-flex align-items-center">
+                    {{#is_enrolled}}
+                        {{#acessar}}
+                            <div class="all-btn all-category d-flex align-items-center">
+                                <a href="{{courseurl}}" style="white-space: nowrap;"
+                                   class="btn btn-primary matricula-se">{{acessar}}</a>
+                            </div>
+                        {{/acessar}}
+                    {{/is_enrolled}}
+                    {{^is_enrolled}}
+                        {{#matricular}}
+                            <div class="all-btn all-category d-flex align-items-center">
+                                <a href="{{courseurl}}" style="white-space: nowrap;"
+                                   class="btn btn-primary matricula-se">{{matricular}}</a>
+                            </div>
+                        {{/matricular}}
+                    {{/is_enrolled}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

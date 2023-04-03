@@ -15,27 +15,162 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    Page footer.
+    @template theme_degrade/footer.
+    Degrade footer layout template.
 }}
-<footer id="page-footer" class="py-3 bg-dark text-light">
-    <div class="container">
-        <div id="course-footer">{{{ output.course_footer }}}</div>
+{{#maintenancefooter}}
+    <footer id="page-footer" class=" footer-popover footer-dark bg-dark text-light">
+        <div id="footer">
+            <div class="footer-bootom">
+                <p class="text-center">
+                    Feito com ❤️ Por <a href="https://eduardokraus.com" target="_blank">Eduardo Kraus</a>.
+                    Powered by <a href="https://moodle.org" target="_blank">Moodle</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+{{/maintenancefooter}}
 
-        {{{ output.footer_text }}}
+{{^maintenancefooter}}
+    <footer id="page-footer" class="footer-block">
+        <div id="footer">
+            {{#footer_enable_block}}
+                <div class="footer-main">
+                    <div class="container-fluid">
+                        <div class="row">
+                            {{#enable_block_description}}
+                                <div class="{{footer_block_class}}">
+                                    <div class="footer-desc">
+                                        <div class="logo-footer">
+                                            <a href="{{{config.wwwroot }}}/?redirect=0">
+                                                {{{logourl_footer}}}
+                                            </a>
+                                        </div>
+                                        <p>{{footer_description}}</p>
 
-        {{{ output.login_info }}}
-        <div class="tool_usertours-resettourcontainer"></div>
-        {{{ output.home_link }}}
-        <nav class="nav navbar-nav d-md-none" aria-label="{{#str}}custommenu, admin{{/str}}">
-            {{# output.custom_menu_flat }}
-                <ul class="list-unstyled pt-3">
-                    {{> theme_degrade/custom_menu_footer }}
-                </ul>
-            {{/ output.custom_menu_flat }}
-        </nav>
-        {{{ output.standard_footer_html }}}
-        {{{ output.standard_end_of_body_html }}}
+                                        {{#footer_settings_edit}}
+                                            <a class="settings-edit" href="{{{footer_settings_edit}}}">
+                                                {{#pix}}edit, theme_degrade{{/pix}}
+                                            </a>
+                                        {{/footer_settings_edit}}
+                                    </div>
+                                </div>
+                            {{/enable_block_description}}
+                            {{#enable_block_links}}
+                                <div class="{{footer_block_class}}">
+                                    <div class="footer-nav">
+                                        <h4>{{footer_links_title}}</h4>
+                                        <ul>
+                                            {{{footer_links}}}
+                                        </ul>
+                                        {{#footer_settings_edit}}
+                                            <a class="settings-edit" href="{{{footer_settings_edit}}}">
+                                                {{#pix}}edit, theme_degrade{{/pix}}
+                                            </a>
+                                        {{/footer_settings_edit}}
+                                    </div>
+                                </div>
+                            {{/enable_block_links}}
+                            {{#enable_block_social}}
+                                <div class="{{footer_block_class}}">
+                                    <div class="social-media">
+                                        <h4>{{footer_social_title}}</h4>
+                                        <ul>
+                                            {{#social_facebook}}
+                                                <li class="smedia-01">
+                                                    <a href="{{social_facebook}}" target="_blank">
+                                                <span class="media-icon">
+                                                <i class="fa fa-facebook"></i>
+                                                </span>
+                                                        <span class="media-name">{{facebook_name}}</span>
+                                                    </a>
+                                                </li>
+                                            {{/social_facebook}}
 
-        {{{ output.footer_developer }}}
-    </div>
-</footer>
+                                            {{#social_twitter}}
+                                                <li class="smedia-02">
+                                                    <a href="{{social_twitter}}" target="_blank">
+                                                        <span class="media-icon">
+                                                            <i class="fa fa-twitter"></i>
+                                                        </span>
+                                                        <span class="media-name">{{twitter_name}}</span>
+                                                    </a>
+                                                </li>
+                                            {{/social_twitter}}
+
+                                            {{#social_instagram}}
+                                                <li class="smedia-04">
+                                                    <a href="{{social_instagram}}" target="_blank">
+                                                        <span class="media-icon">
+                                                            <i class="fa fa-instagram"></i>
+                                                        </span>
+                                                        <span class="media-name">{{instagram_name}}</span>
+                                                    </a>
+                                                </li>
+                                            {{/social_instagram}}
+
+                                            {{#footer_settings_edit}}
+                                                <a class="settings-edit" href="{{{footer_settings_edit}}}">
+                                                    {{#pix}}edit, theme_degrade{{/pix}}
+                                                </a>
+                                            {{/footer_settings_edit}}
+                                        </ul>
+                                    </div>
+                                </div>
+                            {{/enable_block_social}}
+                            {{#enable_block_contact}}
+                                <div class="{{footer_block_class}}">
+                                    <div class="footer-contact">
+                                        <h4>{{contact_footer_title}}</h4>
+
+                                        {{#contact_phone}}
+                                            <p>{{contact_address}}</p>
+                                        {{/contact_phone}}
+                                        {{#contact_phone}}
+                                            <p><i class="fa fa-phone-square"></i>{{contact_phone}}</p>
+                                        {{/contact_phone}}
+
+                                        {{#contact_email}}
+                                            <p><i class="fa fa-envelope"></i>
+                                                <a class="mail-link"
+                                                   href="mailto:{{contact_email}}">{{contact_email}}</a>
+                                            </p>
+                                        {{/contact_email}}
+
+                                        {{#footer_settings_edit}}
+                                            <a class="settings-edit" href="{{{footer_settings_edit}}}">
+                                                {{#pix}}edit, theme_degrade{{/pix}}
+                                            </a>
+                                        {{/footer_settings_edit}}
+
+                                    </div>
+                                </div>
+                            {{/enable_block_contact}}
+                        </div>
+                    </div>
+                    <div class="footer-foot">
+                        <div class="container">
+                            <p class="text-center">
+                                Feito com ❤️ Por <a href="https://eduardokraus.com" target="_blank">Eduardo Kraus</a>.
+                                Powered by <a href="https://moodle.org" target="_blank">Moodle</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {{/footer_enable_block}}
+        </div>
+
+        <div class="footer-content-debugging footer-dark bg-dark text-light">
+            <div class="container-fluid footer-dark-inner">
+                {{{ output.standard_footer_html }}}
+                {{{ output.standard_end_of_body_html }}}
+                {{{ output.debug_footer_html }}}
+            </div>
+        </div>
+    </footer>
+{{/maintenancefooter}}
+{{#js}}
+    require(['theme_boost/footer-popover'], function(FooterPopover) {
+    FooterPopover.init();
+    });
+{{/js}}

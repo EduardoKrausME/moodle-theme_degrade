@@ -1,0 +1,165 @@
+// #site-news-forum,
+.frontpage-course-list {
+    padding: 60px 40px 56px;
+    @media (max-width: 991.98px) {
+        padding: 50px 0;
+    }
+    @media (max-width: 767.98px) {
+        padding: 40px 0 16px;
+    }
+    h2 {
+        font-size: 36px;
+        font-weight: 700;
+        letter-spacing: 0.9px;
+        margin-bottom: 35px;
+        .buttons {
+            float: right;
+            .btn-secondary {
+                color: #392c7d;
+                border: 3px solid #b4a7f5;
+                background: transparent;
+                border-radius: 50px;
+                min-width: 150px;
+                padding: 6px 15px;
+                font-weight: 500;
+                font-size: 14px;
+                &:hover {
+                    background-color: #917cf6;
+                    border-color: #917cf6;
+                    color: #fff;
+                }
+            }
+        }
+    }
+    p.frontpage-course-description {
+        margin-top: 15px;
+        margin-bottom: 50px;
+    }
+}
+.frontpage-course-box {
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    .course-item {
+        border-radius: 10px;
+        position: relative;
+        padding: 20px 20px 6px;
+        transition: all 0.5s ease;
+        background: #fff;
+        backdrop-filter: blur(17px);
+        // margin-bottom: 40px;
+        .course-item-img {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border-radius: 10px 10px 10px 10px;
+            max-width: 330px;
+            margin: 0 auto 14px;
+            img {
+                width: 100%;
+                border-radius: 4px 4px 0 0;
+                transform: translateZ(0);
+                transition: all 2000ms cubic-bezier(.19, 1, .22, 1) 0ms;
+                height: auto;
+                max-width: 100%;
+                border: none;
+                box-shadow: none;
+                box-sizing: border-box;
+                vertical-align: middle;
+            }
+            .price {
+                background: #fff;
+                position: absolute;
+                bottom: 20px;
+                right: 20px;
+                border-radius: 10px;
+                padding: 6px 15px;
+                h3 {
+                    font-size: 24px;
+                    color: #ff6575;
+                    font-weight: 700;
+                    margin-bottom: 0;
+                    span {
+                        font-weight: 700;
+                    }
+                    &.free-color,
+                    &.free-color a {
+                        color: #319f68;
+                        text-transform: uppercase;
+                    }
+                    &.price-color,
+                    &.price-color a {
+                        color: #ff839b;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+            .edit-icon {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                img {
+                    filter: invert(100%);
+                    max-width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+        .course-content {
+            .instructor-group {
+                .instructor-group-img {
+                    align-items: center;
+                    margin-bottom: 10px;
+                    img {
+                        max-width: 40px;
+                        height: 40px;
+                        border-radius: 25px;
+                        margin-right: 10px;
+                        border: 3px solid #e9ecef;
+                        box-shadow: none;
+                        box-sizing: border-box;
+                        vertical-align: middle;
+                    }
+                    .instructor-name {
+                        h4 {
+                            font-size: 15px;
+                            margin-bottom: 3px;
+                            font-weight: 500;
+                            flex: 0 0 100%;
+                            text-transform: capitalize;
+                        }
+                        p {
+                            margin-bottom: 0;
+                            font-size: 13px;
+                            flex: 0 0 100%;
+                        }
+                    }
+                }
+            }
+            h3 {
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 1.4;
+                max-width: 320px;
+                margin-top: 0;
+                margin-bottom: 0.5rem;
+            }
+            .course-info {
+                margin-bottom: 15px;
+                .lesson-group {
+                    img {
+                        width: 18px;
+                    }
+                    p {
+                        margin-bottom: 0;
+                        color: #685f78;
+                        font-size: 16px;
+                        margin-left: 8px;
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -14,26 +14,22 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * A login page layout for the boost theme.
  *
- * @package   theme_degrade
- * @copyright  2020 Eduardo Kraus (https://www.eduardokraus.com)
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     theme_degrade
+ * @copyright   2023 Eduardo kraus (http://eduardokraus.com)
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$bodyattributes = $OUTPUT->body_attributes([
-    "theme-{$PAGE->theme->settings->background_color}",
-    'loginbody'
-]);
+defined('MOODLE_INTERNAL') || die();
 
-$templatecontext = [
+$bodyattributes = $OUTPUT->body_attributes([theme_degrade_get_body_class()]);
+$templatedata = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
-    'bodyattributes' => $bodyattributes
+    'bodyattributes' => $bodyattributes,
 ];
-
-echo $OUTPUT->render_from_template('theme_degrade/login', $templatecontext);
-
+$templatedata = array_merge($templatedata, \theme_degrade\template\footer_data::get_data());
+$templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_data::topo());
+echo $OUTPUT->render_from_template('theme_degrade/login', $templatedata);

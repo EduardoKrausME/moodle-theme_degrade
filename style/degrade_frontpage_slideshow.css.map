@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "sourceRoot": "",
+  "sources": [
+    "degrade_frontpage_slideshow.scss"
+  ],
+  "names": [],
+  "mappings": "AAGI,gCACI,WACA,eACA,kBACA,YACA,oCACI,sBAEJ,gDACI,aACA,iEACI,cAGR,gGAEI,eACA,kBACA,QACA,WACA,aACA,iBACA,WACA,iBACA,eACA,oBACA,0BACA,iBAEJ,gDACI,QACA,0BAEJ,4GAEI,gCAEJ,0CACI,gJAGI,gBAGR,gDACI,cACA,eACA,iBACA,kBACA,YACA,WACA,kBAEJ,sDACI,cACA,eACA,iBACA,kBACA,MAGR,+BACI,kBACA,iBACA,YACA,kBACA,8CACI,eACA,YACA,WACA,aACA,sBACA,kBACA,qBACA,qCACA,yGAEI,sBAIZ,2BACI,8BACA,wBAEJ,0BACI,KACI,WAEJ,GACI,WAIR,4BACI,WACA,gCACI",
+  "file": "degrade_frontpage_slideshow.css"
+}

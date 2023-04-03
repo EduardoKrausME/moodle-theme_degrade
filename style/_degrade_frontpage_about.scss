@@ -1,0 +1,103 @@
+.frontpage_about_area {
+    box-sizing: border-box;
+    padding: 70px 0;
+    background: #f6f6f7;
+    &:before {
+        content: " ";
+        display: table;
+    }
+    .frontpage_about_logoarea {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto 36px;
+        .frontpage_about_logo {
+            max-width: 300px;
+            max-height: 150px;
+        }
+        h3 {
+            margin-top: 40px;
+            margin-bottom: 25px;
+            font-size: 36px;
+            line-height: normal;
+        }
+        .frontpage_about_description {
+            line-height: 25px;
+            font-size: 15px;
+            max-width: 800px;
+            margin: auto;
+            margin-bottom: 60px;
+            color: #666;
+        }
+    }
+    .frontpage_about_counterbox {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        @media (max-width: 500px) {
+            display: flex;
+        }
+        .frontpage_about_box {
+            margin-right: 114px;
+            position: relative;
+            text-align: center;
+            display: inline-block;
+            .separator {
+                background-color: #888;
+                &::after {
+                    content: " ";
+                    position: absolute;
+                    width: 72px;
+                    height: 1px;
+                    background-color: inherit;
+                    top: 50%;
+                    left: calc(100% + 20px);
+                    margin-top: 4px;
+                    filter: alpha(opacity=20);
+                    transform: rotate(-60deg);
+                    -ms-filter: "alpha(opacity=20)";
+                    opacity: .2;
+                }
+            }
+            @media (max-width: 700px) {
+                margin-right: 63px;
+                .separator::after {
+                    margin-left: -20px;
+                }
+            }
+            @media (max-width: 500px) {
+                margin-right: 0;
+                width: 100%;
+                .separator::after {
+                    display: none;
+                }
+            }
+            &:last-child {
+                margin-right: 0;
+                .separator {
+                    display: none;
+                }
+            }
+            .number {
+                margin-bottom: 5px;
+                .number_counter {
+                    font-size: 36px;
+                    font-weight: 600;
+                    line-height: normal;
+                    margin-bottom: 12px;
+                }
+            }
+            .title_counter {
+                display: block;
+                clear: both;
+                h4 {
+                    font-size: 15px;
+                    font-weight: 400;
+                    line-height: 25px;
+                    margin: 0;
+                    transition: .3s;
+                    color: #000;
+                }
+            }
+        }
+    }
+}

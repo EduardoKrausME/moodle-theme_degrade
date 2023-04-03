@@ -15,24 +15,36 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The Setting layout.
+ * settings.php
  *
- * @package   theme_degrade
- * @copyright  2020 Eduardo Kraus (https://www.eduardokraus.com)
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * This is built using the boost template to allow for new theme's using
+ * Moodle's new Boost theme engine
+ *
+ * @package     theme_degrade
+ * @copyright   2023 Eduardo kraus (http://eduardokraus.com)
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die;
 
-if ($ADMIN->fulltree) {
+$settings = null;
 
-    $settings = new theme_boost_admin_settingspage_tabs('themesettingdegrade',
-        get_string('configtitle', 'theme_degrade'));
+if (is_siteadmin()) {
+    $settings = new theme_boost_admin_settingspage_tabs('themesettingdegrade', get_string('pluginname', 'theme_degrade'));
 
-    require(dirname(__FILE__) . "/settings/cores.php");
-    require(dirname(__FILE__) . "/settings/css.php");
-//    require(dirname(__FILE__) . "/settings/social.php");
-    require(dirname(__FILE__) . "/settings/rodape.php");
+
+    $ADMIN->add('themes', new admin_category('theme_degrade', 'Degrade Theme'));
+
+    require_once(__DIR__ . "/settings-home.php");
+
+    require_once(__DIR__ . "/settings-slideshow.php");
+
+    require_once(__DIR__ . "/settings-about.php");
+
+    require_once(__DIR__ . "/settings-logos.php");
+
+    require_once(__DIR__ . "/settings-theme.php");
+
+    require_once(__DIR__ . "/settings-topo.php");
+
+    require_once(__DIR__ . "/settings-footer.php");
 }
-
-

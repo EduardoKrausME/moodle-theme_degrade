@@ -15,20 +15,20 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A maintenance layout for the boost theme.
+ * The maintenance layout.
  *
- * @package   theme_degrade
- * @copyright  2020 Eduardo Kraus (https://www.eduardokraus.com)
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     theme_degrade
+ * @copyright   2023 Eduardo kraus (http://eduardokraus.com)
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$templatecontext = [
-    // We cannot pass the context to format_string, this layout can be used during
-    // installation. At that stage database tables do not exist yet.
+$logourl = theme_degrade_get_logo("header");
+$data = [
     'sitename' => format_string($SITE->shortname, true, ["escape" => false]),
-    'output' => $OUTPUT
+    'output' => $OUTPUT,
+    "logourl" => $logourl,
+    'maintenancefooter' => true
 ];
-
-echo $OUTPUT->render_from_template('theme_degrade/maintenance', $templatecontext);
+echo $OUTPUT->render_from_template('theme_degrade/maintenance', $data);

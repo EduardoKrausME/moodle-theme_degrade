@@ -15,22 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A one column layout for the boost theme.
+ * The one column layout.
  *
- * @package   theme_degrade
- * @copyright  2020 Eduardo Kraus (https://www.eduardokraus.com)
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     theme_degrade
+ * @copyright   2023 Eduardo kraus (http://eduardokraus.com)
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
-
-$bodyattributes = $OUTPUT->body_attributes(["theme-{$PAGE->theme->settings->background_color}"]);
-
-$templatecontext = [
+$bodyattributes = $OUTPUT->body_attributes([theme_degrade_get_body_class()]);
+$data = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
     'bodyattributes' => $bodyattributes
 ];
 
-echo $OUTPUT->render_from_template('theme_degrade/columns1', $templatecontext);
-
+echo $OUTPUT->render_from_template('theme_degrade/columns1', $data);

@@ -1,0 +1,17 @@
+<div class="frontpage-course-list {{root_class}}">
+    <div class="container-fluid">
+        <h2 class="frontpage-course-title">{{title}}
+            {{{add_new_course_button}}}
+        </h2>
+        {{#text}}
+            <p class="frontpage-course-description">{{text}}</p>
+        {{/text}}
+        <div class="courses course-box">
+            <div class="row">
+                {{#courses}}
+                    {{> theme_degrade/frontpage-course }}
+                {{/courses}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,19 +15,23 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme version page.
- * @package    theme_degrade
- * @copyright  2020 Eduardo Kraus (https://www.eduardokraus.com)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * version.php
+ *
+ * This is built using the boost template to allow for new theme's using
+ * Moodle's new Boost theme engine
+ *
+ * @package     theme_degrade
+ * @copyright   2023 Eduardo kraus (http://eduardokraus.com)
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version = 2020041803; // v2
+$plugin->version = 2023040200;
 $plugin->maturity = MATURITY_STABLE;
-$plugin->requires  = 2019051100;
-$plugin->release = 'v3.0.2';
+$plugin->release = 'v4.0.1';
+$plugin->requires = 2022041900;
 $plugin->component = 'theme_degrade';
-$plugin->dependencies = [
-    'theme_boost' => 2019022600
-];
+$plugin->dependencies = array(
+    'theme_boost' => 2022041900,
+);

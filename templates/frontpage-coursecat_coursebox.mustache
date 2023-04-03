@@ -1,0 +1,45 @@
+<div class="col-lg-3 col-md-6 d-flex">
+    <div class="frontpage-coursecat_coursebox d-flex">
+        <div class="course-item">
+            <div class="course-item-img">
+                <a href="{{courseurl}}">
+                    <img alt="" src="{{imgurl}}">
+                </a>
+                <!--div class="price"><h3>R$10</h3></div-->
+            </div>
+            <div class="course-content">
+                <div class="course-title-group">
+                    <h3>
+                        <a href="{{courseurl}}">{{coursename}}</a>
+                    </h3>
+                    {{^is_enrolled}}
+                        <!--a href="{{courseurl}}" class="btn btn-primary">BUY NOW</a-->
+                    {{/is_enrolled}}
+                </div>
+                <div class="course-info border-bottom-0 pb-0 d-flex align-items-center">
+                    <div class="lesson-group d-flex align-items-center">
+                        {{#pix}}lessons, theme_degrade{{/pix}}
+                        <p>{{countlessons}}</p>
+                    </div>
+
+                </div>
+
+
+                <div class="instructor-group d-flex">
+                    {{#instructor}}
+                        <div class="instructor-group-img d-flex">
+                            <a href="#">
+                                <img alt="{{instructorname}}" src="{{instructorurl}}"
+                                     class="avatar avatar-50 photo" height="50" width="50">
+                            </a>
+                            <div class="instructor-name">
+                                <h4><a href="#">{{instructorname}}</a></h4>
+                                <p>{{instructortitle}}</p>
+                            </div>
+                        </div>
+                    {{/instructor}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
