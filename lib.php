@@ -35,7 +35,6 @@
  */
 function theme_degrade_page_init(moodle_page $page) {
     $page->requires->jquery();
-    $page->requires->js('/theme/degrade/javascript/theme.js');
 }
 
 /**
