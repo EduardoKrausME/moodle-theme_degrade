@@ -20,7 +20,7 @@ define([
 
         _theme_select : function(themename) {
 
-            console.log("theme-_theme_select: " + themename);
+            // console.log("theme-_theme_select: " + themename);
 
             theme.id_s_theme_degrade_theme.val(themename);
 
@@ -41,15 +41,15 @@ define([
                 var color = colorElement.attr("data-color");
 
                 if (atualcss.indexOf(name) >= 0) {
-                    console.log(atualcss);
+                    // console.log(atualcss);
                     atualcss = atualcss.replace(new RegExp(name + ": .*?;", "i"), name + ": " + color + ";");
-                    console.log(atualcss);
+                    // console.log(atualcss);
                 } else {
                     falhou_cores++;
                 }
             });
 
-            console.log(falhou_cores);
+            // console.log(falhou_cores);
             if (falhou_cores == 0) {
                 theme.id_s_theme_degrade_customcss.val(atualcss);
             } else {
