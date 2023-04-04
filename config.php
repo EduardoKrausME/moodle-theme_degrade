@@ -30,7 +30,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $THEME->name = 'degrade';
 
-$THEME->sheets = ['degrade', 'custom', 'slick'];
+$THEME->sheets = ['degrade', 'custom'];
 
 $THEME->editor_sheets = [];
 
