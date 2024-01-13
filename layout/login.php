@@ -30,6 +30,6 @@ $templatedata = [
     'output' => $OUTPUT,
     'bodyattributes' => $bodyattributes,
 ];
-$templatedata = array_merge($templatedata, \theme_degrade\template\footer_data::get_data());
 $templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_data::topo());
+$templatedata = array_merge($templatedata, \theme_degrade\template\login_data::get_data());
 echo $OUTPUT->render_from_template('theme_degrade/login', $templatedata);

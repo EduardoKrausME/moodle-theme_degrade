@@ -34,7 +34,11 @@
  * @return null
  */
 function theme_degrade_page_init(moodle_page $page) {
+    global $CFG;
+
     $page->requires->jquery();
+
+    $CFG->enableuserfeedback = false;
 }
 
 /**
@@ -47,7 +51,6 @@ function theme_degrade_page_init(moodle_page $page) {
  * @return string $css
  */
 function theme_degrade_process_css($css, $theme) {
-
     if (preg_match('/root.*--color_theme_primary:/s', $css)) {
         if (isset($theme->settings->customcss[3])) {
             $customcss = $theme->settings->customcss;
@@ -63,7 +66,6 @@ function theme_degrade_process_css($css, $theme) {
                 $rgb = implode(",", array_map('hexdec', $hex));
                 $customcss = str_replace("#{$color}", $rgb, $customcss);
             }
-
 
             $themas = ['color_primary', 'color_secondary', 'color_buttons', 'color_names', 'color_titles'];
             foreach ($themas as $thema) {
@@ -298,6 +300,8 @@ function theme_degrade_get_setting($setting, $format = true) {
         return format_string($theme->settings->$setting);
     } else if ($format === FORMAT_PLAIN) {
         return format_text($theme->settings->$setting, FORMAT_PLAIN);
+    } else if ($format === FORMAT_HTML) {
+        return format_text($theme->settings->$setting, FORMAT_HTML);
     } else {
         return $theme->settings->$setting;
     }
@@ -306,22 +310,22 @@ function theme_degrade_get_setting($setting, $format = true) {
 /**
  * Renderer the slider images.
  *
- * @param $slideshowimage
+ * @param $imagesetting
  *
  * @return string
  * @throws coding_exception
  */
-function theme_degrade_get_setting_image($slideshowimage) {
+function theme_degrade_get_setting_image($imagesetting) {
     global $PAGE;
 
-    if (theme_degrade_get_setting($slideshowimage)) {
-        $slideshowimageurl = $PAGE->theme->setting_file_url($slideshowimage, $slideshowimage);
+    if (theme_degrade_get_setting($imagesetting)) {
+        $imagesettingurl = $PAGE->theme->setting_file_url($imagesetting, $imagesetting);
     }
-    if (empty($slideshowimageurl)) {
-        $slideshowimageurl = '';
+    if (empty($imagesettingurl)) {
+        $imagesettingurl = '';
     }
 
-    return $slideshowimageurl;
+    return $imagesettingurl;
 }
 
 /**

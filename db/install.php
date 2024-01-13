@@ -79,6 +79,8 @@ function xmldb_theme_degrade_install() {
     set_config("footer_links_title", get_string("footer_links_title_default", "theme_degrade"), "theme_degrade");
     set_config("footer_links", "", "theme_degrade");
     set_config("footer_social_title", get_string("footer_social_title_default", "theme_degrade"), "theme_degrade");
+    set_config("social_youtube", "", "theme_degrade");
+    set_config("social_linkedin", "", "theme_degrade");
     set_config("social_facebook", "", "theme_degrade");
     set_config("social_twitter", "", "theme_degrade");
     set_config("social_instagram", "", "theme_degrade");
@@ -86,4 +88,12 @@ function xmldb_theme_degrade_install() {
     set_config("contact_address", "", "theme_degrade");
     set_config("contact_phone", "", "theme_degrade");
     set_config("contact_email", "", "theme_degrade");
+
+    set_config("login_theme", "theme_image_login", "theme_degrade");
+    set_config("login_backgroundfoto", "", "theme_degrade");
+
+
+    set_config("login_login_description", "", "theme_degrade");
+    set_config("login_forgot_description", "", "theme_degrade");
+    set_config("login_signup_description", "", "theme_degrade");
 }

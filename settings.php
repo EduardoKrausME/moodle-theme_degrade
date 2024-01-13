@@ -47,4 +47,6 @@ if (is_siteadmin()) {
     require_once(__DIR__ . "/settings-topo.php");
 
     require_once(__DIR__ . "/settings-footer.php");
+
+    require_once(__DIR__ . "/settings-login.php");
 }

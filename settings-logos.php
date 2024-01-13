@@ -21,22 +21,20 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$temp = new admin_settingpage('theme_degrade_logos', get_string('settings_logos_heading', 'theme_degrade'));
+$page = new admin_settingpage('theme_degrade_logos', get_string('settings_logos_heading', 'theme_degrade'));
 
-// Logo file setting.
 $title = get_string('logo', 'admin');
 $description = get_string('logo_desc', 'admin');
 $setting = new admin_setting_configstoredfile('core_admin/logo', $title, $description, 'logo', 0,
     ['maxfiles' => 1, 'accepted_types' => ['.jpg', '.png']]);
 $setting->set_updatedcallback('theme_reset_all_caches');
-$temp->add($setting);
+$page->add($setting);
 
-// Favicon file setting.
 $title = get_string('favicon', 'theme_degrade');
 $description = get_string('favicon_desc', 'theme_degrade');
 $setting = new admin_setting_configstoredfile('core_admin/favicon', $title, $description, 'favicon', 0,
     ['maxfiles' => 1, 'accepted_types' => ['image']]);
 $setting->set_updatedcallback('theme_reset_all_caches');
-$temp->add($setting);
+$page->add($setting);
 
-$settings->add($temp);
+$settings->add($page);

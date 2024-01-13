@@ -24,7 +24,6 @@
 $string['pluginname'] = 'Degrade';
 $string['choosereadme'] = 'Degrade é um thema construido com carinho para trazer cores alegres ao Moodle.';
 
-
 // Slides.
 $string['settings_slideshow_heading'] = 'SlideShow';
 $string['theme_degrade_slideshow_editbooton'] = 'Editar SlideShow';
@@ -67,13 +66,14 @@ $string['frontpage_about_number_desc'] = 'Coloque aqui a quantidade de informaç
 $string['frontpage_about_text_1_defalt'] = 'Cursos';
 $string['frontpage_about_text_2_defalt'] = 'Professores';
 $string['frontpage_about_text_3_defalt'] = 'Estudantes';
-$string['frontpage_about_text_4_defalt'] = 'Liçoes';
+$string['frontpage_about_text_4_defalt'] = 'Lições';
 
 
 $string['theme_degrade_frontpage_home'] = 'Blocos da Home';
+$string['heart'] = 'Se está gostando desse tema, não esqueça de clicar em ❤️ na página dos themas <a href="{$a}" target="_blank">clicando aqui</a>';
 $string['theme_degrade_frontpage_bloco'] = 'Bloco "{$a}"';
 
-$string['footer_frontpage_blockcourses_text'] = 'Texto explicando os "{$a}"';
+$string['footer_frontpage_blockcourses_text'] = 'Texto curto explicando o bloco "{$a}"';
 $string['footer_frontpage_blockcourses_text_desc'] = 'Adicone um texto falando dos "{$a}"!';
 $string['footer_frontpage_blockcourses_instructor'] = 'Mostrar nome do Professor';
 $string['footer_frontpage_blockcourses_instructor_desc'] = 'Se marcado, mostra os nomes dos professores na lista de cursos!';
@@ -92,6 +92,10 @@ $string['favicon_desc'] = 'O favicon é exibido ao lado do título da página na
 // Footer.
 $string['social_twitter'] = 'Seu Twitter';
 $string['social_twitter_desc'] = 'A URL do Twitter da sua organização.';
+$string['social_youtube'] = 'Seu Youtube';
+$string['social_youtube_desc'] = 'A URL do Youtube da sua organização.';
+$string['social_linkedin'] = 'Seu Linkedin';
+$string['social_linkedin_desc'] = 'A URL do Linkedin da sua organização.';
 $string['social_instagram'] = 'Seu Instagram';
 $string['social_instagram_desc'] = 'A URL do Instagram da sua organização.';
 $string['social_facebook'] = 'Seu Facebook';
@@ -131,6 +135,10 @@ $string['contact_address'] = 'Endereço';
 $string['contact_email'] = 'E-mail';
 $string['contact_phone'] = 'Número de Telefone';
 
+$string['footerblock_copywriter'] = 'Feito com ❤️';
+$string['footer_show_copywriter'] = 'Mostrar o Feito com ❤️';
+$string['footer_show_copywriter_desc'] = 'Desmarque caso deseja ocultar o "Feito com ❤️"';
+
 // Logos.
 $string['settings_logos_heading'] = 'Logos';
 
@@ -159,6 +167,22 @@ $string['background_color_red'] = 'Tema Vermelho {$a}';
 $string['background_color_black'] = 'Tema Preto {$a}';
 $string['background_color_random'] = 'Tema Randômico {$a}';
 
+$string['settings_login_heading'] = 'Tela de Login';
+$string['login_theme'] = 'Tema do login';
+$string['login_theme_desc'] = 'Escolha qual tema quer na área de Login';
+$string['login_theme_image_login'] = 'Imagem de background e login do lado';
+$string['login_theme_imagetext_login'] = 'Imagem de background, texto sobre a imagem e login do lado';
+$string['login_theme_login'] = 'Apenas tela de login, sem imagem lateral';
+$string['theme_login_branco'] = 'Apenas tela de login, sem imagem lateral, com o form em fundo branco';
+$string['login_backgroundfoto'] = 'Imagem de fundo';
+$string['login_backgroundfoto_desc'] = 'Selecione a imagem de fundo do Login/Recuperar Senha/Criar Conta. Imagem padrão é: {$a}';
+
+$string['login_login_description'] = 'Texto na lateral da Tela de Login';
+$string['login_login_description_desc'] = 'Texto que aparecerá apenas na tela de Login';
+$string['login_forgot_description'] = 'Texto na lateral da Tela de Recuperar Senha';
+$string['login_forgot_description_desc'] = 'Texto que aparecerá apenas na tela de Recuperar Senha';
+$string['login_signup_description'] = 'Texto na lateral da Tela de Criar uma conta';
+$string['login_signup_description_desc'] = 'Texto que aparecerá apenas na tela de Criar uma conta';
 
 // Privacy.
 $string['privacy:metadata'] = 'O tema Degrade não armazena nenhum dado pessoal sobre nenhum usuário.';

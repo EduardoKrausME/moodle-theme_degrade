@@ -47,7 +47,7 @@
     .nn-btn-primary {
         background: #f54266;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #c961f7;
     }
 }
@@ -76,7 +76,7 @@
     .theme-default2.loginbody:before {
         background-image: url([[pix:theme|background/C961F7]]);
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #c961f7;
     }
 }
@@ -102,7 +102,7 @@
     .nn-btn-primary {
         background: #00c3b0;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #00c3b0;
     }
 }
@@ -128,7 +128,7 @@
     .nn-btn-primary {
         background: #30e8bf;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #30e8bf;
     }
 }
@@ -154,7 +154,7 @@
     .nn-btn-primary {
         background: #00bf8f;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #00bf8f;
     }
 }
@@ -180,7 +180,7 @@
     .nn-btn-primary {
         background: #007bc3;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #007bc3;
     }
 }
@@ -206,7 +206,7 @@
     .nn-btn-primary {
         background: #000428;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #000428;
     }
 }
@@ -232,7 +232,7 @@
     .nn-btn-primary {
         background: #314755;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #314755;
     }
 }
@@ -258,7 +258,7 @@
     .nn-btn-primary {
         background: #7303c0;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #7303c0;
     }
 }
@@ -284,7 +284,7 @@
     .nn-btn-primary {
         background: #00f0ff;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #00f0ff;
     }
 }
@@ -310,7 +310,7 @@
     .nn-btn-primary {
         background: #83a4d4;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #83a4d4;
     }
 }
@@ -336,7 +336,7 @@
     .nn-btn-primary {
         background: #c10f41;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #c10f41;
     }
 }
@@ -362,7 +362,7 @@
     .nn-btn-primary {
         background: #b21f1f;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #b21f1f;
     }
 }
@@ -388,7 +388,7 @@
     .nn-btn-primary {
         background: #ceac7a;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #ceac7a;
     }
 }
@@ -414,7 +414,7 @@
     .nn-btn-primary {
         background: #e65c00;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #e65c00;
     }
 }
@@ -440,7 +440,7 @@
     .nn-btn-primary {
         background: #d12924;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #d12924;
     }
 }
@@ -466,7 +466,7 @@
     .nn-btn-primary {
         background: #ff512f;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #ff512f;
     }
 }
@@ -492,7 +492,7 @@
     .nn-btn-primary {
         background: #fc354c;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #fc354c;
     }
 }
@@ -518,7 +518,7 @@
     .nn-btn-primary {
         background: #86377b;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #86377b;
     }
 }
@@ -544,7 +544,7 @@
     .nn-btn-primary {
         background: #4c0001;
     }
-    &.loginbody {
+    &[data-templates=login] {
         background-color: #4c0001;
     }
 }

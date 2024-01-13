@@ -71,6 +71,7 @@ $string['frontpage_about_text_4_defalt'] = 'Lecciones';
 
 
 $string['theme_degrade_frontpage_home'] = 'Bloques de Inicio';
+$string['heart'] = 'Si te gusta este tema, no olvides hacer clic en ❤️ en la página de temas <a href="{$a}" target="_blank">haciendo clic aquí</a>';
 $string['theme_degrade_frontpage_bloco'] = 'Bloquear "{$a}"';
 
 $string['footer_frontpage_blockcourses_text'] = 'Texto que explica el "{$a}"';
@@ -90,6 +91,10 @@ $string['favicon_desc'] = 'El favicon se muestra junto al título de la página 
 
 
 // Pie de página.
+$string['social_youtube'] = 'Tu Youtube';
+$string['social_youtube_desc'] = 'URL de Youtube de su organización';
+$string['social_linkedin'] = 'Tu Linkedin';
+$string['social_linkedin_desc'] = 'URL de Linkedin de su organización';
 $string['social_twitter'] = 'Tu Twitter';
 $string['social_twitter_desc'] = 'URL de Twitter de su organización';
 $string['social_instagram'] = 'Tu Instagram';
@@ -117,8 +122,8 @@ $string['footer_social_title_default'] = 'Síguenos en las redes sociales';
 $string['footerblock_contact'] = 'Bloqueo de contactos';
 
 $string['footerblink'] = 'Enlaces de bloque de pie de página';
-$string['footerblink_desc'] = 'Puede configurar enlaces de bloque de pie de página aquí para que se muestren por temas. <br>'.
-    'Cada línea consta de algún texto de menú o clave de idioma o texto, una URL de enlace (opcional), separados por barras verticales. Por ejemplo: <br>'.
+$string['footerblink_desc'] = 'Puede configurar enlaces de bloque de pie de página aquí para que se muestren por temas. <br>' .
+    'Cada línea consta de algún texto de menú o clave de idioma o texto, una URL de enlace (opcional), separados por barras verticales. Por ejemplo: <br>' .
     '<pre>Soporte de Moodle|https://moodle.org/support</pre>';
 
 
@@ -130,6 +135,10 @@ $string['footer_contact_title_default'] = 'Contáctenos';
 $string['contact_address'] = 'Dirección';
 $string['contact_email'] = 'Correo electrónico';
 $string['contact_phone'] = 'Número de teléfono';
+
+$string['footerblock_copywriter'] = 'Hecho con ❤️';
+$string['footer_show_copywriter'] = 'Mostrar Hecho con ❤️';
+$string['footer_show_copywriter_desc'] = 'Desmarcar si desea ocultar el "Hecho con ❤️"';
 
 // Logotipos.
 $string['settings_logos_heading'] = 'Logotipos';
@@ -158,6 +167,23 @@ $string['background_color_blue'] = 'Tema azul {$a}';
 $string['background_color_red'] = 'Tema rojo {$a}';
 $string['background_color_black'] = 'Tema negro {$a}';
 $string['background_color_random'] = 'Tema aleatorio {$a}';
+
+$string['settings_login_heading'] = 'Pantalla de inicio de sesión';
+$string['login_theme'] = 'Tema de inicio de sesión';
+$string['login_theme_desc'] = 'Elija el tema que desea en el área de inicio de sesión';
+$string['login_theme_image_login'] = 'Imagen de fondo y inicio de sesión al lado';
+$string['login_theme_imagetext_login'] = 'Imagen de fondo, texto sobre la imagen e inicio de sesión al lado';
+$string['login_theme_login'] = 'Solo pantalla de inicio de sesión, sin imagen lateral';
+$string['theme_login_branco'] = 'Solo pantalla de inicio de sesión, sin imagen lateral, con el formulario en fondo blanco';
+$string['login_backgroundfoto'] = 'Imagen de fondo';
+$string['login_backgroundfoto_desc'] = 'Seleccione la imagen de fondo de inicio de sesión/Recuperar contraseña/Crear cuenta. La imagen predeterminada es: {$a}';
+
+$string['login_login_description'] = 'Texto en el lateral de la pantalla de inicio de sesión';
+$string['login_login_description_desc'] = 'Texto que aparecerá solo en la pantalla de inicio de sesión';
+$string['login_forgot_description'] = 'Texto en el lateral de la pantalla de recuperar contraseña';
+$string['login_forgot_description_desc'] = 'Texto que aparecerá solo en la pantalla de recuperar contraseña';
+$string['login_signup_description'] = 'Texto en el lateral de la pantalla de crear una cuenta';
+$string['login_signup_description_desc'] = 'Texto que aparecerá solo en la pantalla de crear una cuenta';
 
 
 // Privacidad.

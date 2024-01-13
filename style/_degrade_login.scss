@@ -1,0 +1,225 @@
+
+.login-wrapper {
+    height: 100%;
+    margin-top: 0 !important;
+    .login-logo-area {
+        position: fixed;
+        top: 50px;
+        left: 50px;
+        display: inline-block;
+        z-index: 1000;
+        img {
+            width: 100px;
+        }
+    }
+    .login-area {
+        width: 100%;
+        height: 100%;
+        .login-background-area {
+            position: fixed;
+            width: 50%;
+            top: 0;
+            height: 100%;
+            display: inline-block;
+            overflow: hidden;
+            padding: 60px;
+            text-align: center;
+            background-position: center;
+            background-size: cover;
+            @media (max-width: 992px) {
+                display: none;
+            }
+            .login-color-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.33);
+                z-index: -1;
+                padding: 143px 54px 20px;
+                > div {
+                    color: #fff;
+                    line-height: 1.2;
+                    * {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+        .login-form-area {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            @media (max-width: 992px) {
+                left: 0;
+                width: 100%;
+            }
+            .form-content {
+                position: relative;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 60px;
+                min-height: 100%;
+                .form-items {
+                    text-align: left;
+                    display: inline-block;
+                    width: 100%;
+                    transition: all 0.4s ease;
+                    #loginlogo {
+                        #logoimage {
+                            display: none;
+                        }
+                        h1 {
+                            width: auto;
+                            height: auto;
+                            clip: initial;
+                            position: initial;
+                            white-space: initial;
+                        }
+                    }
+                    #username,
+                    #password {
+                        border: 0;
+                        background-color: #fff;
+                        color: #626262;
+                        width: 100%;
+                        padding: 9px 20px;
+                        text-align: left;
+                        outline: 0;
+                        border-radius: 6px;
+                        font-size: 15px;
+                        font-weight: 300;
+                        transition: all 0.3s ease;
+                        margin-bottom: 14px;
+                    }
+                }
+            }
+            fieldset {
+                border: none;
+            }
+            [type=button] {
+                display: none;
+            }
+            legend {
+                font-size: 28px;
+            }
+            .login-instructions {
+                margin-top: 60px;
+            }
+            .generalbox,
+            .login-instructions,
+            .fdescription,
+            label,
+            a {
+                color: #f1f1f1;
+                text-align: left;
+                font-size: 18px;
+                font-weight: 300;
+                line-height: 20px;
+                margin-bottom: 30px;
+            }
+            label {
+                margin-bottom: 0 !important;
+            }
+            h1, h2, h3, legend {
+                color: #fff;
+                font-weight: 900;
+                margin-bottom: 10px;
+                line-height: 1.2;
+            }
+            #id_searchbyusernamecontainer,
+            #id_searchbyemailcontainer {
+                .row {
+                    flex-direction: column;
+                    > div {
+                        width: 100%;
+                        flex: 0 0 100%;
+                        max-width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    &.login-login_theme_login,
+    &.login-theme_login_branco {
+        .login-area {
+            .login-background-area {
+                display: none;
+            }
+            .login-form-area {
+                position: initial;
+                width: 100%;
+                .form-content {
+                    width: 100%;
+                    .form-items {
+                        max-width: 400px;
+                        margin: 0 auto;
+                    }
+                }
+            }
+        }
+    }
+    &.login-theme_login_branco {
+        .login-area {
+            .login-form-area {
+                .form-content {
+                    .form-items {
+                        background: #fff;
+                        padding: 16px 27px;
+                        border-radius: 10px;
+                        #username,
+                        #password {
+                            background: #cccaca;
+                            color: #3e3e3e;
+                            max-width: 100%;
+                        }
+                    }
+                }
+            }
+            h1, h2, h3, legend {
+                color: #3a3a3a;
+            }
+            .generalbox,
+            .login-instructions,
+            .fdescription,
+            label,
+            a {
+                color: #3a3a3a;
+            }
+        }
+    }
+}
+#login_login_description,
+#login_forgot_description,
+#login_signup_description {
+    display: none;
+}
+#page-login-index .login-login_theme_imagetext_login {
+    #login_login_description {
+        display: block;
+    }
+    &.login-wrapper .login-area .login-background-area .login-color-area {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+}
+#page-login-forgot_password .login-login_theme_imagetext_login {
+    #login_forgot_description {
+        display: block;
+    }
+    &.login-wrapper .login-area .login-background-area .login-color-area {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+}
+#page-login-signup .login-login_theme_imagetext_login {
+    #login_signup_description {
+        display: block;
+    }
+    &.login-wrapper .login-area .login-background-area .login-color-area {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+}

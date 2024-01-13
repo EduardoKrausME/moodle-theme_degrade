@@ -21,9 +21,9 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$temp = new admin_settingpage('theme_degrade_topo', get_string('settings_topo_heading', 'theme_degrade'));
+$page = new admin_settingpage('theme_degrade_topo', get_string('settings_topo_heading', 'theme_degrade'));
 
-$temp->add(new admin_setting_configtextarea('custommenuitems', new lang_string('custommenuitems', 'admin'),
+$page->add(new admin_setting_configtextarea('custommenuitems', new lang_string('custommenuitems', 'admin'),
     new lang_string('configcustommenuitems', 'admin'), '', PARAM_RAW, '50', '10'));
 
-$settings->add($temp);
+$settings->add($page);

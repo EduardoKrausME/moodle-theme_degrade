@@ -21,7 +21,7 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$temp = new admin_settingpage('theme_degrade_slideshow', get_string('settings_slideshow_heading', 'theme_degrade'));
+$page = new admin_settingpage('theme_degrade_slideshow', get_string('settings_slideshow_heading', 'theme_degrade'));
 
 // Number of slides.
 $name = 'theme_degrade/slideshow_numslides';
@@ -40,7 +40,7 @@ $choices = [
     8 => '8',
     9 => '9',
 ];
-$temp->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
+$page->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
 global $PAGE;
 $PAGE->requires->js_call_amd('theme_degrade/settings', 'numslides');
@@ -52,27 +52,27 @@ for ($i = 1; $i <= 9; $i++) {
     $name = "theme_degrade/slideshow_info_{$i}";
     $heading = get_string('slideshow_info', 'theme_degrade', $i);
     $setting = new admin_setting_heading($name, "<span id='admin-slideshow_info_{$i}'>{$heading}</span>", "");
-    $temp->add($setting);
+    $page->add($setting);
 
     $name = "theme_degrade/slideshow_image_{$i}";
     $title = get_string('slideshow_image', 'theme_degrade');
     $description = get_string('slideshow_image_desc', 'theme_degrade');
     $setting = new admin_setting_configstoredfile($name, $title, $description, "slideshow_image_{$i}");
     $setting->set_updatedcallback('theme_reset_all_caches');
-    $temp->add($setting);
+    $page->add($setting);
 
     $name = "theme_degrade/slideshow_url_{$i}";
     $title = get_string('slideshow_url', 'theme_degrade');
     $description = get_string('slideshow_url_desc', 'theme_degrade');
     $default = 'http://www.example.com/';
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_URL);
-    $temp->add($setting);
+    $page->add($setting);
 
     $name = "theme_degrade/slideshow_text_{$i}";
     $title = get_string('slideshow_text', 'theme_degrade');
     $description = get_string('slideshow_text_desc', 'theme_degrade');
     $default = '';
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
-    $temp->add($setting);
+    $page->add($setting);
 }
-$settings->add($temp);
+$settings->add($page);

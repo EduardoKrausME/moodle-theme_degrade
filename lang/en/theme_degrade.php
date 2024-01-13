@@ -71,6 +71,7 @@ $string['frontpage_about_text_4_defalt'] = 'Lessons';
 
 
 $string['theme_degrade_frontpage_home'] = 'Home Blocks';
+$string['heart'] = 'If you like this theme, don\'t forget to click ❤️ on the themes page by <a href="{$a}" target="_blank">clicking here</a>';
 $string['theme_degrade_frontpage_bloco'] = 'Block "{$a}"';
 
 $string['footer_frontpage_blockcourses_text'] = 'Text explaining the "{$a}"';
@@ -90,6 +91,10 @@ $string['favicon_desc'] = 'The favicon is displayed next to the page title in th
 
 
 // Footer.
+$string['social_youtube'] = 'Your Youtube';
+$string['social_youtube_desc'] = 'Your organization\'s Youtube URL.';
+$string['social_linkedin'] = 'Your Youtube';
+$string['social_linkedin_desc'] = 'Your organization\'s Youtube URL.';
 $string['social_twitter'] = 'Your Twitter';
 $string['social_twitter_desc'] = 'Your organization\'s Twitter URL.';
 $string['social_instagram'] = 'Your Instagram';
@@ -131,6 +136,11 @@ $string['contact_address'] = 'Address';
 $string['contact_email'] = 'Email';
 $string['contact_phone'] = 'Phone Number';
 
+$string['footerblock_copywriter'] = 'Made with ❤️';
+$string['footer_show_copywriter'] = 'Show Made with ❤️';
+$string['footer_show_copywriter_desc'] = 'Uncheck if you want to hide the "Made with ❤️"';
+
+
 // Logos.
 $string['settings_logos_heading'] = 'Logos';
 
@@ -158,6 +168,24 @@ $string['background_color_blue'] = 'Blue theme {$a}';
 $string['background_color_red'] = 'Red Theme {$a}';
 $string['background_color_black'] = 'Black theme {$a}';
 $string['background_color_random'] = 'Random Theme {$a}';
+
+$string['settings_login_heading'] = 'Login Screen';
+$string['login_theme'] = 'Login Theme';
+$string['login_theme_desc'] = 'Choose the theme for the Login area';
+$string['login_theme_image_login'] = 'Background image with side login';
+$string['login_theme_imagetext_login'] = 'Background image with text overlay and side login';
+$string['login_theme_login'] = 'Login screen only, no side image';
+$string['theme_login_branco'] = 'Login screen only, no side image, with form on white background';
+$string['login_backgroundfoto'] = 'Background Image';
+$string['login_backgroundfoto_desc'] = 'Select the background image for Login/Forgot Password/Create Account. Default image is: {$a}';
+
+$string['login_login_description'] = 'Text on the side of the Login Screen';
+$string['login_login_description_desc'] = 'Text that will appear only on the Login screen';
+$string['login_forgot_description'] = 'Text on the side of the Forgot Password Screen';
+$string['login_forgot_description_desc'] = 'Text that will appear only on the Forgot Password screen';
+$string['login_signup_description'] = 'Text on the side of the Create an Account Screen';
+$string['login_signup_description_desc'] = 'Text that will appear only on the Create an Account screen';
+
 
 
 // Privacy.

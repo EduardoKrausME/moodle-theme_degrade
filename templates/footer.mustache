@@ -76,16 +76,27 @@
                                     <div class="social-media">
                                         <h4>{{footer_social_title}}</h4>
                                         <ul>
-                                            {{#social_facebook}}
-                                                <li class="smedia-01">
-                                                    <a href="{{social_facebook}}" target="_blank">
-                                                <span class="media-icon">
-                                                <i class="fa fa-facebook"></i>
-                                                </span>
-                                                        <span class="media-name">{{facebook_name}}</span>
+                                            {{#social_youtube}}
+                                                <li class="smedia-02">
+                                                    <a href="{{social_youtube}}" target="_blank">
+                                                        <span class="media-icon">
+                                                            <i class="fa fa-youtube"></i>
+                                                        </span>
+                                                        <span class="media-name">{{youtube_name}}</span>
                                                     </a>
                                                 </li>
-                                            {{/social_facebook}}
+                                            {{/social_youtube}}
+
+                                            {{#social_linkedin}}
+                                                <li class="smedia-02">
+                                                    <a href="{{social_linkedin}}" target="_blank">
+                                                        <span class="media-icon">
+                                                            <i class="fa fa-linkedin"></i>
+                                                        </span>
+                                                        <span class="media-name">{{linkedin_name}}</span>
+                                                    </a>
+                                                </li>
+                                            {{/social_linkedin}}
 
                                             {{#social_twitter}}
                                                 <li class="smedia-02">
@@ -108,6 +119,17 @@
                                                     </a>
                                                 </li>
                                             {{/social_instagram}}
+
+                                            {{#social_facebook}}
+                                                <li class="smedia-01">
+                                                    <a href="{{social_facebook}}" target="_blank">
+                                                <span class="media-icon">
+                                                <i class="fa fa-facebook"></i>
+                                                </span>
+                                                        <span class="media-name">{{facebook_name}}</span>
+                                                    </a>
+                                                </li>
+                                            {{/social_facebook}}
 
                                             {{#footer_settings_edit}}
                                                 <a class="settings-edit" href="{{{footer_settings_edit}}}">
@@ -148,14 +170,17 @@
                             {{/enable_block_contact}}
                         </div>
                     </div>
-                    <div class="footer-foot">
-                        <div class="container">
-                            <p class="text-center">
-                                Feito com ❤️ Por <a href="https://eduardokraus.com" target="_blank">Eduardo Kraus</a>.
-                                Powered by <a href="https://moodle.org" target="_blank">Moodle</a>
-                            </p>
+                    {{#enable_copywriter}}
+                        <div class="footer-foot">
+                            <div class="container">
+                                <p class="text-center">
+                                    {{footerblock_copywriter_text}}
+                                    <a href="https://eduardokraus.com" target="_blank">Eduardo Kraus</a>.
+                                    Powered by <a href="https://moodle.org" target="_blank">Moodle</a>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    {{/enable_copywriter}}
                 </div>
             {{/footer_enable_block}}
         </div>

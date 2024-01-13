@@ -22,10 +22,9 @@
 defined('MOODLE_INTERNAL') || die;
 global $PAGE;
 
-$temp = new admin_settingpage('theme_degrade_css', get_string('settings_theme_heading', 'theme_degrade'));
+$page = new admin_settingpage('theme_degrade_css', get_string('settings_theme_heading', 'theme_degrade'));
 
 
-// Top Background.
 $name = 'theme_degrade/background_color';
 $title = get_string('background_color', 'theme_degrade');
 $description = get_string('background_color_desc', 'theme_degrade');
@@ -65,10 +64,9 @@ foreach ($choices as $choice => $lang) {
 }
 $setting = new admin_setting_configselect($name, $title, $description . $htmlselect, $default, $choices);
 $setting->set_updatedcallback('theme_reset_all_caches');
-$temp->add($setting);
+$page->add($setting);
 
 
-// Theme Color scheme chooser.
 $name = 'theme_degrade/theme';
 $title = get_string('theme', 'theme_degrade');
 $description = get_string('theme_desc', 'theme_degrade');
@@ -141,20 +139,19 @@ foreach ($colorss as $colorname => $colors) {
 
 $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
 $setting->set_updatedcallback('theme_reset_all_caches');
-$temp->add($setting);
+$page->add($setting);
 
 
 $PAGE->requires->js_call_amd('theme_degrade/settings', 'theme');
 
 
-// Custom CSS file.
 $name = 'theme_degrade/customcss';
 $title = get_string('customcss', 'theme_degrade');
 $description = get_string('customcss_desc', 'theme_degrade');
 $default = '';
 $setting = new admin_setting_configtextarea($name, $title, $description, $default);
 $setting->set_updatedcallback('theme_reset_all_caches');
-$temp->add($setting);
+$page->add($setting);
 
 
 $fontsarr = [
@@ -177,6 +174,6 @@ $title = get_string('fontfamily', 'theme_degrade');
 $description = get_string('fontfamily_desc', 'theme_degrade');
 $setting = new admin_setting_configselect($name, $title, $description, 'Roboto', $fontsarr);
 $setting->set_updatedcallback('theme_reset_all_caches');
-$temp->add($setting);
+$page->add($setting);
 
-$settings->add($temp);
+$settings->add($page);
