@@ -99,7 +99,7 @@ class course_renderer extends \core_course_renderer {
             }
 
             $datacursos["courses"][] = [
-                "couse_class" => "col-lg-4 col-md-6",
+                "couse_class" => "col-xg-3 col-lg-4 col-sm-6",
                 "edit_course" => "{$CFG->wwwroot}/course/edit.php?id={$course->id}#fitem_id_overviewfiles_filemanager",
                 "imgurl" => course_renderer_util::couse_image($course),
                 "courseurl" => $courseurl,
@@ -150,7 +150,7 @@ class course_renderer extends \core_course_renderer {
             $course = new core_course_list_element(get_course($course->id));
 
             $datacursos["courses"][] = [
-                "couse_class" => "col-lg-3 col-md-4",
+                "couse_class" => "col-xg-3 col-lg-4 col-sm-6",
                 "edit_course" => "{$CFG->wwwroot}/course/edit.php?id={$course->id}#fitem_id_overviewfiles_filemanager",
                 "imgurl" => course_renderer_util::couse_image($course),
                 "courseurl" => course_renderer_util::course_url($course),
@@ -198,7 +198,7 @@ class course_renderer extends \core_course_renderer {
         $hascoursecreate = has_capability('moodle/course:create', context_system::instance());
 
         $datacurso = [
-            "couse_class" => "col-lg-3 col-md-4",
+            "couse_class" => "col-xg-3 col-lg-4 col-sm-6",
             "edit_course" => "{$CFG->wwwroot}/course/edit.php?id={$course->id}#fitem_id_overviewfiles_filemanager",
             "imgurl" => course_renderer_util::couse_image($course),
             "courseurl" => course_renderer_util::course_url($course),
@@ -231,7 +231,7 @@ class course_renderer extends \core_course_renderer {
         }
 
         $datacurso = [
-            "couse_class" => "col-lg-3 col-md-4",
+            "couse_class" => "col-xg-3 col-lg-4 col-sm-6",
             "edit_course" => "{$CFG->wwwroot}/course/edit.php?id={$course->id}#fitem_id_overviewfiles_filemanager",
             "imgurl" => course_renderer_util::couse_image($course),
             "courseurl" => course_renderer_util::course_url($course),

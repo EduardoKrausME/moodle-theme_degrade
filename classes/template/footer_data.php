@@ -32,7 +32,7 @@ class footer_data {
     public static function get_data() {
         global $CFG;
 
-        $data = array_merge(self::description(), self::links(), self::social(), self::contact());
+        $data = array_merge(self::description(), self::links(), self::social(), self::contact(), self::copywriter());
 
         $footerenableblock = $data['enable_block_description'] +
             $data['enable_block_links'] +
@@ -103,24 +103,32 @@ class footer_data {
         $footersocialtitle = theme_degrade_get_setting('footer_social_title');
         $footersocialtitle = !empty($footersocialtitle) ? $footersocialtitle : '';
 
-        $socialfacebook = theme_degrade_get_setting('social_facebook');
-        $socialfacebook = trim($socialfacebook);
-        $socialtwitter = theme_degrade_get_setting('social_twitter');
-        $socialtwitter = trim($socialtwitter);
-        $socialinstagram = theme_degrade_get_setting('social_instagram');
-        $socialinstagram = trim($socialinstagram);
+        $socialfacebook = trim(theme_degrade_get_setting('social_facebook'));
+        $socialyoutube = trim(theme_degrade_get_setting('social_youtube'));
+        $sociallinkedin = trim(theme_degrade_get_setting('social_linkedin'));
+        $socialtwitter = trim(theme_degrade_get_setting('social_twitter'));
+        $socialinstagram = trim(theme_degrade_get_setting('social_instagram'));
 
-        $socialurls = ($socialfacebook != '' || $socialinstagram != '' || $socialtwitter != '') ? 1 : 0;
+        $socialurls = ($socialfacebook != '' || $socialyoutube != '' || $sociallinkedin != '' || $socialinstagram != '' || $socialtwitter != '') ? 1 : 0;
 
         return [
-            'enable_block_social' => 0 + ($footersocialtitle != '' || $socialurls != 0),
+            'enable_block_social' => 0 + ($socialurls != 0),
             'footer_social_title' => $footersocialtitle,
+
+            'social_youtube' => $socialyoutube,
+            'youtube_name' => "Youtube",
+
+            'social_linkedin' => $sociallinkedin,
+            'linkedin_name' => "Linkedin",
+
             'social_facebook' => $socialfacebook,
+            'facebook_name' => "Facebook",
+
             'social_instagram' => $socialinstagram,
+            'instagram_name' => "Instagram",
+
             'social_twitter' => $socialtwitter,
-            'instagram_name' => get_string("social_instagram", 'theme_degrade'),
-            'twitter_name' => get_string("social_twitter", 'theme_degrade'),
-            'facebook_name' => get_string("social_facebook", 'theme_degrade'),
+            'twitter_name' => "Twitter",
         ];
     }
 
@@ -142,6 +150,17 @@ class footer_data {
             'contact_address' => $contactaddress,
             'contact_phone' => $contactphone,
             'contact_email' => $contactemail,
+        ];
+    }
+
+    /**
+     * @return array
+     * @throws \coding_exception
+     */
+    private static function copywriter() {
+        return [
+            'enable_copywriter' => theme_degrade_get_setting('footer_show_copywriter'),
+            'footerblock_copywriter_text' => get_string('footerblock_copywriter', 'theme_degrade')
         ];
     }
 }

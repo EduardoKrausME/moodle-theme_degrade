@@ -91,7 +91,7 @@ class frontapage_data {
             "frontpage_about_enable" => $frontpageaboutenable,
             "frontpage_about_logo" => $logo,
             "frontpage_about_title" => theme_degrade_get_setting("frontpage_about_title"),
-            "frontpage_about_description" => theme_degrade_get_setting("frontpage_about_description", false),
+            "frontpage_about_description" => theme_degrade_get_setting("frontpage_about_description", FORMAT_HTML),
             "frontpage_about_edit_settings" => self::edit_settings("theme_degrade_about"),
             "about_numbers" => []
         ];
