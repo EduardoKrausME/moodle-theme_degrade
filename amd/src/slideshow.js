@@ -12,7 +12,6 @@ define([
                 slideshow.plusSlides(1);
             }, 7000);
 
-
             $(".slideshow-prev").click(function() {
                 slideshow.plusSlides(-1);
             });
