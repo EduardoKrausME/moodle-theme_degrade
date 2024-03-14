@@ -1,0 +1,97 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_myoverview/main
+
+    This template renders the main content area for the myoverview block.
+
+    Example context (json):
+    {}
+}}
+
+<div id="block-my-links" class="row block-my-links" style="display:none">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+        <a href="{{{config.wwwroot}}}/message/index.php" class="ff_one">
+            <div class="detais">
+                <div>{{#str}}messages,message{{/str}}</div>
+            </div>
+            <div class="ff_icon"><i class="fa fa-comment-o fa-fw"></i></div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+        <a href="{{{config.wwwroot}}}/user/profile.php?id=1" class="ff_one style2">
+            <div class="detais">
+                <div>{{#str}}profile,moodle{{/str}}</div>
+            </div>
+            <div class="ff_icon"><i class="fa fa-graduation-cap fa-fw"></i></div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+        <a href="{{{config.wwwroot}}}/user/preferences.php" class="ff_one style3">
+            <div class="detais">
+                <div>{{#str}}preferences,moodle{{/str}}</div>
+            </div>
+            <div class="ff_icon"><i class="fa fa-cog fa-fw"></i></div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+        <a href="{{{config.wwwroot}}}/grade/report/overview/index.php"
+           class="ff_one style4">
+            <div class="detais">
+                <div>{{#str}}grades,grades{{/str}}</div>
+            </div>
+            <div class="ff_icon"><i class="fa fa-star fa-fw"></i></div>
+        </a>
+    </div>
+</div>
+
+<div id="block-myoverview-{{uniqid}}" class="block-myoverview block-cards" data-region="myoverview" role="navigation">
+    <hr class="mt-0"/>
+
+    <div role="search" data-region="filter" class="d-flex align-items-center my-2"
+         aria-label="{{#str}} aria:controls, block_myoverview {{/str}}">
+        <div class="row no-gutters">
+            {{> block_myoverview/nav-grouping-selector}}
+
+            {{> block_myoverview/nav-search-widget}}
+
+            {{> block_myoverview/nav-sort-selector}}
+
+            {{#displaydropdown}}
+                {{> block_myoverview/nav-display-selector}}
+            {{/displaydropdown}}
+        </div>
+    </div>
+
+    <div class="container-fluid p-0">
+        {{> block_myoverview/courses-view}}
+    </div>
+</div>
+{{#js}}
+    require(['jquery', 'block_myoverview/main',], function($, Main) {
+        var root = $('#block-myoverview-{{uniqid}}');
+        Main.init(root);
+
+        $("#block-region-content").before("<div id='block-my-links-destination'></div>");
+
+        $(".page-mycourses #block-my-links")
+                .show()
+                .appendTo("#block-my-links-destination");
+
+
+    });
+{{/js}}

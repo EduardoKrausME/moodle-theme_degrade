@@ -52,43 +52,43 @@
 
 <body data-templates="frontpage" {{{bodyattributes}}}>
 {{> core/local/toast/wrapper}}
-<div id="page-wrapper" class="d-print-block">
+<div id="page-wrapper" class="d-print-block position-relative">
 
 {{{output.standard_top_of_body_html}}}
 
 {{> theme_degrade/header}}
 {{#courseindex}}
     {{< theme_boost/drawer}}
-    {{#id}}theme_boost-drawers-courseindex{{/id}}
-    {{#drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
-    {{#drawerheading}}
-        {{#str}}courseindex, core_courseformat{{/str}}
-    {{/drawerheading}}
-    {{#drawercontent}}
-        {{{courseindex}}}
-    {{/drawercontent}}
-    {{#drawerpreferencename}}drawer-open-index{{/drawerpreferencename}}
-    {{#drawerstate}}show-drawer-left{{/drawerstate}}
+    {{$id}}theme_boost-drawers-courseindex{{/id}}
+{{$drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
+{{$drawerheading}}
+{{#str}}courseindex, core_courseformat{{/str}}
+{{/drawerheading}}
+{{$drawercontent}}
+{{{courseindex}}}
+{{/drawercontent}}
+{{$drawerpreferencename}}drawer-open-index{{/drawerpreferencename}}
+{{$drawerstate}}show-drawer-left{{/drawerstate}}
 {{/theme_boost/drawer}}
 {{/courseindex}}
 
 
 {{#hasblocks}}
     {{< theme_boost/drawer}}
-    {{#id}}theme_boost-drawers-blocks{{/id}}
-    {{#drawerclasses}}drawer drawer-right{{#blockdraweropen}} show{{/blockdraweropen}}{{/drawerclasses}}
-    {{#drawercontent}}
-            <section class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
-                {{{addblockbutton}}}
-                {{{sidepreblocks}}}
-            </section>
-    {{/drawercontent}}
-    {{#drawerpreferencename}}drawer-open-block{{/drawerpreferencename}}
-    {{#forceopen}}{{#forceblockdraweropen}}1{{/forceblockdraweropen}}{{/forceopen}}
-    {{#drawerstate}}show-drawer-right{{/drawerstate}}
-    {{#tooltipplacement}}left{{/tooltipplacement}}
-    {{#drawercloseonresize}}1{{/drawercloseonresize}}
-    {{#closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}
+    {{$id}}theme_boost-drawers-blocks{{/id}}
+{{$drawerclasses}}drawer drawer-right{{#blockdraweropen}} show{{/blockdraweropen}}{{/drawerclasses}}
+{{$drawercontent}}
+    <section class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
+        {{{addblockbutton}}}
+        {{{sidepreblocks}}}
+    </section>
+{{/drawercontent}}
+{{$drawerpreferencename}}drawer-open-block{{/drawerpreferencename}}
+{{$forceopen}}{{#forceblockdraweropen}}1{{/forceblockdraweropen}}{{/forceopen}}
+{{$drawerstate}}show-drawer-right{{/drawerstate}}
+{{$tooltipplacement}}left{{/tooltipplacement}}
+{{$drawercloseonresize}}1{{/drawercloseonresize}}
+{{$closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}
 {{/theme_boost/drawer}}
 {{/hasblocks}}
 
@@ -100,10 +100,10 @@
             <div id="slideshow">
                 <div class="slideshow-container">
                     {{#slideshow_slides}}
-                        <a href="{{slideshow_url}}"
-                           class="slideshow-item slideshow-item-{{slideshow_num}} slideshow-fade">
-                            <div class="slideshow-numbertext">{{slideshow_num}} / {{slideshow_numslides}}</div>
-                            <img src="{{slideshow_image}}" style="width:100%">
+                        <a href="{{{slideshow_url}}}"
+                           class="slideshow-item slideshow-item-{{{slideshow_num}}} slideshow-fade">
+                            <div class="slideshow-numbertext">{{{slideshow_num}}} / {{{slideshow_numslides}}}</div>
+                            <img src="{{{slideshow_image}}}" style="width:100%">
                             <div class="slideshow-text">{{{slideshow_text}}}</div>
                         </a>
                     {{/slideshow_slides}}
@@ -112,8 +112,8 @@
                 </div>
                 <div class="slideshow-dot-area">
                     {{#slideshow_slides}}
-                        <span class="slideshow-dot slideshow-dot-{{slideshow_num}}"
-                              data-slidenun="{{slideshow_num}}"></span>
+                        <span class="slideshow-dot slideshow-dot-{{{slideshow_num}}}"
+                              data-slidenun="{{{slideshow_num}}}"></span>
                     {{/slideshow_slides}}
 
                     {{#slideshow_edit_settings}}
@@ -128,9 +128,9 @@
             <div class="frontpage_about_area">
                 <div class="frontpage_about_logoarea text-center">
                     {{#frontpage_about_logo}}
-                        <img class="frontpage_about_logo" src="{{frontpage_about_logo}}">
+                        <img class="frontpage_about_logo" src="{{{frontpage_about_logo}}}">
                     {{/frontpage_about_logo}}
-                    <h3>{{frontpage_about_title}}</h3>
+                    <h3>{{{frontpage_about_title}}}</h3>
                     <div class="frontpage_about_description">{{{frontpage_about_description}}}</div>
                     {{#frontpage_about_edit_settings}}
                         {{{frontpage_about_edit_settings}}}
@@ -141,7 +141,7 @@
                         <div class="frontpage_about_box">
                             <span class="separator"></span>
                             <div class="number">
-                                <span class="number_counter text-primary">{{frontpage_about_number}}</span>
+                                <span class="number_counter text-primary">{{{frontpage_about_number}}}</span>
                             </div>
                             <div class="title_counter">
                                 <h4 class="title">{{frontpage_about_text}}</h4>

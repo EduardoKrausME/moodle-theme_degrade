@@ -15,8 +15,8 @@
         .buttons {
             float: right;
             .btn-secondary {
-                color: #392c7d;
-                border: 3px solid #b4a7f5;
+                //color: #392c7d;
+                //border: 3px solid #b4a7f5;
                 background: transparent;
                 border-radius: 50px;
                 min-width: 150px;
@@ -24,8 +24,8 @@
                 font-weight: 500;
                 font-size: 14px;
                 &:hover {
-                    background-color: #917cf6;
-                    border-color: #917cf6;
+                    //background-color: #917cf6;
+                    //border-color: #917cf6;
                     color: #fff;
                 }
             }
@@ -36,6 +36,31 @@
         margin-bottom: 50px;
     }
 }
+.course-box {
+    @media (min-width: 500px) {
+        width: 100%; // 1
+    }
+    @media (min-width: 800px) {
+        width: calc(25% - 14px); // 2
+        margin: 0 6px;
+    }
+    @media (min-width: 1040px) {
+        width: calc(33% - 14px); // 3
+        margin: 0 6px;
+    }
+    @media (min-width: 1210px) {
+        width: calc(25% - 14px); // 4
+        margin: 0 6px;
+    }
+    @media (min-width: 1560px) {
+        width: calc(20% - 10px); // 5
+        margin: 0 4px;
+    }
+    @media (min-width: 2060px) {
+        width: calc(16% - 10px); // 6
+        margin: 0 4px;
+    }
+}
 .frontpage-course-box {
     border: 1px solid #e9ecef;
     border-radius: 10px;
@@ -43,7 +68,7 @@
     .course-item {
         border-radius: 10px;
         position: relative;
-        padding: 20px 20px 6px;
+        padding: 12px 10px 6px;
         transition: all 0.5s ease;
         background: #fff;
         backdrop-filter: blur(17px);
@@ -53,8 +78,14 @@
             overflow: hidden;
             z-index: 1;
             border-radius: 10px 10px 10px 10px;
-            max-width: 330px;
             margin: 0 auto 14px;
+            a {
+                width: 100%;
+                display: block;
+                padding-top: 40%;
+                background-size: cover;
+                background-position: center;
+            }
             img {
                 width: 100%;
                 border-radius: 4px 4px 0 0;
@@ -144,9 +175,16 @@
                 max-width: 320px;
                 margin-top: 0;
                 margin-bottom: 0.5rem;
+                a {
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    width: 100%;
+                    display: inline-block;
+                }
             }
             .course-info {
-                margin-bottom: 15px;
+                // margin-bottom: 15px;
                 .lesson-group {
                     img {
                         width: 18px;

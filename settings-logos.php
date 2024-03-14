@@ -23,16 +23,26 @@ defined('MOODLE_INTERNAL') || die;
 
 $page = new admin_settingpage('theme_degrade_logos', get_string('settings_logos_heading', 'theme_degrade'));
 
-$title = get_string('logo', 'admin');
-$description = get_string('logo_desc', 'admin');
-$setting = new admin_setting_configstoredfile('core_admin/logo', $title, $description, 'logo', 0,
+$setting = new admin_setting_configstoredfile('theme_degrade/logo_color',
+    get_string('logo_color', 'theme_degrade'),
+    get_string('logo_color_desc', 'theme_degrade'),
+    'logo_color', 0,
     ['maxfiles' => 1, 'accepted_types' => ['.jpg', '.png']]);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
-$title = get_string('favicon', 'theme_degrade');
-$description = get_string('favicon_desc', 'theme_degrade');
-$setting = new admin_setting_configstoredfile('core_admin/favicon', $title, $description, 'favicon', 0,
+$setting = new admin_setting_configstoredfile('theme_degrade/logo_write',
+    get_string('logo_write', 'theme_degrade'),
+    get_string('logo_write_desc', 'theme_degrade'),
+    'logo_write', 0,
+    ['maxfiles' => 1, 'accepted_types' => ['.jpg', '.png']]);
+$setting->set_updatedcallback('theme_reset_all_caches');
+$page->add($setting);
+
+$setting = new admin_setting_configstoredfile('core_admin/favicon',
+    get_string('favicon', 'theme_degrade'),
+    get_string('favicon_desc', 'theme_degrade'),
+    'favicon', 0,
     ['maxfiles' => 1, 'accepted_types' => ['image']]);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);

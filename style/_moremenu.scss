@@ -1,0 +1,10 @@
+.moremenu .nav-link.active:focus,
+.moremenu .nav-link.active:hover {
+    background-color: transparent;
+    border-bottom-color: transparent;
+}
+.moremenu .nav-link:hover,
+.moremenu .nav-link:focus {
+    border-color: transparent;
+    background-color: transparent;
+}

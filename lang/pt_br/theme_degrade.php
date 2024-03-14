@@ -18,7 +18,7 @@
  * Strings for component 'theme_degrade', language 'en'
  *
  * @package     theme_degrade
- * @copyright   2023 Eduardo kraus (http://eduardokraus.com)
+ * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['pluginname'] = 'Degrade';
@@ -27,7 +27,6 @@ $string['choosereadme'] = 'Degrade é um thema construido com carinho para traze
 // Slides.
 $string['settings_slideshow_heading'] = 'SlideShow';
 $string['theme_degrade_slideshow_editbooton'] = 'Editar SlideShow';
-
 
 $string['slideshow_numslides'] = 'Quantos imagens no SlideShow';
 $string['slideshow_numslides_desc'] = 'Quantas imagens queres no SlideShow?';
@@ -44,7 +43,6 @@ $string['slideshow_url_desc'] = 'Insira o destino de destino do link do botão d
 
 $string['slideshow_text'] = 'Texto curto descritivo do Slide';
 $string['slideshow_text_desc'] = 'Insira um pequenos textos sobre o slide.';
-
 
 // About.
 $string['settings_about_heading'] = 'Sobre seu Moodle';
@@ -68,7 +66,6 @@ $string['frontpage_about_text_2_defalt'] = 'Professores';
 $string['frontpage_about_text_3_defalt'] = 'Estudantes';
 $string['frontpage_about_text_4_defalt'] = 'Lições';
 
-
 $string['theme_degrade_frontpage_home'] = 'Blocos da Home';
 $string['heart'] = 'Se está gostando desse tema, não esqueça de clicar em ❤️ na página dos themas <a href="{$a}" target="_blank">clicando aqui</a>';
 $string['theme_degrade_frontpage_bloco'] = 'Bloco "{$a}"';
@@ -88,7 +85,6 @@ $string['free_name'] = 'Gratis';
 $string['favicon'] = 'Favicon';
 $string['favicon_desc'] = 'O favicon é exibido ao lado do título da página na guia do navegador. Um favicon do Moodle é exibido se um favicon personalizado não for fornecido.';
 
-
 // Footer.
 $string['social_twitter'] = 'Seu Twitter';
 $string['social_twitter_desc'] = 'A URL do Twitter da sua organização.';
@@ -100,7 +96,6 @@ $string['social_instagram'] = 'Seu Instagram';
 $string['social_instagram_desc'] = 'A URL do Instagram da sua organização.';
 $string['social_facebook'] = 'Seu Facebook';
 $string['social_facebook_desc'] = 'A URL do Facebook da sua organização.';
-
 
 $string['settings_topo_heading'] = 'Topo';
 
@@ -121,15 +116,13 @@ $string['footer_social_title_default'] = 'Nos siga nas redes sociais';
 $string['footerblock_contact'] = 'Bloco de contato';
 
 $string['footerblink'] = 'Links do Bloco de Rodapé';
-$string['footerblink_desc'] = 'Você pode configurar um Bloco de Rodapé Links aqui para serem mostrados por temas. <br>'.
-    'Cada linha consiste em algum texto de menu ou chave de idioma ou texto, um URL de link (opcional),separado por barras verticais.Por exemplo:<br>'.
+$string['footerblink_desc'] = 'Você pode configurar um Bloco de Rodapé Links aqui para serem mostrados por temas. <br>' .
+    'Cada linha consiste em algum texto de menu ou chave de idioma ou texto, um URL de link (opcional),separado por barras verticais.Por exemplo:<br>' .
     '<pre>Moodle Support|https://moodle.org/support</pre>';
-
 
 $string['footer_contact_title'] = 'Título do Bloco de Contato';
 $string['footer_contact_title_desc'] = 'Coloque o título do Bloco que aparecerá no Rodapé com os dados de contato.';
 $string['footer_contact_title_default'] = 'Entre em contato';
-
 
 $string['contact_address'] = 'Endereço';
 $string['contact_email'] = 'E-mail';
@@ -141,6 +134,10 @@ $string['footer_show_copywriter_desc'] = 'Desmarque caso deseja ocultar o "Feito
 
 // Logos.
 $string['settings_logos_heading'] = 'Logos';
+$string['logo_color'] = 'Logo colorida';
+$string['logo_color_desc'] = 'Por favor, faça o upload da sua LOGO colorida caso queira incluí-la no topo. Esta logo será exibida conforme a página é rolada, e o menu será exibido em fundo branco.';
+$string['logo_write'] = 'Logo Branca';
+$string['logo_write_desc'] = 'Por favor, faça o upload da sua LOGO branca caso queira incluí-la no topo. Esta logo será exibida quando a rolagem permanecer no topo, e o menu será exibido em fundo colorido.';
 
 // Themas e CSS.
 $string['settings_theme_heading'] = 'Tema e CSS';
@@ -149,14 +146,23 @@ $string['customcss_desc'] = 'Quaisquer regras CSS que você adicionar a esta ár
 $string['fontfamily'] = 'Fonte do site';
 $string['fontfamily_desc'] = 'Escolha quanfonte você quer suar no seu Moodle';
 
-$string['theme'] = 'Seleção de Temas';
-$string['theme_desc'] = 'Selecione as cores dos textos e botões do Moodle.';
-
-$string['theme_blue'] = 'Azul';
-$string['theme_violet'] = 'Roxo';
-$string['theme_red_d'] = 'Vermelho';
-$string['theme_green'] = 'Verde';
-$string['theme_green_d'] = 'Verde escuro';
+$string['theme_color'] = 'Seleção de cores';
+$string['theme_color_desc'] = 'Selecione as cores dos textos e botões do Moodle ou clique na linha abaixo:';
+$string['theme_color_blue'] = 'Azul';
+$string['theme_color_violet'] = 'Roxo';
+$string['theme_color_red_d'] = 'Vermelho';
+$string['theme_color_green'] = 'Verde';
+$string['theme_color_green_d'] = 'Verde escuro';
+$string['theme_color-color_primary'] = 'Cor Primária';
+$string['theme_color-color_primary_desc'] = 'A cor primária principal do tema, geralmente usada para elementos de destaque e ênfase.';
+$string['theme_color-color_secondary'] = 'Cor Secundária';
+$string['theme_color-color_secondary_desc'] = 'Uma cor secundária que complementa a cor primária, usada para realçar elementos secundários ou para contrastar com a cor primária.';
+$string['theme_color-color_buttons'] = 'Cor dos Botões';
+$string['theme_color-color_buttons_desc'] = 'A cor usada para os botões, adicionando coesão visual e enfatizando ações interativas.';
+$string['theme_color-color_names'] = 'Cor dos Nomes';
+$string['theme_color-color_names_desc'] = 'Cor usada para destacar nomes ou identificadores, fornecendo clareza e ênfase em informações de texto específicas.';
+$string['theme_color-color_titles'] = 'Cor dos Títulos';
+$string['theme_color-color_titles_desc'] = 'A cor utilizada para os títulos, fornecendo destaque e estrutura visual ao conteúdo da página.';
 
 $string['background_color'] = 'Cor de fundo';
 $string['background_color_desc'] = 'Cor de fundo do Topo e Rodapé!';
@@ -170,12 +176,15 @@ $string['background_color_random'] = 'Tema Randômico {$a}';
 $string['settings_login_heading'] = 'Tela de Login';
 $string['login_theme'] = 'Tema do login';
 $string['login_theme_desc'] = 'Escolha qual tema quer na área de Login';
+$string['login_theme_block'] = 'Bloco branco central com background opcional';
 $string['login_theme_image_login'] = 'Imagem de background e login do lado';
 $string['login_theme_imagetext_login'] = 'Imagem de background, texto sobre a imagem e login do lado';
 $string['login_theme_login'] = 'Apenas tela de login, sem imagem lateral';
 $string['theme_login_branco'] = 'Apenas tela de login, sem imagem lateral, com o form em fundo branco';
 $string['login_backgroundfoto'] = 'Imagem de fundo';
 $string['login_backgroundfoto_desc'] = 'Selecione a imagem de fundo do Login/Recuperar Senha/Criar Conta. Imagem padrão é: {$a}';
+$string['login_backgroundcolor'] = 'Cor de fundo';
+$string['login_backgroundcolor_desc'] = 'Selecione a cor de fundo da página de recuperar senha';
 
 $string['login_login_description'] = 'Texto na lateral da Tela de Login';
 $string['login_login_description_desc'] = 'Texto que aparecerá apenas na tela de Login';
@@ -186,3 +195,25 @@ $string['login_signup_description_desc'] = 'Texto que aparecerá apenas na tela 
 
 // Privacy.
 $string['privacy:metadata'] = 'O tema Degrade não armazena nenhum dado pessoal sobre nenhum usuário.';
+
+// Settings icons.
+$string['settings_icons_heading'] = 'Ícones';
+$string['settings_icons_num'] = 'Número de ícones';
+$string['settings_icons_num_desc'] = 'Quantidade de ícones personalizados que deseja adicionar';
+$string['settings_icons_block'] = 'Ícone {$a}';
+$string['settings_icons_none'] = 'Nenhum ícone personalizado';
+$string['settings_icons_name'] = 'Nome do ícone';
+$string['settings_icons_name_desc'] = 'Adicione o nome do ícone para facilitar a seleção no módulo';
+$string['settings_icons_image'] = 'Imagem do ícone';
+$string['settings_icons_image_desc'] = 'Carregue a imagem SVG ou PNG do ícone desejado para substituir no curso.<br>Tamanho recomendado: 24px. Se for PNG, lembre-se da transparência.';
+$string['settings_icons_change_icons'] = 'Mudar o ícone padrão na lista de cursos';
+$string['settings_icons_select_icon'] = 'Selecione o ícone personalizado. Edite em {$a}';
+$string['settings_icons_module_disable'] = 'A seleção de ícone personalizado está desativada. Ative em {$a}';
+$string['settings_icons_default_audio_file'] = 'Áudio';
+$string['settings_icons_default_video_file'] = 'Vídeo';
+$string['settings_icons_default_book'] = 'Livro';
+$string['settings_icons_default_game'] = 'Jogo';
+$string['settings_icons_default_money'] = 'Financeiro';
+$string['settings_icons_default_slide'] = 'Slides';
+$string['settings_icons_default_support'] = 'Suporte';
+$string['settings_icons_default_download'] = 'Download';

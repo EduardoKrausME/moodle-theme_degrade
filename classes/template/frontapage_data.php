@@ -20,7 +20,7 @@ namespace theme_degrade\template;
  * slideshow.php
  *
  * @package     theme_degrade
- * @copyright   2023 Eduardo kraus (http://eduardokraus.com)
+ * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class frontapage_data {
@@ -75,7 +75,6 @@ class frontapage_data {
      */
     public static function about() {
         global $OUTPUT;
-
 
         $frontpageaboutenable = theme_degrade_get_setting("frontpage_about_enable");
 

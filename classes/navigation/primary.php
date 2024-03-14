@@ -26,7 +26,7 @@ use renderer_base;
  *
  * @package     theme_degrade
  * @category    navigation
- * @copyright   2023 Eduardo kraus (http://eduardokraus.com)
+ * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class primary extends \core\navigation\output\primary {
@@ -76,7 +76,7 @@ class primary extends \core\navigation\output\primary {
      *
      * @return array
      */
-    protected function get_primary_nav(): array {
+    protected function get_primary_nav($parent = null): array {
         $nodes = [];
         foreach ($this->page->primarynav->children as $node) {
             $nodes[] = [

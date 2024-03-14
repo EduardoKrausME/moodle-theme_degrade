@@ -21,15 +21,15 @@
  * Moodle's new Boost theme engine
  *
  * @package     theme_degrade
- * @copyright   2023 Eduardo kraus (http://eduardokraus.com)
+ * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version = 2023040201;
+$plugin->version = 2024031400;
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = 'v4.1';
+$plugin->release = '5.1.0';;
 $plugin->requires = 2022041900;
 $plugin->component = 'theme_degrade';
 $plugin->dependencies = array(

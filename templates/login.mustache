@@ -29,22 +29,23 @@
         }
     }
 }}
-{{> theme_boost/head }}
+{{> theme_boost/head}}
 
-<body data-templates="login" {{{bodyattributes }}}>
+<body data-templates="login" {{{bodyattributes}}}>
 
-<div id="page-wrapper" class="login-wrapper login-{{login_theme}}">
+<div id="page-wrapper" class="login-wrapper position-relative login_theme--{{{login_theme}}}">
 
-    {{{output.standard_top_of_body_html }}}
+    {{{output.standard_top_of_body_html}}}
 
     <div class="login-logo-area">
-        <a href="{{{config.wwwroot }}}/?redirect=0">
+        <a href="{{{config.wwwroot}}}/?redirect=0">
             <div class="logo">
                 {{{logourl_header}}}
             </div>
         </a>
     </div>
     <div class="login-area">
+
         <div class="login-background-area" style="{{login_background_image}}">
             <div class="login-color-area">
 
@@ -59,9 +60,9 @@
         <div class="login-form-area">
             <div class="form-content">
                 <div class="form-items">
-                    {{{output.course_content_header }}}
-                    {{{output.main_content }}}
-                    {{{output.course_content_footer }}}
+                    {{{output.course_content_header}}}
+                    {{{output.main_content}}}
+                    {{{output.course_content_footer}}}
                 </div>
             </div>
         </div>
@@ -69,17 +70,17 @@
 
     <div class="footer-content-debugging footer-dark bg-dark text-light">
         <div class="container-fluid footer-dark-inner">
-            {{{ output.standard_end_of_body_html }}}
+            {{{ output.standard_end_of_body_html}}}
         </div>
     </div>
 </div>
 {{#js}}
     require(['theme_boost/footer-popover'], function(FooterPopover) {
-    FooterPopover.init();
+        FooterPopover.init();
     });
 
     require(['theme_boost/loader', 'theme_boost/drawer'], function(Loader, Drawer) {
-    Drawer.init();
-    M.util.js_complete('theme_boost/loader');
+        Drawer.init();
+        M.util.js_complete('theme_boost/loader');
     });
 {{/js}}

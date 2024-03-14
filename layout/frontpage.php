@@ -18,7 +18,7 @@
  * frontpage.php
  *
  * @package     theme_degrade
- * @copyright   2023 Eduardo kraus (http://eduardokraus.com)
+ * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
@@ -30,9 +30,9 @@ require_once($CFG->dirroot . '/course/lib.php');
 // Add block button in editing mode.
 $addblockbutton = $OUTPUT->addblockbutton();
 
-user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
-user_preference_allow_ajax_update('drawer-open-index', PARAM_BOOL);
-user_preference_allow_ajax_update('drawer-open-block', PARAM_BOOL);
+$USER->ajax_updatable_user_prefs['drawer-open-nav'] = PARAM_ALPHA;
+$USER->ajax_updatable_user_prefs['drawer-open-index'] = PARAM_BOOL;
+$USER->ajax_updatable_user_prefs['drawer-open-block'] = PARAM_BOOL;
 
 if (isloggedin()) {
     $courseindexopen = (get_user_preferences('drawer-open-index', true) == true);

@@ -18,14 +18,14 @@
 	Page header.
 }}
 
-<nav id="header" class="navbar fixed-top navbar-light navbar-expand"
+<nav id="header" class="navbar navbar-light navbar-expand"
      aria-label="{{#str}}sitemenubar, admin{{/str}}">
 
     <div class="container-fluid">
         <div class="header-menubar header-menubar-inner">
 
             <div class="header-logo">
-                <a class="navbar-brand" href="{{{config.wwwroot }}}/?redirect=0">
+                <a class="navbar-brand" href="{{{config.wwwroot}}}/?redirect=0">
                     {{{logourl_header}}}
                 </a>
             </div>
@@ -51,28 +51,57 @@
 
             <ul class="navbar-nav d-none d-md-flex my-1 px-1">
                 <!-- page_heading_menu -->
-                {{{output.page_heading_menu }}}
+                {{{output.page_heading_menu}}}
             </ul>
 
             <div id="usernavigation" class="navbar-nav ml-auto">
-                {{#output.search_box }}
-                    {{{output.search_box }}}
+                {{#output.search_box}}
+                    {{{output.search_box}}}
                     <div class="divider border-left h-75 align-self-center mx-1"></div>
                 {{/output.search_box}}
                 {{#langmenu}}
-                    {{> theme_boost/language_menu }}
+                    {{> theme_boost/language_menu}}
                     <div class="divider border-left h-75 align-self-center mx-1"></div>
                 {{/langmenu}}
-                {{{output.navbar_plugin_output }}}
-                <div class="d-flex align-items-stretch usermenu-container" data-region="usermenu">
+                {{{output.navbar_plugin_output}}}
+                <div class="d-flex align-items-center usermenu-container" data-region="usermenu">
                     {{#usermenu}}
-                        {{> core/user_menu }}
+                        {{> core/user_menu}}
                     {{/usermenu}}
                 </div>
-                {{{output.edit_switch }}}
+                {{{output.edit_switch}}}
             </div>
         </div>
     </div>
 </nav>
 
-{{> theme_boost/primary-drawer-mobile }}
+{{> theme_boost/primary-drawer-mobile}}
+
+{{#js}}
+    require(['jquery'], function($) {
+        var header = $("#header");
+        $(window).on('scroll', window_scroll);
+        window_scroll();
+
+        function window_scroll() {
+            var top = $(window).scrollTop();
+            if (top > 90) {
+                header.removeClass("animation");
+                header.css({
+                    position : "fixed",
+                    top      : "-90px"
+                });
+                header.addClass("animation");
+                header.addClass("fixed-top");
+                header.css({top : 0});
+            }
+            if (top < 15) {
+                header.removeClass("fixed-top");
+                header.css({
+                    position : "absolute",
+                    top      : 0
+                });
+            }
+        }
+    });
+{{/js}}

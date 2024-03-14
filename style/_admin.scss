@@ -1,0 +1,15 @@
+#adminsettings {
+    @media (min-width: 900px) {
+        .form-control[type=text] {
+            min-width: 704px;
+            max-width: initial;
+        }
+        .form-colourpicker {
+            .form-control[type=text] {
+                min-width: initial !important;
+                max-width: initial !important;
+                width: auto;
+            }
+        }
+    }
+}

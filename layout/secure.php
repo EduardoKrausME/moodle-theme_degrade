@@ -18,7 +18,7 @@
  * The secure layout.
  *
  * @package     theme_degrade
- * @copyright   2023 Eduardo kraus (http://eduardokraus.com)
+ * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -96,7 +96,7 @@ echo $OUTPUT->render_from_template('theme_degrade/header', $templatedata);
 </div>
 
 <?php
-user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
+$USER->ajax_updatable_user_prefs['drawer-open-nav'] = PARAM_ALPHA;
 $extraclasses = [theme_degrade_get_body_class()];
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 $blockshtml = $OUTPUT->blocks('side-pre');

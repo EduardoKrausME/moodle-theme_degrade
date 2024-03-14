@@ -24,11 +24,6 @@ global $PAGE;
 
 $page = new admin_settingpage('theme_degrade_css', get_string('settings_theme_heading', 'theme_degrade'));
 
-
-$name = 'theme_degrade/background_color';
-$title = get_string('background_color', 'theme_degrade');
-$description = get_string('background_color_desc', 'theme_degrade');
-$default = 'default1';
 $choices = [
     'default1' => get_string('background_color_default', 'theme_degrade', 1),
     'default2' => get_string('background_color_default', 'theme_degrade', 2),
@@ -52,7 +47,12 @@ $choices = [
     'black1' => get_string('background_color_black', 'theme_degrade', 1),
 ];
 
-$htmlselect = "";
+if (strpos($_SERVER['REQUEST_URI'], "admin/upgradesettings.php") > 0) {
+    $htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/degrade/style/initial.css\" />";
+    $htmlselect .= "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/degrade/style/style.css\" />";
+} else {
+    $htmlselect = "";
+}
 foreach ($choices as $choice => $lang) {
     $onclick = "$('#id_s_theme_degrade_background_color').val('{$choice}');";
     $onclick .= "$('body').attr('class',function(i,c){return c.replace(/(^|\s)theme-\S+/g,'')+' theme-{$choice}';})";
@@ -62,52 +62,44 @@ foreach ($choices as $choice => $lang) {
                 <div class=\"preview\"></div>
             </div>";
 }
-$setting = new admin_setting_configselect($name, $title, $description . $htmlselect, $default, $choices);
+$setting = new admin_setting_configselect('theme_degrade/background_color',
+    get_string('background_color', 'theme_degrade'),
+    get_string('background_color_desc', 'theme_degrade') . $htmlselect,
+    'default1', $choices);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 
-$name = 'theme_degrade/theme';
-$title = get_string('theme', 'theme_degrade');
-$description = get_string('theme_desc', 'theme_degrade');
-$default = 'theme_blue';
-$choices = [
-    'theme_blue' => get_string('theme_blue', 'theme_degrade'),
-    'theme_violet' => get_string('theme_violet', 'theme_degrade'),
-    'theme_red_d' => get_string('theme_red_d', 'theme_degrade'),
-    'theme_green' => get_string('theme_green', 'theme_degrade'),
-    'theme_green_d' => get_string('theme_green_d', 'theme_degrade')
-];
 $colorss = [
-    'theme_blue' => [
+    'theme_color_blue' => [
         'color_primary' => '#2b4e84',
         'color_secondary' => '#3e65a0',
         'color_buttons' => '#183054',
         'color_names' => '#c0ccdc',
         'color_titles' => '#e8f0fb'
     ],
-    'theme_violet' => [
+    'theme_color_violet' => [
         'color_primary' => '#8e558e',
         'color_secondary' => '#a55ba5',
         'color_buttons' => '#382738',
         'color_names' => '#edd3ed',
         'color_titles' => '#feffef'
     ],
-    'theme_red_d' => [
+    'theme_color_red_d' => [
         'color_primary' => '#561209',
         'color_secondary' => '#a64437',
         'color_buttons' => '#5e1e15',
         'color_names' => '#f7e3e1',
         'color_titles' => '#fff1ef'
     ],
-    'theme_green' => [
+    'theme_color_green' => [
         'color_primary' => '#426e17',
         'color_secondary' => '#7abb3b',
         'color_buttons' => '#2f510f',
         'color_names' => '#bad3a3',
         'color_titles' => '#f2fde8'
     ],
-    'theme_green_d' => [
+    'theme_color_green_d' => [
         'color_primary' => '#20897b',
         'color_secondary' => '#4ba89c',
         'color_buttons' => '#103430',
@@ -115,43 +107,47 @@ $colorss = [
         'color_titles' => '#e4f7f6'
     ]
 ];
+$choices = [];
+$description = get_string('theme_color_desc', 'theme_degrade');
 foreach ($colorss as $colorname => $colors) {
-
-    $css = $html = "";
+    $html = '';
     foreach ($colors as $key => $cor) {
         $cor = strtoupper($cor);
-        $css .= "    --{$key}: {$cor};\n";
 
-        $styles = "display: inline-block;padding: 2px;margin: 3px;border-radius: 4px;";
+        $styles = "display:inline-block;padding:2px;margin:3px;border-radius:4px;";
         if (preg_match('/#[B-F]/', $cor)) {
-            $html .= "<span style='background:{$cor};color:#515151;' style='{$styles}'
-                            data-name='{$key}' data-color='{$cor}'>{$cor}</span>";
+            $html .= "<span style='{$styles}background:{$cor};color:#515151;'
+                            class='{$key}' data-color='{$cor}'>{$cor}</span>";
         } else {
-            $html .= "<span style='background:{$cor};color:#ffffff;' style='{$styles}'
-                            data-name='{$key}' data-color='{$cor}'>{$cor}</span>";
+            $html .= "<span style='{$styles}background:{$cor};color:#ffffff;'
+                            class='{$key}' data-color='{$cor}'>{$cor}</span>";
         }
     }
     $themename = get_string($colorname, 'theme_degrade');
-    $styles = "display: flex;align-items: center;background: #e6e6e6;width: fit-content;border-radius: 4px;margin-bottom: 5px;";
-    $description .= "<div class='seletor-de-theme' id='theme-{$colorname}' style='{$styles}'
-                          data-name='{$colorname}' data-css=':root{\n{$css}}'>{$themename}: {$html}</div>";
+    $styles = "display:flex;align-items:center;background:#e6e6e6;width:fit-content;border-radius:4px;margin-bottom:5px;";
+    $description .= "<div class='seletor-de-theme-degrade' id='theme-{$colorname}' style='{$styles}'
+                          data-name='{$colorname}'>{$themename}: {$html}</div>";
+
+    $choices[$colorname] = $themename;
 }
-
-$setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
+$setting = new admin_setting_configselect('theme_degrade/theme_color',
+    get_string('theme_color', 'theme_degrade'),
+    $description,
+    'theme_blue', $choices);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
+$PAGE->requires->js_call_amd('theme_degrade/settings', 'theme_color');
 
 
-$PAGE->requires->js_call_amd('theme_degrade/settings', 'theme');
+$colors = ['color_primary', 'color_secondary', 'color_buttons', 'color_names', 'color_titles'];
+foreach ($colors as $color) {
 
-
-$name = 'theme_degrade/customcss';
-$title = get_string('customcss', 'theme_degrade');
-$description = get_string('customcss_desc', 'theme_degrade');
-$default = '';
-$setting = new admin_setting_configtextarea($name, $title, $description, $default);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$page->add($setting);
+    $setting = new admin_setting_configcolourpicker("theme_degrade/theme_color__{$color}",
+        get_string("theme_color-{$color}", 'theme_degrade'),
+        get_string("theme_color-{$color}_desc", 'theme_degrade'), '');
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+}
 
 
 $fontsarr = [
@@ -168,11 +164,17 @@ $fontsarr = [
     'Manrope' => 'Manrope',
     'Oxygen' => 'Oxygen',
 ];
+$setting = new admin_setting_configselect('theme_degrade/fontfamily',
+    get_string('fontfamily', 'theme_degrade'),
+    get_string('fontfamily_desc', 'theme_degrade'),
+    'Roboto', $fontsarr);
+$setting->set_updatedcallback('theme_reset_all_caches');
+$page->add($setting);
 
-$name = 'theme_degrade/fontfamily';
-$title = get_string('fontfamily', 'theme_degrade');
-$description = get_string('fontfamily_desc', 'theme_degrade');
-$setting = new admin_setting_configselect($name, $title, $description, 'Roboto', $fontsarr);
+
+$setting = new admin_setting_configtextarea('theme_degrade/customcss',
+    get_string('customcss', 'theme_degrade'),
+    get_string('customcss_desc', 'theme_degrade'), '');
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 

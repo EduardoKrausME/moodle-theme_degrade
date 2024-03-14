@@ -36,32 +36,32 @@
          "bodyattributes":""
     }
 }}
-{{> theme_boost/head }}
+{{> theme_boost/head}}
 
-<body data-templates="columns1" {{{bodyattributes }}}>
+<body data-templates="columns1" {{{bodyattributes}}}>
 {{> core/local/toast/wrapper}}
 
-<div id="page-wrapper" class="d-print-block">
+<div id="page-wrapper" class="d-print-block position-relative">
 
-    {{{output.standard_top_of_body_html }}}
+    {{{output.standard_top_of_body_html}}}
 
     <div id="page" class="container-fluid d-print-block">
         <div id="page-content" class="row pb-3 d-print-block">
             <div id="region-main-box" class="col-12">
                 <section id="region-main" aria-label="{{#str}}content{{/str}}">
-                    {{{output.course_content_header }}}
-                    {{{output.main_content }}}
-                    {{{output.activity_navigation }}}
-                    {{{output.course_content_footer }}}
+                    {{{output.course_content_header}}}
+                    {{{output.main_content}}}
+                    {{{output.activity_navigation}}}
+                    {{{output.course_content_footer}}}
                 </section>
             </div>
         </div>
     </div>
 
-    {{{output.standard_after_main_region_html }}}
+    {{{output.standard_after_main_region_html}}}
 
 </div>
-{{{output.standard_end_of_body_html }}}
+{{{output.standard_end_of_body_html}}}
 </body>
 </html>
 {{#js}}

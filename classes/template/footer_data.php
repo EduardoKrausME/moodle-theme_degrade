@@ -59,7 +59,8 @@ class footer_data {
         $data['footer_enable_block'] = $footerenableblock;
         $data['footer_block_class'] = $footerblockclass;
         if (has_capability('moodle/site:config', \context_system::instance())) {
-            $data['footer_settings_edit'] = "{$CFG->wwwroot}/admin/settings.php?section=themesettingdegrade#theme_degrade_footer";
+            $data['footer_settings_edit'] =
+                "{$CFG->wwwroot}/admin/settings.php?section=themesettingdegrade#theme_degrade_footer";
         }
         $data['logourl_footer'] = theme_degrade_get_logo("footer");
 
@@ -74,7 +75,7 @@ class footer_data {
         $footerdescription = !empty($footerdescription) ? $footerdescription : '';
 
         return [
-            'enable_block_description' => 1,// + ($footerdescription != ''),
+            'enable_block_description' => 1,
             'footer_description' => $footerdescription,
         ];
     }
@@ -109,7 +110,12 @@ class footer_data {
         $socialtwitter = trim(theme_degrade_get_setting('social_twitter'));
         $socialinstagram = trim(theme_degrade_get_setting('social_instagram'));
 
-        $socialurls = ($socialfacebook != '' || $socialyoutube != '' || $sociallinkedin != '' || $socialinstagram != '' || $socialtwitter != '') ? 1 : 0;
+        $socialurls = (
+            $socialfacebook != '' ||
+            $socialyoutube != '' ||
+            $sociallinkedin != '' ||
+            $socialinstagram != '' ||
+            $socialtwitter != '') ? 1 : 0;
 
         return [
             'enable_block_social' => 0 + ($socialurls != 0),
@@ -140,7 +146,8 @@ class footer_data {
         $contactfootertitle = theme_degrade_get_setting('contact_footer_title');
         $contactfootertitle = !empty($contactfootertitle) ? $contactfootertitle : '';
 
-        $contactaddress = theme_degrade_get_setting('contact_address') ? theme_degrade_get_setting('contact_address') : '';
+        $contactaddress = theme_degrade_get_setting('contact_address') ?
+            theme_degrade_get_setting('contact_address') : '';
         $contactemail = theme_degrade_get_setting('contact_email');
         $contactphone = theme_degrade_get_setting('contact_phone');
 

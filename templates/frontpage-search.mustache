@@ -1,26 +1,26 @@
-<div class="simplesearchform frontpage-simplesearchform-search text-center {{ extraclasses }}">
+<div class="simplesearchform frontpage-simplesearchform-search text-center {{ extraclasses}}">
 
-    <h3 style="display: none">{{ searchstring }}</h3>
+    <h3 style="display: none">{{ searchstring}}</h3>
 
-    <form autocomplete="off" action="{{ action }}" method="get" accept-charset="utf-8"
+    <form autocomplete="off" action="{{ action}}" method="get" accept-charset="utf-8"
           class="mform form-inline simplesearchform">
         {{#hiddenfields}}
-            <input type="hidden" name="{{ name }}" value="{{ value }}">
+            <input type="hidden" name="{{ name}}" value="{{ value}}">
         {{/hiddenfields}}
         <div class="input-group">
             <input type="text"
                    id="searchinput-{{uniqid}}"
                    class="form-control search-button"
-                   placeholder="{{ searchstring }}"
-                   aria-label="{{ searchstring }}"
-                   name="{{ inputname }}"
+                   placeholder="{{ searchstring}}"
+                   aria-label="{{ searchstring}}"
+                   name="{{ inputname}}"
                    data-region="input"
                    autocomplete="off"
-                   value="{{ query }}">
+                   value="{{ query}}">
             <div class="input-group-append">
-                <button type="submit" class="btn {{^btnclass}}btn-submit{{/btnclass}} {{ btnclass }} search-icon">
+                <button type="submit" class="btn {{^btnclass}}btn-submit{{/btnclass}} {{ btnclass}} search-icon">
                     {{#pix}} a/search, core {{/pix}}
-                    <span class="sr-only">{{ searchstring }}</span>
+                    <span class="sr-only">{{ searchstring}}</span>
                 </button>
             </div>
         </div>

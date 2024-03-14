@@ -1,0 +1,58 @@
+.block-my-links {
+    margin: 0 20px;
+    .ff_one {
+        display: flex;
+        background: #fff;
+        padding: 8px;
+        border-radius: 7px;
+        .detais {
+            padding-right: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #0a0a0a;
+            line-height: 1.2;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            p {
+                color: rgb(126, 126, 126);
+                font-size: 12px;
+                line-height: 1;
+                margin-bottom: 6px;
+            }
+        }
+        .ff_icon {
+            border-radius: 5px;
+            background-color: #2441e7;
+            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .09);
+            height: 110px;
+            line-height: 60px;
+            padding: 30px 27px;
+            text-align: center;
+            width: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            i {
+                color: #fff;
+                font-size: 48px;
+                width: 48px;
+                height: 48px;
+            }
+        }
+        &:hover {
+            text-decoration: none;
+        }
+        &.style2 .ff_icon {
+            background-color: rgb(255, 16, 83);
+        }
+        &.style3 .ff_icon {
+            background-color: rgb(0, 167, 142);
+        }
+        &.style4 .ff_icon {
+            background-color: rgb(236, 208, 111);
+        }
+    }
+}

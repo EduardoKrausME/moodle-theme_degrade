@@ -21,30 +21,30 @@
  * Moodle's new Boost theme engine
  *
  * @package     theme_degrade
- * @copyright   2023 Eduardo kraus (http://eduardokraus.com)
+ * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die;
 
 $settings = null;
 
-if (is_siteadmin()) {
-    $settings = new theme_boost_admin_settingspage_tabs('themesettingdegrade', get_string('pluginname', 'theme_degrade'));
+if ($ADMIN->fulltree) {
+    $settings = new theme_boost_admin_settingspage_tabs('themesettingdegrade',
+        get_string('pluginname', 'theme_degrade'));
 
+    require_once(__DIR__ . "/settings-theme.php");
 
-    $ADMIN->add('themes', new admin_category('theme_degrade', 'Degrade Theme'));
+    require_once(__DIR__ . "/settings-logos.php");
+
+    require_once(__DIR__ . "/settings-icons.php");
+
+    require_once(__DIR__ . "/settings-topo.php");
 
     require_once(__DIR__ . "/settings-home.php");
 
     require_once(__DIR__ . "/settings-slideshow.php");
 
     require_once(__DIR__ . "/settings-about.php");
-
-    require_once(__DIR__ . "/settings-logos.php");
-
-    require_once(__DIR__ . "/settings-theme.php");
-
-    require_once(__DIR__ . "/settings-topo.php");
 
     require_once(__DIR__ . "/settings-footer.php");
 

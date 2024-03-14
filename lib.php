@@ -21,7 +21,7 @@
  * Moodle's new Boost theme engine
  *
  * @package     theme_degrade
- * @copyright   2023 Eduardo kraus (http://eduardokraus.com)
+ * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,8 +30,6 @@
  * Page init functions runs every time page loads.
  *
  * @param moodle_page $page
- *
- * @return null
  */
 function theme_degrade_page_init(moodle_page $page) {
     global $CFG;
@@ -42,97 +40,23 @@ function theme_degrade_page_init(moodle_page $page) {
 }
 
 /**
- * Loads the CSS Styles and replace the background images.
- * If background image not available in the settings take the default images.
+ * @param $colorname
  *
- * @param string $css
- * @param string $theme
+ * @return string
  *
- * @return string $css
- */
-function theme_degrade_process_css($css, $theme) {
-    if (preg_match('/root.*--color_theme_primary:/s', $css)) {
-        if (isset($theme->settings->customcss[3])) {
-            $customcss = $theme->settings->customcss;
-
-            preg_match_all('/#(\w{3,6});/', $customcss, $cores);
-
-            foreach ($cores[1] as $color) {
-                if (isset($color[4])) {
-                    $hex = array("{$color[0]}{$color[1]}", "{$color[2]}{$color[3]}", "{$color[4]}{$color[5]}");
-                } else {
-                    $hex = array("{$color[0]}{$color[0]}", "{$color[1]}{$color[1]}", "{$color[2]}{$color[2]}");
-                }
-                $rgb = implode(",", array_map('hexdec', $hex));
-                $customcss = str_replace("#{$color}", $rgb, $customcss);
-            }
-
-            $themas = ['color_primary', 'color_secondary', 'color_buttons', 'color_names', 'color_titles'];
-            foreach ($themas as $thema) {
-                preg_match("/{$thema}:(.*?);/", $customcss, $partes);
-                if (isset($partes[1])) {
-                    $newthema = str_replace("color_", "color_theme_", $thema);
-                    $css = preg_replace("/{$newthema}:(.*?);/", "{$newthema}:{$partes[1]};", $css);;
-                }
-            }
-        }
-
-        if (isset($theme->settings->fontfamily[3])) {
-            $fontfamily = "@import url(https://fonts.googleapis.com/css2?family={$theme->settings->fontfamily}:" .
-                "ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap);\n";
-            $fontfamily .= "body{font-family: {$theme->settings->fontfamily}, Arial, Helvetica, sans-serif;}";
-        } else {
-            $fontfamily = "body{font-family: Arial, Helvetica, sans-serif;}";
-        }
-
-        $css = "{$css}\n{$theme->settings->customcss}\n{$fontfamily}";
-    }
-
-    return $css;
-}
-
-/**
- * Serves any files associated with the theme settings.
- *
- * @param stdClass $course
- * @param stdClass $cm
- * @param context  $context
- * @param string   $filearea
- * @param array    $args
- * @param bool     $forcedownload
- * @param array    $options
- *
- * @return bool
  * @throws coding_exception
- * @throws moodle_exception
  */
-function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
-    static $theme;
+function theme_degrade_process_color_hex($colorname) {
+    $color = theme_degrade_get_setting($colorname);
 
-    if (empty($theme)) {
-        $theme = theme_config::load('degrade');
-    }
-    if ($context->contextlevel == CONTEXT_SYSTEM) {
-        if ($filearea === 'style') {
-            theme_degrade_serve_css($args[1]);
-        } else if ($filearea === 'pagebackground') {
-            return $theme->setting_file_serve('pagebackground', $args, $forcedownload, $options);
-        } else if (preg_match("/slide[1-9][0-9]*image/", $filearea) !== false) {
-            return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
-        } else {
-            send_file_not_found();
-        }
-    } else {
-        send_file_not_found();
-    }
+    $hex = [hexdec(substr($color, 1, 2)), hexdec(substr($color, 3, 2)), hexdec(substr($color, 5, 2))];
+    return implode(",", $hex);
 }
 
 /**
  * Serves CSS for image file updated to styles.
  *
  * @param string $filename
- *
- * @return string
  */
 function theme_degrade_serve_css($filename) {
     global $CFG;
@@ -161,7 +85,6 @@ function theme_degrade_serve_css($filename) {
  *
  * @param string $lastmodified
  * @param string $etag
- *
  */
 function theme_degrade_send_unmodified($lastmodified, $etag) {
     $lifetime = 60 * 60 * 24 * 60;
@@ -179,10 +102,10 @@ function theme_degrade_send_unmodified($lastmodified, $etag) {
 /**
  * Cached css.
  *
- * @param string  $path
- * @param string  $filename
+ * @param string $path
+ * @param string $filename
  * @param integer $lastmodified
- * @param string  $etag
+ * @param string $etag
  */
 function theme_degrade_send_cached_css($path, $filename, $lastmodified, $etag) {
     global $CFG;
@@ -214,12 +137,13 @@ function theme_degrade_send_cached_css($path, $filename, $lastmodified, $etag) {
  * rely on that function just by declaring settings with similar names.
  *
  * @param renderer_base $output Pass in $OUTPUT.
- * @param moodle_page   $page   Pass in $PAGE.
+ * @param moodle_page $page Pass in $PAGE.
  *
  * @return stdClass An object with the following properties:
  *      - navbarclass A CSS class to use on the navbar. By default ''.
  *      - heading HTML to use for the heading. A logo if one is selected or the default heading.
  *      - footer_description HTML to use as a footer_description. By default ''.
+ *
  * @throws coding_exception
  */
 function theme_degrade_get_html_for_settings(renderer_base $output, moodle_page $page) {
@@ -249,17 +173,34 @@ function theme_degrade_get_html_for_settings(renderer_base $output, moodle_page 
 /**
  * Logo Image URL Fetch from theme settings
  *
- * @param string $type
+ * @param string $local
  *
  * @return string $logo
+ *
+ * @throws dml_exception
  */
-function theme_degrade_get_logo($local) {
+function theme_degrade_get_logo($local = null) {
+    global $SITE;
 
-    global $OUTPUT, $SITE;
+    $logocolor = get_config('theme_degrade', 'logo_color');
+    $logowrite = get_config('theme_degrade', 'logo_write');
+    if (empty($logocolor)) {
+        return "<span>{$SITE->shortname}</span>";
+    }
 
-    $url = $OUTPUT->get_logo_url();
-    if ($url) {
-        return "<img src='{$url->out(false)}' alt='{$SITE->fullname}'>";
+    $urllogocolor = moodle_url::make_pluginfile_url(context_system::instance()->id, 'theme_degrade', 'logo_color', '',
+        theme_get_revision(), $logocolor);
+    $urllogowrite = moodle_url::make_pluginfile_url(context_system::instance()->id, 'theme_degrade', 'logo_write', '',
+        theme_get_revision(), $logowrite);
+
+    if ($urllogocolor) {
+        if ($urllogowrite) {
+            return "
+                <img class='logo-color' src='{$urllogocolor->out(false)}' alt='{$SITE->fullname}'>
+                <img class='logo-write' src='{$urllogowrite->out(false)}' alt='{$SITE->fullname}'>";
+        } else {
+            return "<img class='logo-all' src='{$urllogocolor->out(false)}' alt='{$SITE->fullname}'>";
+        }
     } else {
         return "<span>{$SITE->shortname}</span>";
     }
@@ -280,7 +221,7 @@ function theme_degrade_get_body_class() {
  * theme
  *
  * @param string $setting
- * @param bool   $format
+ * @param bool $format
  *
  * @return bool
  * @throws coding_exception
@@ -313,19 +254,45 @@ function theme_degrade_get_setting($setting, $format = true) {
  * @param $imagesetting
  *
  * @return string
+ *
  * @throws coding_exception
+ * @throws dml_exception
  */
 function theme_degrade_get_setting_image($imagesetting) {
-    global $PAGE;
-
     if (theme_degrade_get_setting($imagesetting)) {
-        $imagesettingurl = $PAGE->theme->setting_file_url($imagesetting, $imagesetting);
+        $imagesettingurl = theme_degrade_setting_file_url($imagesetting, $imagesetting);
     }
     if (empty($imagesettingurl)) {
         $imagesettingurl = '';
     }
 
     return $imagesettingurl;
+}
+
+/**
+ * @param $setting
+ * @param $filearea
+ *
+ * @return moodle_url|null
+ *
+ * @throws dml_exception
+ */
+function theme_degrade_setting_file_url($setting, $filearea) {
+    global $CFG, $PAGE;
+
+    if (empty($PAGE->theme->settings->$setting)) {
+        return null;
+    }
+
+    $itemid = theme_get_revision();
+    $filepath = $PAGE->theme->settings->$setting;
+    $syscontext = context_system::instance();
+
+    $url = moodle_url::make_file_url(
+        "$CFG->wwwroot/pluginfile.php",
+        "/{$syscontext->id}/theme_degrade/{$filearea}/{$itemid}{$filepath}");
+
+    return $url;
 }
 
 /**
@@ -345,9 +312,10 @@ function theme_degrade_theme_url() {
  * @param string $menuname Footer block link name.
  *
  * @return string The Footer links are return.
+ * @throws coding_exception
+ * @throws moodle_exception
  */
 function theme_degrade_generate_links($menuname = '') {
-    global $CFG, $PAGE;
     $htmlstr = '';
     $menustr = theme_degrade_get_setting($menuname);
     $menusettings = explode("\n", $menustr);
@@ -378,6 +346,7 @@ function theme_degrade_generate_links($menuname = '') {
  * Fetch the hide course ids
  *
  * @return array
+ * @throws dml_exception
  */
 function theme_degrade_hidden_courses_ids() {
     global $DB;
@@ -434,9 +403,9 @@ function theme_degrade_strip_html_tags($text) {
 /**
  * Cut the Course content.
  *
- * @param string  $str
+ * @param string $str
  * @param integer $n
- * @param string  $endchar
+ * @param string $endchar
  *
  * @return string $out
  */
@@ -450,7 +419,6 @@ function theme_degrade_course_trim_char($str, $n = 500, $endchar = '&#8230;') {
         return $str;
     }
 
-    $out = "";
     $small = substr($str, 0, $n);
     $out = $small . $endchar;
     return $out;
@@ -460,7 +428,7 @@ function theme_degrade_course_trim_char($str, $n = 500, $endchar = '&#8230;') {
  * Function returns the rgb format with the combination of passed color hex and opacity.
  *
  * @param string $hexa
- * @param int    $opacity
+ * @param int $opacity
  *
  * @return string
  */
@@ -474,4 +442,182 @@ function theme_degrade_get_hexa($hexa, $opacity) {
         }
         return "rgba($r, $g, $b, $opacity)";
     }
+
+    return "";
+}
+
+/**
+ * @param moodleform_mod $data The moodle quickforms wrapper object.
+ * @param MoodleQuickForm $mform The actual form object (required to modify the form).
+ *
+ * @throws coding_exception
+ * @throws dml_exception
+ */
+function theme_degrade_coursemodule_standard_elements($data, $mform) {
+    global $CFG;
+
+    $mform->addElement('header', 'theme_degrade_icons',
+        get_string('settings_icons_change_icons', 'theme_degrade'));
+    $configuration = get_string('configuration');
+    $link = "<a href='{$CFG->wwwroot}/admin/settings.php?section=themesettingdegrade#theme_degrade_icons'
+                target='_blank'>{$configuration}</a>";
+
+    if ($settingsiconsnum = get_config('theme_degrade', 'settings_icons_num')) {
+
+        $choices = [0 => get_string("settings_icons_none", 'theme_degrade')];
+        for ($i = 1; $i <= $settingsiconsnum; $i++) {
+            $name = get_config('theme_degrade', "settings_icons_name_{$i}");
+            $image = get_config('theme_degrade', "settings_icons_image_{$i}");
+
+            if ($name && $image) {
+                $choices[$i] = $name;
+            }
+        }
+
+        if ($data->get_coursemodule() && isset($data->get_coursemodule()->id)) {
+            $name = "theme_degrade_customicon_{$data->get_coursemodule()->id}";
+            $customicon = get_config('theme_degrade', $name);
+
+            $data->set_data(['theme_degrade_customicon' => $customicon]);
+        }
+
+        $mform->addElement('select', 'theme_degrade_customicon',
+            get_string('settings_icons_select_icon', 'theme_degrade', $link),
+            $choices);
+    } else {
+        $mform->addElement('html', get_string('settings_icons_module_disable', 'theme_degrade', $link));
+    }
+}
+
+/**
+ * Hook the add/edit of the course module.
+ *
+ * @param moodleform $data Data from the form submission.
+ * @param stdClass $course The course.
+ *
+ * @return moodleform
+ *
+ * @throws dml_exception
+ */
+function theme_degrade_coursemodule_edit_post_actions($data, $course) {
+    $name = "theme_degrade_customicon_{$data->coursemodule}";
+    $customicon = get_config('theme_degrade', $name);
+    if ($customicon != $data->theme_degrade_customicon) {
+        set_config($name, $data->theme_degrade_customicon, 'theme_degrade');
+        theme_reset_all_caches();
+    }
+
+    return $data;
+}
+
+/**
+ * Serves any files associated with the theme settings.
+ *
+ * @param stdClass $course
+ * @param stdClass $cm
+ * @param context $context
+ * @param string $filearea
+ * @param array $args
+ * @param bool $forcedownload
+ * @param array $options
+ *
+ * @return bool
+ *
+ * @throws coding_exception
+ * @throws moodle_exception
+ */
+function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
+    static $theme;
+
+    if (empty($theme)) {
+        $theme = theme_config::load('degrade');
+    }
+    if ($context->contextlevel == CONTEXT_SYSTEM) {
+        if ($filearea === 'style') {
+            theme_degrade_serve_css($args[1]);
+        } else if ($filearea === 'pagebackground') {
+            return $theme->setting_file_serve('pagebackground', $args, $forcedownload, $options);
+        } else if (preg_match("/slide[1-9][0-9]*image/", $filearea) !== false) {
+            return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
+        } else {
+            send_file_not_found();
+        }
+    } else {
+        send_file_not_found();
+    }
+
+    return false;
+}
+
+/**
+ * Loads the CSS Styles and replace the background images.
+ * If background image not available in the settings take the default images.
+ *
+ * @param string $css
+ * @param string $theme
+ *
+ * @return string $css
+ *
+ * @throws coding_exception
+ * @throws dml_exception
+ */
+function theme_degrade_process_css($css, $theme) {
+    global $DB;
+
+    $css =
+        ":root {\n" .
+        "    --color_primary:   " . theme_degrade_process_color_hex("theme_color__color_primary") . " !important;\n" .
+        "    --color_secondary: " . theme_degrade_process_color_hex("theme_color__color_secondary") . " !important;\n" .
+        "    --color_buttons:   " . theme_degrade_process_color_hex("theme_color__color_buttons") . " !important;\n" .
+        "    --color_names:     " . theme_degrade_process_color_hex("theme_color__color_names") . " !important;\n" .
+        "    --color_titles:    " . theme_degrade_process_color_hex("theme_color__color_titles") . " !important;\n" .
+        "}" . $css;
+
+    $fontfamily = theme_degrade_get_setting("fontfamily");
+    if (isset($fontfamily[3])) {
+        $sizes = "0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap";
+        $fontfamily1 = "@import url('https://fonts.googleapis.com/css2?family={$fontfamily}:ital,wght@{$sizes}');";
+        $fontfamily2 = "body,*{font-family:{$fontfamily}, Arial, Helvetica, sans-serif;}";
+    } else {
+        $fontfamily1 = "";
+        $fontfamily2 = "body,*{font-family:Arial, Helvetica, sans-serif;}";
+    }
+
+    $customcss = str_replace("&gt;", ">", theme_degrade_get_setting("customcss"));
+    $css = "{$fontfamily1}{$fontfamily2}\n\n{$css}\n{$customcss}\n{$fontfamily2}";
+
+    $sql = "SELECT name, value  FROM {config_plugins} WHERE name LIKE 'theme_degrade_customicon_%'";
+    $customicons = $DB->get_records_sql($sql);
+    foreach ($customicons as $customicon) {
+        $moduleid = str_replace("theme_degrade_customicon_", "", $customicon->name);
+        $slideshowimage = theme_degrade_get_setting_image("settings_icons_image_{$customicon->value}");
+        $css .= "
+            #module-{$moduleid} .courseicon img,
+            .cmid-{$moduleid} #page-header .activityiconcontainer img {
+                content : url('{$slideshowimage}');
+            }
+            #course-index-cm-{$moduleid} .courseindex-link {
+                display     : flex;
+                align-items : center;
+            }
+            #course-index-cm-{$moduleid} .courseindex-link::before {
+                content           : '';
+                display           : block;
+                height            : 20px;
+                width             : 20px;
+                min-width         : 20px;
+                background-image  : url('{$slideshowimage}');
+                background-size   : contain;
+                background-repeat : no-repeat;
+                margin-right      : 5px;
+            }
+            #course-index-cm-{$moduleid}.pageitem .courseindex-link::before {
+                filter: invert(1);
+            }
+            #course-index-cm-{$moduleid}.pageitem:hover .courseindex-link::before {
+                filter: invert(0);
+            }";
+    }
+
+    return $css;
 }

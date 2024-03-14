@@ -81,6 +81,32 @@
     }
 }
 ///////////////////
+// theme-brasil
+.theme-brasil1 #header,
+.theme-brasil1 #nav-drawer .list-group-item.active > div,
+.theme-brasil1 #nav-drawer .list-group-item.active:hover,
+.theme-brasil1 #footer .footer-main,
+.theme-select-brasil1 .preview {
+    background: #00c3b0;
+    background: linear-gradient(30deg, #ffe150, #19934a);
+}
+.theme-brasil1 {
+    #site-news-forum,
+    .frontpage-course-list {
+        background: #00c3b03d;
+        background: linear-gradient(30deg, #ffe150, #19934a);
+        .btn-primary {
+            background: #00c3b0;
+        }
+    }
+    .nn-btn-primary {
+        background: #00c3b0;
+    }
+    &[data-templates=login] {
+        background-color: #00c3b0;
+    }
+}
+///////////////////
 // theme-green1
 .theme-green1 #header,
 .theme-green1 #nav-drawer .list-group-item.active > div,
@@ -167,6 +193,10 @@
 .theme-select-blue1 .preview {
     background: #007bc3;
     background: linear-gradient(30deg, #007bc3, #2eb8b7);
+    &.fixed-top,
+    &.fixed-top * {
+        color: #007bc3;
+    }
 }
 .theme-blue1 {
     #site-news-forum,

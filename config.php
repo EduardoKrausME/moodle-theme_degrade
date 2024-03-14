@@ -21,7 +21,7 @@
  * Moodle's new Boost theme engine
  *
  * @package     theme_degrade
- * @copyright   2023 Eduardo kraus (http://eduardokraus.com)
+ * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  */
@@ -30,7 +30,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $THEME->name = 'degrade';
 
-$THEME->sheets = ['degrade', 'custom'];
+$THEME->sheets = ['initial', 'style'];
 
 $THEME->editor_sheets = [];
 
@@ -46,21 +46,18 @@ $THEME->requiredblocks = '';
 
 $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
 
-$THEME->csstreepostprocessor = 'theme_degrade_css_tree_post_processor';
+$THEME->csspostprocess = 'theme_degrade_process_css';
 
 $THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
 
 $THEME->haseditswitch = true;
 
-$THEME->usescourseindex = true;
+$THEME->usescourseindex = false;
 
 // By default, all boost theme do not need their titles displayed.
 $THEME->activityheaderconfig = [
     'notitle' => true
 ];
-
-
-$THEME->csspostprocess = 'theme_degrade_process_css';
 
 
 $THEME->layouts = [

@@ -1,78 +1,48 @@
-define([
-    "jquery",
-], function($) {
-    return theme = {
+define(["jquery"], function($) {
+    var theme_degrade = {
 
-        theme         : function() {
-            var degrade_theme = $("#id_s_theme_degrade_theme");
+        theme_color         : function() {
+            var degrade_theme_color = $("#id_s_theme_degrade_theme_color");
 
-            $(".seletor-de-theme").click(function() {
+            $(".seletor-de-theme-degrade").click(function() {
                 var themename = $(this).attr("data-name");
-                theme._theme_select(themename);
+                theme_degrade._theme_color_select(themename);
 
-                degrade_theme.val(themename);
+                degrade_theme_color.val(themename);
             });
-            degrade_theme.change(function() {
-                var themename = degrade_theme.val();
-                theme._theme_select(themename);
+            degrade_theme_color.change(function() {
+                var themename = degrade_theme_color.val();
+                theme_degrade._theme_color_select(themename);
 
-                degrade_theme.val(themename);
+                degrade_theme_color.val(themename);
             });
         },
-        _theme_select : function(themename) {
+        _theme_color_select : function(themename) {
+            var $themename = $("#theme-" + themename);
 
-            var themeDivSelected = $("#theme-" + themename);
-            var degrade_customcss = $("#id_s_theme_degrade_customcss");
+            var color_primary = $themename.find(".color_primary").attr('data-color');
+            var color_secondary = $themename.find(".color_secondary").attr('data-color');
+            var color_buttons = $themename.find(".color_buttons").attr('data-color');
+            var color_names = $themename.find(".color_names").attr('data-color');
+            var color_titles = $themename.find(".color_titles").attr('data-color');
 
-            var atualcss = degrade_customcss.val();
-            if (atualcss.length < 5) {
-                var cssroot_start = themeDivSelected.attr("data-css");
-                degrade_customcss.val(cssroot_start);
-
-                return;
-            }
-
-            var falhou_cores = 0;
-            themeDivSelected.find("span").each(function() {
-                var colorElement = $(this);
-                var name = colorElement.attr("data-name");
-                var color = colorElement.attr("data-color");
-
-                if (atualcss.indexOf(name) >= 0) {
-                    // console.log(atualcss);
-                    atualcss = atualcss.replace(new RegExp(name + ": .*?;", "i"), name + ": " + color + ";");
-                    // console.log(atualcss);
-                } else {
-                    falhou_cores++;
-                }
-            });
-
-            // console.log(falhou_cores);
-            if (falhou_cores == 0) {
-                degrade_customcss.val(atualcss);
-            } else {
-                atualcss = atualcss.replace(/root\s?\{.*?\}/s, "");
-                atualcss = atualcss.trim();
-
-                var cssroot = themeDivSelected.attr("data-css");
-                degrade_customcss.val(cssroot + "\n" + atualcss);
-            }
-
-
+            $("#id_s_theme_degrade_theme_color__color_primary").val(color_primary);
+            $("#id_s_theme_degrade_theme_color__color_secondary").val(color_secondary);
+            $("#id_s_theme_degrade_theme_color__color_buttons").val(color_buttons);
+            $("#id_s_theme_degrade_theme_color__color_names").val(color_names);
+            $("#id_s_theme_degrade_theme_color__color_titles").val(color_titles);
         },
 
         numslides          : function() {
-            var theme_degrade_slideshow_numslides = $("#id_s_theme_degrade_slideshow_numslides");
+            var slideshow_numslides = $("#id_s_slideshow_numslides");
 
-            theme_degrade_slideshow_numslides.change(function() {
-                theme._numslides_changue(theme_degrade_slideshow_numslides.val());
-            });
-
-            theme._numslides_changue(theme_degrade_slideshow_numslides.val());
+            slideshow_numslides.change(theme_degrade._numslides_changue);
+            theme_degrade._numslides_changue();
         },
         _numslides_changue : function(numslides) {
+            var slideshow_numslides = $("#id_s_slideshow_numslides");
             for (var i = 0; i <= 9; i++) {
-                if (numslides >= i) {
+                if (slideshow_numslides.val() >= i) {
                     $("#admin-slideshow_info_" + i).parent().show();
                     $("#admin-slideshow_image_" + i).show();
                     $("#admin-slideshow_text_" + i).show();
@@ -90,36 +60,89 @@ define([
             var login_theme = $("#id_s_theme_degrade_login_theme");
 
             login_theme.change(function() {
-                theme._login_changue(login_theme.val());
+                theme_degrade._login_changue(login_theme.val());
             });
 
-            theme._login_changue(login_theme.val());
+            theme_degrade._login_changue(login_theme.val());
         },
 
         _login_changue : function(themename) {
             var login_backgroundfoto = $("#admin-login_backgroundfoto");
             var login_description = $("#admin-login_login_description, #admin-login_forgot_description, #admin-login_signup_description");
+            var login_backgroundcolor = $("#admin-login_backgroundcolor");
+
+            login_backgroundfoto.hide();
+            login_description.hide();
+            login_backgroundcolor.hide();
 
             switch (themename) {
+                case 'login_theme_block':
+                    login_backgroundfoto.show();
+                    login_backgroundcolor.show();
+                    break;
                 case 'login_theme_image_login' :
                     login_backgroundfoto.show();
-                    login_description.hide();
                     break;
                 case 'login_theme_imagetext_login' :
                     login_backgroundfoto.show();
                     login_description.show();
                     break;
                 case  'login_theme_login' :
-                    login_backgroundfoto.hide();
-                    login_description.hide();
                     break;
                 case 'theme_login_branco' :
-                    login_backgroundfoto.hide();
-                    login_description.hide();
                     break;
             }
-        }
+        },
+
+        about : function() {
+            var about_enable = $("#id_s_theme_degrade_frontpage_about_enable");
+
+            about_enable.change(theme_degrade._about_changue);
+            about_enable.click(theme_degrade._about_changue);
+            theme_degrade._about_changue();
+        },
+
+        _about_changue : function() {
+            var about_enable = $("#id_s_theme_degrade_frontpage_about_enable");
+            if (about_enable.is(":checked")) {
+                $("#theme_degrade_about > fieldset > div").show();
+                $("#theme_degrade_about > fieldset > h3").show();
+            } else {
+                $("#theme_degrade_about > fieldset > div").hide();
+                $("#theme_degrade_about > fieldset > h3").hide();
+            }
+
+            $("#admin-frontpage_about_enable").show();
+            setTimeout(function() {
+                $("#admin-frontpage_about_enable").show();
+            }, 200);
+        },
+
+        icons : function() {
+            var settings_icons_num = $("#id_s_theme_degrade_settings_icons_num");
+
+            settings_icons_num.change(theme_degrade._icons_changue);
+            theme_degrade._icons_changue();
+        },
+
+        _icons_changue : function() {
+            var settings_icons_num = $("#id_s_theme_degrade_settings_icons_num");
+            for (var i = 0; i <= 50; i++) {
+                if (settings_icons_num.val() >= i) {
+                    $("#admin-settings_icons_block_" + i).parent().show(300);
+                    $("#admin-settings_icons_name_" + i).show(300);
+                    $("#admin-settings_icons_image_" + i).show(300);
+                } else {
+                    $("#admin-settings_icons_block_" + i).parent().hide(300);
+                    $("#admin-settings_icons_name_" + i).hide(300);
+                    $("#admin-settings_icons_image_" + i).hide(300);
+                }
+            }
+        },
+
     };
+
+    return theme_degrade;
 });
 
 

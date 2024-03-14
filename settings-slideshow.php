@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * User: Eduardo Kraus
- * Date: 02/04/2023
+ * Date: 02/04/2024
  * Time: 19:18
  */
 
@@ -45,34 +45,29 @@ $page->add(new admin_setting_configselect($name, $title, $description, $default,
 global $PAGE;
 $PAGE->requires->js_call_amd('theme_degrade/settings', 'numslides');
 
-
-$slideshownumslides = get_config('theme_degrade', 'slideshow_numslides');
 for ($i = 1; $i <= 9; $i++) {
 
-    $name = "theme_degrade/slideshow_info_{$i}";
     $heading = get_string('slideshow_info', 'theme_degrade', $i);
-    $setting = new admin_setting_heading($name, "<span id='admin-slideshow_info_{$i}'>{$heading}</span>", "");
+    $setting = new admin_setting_heading("theme_degrade/slideshow_info_{$i}",
+        "<span id='admin-slideshow_info_{$i}'>{$heading}</span>", '');
     $page->add($setting);
 
-    $name = "theme_degrade/slideshow_image_{$i}";
-    $title = get_string('slideshow_image', 'theme_degrade');
-    $description = get_string('slideshow_image_desc', 'theme_degrade');
-    $setting = new admin_setting_configstoredfile($name, $title, $description, "slideshow_image_{$i}");
+    $setting = new admin_setting_configstoredfile("theme_degrade/slideshow_image_{$i}",
+        get_string('slideshow_image', 'theme_degrade'),
+        get_string('slideshow_image_desc', 'theme_degrade'),
+        "slideshow_image_{$i}");
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
-    $name = "theme_degrade/slideshow_url_{$i}";
-    $title = get_string('slideshow_url', 'theme_degrade');
-    $description = get_string('slideshow_url_desc', 'theme_degrade');
-    $default = 'http://www.example.com/';
-    $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_URL);
+    $setting = new admin_setting_configtext("theme_degrade/slideshow_url_{$i}",
+        get_string('slideshow_url', 'theme_degrade'),
+        get_string('slideshow_url_desc', 'theme_degrade'),
+        'http://www.example.com/', PARAM_URL);
     $page->add($setting);
 
-    $name = "theme_degrade/slideshow_text_{$i}";
-    $title = get_string('slideshow_text', 'theme_degrade');
-    $description = get_string('slideshow_text_desc', 'theme_degrade');
-    $default = '';
-    $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
+    $setting = new admin_setting_configtext("theme_degrade/slideshow_text_{$i}",
+        get_string('slideshow_text', 'theme_degrade'),
+        get_string('slideshow_text_desc', 'theme_degrade'), '', PARAM_TEXT);
     $page->add($setting);
 }
 $settings->add($page);

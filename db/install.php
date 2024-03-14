@@ -17,83 +17,147 @@
 /**
  * Theme custom Installation.
  * @package     theme_degrade
- * @copyright   2023 Eduardo kraus (http://eduardokraus.com)
+ * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
- * Theme_degrade install function.
+ * theme_degrade install function.
  *
  * @return void
- * @throws coding_exception
+ * @throws Exception
  */
 function xmldb_theme_degrade_install() {
-    global $SITE, $DB, $SITE;
+    global $DB, $SITE;
 
     if (method_exists('core_plugin_manager', 'reset_caches')) {
         core_plugin_manager::reset_caches();
     }
 
-    set_config("frontpage_avaliablecourses_text", "", "theme_degrade");
-    set_config("frontpage_avaliablecourses_instructor", 1, "theme_degrade");
+    magnific_set_config("frontpage_avaliablecourses_text", '');
+    magnific_set_config("frontpage_avaliablecourses_instructor", 1);
 
-    set_config("slideshow_numslides", 0, "theme_degrade");
+    magnific_set_config("slideshow_numslides", 0);
     for ($i = 1; $i <= 9; $i++) {
-        set_config("slideshow_info_{$i}", "", "theme_degrade");
-        set_config("slideshow_image_{$i}", "", "theme_degrade");
-        set_config("slideshow_url_{$i}", "", "theme_degrade");
-        set_config("slideshow_text_{$i}", "", "theme_degrade");
+        magnific_set_config("slideshow_info_{$i}", '');
+        magnific_set_config("slideshow_image_{$i}", '');
+        magnific_set_config("slideshow_url_{$i}", '');
+        magnific_set_config("slideshow_text_{$i}", '');
     }
 
-    set_config("frontpage_about_enable", 1, "theme_degrade");
-    set_config("frontpage_about_logo", "", "theme_degrade");
-    set_config("frontpage_about_title", get_string("frontpage_about_title_default", "theme_degrade"), "theme_degrade");
-    set_config("frontpage_about_description", "", "theme_degrade");
+    magnific_set_config("frontpage_about_enable", 0);
+    magnific_set_config("frontpage_about_logo", '');
+    magnific_set_config("frontpage_about_title", magnific_get_string("frontpage_about_title_default"));
+    magnific_set_config("frontpage_about_description", '');
     for ($i = 1; $i <= 4; $i++) {
-        set_config("frontpage_about_text_{$i}", get_string("frontpage_about_text_{$i}_defalt", "theme_degrade"), "theme_degrade");
+        magnific_set_config("frontpage_about_text_{$i}", magnific_get_string("frontpage_about_text_{$i}_defalt"));
         if ($i == 1) {
             $count = $DB->get_field_select("course", "COUNT(*)", "id != {$SITE->id}");
-            set_config("frontpage_about_number_{$i}", $count, "theme_degrade");
+            magnific_set_config("frontpage_about_number_{$i}", $count);
         } else if ($i == 2) {
             $roleid = $DB->get_field_select("role", "id", "shortname = 'teacher'");
             $count = $DB->get_field_select("role_assignments", "COUNT(DISTINCT userid)", "roleid = {$roleid}");
-            set_config("frontpage_about_number_{$i}", $count, "theme_degrade");
+            magnific_set_config("frontpage_about_number_{$i}", $count);
         } else if ($i == 3) {
             $roleid = $DB->get_field_select("role", "id", "shortname = 'student'");
             $count = $DB->get_field_select("role_assignments", "COUNT(DISTINCT userid)", "roleid = {$roleid}");
-            set_config("frontpage_about_number_{$i}", $count, "theme_degrade");
+            magnific_set_config("frontpage_about_number_{$i}", $count);
         } else if ($i == 4) {
             $count = $DB->get_field_select("course_modules", "COUNT(*)", "visible = 1 AND course != {$SITE->id}");
-            set_config("frontpage_about_number_{$i}", $count, "theme_degrade");
+            magnific_set_config("frontpage_about_number_{$i}", $count);
         }
     }
 
-    set_config("background_color", "default1", "theme_degrade");
+    magnific_set_config("footer_description", $SITE->fullname);
+    magnific_set_config("footer_links_title", magnific_get_string("footer_links_title_default"));
+    magnific_set_config("footer_links", '');
+    magnific_set_config("footer_social_title", magnific_get_string("footer_social_title_default"));
+    magnific_set_config("social_youtube", '');
+    magnific_set_config("social_linkedin", '');
+    magnific_set_config("social_facebook", '');
+    magnific_set_config("social_twitter", '');
+    magnific_set_config("social_instagram", '');
+    magnific_set_config("contact_footer_title", magnific_get_string("footer_contact_title_default"));
+    magnific_set_config("contact_address", '');
+    magnific_set_config("contact_phone", '');
+    magnific_set_config("contact_email", '');
 
-    set_config("theme", "theme_blue", "theme_degrade");
-    set_config("customcss",
-        ":root{\n--color_primary: #2B4E84;\n--color_secondary: #3E65A0;\n--color_buttons: #183054;" .
-        "\n--color_names: #C0CCDC;\n--color_titles: #E8F0FB;\n}", "theme_degrade");
+    magnific_set_config("login_theme", "theme_image_login");
+    magnific_set_config("login_backgroundfoto", '');
+    magnific_set_config("login_backgroundcolor", '');
 
-    set_config("footer_description", $SITE->fullname, "theme_degrade");
-    set_config("footer_links_title", get_string("footer_links_title_default", "theme_degrade"), "theme_degrade");
-    set_config("footer_links", "", "theme_degrade");
-    set_config("footer_social_title", get_string("footer_social_title_default", "theme_degrade"), "theme_degrade");
-    set_config("social_youtube", "", "theme_degrade");
-    set_config("social_linkedin", "", "theme_degrade");
-    set_config("social_facebook", "", "theme_degrade");
-    set_config("social_twitter", "", "theme_degrade");
-    set_config("social_instagram", "", "theme_degrade");
-    set_config("contact_footer_title", get_string("footer_contact_title_default", "theme_degrade"), "theme_degrade");
-    set_config("contact_address", "", "theme_degrade");
-    set_config("contact_phone", "", "theme_degrade");
-    set_config("contact_email", "", "theme_degrade");
+    magnific_set_config("login_login_description", '');
+    magnific_set_config("login_forgot_description", '');
+    magnific_set_config("login_signup_description", '');
 
-    set_config("login_theme", "theme_image_login", "theme_degrade");
-    set_config("login_backgroundfoto", "", "theme_degrade");
+    magnific_set_config("frontpage_mycourses_text", '');
+    magnific_set_config("frontpage_mycourses_instructor", '');
+    magnific_set_config("logo_color", '');
+    magnific_set_config("logo_write", '');
+    magnific_set_config("fontfamily", 'Roboto');
+    magnific_set_config("customcss", '');
+    magnific_set_config("footer_show_copywriter", 1);
 
+    // Icons.
+    install_settings_icons();
+}
 
-    set_config("login_login_description", "", "theme_degrade");
-    set_config("login_forgot_description", "", "theme_degrade");
-    set_config("login_signup_description", "", "theme_degrade");
+/**
+ * @throws dml_exception
+ */
+function install_settings_icons() {
+    global $CFG;
+
+    for ($i = 1; $i <= 20; $i++) {
+        set_config("settings_icons_name_{$i}", "", "theme_degrade");
+        set_config("settings_icons_image_{$i}", "", "theme_degrade");
+    }
+
+    $files = ['audio_file', 'video_file', 'book', 'game', 'money', 'slide', 'support', 'download'];
+    set_config('settings_icons_num', count($files), "theme_degrade");
+
+    $fs = get_file_storage();
+    $filerecord = new stdClass();
+    $filerecord->component = 'theme_degrade';
+    $filerecord->contextid = context_system::instance()->id;
+    $filerecord->userid = get_admin()->id;
+    $filerecord->filepath = '/';
+    $filerecord->itemid = 0;
+
+    $i = 1;
+    foreach ($files as $file) {
+        $filerecord->filearea = "settings_icons_image_{$i}";
+        $filerecord->filename = "{$file}.svg";
+        try {
+            $fs->create_file_from_pathname($filerecord, "{$CFG->dirroot}/theme/degrade/pix/material/{$file}.svg");
+
+            $default = get_string("settings_icons_default_{$file}", "theme_degrade");
+            set_config("settings_icons_name_{$i}", $default, "theme_degrade");
+        } catch (Exception $e) {
+            echo $e->getMessage() . "<br>";
+        }
+
+        $i++;
+    }
+}
+
+/**
+ * @param $name
+ * @param $value
+ *
+ * @return mixed
+ */
+function magnific_set_config($name, $value) {
+    return set_config($name, $value, "theme_degrade");
+}
+
+/**
+ * @param $name
+ *
+ * @return string
+ *
+ * @throws coding_exception
+ */
+function magnific_get_string($name) {
+    return get_string($name, "theme_degrade");
 }
