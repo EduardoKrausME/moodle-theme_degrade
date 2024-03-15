@@ -21,7 +21,7 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$page = new admin_settingpage('theme_degrade_topo', get_string('settings_topo_heading', 'theme_degrade'));
+$page = new admin_settingpage('theme_degrade_topo', get_string('settings_top_heading', 'theme_degrade'));
 
 $page->add(new admin_setting_configtextarea('custommenuitems',
     get_string('custommenuitems', 'admin'),

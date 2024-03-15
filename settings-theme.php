@@ -70,6 +70,29 @@ $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 
+// Cores do topo
+$setting = new admin_setting_heading("theme_degrade/top_color_heading", '',
+    get_string('top_color_heading', 'theme_degrade'));
+$page->add($setting);
+
+$setting = new admin_setting_configcolourpicker("theme_degrade/top_scroll_background_color",
+    get_string("top_scroll_background_color", 'theme_degrade'),
+    get_string("top_scroll_background_color_desc", 'theme_degrade'), '#FFFFFF');
+$setting->set_updatedcallback('theme_reset_all_caches');
+$page->add($setting);
+
+$setting = new admin_setting_configcolourpicker("theme_degrade/top_scroll_text_color",
+    get_string("top_scroll_text_color", 'theme_degrade'),
+    get_string("top_scroll_text_color_desc", 'theme_degrade'), '#646464');
+$setting->set_updatedcallback('theme_reset_all_caches');
+$page->add($setting);
+
+
+// Cores dos botões
+$setting = new admin_setting_heading("theme_degrade/theme_color_heading", '',
+    get_string('top_color_heading', 'theme_degrade'));
+$page->add($setting);
+
 $colorss = [
     'theme_color_blue' => [
         'color_primary' => '#2b4e84',

@@ -619,5 +619,18 @@ function theme_degrade_process_css($css, $theme) {
             }";
     }
 
+    $top_scroll_background_color = theme_degrade_get_setting("top_scroll_background_color");
+    $top_scroll_text_color_desc = theme_degrade_get_setting("top_scroll_text_color_desc");
+
+    $css .= "
+            .fixed-top {
+                background: {$top_scroll_background_color} !important;
+            }
+            .fixed-top *,
+            .fixed-top :before {
+                color: {$top_scroll_text_color_desc} !important;
+            }
+    ";
+
     return $css;
 }

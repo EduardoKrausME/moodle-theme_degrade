@@ -26,8 +26,6 @@
  */
 defined('MOODLE_INTERNAL') || die;
 
-$settings = null;
-
 if ($ADMIN->fulltree) {
     $settings = new theme_boost_admin_settingspage_tabs('themesettingdegrade',
         get_string('pluginname', 'theme_degrade'));
@@ -50,3 +48,5 @@ if ($ADMIN->fulltree) {
 
     require_once(__DIR__ . "/settings-login.php");
 }
+
+

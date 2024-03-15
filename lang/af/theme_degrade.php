@@ -98,7 +98,7 @@ $string['social_instagram_desc'] = 'Die URL van jou organisasie se Instagram-rek
 $string['social_facebook'] = 'Jou Facebook';
 $string['social_facebook_desc'] = 'Die URL van jou organisasie se Facebook-bladsy.';
 
-$string['settings_topo_heading'] = 'Bander';
+$string['settings_top_heading'] = 'Bander';
 
 $string['settings_footer_heading'] = 'Voetblok';
 
@@ -219,3 +219,9 @@ $string['settings_icons_default_slide'] = 'Dias';
 $string['settings_icons_default_support'] = 'Ondersteuning';
 $string['settings_icons_default_download'] = 'Laai af';
 
+$string['top_color_heading'] = 'Cor do topo ao rolar';
+$string['top_scroll_background_color'] = 'Cor de fundo do menu do topo ao rolar';
+$string['top_scroll_background_color_desc'] = 'Defina a cor de fundo ao rolar a página.';
+$string['top_scroll_text_color'] = 'Cor do texto do menu ao rolar';
+$string['top_scroll_text_color_desc'] = 'Defina a cor do texto do menu ao rolar a página.';
+$string['theme_color_heading'] = 'Seleção de cores do ambiente';

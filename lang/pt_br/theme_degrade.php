@@ -97,7 +97,7 @@ $string['social_instagram_desc'] = 'A URL do Instagram da sua organização.';
 $string['social_facebook'] = 'Seu Facebook';
 $string['social_facebook_desc'] = 'A URL do Facebook da sua organização.';
 
-$string['settings_topo_heading'] = 'Topo';
+$string['settings_top_heading'] = 'Topo';
 
 $string['settings_footer_heading'] = 'Bloco do Rodapé';
 
@@ -217,3 +217,10 @@ $string['settings_icons_default_money'] = 'Financeiro';
 $string['settings_icons_default_slide'] = 'Slides';
 $string['settings_icons_default_support'] = 'Suporte';
 $string['settings_icons_default_download'] = 'Download';
+
+$string['top_color_heading'] = 'Cor do topo ao rolar';
+$string['top_scroll_background_color'] = 'Cor de fundo do menu do topo ao rolar';
+$string['top_scroll_background_color_desc'] = 'Defina a cor de fundo ao rolar a página.';
+$string['top_scroll_text_color'] = 'Cor do texto do menu ao rolar';
+$string['top_scroll_text_color_desc'] = 'Defina a cor do texto do menu ao rolar a página.';
+$string['theme_color_heading'] = 'Seleção de cores do ambiente';

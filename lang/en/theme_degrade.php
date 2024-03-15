@@ -98,7 +98,7 @@ $string['social_instagram_desc'] = 'Your organization\'s Instagram URL.';
 $string['social_facebook'] = 'Your Facebook';
 $string['social_facebook_desc'] = 'Your organization\'s Facebook URL.';
 
-$string['settings_topo_heading'] = 'Top';
+$string['settings_top_heading'] = 'Top';
 
 $string['settings_footer_heading'] = 'Footer Block';
 
@@ -218,3 +218,11 @@ $string['settings_icons_default_money'] = 'Financial';
 $string['settings_icons_default_slide'] = 'Slides';
 $string['settings_icons_default_support'] = 'Support';
 $string['settings_icons_default_download'] = 'Download';
+
+
+$string['top_color_heading'] = 'Scroll Top Color';
+$string['top_scroll_background_color'] = 'Background Color of Top Menu on Scroll';
+$string['top_scroll_background_color_desc'] = 'Set the background color when scrolling the page.';
+$string['top_scroll_text_color'] = 'Text Color of Menu on Scroll';
+$string['top_scroll_text_color_desc'] = 'Set the text color of the menu when scrolling the page.';
+$string['theme_color_heading'] = 'Environment Color Selection';

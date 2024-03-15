@@ -98,7 +98,7 @@ $string['social_instagram_desc'] = 'URL на Instagram на вашата орг�
 $string['social_facebook'] = 'Вашият Facebook';
 $string['social_facebook_desc'] = 'URL на Facebook на вашата организация.';
 
-$string['settings_topo_heading'] = 'Горе';
+$string['settings_top_heading'] = 'Горе';
 
 $string['settings_footer_heading'] = 'Блок в долната част на страницата';
 
@@ -218,3 +218,10 @@ $string['settings_icons_default_money'] = 'Финанси';
 $string['settings_icons_default_slide'] = 'Слайдове';
 $string['settings_icons_default_support'] = 'Поддръжка';
 $string['settings_icons_default_download'] = 'Изтегляне';
+
+$string['top_color_heading'] = 'Цвят на горния ръб при превъртане';
+$string['top_scroll_background_color'] = 'Цвят на фона на горния меню при превъртане';
+$string['top_scroll_background_color_desc'] = 'Задайте цвета на фона при превъртане на страницата.';
+$string['top_scroll_text_color'] = 'Цвят на текста на менюто при превъртане';
+$string['top_scroll_text_color_desc'] = 'Задайте цвета на текста на менюто при превъртане на страницата.';
+$string['theme_color_heading'] = 'Избор на цветове за темата';

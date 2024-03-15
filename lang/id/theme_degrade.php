@@ -98,7 +98,7 @@ $string['social_instagram_desc'] = 'URL Instagram organisasi Anda.';
 $string['social_facebook'] = 'Facebook Anda';
 $string['social_facebook_desc'] = 'URL Facebook organisasi Anda.';
 
-$string['settings_topo_heading'] = 'Atas';
+$string['settings_top_heading'] = 'Atas';
 
 $string['settings_footer_heading'] = 'Blok Footer';
 
@@ -218,3 +218,10 @@ $string['settings_icons_default_money'] = 'Keuangan';
 $string['settings_icons_default_slide'] = 'Slide';
 $string['settings_icons_default_support'] = 'Dukungan';
 $string['settings_icons_default_download'] = 'Unduh';
+
+$string['top_color_heading'] = 'Warna Puncak Saat Bergulir';
+$string['top_scroll_background_color'] = 'Warna Latar Belakang Menu Puncak Saat Bergulir';
+$string['top_scroll_background_color_desc'] = 'Tentukan warna latar belakang saat menggulir halaman.';
+$string['top_scroll_text_color'] = 'Warna Teks Menu Saat Bergulir';
+$string['top_scroll_text_color_desc'] = 'Tentukan warna teks menu saat menggulir halaman.';
+$string['theme_color_heading'] = 'Pemilihan Warna Tema';
