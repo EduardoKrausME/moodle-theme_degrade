@@ -22,7 +22,7 @@
  */
 
 /**
- * theme_degrade install function.
+ * Theme_degrade install function.
  *
  * @return void
  * @throws Exception
@@ -99,13 +99,13 @@ function xmldb_theme_degrade_install() {
     magnific_set_config("footer_show_copywriter", 1);
 
     // Icons.
-    install_settings_icons();
+    degrade_install_settings_icons();
 }
 
 /**
  * @throws dml_exception
  */
-function install_settings_icons() {
+function degrade_install_settings_icons() {
     global $CFG;
 
     for ($i = 1; $i <= 20; $i++) {
