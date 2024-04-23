@@ -34,71 +34,71 @@ function xmldb_theme_degrade_install() {
         core_plugin_manager::reset_caches();
     }
 
-    magnific_set_config("frontpage_avaliablecourses_text", '');
-    magnific_set_config("frontpage_avaliablecourses_instructor", 1);
+    theme_degrade_set_config("frontpage_avaliablecourses_text", '');
+    theme_degrade_set_config("frontpage_avaliablecourses_instructor", 1);
 
-    magnific_set_config("slideshow_numslides", 0);
+    theme_degrade_set_config("slideshow_numslides", 0);
     for ($i = 1; $i <= 9; $i++) {
-        magnific_set_config("slideshow_info_{$i}", '');
-        magnific_set_config("slideshow_image_{$i}", '');
-        magnific_set_config("slideshow_url_{$i}", '');
-        magnific_set_config("slideshow_text_{$i}", '');
+        theme_degrade_set_config("slideshow_info_{$i}", '');
+        theme_degrade_set_config("slideshow_image_{$i}", '');
+        theme_degrade_set_config("slideshow_url_{$i}", '');
+        theme_degrade_set_config("slideshow_text_{$i}", '');
     }
 
-    magnific_set_config("frontpage_about_enable", 0);
-    magnific_set_config("frontpage_about_logo", '');
-    magnific_set_config("frontpage_about_title", magnific_get_string("frontpage_about_title_default"));
-    magnific_set_config("frontpage_about_description", '');
+    theme_degrade_set_config("frontpage_about_enable", 0);
+    theme_degrade_set_config("frontpage_about_logo", '');
+    theme_degrade_set_config("frontpage_about_title", magnific_get_string("frontpage_about_title_default"));
+    theme_degrade_set_config("frontpage_about_description", '');
     for ($i = 1; $i <= 4; $i++) {
-        magnific_set_config("frontpage_about_text_{$i}", magnific_get_string("frontpage_about_text_{$i}_defalt"));
+        theme_degrade_set_config("frontpage_about_text_{$i}", magnific_get_string("frontpage_about_text_{$i}_defalt"));
         if ($i == 1) {
             $count = $DB->get_field_select("course", "COUNT(*)", "id != {$SITE->id}");
-            magnific_set_config("frontpage_about_number_{$i}", $count);
+            theme_degrade_set_config("frontpage_about_number_{$i}", $count);
         } else if ($i == 2) {
             $roleid = $DB->get_field_select("role", "id", "shortname = 'teacher'");
             $count = $DB->get_field_select("role_assignments", "COUNT(DISTINCT userid)", "roleid = {$roleid}");
-            magnific_set_config("frontpage_about_number_{$i}", $count);
+            theme_degrade_set_config("frontpage_about_number_{$i}", $count);
         } else if ($i == 3) {
             $roleid = $DB->get_field_select("role", "id", "shortname = 'student'");
             $count = $DB->get_field_select("role_assignments", "COUNT(DISTINCT userid)", "roleid = {$roleid}");
-            magnific_set_config("frontpage_about_number_{$i}", $count);
+            theme_degrade_set_config("frontpage_about_number_{$i}", $count);
         } else if ($i == 4) {
             $count = $DB->get_field_select("course_modules", "COUNT(*)", "visible = 1 AND course != {$SITE->id}");
-            magnific_set_config("frontpage_about_number_{$i}", $count);
+            theme_degrade_set_config("frontpage_about_number_{$i}", $count);
         }
     }
 
-    magnific_set_config("footer_type", 0);
-    magnific_set_config("footer_description", $SITE->fullname);
-    magnific_set_config("footer_links_title", magnific_get_string("footer_links_title_default"));
-    magnific_set_config("footer_links", '');
-    magnific_set_config("footer_social_title", magnific_get_string("footer_social_title_default"));
-    magnific_set_config("social_youtube", '');
-    magnific_set_config("social_linkedin", '');
-    magnific_set_config("social_facebook", '');
-    magnific_set_config("social_twitter", '');
-    magnific_set_config("social_instagram", '');
-    magnific_set_config("contact_footer_title", magnific_get_string("footer_contact_title_default"));
-    magnific_set_config("contact_address", '');
-    magnific_set_config("contact_phone", '');
-    magnific_set_config("contact_email", '');
+    theme_degrade_set_config("footer_type", 0);
+    theme_degrade_set_config("footer_description", $SITE->fullname);
+    theme_degrade_set_config("footer_links_title", magnific_get_string("footer_links_title_default"));
+    theme_degrade_set_config("footer_links", '');
+    theme_degrade_set_config("footer_social_title", magnific_get_string("footer_social_title_default"));
+    theme_degrade_set_config("social_youtube", '');
+    theme_degrade_set_config("social_linkedin", '');
+    theme_degrade_set_config("social_facebook", '');
+    theme_degrade_set_config("social_twitter", '');
+    theme_degrade_set_config("social_instagram", '');
+    theme_degrade_set_config("contact_footer_title", magnific_get_string("footer_contact_title_default"));
+    theme_degrade_set_config("contact_address", '');
+    theme_degrade_set_config("contact_phone", '');
+    theme_degrade_set_config("contact_email", '');
 
-    magnific_set_config("login_theme", "theme_image_login");
-    magnific_set_config("login_backgroundfoto", '');
-    magnific_set_config("login_backgroundcolor", '');
+    theme_degrade_set_config("login_theme", "theme_image_login");
+    theme_degrade_set_config("login_backgroundfoto", '');
+    theme_degrade_set_config("login_backgroundcolor", '');
 
-    magnific_set_config("login_login_description", '');
-    magnific_set_config("login_forgot_description", '');
-    magnific_set_config("login_signup_description", '');
+    theme_degrade_set_config("login_login_description", '');
+    theme_degrade_set_config("login_forgot_description", '');
+    theme_degrade_set_config("login_signup_description", '');
 
-    magnific_set_config("home_type", 0);
-    magnific_set_config("frontpage_mycourses_text", '');
-    magnific_set_config("frontpage_mycourses_instructor", '');
-    magnific_set_config("logo_color", '');
-    magnific_set_config("logo_write", '');
-    magnific_set_config("fontfamily", 'Roboto');
-    magnific_set_config("customcss", '');
-    magnific_set_config("footer_show_copywriter", 1);
+    theme_degrade_set_config("home_type", 0);
+    theme_degrade_set_config("frontpage_mycourses_text", '');
+    theme_degrade_set_config("frontpage_mycourses_instructor", '');
+    theme_degrade_set_config("logo_color", '');
+    theme_degrade_set_config("logo_write", '');
+    theme_degrade_set_config("fontfamily", 'Roboto');
+    theme_degrade_set_config("customcss", '');
+    theme_degrade_set_config("footer_show_copywriter", 1);
 
     // Icons.
     degrade_install_settings_icons();
@@ -149,7 +149,7 @@ function degrade_install_settings_icons() {
  *
  * @return mixed
  */
-function magnific_set_config($name, $value) {
+function theme_degrade_set_config($name, $value) {
     return set_config($name, $value, "theme_degrade");
 }
 

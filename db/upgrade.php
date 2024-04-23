@@ -39,9 +39,11 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2024031007, 'theme', 'degrade');
     }
 
-    if ($oldversion < 2024042200) {
-        magnific_set_config("footer_type", 0);
-        magnific_set_config("home_type", 0);
+    if ($oldversion < 2024042301) {
+        set_config("footer_type", 0, "theme_degrade");
+        set_config("home_type", 0, "theme_degrade");
+
+        upgrade_plugin_savepoint(true, 2024042301, 'theme', 'degrade');
     }
 
     return true;
