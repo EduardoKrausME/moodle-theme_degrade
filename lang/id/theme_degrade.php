@@ -22,8 +22,8 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Boost Magnific';
-$string['choosereadme'] = 'Boost Magnific adalah tema yang dibuat dengan penuh kasih sayang untuk membawa warna ceria ke Moodle.';
+$string['pluginname'] = 'Degrade';
+$string['choosereadme'] = 'Degrade adalah tema yang dibuat dengan penuh kasih sayang untuk membawa warna ceria ke Moodle.';
 
 // Slides.
 $string['settings_slideshow_heading'] = 'SlideShow';
@@ -193,7 +193,7 @@ $string['login_signup_description'] = 'Teks di samping Layar Buat Akun';
 $string['login_signup_description_desc'] = 'Teks yang hanya muncul di Layar Buat Akun';
 
 // Privacy.
-$string['privacy:metadata'] = 'Tema Boost Magnific tidak menyimpan data pribadi tentang pengguna.';
+$string['privacy:metadata'] = 'Tema Degrade tidak menyimpan data pribadi tentang pengguna.';
 
 // Pengaturan ikon.
 $string['settings_icons_heading'] = 'Ikon';

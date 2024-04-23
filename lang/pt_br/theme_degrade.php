@@ -21,8 +21,8 @@
  * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-$string['pluginname'] = 'Boost Magnific';
-$string['choosereadme'] = 'Boost Magnific é um thema construido com carinho para trazer cores alegres ao Moodle.';
+$string['pluginname'] = 'Degrade';
+$string['choosereadme'] = 'Degrade é um thema construido com carinho para trazer cores alegres ao Moodle.';
 
 // Slides.
 $string['settings_slideshow_heading'] = 'SlideShow';
@@ -192,7 +192,7 @@ $string['login_signup_description'] = 'Texto na lateral da Tela de Criar uma con
 $string['login_signup_description_desc'] = 'Texto que aparecerá apenas na tela de Criar uma conta';
 
 // Privacy.
-$string['privacy:metadata'] = 'O tema Boost Magnific não armazena nenhum dado pessoal sobre nenhum usuário.';
+$string['privacy:metadata'] = 'O tema Degrade não armazena nenhum dado pessoal sobre nenhum usuário.';
 
 // Settings icons.
 $string['settings_icons_heading'] = 'Ícones';
