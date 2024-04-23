@@ -117,9 +117,7 @@ $string['footer_social_title_default'] = 'Síguenos en redes sociales';
 $string['footerblock_contact'] = 'Bloque de contacto';
 
 $string['footerblink'] = 'Enlaces del Bloque del Pie de página';
-$string['footerblink_desc'] = 'Puedes configurar aquí los enlaces del Bloque del Pie de página para que se muestren por temas. <br>' .
-    'Cada línea consta de algún texto de menú o clave de idioma o texto, un URL de enlace (opcional), separados por barras verticales. Por ejemplo:<br>' .
-    '<pre>Soporte de Moodle|https://moodle.org/support</pre>';
+$string['footerblink_desc'] = 'Puedes configurar aquí los enlaces del Bloque del Pie de página para que se muestren por temas. <br>Cada línea consta de algún texto de menú o clave de idioma o texto, un URL de enlace (opcional), separados por barras verticales. Por ejemplo:<br><pre>Soporte de Moodle|https://moodle.org/support</pre>';
 
 $string['footer_contact_title'] = 'Título del Bloque de Contacto';
 $string['footer_contact_title_desc'] = 'Ingresa el título del Bloque que se mostrará en el Pie de página con los datos de contacto.';

@@ -117,9 +117,7 @@ $string['footer_social_title_default'] = 'Volg ons op sosiale media';
 $string['footerblock_contact'] = 'Kontakblok';
 
 $string['footerblink'] = 'Skakels van die Voetblok';
-$string['footerblink_desc'] = 'Jy kan \'n Voetblok Skakels hier instel om deur temas vertoon te word. <br>' .
-    'Elke lyn bestaan uit \'n bietjie menu- of taalsleutelteks, \'n skakel-URL (opsioneel), geskei deur vertikale strepies. Byvoorbeeld:<br>' .
-    '<pre>Moodle-ondersteuning|https://moodle.org/ondersteuning</pre>';
+$string['footerblink_desc'] = 'Jy kan \'n Voetblok Skakels hier instel om deur temas vertoon te word. <br>Elke lyn bestaan uit \'n bietjie menu- of taalsleutelteks, \'n skakel-URL (opsioneel), geskei deur vertikale strepies. Byvoorbeeld:<br><pre>Moodle-ondersteuning|https://moodle.org/ondersteuning</pre>';
 
 $string['footer_contact_title'] = 'Titel van die Kontakblok';
 $string['footer_contact_title_desc'] = 'Voer die titel van die blok in wat in die voet met jou kontakinligting vertoon sal word.';

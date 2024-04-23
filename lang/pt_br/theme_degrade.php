@@ -116,9 +116,7 @@ $string['footer_social_title_default'] = 'Nos siga nas redes sociais';
 $string['footerblock_contact'] = 'Bloco de contato';
 
 $string['footerblink'] = 'Links do Bloco de Rodapé';
-$string['footerblink_desc'] = 'Você pode configurar um Bloco de Rodapé Links aqui para serem mostrados por temas. <br>' .
-    'Cada linha consiste em algum texto de menu ou chave de idioma ou texto, um URL de link (opcional),separado por barras verticais.Por exemplo:<br>' .
-    '<pre>Moodle Support|https://moodle.org/support</pre>';
+$string['footerblink_desc'] = 'Você pode configurar um Bloco de Rodapé Links aqui para serem mostrados por temas. <br>Cada linha consiste em algum texto de menu ou chave de idioma ou texto, um URL de link (opcional),separado por barras verticais.Por exemplo:<br><pre>Moodle Support|https://moodle.org/support</pre>';
 
 $string['footer_contact_title'] = 'Título do Bloco de Contato';
 $string['footer_contact_title_desc'] = 'Coloque o título do Bloco que aparecerá no Rodapé com os dados de contato.';

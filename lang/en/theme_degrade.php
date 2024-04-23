@@ -117,9 +117,7 @@ $string['footer_social_title_default'] = 'Follow us on social media';
 $string['footerblock_contact'] = 'Contact block';
 
 $string['footerblink'] = 'Footer Block Links';
-$string['footerblink_desc'] = 'You can configure a Footer Block Links here to be shown by themes.<br>' .
-    'Each line consists of some menu text or language key or text, a link URL (optional), separated by vertical bars. For example:<br>' .
-    '<pre>Moodle Support|https://moodle.org/support</pre>';
+$string['footerblink_desc'] = 'You can configure a Footer Block Links here to be shown by themes.<br>Each line consists of some menu text or language key or text, a link URL (optional), separated by vertical bars. For example:<br><pre>Moodle Support|https://moodle.org/support</pre>';
 
 $string['footer_contact_title'] = 'Contact Block Title';
 $string['footer_contact_title_desc'] = 'Enter the title of the block that will appear in the footer with the contact details.';

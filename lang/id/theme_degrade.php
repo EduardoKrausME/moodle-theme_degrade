@@ -117,9 +117,7 @@ $string['footer_social_title_default'] = 'Ikuti kami di media sosial';
 $string['footerblock_contact'] = 'Blok Kontak';
 
 $string['footerblink'] = 'Tautan Blok Footer';
-$string['footerblink_desc'] = 'Anda dapat mengonfigurasi Blok Tautan Footer di sini untuk ditampilkan oleh tema. <br>' .
-    'Setiap baris terdiri dari beberapa teks menu atau kunci bahasa atau teks, URL tautan (opsional), dipisahkan oleh garis vertikal. Contohnya:<br>' .
-    '<pre>Dukungan Moodle|https://moodle.org/support</pre>';
+$string['footerblink_desc'] = 'Anda dapat mengonfigurasi Blok Tautan Footer di sini untuk ditampilkan oleh tema. <br>Setiap baris terdiri dari beberapa teks menu atau kunci bahasa atau teks, URL tautan (opsional), dipisahkan oleh garis vertikal. Contohnya:<br><pre>Dukungan Moodle|https://moodle.org/support</pre>';
 
 $string['footer_contact_title'] = 'Judul Blok Kontak';
 $string['footer_contact_title_desc'] = 'Masukkan judul Blok yang akan muncul di Footer dengan data kontak.';
