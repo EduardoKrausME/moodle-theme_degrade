@@ -124,104 +124,112 @@
         {{/slideshow_numslides}}
 
 
-        {{#frontpage_about_enable}}
-            <div class="frontpage_about_area">
-                <div class="frontpage_about_logoarea text-center">
-                    {{#frontpage_about_logo}}
-                        <img class="frontpage_about_logo" src="{{{frontpage_about_logo}}}">
-                    {{/frontpage_about_logo}}
-                    <h3>{{{frontpage_about_title}}}</h3>
-                    <div class="frontpage_about_description">{{{frontpage_about_description}}}</div>
-                    {{#frontpage_about_edit_settings}}
-                        {{{frontpage_about_edit_settings}}}
-                    {{/frontpage_about_edit_settings}}
-                </div>
-                <div class="frontpage_about_counterbox text-center">
-                    {{#about_numbers}}
-                        <div class="frontpage_about_box">
-                            <span class="separator"></span>
-                            <div class="number">
-                                <span class="number_counter text-primary">{{{frontpage_about_number}}}</span>
-                            </div>
-                            <div class="title_counter">
-                                <h4 class="title">{{frontpage_about_text}}</h4>
-                            </div>
-                        </div>
-                    {{/about_numbers}}
-                </div>
-            </div>
-        {{/frontpage_about_enable}}
-
-
-        <div id="topofscroll" class="main-inner">
-            <div class="drawer-toggles d-flex">
-                {{#courseindex}}
-                    <div class="drawer-toggler drawer-left-toggle open-nav d-print-none">
-                        <button class="btn icon-no-margin"
-                                data-toggler="drawers"
-                                data-action="toggle"
-                                data-target="theme_boost-drawers-courseindex"
-                                data-toggle="tooltip"
-                                data-placement="right"
-                                title="{{#str}}opendrawerindex, core{{/str}}">
-                            <span class="sr-only">{{#str}}opendrawerindex, core{{/str}}</span>
-                            {{#pix}} t/index_drawer, moodle {{/pix}}
-                        </button>
-                    </div>
-                {{/courseindex}}
-                {{#hasblocks}}
-                    <div class="drawer-toggler drawer-right-toggle ml-auto d-print-none">
-                        <button class="btn icon-no-margin"
-                                data-toggler="drawers"
-                                data-action="toggle"
-                                data-target="theme_boost-drawers-blocks"
-                                data-toggle="tooltip"
-                                data-placement="right"
-                                title="{{#str}}opendrawerblocks, core{{/str}}">
-                            <span class="sr-only">{{#str}}opendrawerblocks, core{{/str}}</span>
-                            <span class="dir-rtl-hide">{{#pix}}t/blocks_drawer, core{{/pix}}</span>
-                            <span class="dir-ltr-hide">{{#pix}}t/blocks_drawer_rtl, core{{/pix}}</span>
-                        </button>
-                    </div>
-                {{/hasblocks}}
-            </div>
+        {{#frontpage_html}}
             {{{output.full_header}}}
-            {{#secondarymoremenu}}
-                <div class="secondary-navigation d-print-none">
-                    {{> core/moremenu}}
-                </div>
-            {{/secondarymoremenu}}
-            <div id="page-content" class="pb-3 d-print-block">
-                <div id="region-main-box">
-                    {{#hasregionmainsettingsmenu}}
-                        <div id="region-main-settings-menu" class="d-print-none">
-                            <div> {{{regionmainsettingsmenu}}} </div>
-                        </div>
-                    {{/hasregionmainsettingsmenu}}
-                    <section id="region-main" aria-label="{{#str}}content{{/str}}">
+            {{{frontpage_htmldata}}}
+            <style>{{{frontpage_cssdata}}}</style>
 
-                        {{#hasregionmainsettingsmenu}}
-                            <div class="region_main_settings_menu_proxy"></div>
-                        {{/hasregionmainsettingsmenu}}
-                        {{{output.course_content_header}}}
-                        {{#headercontent}}
-                            {{> core/activity_header}}
-                        {{/headercontent}}
-                        {{#overflow}}
-                            <div class="container-fluid tertiary-navigation">
-                                <div class="navitem">
-                                    {{> core/url_select}}
+           <!-- {{{output.main_content}}} -->
+        {{/frontpage_html}}
+        {{^frontpage_html}}
+            {{#frontpage_about_enable}}
+                <div class="frontpage_about_area">
+                    <div class="frontpage_about_logoarea text-center">
+                        {{#frontpage_about_logo}}
+                            <img class="frontpage_about_logo" src="{{{frontpage_about_logo}}}">
+                        {{/frontpage_about_logo}}
+                        <h3>{{{frontpage_about_title}}}</h3>
+                        <div class="frontpage_about_description">{{{frontpage_about_description}}}</div>
+                        {{#frontpage_about_edit_settings}}
+                            {{{frontpage_about_edit_settings}}}
+                        {{/frontpage_about_edit_settings}}
+                    </div>
+                    <div class="frontpage_about_counterbox text-center">
+                        {{#about_numbers}}
+                            <div class="frontpage_about_box">
+                                <span class="separator"></span>
+                                <div class="number">
+                                    <span class="number_counter text-primary">{{{frontpage_about_number}}}</span>
+                                </div>
+                                <div class="title_counter">
+                                    <h4 class="title">{{frontpage_about_text}}</h4>
                                 </div>
                             </div>
-                        {{/overflow}}
-                        {{{output.main_content}}}
-                        {{{output.activity_navigation}}}
-                        {{{output.course_content_footer}}}
+                        {{/about_numbers}}
+                    </div>
+                </div>
+            {{/frontpage_about_enable}}
 
-                    </section>
+            <div id="topofscroll" class="main-inner">
+                <div class="drawer-toggles d-flex">
+                    {{#courseindex}}
+                        <div class="drawer-toggler drawer-left-toggle open-nav d-print-none">
+                            <button class="btn icon-no-margin"
+                                    data-toggler="drawers"
+                                    data-action="toggle"
+                                    data-target="theme_boost-drawers-courseindex"
+                                    data-toggle="tooltip"
+                                    data-placement="right"
+                                    title="{{#str}}opendrawerindex, core{{/str}}">
+                                <span class="sr-only">{{#str}}opendrawerindex, core{{/str}}</span>
+                                {{#pix}} t/index_drawer, moodle {{/pix}}
+                            </button>
+                        </div>
+                    {{/courseindex}}
+                    {{#hasblocks}}
+                        <div class="drawer-toggler drawer-right-toggle ml-auto d-print-none">
+                            <button class="btn icon-no-margin"
+                                    data-toggler="drawers"
+                                    data-action="toggle"
+                                    data-target="theme_boost-drawers-blocks"
+                                    data-toggle="tooltip"
+                                    data-placement="right"
+                                    title="{{#str}}opendrawerblocks, core{{/str}}">
+                                <span class="sr-only">{{#str}}opendrawerblocks, core{{/str}}</span>
+                                <span class="dir-rtl-hide">{{#pix}}t/blocks_drawer, core{{/pix}}</span>
+                                <span class="dir-ltr-hide">{{#pix}}t/blocks_drawer_rtl, core{{/pix}}</span>
+                            </button>
+                        </div>
+                    {{/hasblocks}}
+                </div>
+                {{{output.full_header}}}
+                {{#secondarymoremenu}}
+                    <div class="secondary-navigation d-print-none">
+                        {{> core/moremenu}}
+                    </div>
+                {{/secondarymoremenu}}
+                <div id="page-content" class="pb-3 d-print-block">
+                    <div id="region-main-box">
+                        {{#hasregionmainsettingsmenu}}
+                            <div id="region-main-settings-menu" class="d-print-none">
+                                <div> {{{regionmainsettingsmenu}}} </div>
+                            </div>
+                        {{/hasregionmainsettingsmenu}}
+                        <section id="region-main" aria-label="{{#str}}content{{/str}}">
+
+                            {{#hasregionmainsettingsmenu}}
+                                <div class="region_main_settings_menu_proxy"></div>
+                            {{/hasregionmainsettingsmenu}}
+                            {{{output.course_content_header}}}
+                            {{#headercontent}}
+                                {{> core/activity_header}}
+                            {{/headercontent}}
+                            {{#overflow}}
+                                <div class="container-fluid tertiary-navigation">
+                                    <div class="navitem">
+                                        {{> core/url_select}}
+                                    </div>
+                                </div>
+                            {{/overflow}}
+                            {{{output.main_content}}}
+                            {{{output.activity_navigation}}}
+                            {{{output.course_content_footer}}}
+
+                        </section>
+                    </div>
                 </div>
             </div>
-        </div>
+        {{/frontpage_html}}
         {{> theme_degrade/footer}}
     </div>
 {{{output.standard_after_main_region_html}}}

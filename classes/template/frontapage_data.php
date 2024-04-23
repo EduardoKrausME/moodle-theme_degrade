@@ -16,6 +16,8 @@
 
 namespace theme_degrade\template;
 
+use theme_degrade\fonts\font_util;
+
 /**
  * slideshow.php
  *
@@ -25,6 +27,11 @@ namespace theme_degrade\template;
  */
 class frontapage_data {
 
+    /**
+     * @return array
+     *
+     * @throws \dml_exception
+     */
     public static function topo() {
         return [
             'logourl_header' => theme_degrade_get_logo("header")
@@ -33,6 +40,7 @@ class frontapage_data {
 
     /**
      * @return array
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -70,6 +78,7 @@ class frontapage_data {
 
     /**
      * @return array
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -80,6 +89,7 @@ class frontapage_data {
 
         $logo = theme_degrade_get_setting_image("frontpage_about_logo");
         if (!$logo) {
+            /** @var \moodle_url $url */
             $url = $OUTPUT->get_logo_url();
             if ($url) {
                 $logo = $url->out(false);
@@ -114,9 +124,42 @@ class frontapage_data {
     }
 
     /**
+     * @return array
+     *
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
+    public static function home_html() {
+        $home_type = get_config("theme_degrade", "home_type");
+        $chave = optional_param('chave', false, PARAM_TEXT);
+
+        if ($home_type == 1 || $chave == "home") {
+            if ($chave == 'home') {
+                $frontpage_htmldata = optional_param('htmldata', false, PARAM_RAW);
+                $frontpage_cssdata = optional_param('cssdata', false, PARAM_RAW);
+            } else {
+                $frontpage_htmldata = get_config("theme_degrade", "home_htmldata");
+                $frontpage_cssdata = get_config("theme_degrade", "home_cssdata");
+            }
+
+            font_util::print_only_unique();
+            return [
+                'frontpage_html' => true,
+                'frontpage_htmldata' => $frontpage_htmldata,
+                'frontpage_cssdata' => $frontpage_cssdata,
+            ];
+        } else {
+            return [
+                'frontpage_html' => false,
+            ];
+        }
+    }
+
+    /**
      * @param $hasteg
      *
      * @return bool|string
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */

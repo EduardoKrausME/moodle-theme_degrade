@@ -21,7 +21,7 @@
  * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die;
 
 require_once($CFG->libdir . '/behat/lib.php');
 require_once($CFG->dirroot . '/course/lib.php');
@@ -110,5 +110,6 @@ $templatedata = array_merge($templatedata, \theme_degrade\template\footer_data::
 $templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_data::topo());
 $templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_data::slideshow());
 $templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_data::about());
+$templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_data::home_html());
 
 echo $OUTPUT->render_from_template('theme_degrade/frontpage', $templatedata);

@@ -23,16 +23,28 @@
 namespace theme_degrade\template;
 
 
+use theme_degrade\fonts\font_util;
+
 class footer_data {
 
     /**
+     * @return array
+     *
      * @throws \coding_exception
      * @throws \dml_exception
+     * @throws \moodle_exception
      */
     public static function get_data() {
         global $CFG;
 
-        $data = array_merge(self::description(), self::links(), self::social(), self::contact(), self::copywriter());
+        $data = array_merge(
+            self::description(),
+            self::links(),
+            self::social(),
+            self::contact(),
+            self::copywriter(),
+            self::footer_html()
+        );
 
         $footerenableblock = $data['enable_block_description'] +
             $data['enable_block_links'] +
@@ -82,7 +94,9 @@ class footer_data {
 
     /**
      * @return array
+     *
      * @throws \coding_exception
+     * @throws \moodle_exception
      */
     private static function links() {
         $footerlinkstitle = theme_degrade_get_setting('footer_links_title');
@@ -98,6 +112,7 @@ class footer_data {
 
     /**
      * @return array
+     *
      * @throws \coding_exception
      */
     private static function social() {
@@ -140,6 +155,7 @@ class footer_data {
 
     /**
      * @return array
+     *
      * @throws \coding_exception
      */
     private static function contact() {
@@ -162,6 +178,7 @@ class footer_data {
 
     /**
      * @return array
+     *
      * @throws \coding_exception
      */
     private static function copywriter() {
@@ -169,5 +186,37 @@ class footer_data {
             'enable_copywriter' => theme_degrade_get_setting('footer_show_copywriter'),
             'footerblock_copywriter_text' => get_string('footerblock_copywriter', 'theme_degrade')
         ];
+    }
+
+    /**
+     * @return array
+     *
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
+    private static function footer_html() {
+        $footer_type = get_config("theme_degrade", "footer_type");
+        $chave = optional_param('chave', false, PARAM_TEXT);
+
+        if ($footer_type == 1 || $chave == "footer") {
+            if ($chave == 'footer') {
+                $frontpage_htmldata = optional_param('htmldata', false, PARAM_RAW);
+                $frontpage_cssdata = optional_param('cssdata', false, PARAM_RAW);
+            } else {
+                $frontpage_htmldata = get_config("theme_degrade", "footer_htmldata");
+                $frontpage_cssdata = get_config("theme_degrade", "footer_cssdata");
+            }
+
+            font_util::print_only_unique();
+            return [
+                'footer_html' => true,
+                'footer_htmldata' => $frontpage_htmldata,
+                'footer_cssdata' => $frontpage_cssdata,
+            ];
+        } else {
+            return [
+                'footer_html' => false,
+            ];
+        }
     }
 }

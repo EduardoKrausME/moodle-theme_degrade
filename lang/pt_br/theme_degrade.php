@@ -15,14 +15,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'theme_degrade', language 'en'
+ * Strings for component 'theme_degrade', language 'pt_br'
  *
  * @package     theme_degrade
  * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-$string['pluginname'] = 'Degrade';
-$string['choosereadme'] = 'Degrade é um thema construido com carinho para trazer cores alegres ao Moodle.';
+$string['pluginname'] = 'Boost Magnific';
+$string['choosereadme'] = 'Boost Magnific é um thema construido com carinho para trazer cores alegres ao Moodle.';
 
 // Slides.
 $string['settings_slideshow_heading'] = 'SlideShow';
@@ -194,7 +194,7 @@ $string['login_signup_description'] = 'Texto na lateral da Tela de Criar uma con
 $string['login_signup_description_desc'] = 'Texto que aparecerá apenas na tela de Criar uma conta';
 
 // Privacy.
-$string['privacy:metadata'] = 'O tema Degrade não armazena nenhum dado pessoal sobre nenhum usuário.';
+$string['privacy:metadata'] = 'O tema Boost Magnific não armazena nenhum dado pessoal sobre nenhum usuário.';
 
 // Settings icons.
 $string['settings_icons_heading'] = 'Ícones';
@@ -224,3 +224,181 @@ $string['top_scroll_background_color_desc'] = 'Defina a cor de fundo ao rolar a 
 $string['top_scroll_text_color'] = 'Cor do texto do menu ao rolar';
 $string['top_scroll_text_color_desc'] = 'Defina a cor do texto do menu ao rolar a página.';
 $string['theme_color_heading'] = 'Seleção de cores do ambiente';
+
+
+$string['content_type_home'] = 'na home';
+$string['content_type_footer'] = 'no rodapé';
+$string['content_type'] = 'Tipo do conteúdo que deseja {$a}';
+$string['content_type_desc'] = 'Selecione o tipo de conteúdo que você deseja exibir {$a}.';
+$string['content_type_default'] = 'Padrão do Moodle';
+$string['content_type_html'] = 'Conteúdo em HTML gerado pelo editor';
+
+$string['editor_link_home'] = '<a class="btn btn-info" href="{$a}">Editar HTML da Home</a>';
+$string['editor_link_footer'] = '<a class="btn btn-info" href="{$a}">Editar HTML do Rodapé</a>';
+
+
+// Editor de HTML.
+$string['grapsjs-assetmanager-addbutton'] = 'Adicionar imagem';
+$string['grapsjs-assetmanager-modaltitle'] = 'Selecionar imagem';
+$string['grapsjs-assetmanager-uploadtitle'] = 'Solte os arquivos aqui ou clique para enviar';
+$string['grapsjs-domcomponents-names-'] = 'Box';
+$string['grapsjs-domcomponents-names-wrapper'] = 'Corpo';
+$string['grapsjs-domcomponents-names-text'] = 'Texto';
+$string['grapsjs-domcomponents-names-comment'] = 'Comentário';
+$string['grapsjs-domcomponents-names-image'] = 'Imagem';
+$string['grapsjs-domcomponents-names-video'] = 'Vídeo';
+$string['grapsjs-domcomponents-names-label'] = 'Label';
+$string['grapsjs-domcomponents-names-link'] = 'Link';
+$string['grapsjs-domcomponents-names-map'] = 'Mapa';
+$string['grapsjs-domcomponents-names-tfoot'] = 'Rodapé da tabela';
+$string['grapsjs-domcomponents-names-tbody'] = 'Corpo da tabela';
+$string['grapsjs-domcomponents-names-thead'] = 'Cabeçalho da tabela';
+$string['grapsjs-domcomponents-names-table'] = 'Tabela';
+$string['grapsjs-domcomponents-names-row'] = 'Linha da tabela';
+$string['grapsjs-domcomponents-names-cell'] = 'Célula da tabela';
+$string['grapsjs-domcomponents-names-section'] = 'Seção';
+$string['grapsjs-domcomponents-names-body'] = 'Corpo';
+$string['grapsjs-devicemanager-device'] = 'Dispositivo';
+$string['grapsjs-devicemanager-devices-desktop'] = 'Desktop';
+$string['grapsjs-devicemanager-devices-tablet'] = 'Tablet';
+$string['grapsjs-devicemanager-devices-mobilelandscape'] = 'Celular, modo panorâmico';
+$string['grapsjs-devicemanager-devices-mobileportrait'] = 'Celular, modo retrato';
+$string['grapsjs-panels-buttons-titles-preview'] = 'Pré-visualização';
+$string['grapsjs-panels-buttons-titles-fullscreen'] = 'Tela cheia';
+$string['grapsjs-panels-buttons-titles-sw-visibility'] = 'Ver componentes';
+$string['grapsjs-panels-buttons-titles-export-template'] = 'Ver código';
+$string['grapsjs-panels-buttons-titles-open-sm'] = 'Abrir gerenciador de estilos';
+$string['grapsjs-panels-buttons-titles-open-tm'] = 'Configurações';
+$string['grapsjs-panels-buttons-titles-open-layers'] = 'Abrir gerenciador de camadas';
+$string['grapsjs-panels-buttons-titles-open-blocks'] = 'Abrir blocos';
+$string['grapsjs-selectormanager-label'] = 'Classes';
+$string['grapsjs-selectormanager-selected'] = 'Selecionado';
+$string['grapsjs-selectormanager-emptystate'] = '- Estado -';
+$string['grapsjs-selectormanager-states-hover'] = 'Hover';
+$string['grapsjs-selectormanager-states-active'] = 'Click';
+$string['grapsjs-selectormanager-states-nth-of-type-2n'] = 'Even/Odd';
+$string['grapsjs-stylemanager-empty'] = 'Selecione um elemento para usar o gerenciador de estilos';
+$string['grapsjs-stylemanager-layer'] = 'Camada';
+$string['grapsjs-stylemanager-filebutton'] = 'Imagens';
+$string['grapsjs-stylemanager-sectors-general'] = 'Geral';
+$string['grapsjs-stylemanager-sectors-layout'] = 'Disposição';
+$string['grapsjs-stylemanager-sectors-typography'] = 'Tipografia';
+$string['grapsjs-stylemanager-sectors-decorations'] = 'Decorações';
+$string['grapsjs-stylemanager-sectors-extra'] = 'Extra';
+$string['grapsjs-stylemanager-sectors-flex'] = 'Flex';
+$string['grapsjs-stylemanager-sectors-dimension'] = 'Dimensão';
+$string['grapsjs-stylemanager-properties-float'] = 'Float';
+$string['grapsjs-stylemanager-properties-display'] = 'Exibição';
+$string['grapsjs-stylemanager-properties-position'] = 'Posição';
+$string['grapsjs-stylemanager-properties-top'] = 'Topo';
+$string['grapsjs-stylemanager-properties-right'] = 'Direita';
+$string['grapsjs-stylemanager-properties-left'] = 'Esquerda';
+$string['grapsjs-stylemanager-properties-center'] = 'Centro';
+$string['grapsjs-stylemanager-properties-justify'] = 'Justificar';
+$string['grapsjs-stylemanager-properties-none'] = 'Nenhum';
+$string['grapsjs-stylemanager-properties-underline'] = 'Sublinhado';
+$string['grapsjs-stylemanager-properties-line-through'] = 'Riscado';
+$string['grapsjs-stylemanager-properties-bottom'] = 'Inferior';
+$string['grapsjs-stylemanager-properties-width'] = 'Largura';
+$string['grapsjs-stylemanager-properties-height'] = 'Altura';
+$string['grapsjs-stylemanager-properties-max-width'] = 'Largura Max.';
+$string['grapsjs-stylemanager-properties-max-height'] = 'Altura Max.';
+$string['grapsjs-stylemanager-properties-margin'] = 'Margem';
+$string['grapsjs-stylemanager-properties-margin-top'] = 'Margem Superior';
+$string['grapsjs-stylemanager-properties-margin-right'] = 'Margem a Direita';
+$string['grapsjs-stylemanager-properties-margin-left'] = 'Margem a Esquerda';
+$string['grapsjs-stylemanager-properties-margin-bottom'] = 'Margem Inferior';
+$string['grapsjs-stylemanager-properties-padding'] = 'Padding';
+$string['grapsjs-stylemanager-properties-padding-top'] = 'Padding Superior';
+$string['grapsjs-stylemanager-properties-padding-left'] = 'Padding a Esquerda';
+$string['grapsjs-stylemanager-properties-padding-right'] = 'Padding a Direita';
+$string['grapsjs-stylemanager-properties-padding-bottom'] = 'Padding Inferior';
+$string['grapsjs-stylemanager-properties-font-family'] = 'Font Family';
+$string['grapsjs-stylemanager-properties-font-size'] = 'Tamanho da fonte';
+$string['grapsjs-stylemanager-properties-font-weight'] = 'Espessura da fonte';
+$string['grapsjs-stylemanager-properties-letter-spacing'] = 'Espaço entre letras';
+$string['grapsjs-stylemanager-properties-color'] = 'Cor';
+$string['grapsjs-stylemanager-properties-line-height'] = 'Altura da linha';
+$string['grapsjs-stylemanager-properties-text-align'] = 'Alinhamento do texto';
+$string['grapsjs-stylemanager-properties-text-shadow'] = 'Sombra do texto';
+$string['grapsjs-stylemanager-properties-text-shadow-h'] = 'Sombra do texto: horizontal';
+$string['grapsjs-stylemanager-properties-text-shadow-v'] = 'Sombra do texto: vertical';
+$string['grapsjs-stylemanager-properties-text-shadow-blur'] = 'Desfoque da sombra do texto';
+$string['grapsjs-stylemanager-properties-text-shadow-color'] = 'Cor da sombra da fonte';
+$string['grapsjs-stylemanager-properties-border-top-left'] = 'Borda superior a esquerda';
+$string['grapsjs-stylemanager-properties-border-top-right'] = 'Borda superior a direita';
+$string['grapsjs-stylemanager-properties-border-bottom-left'] = 'Borda inferior a esquerda';
+$string['grapsjs-stylemanager-properties-border-bottom-right'] = 'Borda inferior a direita';
+$string['grapsjs-stylemanager-properties-border-radius-top-left'] = 'Raio da borda superior esquerda';
+$string['grapsjs-stylemanager-properties-border-radius-top-right'] = 'Raio da borda superior direita';
+$string['grapsjs-stylemanager-properties-border-radius-bottom-left'] = 'Raio da borda inferior esquerda';
+$string['grapsjs-stylemanager-properties-border-radius-bottom-right'] = 'Raio da borda inferior direita';
+$string['grapsjs-stylemanager-properties-border-radius'] = 'Raio da borda';
+$string['grapsjs-stylemanager-properties-border'] = 'Borda';
+$string['grapsjs-stylemanager-properties-border-width'] = 'Largura da borda';
+$string['grapsjs-stylemanager-properties-border-style'] = 'Estilo da borda';
+$string['grapsjs-stylemanager-properties-border-color'] = 'Cor da borda';
+$string['grapsjs-stylemanager-properties-box-shadow'] = 'Sombra da box';
+$string['grapsjs-stylemanager-properties-box-shadow-h'] = 'Sombra da box: horizontal';
+$string['grapsjs-stylemanager-properties-box-shadow-v'] = 'Sombra da box: vertical';
+$string['grapsjs-stylemanager-properties-box-shadow-blur'] = 'Desfoque da sombra da box';
+$string['grapsjs-stylemanager-properties-box-shadow-spread'] = 'Extensão da sombra da box';
+$string['grapsjs-stylemanager-properties-box-shadow-color'] = 'Cor da sombra da box';
+$string['grapsjs-stylemanager-properties-box-shadow-type'] = 'Tipo de sombra da box';
+$string['grapsjs-stylemanager-properties-background'] = 'Fundo';
+$string['grapsjs-stylemanager-properties-background-color'] = 'Cor de fundo';
+$string['grapsjs-stylemanager-properties-background-image'] = 'Imagem de fundo';
+$string['grapsjs-stylemanager-properties-background-repeat'] = 'Repetir fundo';
+$string['grapsjs-stylemanager-properties-background-position'] = 'Posição do fundo';
+$string['grapsjs-stylemanager-properties-background-attachment'] = 'Plugin de fundo';
+$string['grapsjs-stylemanager-properties-background-size'] = 'Tamanho do fundo';
+$string['grapsjs-stylemanager-properties-transition'] = 'Transição';
+$string['grapsjs-stylemanager-properties-transition-property'] = 'Tipo de transição';
+$string['grapsjs-stylemanager-properties-transition-duration'] = 'Tempo de transição';
+$string['grapsjs-stylemanager-properties-transition-timing-function'] = 'Função do tempo da transição';
+$string['grapsjs-stylemanager-properties-perspective'] = 'Perspectiva';
+$string['grapsjs-stylemanager-properties-transform'] = 'Transformação';
+$string['grapsjs-stylemanager-properties-transform-rotate-x'] = 'Rotacionar horizontalmente';
+$string['grapsjs-stylemanager-properties-transform-rotate-y'] = 'Rotacionar verticalmente';
+$string['grapsjs-stylemanager-properties-transform-rotate-z'] = 'Rotacionar profundidade';
+$string['grapsjs-stylemanager-properties-transform-scale-x'] = 'Escalar horizontalmente';
+$string['grapsjs-stylemanager-properties-transform-scale-y'] = 'Escalar verticalmente';
+$string['grapsjs-stylemanager-properties-transform-scale-z'] = 'Escalar profundidade';
+$string['grapsjs-stylemanager-properties-flex-direction'] = 'Direção Flex';
+$string['grapsjs-stylemanager-properties-flex-wrap'] = 'Flex wrap';
+$string['grapsjs-stylemanager-properties-justify-content'] = 'Ajustar conteúdo';
+$string['grapsjs-stylemanager-properties-align-items'] = 'Alinhar elementos';
+$string['grapsjs-stylemanager-properties-align-content'] = 'Alinhar conteúdo';
+$string['grapsjs-stylemanager-properties-order'] = 'Ordem';
+$string['grapsjs-stylemanager-properties-flex-basis'] = 'Base Flex';
+$string['grapsjs-stylemanager-properties-flex-grow'] = 'Crescimento Flex';
+$string['grapsjs-stylemanager-properties-flex-shrink'] = 'Contração Flex';
+$string['grapsjs-stylemanager-properties-align-self'] = 'Alinhar-se';
+$string['grapsjs-traitmanager-empty'] = 'Selecione um elemento para usar o gerenciador de características';
+$string['grapsjs-traitmanager-label'] = 'Configurações do componente';
+$string['grapsjs-traitmanager-traits-options-target-false'] = 'Esta janela';
+$string['grapsjs-traitmanager-traits-options-target-_blank'] = 'Nova janela';
+$string['grapsjs-general'] = 'Gerais';
+$string['grapsjs-dimensions'] = 'Dimensões';
+$string['grapsjs-width'] = 'Largura';
+$string['grapsjs-tipografia'] = 'Tipografia';
+$string['grapsjs-decoration'] = 'Decorações';
+$string['grapsjs-edit_code'] = 'Editar código';
+$string['grapsjs-edit_code_paste_here_html'] = 'Cole aqui seu HTML/CSS e clique em Importar';
+$string['grapsjs-repeat'] = 'Repetir';
+$string['grapsjs-position'] = 'Posição';
+$string['grapsjs-attachment'] = 'Anexo';
+$string['grapsjs-size'] = 'Tamanho';
+$string['grapsjs-page_save'] = 'Salvar';
+$string['grapsjs-page_preview'] = 'Pré-visualizar';
+$string['grapsjs-show_border'] = 'Mostrar Bordas';
+$string['grapsjs-preview'] = 'Prévia';
+$string['grapsjs-fullscreen'] = 'Tela Cheia';
+$string['grapsjs-undo'] = 'Desfazer';
+$string['grapsjs-redo'] = 'Refazer';
+$string['grapsjs-clear'] = 'Limpar o canvas';
+$string['grapsjs-confirm_clear'] = 'Tem certeza de limpar o canvas?';
+$string['grapsjs-open_sm'] = 'Gerenciador de Estilos';
+$string['grapsjs-open_layers'] = 'Camadas';
+$string['grapsjs-open_block'] = 'Blocos';
+$string['grapsjs-settings'] = 'Configurações';

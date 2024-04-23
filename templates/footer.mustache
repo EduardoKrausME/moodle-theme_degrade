@@ -34,155 +34,172 @@
 {{^maintenancefooter}}
     <footer id="page-footer" class="footer-block">
         <div id="footer">
-            {{#footer_enable_block}}
-                <div class="footer-main">
-                    <div class="container-fluid">
-                        <div class="row">
-                            {{#enable_block_description}}
-                                <div class="{{{footer_block_class}}}">
-                                    <div class="footer-desc">
-                                        <div class="logo-footer">
-                                            <a href="{{{config.wwwroot}}}/?redirect=0">
-                                                {{{logourl_footer}}}
-                                            </a>
-                                        </div>
-                                        <p>{{{footer_description}}}</p>
-
-                                        {{#footer_settings_edit}}
-                                            <a class="settings-edit" href="{{{footer_settings_edit}}}">
-                                                {{#pix}}edit, theme_degrade{{/pix}}
-                                            </a>
-                                        {{/footer_settings_edit}}
-                                    </div>
-                                </div>
-                            {{/enable_block_description}}
-                            {{#enable_block_links}}
-                                <div class="{{{footer_block_class}}}">
-                                    <div class="footer-nav">
-                                        <h4>{{{footer_links_title}}}</h4>
-                                        <ul>
-                                            {{{footer_links}}}
-                                        </ul>
-                                        {{#footer_settings_edit}}
-                                            <a class="settings-edit" href="{{{footer_settings_edit}}}">
-                                                {{#pix}}edit, theme_degrade{{/pix}}
-                                            </a>
-                                        {{/footer_settings_edit}}
-                                    </div>
-                                </div>
-                            {{/enable_block_links}}
-                            {{#enable_block_social}}
-                                <div class="{{{footer_block_class}}}">
-                                    <div class="social-media">
-                                        <h4>{{{footer_social_title}}}</h4>
-                                        <ul>
-                                            {{#social_youtube}}
-                                                <li class="smedia-02">
-                                                    <a href="{{{social_youtube}}}" target="_blank">
-                                                        <span class="media-icon">
-                                                            <i class="fa fa-youtube"></i>
-                                                        </span>
-                                                        <span class="media-name">{{{youtube_name}}}</span>
-                                                    </a>
-                                                </li>
-                                            {{/social_youtube}}
-
-                                            {{#social_linkedin}}
-                                                <li class="smedia-02">
-                                                    <a href="{{{social_linkedin}}}" target="_blank">
-                                                        <span class="media-icon">
-                                                            <i class="fa fa-linkedin"></i>
-                                                        </span>
-                                                        <span class="media-name">{{{linkedin_name}}}</span>
-                                                    </a>
-                                                </li>
-                                            {{/social_linkedin}}
-
-                                            {{#social_twitter}}
-                                                <li class="smedia-02">
-                                                    <a href="{{{social_twitter}}}" target="_blank">
-                                                        <span class="media-icon">
-                                                            <i class="fa fa-twitter"></i>
-                                                        </span>
-                                                        <span class="media-name">{{{twitter_name}}}</span>
-                                                    </a>
-                                                </li>
-                                            {{/social_twitter}}
-
-                                            {{#social_instagram}}
-                                                <li class="smedia-04">
-                                                    <a href="{{{social_instagram}}}" target="_blank">
-                                                        <span class="media-icon">
-                                                            <i class="fa fa-instagram"></i>
-                                                        </span>
-                                                        <span class="media-name">{{{instagram_name}}}</span>
-                                                    </a>
-                                                </li>
-                                            {{/social_instagram}}
-
-                                            {{#social_facebook}}
-                                                <li class="smedia-01">
-                                                    <a href="{{{social_facebook}}}" target="_blank">
-                                                <span class="media-icon">
-                                                <i class="fa fa-facebook"></i>
-                                                </span>
-                                                        <span class="media-name">{{{facebook_name}}}</span>
-                                                    </a>
-                                                </li>
-                                            {{/social_facebook}}
+            {{#footer_html}}
+                {{{footer_htmldata}}}
+                <style>{{{footer_cssdata}}}</style>
+                {{#enable_copywriter}}
+                    <div class="footer-foot">
+                        <div class="container">
+                            <p class="text-center">
+                                {{{footerblock_copywriter_text}}}
+                                <a href="https://eduardokraus.com" target="_blank">Eduardo Kraus</a>.
+                                Powered by <a href="https://moodle.org" target="_blank">Moodle</a>
+                            </p>
+                        </div>
+                    </div>
+                {{/enable_copywriter}}
+            {{/footer_html}}
+            {{^footer_html}}
+                {{#footer_enable_block}}
+                    <div class="footer-main">
+                        <div class="container-fluid">
+                            <div class="row">
+                                {{#enable_block_description}}
+                                    <div class="{{{footer_block_class}}}">
+                                        <div class="footer-desc">
+                                            <div class="logo-footer">
+                                                <a href="{{{config.wwwroot}}}/?redirect=0">
+                                                    {{{logourl_footer}}}
+                                                </a>
+                                            </div>
+                                            <p>{{{footer_description}}}</p>
 
                                             {{#footer_settings_edit}}
                                                 <a class="settings-edit" href="{{{footer_settings_edit}}}">
                                                     {{#pix}}edit, theme_degrade{{/pix}}
                                                 </a>
                                             {{/footer_settings_edit}}
-                                        </ul>
+                                        </div>
                                     </div>
-                                </div>
-                            {{/enable_block_social}}
-                            {{#enable_block_contact}}
-                                <div class="{{{footer_block_class}}}">
-                                    <div class="footer-contact">
-                                        <h4>{{{contact_footer_title}}}</h4>
-
-                                        {{#contact_phone}}
-                                            <p>{{{contact_address}}}</p>
-                                        {{/contact_phone}}
-                                        {{#contact_phone}}
-                                            <p><i class="fa fa-phone-square"></i>{{{contact_phone}}}</p>
-                                        {{/contact_phone}}
-
-                                        {{#contact_email}}
-                                            <p><i class="fa fa-envelope"></i>
-                                                <a class="mail-link"
-                                                   href="mailto:{{{contact_email}}}">{{{contact_email}}}</a>
-                                            </p>
-                                        {{/contact_email}}
-
-                                        {{#footer_settings_edit}}
-                                            <a class="settings-edit" href="{{{footer_settings_edit}}}">
-                                                {{#pix}}edit, theme_degrade{{/pix}}
-                                            </a>
-                                        {{/footer_settings_edit}}
-
+                                {{/enable_block_description}}
+                                {{#enable_block_links}}
+                                    <div class="{{{footer_block_class}}}">
+                                        <div class="footer-nav">
+                                            <h4>{{{footer_links_title}}}</h4>
+                                            <ul>
+                                                {{{footer_links}}}
+                                            </ul>
+                                            {{#footer_settings_edit}}
+                                                <a class="settings-edit" href="{{{footer_settings_edit}}}">
+                                                    {{#pix}}edit, theme_degrade{{/pix}}
+                                                </a>
+                                            {{/footer_settings_edit}}
+                                        </div>
                                     </div>
-                                </div>
-                            {{/enable_block_contact}}
-                        </div>
-                    </div>
-                    {{#enable_copywriter}}
-                        <div class="footer-foot">
-                            <div class="container">
-                                <p class="text-center">
-                                    {{{footerblock_copywriter_text}}}
-                                    <a href="https://eduardokraus.com" target="_blank">Eduardo Kraus</a>.
-                                    Powered by <a href="https://moodle.org" target="_blank">Moodle</a>
-                                </p>
+                                {{/enable_block_links}}
+                                {{#enable_block_social}}
+                                    <div class="{{{footer_block_class}}}">
+                                        <div class="social-media">
+                                            <h4>{{{footer_social_title}}}</h4>
+                                            <ul>
+                                                {{#social_youtube}}
+                                                    <li class="smedia-02">
+                                                        <a href="{{{social_youtube}}}" target="_blank">
+                                                        <span class="media-icon">
+                                                            <i class="fa fa-youtube"></i>
+                                                        </span>
+                                                            <span class="media-name">{{{youtube_name}}}</span>
+                                                        </a>
+                                                    </li>
+                                                {{/social_youtube}}
+
+                                                {{#social_linkedin}}
+                                                    <li class="smedia-02">
+                                                        <a href="{{{social_linkedin}}}" target="_blank">
+                                                        <span class="media-icon">
+                                                            <i class="fa fa-linkedin"></i>
+                                                        </span>
+                                                            <span class="media-name">{{{linkedin_name}}}</span>
+                                                        </a>
+                                                    </li>
+                                                {{/social_linkedin}}
+
+                                                {{#social_twitter}}
+                                                    <li class="smedia-02">
+                                                        <a href="{{{social_twitter}}}" target="_blank">
+                                                        <span class="media-icon">
+                                                            <i class="fa fa-twitter"></i>
+                                                        </span>
+                                                            <span class="media-name">{{{twitter_name}}}</span>
+                                                        </a>
+                                                    </li>
+                                                {{/social_twitter}}
+
+                                                {{#social_instagram}}
+                                                    <li class="smedia-04">
+                                                        <a href="{{{social_instagram}}}" target="_blank">
+                                                        <span class="media-icon">
+                                                            <i class="fa fa-instagram"></i>
+                                                        </span>
+                                                            <span class="media-name">{{{instagram_name}}}</span>
+                                                        </a>
+                                                    </li>
+                                                {{/social_instagram}}
+
+                                                {{#social_facebook}}
+                                                    <li class="smedia-01">
+                                                        <a href="{{{social_facebook}}}" target="_blank">
+                                                <span class="media-icon">
+                                                <i class="fa fa-facebook"></i>
+                                                </span>
+                                                            <span class="media-name">{{{facebook_name}}}</span>
+                                                        </a>
+                                                    </li>
+                                                {{/social_facebook}}
+
+                                                {{#footer_settings_edit}}
+                                                    <a class="settings-edit" href="{{{footer_settings_edit}}}">
+                                                        {{#pix}}edit, theme_degrade{{/pix}}
+                                                    </a>
+                                                {{/footer_settings_edit}}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                {{/enable_block_social}}
+                                {{#enable_block_contact}}
+                                    <div class="{{{footer_block_class}}}">
+                                        <div class="footer-contact">
+                                            <h4>{{{contact_footer_title}}}</h4>
+
+                                            {{#contact_phone}}
+                                                <p>{{{contact_address}}}</p>
+                                            {{/contact_phone}}
+                                            {{#contact_phone}}
+                                                <p><i class="fa fa-phone-square"></i>{{{contact_phone}}}</p>
+                                            {{/contact_phone}}
+
+                                            {{#contact_email}}
+                                                <p><i class="fa fa-envelope"></i>
+                                                    <a class="mail-link"
+                                                       href="mailto:{{{contact_email}}}">{{{contact_email}}}</a>
+                                                </p>
+                                            {{/contact_email}}
+
+                                            {{#footer_settings_edit}}
+                                                <a class="settings-edit" href="{{{footer_settings_edit}}}">
+                                                    {{#pix}}edit, theme_degrade{{/pix}}
+                                                </a>
+                                            {{/footer_settings_edit}}
+
+                                        </div>
+                                    </div>
+                                {{/enable_block_contact}}
                             </div>
                         </div>
-                    {{/enable_copywriter}}
-                </div>
-            {{/footer_enable_block}}
+                        {{#enable_copywriter}}
+                            <div class="footer-foot">
+                                <div class="container">
+                                    <p class="text-center">
+                                        {{{footerblock_copywriter_text}}}
+                                        <a href="https://eduardokraus.com" target="_blank">Eduardo Kraus</a>.
+                                        Powered by <a href="https://moodle.org" target="_blank">Moodle</a>
+                                    </p>
+                                </div>
+                            </div>
+                        {{/enable_copywriter}}
+                    </div>
+                {{/footer_enable_block}}
+            {{/footer_html}}
         </div>
 
         <div class="footer-content-debugging footer-dark bg-dark text-light">

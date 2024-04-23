@@ -634,3 +634,11 @@ function theme_degrade_process_css($css, $theme) {
 
     return $css;
 }
+
+/**
+ * @param string $identifier
+ */
+function theme_degrade_get_string($identifier) {
+    //$CFG->debugdeveloper = 0;
+    echo get_string($identifier, 'theme_degrade');
+}

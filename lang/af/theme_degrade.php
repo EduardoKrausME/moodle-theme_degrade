@@ -15,15 +15,15 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'theme_degrade', language 'en'
+ * Strings for component 'theme_degrade', language 'af'
  *
  * @package     theme_degrade
  * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Degrade';
-$string['choosereadme'] = 'Degrade is \'n tema met sorg gebou om vrolike kleure na Moodle te bring.';
+$string['pluginname'] = 'Boost Magnific';
+$string['choosereadme'] = 'Boost Magnific is \'n tema met sorg gebou om vrolike kleure na Moodle te bring.';
 
 // Slides.
 $string['settings_slideshow_heading'] = 'SlideShow';
@@ -195,7 +195,7 @@ $string['login_signup_description'] = 'Teks aan die kant van die Skep Rekening-s
 $string['login_signup_description_desc'] = 'Teks wat net op die Skep Rekening-skerm verskyn';
 
 // Privacy.
-$string['privacy:metadata'] = 'Die Degrade tema stoor geen persoonlike data oor enige gebruiker nie.';
+$string['privacy:metadata'] = 'Die Boost Magnific tema stoor geen persoonlike data oor enige gebruiker nie.';
 
 // Instellingsikone.
 $string['settings_icons_heading'] = 'Ikonse';
@@ -219,9 +219,187 @@ $string['settings_icons_default_slide'] = 'Dias';
 $string['settings_icons_default_support'] = 'Ondersteuning';
 $string['settings_icons_default_download'] = 'Laai af';
 
-$string['top_color_heading'] = 'Cor do topo ao rolar';
-$string['top_scroll_background_color'] = 'Cor de fundo do menu do topo ao rolar';
-$string['top_scroll_background_color_desc'] = 'Defina a cor de fundo ao rolar a página.';
-$string['top_scroll_text_color'] = 'Cor do texto do menu ao rolar';
-$string['top_scroll_text_color_desc'] = 'Defina a cor do texto do menu ao rolar a página.';
-$string['theme_color_heading'] = 'Seleção de cores do ambiente';
+$string['top_color_heading'] = 'Bokant van rolkleur';
+$string['top_scroll_background_color'] = 'Agtergrondkleur van topmenu wanneer gescrol word';
+$string['top_scroll_background_color_desc'] = 'Stel die agtergrondkleur in wanneer deur die bladsy gescrol word.';
+$string['top_scroll_text_color'] = 'Teks kleur van topmenu tydens scroll';
+$string['top_scroll_text_color_desc'] = 'Stel die tekskleur van die topmenu in wanneer deur die bladsy gescrol word.';
+$string['theme_color_heading'] = 'Kleurseleksie van die omgewing';
+
+
+$string['content_type_home'] = 'tuis';
+$string['content_type_footer'] = 'in die voetskrif';
+$string['content_type'] = 'Inhoudstipe wat u wil {$a}';
+$string['content_type_desc'] = 'Selekteer die tipe inhoud wat u wil vertoon {$a}.';
+$string['content_type_default'] = 'Moodle Standaard';
+$string['content_type_html'] = 'HTML-inhoud gegenereer deur die redigeerder';
+
+$string['editor_link_home'] = '<a class="btn btn-info" href="{$a}">Wysig HTML</a>';
+$string['editor_link_footer'] = '<a class="btn btn-info" href="{$a}">Wysig HTML</a>';
+
+
+// HTML redigeerder.
+$string['grapsjs-assetmanager-addbutton'] = 'Voeg beeld by';
+$string['grapsjs-assetmanager-modaltitle'] = 'Selekteer beeld';
+$string['grapsjs-assetmanager-uploadtitle'] = 'Loslêers hier of klik om op te laai';
+$string['grapsjs-domcomponents-names-'] = 'Boks';
+$string['grapsjs-domcomponents-names-wrapper'] = 'Liggaam';
+$string['grapsjs-domcomponents-names-text'] = 'Teks';
+$string['grapsjs-domcomponents-names-comment'] = 'Kommentaar';
+$string['grapsjs-domcomponents-names-image'] = 'Beeld';
+$string['grapsjs-domcomponents-names-video'] = 'Video';
+$string['grapsjs-domcomponents-names-label'] = 'Etiket';
+$string['grapsjs-domcomponents-names-link'] = 'Skakel';
+$string['grapsjs-domcomponents-names-map'] = 'Kaart';
+$string['grapsjs-domcomponents-names-tfoot'] = 'Voetskrif van tabel';
+$string['grapsjs-domcomponents-names-tbody'] = 'Liggaam van tabel';
+$string['grapsjs-domcomponents-names-thead'] = 'Hoof van tabel';
+$string['grapsjs-domcomponents-names-table'] = 'Tabel';
+$string['grapsjs-domcomponents-names-row'] = 'Ry van tabel';
+$string['grapsjs-domcomponents-names-cell'] = 'Sel van tabel';
+$string['grapsjs-domcomponents-names-section'] = 'Seksie';
+$string['grapsjs-domcomponents-names-body'] = 'Liggaam';
+$string['grapsjs-devicemanager-device'] = 'Toestel';
+$string['grapsjs-devicemanager-devices-desktop'] = 'Lessenaar';
+$string['grapsjs-devicemanager-devices-tablet'] = 'Tablet';
+$string['grapsjs-devicemanager-devices-mobilelandscape'] = 'Selfoon, landskap modus';
+$string['grapsjs-devicemanager-devices-mobileportrait'] = 'Selfoon, portret modus';
+$string['grapsjs-panels-buttons-titles-preview'] = 'Voorskou';
+$string['grapsjs-panels-buttons-titles-fullscreen'] = 'Volle skerm';
+$string['grapsjs-panels-buttons-titles-sw-visibility'] = 'Sien komponente';
+$string['grapsjs-panels-buttons-titles-export-template'] = 'Sien kode';
+$string['grapsjs-panels-buttons-titles-open-sm'] = 'Open styl bestuurder';
+$string['grapsjs-panels-buttons-titles-open-tm'] = 'Stellings';
+$string['grapsjs-panels-buttons-titles-open-layers'] = 'Open lae bestuurder';
+$string['grapsjs-panels-buttons-titles-open-blocks'] = 'Open blokke';
+$string['grapsjs-selectormanager-label'] = 'Klasse';
+$string['grapsjs-selectormanager-selected'] = 'Geselekteer';
+$string['grapsjs-selectormanager-emptystate'] = '- Staat -';
+$string['grapsjs-selectormanager-states-hover'] = 'Sweef';
+$string['grapsjs-selectormanager-states-active'] = 'Klik';
+$string['grapsjs-selectormanager-states-nth-of-type-2n'] = 'Ewe/Ongelyk';
+$string['grapsjs-stylemanager-empty'] = 'Selekteer \'n element om die styl bestuurder te gebruik';
+$string['grapsjs-stylemanager-layer'] = 'Laag';
+$string['grapsjs-stylemanager-filebutton'] = 'Beelde';
+$string['grapsjs-stylemanager-sectors-general'] = 'Algemeen';
+$string['grapsjs-stylemanager-sectors-layout'] = 'Uitleg';
+$string['grapsjs-stylemanager-sectors-typography'] = 'Tipografie';
+$string['grapsjs-stylemanager-sectors-decorations'] = 'Versierings';
+$string['grapsjs-stylemanager-sectors-extra'] = 'Ekstra';
+$string['grapsjs-stylemanager-sectors-flex'] = 'Flex';
+$string['grapsjs-stylemanager-sectors-dimension'] = 'Dimensie';
+$string['grapsjs-stylemanager-properties-float'] = 'Dryf';
+$string['grapsjs-stylemanager-properties-display'] = 'Vertoon';
+$string['grapsjs-stylemanager-properties-position'] = 'Posisie';
+$string['grapsjs-stylemanager-properties-top'] = 'Bo';
+$string['grapsjs-stylemanager-properties-right'] = 'Regs';
+$string['grapsjs-stylemanager-properties-left'] = 'Links';
+$string['grapsjs-stylemanager-properties-center'] = 'Sentrum';
+$string['grapsjs-stylemanager-properties-justify'] = 'Regverdig';
+$string['grapsjs-stylemanager-properties-none'] = 'Geen';
+$string['grapsjs-stylemanager-properties-underline'] = 'Onderstreep';
+$string['grapsjs-stylemanager-properties-line-through'] = 'Deurstreep';
+$string['grapsjs-stylemanager-properties-bottom'] = 'Onder';
+$string['grapsjs-stylemanager-properties-width'] = 'Breedte';
+$string['grapsjs-stylemanager-properties-height'] = 'Hoogte';
+$string['grapsjs-stylemanager-properties-max-width'] = 'Maks. Breedte';
+$string['grapsjs-stylemanager-properties-max-height'] = 'Maks. Hoogte';
+$string['grapsjs-stylemanager-properties-margin'] = 'Rand';
+$string['grapsjs-stylemanager-properties-margin-top'] = 'Bo Rand';
+$string['grapsjs-stylemanager-properties-margin-right'] = 'Regs Rand';
+$string['grapsjs-stylemanager-properties-margin-left'] = 'Links Rand';
+$string['grapsjs-stylemanager-properties-margin-bottom'] = 'Onder Rand';
+$string['grapsjs-stylemanager-properties-padding'] = 'Vulsel';
+$string['grapsjs-stylemanager-properties-padding-top'] = 'Bo Vulsel';
+$string['grapsjs-stylemanager-properties-padding-left'] = 'Links Vulsel';
+$string['grapsjs-stylemanager-properties-padding-right'] = 'Regs Vulsel';
+$string['grapsjs-stylemanager-properties-padding-bottom'] = 'Onder Vulsel';
+$string['grapsjs-stylemanager-properties-font-family'] = 'Skrif Familie';
+$string['grapsjs-stylemanager-properties-font-size'] = 'Skrif Grootte';
+$string['grapsjs-stylemanager-properties-font-weight'] = 'Skrif Gewig';
+$string['grapsjs-stylemanager-properties-letter-spacing'] = 'Letter Spasiëring';
+$string['grapsjs-stylemanager-properties-color'] = 'Kleur';
+$string['grapsjs-stylemanager-properties-line-height'] = 'Lyn Hoogte';
+$string['grapsjs-stylemanager-properties-text-align'] = 'Teks Uitlyn';
+$string['grapsjs-stylemanager-properties-text-shadow'] = 'Teks Skadu';
+$string['grapsjs-stylemanager-properties-text-shadow-h'] = 'Teks Skadu: horisontaal';
+$string['grapsjs-stylemanager-properties-text-shadow-v'] = 'Teks Skadu: vertikaal';
+$string['grapsjs-stylemanager-properties-text-shadow-blur'] = 'Teks Skadu vaag';
+$string['grapsjs-stylemanager-properties-text-shadow-color'] = 'Teks Skadu Kleur';
+$string['grapsjs-stylemanager-properties-border-top-left'] = 'Bo Linker Grens';
+$string['grapsjs-stylemanager-properties-border-top-right'] = 'Bo Regter Grens';
+$string['grapsjs-stylemanager-properties-border-bottom-left'] = 'Onder Linker Grens';
+$string['grapsjs-stylemanager-properties-border-bottom-right'] = 'Onder Regter Grens';
+$string['grapsjs-stylemanager-properties-border-radius-top-left'] = 'Bo Linker Grens Radius';
+$string['grapsjs-stylemanager-properties-border-radius-top-right'] = 'Bo Regter Grens Radius';
+$string['grapsjs-stylemanager-properties-border-radius-bottom-left'] = 'Onder Linker Grens Radius';
+$string['grapsjs-stylemanager-properties-border-radius-bottom-right'] = 'Onder Regter Grens Radius';
+$string['grapsjs-stylemanager-properties-border-radius'] = 'Grens Radius';
+$string['grapsjs-stylemanager-properties-border'] = 'Grens';
+$string['grapsjs-stylemanager-properties-border-width'] = 'Grens Breedte';
+$string['grapsjs-stylemanager-properties-border-style'] = 'Grens Styl';
+$string['grapsjs-stylemanager-properties-border-color'] = 'Grens Kleur';
+$string['grapsjs-stylemanager-properties-box-shadow'] = 'Boks Skadu';
+$string['grapsjs-stylemanager-properties-box-shadow-h'] = 'Boks Skadu: horisontaal';
+$string['grapsjs-stylemanager-properties-box-shadow-v'] = 'Boks Skadu: vertikaal';
+$string['grapsjs-stylemanager-properties-box-shadow-blur'] = 'Boks Skadu vaag';
+$string['grapsjs-stylemanager-properties-box-shadow-spread'] = 'Boks Skadu verspreiding';
+$string['grapsjs-stylemanager-properties-box-shadow-color'] = 'Boks Skadu Kleur';
+$string['grapsjs-stylemanager-properties-box-shadow-type'] = 'Boks Skadu Tipe';
+$string['grapsjs-stylemanager-properties-background'] = 'Agtergrond';
+$string['grapsjs-stylemanager-properties-background-color'] = 'Agtergrond Kleur';
+$string['grapsjs-stylemanager-properties-background-image'] = 'Agtergrond Beeld';
+$string['grapsjs-stylemanager-properties-background-repeat'] = 'Herhaal Agtergrond';
+$string['grapsjs-stylemanager-properties-background-position'] = 'Agtergrond Posisie';
+$string['grapsjs-stylemanager-properties-background-attachment'] = 'Agtergrond Byvoeging';
+$string['grapsjs-stylemanager-properties-background-size'] = 'Agtergrond Grootte';
+$string['grapsjs-stylemanager-properties-transition'] = 'Oorgang';
+$string['grapsjs-stylemanager-properties-transition-property'] = 'Oorgang Eienskap';
+$string['grapsjs-stylemanager-properties-transition-duration'] = 'Oorgang Duur';
+$string['grapsjs-stylemanager-properties-transition-timing-function'] = 'Oorgang Tydsfunksie';
+$string['grapsjs-stylemanager-properties-perspective'] = 'Perspektief';
+$string['grapsjs-stylemanager-properties-transform'] = 'Transformeer';
+$string['grapsjs-stylemanager-properties-transform-rotate-x'] = 'Draai horisontaal';
+$string['grapsjs-stylemanager-properties-transform-rotate-y'] = 'Draai vertikaal';
+$string['grapsjs-stylemanager-properties-transform-rotate-z'] = 'Draai diepte';
+$string['grapsjs-stylemanager-properties-transform-scale-x'] = 'Skaleer horisontaal';
+$string['grapsjs-stylemanager-properties-transform-scale-y'] = 'Skaleer vertikaal';
+$string['grapsjs-stylemanager-properties-transform-scale-z'] = 'Skaleer diepte';
+$string['grapsjs-stylemanager-properties-flex-direction'] = 'Flex Rigting';
+$string['grapsjs-stylemanager-properties-flex-wrap'] = 'Flex toedraai';
+$string['grapsjs-stylemanager-properties-justify-content'] = 'Inhoud regverdig';
+$string['grapsjs-stylemanager-properties-align-items'] = 'Items uitlyn';
+$string['grapsjs-stylemanager-properties-align-content'] = 'Inhoud uitlyn';
+$string['grapsjs-stylemanager-properties-order'] = 'Volgorde';
+$string['grapsjs-stylemanager-properties-flex-basis'] = 'Flex Basis';
+$string['grapsjs-stylemanager-properties-flex-grow'] = 'Flex Groei';
+$string['grapsjs-stylemanager-properties-flex-shrink'] = 'Flex Krimp';
+$string['grapsjs-stylemanager-properties-align-self'] = 'Self uitlyn';
+$string['grapsjs-traitmanager-empty'] = 'Selekteer \'n element om die eienskap bestuurder te gebruik';
+$string['grapsjs-traitmanager-label'] = 'Komponent se instellings';
+$string['grapsjs-traitmanager-traits-options-target-false'] = 'Hierdie venster';
+$string['grapsjs-traitmanager-traits-options-target-_blank'] = 'Nuwe venster';
+$string['grapsjs-general'] = 'Algemeen';
+$string['grapsjs-dimensions'] = 'Dimensies';
+$string['grapsjs-width'] = 'Breedte';
+$string['grapsjs-tipografia'] = 'Tipografie';
+$string['grapsjs-decoration'] = 'Versierings';
+$string['grapsjs-edit_code'] = 'Wysig kode';
+$string['grapsjs-edit_code_paste_here_html'] = 'Plak hier jou HTML/CSS en klik op Invoer';
+$string['grapsjs-repeat'] = 'Herhaal';
+$string['grapsjs-position'] = 'Posisie';
+$string['grapsjs-attachment'] = 'Byvoeging';
+$string['grapsjs-size'] = 'Grootte';
+$string['grapsjs-page_save'] = 'Stoor';
+$string['grapsjs-page_preview'] = 'Voorskou';
+$string['grapsjs-show_border'] = 'Wys Grense';
+$string['grapsjs-preview'] = 'Voorskou';
+$string['grapsjs-fullscreen'] = 'Volle Skerm';
+$string['grapsjs-undo'] = 'Ontdoen';
+$string['grapsjs-redo'] = 'Oordoen';
+$string['grapsjs-clear'] = 'Maak die canvas skoon';
+$string['grapsjs-confirm_clear'] = 'Is jy seker jy wil die canvas skoonmaak?';
+$string['grapsjs-open_sm'] = 'Styl Bestuurder';
+$string['grapsjs-open_layers'] = 'Laë';
+$string['grapsjs-open_block'] = 'Blokke';
+$string['grapsjs-settings'] = 'Instellings';

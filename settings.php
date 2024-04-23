@@ -42,7 +42,9 @@ if ($ADMIN->fulltree) {
 
     require_once(__DIR__ . "/settings-slideshow.php");
 
-    require_once(__DIR__ . "/settings-about.php");
+    if (get_config('theme_degrade', 'home_type') == 0) {
+        require_once(__DIR__ . "/settings-about.php");
+    }
 
     require_once(__DIR__ . "/settings-footer.php");
 
