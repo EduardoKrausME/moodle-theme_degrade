@@ -67,10 +67,10 @@
     }
 }}
 <span id="maincontent"></span>
-{{#title}}
-    <h2>{{{title}}}</h2>
-{{/title}}
 <div id="id-activity-header" class="activity-header" data-for="page-activity-header">
+    {{#title}}
+        <h2>{{{title}}}</h2>
+    {{/title}}
     {{#completion}}
         <span class="sr-only">{{#str}} overallaggregation, completion {{/str}}</span>
         {{{completion}}}
@@ -90,7 +90,9 @@
 
 {{#js}}
     require(['jquery'], function($) {
+        /*
         var $destination = $("#page-header .page-context-header");
         $("#id-activity-header").appendTo( $destination.parent().parent() );
+        */
     });
 {{/js}}
