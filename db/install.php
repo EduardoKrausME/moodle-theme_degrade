@@ -68,6 +68,7 @@ function xmldb_theme_degrade_install() {
         }
     }
 
+    magnific_set_config("footer_type", 0);
     magnific_set_config("footer_description", $SITE->fullname);
     magnific_set_config("footer_links_title", magnific_get_string("footer_links_title_default"));
     magnific_set_config("footer_links", '');
@@ -90,6 +91,7 @@ function xmldb_theme_degrade_install() {
     magnific_set_config("login_forgot_description", '');
     magnific_set_config("login_signup_description", '');
 
+    magnific_set_config("home_type", 0);
     magnific_set_config("frontpage_mycourses_text", '');
     magnific_set_config("frontpage_mycourses_instructor", '');
     magnific_set_config("logo_color", '');
