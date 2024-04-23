@@ -24,10 +24,6 @@ defined('MOODLE_INTERNAL') || die;
 $page = new admin_settingpage('theme_degrade_slideshow', get_string('settings_slideshow_heading', 'theme_degrade'));
 
 // Number of slides.
-$name = 'theme_degrade/slideshow_numslides';
-$title = get_string('slideshow_numslides', 'theme_degrade');
-$description = get_string('slideshow_numslides_desc', 'theme_degrade');
-$default = 0;
 $choices = [
     0 => get_string("slideshow_numslides_nenhum", 'theme_degrade'),
     1 => '1',
@@ -40,10 +36,10 @@ $choices = [
     8 => '8',
     9 => '9',
 ];
-$page->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
-
-global $PAGE;
-$PAGE->requires->js_call_amd('theme_degrade/settings', 'numslides');
+$settingslideshownumslides = new admin_setting_configselect('theme_degrade/slideshow_numslides',
+    get_string('slideshow_numslides', 'theme_degrade'),
+    get_string('slideshow_numslides_desc', 'theme_degrade'), 0, $choices);
+$page->add($settingslideshownumslides);
 
 for ($i = 1; $i <= 9; $i++) {
 
@@ -71,3 +67,6 @@ for ($i = 1; $i <= 9; $i++) {
     $page->add($setting);
 }
 $settings->add($page);
+
+global $PAGE;
+$PAGE->requires->js_call_amd('theme_degrade/settings', 'numslides', [$settingslideshownumslides->get_id()]);
