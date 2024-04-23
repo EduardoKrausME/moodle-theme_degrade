@@ -28,7 +28,7 @@ use user_picture;
 
 class course_renderer_util {
     /**
-     * @param $course
+     * @param \core_course_list_element $course
      *
      * @return string
      */
@@ -38,13 +38,14 @@ class course_renderer_util {
         $imgurl = false;
         $noimgurl = $OUTPUT->image_url('curso-no-photo', 'theme')->out();
 
+        /** @var \stored_file $file */
         foreach ($course->get_course_overviewfiles() as $file) {
             $isimage = $file->is_valid_image();
-            $imgurl = file_encode_url("$CFG->wwwroot/pluginfile.php",
-                "/{$file->get_contextid()}/{$file->get_component()}/" .
-                "{$file->get_filearea()}{$file->get_filepath()}{$file->get_filename()}", !$isimage);
-            if (!$isimage) {
-                $imgurl = $noimgurl;
+            if ($isimage) {
+                $imgurl = file_encode_url("{$CFG->wwwroot}/pluginfile.php",
+                    "/{$file->get_contextid()}/{$file->get_component()}/" .
+                    "{$file->get_filearea()}{$file->get_filepath()}{$file->get_filename()}", !$isimage);
+
             }
         }
 
@@ -52,7 +53,7 @@ class course_renderer_util {
             $imgurl = $noimgurl;
         }
 
-            return $imgurl;
+        return $imgurl;
     }
 
     /**
