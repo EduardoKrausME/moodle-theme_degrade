@@ -58,7 +58,7 @@ if (get_config('theme_degrade', 'home_type') != 0) {
         }
     }
 } else {
-    $description = get_string('content_type_desc', 'theme_degrade');
+    $description = get_string('content_type_home_desc', 'theme_degrade');
 }
 $choices = [
     0 => get_string("content_type_default", 'theme_degrade'),

@@ -33,23 +33,21 @@
 
 {{^maintenancefooter}}
     <footer id="page-footer" class="footer-block">
-        <div id="footer">
-            {{#footer_html}}
+        {{#footer_html}}
+            <div id="footer">
                 {{{footer_htmleditor}}}
-                {{#enable_copywriter}}
-                    <div class="footer-foot">
-                        <div class="container">
-                            <p class="text-center">
-                                {{{footerblock_copywriter_text}}}
-                                <a href="https://eduardokraus.com" target="_blank">Eduardo Kraus</a>.
-                                Powered by <a href="https://moodle.org" target="_blank">Moodle</a>
-                            </p>
-                        </div>
+                {{#footer_settings_edit}}
+                    <div class="footer-main text-center mt-0 pb-5">
+                        <a class="settings-edit" href="{{{footer_settings_edit}}}">
+                            {{#pix}}edit, theme_degrade{{/pix}}
+                        </a>
                     </div>
-                {{/enable_copywriter}}
-            {{/footer_html}}
-            {{^footer_html}}
-                {{#footer_enable_block}}
+                {{/footer_settings_edit}}
+            </div>
+        {{/footer_html}}
+        {{^footer_html}}
+            {{#footer_enable_block}}
+                <div id="footer">
                     <div class="footer-main">
                         <div class="container-fluid">
                             <div class="row">
@@ -197,9 +195,9 @@
                             </div>
                         {{/enable_copywriter}}
                     </div>
-                {{/footer_enable_block}}
-            {{/footer_html}}
-        </div>
+                </div>
+            {{/footer_enable_block}}
+        {{/footer_html}}
 
         <div class="footer-content-debugging footer-dark bg-dark text-light">
             <div class="container-fluid footer-dark-inner">
