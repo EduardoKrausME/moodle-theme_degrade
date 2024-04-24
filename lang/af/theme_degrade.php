@@ -224,17 +224,18 @@ $string['top_scroll_text_color'] = 'Teks kleur van topmenu tydens scroll';
 $string['top_scroll_text_color_desc'] = 'Stel die tekskleur van die topmenu in wanneer deur die bladsy gescrol word.';
 $string['theme_color_heading'] = 'Kleurseleksie van die omgewing';
 
-
-$string['content_type_home'] = 'tuis';
-$string['content_type_footer'] = 'in die voetskrif';
-$string['content_type'] = 'Inhoudstipe wat u wil {$a}';
-$string['content_type_desc'] = 'Selekteer die tipe inhoud wat u wil vertoon {$a}.';
-$string['content_type_default'] = 'Moodle Standaard';
-$string['content_type_html'] = 'HTML-inhoud gegenereer deur die redigeerder';
-
-$string['editor_link_home'] = '<a class="btn btn-info" href="{$a}">Wysig HTML</a>';
-$string['editor_link_footer'] = '<a class="btn btn-info" href="{$a}">Wysig HTML</a>';
-
+// Link para editor da home e footer.
+$string['content_type_home'] = 'Inhoudstipe vir die tuisblad';
+$string['content_type_home_desc'] = 'Kies die tipe inhoud wat jy op die tuisblad wil vertoon.';
+$string['editor_link_home'] = 'Redigeer die tuisblad vir die taal {$a}';
+$string['editor_link_home_all'] = 'Redigeer die tuisblad vir alle tale';
+$string['content_type_footer'] = 'Inhoudstipe vir die voetnoot';
+$string['content_type_footer_desc'] = 'Kies die tipe inhoud wat jy in die voetnoot wil vertoon.';
+$string['editor_link_footer'] = 'Redigeer die voetnootblok vir die taal {$a}';
+$string['editor_link_footer_all'] = 'Redigeer die voetnootblok vir alle tale';
+$string['content_type_empty'] = '(Geen inhoud)';
+$string['content_type_default'] = 'Moodle se Standaard';
+$string['content_type_html'] = 'Bladsy om te skep met redigeerder';
 
 // HTML redigeerder.
 $string['grapsjs-assetmanager-addbutton'] = 'Voeg beeld by';

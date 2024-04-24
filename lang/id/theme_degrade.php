@@ -224,16 +224,18 @@ $string['top_scroll_text_color'] = 'Warna Teks Menu Saat Bergulir';
 $string['top_scroll_text_color_desc'] = 'Tentukan warna teks menu saat menggulir halaman.';
 $string['theme_color_heading'] = 'Pemilihan Warna Tema';
 
-
-$string['content_type_home'] = 'di beranda';
-$string['content_type_footer'] = 'di footer';
-$string['content_type'] = 'Jenis konten yang ingin Anda {$a}';
-$string['content_type_desc'] = 'Pilih jenis konten yang ingin Anda tampilkan {$a}.';
+// Link para editor da home e footer.
+$string['content_type_home'] = 'Jenis Konten untuk Halaman Utama';
+$string['content_type_home_desc'] = 'Pilih jenis konten yang ingin ditampilkan di halaman utama.';
+$string['editor_link_home'] = 'Edit halaman utama untuk bahasa {$a}';
+$string['editor_link_home_all'] = 'Edit halaman utama untuk semua bahasa';
+$string['content_type_footer'] = 'Jenis Konten untuk Footer';
+$string['content_type_footer_desc'] = 'Pilih jenis konten yang ingin ditampilkan di footer.';
+$string['editor_link_footer'] = 'Edit blok footer untuk bahasa {$a}';
+$string['editor_link_footer_all'] = 'Edit blok footer untuk semua bahasa';
+$string['content_type_empty'] = '(Tidak ada konten)';
 $string['content_type_default'] = 'Default Moodle';
-$string['content_type_html'] = 'Konten HTML yang dihasilkan oleh editor';
-
-$string['editor_link_home'] = '<a class="btn btn-info" href="{$a}">Edit HTML Beranda</a>';
-$string['editor_link_footer'] = '<a class="btn btn-info" href="{$a}">Edit HTML Footer</a>';
+$string['content_type_html'] = 'Halaman yang akan dibuat dengan editor';
 
 // Editor HTML.
 $string['grapsjs-assetmanager-addbutton'] = 'Tambah Gambar';

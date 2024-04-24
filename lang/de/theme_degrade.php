@@ -224,16 +224,18 @@ $string['top_scroll_text_color'] = 'Textfarbe des Menüs beim Scrollen';
 $string['top_scroll_text_color_desc'] = 'Definieren Sie die Textfarbe des Menüs beim Scrollen der Seite.';
 $string['theme_color_heading'] = 'Farbauswahl des Themas';
 
-
-$string['content_type_home'] = 'auf der Startseite';
-$string['content_type_footer'] = 'im Footer';
-$string['content_type'] = 'Inhaltstyp, den Sie {$a} möchten';
-$string['content_type_desc'] = 'Wählen Sie den Inhaltstyp, den Sie anzeigen möchten {$a}.';
-$string['content_type_default'] = 'Moodle Standard';
-$string['content_type_html'] = 'Inhalt in HTML, erstellt mit dem Editor';
-
-$string['editor_link_home'] = '<a class="btn btn-info" href="{$a}">HTML der Startseite bearbeiten</a>';
-$string['editor_link_footer'] = '<a class="btn btn-info" href="{$a}">HTML des Footers bearbeiten</a>';
+// Link para editor da home e footer.
+$string['content_type_home'] = 'Inhaltstyp für die Startseite';
+$string['content_type_home_desc'] = 'Wählen Sie den Inhaltstyp aus, der auf der Startseite angezeigt werden soll.';
+$string['editor_link_home'] = 'Startseite für die Sprache {$a} bearbeiten';
+$string['editor_link_home_all'] = 'Startseite für alle Sprachen bearbeiten';
+$string['content_type_footer'] = 'Inhaltstyp für den Footer';
+$string['content_type_footer_desc'] = 'Wählen Sie den Inhaltstyp aus, der im Footer angezeigt werden soll.';
+$string['editor_link_footer'] = 'Footer-Block für die Sprache {$a} bearbeiten';
+$string['editor_link_footer_all'] = 'Footer-Block für alle Sprachen bearbeiten';
+$string['content_type_empty'] = '(Kein Inhalt)';
+$string['content_type_default'] = 'Standard Moodle';
+$string['content_type_html'] = 'Seite mit Editor erstellen';
 
 // HTML-Editor
 $string['grapsjs-assetmanager-addbutton'] = 'Bild hinzufügen';

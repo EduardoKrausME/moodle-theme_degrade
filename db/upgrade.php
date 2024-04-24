@@ -46,5 +46,19 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2024042301, 'theme', 'degrade');
     }
 
+    if ($oldversion < 2024042400) {
+        $htmldata = get_config("theme_degrade", "home_htmldata");
+        $cssdata = get_config("theme_degrade", "home_cssdata");
+        $html = "{$htmldata}\n<style>{$cssdata}</style>";
+        set_config("home_htmleditor_all", $html, "theme_degrade");
+
+        $htmldata = get_config("theme_degrade", "footer_htmldata");
+        $cssdata = get_config("theme_degrade", "footer_cssdata");
+        $html = "{$htmldata}\n<style>{$cssdata}</style>";
+        set_config("footer_htmleditor_all", $html, "theme_degrade");
+
+        upgrade_plugin_savepoint(true, 2024042400, 'theme', 'degrade');
+    }
+
     return true;
 }

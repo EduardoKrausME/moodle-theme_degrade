@@ -200,18 +200,25 @@ class footer_data {
 
         if ($footer_type == 1 || $chave == "footer") {
             if ($chave == 'footer') {
-                $frontpage_htmldata = optional_param('htmldata', false, PARAM_RAW);
-                $frontpage_cssdata = optional_param('cssdata', false, PARAM_RAW);
+                $htmldata = optional_param('htmldata', false, PARAM_RAW);
+                $cssdata = optional_param('cssdata', false, PARAM_RAW);
+
+                $htmldata = "{$htmldata}\n<style>{$cssdata}</style>";
             } else {
-                $frontpage_htmldata = get_config("theme_degrade", "footer_htmldata");
-                $frontpage_cssdata = get_config("theme_degrade", "footer_cssdata");
+                $lang = current_language();
+                $htmldata = get_config("theme_degrade", "footer_htmleditor_{$lang}");
+                if (!isset($htmldata[3])) {
+                    $htmldata = get_config("theme_degrade", "footer_htmleditor_all");
+                }
+                if (!isset($htmldata[3])) {
+                    $htmldata = get_string('content_type_empty', 'theme_degrade');
+                }
             }
 
             font_util::print_only_unique();
             return [
                 'footer_html' => true,
-                'footer_htmldata' => $frontpage_htmldata,
-                'footer_cssdata' => $frontpage_cssdata,
+                'footer_htmleditor' => $htmldata,
             ];
         } else {
             return [

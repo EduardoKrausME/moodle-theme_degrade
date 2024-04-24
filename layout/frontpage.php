@@ -112,4 +112,10 @@ $templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_da
 $templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_data::about());
 $templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_data::home_html());
 
+if (get_config("theme_degrade", "home_type") == 1) {
+    // Caso seja HTML, não precisa gerar os blocos.
+    $CFG->frontpage = "";
+    $CFG->frontpageloggedin = "";
+}
+
 echo $OUTPUT->render_from_template('theme_degrade/frontpage', $templatedata);

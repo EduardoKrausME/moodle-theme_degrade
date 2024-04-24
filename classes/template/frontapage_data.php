@@ -135,22 +135,26 @@ class frontapage_data {
 
         if ($home_type == 1 || $chave == "home") {
             if ($chave == 'home') {
-                $frontpage_htmldata = optional_param('htmldata', false, PARAM_RAW);
-                $frontpage_cssdata = optional_param('cssdata', false, PARAM_RAW);
+                $htmldata = optional_param('htmldata', false, PARAM_RAW);
+                $cssdata = optional_param('cssdata', false, PARAM_RAW);
+
+                $htmldata = "{$htmldata}\n<style>{$cssdata}</style>";
             } else {
-                $frontpage_htmldata = get_config("theme_degrade", "home_htmldata");
-                $frontpage_cssdata = get_config("theme_degrade", "home_cssdata");
+                $lang = current_language();
+                $htmldata = get_config("theme_degrade", "home_htmleditor_{$lang}");
+                if (!isset($htmldata[3])) {
+                    $htmldata = get_config("theme_degrade", "home_htmleditor_all");
+                }
             }
 
             font_util::print_only_unique();
             return [
-                'frontpage_html' => true,
-                'frontpage_htmldata' => $frontpage_htmldata,
-                'frontpage_cssdata' => $frontpage_cssdata,
+                'home_html' => true,
+                'home_htmleditor' => $htmldata,
             ];
         } else {
             return [
-                'frontpage_html' => false,
+                'home_html' => false,
             ];
         }
     }

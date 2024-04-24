@@ -224,17 +224,18 @@ $string['top_scroll_text_color'] = 'Цвят на текста на менюто
 $string['top_scroll_text_color_desc'] = 'Задайте цвета на текста на менюто при превъртане на страницата.';
 $string['theme_color_heading'] = 'Избор на цветове за темата';
 
-
-$string['content_type_home'] = 'на началната страница';
-$string['content_type_footer'] = 'в долния колонтитул';
-$string['content_type'] = 'Тип на съдържание, което искате {$a}';
-$string['content_type_desc'] = 'Изберете типа съдържание, което искате да покажете {$a}.';
-$string['content_type_default'] = 'Стандартен на Moodle';
-$string['content_type_html'] = 'Съдържание в HTML, генерирано от редактора';
-
-$string['editor_link_home'] = '<a class="btn btn-info" href="{$a}">Редактиране на HTML на началната страница</a>';
-$string['editor_link_footer'] = '<a class="btn btn-info" href="{$a}">Редактиране на HTML на началната страница</a>';
-
+// Link para editor da home e footer.
+$string['content_type_home'] = 'Тип съдържание за началната страница';
+$string['content_type_home_desc'] = 'Изберете тип съдържание, което искате да се показва на началната страница.';
+$string['editor_link_home'] = 'Редактиране на началната страница за езика {$a}';
+$string['editor_link_home_all'] = 'Редактиране на началната страница за всички езици';
+$string['content_type_footer'] = 'Тип съдържание за подвързията';
+$string['content_type_footer_desc'] = 'Изберете тип съдържание, което искате да се показва в подвързията.';
+$string['editor_link_footer'] = 'Редактиране на блока в подвързията за езика {$a}';
+$string['editor_link_footer_all'] = 'Редактиране на блока в подвързията за всички езици';
+$string['content_type_empty'] = '(Няма съдържание)';
+$string['content_type_default'] = 'По подразбиране за Moodle';
+$string['content_type_html'] = 'Страница, която да бъде създадена с редактор';
 
 // Редактор на HTML.
 $string['grapsjs-assetmanager-addbutton'] = 'Добавяне на изображение';

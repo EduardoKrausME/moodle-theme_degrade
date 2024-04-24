@@ -124,14 +124,13 @@
         {{/slideshow_numslides}}
 
 
-        {{#frontpage_html}}
+        {{#home_html}}
             {{{output.full_header}}}
-            {{{frontpage_htmldata}}}
-            <style>{{{frontpage_cssdata}}}</style>
+            {{{home_htmleditor}}}
 
-           <!-- {{{output.main_content}}} -->
-        {{/frontpage_html}}
-        {{^frontpage_html}}
+            <!-- {{{output.main_content}}} -->
+        {{/home_html}}
+        {{^home_html}}
             {{#frontpage_about_enable}}
                 <div class="frontpage_about_area">
                     <div class="frontpage_about_logoarea text-center">
@@ -229,7 +228,7 @@
                     </div>
                 </div>
             </div>
-        {{/frontpage_html}}
+        {{/home_html}}
         {{> theme_degrade/footer}}
     </div>
 {{{output.standard_after_main_region_html}}}
@@ -239,15 +238,15 @@
 </html>
 {{#js}}
     require(['jquery', 'theme_boost/loader', 'theme_boost/drawer'], function($, Loader, Drawer) {
-    Drawer.init();
-    M.util.js_complete('theme_boost/loader');
-    if ($('body').hasClass('dir-rtl') ) {
-    var rtl = true;
-    } else {
-    var rtl = false;
-    }
+        Drawer.init();
+        M.util.js_complete('theme_boost/loader');
+        if ($('body').hasClass('dir-rtl')) {
+            var rtl = true;
+        } else {
+            var rtl = false;
+        }
     });
-    require([ 'theme_degrade/slideshow'], function(slideshow) {
-    slideshow.show();
+    require(['theme_degrade/slideshow'], function(slideshow) {
+        slideshow.show();
     });
 {{/js}}

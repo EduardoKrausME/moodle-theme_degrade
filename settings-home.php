@@ -27,18 +27,45 @@ $page = new admin_settingpage('theme_degrade_frontpage_home',
 
 $home = get_string('content_type_home', 'theme_degrade');
 if (get_config('theme_degrade', 'home_type') != 0) {
-    $description =
-        get_string('content_type_desc', 'theme_degrade', $home) . "<br><br>" .
-        get_string('editor_link_home', 'theme_degrade', "{$CFG->wwwroot}/theme/degrade/_editor/?chave=home");
+    $description = get_string('content_type_home_desc', 'theme_degrade', $home) . "<br>";
+
+    $empty_text = get_string('content_type_empty', 'theme_degrade');
+
+    $text = get_string('editor_link_home_all', 'theme_degrade');
+    $html = "<a class='btn btn-info mt-1 mb-2' href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&editlang=all'>{$text}</a>";
+    if (!isset(get_config("theme_degrade", "home_htmleditor_all")[3]))
+        $html = "{$html} <strong class='alert-warning'>{$empty_text}</strong>";
+    $description .= "{$html}<br>";
+
+    if ($CFG->langmenu) {
+        $list_of_translations = get_string_manager()->get_list_of_translations();
+        $lang_name = $list_of_translations[$CFG->lang];
+
+        $text = get_string('editor_link_home', 'theme_degrade', $lang_name);
+        $html = "<a class='btn btn-info mt-1 mb-2' href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&editlang={$CFG->lang}'>{$text}</a>";
+        if (!isset(get_config("theme_degrade", "home_htmleditor_{$CFG->lang}")[3]))
+            $html = "{$html} <strong class='alert-warning'>{$empty_text}</strong>";
+        $description .= "{$html}<br>";
+
+        foreach ($list_of_translations as $lang_key => $lang_name) {
+            if ($CFG->lang == $lang_key) continue;
+
+            $text = get_string('editor_link_home', 'theme_degrade', $lang_name);
+            $html = "<a class='btn btn-info mt-1' href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&editlang={$lang_key}'>{$text}</a>";
+            if (!isset(get_config("theme_degrade", "home_htmleditor_{$lang_key}")[3]))
+                $html = "{$html} <strong class='alert-warning'>{$empty_text}</strong>";
+            $description .= "{$html}<br>";
+        }
+    }
 } else {
-    $description = get_string('content_type_desc', 'theme_degrade', $home);
+    $description = get_string('content_type_desc', 'theme_degrade');
 }
 $choices = [
     0 => get_string("content_type_default", 'theme_degrade'),
     1 => get_string("content_type_html", 'theme_degrade'),
 ];
 $setting = new admin_setting_configselect('theme_degrade/home_type',
-    get_string('content_type', 'theme_degrade', $home),
+    get_string('content_type_home', 'theme_degrade'),
     $description, 0, $choices);
 $page->add($setting);
 $PAGE->requires->js_call_amd('theme_degrade/settings', 'autosubmit', [$setting->get_id()]);

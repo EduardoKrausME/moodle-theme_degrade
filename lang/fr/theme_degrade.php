@@ -224,17 +224,18 @@ $string['top_scroll_text_color'] = 'Couleur du texte du menu en haut en défilem
 $string['top_scroll_text_color_desc'] = 'Définissez la couleur du texte du menu lors du défilement de la page.';
 $string['theme_color_heading'] = 'Sélection des couleurs du thème';
 
-
-$string['content_type_home'] = 'à la maison';
-$string['content_type_footer'] = 'au pied de page';
-$string['content_type'] = 'Type de contenu que vous souhaitez {$a}';
-$string['content_type_desc'] = 'Sélectionnez le type de contenu que vous souhaitez afficher {$a}.';
-$string['content_type_default'] = 'Défaut de Moodle';
-$string['content_type_html'] = 'Contenu HTML généré par l’éditeur';
-
-$string['editor_link_home'] = '<a class="btn btn-info" href="{$a}">Modifier le HTML de la maison</a>';
-$string['editor_link_footer'] = '<a class="btn btn-info" href="{$a}">Modifier le HTML de la maison</a>';
-
+// Link para editor da home e footer.
+$string['content_type_home'] = 'Type de contenu pour la page d\'accueil';
+$string['content_type_home_desc'] = 'Sélectionnez le type de contenu à afficher sur la page d\'accueil.';
+$string['editor_link_home'] = 'Modifier la page d\'accueil pour la langue {$a}';
+$string['editor_link_home_all'] = 'Modifier la page d\'accueil pour toutes les langues';
+$string['content_type_footer'] = 'Type de contenu pour le pied de page';
+$string['content_type_footer_desc'] = 'Sélectionnez le type de contenu à afficher dans le pied de page.';
+$string['editor_link_footer'] = 'Modifier le bloc du pied de page pour la langue {$a}';
+$string['editor_link_footer_all'] = 'Modifier le bloc du pied de page pour toutes les langues';
+$string['content_type_empty'] = '(Aucun contenu)';
+$string['content_type_default'] = 'Par défaut Moodle';
+$string['content_type_html'] = 'Page à créer avec l\'éditeur';
 
 // Éditeur HTML.
 $string['grapsjs-assetmanager-addbutton'] = 'Ajouter une image';

@@ -4,23 +4,9 @@ require_once('../../../config.php');
 require_once('../lib.php');
 
 $chave = required_param('chave', PARAM_TEXT);
+$editlang = required_param('editlang', PARAM_TEXT);
 require_login();
 require_capability('moodle/site:config', context_system::instance());
-
-$htmldata = optional_param('htmldata', false, PARAM_RAW);
-if ($htmldata) {
-    $aaa = set_config("{$chave}_htmldata", $htmldata, "theme_degrade");
-    $cssdata = optional_param('cssdata', false, PARAM_RAW);
-    set_config("{$chave}_cssdata", $cssdata, "theme_degrade");
-
-    $home_type = get_config("theme_degrade", "home_type");
-    if ($home_type == 1 && $chave == "home") {
-        set_config("frontpage", 0);
-        set_config("frontpageloggedin", 0);
-    }
-
-    redirect("{$CFG->wwwroot}/admin/settings.php?section=themesettingdegrade#theme_degrade_{$chave}");
-}
 
 ?>
 <!doctype html>
@@ -62,15 +48,21 @@ if ($htmldata) {
 
 <div id="gjs" style="height:0; overflow:hidden">
     <?php
+    $htmldata = optional_param('htmldata', false, PARAM_RAW);
+    if ($htmldata && confirm_sesskey()) {
+        $cssdata = optional_param('cssdata', false, PARAM_RAW);
+        $html = "{$htmldata}\n<style>{$cssdata}</style>";
+        set_config("{$chave}_htmleditor_{$editlang}", $html, "theme_degrade");
+
+        $home_type = get_config("theme_degrade", "home_type");
+
+        redirect("{$CFG->wwwroot}/admin/settings.php?section=themesettingdegrade#theme_degrade_{$chave}");
+    }
+
     if (file_exists(__DIR__ . "/default-{$chave}.html")) {
-        $htmldata = get_config("theme_degrade", "{$chave}_htmldata");
+        $htmldata = get_config("theme_degrade", "{$chave}_htmleditor_{$editlang}");
         if ($htmldata) {
             echo $htmldata;
-
-            $cssdata = get_config("theme_degrade", "{$chave}_cssdata");
-            if ($cssdata) {
-                echo "<style>{$cssdata}</style>";
-            }
         } else {
             $data = file_get_contents(__DIR__ . "/default-{$chave}.html");
             $data = str_replace("{wwwroot}", $CFG->wwwroot, $data);
@@ -494,7 +486,9 @@ if ($htmldata) {
             'className' : "btn-salvar padding-0",
             'label'     : `<form class="form-preview-preview" method="post" target="_top"
                                  style="display:none;margin:0;"
-                                 action="<?php echo $CFG->wwwroot ?>/theme/degrade/_editor/?chave=<?php echo $chave ?>">
+                                 action="<?php echo $CFG->wwwroot ?>/theme/degrade/_editor/">
+                               <input type="hidden" name="chave"    value="<?php echo $chave ?>">
+                               <input type="hidden" name="editlang" value="<?php echo $editlang ?>">
                                <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>">
                                <input type="hidden" name="htmldata" class="form-htmldata">
                                <input type="hidden" name="cssdata"  class="form-cssdata">
@@ -507,6 +501,8 @@ if ($htmldata) {
                                  style="display:none;margin:0;"
                                  action="<?php echo $CFG->wwwroot ?>/">
                                <input type="hidden" name="chave"    value="<?php echo $chave ?>">
+                               <input type="hidden" name="editlang" value="<?php echo $editlang ?>">
+                               <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>">
                                <input type="hidden" name="htmldata" class="form-htmldata">
                                <input type="hidden" name="cssdata"  class="form-cssdata">
                                <button type="submit" class="btn-salvar gjs-pn-btn gjs-pn-active gjs-four-color">

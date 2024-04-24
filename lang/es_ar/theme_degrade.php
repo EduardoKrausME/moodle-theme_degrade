@@ -224,16 +224,18 @@ $string['top_scroll_text_color'] = 'Color del texto del menú al desplazar';
 $string['top_scroll_text_color_desc'] = 'Establece el color del texto del menú al desplazar la página.';
 $string['theme_color_heading'] = 'Selección de colores del entorno';
 
-
-$string['content_type_home'] = 'en el inicio';
-$string['content_type_footer'] = 'en el pie de página';
-$string['content_type'] = 'Tipo de contenido que desea {$a}';
-$string['content_type_desc'] = 'Seleccione el tipo de contenido que desea mostrar {$a}.';
+// Link para editor da home e footer.
+$string['content_type_home'] = 'Tipo de contenido para la página de inicio';
+$string['content_type_home_desc'] = 'Seleccione el tipo de contenido que desea mostrar en la página de inicio.';
+$string['editor_link_home'] = 'Editar la página de inicio para el idioma {$a}';
+$string['editor_link_home_all'] = 'Editar la página de inicio para todos los idiomas';
+$string['content_type_footer'] = 'Tipo de contenido para el pie de página';
+$string['content_type_footer_desc'] = 'Seleccione el tipo de contenido que desea mostrar en el pie de página.';
+$string['editor_link_footer'] = 'Editar el bloque del pie de página para el idioma {$a}';
+$string['editor_link_footer_all'] = 'Editar el bloque del pie de página para todos los idiomas';
+$string['content_type_empty'] = '(Sin contenido)';
 $string['content_type_default'] = 'Predeterminado de Moodle';
-$string['content_type_html'] = 'Contenido en HTML generado por el editor';
-
-$string['editor_link_home'] = '<a class="btn btn-info" href="{$a}">Editar HTML del Inicio</a>';
-$string['editor_link_footer'] = '<a class="btn btn-info" href="{$a}">Editar HTML del Inicio</a>';
+$string['content_type_html'] = 'Página a ser creada con editor';
 
 // Editor de HTML.
 $string['grapsjs-assetmanager-addbutton'] = 'Agregar imagen';

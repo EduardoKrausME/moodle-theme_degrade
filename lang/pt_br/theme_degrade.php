@@ -223,17 +223,18 @@ $string['top_scroll_text_color'] = 'Cor do texto do menu ao rolar';
 $string['top_scroll_text_color_desc'] = 'Defina a cor do texto do menu ao rolar a página.';
 $string['theme_color_heading'] = 'Seleção de cores do ambiente';
 
-
-$string['content_type_home'] = 'na home';
-$string['content_type_footer'] = 'no rodapé';
-$string['content_type'] = 'Tipo do conteúdo que deseja {$a}';
-$string['content_type_desc'] = 'Selecione o tipo de conteúdo que você deseja exibir {$a}.';
+// Link para editor da home e footer.
+$string['content_type_home'] = 'Tipo de conteúdo para a página inicial';
+$string['content_type_home_desc'] = 'Selecione o tipo de conteúdo que deseja exibir na página inicial.';
+$string['editor_link_home'] = 'Editar a página inicial para o idioma {$a}';
+$string['editor_link_home_all'] = 'Editar a página inicial para todos os idiomas';
+$string['content_type_footer'] = 'Tipo de conteúdo para o rodapé';
+$string['content_type_footer_desc'] = 'Selecione o tipo de conteúdo que deseja exibir no rodapé.';
+$string['editor_link_footer'] = 'Editar o bloco do rodapé para o idioma {$a}';
+$string['editor_link_footer_all'] = 'Editar o bloco do rodapé para todos os idiomas';
+$string['content_type_empty'] = '(Nenhum conteúdo)';
 $string['content_type_default'] = 'Padrão do Moodle';
-$string['content_type_html'] = 'Conteúdo em HTML gerado pelo editor';
-
-$string['editor_link_home'] = '<a class="btn btn-info" href="{$a}">Editar HTML da Home</a>';
-$string['editor_link_footer'] = '<a class="btn btn-info" href="{$a}">Editar HTML do Rodapé</a>';
-
+$string['content_type_html'] = 'Página a ser criada com editor';
 
 // Editor de HTML.
 $string['grapsjs-assetmanager-addbutton'] = 'Adicionar imagem';
