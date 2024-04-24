@@ -33,31 +33,6 @@ define(["jquery"], function($) {
             $("#id_s_theme_degrade_theme_color__color_titles").val(color_titles);
         },
 
-        numslides          : function(element_id) {
-            var slideshow_numslides = $("#" + element_id);
-
-            slideshow_numslides.change(function() {
-                theme_degrade._numslides_changue(element_id);
-            });
-            theme_degrade._numslides_changue(element_id);
-        },
-        _numslides_changue : function(element_id) {
-            var slideshow_numslides = $("#" + element_id);
-            for (var i = 0; i <= 9; i++) {
-                if (slideshow_numslides.val() >= i) {
-                    $("#admin-slideshow_info_" + i).parent().show();
-                    $("#admin-slideshow_image_" + i).show();
-                    $("#admin-slideshow_text_" + i).show();
-                    $("#admin-slideshow_url_" + i).show();
-                } else {
-                    $("#admin-slideshow_info_" + i).parent().hide();
-                    $("#admin-slideshow_image_" + i).hide();
-                    $("#admin-slideshow_text_" + i).hide();
-                    $("#admin-slideshow_url_" + i).hide();
-                }
-            }
-        },
-
         login : function() {
             var login_theme = $("#id_s_theme_degrade_login_theme");
 

@@ -41,8 +41,8 @@ $settingslideshownumslides = new admin_setting_configselect('theme_degrade/slide
     get_string('slideshow_numslides_desc', 'theme_degrade'), 0, $choices);
 $page->add($settingslideshownumslides);
 
-for ($i = 1; $i <= 9; $i++) {
-
+$slideshownumslides = get_config('theme_degrade', 'slideshow_numslides');
+for ($i = 1; $i <= $slideshownumslides; $i++) {
     $heading = get_string('slideshow_info', 'theme_degrade', $i);
     $setting = new admin_setting_heading("theme_degrade/slideshow_info_{$i}",
         "<span id='admin-slideshow_info_{$i}'>{$heading}</span>", '');
@@ -66,7 +66,8 @@ for ($i = 1; $i <= 9; $i++) {
         get_string('slideshow_text_desc', 'theme_degrade'), '', PARAM_TEXT);
     $page->add($setting);
 }
+
 $settings->add($page);
 
 global $PAGE;
-$PAGE->requires->js_call_amd('theme_degrade/settings', 'numslides', [$settingslideshownumslides->get_id()]);
+$PAGE->requires->js_call_amd('theme_degrade/settings', 'autosubmit', [$settingslideshownumslides->get_id()]);
