@@ -64,11 +64,17 @@ require_capability('moodle/site:config', context_system::instance());
         if ($htmldata) {
             echo $htmldata;
         } else {
-            $data = file_get_contents(__DIR__ . "/default-{$chave}.html");
-            $data = str_replace("{wwwroot}", $CFG->wwwroot, $data);
-            $data = str_replace("{shortname}", $SITE->shortname, $data);
-            $data = str_replace("{fullname}", $SITE->fullname, $data);
-            echo $data;
+            $htmldata = file_get_contents(__DIR__ . "/default-{$chave}.html");
+            $htmldata = str_replace("{wwwroot}", $CFG->wwwroot, $htmldata);
+            $htmldata = str_replace("{shortname}", $SITE->shortname, $htmldata);
+            $htmldata = str_replace("{fullname}", $SITE->fullname, $htmldata);
+
+            $htmldata = str_replace("{footer_links_title_default}", theme_degrade_get_string('footer_links_title_default'), $htmldata);
+            $htmldata = str_replace("{footer_social_title_default}", theme_degrade_get_string('footer_social_title_default'), $htmldata);
+            $htmldata = str_replace("{footer_contact_title_default}", theme_degrade_get_string('footer_contact_title_default'), $htmldata);
+            $htmldata = str_replace("{contact_address}", theme_degrade_get_string('contact_address'), $htmldata);
+
+            echo $htmldata;
         }
 
         if (file_exists(__DIR__ . "/default-{$chave}.css")) {
