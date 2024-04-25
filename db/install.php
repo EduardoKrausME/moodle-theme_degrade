@@ -47,10 +47,10 @@ function xmldb_theme_degrade_install() {
 
     theme_degrade_set_config("frontpage_about_enable", 0);
     theme_degrade_set_config("frontpage_about_logo", '');
-    theme_degrade_set_config("frontpage_about_title", magnific_get_string("frontpage_about_title_default"));
+    theme_degrade_set_config("frontpage_about_title", degrade_get_string("frontpage_about_title_default"));
     theme_degrade_set_config("frontpage_about_description", '');
     for ($i = 1; $i <= 4; $i++) {
-        theme_degrade_set_config("frontpage_about_text_{$i}", magnific_get_string("frontpage_about_text_{$i}_defalt"));
+        theme_degrade_set_config("frontpage_about_text_{$i}", degrade_get_string("frontpage_about_text_{$i}_defalt"));
         if ($i == 1) {
             $count = $DB->get_field_select("course", "COUNT(*)", "id != {$SITE->id}");
             theme_degrade_set_config("frontpage_about_number_{$i}", $count);
@@ -70,15 +70,15 @@ function xmldb_theme_degrade_install() {
 
     theme_degrade_set_config("footer_type", 0);
     theme_degrade_set_config("footer_description", $SITE->fullname);
-    theme_degrade_set_config("footer_links_title", magnific_get_string("footer_links_title_default"));
+    theme_degrade_set_config("footer_links_title", degrade_get_string("footer_links_title_default"));
     theme_degrade_set_config("footer_links", '');
-    theme_degrade_set_config("footer_social_title", magnific_get_string("footer_social_title_default"));
+    theme_degrade_set_config("footer_social_title", degrade_get_string("footer_social_title_default"));
     theme_degrade_set_config("social_youtube", '');
     theme_degrade_set_config("social_linkedin", '');
     theme_degrade_set_config("social_facebook", '');
     theme_degrade_set_config("social_twitter", '');
     theme_degrade_set_config("social_instagram", '');
-    theme_degrade_set_config("contact_footer_title", magnific_get_string("footer_contact_title_default"));
+    theme_degrade_set_config("contact_footer_title", degrade_get_string("footer_contact_title_default"));
     theme_degrade_set_config("contact_address", '');
     theme_degrade_set_config("contact_phone", '');
     theme_degrade_set_config("contact_email", '');
@@ -160,6 +160,6 @@ function theme_degrade_set_config($name, $value) {
  *
  * @throws coding_exception
  */
-function magnific_get_string($name) {
+function degrade_get_string($name) {
     return get_string($name, "theme_degrade");
 }
