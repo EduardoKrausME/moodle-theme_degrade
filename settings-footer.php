@@ -152,15 +152,15 @@ if (get_config('theme_degrade', 'footer_type') == 0) {
     $setting = new admin_setting_configtext('theme_degrade/contact_email',
         get_string('contact_email', 'theme_degrade'), '', '');
     $page->add($setting);
+
+    $setting = new admin_setting_heading('theme_degrade_footerblock_copywriter',
+        get_string('footerblock_copywriter', 'theme_degrade'), '');
+    $page->add($setting);
+
+    $setting = new admin_setting_configcheckbox('theme_degrade/footer_show_copywriter',
+        get_string('footer_show_copywriter', 'theme_degrade'),
+        get_string('footer_show_copywriter_desc', 'theme_degrade'), 1);
+    $page->add($setting);
 }
-
-$setting = new admin_setting_heading('theme_degrade_footerblock_copywriter',
-    get_string('footerblock_copywriter', 'theme_degrade'), '');
-$page->add($setting);
-
-$setting = new admin_setting_configcheckbox('theme_degrade/footer_show_copywriter',
-    get_string('footer_show_copywriter', 'theme_degrade'),
-    get_string('footer_show_copywriter_desc', 'theme_degrade'), 1);
-$page->add($setting);
 
 $settings->add($page);
