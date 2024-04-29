@@ -564,6 +564,12 @@ function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $for
 function theme_degrade_process_css($css, $theme) {
     global $DB;
 
+    if (@file_exists(__DIR__ . "/style/boost_training.css")) {
+        $customcss = file_get_contents(__DIR__ . "/style/boost_training.css");
+
+        $css = "{$css}{$customcss}";
+    }
+
     $css =
         ":root {\n" .
         "    --color_primary:   " . theme_degrade_process_color_hex("theme_color__color_primary") . " !important;\n" .
