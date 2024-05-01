@@ -147,7 +147,7 @@ class frontapage_data {
                 }
             }
 
-            font_util::print_only_unique();
+            $htmldata .= font_util::print_only_unique();
             return [
                 'home_html' => true,
                 'home_htmleditor' => $htmldata,

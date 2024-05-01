@@ -215,7 +215,7 @@ class footer_data {
                 }
             }
 
-            font_util::print_only_unique();
+            $htmldata .= font_util::print_only_unique();
             return [
                 'footer_html' => true,
                 'footer_htmleditor' => $htmldata,
