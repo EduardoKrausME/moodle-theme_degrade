@@ -60,5 +60,13 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2024042400, 'theme', 'degrade');
     }
 
+    if ($oldversion < 2024050200) {
+        $fonts = "<style>
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=Amatic+SC:wght@400;700&family=Bad+Script&family=Dancing+Script:wght@400..700&family=Great+Vibes&family=Marck+Script&family=Nanum+Pen+Script&family=Orbitron:wght@400..900&family=Ubuntu+Condensed&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+</style>";
+        set_config("pagefonts", $fonts, "theme_degrade");
+        upgrade_plugin_savepoint(true, 2024050200, 'theme', 'degrade');
+    }
+
     return true;
 }

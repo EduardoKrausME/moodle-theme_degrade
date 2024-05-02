@@ -22,7 +22,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['pluginname'] = 'Degrade';
-$string['choosereadme'] = 'Degrade é um thema construido com carinho para trazer cores alegres ao Moodle.';
+$string['choosereadme'] = 'O Degrade é um tema cuidadosamente elaborado para adicionar cores vibrantes e uma atmosfera alegre ao Moodle.';
 
 // Slides.
 $string['settings_slideshow_heading'] = 'SlideShow';
@@ -235,6 +235,8 @@ $string['editor_link_footer_all'] = 'Editar o bloco do rodapé para todos os idi
 $string['content_type_empty'] = '(Nenhum conteúdo)';
 $string['content_type_default'] = 'Padrão do Moodle';
 $string['content_type_html'] = 'Página a ser criada com editor';
+$string['content_pagefonts'] = 'Fontes Extras do Google';
+$string['content_pagefonts_desc'] = 'Adicione aqui o link do @import do Google para fontes extras.<br>Pode colocar vários import.<br><a href="https://fonts.google.com/selection/embed" target="google">Embed code</a><br><img src="{$a}" style="max-width: 100%;width: 420px;">';
 
 // Editor de HTML.
 $string['grapsjs-assetmanager-addbutton'] = 'Adicionar imagem';

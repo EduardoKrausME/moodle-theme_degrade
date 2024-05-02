@@ -237,6 +237,9 @@ $string['editor_link_footer_all'] = 'Edit the footer block for all languages';
 $string['content_type_empty'] = '(No content)';
 $string['content_type_default'] = 'Moodle default';
 $string['content_type_html'] = 'Page to be created with editor';
+$string['content_pagefonts'] = 'Google Extra Fonts';
+$string['content_pagefonts_desc'] = 'Add here the @import link from Google for extra fonts.<br>You can put multiple import.<br><a href="https://fonts.google.com/selection/embed" target="google">Embed code</a><br><img src="{$a}" style="max-width: 100%;width: 420px;">';
+
 
 // HTML Editor.
 $string['grapsjs-assetmanager-addbutton'] = 'Add image';

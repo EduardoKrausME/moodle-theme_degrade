@@ -57,6 +57,13 @@ if (get_config('theme_degrade', 'home_type') != 0) {
             $description .= "{$html}<br>";
         }
     }
+
+    $icon = $OUTPUT->image_url("google-fonts", "theme_degrade")->out(false);
+    $setting = new admin_setting_configtextarea('theme_degrade/pagefonts',
+        get_string('content_pagefonts', 'local_kopere_dashboard'),
+        get_string('content_pagefonts_desc', 'local_kopere_dashboard', $icon), "");
+    $page->add($setting);
+
 } else {
     $description = get_string('content_type_home_desc', 'theme_degrade');
 }

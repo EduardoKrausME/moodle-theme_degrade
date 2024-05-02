@@ -23,11 +23,12 @@
 
 namespace theme_degrade\fonts;
 
-defined('MOODLE_INTERNAL') || die;
-
 class font_util {
+
     /**
      * @return array
+     *
+     * @throws \coding_exception
      */
     private static function list_fonts() {
         static $fontList;
@@ -35,7 +36,7 @@ class font_util {
             return $fontList;
         }
 
-        $fonts = [
+        $fontsdefault = [
             "family=Alex+Brush",
             "family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900",
             "family=Bebas+Neue",
@@ -71,8 +72,14 @@ class font_util {
             "family=Source+Sans+3:ital,wght@0,200..900;1,200..900",
             "family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700",
             "family=Vibur",
-            "family=Work+Sans:ital,wght@0,100..900;1,100..900"
+            "family=Work+Sans:ital,wght@0,100..900;1,100..900",
         ];
+
+        $pagefonts = get_string('pagefonts', 'theme_degrade');
+        preg_match_all('/(family=.*?)&/', $pagefonts, $fontsuser);
+        if (isset($fontsuser[1])) {
+            $fonts = array_merge($fontsuser[1], $fontsdefault);
+        }
 
         $fontList = ['css' => [], 'grapsjs' => [], 'ckeditor' => []];
         foreach ($fonts as $font) {
@@ -91,7 +98,6 @@ class font_util {
             }
         }
 
-
         $fontList['css'] = 'https://fonts.googleapis.com/css2?' . implode('&', $fontList['css']) . '&display=swap';
         $fontList['grapsjs'] = implode(",", $fontList['grapsjs']);
         $fontList['ckeditor'] = implode(";", $fontList['ckeditor']);
@@ -101,6 +107,8 @@ class font_util {
 
     /**
      * @return string
+     *
+     * @throws \coding_exception
      */
     public static function css() {
         return self::list_fonts()['css'];
@@ -108,6 +116,8 @@ class font_util {
 
     /**
      * @return string
+     *
+     * @throws \coding_exception
      */
     public static function grapsjs() {
         return self::list_fonts()['grapsjs'];
@@ -115,12 +125,15 @@ class font_util {
 
     /**
      * @return string
+     *
+     * @throws \coding_exception
      */
     public static function ckeditor() {
         return self::list_fonts()['ckeditor'];
     }
 
     /**
+     * @throws \coding_exception
      */
     public static function print_only_unique() {
         static $printed = false;

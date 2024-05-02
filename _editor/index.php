@@ -19,7 +19,6 @@ require_capability('moodle/site:config', context_system::instance());
     <link rel="stylesheet" href="styles/grapesjs-preset-webpage.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/tooltip.css">
-    <link rel="stylesheet" href="styles/demos.css">
     <link rel="stylesheet" href="styles/grapick.css">
 
     <script src="js/jquery.js"></script>
@@ -65,10 +64,10 @@ require_capability('moodle/site:config', context_system::instance());
             $htmldata = str_replace("{shortname}", $SITE->shortname, $htmldata);
             $htmldata = str_replace("{fullname}", $SITE->fullname, $htmldata);
 
-            $htmldata = str_replace("{footer_links_title_default}", theme_degrade_get_string('footer_links_title_default'), $htmldata);
-            $htmldata = str_replace("{footer_social_title_default}", theme_degrade_get_string('footer_social_title_default'), $htmldata);
-            $htmldata = str_replace("{footer_contact_title_default}", theme_degrade_get_string('footer_contact_title_default'), $htmldata);
-            $htmldata = str_replace("{contact_address}", theme_degrade_get_string('contact_address'), $htmldata);
+            $htmldata = str_replace("{footer_links_title_default}", get_string('footer_links_title_default', 'theme_degrade'), $htmldata);
+            $htmldata = str_replace("{footer_social_title_default}", get_string('footer_social_title_default', 'theme_degrade'), $htmldata);
+            $htmldata = str_replace("{footer_contact_title_default}", get_string('footer_contact_title_default', 'theme_degrade'), $htmldata);
+            $htmldata = str_replace("{contact_address}", get_string('contact_address', 'theme_degrade'), $htmldata);
 
             echo $htmldata;
         }
@@ -582,25 +581,6 @@ require_capability('moodle/site:config', context_system::instance());
         }
     ]);
 
-    function showButtonUpdate() {
-        var html = editor.getHtml();
-        html = html.split(/<body.*?>/).join('');
-        html = html.split('</body>').join('');
-
-        var css = editor.getCss();
-        css = css.split(/\*.*?}/s).join('');
-        css = css.split(/body.*?}/s).join('');
-        css = css.split(/\[data-gjs-type="?wrapper"?]\s?>\s?#/).join('#');
-        css = css.split(/\[data-gjs-type="?wrapper"?]\s?>\s/).join('');
-
-        $(".form-htmldata").val(html);
-        $(".form-cssdata").val(css);
-        $(".form-preview-preview").show(300);
-    }
-
-    editor.on('load', showButtonUpdate);
-    editor.on('update', showButtonUpdate);
-
     // Update canvas-clear command
     editor.Commands.add('canvas-clear', function() {
         if (confirm("<?php theme_degrade_get_string("grapsjs-confirm_clear") ?>")) {
@@ -661,6 +641,25 @@ require_capability('moodle/site:config', context_system::instance());
     }
 
 
+    function showButtonUpdate() {
+        var html = editor.getHtml();
+        html = html.split(/<body.*?>/).join('');
+        html = html.split('</body>').join('');
+
+        var css = editor.getCss();
+        css = css.split(/\*.*?}/s).join('');
+        css = css.split(/\nbody.*?}/s).join('');
+        css = css.split(/:root.*?}/s).join('');
+        css = css.split(/\[data-gjs-type="?wrapper"?]\s?>\s?#/).join('#');
+        css = css.split(/\[data-gjs-type="?wrapper"?]\s?>\s/).join('');
+
+        $(".form-htmldata").val(html);
+        $(".form-cssdata").val(css);
+        $(".form-preview-preview").show(300);
+    }
+
+    editor.on('update', showButtonUpdate);
+
     // Do stuff on load
     editor.on('load', function() {
         var $ = grapesjs.$;
@@ -700,7 +699,42 @@ require_capability('moodle/site:config', context_system::instance());
         // Open block manager
         var openBlocksBtn = editor.Panels.getButton('views', 'open-blocks');
         openBlocksBtn && openBlocksBtn.set('active', 1);
+
+        showButtonUpdate();
+
+        // Show help button
+        var logoCont = document.querySelector('.gjs-help-icon');
+        var logoPanel = document.querySelector('.gjs-pn-commands');
+        logoPanel.appendChild(logoCont);
     });
 </script>
+<div style="display: none">
+    <div class="gjs-help-icon">
+        <a href="https://grapesjs.com/docs/" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 250" style="height:27px;">
+                <g fill="#b9a5a6">
+                    <path d="M469.779,250C493.059,250,512,231.463,512,208.682V41.319C512,18.537,493.059,0,469.779,0H42.221C18.94,0,0,18.537,0,41.319
+                            v167.363C0,231.465,18.941,250,42.221,250 M42.221,234.309c-14.438,0-26.188-11.496-26.188-25.629V41.318
+                            c0-14.133,11.748-25.629,26.188-25.629h427.556c14.439,0,26.189,11.496,26.189,25.629v167.364l0,0
+                            c0,14.131-11.748,25.629-26.188,25.629"/>
+                    <path id="H" d="M141.821,62.987c-4.729,0-8.563,3.752-8.563,8.381v45.251H77.311V71.368c0-4.627-3.833-8.381-8.564-8.381
+                            c-4.731,0-8.563,3.752-8.563,8.381v107.265c0,4.629,3.833,8.381,8.563,8.381c4.73,0,8.564-3.75,8.564-8.381v-45.252h55.947v45.252
+                            c0,4.629,3.834,8.381,8.563,8.381s8.564-3.75,8.564-8.381V71.368C150.384,66.739,146.551,62.987,141.821,62.987z"/>
+                    <path id="E" d="M242.298,170.252h-54.805c-0.316,0-0.572-0.25-0.572-0.559v-36.314h37.107c4.729,0,8.564-3.75,8.564-8.379
+                            c0-4.629-3.835-8.38-8.564-8.38h-37.107V80.305c0-0.308,0.254-0.558,0.572-0.558h54.805c4.729,0,8.563-3.751,8.563-8.38
+                            c0-4.629-3.832-8.38-8.563-8.38h-54.805c-9.76,0-17.698,7.768-17.698,17.318v89.386c0,9.553,7.938,17.32,17.698,17.32h54.805
+                            c4.729,0,8.563-3.75,8.563-8.381C250.861,174.004,247.027,170.252,242.298,170.252z"/>
+                    <path id="L" d="M342.773,170.252h-54.807c-0.313,0-0.57-0.25-0.57-0.559V71.367c0-4.628-3.832-8.381-8.564-8.381
+                            c-4.729,0-8.564,3.752-8.564,8.381v98.327c0,9.549,7.941,17.32,17.697,17.32h54.807c4.729,0,8.564-3.752,8.564-8.381
+                            C351.336,174.002,347.504,170.252,342.773,170.252z"/>
+                    <path id="P" d="M406.715,62.986h-27.404c-9.76,0-17.697,7.769-17.697,17.319v98.328c0,4.629,3.836,8.381,8.566,8.381
+                            c4.727,0,8.562-3.752,8.562-8.381v-27.375h27.976c24.869,0,45.1-19.799,45.1-44.135C451.816,82.786,431.581,62.986,406.715,62.986z
+                             M406.715,134.496h-27.976V80.305c0-0.309,0.257-0.558,0.571-0.558h27.402c15.424,0,27.973,12.28,27.973,27.375
+                            C434.688,122.216,422.139,134.496,406.715,134.496z"/>
+                </g>
+            </svg>
+        </a>
+    </div>
+</div>
 </body>
 </html>
