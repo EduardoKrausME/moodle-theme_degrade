@@ -60,8 +60,8 @@ if (get_config('theme_degrade', 'home_type') != 0) {
 
     $icon = $OUTPUT->image_url("google-fonts", "theme_degrade")->out(false);
     $setting = new admin_setting_configtextarea('theme_degrade/pagefonts',
-        get_string('content_pagefonts', 'local_kopere_dashboard'),
-        get_string('content_pagefonts_desc', 'local_kopere_dashboard', $icon), "");
+        get_string('content_pagefonts', 'theme_boost_magnific'),
+        get_string('content_pagefonts_desc', 'theme_boost_magnific', $icon), "");
     $page->add($setting);
 
 } else {
