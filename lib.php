@@ -535,6 +535,13 @@ function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $for
     if ($context->contextlevel == CONTEXT_SYSTEM) {
         if ($filearea === 'style') {
             theme_degrade_serve_css($args[1]);
+        } else if ($filearea === 'editor_home' || $filearea === 'editor_footer') {
+            $fullpath = sha1("/{$context->id}/theme_degrade/{$filearea}/{$args[0]}/{$args[1]}");
+            $fs = get_file_storage();
+            if ($file = $fs->get_file_by_hash($fullpath)) {
+                return send_stored_file($file, 0, 0, false, $options);
+            }
+            send_file_not_found();
         } else if ($filearea === 'pagebackground') {
             return $theme->setting_file_serve('pagebackground', $args, $forcedownload, $options);
         } else if (preg_match("/slide[1-9][0-9]*image/", $filearea) !== false) {
@@ -581,16 +588,13 @@ function theme_degrade_process_css($css, $theme) {
 
     $fontfamily = theme_degrade_get_setting("fontfamily");
     if (isset($fontfamily[3])) {
-        $sizes = "0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap";
-        $fontfamily1 = "@import url('https://fonts.googleapis.com/css2?family={$fontfamily}:ital,wght@{$sizes}');";
-        $fontfamily2 = "body,*{font-family:{$fontfamily}, Arial, Helvetica, sans-serif;}";
+        $fontfamily = "body,*{font-family:{$fontfamily}, Arial, Helvetica, sans-serif;}";
     } else {
-        $fontfamily1 = "";
-        $fontfamily2 = "body,*{font-family:Arial, Helvetica, sans-serif;}";
+        $fontfamily = "body,*{font-family:Arial, Helvetica, sans-serif;}";
     }
 
     $customcss = str_replace("&gt;", ">", theme_degrade_get_setting("customcss"));
-    $css = "{$fontfamily1}{$fontfamily2}\n\n{$css}\n{$customcss}\n{$fontfamily2}";
+    $css = "{$fontfamily}\n\n{$css}\n{$customcss}\n{$fontfamily}";
 
     $sql = "SELECT name, value  FROM {config_plugins} WHERE name LIKE 'theme_degrade_customicon_%'";
     $customicons = $DB->get_records_sql($sql);
