@@ -41,12 +41,17 @@ require_capability('moodle/site:config', context_system::instance());
 </head>
 <body>
 
-<div id="gjs" style="height:0; overflow:hidden">
+<div id="gjs" style="height-:0; overflow-:hidden">
     <?php
-    $htmldata = optional_param('htmldata', false, PARAM_RAW);
-    if ($htmldata && confirm_sesskey()) {
+    $action = optional_param('action', false, PARAM_TEXT);
+    if ($action == 'save' && confirm_sesskey()) {
+        $htmldata = optional_param('htmldata', false, PARAM_RAW);
         $cssdata = optional_param('cssdata', false, PARAM_RAW);
-        $html = "{$htmldata}\n<style>{$cssdata}</style>";
+        if ($cssdata) {
+            $html = "{$htmldata}\n<style>{$cssdata}</style>";
+        } else {
+            $html = "{$htmldata}";
+        }
         set_config("{$chave}_htmleditor_{$editlang}", $html, "theme_degrade");
 
         $home_type = get_config("theme_degrade", "home_type");
@@ -56,7 +61,7 @@ require_capability('moodle/site:config', context_system::instance());
 
     if (file_exists(__DIR__ . "/default-{$chave}.html")) {
         $htmldata = get_config("theme_degrade", "{$chave}_htmleditor_{$editlang}");
-        if ($htmldata) {
+        if (isset($htmldata[40])) {
             echo $htmldata;
         } else {
             $htmldata = file_get_contents(__DIR__ . "/default-{$chave}.html");
@@ -88,8 +93,33 @@ require_capability('moodle/site:config', context_system::instance());
         'showOffsets'     : true,
         'storageManager'  : false,
         'assetManager'    : {
-            'embedAsBase64' : true,
-            'assets'        : [],
+            'upload'     : '<?php echo $CFG->wwwroot ?>/theme/degrade/_editor/files.php?chave=<?php echo $chave ?>',
+            'uploadName' : 'files',
+            'assets'     : [<?php
+                $contextid = context_system::instance()->id;
+                $component = 'theme_degrade';
+                $filearea = "editor_{$chave}";
+                $fs = get_file_storage();
+                $files = $fs->get_area_files($contextid, $component, $filearea, false, $sort = "filename", false);
+
+                /** @var stored_file $file */
+                foreach ($files as $file) {
+                    $url = moodle_url::make_file_url(
+                        "$CFG->wwwroot/pluginfile.php",
+                        "/{$contextid}/theme_degrade/{$file->get_filearea()}/{$file->get_itemid()}{$file->get_filepath()}{$file->get_filename()}");
+                    echo "\n                '{$url->out(false)}',";
+                }
+                if($chave == 'home'){
+                  echo "
+                    '<?php echo $CFG->wwwroot ?>/theme/degrade/_editor/img/demo/78c5d6.png',
+                    '<?php echo $CFG->wwwroot ?>/theme/degrade/_editor/img/demo/459ba8.png',
+                    '<?php echo $CFG->wwwroot ?>/theme/degrade/_editor/img/demo/79c267.png',
+                    '<?php echo $CFG->wwwroot ?>/theme/degrade/_editor/img/demo/c5d647.png',
+                    '<?php echo $CFG->wwwroot ?>/theme/degrade/_editor/img/demo/f28c33.png',
+                    '<?php echo $CFG->wwwroot ?>/theme/degrade/_editor/img/demo/e868a2.png',";
+                }
+                ?>
+            ],
         },
         'selectorManager' : {componentFirst : true},
         'styleManager'    : {
@@ -558,6 +588,7 @@ require_capability('moodle/site:config', context_system::instance());
                                <input type="hidden" name="chave"    value="<?php echo $chave ?>">
                                <input type="hidden" name="editlang" value="<?php echo $editlang ?>">
                                <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>">
+                               <input type="hidden" name="action"   value="save">
                                <input type="hidden" name="htmldata" class="form-htmldata">
                                <input type="hidden" name="cssdata"  class="form-cssdata">
                                <button type="submit" class="btn-salvar gjs-pn-btn gjs-pn-active gjs-four-color">
