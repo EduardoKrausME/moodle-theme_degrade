@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&family=Inter:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Manrope:wght@200..800&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat+Subrayada:wght@400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oxygen:wght@300;400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sora:wght@100..800&display=swap');
 * {
     outline: none;
 }
@@ -1518,7 +1518,7 @@ body.limitedwidth #page.drawers .main-inner,
     height: auto;
     padding: 0;
     margin: 0;
-    overflow-y: hidden;
+    // overflow-y: hidden;
 }
 .pagelayout-admin #page.drawers {
     overflow-y: auto !important;
@@ -2158,53 +2158,58 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
         height: 100%;
     }
 }
-.header-menubar .navbar-nav .usermenu .dropdown a {
-    color: rgb(var(--color_primary));
-    padding: 7px 10px;
-    &.active,
-    &:hover,
-    &:focus {
-        font-weight: bold;
+.header-menubar .navbar-nav {
+    .usermenu .dropdown a {
         color: rgb(var(--color_primary));
-    }
-    &#user-menu-toggle {
-        color: #fff;
+        padding: 7px 10px;
         &.active,
         &:hover,
         &:focus {
             font-weight: bold;
+            color: rgb(var(--color_primary));
+        }
+        &#user-menu-toggle {
             color: #fff;
+            &.active,
+            &:hover,
+            &:focus {
+                font-weight: bold;
+                color: #fff;
+            }
         }
     }
-}
-.header-menubar .navbar-nav .editmode-switch-form {
-    margin-bottom: 0;
-}
-.header-menubar .navbar-nav .editmode-switch-form .input-group label {
-    color: #fff;
-    margin-bottom: 0;
-}
-.header-menubar .navbar-nav .simplesearchform {
-    // height: 100%;
-}
-.header-menubar .navbar-nav .simplesearchform .collapse.show {
-    position: fixed;
-}
-.header-menubar .navbar-nav .simplesearchform .btn-open {
-    color: #fff;
-}
-.header-menubar .navbar-nav .simplesearchform .collapse form .input-group .form-control {
-    height: 43px;
-    line-height: 43px;
-}
-.header-menubar .navbar-nav .simplesearchform .collapse form .input-group .btn-close {
-    right: 40px;
-}
-.header-menubar .navbar-nav .simplesearchform .collapse form .input-group .input-group-append .btn {
-    color: #fff;
-    background: rgb(var(--color_primary));
-    border: 0;
-    right: 0;
+    .editmode-switch-form {
+        margin-bottom: 0;
+        .input-group label {
+            color: #fff;
+            margin-bottom: 0;
+            @media (max-width: 900px) {
+                display: none !important;
+            }
+        }
+    }
+    .simplesearchform {
+        // height: 100%;
+        .collapse.show {
+            position: fixed;
+        }
+        .btn-open {
+            color: #fff;
+        }
+        .collapse form .input-group .form-control {
+            height: 43px;
+            line-height: 43px;
+        }
+        .collapse form .input-group .btn-close {
+            right: 40px;
+        }
+        .collapse form .input-group .input-group-append .btn {
+            color: #fff;
+            background: rgb(var(--color_primary));
+            border: 0;
+            right: 0;
+        }
+    }
 }
 .header-menubar .nav > li > a {
     font-size: 16px;
@@ -2677,7 +2682,7 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
 /*Header main*/
 #header {
     padding: 12px 0;
-    position: absolute;
+    //position: absolute;
     //top: 0;
     right: 0;
     left: 0;
@@ -2710,11 +2715,15 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
         top: 0;
         position: fixed;
         border: none;
+        height: initial;
         .logo-color {
             display: initial;
         }
         .logo-write {
             display: none;
+        }
+        .nav-link {
+            white-space: initial;
         }
         .active {
             background: transparent;
@@ -4554,7 +4563,7 @@ button.btn-footer-popover:active {
     }
 }
 #page.drawers {
-    margin-top: 100px;
+    margin-top: 14px;
 }
 .pagelayout-maintenance #page {
     margin-top: 0 !important;
