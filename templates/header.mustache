@@ -87,20 +87,11 @@
             var top = $(window).scrollTop();
             if (top > 90) {
                 header.removeClass("animation");
-                header.css({
-                    position : "fixed",
-                    top      : "-90px"
-                });
-                header.addClass("animation");
                 header.addClass("fixed-top");
-                header.css({top : 0});
+                header.addClass("animation");
             }
             if (top < 15) {
                 header.removeClass("fixed-top");
-                header.css({
-                    position : "absolute",
-                    top      : 0
-                });
             }
         }
     });
