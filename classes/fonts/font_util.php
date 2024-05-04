@@ -28,7 +28,7 @@ class font_util {
     /**
      * @return array
      *
-     * @throws \coding_exception
+     * @throws \dml_exception
      */
     private static function list_fonts() {
         static $fontList;
@@ -75,7 +75,7 @@ class font_util {
             "family=Work+Sans:ital,wght@0,100..900;1,100..900",
         ];
 
-        $pagefonts = get_string('pagefonts', 'theme_degrade');
+        $pagefonts = get_config('theme_degrade', 'pagefonts');
         preg_match_all('/(family=.*?)&/', $pagefonts, $fontsuser);
         if (isset($fontsuser[1])) {
             $fonts = array_merge($fontsuser[1], $fontsdefault);
@@ -108,7 +108,7 @@ class font_util {
     /**
      * @return string
      *
-     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function css() {
         return self::list_fonts()['css'];
@@ -117,7 +117,7 @@ class font_util {
     /**
      * @return string
      *
-     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function grapsjs() {
         return self::list_fonts()['grapsjs'];
@@ -126,19 +126,25 @@ class font_util {
     /**
      * @return string
      *
-     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function ckeditor() {
         return self::list_fonts()['ckeditor'];
     }
 
     /**
-     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function print_only_unique() {
         static $printed = false;
         if ($printed) return "";
         $printed = true;
+
+        global $PAGE;
+        $PAGE->requires->js_call_amd('theme_boost/index');
+        $PAGE->requires->jquery();
+        $PAGE->requires->jquery_plugin("ui");
+        $PAGE->requires->jquery_plugin("ui-css");
 
         return "<link rel='stylesheet' href='" . font_util::css() . "'>";
     }
