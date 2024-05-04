@@ -33,8 +33,9 @@ if (get_config('theme_degrade', 'home_type') != 0) {
 
     $text = get_string('editor_link_home_all', 'theme_degrade');
     $html = "<a class='btn btn-info mt-1 mb-2' href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&editlang=all'>{$text}</a>";
-    if (!isset(get_config("theme_degrade", "home_htmleditor_all")[3]))
+    if (!isset(get_config("theme_degrade", "home_htmleditor_all")[40])) {
         $html = "{$html} <strong class='alert-warning'>{$empty_text}</strong>";
+    }
     $description .= "{$html}<br>";
 
     if ($CFG->langmenu) {
@@ -43,8 +44,9 @@ if (get_config('theme_degrade', 'home_type') != 0) {
 
         $text = get_string('editor_link_home', 'theme_degrade', $lang_name);
         $html = "<a class='btn btn-info mt-1 mb-2' href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&editlang={$CFG->lang}'>{$text}</a>";
-        if (!isset(get_config("theme_degrade", "home_htmleditor_{$CFG->lang}")[3]))
+        if (!isset(get_config("theme_degrade", "home_htmleditor_{$CFG->lang}")[40])) {
             $html = "{$html} <strong class='alert-warning'>{$empty_text}</strong>";
+        }
         $description .= "{$html}<br>";
 
         foreach ($list_of_translations as $lang_key => $lang_name) {
@@ -52,17 +54,12 @@ if (get_config('theme_degrade', 'home_type') != 0) {
 
             $text = get_string('editor_link_home', 'theme_degrade', $lang_name);
             $html = "<a class='btn btn-info mt-1' href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&editlang={$lang_key}'>{$text}</a>";
-            if (!isset(get_config("theme_degrade", "home_htmleditor_{$lang_key}")[3]))
+            if (!isset(get_config("theme_degrade", "home_htmleditor_{$lang_key}")[40])) {
                 $html = "{$html} <strong class='alert-warning'>{$empty_text}</strong>";
+            }
             $description .= "{$html}<br>";
         }
     }
-
-    $icon = $OUTPUT->image_url("google-fonts", "theme_degrade")->out(false);
-    $setting = new admin_setting_configtextarea('theme_degrade/pagefonts',
-        get_string('content_pagefonts', 'theme_boost_magnific'),
-        get_string('content_pagefonts_desc', 'theme_boost_magnific', $icon), "");
-    $page->add($setting);
 
 } else {
     $description = get_string('content_type_home_desc', 'theme_degrade');
@@ -76,6 +73,14 @@ $setting = new admin_setting_configselect('theme_degrade/home_type',
     $description, 0, $choices);
 $page->add($setting);
 $PAGE->requires->js_call_amd('theme_degrade/settings', 'autosubmit', [$setting->get_id()]);
+
+if (get_config('theme_degrade', 'home_type') != 0) {
+    $icon = $OUTPUT->image_url("google-fonts", "theme_degrade")->out(false);
+    $setting = new admin_setting_configtextarea('theme_degrade/pagefonts',
+        get_string('content_pagefonts', 'theme_degrade'),
+        get_string('content_pagefonts_desc', 'theme_degrade', $icon), "");
+    $page->add($setting);
+}
 
 
 if (get_config('theme_degrade', 'home_type') == 0) {

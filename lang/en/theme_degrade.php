@@ -22,8 +22,8 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Degrade';
-$string['choosereadme'] = 'Degrade is a theme crafted with care to bring cheerful colors to Moodle.';
+$string['pluginname'] = 'Boost Magnific';
+$string['choosereadme'] = 'Boost Magnific is a theme crafted with care to bring cheerful colors to Moodle.';
 
 // Slides.
 $string['settings_slideshow_heading'] = 'SlideShow';
@@ -132,14 +132,13 @@ $string['footer_show_copywriter'] = 'Show Made with ❤️';
 $string['footer_show_copywriter_desc'] = 'Uncheck if you want to hide the "Made with ❤️"';
 
 // Logos.
-$string['settings_logos_heading'] = 'Logos';
 $string['logo_color'] = 'Colored Logo';
 $string['logo_color_desc'] = 'Please upload your colored LOGO if you want to include it at the top. This logo will be displayed as the page is scrolled, and the menu will be displayed on a white background.';
-$string['logo_write'] = 'White Logo';
-$string['logo_write_desc'] = 'Please upload your white LOGO if you want to include it at the top. This logo will be displayed when scrolling remains at the top, and the menu will be displayed on a colored background.';
+$string['logo_write'] = 'Top menu logo on scroll';
+$string['logo_write_desc'] = 'Please upload your logo if you wish to include it at the top. This logo will be displayed when scrolling remains at the top, and the menu will be displayed on a colored background.';
 
 // Themes and CSS.
-$string['settings_theme_heading'] = 'Theme and CSS';
+$string['settings_theme_heading'] = 'Theme';
 $string['customcss'] = 'Custom CSS';
 $string['customcss_desc'] = 'Any CSS rules you add to this text area will be reflected on all pages, making it easy to customize this theme.';
 $string['fontfamily'] = 'Site Font';
@@ -193,7 +192,7 @@ $string['login_signup_description'] = 'Text on the side of the Create an Account
 $string['login_signup_description_desc'] = 'Text that will appear only on the Create an Account screen';
 
 // Privacy.
-$string['privacy:metadata'] = 'The Degrade theme does not store any personal data about any user.';
+$string['privacy:metadata'] = 'The Boost Magnific theme does not store any personal data about any user.';
 
 // Settings icons.
 $string['settings_icons_heading'] = 'Icons';
@@ -239,7 +238,6 @@ $string['content_type_default'] = 'Moodle default';
 $string['content_type_html'] = 'Page to be created with editor';
 $string['content_pagefonts'] = 'Google Extra Fonts';
 $string['content_pagefonts_desc'] = 'Add here the @import link from Google for extra fonts.<br>You can put multiple import.<br><a href="https://fonts.google.com/selection/embed" target="google">Embed code</a><br><img src="{$a}" style="max-width: 100%;width: 420px;">';
-
 
 // HTML Editor.
 $string['grapsjs-assetmanager-addbutton'] = 'Add image';
