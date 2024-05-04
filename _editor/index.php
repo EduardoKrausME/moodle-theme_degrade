@@ -58,7 +58,7 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
     </head>
     <body>
 
-    <div id="gjs" style="height-:0; overflow-:hidden">
+    <div id="gjs" style="height:0; overflow:hidden">
         <?php
         $action = optional_param('action', false, PARAM_TEXT);
         if ($action == 'save' && confirm_sesskey()) {
@@ -409,9 +409,7 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
                     'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
                     '<?php echo \theme_degrade\fonts\font_util::css() ?>',
                 ],
-                'scripts' : [
-                    'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
-                ],
+                'scripts' : [],
             },
             'i18n'            : {
                 'locale'         : 'en',
