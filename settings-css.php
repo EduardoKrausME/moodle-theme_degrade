@@ -42,7 +42,7 @@ $fontslist = [
 $description = "";
 foreach ($fontslist as $font) {
     $description .= "<div style='font-family:\"{$font}\";font-size:1.2em'>
-                         <a href='https://fonts.google.com/specimen/{$font}' 
+                         <a href='https://fonts.google.com/specimen/{$font}'
                             target='_blank' style='font-family:\"{$font}\"'>{$font}</a>
                          - \"Lorem ipsum dolor sit amet, consectetur adipiscing elit\"</div>";
 }
@@ -52,7 +52,6 @@ $setting = new admin_setting_configselect('theme_degrade/fontfamily',
     'Roboto', $fontslist);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
-
 
 $setting = new admin_setting_configtextarea('theme_degrade/customcss',
     get_string('customcss', 'theme_degrade'),

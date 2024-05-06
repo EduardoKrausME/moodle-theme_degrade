@@ -21,7 +21,6 @@
 
 namespace theme_degrade\output\core;
 
-
 use context_course;
 use moodle_url;
 use user_picture;

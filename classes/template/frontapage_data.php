@@ -130,10 +130,10 @@ class frontapage_data {
      * @throws \dml_exception
      */
     public static function home_html() {
-        $home_type = get_config("theme_degrade", "home_type");
+        $hometype = get_config("theme_degrade", "home_type");
         $chave = optional_param('chave', false, PARAM_TEXT);
 
-        if ($home_type == 1 || $chave == "home") {
+        if ($hometype == 1 || $chave == "home") {
             if ($chave == 'home') {
                 $htmldata = optional_param('htmldata', false, PARAM_RAW);
                 $cssdata = optional_param('cssdata', false, PARAM_RAW);

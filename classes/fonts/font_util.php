@@ -31,14 +31,15 @@ class font_util {
      * @throws \dml_exception
      */
     private static function list_fonts() {
-        static $fontList;
-        if ($fontList) {
-            return $fontList;
+        static $fontlist;
+        if ($fontlist) {
+            return $fontlist;
         }
 
         $fontsdefault = [
             "family=Alex+Brush",
-            "family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900",
+            "family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;" .
+            "1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900",
             "family=Bebas+Neue",
             "family=Cabin:ital,wght@0,400..700;1,400..700",
             "family=Caveat+Brush",
@@ -56,12 +57,14 @@ class font_util {
             "family=Josefin+Sans:ital,wght@0,100..700;1,100..700",
             "family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900",
             "family=Lora:ital,wght@0,400..700;1,400..700",
-            "family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900",
+            "family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;" .
+            "1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900",
             "family=Montserrat:ital,wght@0,100..900;1,100..900",
             "family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000",
             "family=Nunito:ital,wght@0,200..1000;1,200..1000",
             "family=Open+Sans:ital,wght@0,300..800;1,300..800",
-            "family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900",
+            "family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;" .
+            "1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900",
             "family=Raleway+Dots",
             "family=Raleway:ital,wght@0,100..900;1,100..900",
             "family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900",
@@ -81,28 +84,28 @@ class font_util {
             $fonts = array_merge($fontsuser[1], $fontsdefault);
         }
 
-        $fontList = ['css' => [], 'grapsjs' => [], 'ckeditor' => []];
+        $fontlist = ['css' => [], 'grapsjs' => [], 'ckeditor' => []];
         foreach ($fonts as $font) {
 
-            preg_match('/family=([A-Z,a-z\+]{2,30})/', $font, $fontInfo);
-            if ($fontInfo[1]) {
-                $fontList['css'][] = $font;
-                $fontName = urldecode($fontInfo[1]);
+            preg_match('/family=([A-Z,a-z\+]{2,30})/', $font, $fontinfo);
+            if ($fontinfo[1]) {
+                $fontlist['css'][] = $font;
+                $fontname = urldecode($fontinfo[1]);
 
-                $fontList['grapsjs'][] = "
+                $fontlist['grapsjs'][] = "
                         {
-                            'id' : \"'{$fontName}'\", 
-                            'label' : '{$fontName}', 
+                            'id' : \"'{$fontname}'\",
+                            'label' : '{$fontname}',
                         }";
-                $fontList['ckeditor'][] = "{$fontName}/{$fontName}";
+                $fontlist['ckeditor'][] = "{$fontname}/{$fontname}";
             }
         }
 
-        $fontList['css'] = 'https://fonts.googleapis.com/css2?' . implode('&', $fontList['css']) . '&display=swap';
-        $fontList['grapsjs'] = implode(",", $fontList['grapsjs']);
-        $fontList['ckeditor'] = implode(";", $fontList['ckeditor']);
+        $fontlist['css'] = 'https://fonts.googleapis.com/css2?' . implode('&', $fontlist['css']) . '&display=swap';
+        $fontlist['grapsjs'] = implode(",", $fontlist['grapsjs']);
+        $fontlist['ckeditor'] = implode(";", $fontlist['ckeditor']);
 
-        return $fontList;
+        return $fontlist;
     }
 
     /**
@@ -137,7 +140,9 @@ class font_util {
      */
     public static function print_only_unique() {
         static $printed = false;
-        if ($printed) return "";
+        if ($printed) {
+            return "";
+        }
         $printed = true;
 
         global $PAGE;
@@ -146,6 +151,6 @@ class font_util {
         $PAGE->requires->jquery_plugin("ui");
         $PAGE->requires->jquery_plugin("ui-css");
 
-        return "<link rel='stylesheet' href='" . font_util::css() . "'>";
+        return "<link rel='stylesheet' href='" . self::css() . "'>";
     }
 }

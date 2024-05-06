@@ -25,7 +25,6 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
 namespace theme_degrade\output\core;
 
 use html_writer;
@@ -645,5 +644,3 @@ class course_renderer extends \core_course_renderer {
         return $output;
     }
 }
-
-

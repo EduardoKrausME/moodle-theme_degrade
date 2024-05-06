@@ -126,6 +126,3 @@ define(["jquery"], function($) {
 
     return theme_degrade;
 });
-
-
-

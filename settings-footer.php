@@ -24,36 +24,43 @@ defined('MOODLE_INTERNAL') || die;
 $page = new admin_settingpage('theme_degrade_footer',
     get_string('settings_footer_heading', 'theme_degrade'));
 
-
 $footer = get_string('content_type_footer', 'theme_degrade');
 if (get_config('theme_degrade', 'footer_type') != 0) {
     $description = get_string('content_type_footer_desc', 'theme_degrade', $footer) . "<br>";
 
-    $empty_text = get_string('content_type_empty', 'theme_degrade');
+    $emptytext = get_string('content_type_empty', 'theme_degrade');
 
     $text = get_string('editor_link_footer_all', 'theme_degrade');
-    $html = "<a class='btn btn-info mt-1 mb-2' href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=footer&editlang=all'>{$text}</a>";
-    if (!isset(get_config("theme_degrade", "footer_htmleditor_all")[3]))
-        $html = "{$html} <strong class='alert-warning'>{$empty_text}</strong>";
+    $html = "<a class='btn btn-info mt-1 mb-2'
+                href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=footer&editlang=all'>{$text}</a>";
+    if (!isset(get_config("theme_degrade", "footer_htmleditor_all")[3])) {
+        $html = "{$html} <strong class='alert-warning'>{$emptytext}</strong>";
+    }
     $description .= "{$html}<br>";
 
     if ($CFG->langmenu) {
-        $list_of_translations = get_string_manager()->get_list_of_translations();
-        $lang_name = $list_of_translations[$CFG->lang];
+        $listoftranslations = get_string_manager()->get_list_of_translations();
+        $langname = $listoftranslations[$CFG->lang];
 
-        $text = get_string('editor_link_footer', 'theme_degrade', $lang_name);
-        $html = "<a class='btn btn-info mt-1 mb-2' href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=footer&editlang={$CFG->lang}'>{$text}</a>";
-        if (!isset(get_config("theme_degrade", "footer_htmleditor_{$CFG->lang}")[3]))
-            $html = "{$html} <strong class='alert-warning'>{$empty_text}</strong>";
+        $text = get_string('editor_link_footer', 'theme_degrade', $langname);
+        $html = "<a class='btn btn-info mt-1 mb-2'
+                    href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=footer&editlang={$CFG->lang}'>{$text}</a>";
+        if (!isset(get_config("theme_degrade", "footer_htmleditor_{$CFG->lang}")[3])) {
+            $html = "{$html} <strong class='alert-warning'>{$emptytext}</strong>";
+        }
         $description .= "{$html}<br>";
 
-        foreach ($list_of_translations as $lang_key => $lang_name) {
-            if ($CFG->lang == $lang_key) continue;
+        foreach ($listoftranslations as $langkey => $langname) {
+            if ($CFG->lang == $langkey) {
+                continue;
+            }
 
-            $text = get_string('editor_link_footer', 'theme_degrade', $lang_name);
-            $html = "<a class='btn btn-info mt-1' href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=footer&editlang={$lang_key}'>{$text}</a>";
-            if (!isset(get_config("theme_degrade", "footer_htmleditor_{$lang_key}")[3]))
-                $html = "{$html} <strong class='alert-warning'>{$empty_text}</strong>";
+            $text = get_string('editor_link_footer', 'theme_degrade', $langname);
+            $html = "<a class='btn btn-info mt-1'
+                        href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=footer&editlang={$langkey}'>{$text}</a>";
+            if (!isset(get_config("theme_degrade", "footer_htmleditor_{$langkey}")[3])) {
+                $html = "{$html} <strong class='alert-warning'>{$emptytext}</strong>";
+            }
             $description .= "{$html}<br>";
         }
     }
@@ -69,7 +76,6 @@ $setting = new admin_setting_configselect('theme_degrade/footer_type',
     $description, 0, $choices);
 $page->add($setting);
 $PAGE->requires->js_call_amd('theme_degrade/settings', 'autosubmit', [$setting->get_id()]);
-
 
 if (get_config('theme_degrade', 'footer_type') == 0) {
     $setting = new admin_setting_heading('theme_degrade_footerblock_description',
@@ -129,7 +135,6 @@ if (get_config('theme_degrade', 'footer_type') == 0) {
         get_string('social_instagram', 'theme_degrade'),
         get_string('social_instagram_desc', 'theme_degrade'), '');
     $page->add($setting);
-
 
     $setting = new admin_setting_heading('theme_degrade_footerblock_contact',
         get_string('footerblock_contact', 'theme_degrade') . ' 4 ', '');

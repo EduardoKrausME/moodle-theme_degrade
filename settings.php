@@ -50,5 +50,3 @@ if ($ADMIN->fulltree) {
 
     require_once(__DIR__ . "/settings-login.php");
 }
-
-

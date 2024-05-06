@@ -23,7 +23,6 @@ defined('MOODLE_INTERNAL') || die;
 
 $page = new admin_settingpage('theme_degrade_login', get_string('settings_login_heading', 'theme_degrade'));
 
-
 $choices = [
     'login_theme_block' => get_string('login_theme_block', 'theme_degrade'),
     'login_theme_image_login' => get_string('login_theme_image_login', 'theme_degrade'),
@@ -37,7 +36,6 @@ $setting = new admin_setting_configselect('theme_degrade/login_theme',
     'login_theme_block', $choices);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
-
 
 $link = '<a href="https://www.freepik.com/free-photo/teacher-talking-with-her-students-online_11332964.htm"
             target="_blank">Teacher talking with her students online</a>';
@@ -71,6 +69,5 @@ $page->add($setting);
 
 global $PAGE;
 $PAGE->requires->js_call_amd('theme_degrade/settings', 'login');
-
 
 $settings->add($page);

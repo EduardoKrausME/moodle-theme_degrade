@@ -59,7 +59,6 @@ $THEME->activityheaderconfig = [
     'notitle' => true
 ];
 
-
 $THEME->layouts = [
     // Most backwards compatible layout without the blocks.
     'base' => array(

@@ -55,7 +55,6 @@ for ($i = 1; $i <= 20; $i++) {
     $page->add($setting);
 }
 
-
 $settings->add($page);
 global $PAGE;
 $PAGE->requires->js_call_amd('theme_degrade/settings', 'icons');

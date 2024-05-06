@@ -45,6 +45,3 @@ define([
 
     return slideshow_degrade;
 });
-
-
-

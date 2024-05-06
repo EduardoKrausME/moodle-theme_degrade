@@ -22,12 +22,13 @@
 
 namespace theme_degrade\template;
 
-
 class login_data {
 
     /**
      * @return array
+     *
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function get_data() {
         global $OUTPUT;

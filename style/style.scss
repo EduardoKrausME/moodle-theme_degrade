@@ -1551,7 +1551,7 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
             background: none;
         }
     }
-    
+
 }
 #header .dropdown-item[aria-current="true"]:focus-within,
 #header .dropdown-item[aria-current="true"]:hover,
@@ -4592,7 +4592,7 @@ button.btn-footer-popover:active {
 }
 #page-header {
     @import "crumbs";
-    
+
     .menubar .dropdown .dropdown-menu .dropdown-item {
         padding: 0;
         a {
@@ -4697,7 +4697,7 @@ button.btn-footer-popover:active {
                 }
             }
         }
-        
+
     }
     .messagearea {
         float: none;
@@ -4757,7 +4757,7 @@ button.btn-footer-popover:active {
             color: rgb(var(--color_primary));
         }
     }
-    
+
 }
 .courseindex {
     .courseindex-section .courseindex-sectioncontent .courseindex-item.pageitem {

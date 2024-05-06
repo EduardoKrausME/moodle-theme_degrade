@@ -24,38 +24,42 @@ defined('MOODLE_INTERNAL') || die;
 $page = new admin_settingpage('theme_degrade_frontpage_home',
     get_string('theme_degrade_frontpage_home', 'theme_degrade'));
 
-
 $home = get_string('content_type_home', 'theme_degrade');
 if (get_config('theme_degrade', 'home_type') != 0) {
     $description = get_string('content_type_home_desc', 'theme_degrade', $home) . "<br>";
 
-    $empty_text = get_string('content_type_empty', 'theme_degrade');
+    $emptytext = get_string('content_type_empty', 'theme_degrade');
 
     $text = get_string('editor_link_home_all', 'theme_degrade');
-    $html = "<a class='btn btn-info mt-1 mb-2' href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&editlang=all'>{$text}</a>";
+    $html = "<a class='btn btn-info mt-1 mb-2'
+                href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&editlang=all'>{$text}</a>";
     if (!isset(get_config("theme_degrade", "home_htmleditor_all")[40])) {
-        $html = "{$html} <strong class='alert-warning'>{$empty_text}</strong>";
+        $html = "{$html} <strong class='alert-warning'>{$emptytext}</strong>";
     }
     $description .= "{$html}<br>";
 
     if ($CFG->langmenu) {
-        $list_of_translations = get_string_manager()->get_list_of_translations();
-        $lang_name = $list_of_translations[$CFG->lang];
+        $listoftranslations = get_string_manager()->get_list_of_translations();
+        $langname = $listoftranslations[$CFG->lang];
 
-        $text = get_string('editor_link_home', 'theme_degrade', $lang_name);
-        $html = "<a class='btn btn-info mt-1 mb-2' href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&editlang={$CFG->lang}'>{$text}</a>";
+        $text = get_string('editor_link_home', 'theme_degrade', $langname);
+        $html = "<a class='btn btn-info mt-1 mb-2'
+                    href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&editlang={$CFG->lang}'>{$text}</a>";
         if (!isset(get_config("theme_degrade", "home_htmleditor_{$CFG->lang}")[40])) {
-            $html = "{$html} <strong class='alert-warning'>{$empty_text}</strong>";
+            $html = "{$html} <strong class='alert-warning'>{$emptytext}</strong>";
         }
         $description .= "{$html}<br>";
 
-        foreach ($list_of_translations as $lang_key => $lang_name) {
-            if ($CFG->lang == $lang_key) continue;
+        foreach ($listoftranslations as $langkey => $langname) {
+            if ($CFG->lang == $langkey) {
+                continue;
+            }
 
-            $text = get_string('editor_link_home', 'theme_degrade', $lang_name);
-            $html = "<a class='btn btn-info mt-1' href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&editlang={$lang_key}'>{$text}</a>";
-            if (!isset(get_config("theme_degrade", "home_htmleditor_{$lang_key}")[40])) {
-                $html = "{$html} <strong class='alert-warning'>{$empty_text}</strong>";
+            $text = get_string('editor_link_home', 'theme_degrade', $langname);
+            $html = "<a class='btn btn-info mt-1'
+                        href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&editlang={$langkey}'>{$text}</a>";
+            if (!isset(get_config("theme_degrade", "home_htmleditor_{$langkey}")[40])) {
+                $html = "{$html} <strong class='alert-warning'>{$emptytext}</strong>";
             }
             $description .= "{$html}<br>";
         }
@@ -82,7 +86,6 @@ if (get_config('theme_degrade', 'home_type') != 0) {
     $page->add($setting);
 }
 
-
 if (get_config('theme_degrade', 'home_type') == 0) {
     $setting = new admin_setting_heading("theme_degrade/heart", '',
         get_string('heart', 'theme_degrade', 'https://moodle.org/plugins/theme_degrade'));
@@ -102,7 +105,6 @@ if (get_config('theme_degrade', 'home_type') == 0) {
         get_string('footer_frontpage_blockcourses_instructor_desc', 'theme_degrade'),
         1);
     $page->add($setting);
-
 
     $setting = new admin_setting_heading("theme_degrade/theme_degrade_frontpage_bloco",
         get_string('theme_degrade_frontpage_bloco', 'theme_degrade', get_string('mycourses')), '');

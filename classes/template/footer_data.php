@@ -22,7 +22,6 @@
 
 namespace theme_degrade\template;
 
-
 use theme_degrade\fonts\font_util;
 
 class footer_data {
@@ -195,10 +194,10 @@ class footer_data {
      * @throws \dml_exception
      */
     private static function footer_html() {
-        $footer_type = get_config("theme_degrade", "footer_type");
+        $footertype = get_config("theme_degrade", "footer_type");
         $chave = optional_param('chave', false, PARAM_TEXT);
 
-        if ($footer_type == 1 || $chave == "footer") {
+        if ($footertype == 1 || $chave == "footer") {
             if ($chave == 'footer') {
                 $htmldata = optional_param('htmldata', false, PARAM_RAW);
                 $cssdata = optional_param('cssdata', false, PARAM_RAW);

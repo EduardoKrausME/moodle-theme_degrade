@@ -26,7 +26,6 @@ defined('MOODLE_INTERNAL') || die;
 require_once($CFG->libdir . '/behat/lib.php');
 require_once($CFG->dirroot . '/course/lib.php');
 
-
 // Add block button in editing mode.
 $addblockbutton = $OUTPUT->addblockbutton();
 

@@ -77,8 +77,7 @@ $setting = new admin_setting_configstoredfile('theme_degrade/logo_color',
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
-
-// Cores do topo
+// Cores do topo.
 $setting = new admin_setting_heading("theme_degrade/top_color_heading",
     get_string('top_color_heading', 'theme_degrade'), '');
 $page->add($setting);
@@ -103,8 +102,7 @@ $setting = new admin_setting_configstoredfile('theme_degrade/logo_write',
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
-
-// Cores dos botões
+// Cores dos botões.
 $setting = new admin_setting_heading("theme_degrade/theme_color_heading",
     get_string('theme_color_heading', 'theme_degrade'),  '');
 $page->add($setting);
@@ -177,7 +175,6 @@ $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 $PAGE->requires->js_call_amd('theme_degrade/settings', 'theme_color');
 
-
 $colors = ['color_primary', 'color_secondary', 'color_buttons', 'color_names', 'color_titles'];
 foreach ($colors as $color) {
 
@@ -188,8 +185,7 @@ foreach ($colors as $color) {
     $page->add($setting);
 }
 
-
-// Favicon
+// Favicon.
 $setting = new admin_setting_heading("theme_degrade/favicon_heading",
     get_string('favicon', 'admin'), '');
 $page->add($setting);
@@ -201,7 +197,6 @@ $setting = new admin_setting_configstoredfile('core_admin/favicon',
     ['maxfiles' => 1, 'accepted_types' => ['image']]);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
-
 
 $fontsarr = [
     'Roboto' => 'Roboto',
@@ -223,7 +218,6 @@ $setting = new admin_setting_configselect('theme_degrade/fontfamily',
     'Roboto', $fontsarr);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
-
 
 $setting = new admin_setting_configtextarea('theme_degrade/customcss',
     get_string('customcss', 'theme_degrade'),
