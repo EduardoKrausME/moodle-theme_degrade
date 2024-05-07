@@ -22,36 +22,60 @@
 defined('MOODLE_INTERNAL') || die;
 global $PAGE;
 
-$page = new admin_settingpage('theme_degrade_css', 'CSS');
-
-$fontslist = [
-    'Epilogue' => 'Epilogue',
-    'Inter' => 'Inter',
-    'Lato' => 'Lato',
-    'Manrope' => 'Manrope',
-    'Montserrat' => 'Montserrat',
-    'Nunito' => 'Nunito',
-    'Nunito Sans' => 'Nunito Sans',
-    'Open Sans' => 'Open Sans',
-    'Oxygen' => 'Oxygen',
-    'Poppins' => 'Poppins',
-    'Raleway' => 'Raleway',
-    'Roboto' => 'Roboto',
-    'Sora' => 'Sora',
-];
+$fontslist = \theme_degrade\fonts\font_util::site('sitefonts');
 $description = "";
 foreach ($fontslist as $font) {
     $description .= "<div style='font-family:\"{$font}\";font-size:1.2em'>
                          <a href='https://fonts.google.com/specimen/{$font}'
                             target='_blank' style='font-family:\"{$font}\"'>{$font}</a>
-                         - \"Lorem ipsum dolor sit amet, consectetur adipiscing elit\"</div>";
+                         - \"Lorem ipsum dolor sit amet.
+                            <strong>strong</strong>  <em>em</em> <strong><em>strong/em</em></strong>\"</div>";
 }
+
+$page = new admin_settingpage('theme_degrade_css',
+    get_string('settings_css_heading', 'theme_degrade'));
+
+$setting = new admin_setting_heading("theme_degrade/fonts",
+    get_string('fontpreview', 'theme_degrade'),
+    "<blockquote>{$description}</blockquote>");
+$page->add($setting);
+
+$setting = new admin_setting_configselect('theme_degrade/fontfamily_title',
+    get_string('fontfamily_title', 'theme_degrade'),
+    get_string('fontfamily_title_desc', 'theme_degrade'),
+    'Montserrat', $fontslist);
+$setting->set_updatedcallback('theme_reset_all_caches');
+$page->add($setting);
+
 $setting = new admin_setting_configselect('theme_degrade/fontfamily',
     get_string('fontfamily', 'theme_degrade'),
-    get_string('fontfamily_desc', 'theme_degrade') . $description,
+    get_string('fontfamily_desc', 'theme_degrade'),
     'Roboto', $fontslist);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
+
+$setting = new admin_setting_configselect('theme_degrade/fontfamily_menus',
+    get_string('fontfamily_menus', 'theme_degrade'),
+    get_string('fontfamily_menus_desc', 'theme_degrade'),
+    'Roboto', $fontslist);
+$setting->set_updatedcallback('theme_reset_all_caches');
+$page->add($setting);
+
+$setting = new admin_setting_configselect('theme_degrade/fontfamily_sitename',
+    get_string('fontfamily_sitename', 'theme_degrade'),
+    get_string('fontfamily_sitename_desc', 'theme_degrade'),
+    'Roboto', $fontslist);
+$setting->set_updatedcallback('theme_reset_all_caches');
+$page->add($setting);
+
+
+$icon = $OUTPUT->image_url("google-fonts", "theme_degrade")->out(false);
+$extra = "<br><a href=\"https://fonts.google.com/selection/embed\" target=\"google\">Embed code Page</a><br><img src=\"{$icon}\" style=\"max-width: 100%;width: 420px;\">";
+$setting = new admin_setting_configtextarea('theme_degrade/sitefonts',
+    get_string('sitefonts', 'theme_degrade'),
+    get_string('sitefonts_desc', 'theme_degrade') . $extra, "");
+$page->add($setting);
+
 
 $setting = new admin_setting_configtextarea('theme_degrade/customcss',
     get_string('customcss', 'theme_degrade'),

@@ -574,12 +574,18 @@ function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $for
 function theme_degrade_process_css($css, $theme) {
     global $DB;
 
+    // Import site fonts.
+    $fontimport = \theme_degrade\fonts\font_util::css('sitefonts');
+    $css = "@import url('{$fontimport}');\n{$css}";
+
+    // Local css.
     if (@file_exists(__DIR__ . "/style/boost_training.css")) {
         $customcss = file_get_contents(__DIR__ . "/style/boost_training.css");
 
-        $css = "{$css}{$customcss}";
+        $css = "{$css}\n{$customcss}";
     }
 
+    // Color list.
     $css =
         ":root {\n" .
         "    --color_primary:   " . theme_degrade_process_color_hex("theme_color__color_primary") . " !important;\n" .
@@ -589,16 +595,11 @@ function theme_degrade_process_css($css, $theme) {
         "    --color_titles:    " . theme_degrade_process_color_hex("theme_color__color_titles") . " !important;\n" .
         "}" . $css;
 
-    $fontfamily = theme_degrade_get_setting("fontfamily");
-    if (isset($fontfamily[3])) {
-        $fontfamily = "body,*{font-family:{$fontfamily}, Arial, Helvetica, sans-serif;}";
-    } else {
-        $fontfamily = "body,*{font-family:Arial, Helvetica, sans-serif;}";
-    }
-
+    // Custom CSS.
     $customcss = str_replace("&gt;", ">", theme_degrade_get_setting("customcss"));
-    $css = "{$fontfamily}\n\n{$css}\n{$customcss}\n{$fontfamily}";
+    $css = "{$css}\n{$customcss}";
 
+    // Icons modules.
     $sql = "SELECT name, value  FROM {config_plugins} WHERE name LIKE 'theme_degrade_customicon_%'";
     $customicons = $DB->get_records_sql($sql);
     foreach ($customicons as $customicon) {
@@ -632,13 +633,14 @@ function theme_degrade_process_css($css, $theme) {
             }";
     }
 
+    // Color on roll page.
     global $CFG;
     if ($CFG->theme != "boost_training") {
         $topscrollbackgroundcolor = theme_degrade_get_setting("top_scroll_background_color");
         $topscrolltextcolor = theme_degrade_get_setting("top_scroll_text_color");
 
         $css .= "
-            /*.header-menubar .primary-navigation ul.navbar-nav li a,
+            .header-menubar .primary-navigation ul.navbar-nav li a,
             .header-menubar .navbar-nav .simplesearchform .btn-open,
             #header .popover-region .popover-region-toggle i.icon,
             .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
@@ -652,7 +654,7 @@ function theme_degrade_process_css($css, $theme) {
             .header-logo a.navbar-brand img,
             .header-logo a.navbar-brand span {
                 color: {$topscrolltextcolor} !important;
-            }*/
+            }
             .fixed-top {
                 background: {$topscrollbackgroundcolor} !important;
             }
@@ -661,6 +663,37 @@ function theme_degrade_process_css($css, $theme) {
                 color: {$topscrolltextcolor} !important;
             }";
     }
+
+    // Fonts.
+    $fontfamilytext = theme_degrade_get_setting("fontfamily");
+    $fontfamilytext = isset($fontfamilytext[3]) ? "{$fontfamilytext}," : "";
+    $fontfamilytext = "body,* {font-family:{$fontfamilytext} Arial, Helvetica, sans-serif}";
+
+    $fontfamilytitle = theme_degrade_get_setting("fontfamily_title");
+    $fontfamilytitle = isset($fontfamilytitle[3]) ? "{$fontfamilytitle}," : "";
+    $fontfamilytitle = "h1,h2,h3,h4,h5,h6 {font-family:{$fontfamilytitle} Arial, Helvetica, sans-serif}";
+
+    $fontfamilysitename = theme_degrade_get_setting("fontfamily_sitename");
+    $fontfamilysitename = isset($fontfamilysitename[3]) ? "{$fontfamilysitename}," : "";
+    $fontfamilysitename = ".header-logo a.navbar-brand span {font-family:{$fontfamilysitename} Arial, Helvetica, sans-serif}";
+
+    $fontfamilymenus = theme_degrade_get_setting("fontfamily_menus");
+    $fontfamilymenus = isset($fontfamilymenus[3]) ? "{$fontfamilymenus}," : "";
+    $fontfamilymenus = ".header-menubar .primary-navigation ul.navbar-nav li a,
+            .header-menubar .navbar-nav .simplesearchform .btn-open,
+            #header .popover-region .popover-region-toggle i.icon,
+            .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
+            .header-menubar .navbar-nav .editmode-switch-form .input-group label,
+            .usermenu .moodle-actionmenu a.dropdown-toggle,
+            .navbar-light .navbar-nav .show>.nav-link,
+            .navbar-light .navbar-nav .active>.nav-link,
+            .navbar-light .navbar-nav .nav-link.show,
+            .navbar-light .navbar-nav .nav-link.active,
+            .header-logo a.navbar-brand img {
+                font-family : {$fontfamilymenus} Arial, Helvetica, sans-serif
+            }";
+
+    $css = "{$css}\n{$fontfamilytext}\n{$fontfamilytitle}\n{$fontfamilysitename}\n{$fontfamilymenus}";
 
     return $css;
 }

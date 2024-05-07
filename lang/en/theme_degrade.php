@@ -137,13 +137,24 @@ $string['logo_color_desc'] = 'Please upload your colored LOGO if you want to inc
 $string['logo_write'] = 'Top menu logo on scroll';
 $string['logo_write_desc'] = 'Please upload your logo if you wish to include it at the top. This logo will be displayed when scrolling remains at the top, and the menu will be displayed on a colored background.';
 
-// Themes and CSS.
-$string['settings_theme_heading'] = 'Theme';
+// CSS.
+$string['settings_css_heading'] = 'Fonts and CSS';
+$string['fontpreview'] = 'Font List Preview';
+$string['fontfamily'] = 'Site Text Fonts';
+$string['fontfamily_desc'] = 'Choose which font you want to use for the text on your Moodle site.';
+$string['fontfamily_title'] = 'Title Text Fonts';
+$string['fontfamily_title_desc'] = 'Choose which font you want to use for titles on your Moodle site.';
+$string['sitefonts'] = 'Additional Google Fonts';
+$string['sitefonts_desc'] = 'Insert the @import code from Google Fonts as indicated in the image below. After saving, the "Site Font" field will be updated, displaying these fonts. You can add multiple @import as needed.';
+$string['fontfamily_menus'] = 'Menu Fonts';
+$string['fontfamily_menus_desc'] = 'Choose which font you want to use for menus on your Moodle site.';
+$string['fontfamily_sitename'] = 'Font for the site name';
+$string['fontfamily_sitename_desc'] = 'The font that will be applied to the site name if a logo is not provided.';
 $string['customcss'] = 'Custom CSS';
 $string['customcss_desc'] = 'Any CSS rules you add to this text area will be reflected on all pages, making it easy to customize this theme.';
-$string['fontfamily'] = 'Site Font';
-$string['fontfamily_desc'] = 'Choose which font you want to use on your Moodle';
 
+// Themes.
+$string['settings_theme_heading'] = 'Theme';
 $string['theme_color'] = 'Color Selection';
 $string['theme_color_desc'] = 'Select the colors of Moodle texts and buttons or click the line below:';
 $string['theme_color_blue'] = 'Blue';
