@@ -22,7 +22,8 @@
 defined('MOODLE_INTERNAL') || die;
 global $PAGE;
 
-$page = new admin_settingpage('theme_degrade_theme', get_string('settings_theme_heading', 'theme_degrade'));
+$page = new admin_settingpage('theme_degrade_theme',
+    get_string('settings_theme_heading', 'theme_degrade'));
 
 if ($CFG->theme != "boost_training") {
     $choices = [
