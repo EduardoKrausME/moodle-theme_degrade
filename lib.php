@@ -626,10 +626,12 @@ function theme_degrade_process_css($css, $theme) {
             }";
     }
 
-    $topscrollbackgroundcolor = theme_degrade_get_setting("top_scroll_background_color");
-    $topscrolltextcolor = theme_degrade_get_setting("top_scroll_text_color");
+    global $CFG;
+    if ($CFG->theme != "boost_training") {
+        $topscrollbackgroundcolor = theme_degrade_get_setting("top_scroll_background_color");
+        $topscrolltextcolor = theme_degrade_get_setting("top_scroll_text_color");
 
-    $css .= "
+        $css .= "
             /*.header-menubar .primary-navigation ul.navbar-nav li a,
             .header-menubar .navbar-nav .simplesearchform .btn-open,
             #header .popover-region .popover-region-toggle i.icon,
@@ -651,8 +653,8 @@ function theme_degrade_process_css($css, $theme) {
             .fixed-top *,
             .fixed-top :before {
                 color: {$topscrolltextcolor} !important;
-            }
-    ";
+            }";
+    }
 
     return $css;
 }

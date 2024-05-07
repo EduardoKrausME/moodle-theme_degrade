@@ -20,7 +20,7 @@
  * @package     theme_degrade
  * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @created     03/05/2024 22:28
+ * @date        03/05/2024 22:28
  */
 
 require_once('../../../config.php');

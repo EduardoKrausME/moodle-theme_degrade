@@ -14,9 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * User: Eduardo Kraus
- * Date: 02/04/2023
- * Time: 19:54
+ * @package     theme_degrade
+ * @copyright   2024 Eduardo Kraus https://eduardokraus.com/
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @date        02/04/2023 19:54
  */
 
 defined('MOODLE_INTERNAL') || die;
@@ -24,50 +25,52 @@ global $PAGE;
 
 $page = new admin_settingpage('theme_degrade_theme', get_string('settings_theme_heading', 'theme_degrade'));
 
-$choices = [
-    'default1' => get_string('background_color_default', 'theme_degrade', 1),
-    'default2' => get_string('background_color_default', 'theme_degrade', 2),
-    'green1' => get_string('background_color_green', 'theme_degrade', 1),
-    'green2' => get_string('background_color_green', 'theme_degrade', 2),
-    'green3' => get_string('background_color_green', 'theme_degrade', 3),
-    'blue1' => get_string('background_color_blue', 'theme_degrade', 1),
-    'blue2' => get_string('background_color_blue', 'theme_degrade', 2),
-    'blue3' => get_string('background_color_blue', 'theme_degrade', 3),
-    'blue4' => get_string('background_color_blue', 'theme_degrade', 4),
-    'blue5' => get_string('background_color_blue', 'theme_degrade', 5),
-    'blue6' => get_string('background_color_blue', 'theme_degrade', 6),
-    'red1' => get_string('background_color_red', 'theme_degrade', 1),
-    'red2' => get_string('background_color_red', 'theme_degrade', 2),
-    'red3' => get_string('background_color_red', 'theme_degrade', 3),
-    'red4' => get_string('background_color_red', 'theme_degrade', 4),
-    'red5' => get_string('background_color_red', 'theme_degrade', 5),
-    'red6' => get_string('background_color_red', 'theme_degrade', 6),
-    'red7' => get_string('background_color_red', 'theme_degrade', 7),
-    'red8' => get_string('background_color_red', 'theme_degrade', 8),
-    'black1' => get_string('background_color_black', 'theme_degrade', 1),
-];
+if ($CFG->theme != "boost_training") {
+    $choices = [
+        'default1' => get_string('background_color_default', 'theme_degrade', 1),
+        'default2' => get_string('background_color_default', 'theme_degrade', 2),
+        'green1' => get_string('background_color_green', 'theme_degrade', 1),
+        'green2' => get_string('background_color_green', 'theme_degrade', 2),
+        'green3' => get_string('background_color_green', 'theme_degrade', 3),
+        'blue1' => get_string('background_color_blue', 'theme_degrade', 1),
+        'blue2' => get_string('background_color_blue', 'theme_degrade', 2),
+        'blue3' => get_string('background_color_blue', 'theme_degrade', 3),
+        'blue4' => get_string('background_color_blue', 'theme_degrade', 4),
+        'blue5' => get_string('background_color_blue', 'theme_degrade', 5),
+        'blue6' => get_string('background_color_blue', 'theme_degrade', 6),
+        'red1' => get_string('background_color_red', 'theme_degrade', 1),
+        'red2' => get_string('background_color_red', 'theme_degrade', 2),
+        'red3' => get_string('background_color_red', 'theme_degrade', 3),
+        'red4' => get_string('background_color_red', 'theme_degrade', 4),
+        'red5' => get_string('background_color_red', 'theme_degrade', 5),
+        'red6' => get_string('background_color_red', 'theme_degrade', 6),
+        'red7' => get_string('background_color_red', 'theme_degrade', 7),
+        'red8' => get_string('background_color_red', 'theme_degrade', 8),
+        'black1' => get_string('background_color_black', 'theme_degrade', 1),
+    ];
 
-if (strpos($_SERVER['REQUEST_URI'], "admin/upgradesettings.php") > 0) {
-    $htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/degrade/style/initial.css\" />";
-    $htmlselect .= "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/degrade/style/style.css\" />";
-} else {
-    $htmlselect = "";
-}
-foreach ($choices as $choice => $lang) {
-    $onclick = "$('#id_s_theme_degrade_background_color').val('{$choice}');";
-    $onclick .= "$('body').attr('class',function(i,c){return c.replace(/(^|\s)theme-\S+/g,'')+' theme-{$choice}';})";
-    $htmlselect
-        .= "<div id=\"theme-select-{$choice}\" class=\"theme-select-{$choice} theme-select-item\" data-theme=\"{$choice}\"
+    if (strpos($_SERVER['REQUEST_URI'], "admin/upgradesettings.php") > 0) {
+        $htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/degrade/style/initial.css\" />";
+        $htmlselect .= "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/degrade/style/style.css\" />";
+    } else {
+        $htmlselect = "";
+    }
+    foreach ($choices as $choice => $lang) {
+        $onclick = "$('#id_s_theme_degrade_background_color').val('{$choice}');";
+        $onclick .= "$('body').attr('class',function(i,c){return c.replace(/(^|\s)theme-\S+/g,'')+' theme-{$choice}';})";
+        $htmlselect
+            .= "<div id=\"theme-select-{$choice}\" class=\"theme-select-{$choice} theme-select-item\" data-theme=\"{$choice}\"
                  onclick=\"{$onclick}\">
                 <div class=\"preview\"></div>
             </div>";
+    }
+    $setting = new admin_setting_configselect('theme_degrade/background_color',
+        get_string('background_color', 'theme_degrade'),
+        get_string('background_color_desc', 'theme_degrade') . $htmlselect,
+        'default1', $choices);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
 }
-$setting = new admin_setting_configselect('theme_degrade/background_color',
-    get_string('background_color', 'theme_degrade'),
-    get_string('background_color_desc', 'theme_degrade') . $htmlselect,
-    'default1', $choices);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$page->add($setting);
 
 $setting = new admin_setting_configstoredfile('theme_degrade/logo_color',
     get_string('logo_color', 'theme_degrade'),
@@ -78,29 +81,31 @@ $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 // Cores do topo.
-$setting = new admin_setting_heading("theme_degrade/top_color_heading",
-    get_string('top_color_heading', 'theme_degrade'), '');
-$page->add($setting);
+if ($CFG->theme != "boost_training") {
+    $setting = new admin_setting_heading("theme_degrade/top_color_heading",
+        get_string('top_color_heading', 'theme_degrade'), '');
+    $page->add($setting);
 
-$setting = new admin_setting_configcolourpicker("theme_degrade/top_scroll_background_color",
-    get_string("top_scroll_background_color", 'theme_degrade'),
-    get_string("top_scroll_background_color_desc", 'theme_degrade'), '#FFFFFF');
-$setting->set_updatedcallback('theme_reset_all_caches');
-$page->add($setting);
+    $setting = new admin_setting_configcolourpicker("theme_degrade/top_scroll_background_color",
+        get_string("top_scroll_background_color", 'theme_degrade'),
+        get_string("top_scroll_background_color_desc", 'theme_degrade'), '#FFFFFF');
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
 
-$setting = new admin_setting_configcolourpicker("theme_degrade/top_scroll_text_color",
-    get_string("top_scroll_text_color", 'theme_degrade'),
-    get_string("top_scroll_text_color_desc", 'theme_degrade'), '#646464');
-$setting->set_updatedcallback('theme_reset_all_caches');
-$page->add($setting);
+    $setting = new admin_setting_configcolourpicker("theme_degrade/top_scroll_text_color",
+        get_string("top_scroll_text_color", 'theme_degrade'),
+        get_string("top_scroll_text_color_desc", 'theme_degrade'), '#646464');
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
 
-$setting = new admin_setting_configstoredfile('theme_degrade/logo_write',
-    get_string('logo_write', 'theme_degrade'),
-    get_string('logo_write_desc', 'theme_degrade'),
-    'logo_write', 0,
-    ['maxfiles' => 1, 'accepted_types' => ['.jpg', '.png']]);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$page->add($setting);
+    $setting = new admin_setting_configstoredfile('theme_degrade/logo_write',
+        get_string('logo_write', 'theme_degrade'),
+        get_string('logo_write_desc', 'theme_degrade'),
+        'logo_write', 0,
+        ['maxfiles' => 1, 'accepted_types' => ['.jpg', '.png']]);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+}
 
 // Cores dos botões.
 $setting = new admin_setting_heading("theme_degrade/theme_color_heading",
@@ -195,33 +200,6 @@ $setting = new admin_setting_configstoredfile('core_admin/favicon',
     get_string('favicon_desc', 'theme_degrade'),
     'favicon', 0,
     ['maxfiles' => 1, 'accepted_types' => ['image']]);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$page->add($setting);
-
-$fontsarr = [
-    'Roboto' => 'Roboto',
-    'Open Sans' => 'Open Sans',
-    'Lato' => 'Lato',
-    'Montserrat' => 'Montserrat',
-    'Poppins' => 'Poppins',
-    'Nunito' => 'Nunito',
-    'Inter' => 'Inter',
-    'Raleway' => 'Raleway',
-    'Sora' => 'Sora',
-    'Epilogue' => 'Epilogue',
-    'Manrope' => 'Manrope',
-    'Oxygen' => 'Oxygen',
-];
-$setting = new admin_setting_configselect('theme_degrade/fontfamily',
-    get_string('fontfamily', 'theme_degrade'),
-    get_string('fontfamily_desc', 'theme_degrade'),
-    'Roboto', $fontsarr);
-$setting->set_updatedcallback('theme_reset_all_caches');
-$page->add($setting);
-
-$setting = new admin_setting_configtextarea('theme_degrade/customcss',
-    get_string('customcss', 'theme_degrade'),
-    get_string('customcss_desc', 'theme_degrade'), '');
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 

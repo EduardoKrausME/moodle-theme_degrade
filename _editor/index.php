@@ -29,6 +29,10 @@ $editlang = required_param('editlang', PARAM_TEXT);
 require_login();
 require_capability('moodle/site:config', context_system::instance());
 
+
+global $plugins;
+require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
+
 $currentlang = $CFG->lang;
 if (isset($_SESSION['SESSION']->lang)) {
     $currentlang = $_SESSION['SESSION']->lang;
