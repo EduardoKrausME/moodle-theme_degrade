@@ -39,7 +39,7 @@ function theme_degrade_page_init(moodle_page $page) {
 }
 
 /**
- * @param $colorname
+ * @param string $colorname
  *
  * @return string
  *
@@ -248,7 +248,7 @@ function theme_degrade_get_setting($setting, $format = true) {
 /**
  * Renderer the slider images.
  *
- * @param $imagesetting
+ * @param string $imagesetting
  *
  * @return string
  *
@@ -267,8 +267,8 @@ function theme_degrade_get_setting_image($imagesetting) {
 }
 
 /**
- * @param $setting
- * @param $filearea
+ * @param string $setting
+ * @param string $filearea
  *
  * @return moodle_url|null
  *
@@ -627,15 +627,30 @@ function theme_degrade_process_css($css, $theme) {
     }
 
     $topscrollbackgroundcolor = theme_degrade_get_setting("top_scroll_background_color");
-    $topscrolltextcolordesc = theme_degrade_get_setting("top_scroll_text_color_desc");
+    $topscrolltextcolor = theme_degrade_get_setting("top_scroll_text_color");
 
     $css .= "
+            /*.header-menubar .primary-navigation ul.navbar-nav li a,
+            .header-menubar .navbar-nav .simplesearchform .btn-open,
+            #header .popover-region .popover-region-toggle i.icon,
+            .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
+            .header-menubar .navbar-nav .editmode-switch-form .input-group label,
+            .custom-switch .custom-control-label:after,
+            .usermenu .moodle-actionmenu a.dropdown-toggle,
+            .navbar-light .navbar-nav .show>.nav-link,
+            .navbar-light .navbar-nav .active>.nav-link,
+            .navbar-light .navbar-nav .nav-link.show,
+            .navbar-light .navbar-nav .nav-link.active,
+            .header-logo a.navbar-brand img,
+            .header-logo a.navbar-brand span {
+                color: {$topscrolltextcolor} !important;
+            }*/
             .fixed-top {
                 background: {$topscrollbackgroundcolor} !important;
             }
             .fixed-top *,
             .fixed-top :before {
-                color: {$topscrolltextcolordesc} !important;
+                color: {$topscrolltextcolor} !important;
             }
     ";
 

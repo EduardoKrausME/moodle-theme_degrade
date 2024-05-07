@@ -15,9 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * User: Eduardo Kraus
- * Date: 01/04/2023
- * Time: 11:38
+ * Footer template data
+ *
+ * @package     theme_degrade
+ * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @created     01/04/2023 11:38
  */
 
 namespace theme_degrade\template;

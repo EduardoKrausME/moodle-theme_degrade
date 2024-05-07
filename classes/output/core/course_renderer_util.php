@@ -13,10 +13,17 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * User: Eduardo Kraus
- * Date: 01/04/2023
- * Time: 08:21
+ * course_renderer.php
+ *
+ * This is built using the boost template to allow for new theme's using
+ * Moodle's new Boost theme engine
+ *
+ * @package     theme_degrade
+ * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @created     01/04/2023 08:21
  */
 
 namespace theme_degrade\output\core;
@@ -56,7 +63,7 @@ class course_renderer_util {
     }
 
     /**
-     * @param $courseid
+     * @param int $courseid
      *
      * @return array
      * @throws \dml_exception
@@ -89,7 +96,7 @@ class course_renderer_util {
     }
 
     /**
-     * @param $course
+     * @param object $courseid
      *
      * @return string
      * @throws \moodle_exception
@@ -101,7 +108,7 @@ class course_renderer_util {
     }
 
     /**
-     * @param $course
+     * @param object $courseid
      *
      * @return string
      * @throws \coding_exception
@@ -120,7 +127,7 @@ class course_renderer_util {
     }
 
     /**
-     * @param $course
+     * @param object $courseid
      *
      * @return bool
      */

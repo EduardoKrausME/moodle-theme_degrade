@@ -29,36 +29,23 @@
 defined('MOODLE_INTERNAL') || die;
 
 $THEME->name = 'degrade';
-
 $THEME->sheets = ['initial', 'style'];
-
 $THEME->editor_sheets = [];
-
 $THEME->parents = ['boost'];
-
 $THEME->enable_dock = false;
-
 $THEME->yuicssmodules = array();
-
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
-
 $THEME->requiredblocks = '';
-
 $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
-
 $THEME->csspostprocess = 'theme_degrade_process_css';
-
 $THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
-
 $THEME->haseditswitch = true;
-
 $THEME->usescourseindex = false;
 
 // By default, all boost theme do not need their titles displayed.
 $THEME->activityheaderconfig = [
     'notitle' => true
 ];
-
 $THEME->layouts = [
     // Most backwards compatible layout without the blocks.
     'base' => array(
@@ -191,7 +178,6 @@ $THEME->layouts = [
         'defaultregion' => 'side-pre'
     )
 ];
-
 $THEME->blockrtlmanipulations = array(
     'side-pre' => 'side-post',
     'side-post' => 'side-pre'
