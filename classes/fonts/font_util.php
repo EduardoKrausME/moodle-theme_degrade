@@ -18,7 +18,6 @@
  * @package     theme_degrade
  * @copyright   2024 Eduardo Kraus https://eduardokraus.com/
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @date        10/01/2024 17:58
  */
 
 namespace theme_degrade\fonts;
@@ -26,6 +25,8 @@ namespace theme_degrade\fonts;
 class font_util {
 
     /**
+     * list_fonts
+     *
      * @return array
      *
      * @throws \dml_exception
@@ -109,6 +110,8 @@ class font_util {
     }
 
     /**
+     * css
+     *
      * @return string
      *
      * @throws \dml_exception
@@ -118,6 +121,8 @@ class font_util {
     }
 
     /**
+     * grapsjs
+     *
      * @return string
      *
      * @throws \dml_exception
@@ -127,6 +132,8 @@ class font_util {
     }
 
     /**
+     * ckeditor
+     *
      * @return string
      *
      * @throws \dml_exception
@@ -136,6 +143,8 @@ class font_util {
     }
 
     /**
+     * print_only_unique
+     *
      * @throws \dml_exception
      */
     public static function print_only_unique() {

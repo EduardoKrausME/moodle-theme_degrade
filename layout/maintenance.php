@@ -29,6 +29,6 @@ $data = [
     'sitename' => format_string($SITE->shortname, true, ["escape" => false]),
     'output' => $OUTPUT,
     "logourl" => $logourl,
-    'maintenancefooter' => true
+    'maintenancefooter' => true,
 ];
 echo $OUTPUT->render_from_template('theme_degrade/maintenance', $data);

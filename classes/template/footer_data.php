@@ -20,13 +20,19 @@
  * @package     theme_degrade
  * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @date        01/04/2023 11:38
  */
 
 namespace theme_degrade\template;
 
 use theme_degrade\fonts\font_util;
 
+/**
+ * footer_data.php
+ *
+ * @package     theme_degrade
+ * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class footer_data {
 
     /**
@@ -186,7 +192,7 @@ class footer_data {
     private static function copywriter() {
         return [
             'enable_copywriter' => theme_degrade_get_setting('footer_show_copywriter'),
-            'footerblock_copywriter_text' => get_string('footerblock_copywriter', 'theme_degrade')
+            'footerblock_copywriter_text' => get_string('footerblock_copywriter', 'theme_degrade'),
         ];
     }
 

@@ -23,7 +23,6 @@
  * @package     theme_degrade
  * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @date        01/04/2023 08:21
  */
 
 namespace theme_degrade\output\core;
@@ -63,9 +62,10 @@ class course_renderer_util {
     }
 
     /**
-     * @param int $courseid
+     * @param object $course
      *
      * @return array
+     *
      * @throws \dml_exception
      * @throws \moodle_exception
      */
@@ -76,7 +76,7 @@ class course_renderer_util {
         if ($course->has_course_contacts()) {
             foreach ($course->get_course_contacts() as $coursecontact) {
 
-                $user = $DB->get_record('user', array('id' => $coursecontact['user']->id),
+                $user = $DB->get_record('user', ['id' => $coursecontact['user']->id],
                     implode(',', \core_user\fields::get_picture_fields()), MUST_EXIST);
                 $userpicture = new user_picture($user);
 
@@ -96,21 +96,23 @@ class course_renderer_util {
     }
 
     /**
-     * @param object $courseid
+     * @param object $course
      *
      * @return string
+     *
      * @throws \moodle_exception
      */
     public static function course_url($course) {
-        $courseurl = new moodle_url('/course/view.php', array('id' => $course->id));
+        $courseurl = new moodle_url('/course/view.php', ['id' => $course->id]);
 
         return $courseurl->out();
     }
 
     /**
-     * @param object $courseid
+     * @param object $course
      *
      * @return string
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -127,7 +129,7 @@ class course_renderer_util {
     }
 
     /**
-     * @param object $courseid
+     * @param object $course
      *
      * @return bool
      */

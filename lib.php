@@ -155,7 +155,7 @@ function theme_degrade_get_html_for_settings(renderer_base $output, moodle_page 
     }
 
     if (!empty($page->theme->settings->logo)) {
-        $return->heading = html_writer::link($CFG->wwwroot, '', array('title' => get_string('home'), 'class' => 'logo'));
+        $return->heading = html_writer::link($CFG->wwwroot, '', ['title' => get_string('home'), 'class' => 'logo']);
     } else {
         $return->heading = $output->page_heading();
     }
@@ -206,7 +206,9 @@ function theme_degrade_get_logo($local = null) {
 }
 
 /**
+ * theme_degrade_get_body_class
  * @return string
+ *
  * @throws coding_exception
  */
 function theme_degrade_get_body_class() {
@@ -267,6 +269,8 @@ function theme_degrade_get_setting_image($imagesetting) {
 }
 
 /**
+ * theme_degrade_setting_file_url
+ *
  * @param string $setting
  * @param string $filearea
  *
@@ -347,7 +351,7 @@ function theme_degrade_generate_links($menuname = '') {
  */
 function theme_degrade_hidden_courses_ids() {
     global $DB;
-    $hcourseids = array();
+    $hcourseids = [];
     $result = $DB->get_records_sql("SELECT id FROM {course} WHERE visible='0' ");
     if (!empty($result)) {
         foreach ($result as $row) {
@@ -367,7 +371,7 @@ function theme_degrade_hidden_courses_ids() {
  */
 function theme_degrade_strip_html_tags($text) {
     $text = preg_replace(
-        array(
+        [
             // Remove invisible content.
             '@<head[^>]*?>.*?</head>@siu',
             '@<style[^>]*?>.*?</style>@siu',
@@ -386,12 +390,12 @@ function theme_degrade_strip_html_tags($text) {
             '@</?((form)|(button)|(fieldset)|(legend)|(input))@iu',
             '@</?((label)|(select)|(optgroup)|(option)|(textarea))@iu',
             '@</?((frameset)|(frame)|(iframe))@iu',
-        ),
-        array(
+        ],
+        [
             ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
             "\n\$0", "\n\$0", "\n\$0", "\n\$0", "\n\$0", "\n\$0",
             "\n\$0", "\n\$0",
-        ),
+        ],
         $text
     );
     return strip_tags($text);
@@ -411,7 +415,7 @@ function theme_degrade_course_trim_char($str, $n = 500, $endchar = '&#8230;') {
         return $str;
     }
 
-    $str = preg_replace("/\s+/", ' ', str_replace(array("\r\n", "\r", "\n"), ' ', $str));
+    $str = preg_replace("/\s+/", ' ', str_replace(["\r\n", "\r", "\n"], ' ', $str));
     if (strlen($str) <= $n) {
         return $str;
     }
@@ -444,6 +448,8 @@ function theme_degrade_get_hexa($hexa, $opacity) {
 }
 
 /**
+ * theme_degrade_coursemodule_standard_elements
+ *
  * @param moodleform_mod $data The moodle quickforms wrapper object.
  * @param MoodleQuickForm $mform The actual form object (required to modify the form).
  *
@@ -523,7 +529,7 @@ function theme_degrade_coursemodule_edit_post_actions($data, $course) {
  * @throws coding_exception
  * @throws moodle_exception
  */
-function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
+function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
     static $theme;
 
     if (empty($theme)) {

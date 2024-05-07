@@ -107,7 +107,7 @@ $templatedata = [
     'regionmainsettingsmenu' => $regionmainsettingsmenu,
     'overflow' => $overflow,
     'headercontent' => $headercontent,
-    'addblockbutton' => $addblockbutton
+    'addblockbutton' => $addblockbutton,
 ];
 
 require_once("{$CFG->dirroot}/theme/degrade/classes/template/footer_data.php");

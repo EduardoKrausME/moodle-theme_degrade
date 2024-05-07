@@ -83,14 +83,15 @@
 </div>
 {{#js}}
     require(['jquery', 'block_myoverview/main',], function($, Main) {
-        var root = $('#block-myoverview-{{uniqid}}');
-        Main.init(root);
+    var root = $('#block-myoverview-{{uniqid}}');
+    Main.init(root);
 
-        $("#block-region-content").before("<div id='block-my-links-destination'></div>");
+    $("#block-region-content").before("
+    <div id='block-my-links-destination'></div>");
 
-        $(".page-mycourses #block-my-links")
-                .show()
-                .appendTo("#block-my-links-destination");
+    $(".page-mycourses #block-my-links")
+    .show()
+    .appendTo("#block-my-links-destination");
 
     });
 {{/js}}

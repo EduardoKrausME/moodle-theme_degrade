@@ -17,7 +17,6 @@
  * @package     theme_degrade
  * @copyright   2024 Eduardo Kraus https://eduardokraus.com/
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @date        18/11/2024 12:23
  */
 
 defined('MOODLE_INTERNAL') || die;

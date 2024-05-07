@@ -118,6 +118,8 @@ function xmldb_theme_degrade_install() {
 }
 
 /**
+ * degrade_install_settings_icons function
+ *
  * @throws dml_exception
  */
 function degrade_install_settings_icons() {
@@ -157,6 +159,8 @@ function degrade_install_settings_icons() {
 }
 
 /**
+ * theme_degrade_set_config function
+ *
  * @param object $name
  * @param object $value
  *

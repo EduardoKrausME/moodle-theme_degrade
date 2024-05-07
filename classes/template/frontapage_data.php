@@ -27,7 +27,7 @@ namespace theme_degrade\template;
 use theme_degrade\fonts\font_util;
 
 /**
- * slideshow.php
+ * frontapage_data.php
  *
  * @package     theme_degrade
  * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
@@ -42,7 +42,7 @@ class frontapage_data {
      */
     public static function topo() {
         return [
-            'logourl_header' => theme_degrade_get_logo("header")
+            'logourl_header' => theme_degrade_get_logo("header"),
         ];
     }
 
@@ -57,7 +57,7 @@ class frontapage_data {
         $data = [
             "slideshow_numslides" => $slideshownumslides,
             "slideshow_edit_settings" => self::edit_settings("theme_degrade_slideshow"),
-            "slideshow_slides" => []
+            "slideshow_slides" => [],
         ];
 
         if (!$slideshownumslides) {
@@ -110,7 +110,7 @@ class frontapage_data {
             "frontpage_about_title" => theme_degrade_get_setting("frontpage_about_title"),
             "frontpage_about_description" => theme_degrade_get_setting("frontpage_about_description", FORMAT_HTML),
             "frontpage_about_edit_settings" => self::edit_settings("theme_degrade_about"),
-            "about_numbers" => []
+            "about_numbers" => [],
         ];
         if (!$frontpageaboutenable) {
             return $data;

@@ -67,7 +67,7 @@ $templatedata = [
     'regionmainsettingsmenu' => $regionmainsettingsmenu,
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
     'logo' => $logo,
-    "customclass" => $class
+    "customclass" => $class,
 ];
 
 echo $OUTPUT->render_from_template('theme_degrade/header', $templatedata);

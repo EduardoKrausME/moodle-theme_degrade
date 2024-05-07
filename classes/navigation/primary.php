@@ -74,6 +74,8 @@ class primary extends \core\navigation\output\primary {
     /**
      * Get the primary nav object and standardize the output
      *
+     * @param null $parent
+     *
      * @return array
      */
     protected function get_primary_nav($parent = null): array {
@@ -117,7 +119,7 @@ class primary extends \core\navigation\output\primary {
         // Gather all the avatar data to be displayed in the user menu.
         $usermenudata['avatardata'][] = [
             'content' => $info->metadata['useravatar'],
-            'classes' => 'current'
+            'classes' => 'current',
         ];
         $usermenudata['userfullname'] = $info->metadata['realuserfullname'] ?? $info->metadata['userfullname'];
 
@@ -125,11 +127,11 @@ class primary extends \core\navigation\output\primary {
         if ($info->metadata['asotheruser']) {
             $usermenudata['avatardata'][] = [
                 'content' => $info->metadata['realuseravatar'],
-                'classes' => 'realuser'
+                'classes' => 'realuser',
             ];
             $usermenudata['metadata'][] = [
                 'content' => get_string('loggedinas', 'moodle', $info->metadata['userfullname']),
-                'classes' => 'viewingas'
+                'classes' => 'viewingas',
             ];
         }
 
@@ -155,7 +157,7 @@ class primary extends \core\navigation\output\primary {
                 $customclass = str_replace('##GENERATEDCLASS##', $generatedclass, ($value['class'] ?? ''));
                 $usermenudata['metadata'][] = [
                     'content' => $content,
-                    'classes' => $customclass
+                    'classes' => $customclass,
                 ];
             }
         }

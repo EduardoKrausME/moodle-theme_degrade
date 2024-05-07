@@ -45,7 +45,9 @@ class course_renderer extends \core_course_renderer {
 
     /**
      * Renderer function for the frontpage available courses.
+     *
      * @return string
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      * @throws \moodle_exception
@@ -58,12 +60,12 @@ class course_renderer extends \core_course_renderer {
         }
 
         $chelper = new coursecat_helper();
-        $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_EXPANDED)->set_courses_display_options(array(
+        $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_EXPANDED)->set_courses_display_options([
             'recursive' => true,
             'limit' => $CFG->frontpagecourselimit,
             'viewmoreurl' => new moodle_url('/course/index.php'),
-            'viewmoretext' => get_string('fulllistofcourses')
-        ));
+            'viewmoretext' => get_string('fulllistofcourses'),
+        ]);
         $courses = core_course_category::get(0)->get_courses($chelper->get_courses_display_options());
 
         $hascoursecreate = has_capability('moodle/course:create', context_system::instance());
@@ -84,7 +86,7 @@ class course_renderer extends \core_course_renderer {
 
                 $koperepaydetalhe = $DB->get_record("kopere_pay_detalhe", ['course' => $course->id]);
                 if ($koperepaydetalhe && $koperepaydetalhe->course) {
-                    $courseurl = (new moodle_url('/local/kopere_pay/', array('id' => $course->id)))->out();
+                    $courseurl = (new moodle_url('/local/kopere_pay/', ['id' => $course->id]))->out();
                     $preco = \local_kopere_pay\util\Formater::precoToFloat($koperepaydetalhe->preco);
                     if ($preco <= 5) {
                         $freename = "<a href='{$courseurl}'>" . get_string("free_name", "theme_degrade") . "</a>";
@@ -123,6 +125,7 @@ class course_renderer extends \core_course_renderer {
      * Also lists remote courses or remote hosts if MNET authorisation is used
      *
      * @return string
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      * @throws \moodle_exception
@@ -173,12 +176,13 @@ class course_renderer extends \core_course_renderer {
      * please use {@link core_course_renderer::course_info_box()}
      *
      * @param coursecat_helper $chelper various display options
-     * @param core_course_list_element|stdClass $course
+     * @param stdClass $course
      * @param string $additionalclasses additional classes to add to the main <div> tag
      *                                                             (usually depend on the course position in list -
      *                                                             first/last/even/odd)
      *
      * @return string
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      * @throws \moodle_exception
@@ -266,7 +270,7 @@ class course_renderer extends \core_course_renderer {
         $content .= $this->course_search_form($search);
 
         if (!empty($searchcriteria)) {
-            $displayoptions = array('sort' => array('displayname' => 1));
+            $displayoptions = ['sort' => ['displayname' => 1]];
             $perpage = optional_param('perpage', 0, PARAM_RAW);
             if ($perpage !== 'all') {
                 $displayoptions['limit'] = ((int)$perpage <= 0) ? $CFG->coursesperpage : (int)$perpage;
@@ -286,7 +290,7 @@ class course_renderer extends \core_course_renderer {
             $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_EXPANDED_WITH_CAT);
             $chelper->set_courses_display_options($displayoptions);
             $chelper->set_search_criteria($searchcriteria);
-            $chelper->set_attributes(array('class' => $class));
+            $chelper->set_attributes(['class' => $class]);
 
             $courses = core_course_category::search_courses($searchcriteria, $chelper->get_courses_display_options());
             $totalcount = core_course_category::search_courses_count($searchcriteria);
@@ -344,14 +348,14 @@ class course_renderer extends \core_course_renderer {
 
         $chelper = new coursecat_helper();
         if ($description = $chelper->get_category_formatted_description($coursecat)) {
-            $output .= $this->box($description, array('class' => 'generalbox info'));
+            $output .= $this->box($description, ['class' => 'generalbox info']);
         }
 
         $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_AUTO)
-            ->set_attributes(array('class' => 'row category-browse category-browse-' . $coursecat->id));
+            ->set_attributes(['class' => 'row category-browse category-browse-' . $coursecat->id]);
 
-        $coursedisplayoptions = array();
-        $catdisplayoptions = array();
+        $coursedisplayoptions = [];
+        $catdisplayoptions = [];
         $browse = optional_param('browse', null, PARAM_ALPHA);
         $perpage = optional_param('perpage', $CFG->coursesperpage, PARAM_INT);
         $page = optional_param('page', 0, PARAM_INT);
@@ -366,19 +370,19 @@ class course_renderer extends \core_course_renderer {
         $catdisplayoptions['limit'] = $perpage;
         if ($browse === 'courses' || !$coursecat->get_children_count()) {
             $coursedisplayoptions['offset'] = $page * $perpage;
-            $coursedisplayoptions['paginationurl'] = new moodle_url($baseurl, array('browse' => 'courses'));
+            $coursedisplayoptions['paginationurl'] = new moodle_url($baseurl, ['browse' => 'courses']);
             $catdisplayoptions['nodisplay'] = true;
-            $catdisplayoptions['viewmoreurl'] = new moodle_url($baseurl, array('browse' => 'categories'));
+            $catdisplayoptions['viewmoreurl'] = new moodle_url($baseurl, ['browse' => 'categories']);
             $catdisplayoptions['viewmoretext'] = get_string('viewallsubcategories');
         } else if ($browse === 'categories' || !$coursecat->get_courses_count()) {
             $coursedisplayoptions['nodisplay'] = true;
             $catdisplayoptions['offset'] = $page * $perpage;
-            $catdisplayoptions['paginationurl'] = new moodle_url($baseurl, array('browse' => 'categories'));
-            $coursedisplayoptions['viewmoreurl'] = new moodle_url($baseurl, array('browse' => 'courses'));
+            $catdisplayoptions['paginationurl'] = new moodle_url($baseurl, ['browse' => 'categories']);
+            $coursedisplayoptions['viewmoreurl'] = new moodle_url($baseurl, ['browse' => 'courses']);
             $coursedisplayoptions['viewmoretext'] = get_string('viewallcourses');
         } else {
-            $coursedisplayoptions['viewmoreurl'] = new moodle_url($baseurl, array('browse' => 'courses', 'page' => 1));
-            $catdisplayoptions['viewmoreurl'] = new moodle_url($baseurl, array('browse' => 'categories', 'page' => 1));
+            $coursedisplayoptions['viewmoreurl'] = new moodle_url($baseurl, ['browse' => 'courses', 'page' => 1]);
+            $catdisplayoptions['viewmoreurl'] = new moodle_url($baseurl, ['browse' => 'categories', 'page' => 1]);
         }
         $chelper->set_courses_display_options($coursedisplayoptions);
         $chelper->set_categories_display_options($catdisplayoptions);
@@ -432,10 +436,10 @@ class course_renderer extends \core_course_renderer {
                 $perpage = $chelper->get_courses_display_option('limit', $CFG->coursesperpage);
                 $page = $chelper->get_courses_display_option('offset') / $perpage;
                 $pagingbar = $this->paging_bar($totalcount, $page, $perpage,
-                    $paginationurl->out(false, array('perpage' => $perpage)));
+                    $paginationurl->out(false, ['perpage' => $perpage]));
                 if ($paginationallowall) {
-                    $pagingbar .= html_writer::tag('div', html_writer::link($paginationurl->out(false, array('perpage' => 'all')),
-                        get_string('showall', '', $totalcount)), array('class' => 'paging paging-showall'));
+                    $pagingbar .= html_writer::tag('div', html_writer::link($paginationurl->out(false, ['perpage' => 'all']),
+                        get_string('showall', '', $totalcount)), ['class' => 'paging paging-showall']);
                 }
             } else if ($viewmoreurl = $chelper->get_courses_display_option('viewmoreurl')) {
                 $viewmoretext = $chelper->get_courses_display_option('viewmoretext', get_string('viewmore'));
@@ -447,8 +451,8 @@ class course_renderer extends \core_course_renderer {
             }
         } else if (($totalcount > $CFG->coursesperpage) && $paginationurl && $paginationallowall) {
             $pagingbar = html_writer::tag('div',
-                html_writer::link($paginationurl->out(false, array('perpage' => $CFG->coursesperpage)),
-                    get_string('showperpage', '', $CFG->coursesperpage)), array('class' => 'paging paging-showperpage'));
+                html_writer::link($paginationurl->out(false, ['perpage' => $CFG->coursesperpage]),
+                    get_string('showperpage', '', $CFG->coursesperpage)), ['class' => 'paging paging-showperpage']);
         }
 
         $attributes = $chelper->get_and_erase_attributes('courses row');
@@ -506,15 +510,15 @@ class course_renderer extends \core_course_renderer {
             $category = core_course_category::get($categoryid);
 
             $chelper = new coursecat_helper();
-            $baseurl = new moodle_url('/course/index.php', array('categoryid' => $categoryid));
-            $coursedisplayoptions = array(
+            $baseurl = new moodle_url('/course/index.php', ['categoryid' => $categoryid]);
+            $coursedisplayoptions = [
                 'limit' => $CFG->coursesperpage,
-                'viewmoreurl' => new moodle_url($baseurl, array('browse' => 'courses', 'page' => 1))
-            );
-            $catdisplayoptions = array(
+                'viewmoreurl' => new moodle_url($baseurl, ['browse' => 'courses', 'page' => 1]),
+            ];
+            $catdisplayoptions = [
                 'limit' => $CFG->coursesperpage,
-                'viewmoreurl' => new moodle_url($baseurl, array('browse' => 'categories', 'page' => 1))
-            );
+                'viewmoreurl' => new moodle_url($baseurl, ['browse' => 'categories', 'page' => 1]),
+            ];
             $chelper->set_show_courses($showcourses);
             $chelper->set_courses_display_options($coursedisplayoptions);
             $chelper->set_categories_display_options($catdisplayoptions);
@@ -524,7 +528,7 @@ class course_renderer extends \core_course_renderer {
         } else if ($type === self::COURSECAT_TYPE_COURSE) {
             $courseid = required_param('courseid', PARAM_INT);
 
-            $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
+            $course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
 
             $chelper = new coursecat_helper();
             $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_EXPANDED);
@@ -548,15 +552,21 @@ class course_renderer extends \core_course_renderer {
             return '';
         }
         $chelper = new coursecat_helper();
-        $chelper->set_subcat_depth($CFG->maxcategorydepth)->set_categories_display_options(array(
+        $chelper->set_subcat_depth($CFG->maxcategorydepth)->set_categories_display_options([
             'limit' => $CFG->coursesperpage,
             'viewmoreurl' => new moodle_url('/course/index.php',
-                array('browse' => 'categories', 'page' => 1))
-        ))->set_courses_display_options(array(
+                [
+                    'browse' => 'categories',
+                    'page' => 1,
+                ])
+        ])->set_courses_display_options([
             'limit' => $CFG->coursesperpage,
             'viewmoreurl' => new moodle_url('/course/index.php',
-                array('browse' => 'courses', 'page' => 1))
-        ))->set_attributes(array('class' => 'row frontpage-category-combo'));
+                [
+                    'browse' => 'courses',
+                    'page' => 1,
+                ]),
+        ])->set_attributes(['class' => 'row frontpage-category-combo']);
         return $this->coursecat_tree($chelper, $tree);
     }
 
@@ -577,7 +587,7 @@ class course_renderer extends \core_course_renderer {
             'inputname' => 'q',
             'searchstring' => get_string('searchcourses'),
             'hiddenfields' => (object)['name' => 'areaids', 'value' => 'core_course-course'],
-            'query' => $value
+            'query' => $value,
         ];
         return $this->render_from_template('theme_degrade/frontpage-search', $data);
     }

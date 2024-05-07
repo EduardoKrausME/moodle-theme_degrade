@@ -17,7 +17,6 @@
  * @package     theme_degrade
  * @copyright   2024 Eduardo Kraus https://eduardokraus.com/
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @date        02/04/2023 19:54
  */
 
 defined('MOODLE_INTERNAL') || die;
@@ -109,7 +108,7 @@ if ($CFG->theme != "boost_training") {
 
 // Cores dos botões.
 $setting = new admin_setting_heading("theme_degrade/theme_color_heading",
-    get_string('theme_color_heading', 'theme_degrade'),  '');
+    get_string('theme_color_heading', 'theme_degrade'), '');
 $page->add($setting);
 
 $colorss = [
@@ -118,35 +117,35 @@ $colorss = [
         'color_secondary' => '#3e65a0',
         'color_buttons' => '#183054',
         'color_names' => '#c0ccdc',
-        'color_titles' => '#e8f0fb'
+        'color_titles' => '#e8f0fb',
     ],
     'theme_color_violet' => [
         'color_primary' => '#8e558e',
         'color_secondary' => '#a55ba5',
         'color_buttons' => '#382738',
         'color_names' => '#edd3ed',
-        'color_titles' => '#feffef'
+        'color_titles' => '#feffef',
     ],
     'theme_color_red_d' => [
         'color_primary' => '#561209',
         'color_secondary' => '#a64437',
         'color_buttons' => '#5e1e15',
         'color_names' => '#f7e3e1',
-        'color_titles' => '#fff1ef'
+        'color_titles' => '#fff1ef',
     ],
     'theme_color_green' => [
         'color_primary' => '#426e17',
         'color_secondary' => '#7abb3b',
         'color_buttons' => '#2f510f',
         'color_names' => '#bad3a3',
-        'color_titles' => '#f2fde8'
+        'color_titles' => '#f2fde8',
     ],
     'theme_color_green_d' => [
         'color_primary' => '#20897b',
         'color_secondary' => '#4ba89c',
         'color_buttons' => '#103430',
         'color_names' => '#c0dcdb',
-        'color_titles' => '#e4f7f6'
+        'color_titles' => '#e4f7f6',
     ]
 ];
 $choices = [];
