@@ -76,7 +76,7 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2024050200, "theme", "degrade");
     }
 
-    if ($oldversion < 2024050607) {
+    if ($oldversion < 2024050700) {
         $fonts = "<style>\n@import url('https://fonts.googleapis.com/css2?" .
             "&family=Briem+Hand:wght@100..900" .
             "&family=Epilogue:ital,wght@0,100..900;1,100..900" .
@@ -98,7 +98,7 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         set_config("fontfamily_menus", "Roboto", "theme_degrade");
         set_config("fontfamily_sitename", "Oswald", "theme_degrade");
 
-        upgrade_plugin_savepoint(true, 2024050607, "theme", "degrade");
+        upgrade_plugin_savepoint(true, 2024050700, "theme", "degrade");
     }
 
     return true;
