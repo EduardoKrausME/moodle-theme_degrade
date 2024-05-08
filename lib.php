@@ -640,27 +640,25 @@ function theme_degrade_process_css($css, $theme) {
         $topscrolltextcolor = theme_degrade_get_setting("top_scroll_text_color");
 
         $css .= "
-            .header-menubar .primary-navigation ul.navbar-nav li a,
-            .header-menubar .navbar-nav .simplesearchform .btn-open,
-            #header .popover-region .popover-region-toggle i.icon,
-            .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
-            .header-menubar .navbar-nav .editmode-switch-form .input-group label,
-            .custom-switch .custom-control-label:after,
-            .usermenu .moodle-actionmenu a.dropdown-toggle,
-            .navbar-light .navbar-nav .show>.nav-link,
-            .navbar-light .navbar-nav .active>.nav-link,
-            .navbar-light .navbar-nav .nav-link.show,
-            .navbar-light .navbar-nav .nav-link.active,
-            .header-logo a.navbar-brand img,
-            .header-logo a.navbar-brand span {
+            .fixed-top .header-menubar .navbar-nav .simplesearchform .btn-open,
+            #header.fixed-top  .popover-region .popover-region-toggle i.icon,
+            .fixed-top .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
+            .fixed-top .header-menubar .navbar-nav .editmode-switch-form .input-group label,
+            .fixed-top .usermenu .moodle-actionmenu a.dropdown-toggle,
+            .navbar-light.fixed-top .navbar-nav .show>.nav-link,
+            .navbar-light.fixed-top .navbar-nav .active>.nav-link,
+            .navbar-light.fixed-top .navbar-nav .nav-link.show,
+            .navbar-light.fixed-top .navbar-nav .nav-link.active,
+            .fixed-top .header-logo a.navbar-brand img,
+            .fixed-top .header-logo a.navbar-brand span,
+            .fixed-top .header-menubar .primary-navigation ul.navbar-nav > li > a {
                 color: {$topscrolltextcolor} !important;
+            }
+            .fixed-top .custom-switch .custom-control-label:after{
+                background: {$topscrolltextcolor} !important;
             }
             .fixed-top {
                 background: {$topscrollbackgroundcolor} !important;
-            }
-            .fixed-top *,
-            .fixed-top :before {
-                color: {$topscrolltextcolor} !important;
             }";
     }
 
@@ -680,8 +678,6 @@ function theme_degrade_process_css($css, $theme) {
     $fontfamilymenus = theme_degrade_get_setting("fontfamily_menus");
     $fontfamilymenus = isset($fontfamilymenus[3]) ? "{$fontfamilymenus}," : "";
     $fontfamilymenus = ".header-menubar .primary-navigation ul.navbar-nav li a,
-            .header-menubar .navbar-nav .simplesearchform .btn-open,
-            #header .popover-region .popover-region-toggle i.icon,
             .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
             .header-menubar .navbar-nav .editmode-switch-form .input-group label,
             .usermenu .moodle-actionmenu a.dropdown-toggle,
