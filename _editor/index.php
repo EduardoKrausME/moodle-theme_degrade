@@ -29,34 +29,12 @@ $editlang = required_param('editlang', PARAM_TEXT);
 require_login();
 require_capability('moodle/site:config', context_system::instance());
 
-
-global $plugins;
-require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
-
-$currentlang = $CFG->lang;
-if (isset($_SESSION['SESSION']->lang)) {
-    $currentlang = $_SESSION['SESSION']->lang;
-}
-$langP = explode("_", $currentlang);
-foreach ($langP as $i) {
-    $_lang = implode("_", $langP);
-    if (file_exists(__DIR__ . "/js/locale/{$_lang}.json")) {
-        $currentlang = $_lang;
-        break;
-    }
-    array_pop($langP);
-}
-if (!file_exists(__DIR__ . "/js/locale/{$currentlang}.json")) {
-    $currentlang = "en";
-}
-$langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json"));
-
 ?>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Edit Page</title>
+    <title>Edit</title>
     <link rel="stylesheet" href="styles/toastr.css">
     <link rel="stylesheet" href="styles/grapes.css">
     <link rel="stylesheet" href="styles/grapesjs-preset-webpage.css">
@@ -71,14 +49,10 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
     <script src="js/plugins/grapesjs-preset-webpage.js"></script>
     <script src="js/plugins/grapesjs-blocks-basic.js"></script>
     <script src="js/plugins/grapesjs-plugin-forms.js"></script>
-    <script src="js/plugins/grapesjs-component-countdown.js"></script>
-    <script src="js/plugins/grapesjs-tabs.js"></script>
     <script src="js/plugins/grapesjs-custom-code.js"></script>
     <script src="js/plugins/grapesjs-touch.js"></script>
     <script src="js/plugins/grapesjs-parser-postcss.js"></script>
-    <script src="js/plugins/grapesjs-tooltip.js"></script>
     <script src="js/plugins/grapesjs-tui-image-editor.js"></script>
-    <script src="js/plugins/grapesjs-typed.js"></script>
     <script src="js/plugins/grapesjs-style-bg.js"></script>
     <script src="js/plugins/grapesjs-plugin-ckeditor.js"></script>
 </head>
@@ -125,6 +99,9 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
             echo "<style>{$css}</style>";
         }
     }
+
+    global $plugins;
+    require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
     ?>
 </div>
 
@@ -168,7 +145,7 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
         'styleManager'    : {
             'sectors' : [
                 {
-                    'name'       : '<?php echo $langs->styleManager->sectors->general ?>',
+                    'name'       : '<?php echo get_string("grapsjs-general", "theme_degrade") ?>',
                     'properties' : [
                         'display',
                         {'extend' : 'position', 'type' : 'select'},
@@ -179,7 +156,7 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
                     ],
                 },
                 {
-                    'name'       : '<?php echo $langs->styleManager->sectors->dimension ?>',
+                    'name'       : '<?php echo get_string("grapsjs-dimensions", "theme_degrade") ?>',
                     'open'       : false,
                     'properties' : [
                         'width',
@@ -193,13 +170,13 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
                     ],
                 },
                 {
-                    'name'       : '<?php echo $langs->styleManager->sectors->typography ?>',
+                    'name'       : '<?php echo get_string("grapsjs-tipografia", "theme_degrade") ?>',
                     'open'       : false,
                     'properties' : [
                         {
                             'property' : 'font-family',
                             'type'     : 'select',
-                            'name'     : '<?php $a = 'font-family'; echo $langs->styleManager->properties->$a ?>',
+                            'name'     : '<?php echo get_string("grapsjs-stylemanager-properties-font-family", "theme_degrade") ?>',
                             'options'  : [
                                 {
                                     'id'    : "Arial,Helvetica,sans-serif",
@@ -226,22 +203,22 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
                             'options' : [
                                 {
                                     'id'        : 'left',
-                                    'label'     : '<?php echo $langs->styleManager->properties->left ?>',
+                                    'label'     : '<?php echo get_string("grapsjs-stylemanager-properties-left", "theme_degrade") ?>',
                                     'className' : 'fa fa-align-left'
                                 },
                                 {
                                     'id'        : 'center',
-                                    'label'     : '<?php echo $langs->styleManager->properties->center ?>',
+                                    'label'     : '<?php echo get_string("grapsjs-stylemanager-properties-center", "theme_degrade") ?>',
                                     'className' : 'fa fa-align-center'
                                 },
                                 {
                                     'id'        : 'right',
-                                    'label'     : '<?php echo $langs->styleManager->properties->right ?>',
+                                    'label'     : '<?php echo get_string("grapsjs-stylemanager-properties-right", "theme_degrade") ?>',
                                     'className' : 'fa fa-align-right'
                                 },
                                 {
                                     'id'        : 'justify',
-                                    'label'     : '<?php echo $langs->styleManager->properties->justify ?>',
+                                    'label'     : '<?php echo get_string("grapsjs-stylemanager-properties-justify", "theme_degrade") ?>',
                                     'className' : 'fa fa-align-justify'
                                 }
                             ],
@@ -253,17 +230,17 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
                             'options'  : [
                                 {
                                     'id'        : 'none',
-                                    'label'     : '<?php echo $langs->styleManager->properties->none ?>',
+                                    'label'     : '<?php echo get_string("grapsjs-stylemanager-properties-none", "theme_degrade") ?>',
                                     'className' : 'fa fa-times'
                                 },
                                 {
                                     'id'        : 'underline',
-                                    'label'     : '<?php echo $langs->styleManager->properties->underline ?>',
+                                    'label'     : '<?php echo get_string("grapsjs-stylemanager-properties-underline", "theme_degrade") ?>',
                                     'className' : 'fa fa-underline'
                                 },
                                 {
                                     'id'        : 'line-through',
-                                    'label'     : '<?php echo $langs->styleManager->properties->line_through ?>',
+                                    'label'     : '<?php echo get_string("grapsjs-stylemanager-properties-line-through", "theme_degrade") ?>',
                                     'className' : 'fa fa-strikethrough'
                                 }
                             ],
@@ -295,14 +272,14 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
                     ],
                 },
                 {
-                    'name'       : '<?php echo $langs->styleManager->properties->background ?>',
+                    'name'       : '<?php echo get_string("grapsjs-stylemanager-properties-background", "theme_degrade") ?>',
                     'open'       : false,
                     'properties' : [
                         'background',
                     ],
                 },
                 {
-                    'name'       : '<?php echo $langs->styleManager->sectors->decorations ?>',
+                    'name'       : '<?php echo get_string("grapsjs-decoration", "theme_degrade") ?>',
                     'open'       : false,
                     'properties' : [
                         'opacity',
@@ -343,11 +320,11 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
                 ],
             },
             'grapesjs-tabs'             : {
-                'tabsBlock' : {'category' : '<?php echo $langs->styleManager->sectors->extra ?>'}
+                'tabsBlock' : {'category' : '<?php echo get_string("grapsjs-stylemanager-sectors-extra", "theme_degrade") ?>'}
             },
             'grapesjs-typed'            : {
                 'block' : {
-                    'category' : '<?php echo $langs->styleManager->sectors->extra ?>',
+                    'category' : '<?php echo get_string("grapsjs-stylemanager-sectors-extra", "theme_degrade") ?>',
                     'content'  : {
                         'type'       : 'typed',
                         'type-speed' : 40,
@@ -360,8 +337,8 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
                 }
             },
             'grapesjs-preset-webpage'   : {
-                'modalImportTitle'   : '<?php echo $langs->preset->webpage->edit_code ?>',
-                'modalImportLabel'   : '<div style="margin-bottom: 10px; font-size: 13px;"><?php echo $langs->preset->webpage->edit_code_paste_here_html ?></div>',
+                'modalImportTitle'   : '<?php echo get_string("grapsjs-edit_code", "theme_degrade") ?>',
+                'modalImportLabel'   : '<div style="margin-bottom: 10px; font-size: 13px;"><?php echo get_string("grapsjs-edit_code_paste_here_html", "theme_degrade") ?></div>',
                 'modalImportContent' : function(editor) {
                     var html = editor.getHtml();
                     html = html.split(/<body.*?>/).join('');
@@ -432,6 +409,7 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
         'canvas'          : {
             'styles'  : [
                 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
+                '<?php echo "{$CFG->wwwroot}/local/kopere_dashboard/_editor/styles/bootstrap.css"; ?>',
                 '<?php echo \theme_degrade\fonts\font_util::css() ?>',
                 '<?php echo "{$CFG->wwwroot}/lib/jquery/{$plugins['ui-css']['files'][0]}"; ?>',
             ],
@@ -446,7 +424,176 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
             'detectLocale'   : false,
             'localeFallback' : 'en',
             'messages'       : {
-                'en' : <?php echo json_encode($langs, JSON_PRETTY_PRINT) ?>,
+                'en' : {
+                    'assetManager'    : {
+                        'addButton'   : "<?php echo get_string("grapsjs-assetmanager-addbutton", "theme_degrade") ?>",
+                        'modalTitle'  : "<?php echo get_string("grapsjs-assetmanager-modaltitle", "theme_degrade") ?>",
+                        'uploadTitle' : "<?php echo get_string("grapsjs-assetmanager-uploadtitle", "theme_degrade") ?>"
+                    },
+                    'domComponents'   : {
+                        'names' : {
+                            ""        : "<?php echo get_string("grapsjs-domcomponents-names-", "theme_degrade") ?>",
+                            'wrapper' : "<?php echo get_string("grapsjs-domcomponents-names-wrapper", "theme_degrade") ?>",
+                            'text'    : "<?php echo get_string("grapsjs-domcomponents-names-text", "theme_degrade") ?>",
+                            'comment' : "<?php echo get_string("grapsjs-domcomponents-names-comment", "theme_degrade") ?>",
+                            'image'   : "<?php echo get_string("grapsjs-domcomponents-names-image", "theme_degrade") ?>",
+                            'video'   : "<?php echo get_string("grapsjs-domcomponents-names-video", "theme_degrade") ?>",
+                            'label'   : "<?php echo get_string("grapsjs-domcomponents-names-label", "theme_degrade") ?>",
+                            'link'    : "<?php echo get_string("grapsjs-domcomponents-names-link", "theme_degrade") ?>",
+                            'map'     : "<?php echo get_string("grapsjs-domcomponents-names-map", "theme_degrade") ?>",
+                            'tfoot'   : "<?php echo get_string("grapsjs-domcomponents-names-tfoot", "theme_degrade") ?>",
+                            'tbody'   : "<?php echo get_string("grapsjs-domcomponents-names-tbody", "theme_degrade") ?>",
+                            'thead'   : "<?php echo get_string("grapsjs-domcomponents-names-thead", "theme_degrade") ?>",
+                            'table'   : "<?php echo get_string("grapsjs-domcomponents-names-table", "theme_degrade") ?>",
+                            'row'     : "<?php echo get_string("grapsjs-domcomponents-names-row", "theme_degrade") ?>",
+                            'cell'    : "<?php echo get_string("grapsjs-domcomponents-names-cell", "theme_degrade") ?>",
+                            'section' : "<?php echo get_string("grapsjs-domcomponents-names-section", "theme_degrade") ?>",
+                            'body'    : "<?php echo get_string("grapsjs-domcomponents-names-wrapper", "theme_degrade") ?>"
+                        }
+                    },
+                    'deviceManager'   : {
+                        'device'  : "<?php echo get_string("grapsjs-devicemanager-device", "theme_degrade") ?>",
+                        'devices' : {
+                            'desktop'         : "<?php echo get_string("grapsjs-devicemanager-devices-desktop", "theme_degrade") ?>",
+                            'tablet'          : "<?php echo get_string("grapsjs-devicemanager-devices-tablet", "theme_degrade") ?>",
+                            'mobileLandscape' : "<?php echo get_string("grapsjs-devicemanager-devices-mobilelandscape", "theme_degrade") ?>",
+                            'mobilePortrait'  : "<?php echo get_string("grapsjs-devicemanager-devices-mobileportrait", "theme_degrade") ?>"
+                        }
+                    },
+                    'panels'          : {
+                        'buttons' : {
+                            'titles' : {
+                                'preview'       : "<?php echo get_string("grapsjs-panels-buttons-titles-preview", "theme_degrade") ?>",
+                                'fullscreen'    : "<?php echo get_string("grapsjs-panels-buttons-titles-fullscreen", "theme_degrade") ?>",
+                                "sw-visibility" : "<?php echo get_string("grapsjs-panels-buttons-titles-sw-visibility", "theme_degrade") ?>",
+                                "open-sm"       : "<?php echo get_string("grapsjs-panels-buttons-titles-open-sm", "theme_degrade") ?>",
+                                "open-tm"       : "<?php echo get_string("grapsjs-panels-buttons-titles-open-tm", "theme_degrade") ?>",
+                                "open-layers"   : "<?php echo get_string("grapsjs-panels-buttons-titles-open-layers", "theme_degrade") ?>",
+                                "open-blocks"   : "<?php echo get_string("grapsjs-panels-buttons-titles-open-blocks", "theme_degrade") ?>"
+                            }
+                        }
+                    },
+                    'selectorManager' : {
+                        'label'      : "<?php echo get_string("grapsjs-selectormanager-label", "theme_degrade") ?>",
+                        'selected'   : "<?php echo get_string("grapsjs-selectormanager-selected", "theme_degrade") ?>",
+                        'emptyState' : "<?php echo get_string("grapsjs-selectormanager-emptystate", "theme_degrade") ?>",
+                        'states'     : {
+                            'hover'           : "<?php echo get_string("grapsjs-selectormanager-states-hover", "theme_degrade") ?>",
+                            'active'          : "<?php echo get_string("grapsjs-selectormanager-states-active", "theme_degrade") ?>",
+                            "nth-of-type(2n)" : "<?php echo get_string("grapsjs-selectormanager-states-nth-of-type-2n", "theme_degrade") ?>"
+                        }
+                    },
+                    'styleManager'    : {
+                        'empty'      : "<?php echo get_string("grapsjs-stylemanager-empty", "theme_degrade") ?>",
+                        'layer'      : "<?php echo get_string("grapsjs-stylemanager-layer", "theme_degrade") ?>",
+                        'fileButton' : "<?php echo get_string("grapsjs-stylemanager-filebutton", "theme_degrade") ?>",
+                        'sectors'    : {
+                            'general'     : "<?php echo get_string("grapsjs-stylemanager-sectors-general", "theme_degrade") ?>",
+                            'layout'      : "<?php echo get_string("grapsjs-stylemanager-sectors-layout", "theme_degrade") ?>",
+                            'typography'  : "<?php echo get_string("grapsjs-stylemanager-sectors-typography", "theme_degrade") ?>",
+                            'decorations' : "<?php echo get_string("grapsjs-stylemanager-sectors-decorations", "theme_degrade") ?>",
+                            'extra'       : "<?php echo get_string("grapsjs-stylemanager-sectors-extra", "theme_degrade") ?>",
+                            'flex'        : "<?php echo get_string("grapsjs-stylemanager-sectors-flex", "theme_degrade") ?>",
+                            'dimension'   : "<?php echo get_string("grapsjs-stylemanager-sectors-dimension", "theme_degrade") ?>"
+                        },
+                        'properties' : {
+                            'float'                      : "<?php echo get_string("grapsjs-stylemanager-properties-float", "theme_degrade") ?>",
+                            'display'                    : "<?php echo get_string("grapsjs-stylemanager-properties-display", "theme_degrade") ?>",
+                            'position'                   : "<?php echo get_string("grapsjs-stylemanager-properties-position", "theme_degrade") ?>",
+                            'top'                        : "<?php echo get_string("grapsjs-stylemanager-properties-top", "theme_degrade") ?>",
+                            'right'                      : "<?php echo get_string("grapsjs-stylemanager-properties-right", "theme_degrade") ?>",
+                            'left'                       : "<?php echo get_string("grapsjs-stylemanager-properties-left", "theme_degrade") ?>",
+                            'bottom'                     : "<?php echo get_string("grapsjs-stylemanager-properties-bottom", "theme_degrade") ?>",
+                            'width'                      : "<?php echo get_string("grapsjs-stylemanager-properties-width", "theme_degrade") ?>",
+                            'height'                     : "<?php echo get_string("grapsjs-stylemanager-properties-height", "theme_degrade") ?>",
+                            "max-width"                  : "<?php echo get_string("grapsjs-stylemanager-properties-max-width", "theme_degrade") ?>",
+                            "max-height"                 : "<?php echo get_string("grapsjs-stylemanager-properties-max-height", "theme_degrade") ?>",
+                            'margin'                     : "<?php echo get_string("grapsjs-stylemanager-properties-margin", "theme_degrade") ?>",
+                            "margin-top"                 : "<?php echo get_string("grapsjs-stylemanager-properties-margin-top", "theme_degrade") ?>",
+                            "margin-right"               : "<?php echo get_string("grapsjs-stylemanager-properties-margin-right", "theme_degrade") ?>",
+                            "margin-left"                : "<?php echo get_string("grapsjs-stylemanager-properties-margin-left", "theme_degrade") ?>",
+                            "margin-bottom"              : "<?php echo get_string("grapsjs-stylemanager-properties-margin-bottom", "theme_degrade") ?>",
+                            'padding'                    : "<?php echo get_string("grapsjs-stylemanager-properties-padding", "theme_degrade") ?>",
+                            "padding-top"                : "<?php echo get_string("grapsjs-stylemanager-properties-padding-top", "theme_degrade") ?>",
+                            "padding-left"               : "<?php echo get_string("grapsjs-stylemanager-properties-padding-left", "theme_degrade") ?>",
+                            "padding-right"              : "<?php echo get_string("grapsjs-stylemanager-properties-padding-right", "theme_degrade") ?>",
+                            "padding-bottom"             : "<?php echo get_string("grapsjs-stylemanager-properties-padding-bottom", "theme_degrade") ?>",
+                            "font-family"                : "<?php echo get_string("grapsjs-stylemanager-properties-font-family", "theme_degrade") ?>",
+                            "font-size"                  : "<?php echo get_string("grapsjs-stylemanager-properties-font-size", "theme_degrade") ?>",
+                            "font-weight"                : "<?php echo get_string("grapsjs-stylemanager-properties-font-weight", "theme_degrade") ?>",
+                            "letter-spacing"             : "<?php echo get_string("grapsjs-stylemanager-properties-letter-spacing", "theme_degrade") ?>",
+                            'color'                      : "<?php echo get_string("grapsjs-stylemanager-properties-color", "theme_degrade") ?>",
+                            "line-height"                : "<?php echo get_string("grapsjs-stylemanager-properties-line-height", "theme_degrade") ?>",
+                            "text-align"                 : "<?php echo get_string("grapsjs-stylemanager-properties-text-align", "theme_degrade") ?>",
+                            "text-shadow"                : "<?php echo get_string("grapsjs-stylemanager-properties-text-shadow", "theme_degrade") ?>",
+                            "text-shadow-h"              : "<?php echo get_string("grapsjs-stylemanager-properties-text-shadow-h", "theme_degrade") ?>",
+                            "text-shadow-v"              : "<?php echo get_string("grapsjs-stylemanager-properties-text-shadow-v", "theme_degrade") ?>",
+                            "text-shadow-blur"           : "<?php echo get_string("grapsjs-stylemanager-properties-text-shadow-blur", "theme_degrade") ?>",
+                            "text-shadow-color"          : "<?php echo get_string("grapsjs-stylemanager-properties-text-shadow-color", "theme_degrade") ?>",
+                            "border-top-left"            : "<?php echo get_string("grapsjs-stylemanager-properties-border-top-left", "theme_degrade") ?>",
+                            "border-top-right"           : "<?php echo get_string("grapsjs-stylemanager-properties-border-top-right", "theme_degrade") ?>",
+                            "border-bottom-left"         : "<?php echo get_string("grapsjs-stylemanager-properties-border-bottom-left", "theme_degrade") ?>",
+                            "border-bottom-right"        : "<?php echo get_string("grapsjs-stylemanager-properties-border-bottom-right", "theme_degrade") ?>",
+                            "border-radius-top-left"     : "<?php echo get_string("grapsjs-stylemanager-properties-border-radius-top-left", "theme_degrade") ?>",
+                            "border-radius-top-right"    : "<?php echo get_string("grapsjs-stylemanager-properties-border-radius-top-right", "theme_degrade") ?>",
+                            "border-radius-bottom-left"  : "<?php echo get_string("grapsjs-stylemanager-properties-border-radius-bottom-left", "theme_degrade") ?>",
+                            "border-radius-bottom-right" : "<?php echo get_string("grapsjs-stylemanager-properties-border-radius-bottom-right", "theme_degrade") ?>",
+                            "border-radius"              : "<?php echo get_string("grapsjs-stylemanager-properties-border-radius", "theme_degrade") ?>",
+                            'border'                     : "<?php echo get_string("grapsjs-stylemanager-properties-border", "theme_degrade") ?>",
+                            "border-width"               : "<?php echo get_string("grapsjs-stylemanager-properties-border-width", "theme_degrade") ?>",
+                            "border-style"               : "<?php echo get_string("grapsjs-stylemanager-properties-border-style", "theme_degrade") ?>",
+                            "border-color"               : "<?php echo get_string("grapsjs-stylemanager-properties-border-color", "theme_degrade") ?>",
+                            "box-shadow"                 : "<?php echo get_string("grapsjs-stylemanager-properties-box-shadow", "theme_degrade") ?>",
+                            "box-shadow-h"               : "<?php echo get_string("grapsjs-stylemanager-properties-box-shadow-h", "theme_degrade") ?>",
+                            "box-shadow-v"               : "<?php echo get_string("grapsjs-stylemanager-properties-box-shadow-v", "theme_degrade") ?>",
+                            "box-shadow-blur"            : "<?php echo get_string("grapsjs-stylemanager-properties-box-shadow-blur", "theme_degrade") ?>",
+                            "box-shadow-spread"          : "<?php echo get_string("grapsjs-stylemanager-properties-box-shadow-spread", "theme_degrade") ?>",
+                            "box-shadow-color"           : "<?php echo get_string("grapsjs-stylemanager-properties-box-shadow-color", "theme_degrade") ?>",
+                            "box-shadow-type"            : "<?php echo get_string("grapsjs-stylemanager-properties-box-shadow-type", "theme_degrade") ?>",
+                            'background'                 : "<?php echo get_string("grapsjs-stylemanager-properties-background", "theme_degrade") ?>",
+                            "background-color"           : "<?php echo get_string("grapsjs-stylemanager-properties-background-color", "theme_degrade") ?>",
+                            "background-image"           : "<?php echo get_string("grapsjs-stylemanager-properties-background-image", "theme_degrade") ?>",
+                            "background-repeat"          : "<?php echo get_string("grapsjs-stylemanager-properties-background-repeat", "theme_degrade") ?>",
+                            "background-position"        : "<?php echo get_string("grapsjs-stylemanager-properties-background-position", "theme_degrade") ?>",
+                            "background-attachment"      : "<?php echo get_string("grapsjs-stylemanager-properties-background-attachment", "theme_degrade") ?>",
+                            "background-size"            : "<?php echo get_string("grapsjs-stylemanager-properties-background-size", "theme_degrade") ?>",
+                            'transition'                 : "<?php echo get_string("grapsjs-stylemanager-properties-transition", "theme_degrade") ?>",
+                            "transition-property"        : "<?php echo get_string("grapsjs-stylemanager-properties-transition-property", "theme_degrade") ?>",
+                            "transition-duration"        : "<?php echo get_string("grapsjs-stylemanager-properties-transition-duration", "theme_degrade") ?>",
+                            "transition-timing-function" : "<?php echo get_string("grapsjs-stylemanager-properties-transition-timing-function", "theme_degrade") ?>",
+                            'perspective'                : "<?php echo get_string("grapsjs-stylemanager-properties-perspective", "theme_degrade") ?>",
+                            'transform'                  : "<?php echo get_string("grapsjs-stylemanager-properties-transform", "theme_degrade") ?>",
+                            "transform-rotate-x"         : "<?php echo get_string("grapsjs-stylemanager-properties-transform-rotate-x", "theme_degrade") ?>",
+                            "transform-rotate-y"         : "<?php echo get_string("grapsjs-stylemanager-properties-transform-rotate-y", "theme_degrade") ?>",
+                            "transform-rotate-z"         : "<?php echo get_string("grapsjs-stylemanager-properties-transform-rotate-z", "theme_degrade") ?>",
+                            "transform-scale-x"          : "<?php echo get_string("grapsjs-stylemanager-properties-transform-scale-x", "theme_degrade") ?>",
+                            "transform-scale-y"          : "<?php echo get_string("grapsjs-stylemanager-properties-transform-scale-y", "theme_degrade") ?>",
+                            "transform-scale-z"          : "<?php echo get_string("grapsjs-stylemanager-properties-transform-scale-z", "theme_degrade") ?>",
+                            "flex-direction"             : "<?php echo get_string("grapsjs-stylemanager-properties-flex-direction", "theme_degrade") ?>",
+                            "flex-wrap"                  : "<?php echo get_string("grapsjs-stylemanager-properties-flex-wrap", "theme_degrade") ?>",
+                            "justify-content"            : "<?php echo get_string("grapsjs-stylemanager-properties-justify-content", "theme_degrade") ?>",
+                            "align-items"                : "<?php echo get_string("grapsjs-stylemanager-properties-align-items", "theme_degrade") ?>",
+                            "align-content"              : "<?php echo get_string("grapsjs-stylemanager-properties-align-content", "theme_degrade") ?>",
+                            'order'                      : "<?php echo get_string("grapsjs-stylemanager-properties-order", "theme_degrade") ?>",
+                            "flex-basis"                 : "<?php echo get_string("grapsjs-stylemanager-properties-flex-basis", "theme_degrade") ?>",
+                            "flex-grow"                  : "<?php echo get_string("grapsjs-stylemanager-properties-flex-grow", "theme_degrade") ?>",
+                            "flex-shrink"                : "<?php echo get_string("grapsjs-stylemanager-properties-flex-shrink", "theme_degrade") ?>",
+                            "align-self"                 : "<?php echo get_string("grapsjs-stylemanager-properties-align-self", "theme_degrade") ?>",
+                        },
+                    },
+                    'traitManager'    : {
+                        'empty'  : "<?php echo get_string("grapsjs-traitmanager-empty", "theme_degrade") ?>",
+                        'label'  : "<?php echo get_string("grapsjs-traitmanager-label", "theme_degrade") ?>",
+                        'traits' : {
+                            'options' : {
+                                'target' : {
+                                    'false'  : "<?php echo get_string("grapsjs-traitmanager-traits-options-target-false", "theme_degrade") ?>",
+                                    '_blank' : "<?php echo get_string("grapsjs-traitmanager-traits-options-target-_blank", "theme_degrade") ?>"
+                                },
+                            },
+                        },
+                    },
+                },
             }
         }
     });
@@ -469,7 +616,7 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
                            <input type="hidden" name="cssdata"  class="form-cssdata">
                            <button type="submit" class="btn-salvar gjs-pn-btn gjs-pn-active gjs-four-color">
                                <i class='fa fa-save'></i>&nbsp;
-                               <?php echo $langs->page->save ?>
+                               <?php echo get_string("grapsjs-page_save", "theme_degrade") ?>
                           </button>
                        </form>
                        <form class="form-preview-preview" method="post" target="home-preview"
@@ -482,7 +629,7 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
                            <input type="hidden" name="cssdata"  class="form-cssdata">
                            <button type="submit" class="btn-salvar gjs-pn-btn gjs-pn-active gjs-four-color">
                                <i class='fa fa-eye'></i>&nbsp;
-                               <?php echo $langs->page->preview ?>
+                               <?php echo get_string("grapsjs-page_preview", "theme_degrade") ?>
                           </button>
                        </form>`,
         }
@@ -602,7 +749,7 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
 
     // Update canvas-clear command
     editor.Commands.add('canvas-clear', function() {
-        if (confirm("<?php echo $langs->canvas->clear ?>")) {
+        if (confirm("<?php echo get_string("grapsjs-confirm_clear", "theme_degrade") ?>")) {
             editor.runCommand('core:canvas-clear');
             setTimeout(function() {
                 localStorage.clear()
@@ -627,13 +774,13 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
 
     // Add and beautify tooltips
     var options = [
-        ['sw-visibility', '<?php $a = 'sw-visibility'; echo $langs->panels->buttons->titles->$a ?>'],
-        ['preview', '<?php echo $langs->panels->buttons->titles->preview ?>'],
-        ['fullscreen', '<?php echo $langs->panels->buttons->titles->fullscreen ?>'],
-        ['undo', '<?php echo $langs->panels->buttons->titles->undo ?>'],
-        ['redo', '<?php echo $langs->panels->buttons->titles->redo ?>'],
-        ['canvas-clear', '<?php echo $langs->panels->buttons->titles->clear ?>'],
-        ['gjs-open-import-webpage', '<?php echo $langs->panels->buttons->titles->edit_code ?>'],
+        ['sw-visibility', '<?php echo get_string("grapsjs-show_border", "theme_degrade") ?>'],
+        ['preview', '<?php echo get_string("grapsjs-preview", "theme_degrade") ?>'],
+        ['fullscreen', '<?php echo get_string("grapsjs-fullscreen", "theme_degrade") ?>'],
+        ['undo', '<?php echo get_string("grapsjs-undo", "theme_degrade") ?>'],
+        ['redo', '<?php echo get_string("grapsjs-redo", "theme_degrade") ?>'],
+        ['canvas-clear', '<?php echo get_string("grapsjs-clear", "theme_degrade") ?>'],
+        ['gjs-open-import-webpage', '<?php echo get_string("grapsjs-edit_code", "theme_degrade") ?>'],
     ];
     options.forEach(function(item) {
         editor.Panels.getButton('options', item[0]).set('attributes', {
@@ -643,9 +790,9 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
     });
 
     var views = [
-        ['open-sm', '<?php $a = 'open-sm'; echo $langs->panels->buttons->titles->$a ?>'],
-        ['open-layers', '<?php $a = 'open-layers'; echo $langs->panels->buttons->titles->$a ?>'],
-        ['open-blocks', '<?php $a = 'open-blocks'; echo $langs->panels->buttons->titles->$a ?>'],
+        ['open-sm', '<?php echo get_string("grapsjs-open_sm", "theme_degrade") ?>'],
+        ['open-layers', '<?php echo get_string("grapsjs-open_layers", "theme_degrade") ?>'],
+        ['open-blocks', '<?php echo get_string("grapsjs-open_block", "theme_degrade") ?>'],
     ];
     views.forEach(function(item) {
         editor.Panels.getButton('views', item[0]).set('attributes', {
@@ -705,7 +852,7 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
 
         // Add Settings Sector
         var traitsSector = $('<div class="gjs-sm-sector no-select">' +
-            '<div class="gjs-sm-sector-title"><span class="icon-settings fa fa-cog"></span> <span class="gjs-sm-sector-label"><?php echo $langs->page->settings ?></span></div>' +
+            '<div class="gjs-sm-sector-title"><span class="icon-settings fa fa-cog"></span> <span class="gjs-sm-sector-label"><?php echo get_string('grapsjs-settings', 'theme_degrade') ?></span></div>' +
             '<div class="gjs-sm-properties" style="display: none;"></div></div>');
         var traitsProps = traitsSector.find('.gjs-sm-properties');
         traitsProps.append($('.gjs-traits-cs'));
