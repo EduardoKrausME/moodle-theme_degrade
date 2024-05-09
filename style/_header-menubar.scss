@@ -54,10 +54,11 @@
                     padding: 11px 15px !important;
                     &:hover,
                     &.active {
+                        color: #fff;
                         font-weight: 700;
-                    }
-                    &.active:hover {
-                        color: #e4e4e4;
+                        &:hover {
+                            color: #e4e4e4;
+                        }
                     }
                 }
             }
@@ -97,7 +98,7 @@
                         color: rgb(var(--color_primary));
                         &:after {
                             position: absolute;
-                            right: 12px;
+                            right: 7px;
                             top: 17px;
                         }
                         &.active,
@@ -115,6 +116,11 @@
             .nav-link {
                 height: initial;
                 border-top: initial;
+                position: relative;
+                &:after {
+                    position: absolute;
+                    top: 17px;
+                }
             }
         }
     }

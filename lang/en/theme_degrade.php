@@ -98,7 +98,41 @@ $string['social_instagram_desc'] = 'Your organization\'s Instagram URL.';
 $string['social_facebook'] = 'Your Facebook';
 $string['social_facebook_desc'] = 'Your organization\'s Facebook URL.';
 
-$string['settings_top_heading'] = 'Top';
+$string['settings_top_heading'] = 'Top Menu';
+$string['custommenuitems'] = 'Custom Top Menu Items';
+$string['custommenuitems_desc'] = 'You can create a custom menu alongside the top menus. The root menu should start flush with the edge, and submenus should be preceded by a hyphen (-). The number of hyphens determines the item depth. Thus, items with a single hyphen appear in a submenu below the previous top-level item, and items with two hyphens appear in a submenu below the preceding submenu.
+The content of each menu item should consist of up to three elements (<strong>label</strong> | <strong>url</strong> | <strong>tooltip</strong> | <strong>lang</strong>), each separated by the "|" character.
+<ul>
+<li><strong>label</strong>: This is the text that will be displayed within the menu item. You must specify a label for each menu item.</li>
+<li><strong>url</strong>: This is the URL to which the user will be taken upon clicking the menu item. This is optional; if not provided, the item will not be linked anywhere.<br>
+Other attributes such as "target" can be appended to the end of the URL.</li>
+<li><strong>tooltip</strong>: If you provide a URL, you can also choose to provide a tooltip for the link created with the URL. This is optional, and if not defined, the label is used as the tooltip for the menu item.</li>
+<li><strong>lang</strong>: You can add a language code (or a comma-separated list of codes) as the fourth element of the line. The line will be displayed only if the user has selected the listed language(s).</li>
+</ul>
+Below is an example of how you would create a custom menu:
+<blockquote><pre>
+Courses
+-All courses | /course/
+-My courses
+--Example Course 
+---Example Course 7 | /course/view.php?id=7
+---Example Course 9 | /course/view.php?id=9
+--Test Course 
+---Test Course 2 | /course/view.php?id=2
+---Test Course 5 | /course/view.php?id=5
+Google
+-Google in any language | https://google.com/" target="_blank
+-Google in Mexico | https://www.google.com.mx/" target="_blank|Google Label|en
+-Google in Portuguese | https://google.com.br/" target="_blank|Google Label|pt,pt_br,pt_br_kids
+Support Page | https://support.com/" target="_blank
+</pre></blockquote>
+For Moodle with support for multiple languages, the <strong>label</strong> value should be formatted as <strong>"langstringname,componentname"</strong>.
+<blockquote><pre>
+profile,moodle | /user/profile.php
+messages,message | /message/index.php
+</pre></blockquote>
+<a href="https://docs.moodle.org/404/en/Advanced_theme_settings" target="_blank">More menu information</a>';
+
 
 $string['settings_footer_heading'] = 'Footer Block';
 

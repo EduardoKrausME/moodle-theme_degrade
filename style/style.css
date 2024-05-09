@@ -2441,9 +2441,11 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
 .header-menubar .primary-navigation ul.navbar-nav li a:hover, .header-menubar .primary-navigation ul.navbar-nav li a.active,
 .header-menubar .usernavigation ul.navbar-nav li a:hover,
 .header-menubar .usernavigation ul.navbar-nav li a.active {
+  color: #fff;
   font-weight: 700;
 }
-.header-menubar .primary-navigation ul.navbar-nav li a.active:hover,
+.header-menubar .primary-navigation ul.navbar-nav li a:hover:hover, .header-menubar .primary-navigation ul.navbar-nav li a.active:hover,
+.header-menubar .usernavigation ul.navbar-nav li a:hover:hover,
 .header-menubar .usernavigation ul.navbar-nav li a.active:hover {
   color: #e4e4e4;
 }
@@ -2491,7 +2493,7 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
 .header-menubar .primary-navigation ul.navbar-nav .dropdown .dropdown-menu a:after,
 .header-menubar .usernavigation ul.navbar-nav .dropdown .dropdown-menu a:after {
   position: absolute;
-  right: 12px;
+  right: 7px;
   top: 17px;
 }
 .header-menubar .primary-navigation ul.navbar-nav .dropdown .dropdown-menu a.active, .header-menubar .primary-navigation ul.navbar-nav .dropdown .dropdown-menu a:hover, .header-menubar .primary-navigation ul.navbar-nav .dropdown .dropdown-menu a:focus,
@@ -2509,6 +2511,12 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
 .header-menubar .usernavigation .navigation .nav-link {
   height: initial;
   border-top: initial;
+  position: relative;
+}
+.header-menubar .primary-navigation .navigation .nav-link:after,
+.header-menubar .usernavigation .navigation .nav-link:after {
+  position: absolute;
+  top: 17px;
 }
 .header-menubar #usernavigation {
   padding: 12px 0;

@@ -34,6 +34,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
      *custom_menu_drawer
      *
      * @return string
+     *
+     * @throws \coding_exception
      */
     public function custom_menu_drawer() {
         global $CFG;
@@ -57,6 +59,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @param string $menuid
      *
      * @return string
+     *
+     * @throws \coding_exception
      */
     public function render_custom_menu(custom_menu $menu, $wrappre = '', $wrappost = '', $menuid = '') {
         if (!$menu->has_children()) {
@@ -80,9 +84,11 @@ class core_renderer extends \theme_boost\output\core_renderer {
      *
      * @param custom_menu_item $menunode
      * @param int $level = 0
-     * @param int $menuid
+     * @param string $menuid
      *
      * @return string
+     *
+     * @throws \coding_exception
      */
     protected function render_custom_menu_item(custom_menu_item $menunode, $level = 0, $menuid = '') {
         static $submenucount = 0;
@@ -94,27 +100,31 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $url = '#';
         }
         if ($menunode->has_children()) {
-            $content = '<li class="nav-item dropdown my-auto">';
-            $content .= html_writer::start_tag('a', ['href' => $url,
-                'class' => 'dropdown-item dropdown-toggle nav-link', 'role' => 'button',
-                'id' => $menuid . $submenucount,
-                'aria-haspopup' => 'true',
-                'aria-expanded' => 'false',
-                'aria-controls' => 'dropdown' . $menuid . $submenucount,
-                'data-target' => $url,
-                'data-toggle' => 'dropdown',
-                'title' => $menunode->get_title(),]);
-            $content .= $menunode->get_text();
-            $content .= '</a>';
-            $content .= '<ul role="menu" class="dropdown-menu" id="dropdown' . $menuid . $submenucount . '" aria-labelledby="'
-                . $menuid . $submenucount . '">';
+            $content = "
+                <li class='nav-item dropdown my-auto'>
+                    <a href='{$url}'
+                       class='dropdown-item dropdown-toggle nav-link aaaa'
+                       role='button'
+                       id='{$menuid}{$submenucount}'
+                       aria-haspopup='true'
+                       aria-expanded='false'
+                       aria-controls='dropdown{$menuid}{$submenucount}'
+                       data-target='{$url}'
+                       data-toggle='dropdown'
+                       title='{$menunode->get_title()}'>
+                        {$this->get_text($menunode)}
+                    </a>
+                    <ul role='menu'
+                        class='dropdown-menu'
+                        id='dropdown{$menuid}{$submenucount}'
+                        aria-labelledby='{$menuid}{$submenucount}'>";
 
             foreach ($menunode->get_children() as $menunode) {
-                $content .= $this->render_custom_menu_item($menunode, 1, $menuid . $submenucount);
+                $content .= $this->render_custom_menu_item($menunode, 1, "{$menuid}{$submenucount}");
             }
             $content .= '</ul></li>';
         } else {
-            if (preg_match("/^#+$/", $menunode->get_text())) {
+            if (preg_match("/^#+$/", $this->get_text($menunode))) {
                 // This is a divider.
                 $content = html_writer::start_tag('li', ['class' => 'dropdown-divider']);
             } else {
@@ -141,7 +151,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                         $attributes['target'] = $helptarget;
                     }
                 }
-                $content .= html_writer::link($url, $menunode->get_text(), $attributes);
+                $content .= html_writer::link($url, $this->get_text($menunode), $attributes);
 
                 $content .= "</li>";
             }
@@ -158,24 +168,28 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @param bool $indent
      *
      * @return string
+     *
+     * @throws \coding_exception
      */
     protected function render_custom_menu_item_drawer(custom_menu_item $menunode, $level = 0, $menuid = '', $indent = false) {
         static $submenucount = 0;
 
         if ($menunode->has_children()) {
             $submenucount++;
-            $content = '<li class="m-l-0">';
-            $content .= html_writer::start_tag('a', ['href' => '#' . $menuid . $submenucount,
-                'class' => 'list-group-item dropdown-toggle',
-                'aria-haspopup' => 'true', 'data-target' => '#', 'data-toggle' => 'collapse',
-                'title' => $menunode->get_title(),]);
-            $content .= $menunode->get_text();
-            $content .= '</a>';
-
-            $content .= '<ul class="collapse" id="' . $menuid . $submenucount . '">';
+            $content = "
+                <li class='m-l-0'>
+                    <a href='#{$menuid}{$submenucount}'
+                       class='list-group-item dropdown-toggle'
+                       aria-haspopup='true'
+                       data-target='#'
+                       data-toggle'collapse'
+                       title='{$menunode->get_title()}'>
+                        {$this->get_text($menunode)}
+                    </a>
+                    <ul class='collapse' id='{$menuid}{$submenucount}'>";
             $indent = true;
             foreach ($menunode->get_children() as $menunode) {
-                $content .= $this->render_custom_menu_item_drawer($menunode, 1, $menuid . $submenucount, $indent);
+                $content .= $this->render_custom_menu_item_drawer($menunode, 1, "{$menuid}{$submenucount}", $indent);
             }
             $content .= '</ul></li>';
         } else {
@@ -194,16 +208,48 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 $marginclass = 'm-l-0';
             }
 
-            $content = '<li class="' . $marginclass . '">';
-            $content .= '<a class="list-group-item list-group-item-action" href="' . $url . '" ';
-            $content .= 'data-key="" data-isexpandable="0" data-indent="' . $dataindent;
-            $content .= '" data-showdivider="0" data-type="1" data-nodetype="1"';
-            $content .= 'data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" ';
-            $content .= 'data-preceedwithhr="0" data-parent-key="' . $menuid . '">';
-            $content .= '<div class="' . $marginclass . '">';
-            $content .= $menunode->get_text();
-            $content .= '</div></a></li>';
+            $content = "
+                <li class='{$marginclass}'>
+                    <a href='{$url}'
+                       class='list-group-item list-group-item-action'
+                       data-key=''
+                       data-isexpandable='0'
+                       data-indent='{$dataindent}'
+                       data-showdivider='0'
+                       data-type='1'
+                       data-nodetype='1'
+                       data-collapse='0'
+                       data-forceopen='1'
+                       data-isactive='1'
+                       data-hidden='0'
+                       data-preceedwithhr='0'
+                       data-parent-key='{$menuid}'>
+                        <div class='{$marginclass}'>
+                            {$this->get_text($menunode)}
+                        </div>
+                    </a>
+                </li>";
         }
         return $content;
+    }
+
+    /**
+     * Get text translate
+     *
+     * @param custom_menu_item $menunode
+     *
+     * @return string
+     *
+     * @throws \coding_exception
+     */
+    public function get_text($menunode) {
+        $text = $menunode->get_text();
+        if (strpos($text, ",")) {
+            $texts = explode(",", $text);
+
+            return get_string($texts[0], $texts[1]);
+        }
+
+        return $text;
     }
 }
