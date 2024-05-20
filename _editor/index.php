@@ -54,7 +54,12 @@ require_capability('moodle/site:config', context_system::instance());
     <script src="js/plugins/grapesjs-parser-postcss.js"></script>
     <script src="js/plugins/grapesjs-tui-image-editor.js"></script>
     <script src="js/plugins/grapesjs-style-bg.js"></script>
+    <script src="js/plugins/grapesjs-style-gradient.js"></script>
     <script src="js/plugins/grapesjs-plugin-ckeditor.js"></script>
+    <script src="js/plugins/grapesjs-tabs.js"></script>
+    <script src="js/plugins/grapesjs-google-material-icons.js"></script>
+    <script src="js/plugins/grapesjs-component-code-editor.js"></script>
+    <script src="js/plugins/grapesjs-ui-suggest-classes.js"></script>
 </head>
 <body>
 
@@ -303,12 +308,17 @@ require_capability('moodle/site:config', context_system::instance());
             'grapesjs-style-bg',
             'grapesjs-preset-webpage',
             'grapesjs-plugin-ckeditor',
+            'grapesjs-style-gradient',
+            'grapesjs-tabs',
+            'grapesjs-google-material-icons',
+            'grapesjs-component-code-editor',
+            'grapesjs-ui-suggest-classes',
         ],
         'pluginsOpts'     : {
-            'grapesjs-blocks-basic'     : {
+            'grapesjs-blocks-basic'          : {
                 'flexGrid' : false,
             },
-            'grapesjs-tui-image-editor' : {
+            'grapesjs-tui-image-editor'      : {
                 'script' : [
                     './js/tui/tui-code-snippet.js',
                     './js/tui/tui-color-picker.js',
@@ -319,12 +329,9 @@ require_capability('moodle/site:config', context_system::instance());
                     './styles/tui/tui-image-editor.css',
                 ],
             },
-            'grapesjs-tabs'             : {
-                'tabsBlock' : {'category' : '<?php echo get_string("grapsjs-stylemanager-sectors-extra", "theme_degrade") ?>'}
-            },
-            'grapesjs-typed'            : {
+            'grapesjs-typed'                 : {
                 'block' : {
-                    'category' : '<?php echo get_string("grapsjs-stylemanager-sectors-extra", "theme_degrade") ?>',
+                    'category' : 'Extra',
                     'content'  : {
                         'type'       : 'typed',
                         'type-speed' : 40,
@@ -336,7 +343,7 @@ require_capability('moodle/site:config', context_system::instance());
                     }
                 }
             },
-            'grapesjs-preset-webpage'   : {
+            'grapesjs-preset-webpage'        : {
                 'modalImportTitle'   : '<?php echo get_string("grapsjs-edit_code", "theme_degrade") ?>',
                 'modalImportLabel'   : '<div style="margin-bottom: 10px; font-size: 13px;"><?php echo get_string("grapsjs-edit_code_paste_here_html", "theme_degrade") ?></div>',
                 'modalImportContent' : function(editor) {
@@ -354,10 +361,10 @@ require_capability('moodle/site:config', context_system::instance());
                     return `${html}\n<style>\n${css}</style>`;
                 },
             },
-            'grapesjs-blocks-table'     : {
+            'grapesjs-blocks-table'          : {
                 'containerId' : '#gjs'
             },
-            'grapesjs-plugin-ckeditor'  : {
+            'grapesjs-plugin-ckeditor'       : {
                 'options' : {
                     'baseHref'            : '<?php echo $CFG->wwwroot ?>/',
                     'startupFocus'        : true,
@@ -405,6 +412,21 @@ require_capability('moodle/site:config', context_system::instance());
                     ],
                 },
             },
+            'grapesjs-style-gradient'        : {
+                'colorPicker' : 'default',
+                'grapickOpts' : {
+                    'min' : 1,
+                    'max' : 99,
+                },
+            },
+            'grapesjs-tabs'                  : {
+                'tabsBlock' : {
+                    'category' : 'Extra',
+                },
+            },
+            'grapesjs-google-material-icons' : {},
+            'grapesjs-component-code-editor' : {},
+            'grapesjs-ui-suggest-classes':{},
         },
         'canvas'          : {
             'styles'  : [
@@ -492,7 +514,7 @@ require_capability('moodle/site:config', context_system::instance());
                             'layout'      : "<?php echo get_string("grapsjs-stylemanager-sectors-layout", "theme_degrade") ?>",
                             'typography'  : "<?php echo get_string("grapsjs-stylemanager-sectors-typography", "theme_degrade") ?>",
                             'decorations' : "<?php echo get_string("grapsjs-stylemanager-sectors-decorations", "theme_degrade") ?>",
-                            'extra'       : "<?php echo get_string("grapsjs-stylemanager-sectors-extra", "theme_degrade") ?>",
+                            'extra'       : "Extra",
                             'flex'        : "<?php echo get_string("grapsjs-stylemanager-sectors-flex", "theme_degrade") ?>",
                             'dimension'   : "<?php echo get_string("grapsjs-stylemanager-sectors-dimension", "theme_degrade") ?>"
                         },
@@ -708,6 +730,13 @@ require_capability('moodle/site:config', context_system::instance());
                                 c0,0.617-0.666,1.193-1.291,1.193L1.292,52C0.625,52,0,51.383,0,50.805V21.283v-5.978V3.196C0,2.579,0.667,2,1.292,2h12.917
                                 C14.875,2,15.5,2.618,15.5,3.196v12.071l-0.076,0.039"/>
                         </svg>`,
+    });
+
+    editor.StyleManager.addProperty('decorations', {
+        name     : 'Gradient',
+        property : 'background-image',
+        type     : 'gradient',
+        defaults : 'none'
     });
 
     // Bootstrap’s custom component
