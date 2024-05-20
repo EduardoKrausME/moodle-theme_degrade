@@ -1470,8 +1470,8 @@ button.close:focus,
 .btn-outline-secondary:not(:disabled):not(.disabled):active,
 .btn-outline-secondary:not(:disabled):not(.disabled).active,
 .show > .btn-outline-secondary.dropdown-toggle {
-    border-top: 3px solid transparent;
-    border-color: rgb(var(--color_primary));
+    // border-top: 3px solid transparent;
+    // border-color: rgb(var(--color_primary));
     // background-color: rgba(var(--color_primary), 0.26);
     background: transparent;
 }
