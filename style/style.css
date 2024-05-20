@@ -737,12 +737,6 @@ body:not(.pagelayout-frontpage) #region-main {
   filter: none;
 }
 
-.dropdown-item,
-.dropdown-item:hover,
-.dropdown-item:focus {
-  color: #fff;
-}
-
 .dropdown-menu .dropdown-item:hover,
 .dropdown-menu .dropdown-item:hover,
 .dropdown-menu .dropdown-item:focus,
@@ -1449,6 +1443,7 @@ tr.discussion .btn i.icon {
 .form-autocomplete-selection span.badge {
   background: rgb(var(--color_primary));
   padding: 5px;
+  color: #fff;
 }
 
 .form-autocomplete-suggestions li:first-child {
@@ -2517,6 +2512,7 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
 .header-menubar .usernavigation .navigation .nav-link:after {
   position: absolute;
   top: 17px;
+  right: 4px;
 }
 .header-menubar #usernavigation {
   padding: 12px 0;
@@ -3149,158 +3145,131 @@ div.dropdown-item:focus-within {
   background: rgb(var(--color_secondary));
   margin-top: 60px;
 }
-
 .header-main .search-input-wrapper {
   height: 100%;
   padding: 0;
   margin: 0 5px;
 }
-
 .header-main .search-input-wrapper > div {
   height: 100%;
 }
-
 .header-main .search-input-wrapper > div i.icon {
   color: #fff;
   margin-top: 17px;
 }
-
 .header-main .navbar-toggleable-md {
   max-height: none;
   text-align: right;
   padding: 0;
   box-shadow: none;
 }
-
 .header-main .navbar-toggleable-md .custom-menu > ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: inline-block;
 }
-
 .header-main .navbar-toggleable-md .custom-menu > ul .usermenu .menubar .dropdown a:last-child {
   border-top: 0;
 }
-
 .header-main .navbar-toggleable-md .custom-menu > ul .usermenu .menubar .dropdown .dropdown-menu a {
   padding: 10px;
 }
-
 .header-main .navbar-toggleable-md .custom-menu > ul a {
   font-size: 16px;
   color: #fff;
   padding: 15px 18px;
   display: inline-block;
 }
-
 .header-main .navbar-toggleable-md .custom-menu > ul a:hover,
 .header-main .navbar-toggleable-md .custom-menu > ul a:focus {
   background: rgb(var(--color_primary));
   text-decoration: none;
 }
-
 .header-main .navbar-toggleable-md .custom-menu > ul > .no-divider {
   background: none;
 }
-
 .header-main .navbar-toggleable-md .custom-menu > ul .dropdown.nav-item {
   margin: 5px 0;
   display: inline-block;
 }
-
 .header-main .navbar-toggleable-md .custom-menu > ul .dropdown.nav-item:hover {
   background: none;
 }
-
 .header-main .navbar-toggleable-md .custom-menu > ul .dropdown.nav-item:last-child {
   margin: 0;
 }
-
 .header-main .navbar-toggleable-md .custom-menu > ul .dropdown.nav-item .dropdown-menu {
   border: 1px solid rgb(var(--color_white_43));
   left: auto;
   right: 0;
   position: absolute;
 }
-
 .header-main .navbar-toggleable-md .custom-menu > ul .dropdown.nav-item .dropdown-menu a {
   padding: 10px;
   border-bottom: 1px solid rgb(var(--color_white_43));
 }
-
 .header-main .navbar-toggleable-md .custom-menu > ul .dropdown.nav-item .dropdown-menu a:last-child {
   border: 0;
 }
-
 .header-main .navbar-toggleable-md .custom-menu > ul .nav-item {
   margin: 0;
   display: inline-block;
 }
-
 .header-main .navbar-toggleable-md .custom-menu > ul a.nav-item.nav-link {
   margin: 0;
 }
-
 .header-main .navbar-toggleable-md .custom-menu .dropdown-menu a {
   display: block;
 }
-
 .header-main .navbar-toggleable-md .header-logo a.navbar-brand {
   padding: 0;
   margin: 0;
   background: none;
 }
-
 .header-main .navbar-toggleable-md .header-logo a.navbar-brand:hover {
   background: none;
 }
-
 .header-main .navbar-toggleable-md .header-logo a.navbar-brand:focus {
   background: none;
 }
-
 .header-main .navbar-toggleable-md a {
   color: #fff;
   font-size: 16px;
   padding: 15px 20px;
 }
-
 .header-main .navbar-toggleable-md a:hover,
 .header-main .navbar-toggleable-md a:focus {
   background: rgb(var(--color_buttons));
 }
-
 .header-main .moodle-actionmenu.show[data-enhanced] .menu a {
   font-size: 16px;
 }
-
 .header-main button.navbar-toggler {
   padding: 0;
   margin: 0;
 }
-
 .header-main button.navbar-toggler:hover {
   background: transparent;
 }
-
 .header-main button.navbar-toggler:focus {
   background: transparent;
 }
-
 .header-main button.navbar-toggler:before {
   content: "\f0c9";
   font-family: fontawesome;
   color: #fff;
   font-size: 26px;
 }
-
 .header-main button.navbar-toggler.nocontent-navbar {
   display: none;
 }
-
 .header-main button.navbar-toggler .navbar-toggler-icon {
   display: none;
+}
+
+.pagelayout-maintenance .header-main .navbar-light, .pagelayout-maintenance .header-main .navbar-light * {
+  color: #fff;
 }
 
 .jsenabled .header-main .moodle-actionmenu[data-enhance] .toggle-display.textmenu .caret {
