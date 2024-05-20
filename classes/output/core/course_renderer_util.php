@@ -40,25 +40,25 @@ class course_renderer_util {
     public static function couse_image($course) {
         global $CFG, $OUTPUT;
 
-        $imgurl = false;
-        $noimgurl = $OUTPUT->image_url('curso-no-photo', 'theme')->out();
+        $courseimage = false;
+        $nocourseimage = $OUTPUT->image_url('curso-no-photo', 'theme')->out();
 
         /** @var \stored_file $file */
         foreach ($course->get_course_overviewfiles() as $file) {
             $isimage = $file->is_valid_image();
             if ($isimage) {
-                $imgurl = file_encode_url("{$CFG->wwwroot}/pluginfile.php",
+                $courseimage = file_encode_url("{$CFG->wwwroot}/pluginfile.php",
                     "/{$file->get_contextid()}/{$file->get_component()}/" .
                     "{$file->get_filearea()}{$file->get_filepath()}{$file->get_filename()}", !$isimage);
 
             }
         }
 
-        if (empty($imgurl)) {
-            $imgurl = $noimgurl;
+        if (empty($courseimage)) {
+            $courseimage = $nocourseimage;
         }
 
-        return $imgurl;
+        return $courseimage;
     }
 
     /**
@@ -103,9 +103,9 @@ class course_renderer_util {
      * @throws \moodle_exception
      */
     public static function course_url($course) {
-        $courseurl = new moodle_url('/course/view.php', ['id' => $course->id]);
+        $viewurl = new moodle_url('/course/view.php', ['id' => $course->id]);
 
-        return $courseurl->out();
+        return $viewurl->out();
     }
 
     /**

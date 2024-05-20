@@ -80,19 +80,19 @@ class course_renderer extends \core_course_renderer {
 
         foreach ($courses as $course) {
 
-            $courseurl = course_renderer_util::course_url($course);
+            $viewurl = course_renderer_util::course_url($course);
             $freename = $priceval = false;
             if (file_exists("{$CFG->dirroot}/local/kopere_pay/lib.php")) {
 
                 $koperepaydetalhe = $DB->get_record("kopere_pay_detalhe", ['course' => $course->id]);
                 if ($koperepaydetalhe && $koperepaydetalhe->course) {
-                    $courseurl = (new moodle_url('/local/kopere_pay/', ['id' => $course->id]))->out();
+                    $viewurl = (new moodle_url('/local/kopere_pay/', ['id' => $course->id]))->out();
                     $preco = \local_kopere_pay\util\Formater::precoToFloat($koperepaydetalhe->preco);
                     if ($preco <= 5) {
-                        $freename = "<a href='{$courseurl}'>" . get_string("free_name", "theme_degrade") . "</a>";
+                        $freename = "<a href='{$viewurl}'>" . get_string("free_name", "theme_degrade") . "</a>";
                     } else {
                         $preco = \local_kopere_pay\util\Formater::numberFormater($koperepaydetalhe->preco);
-                        $priceval = "<a href='{$courseurl}'>R$ {$preco}</a>";
+                        $priceval = "<a href='{$viewurl}'>R$ {$preco}</a>";
                     }
                 }
             }
@@ -100,9 +100,9 @@ class course_renderer extends \core_course_renderer {
             $datacursos["courses"][] = [
                 "couse_class" => "col-xg-3 col-lg-4 col-sm-6",
                 "edit_course" => "{$CFG->wwwroot}/course/edit.php?id={$course->id}#fitem_id_overviewfiles_filemanager",
-                "imgurl" => course_renderer_util::couse_image($course),
-                "courseurl" => $courseurl,
-                "coursename" => $course->get_formatted_name(),
+                "courseimage" => course_renderer_util::couse_image($course),
+                "viewurl" => $viewurl,
+                "fullname" => $course->get_formatted_name(),
                 "countlessons" => course_renderer_util::count_lessson($course),
                 "showinstructor" => theme_degrade_get_setting("frontpage_avaliablecourses_instructor")
                     && count(course_renderer_util::get_teachers($course)),
@@ -154,9 +154,9 @@ class course_renderer extends \core_course_renderer {
             $datacursos["courses"][] = [
                 "couse_class" => "col-xg-3 col-lg-4 col-sm-6",
                 "edit_course" => "{$CFG->wwwroot}/course/edit.php?id={$course->id}#fitem_id_overviewfiles_filemanager",
-                "imgurl" => course_renderer_util::couse_image($course),
-                "courseurl" => course_renderer_util::course_url($course),
-                "coursename" => $course->get_formatted_name(),
+                "courseimage" => course_renderer_util::couse_image($course),
+                "viewurl" => course_renderer_util::course_url($course),
+                "fullname" => $course->get_formatted_name(),
                 "countlessons" => course_renderer_util::count_lessson($course),
                 "showinstructor" => theme_degrade_get_setting("frontpage_mycourses_instructor") &&
                     count(course_renderer_util::get_teachers($course)),
@@ -205,9 +205,9 @@ class course_renderer extends \core_course_renderer {
         $datacurso = [
             "couse_class" => "col-xg-3 col-lg-4 col-sm-6",
             "edit_course" => "{$CFG->wwwroot}/course/edit.php?id={$course->id}#fitem_id_overviewfiles_filemanager",
-            "imgurl" => course_renderer_util::couse_image($course),
-            "courseurl" => course_renderer_util::course_url($course),
-            "coursename" => $course->get_formatted_name(),
+            "courseimage" => course_renderer_util::couse_image($course),
+            "viewurl" => course_renderer_util::course_url($course),
+            "fullname" => $course->get_formatted_name(),
             "countlessons" => course_renderer_util::count_lessson($course),
             "showinstructor" => true,
             "instructor" => course_renderer_util::get_teachers($course),
@@ -238,9 +238,9 @@ class course_renderer extends \core_course_renderer {
         $datacurso = [
             "couse_class" => "col-xg-3 col-lg-4 col-sm-6",
             "edit_course" => "{$CFG->wwwroot}/course/edit.php?id={$course->id}#fitem_id_overviewfiles_filemanager",
-            "imgurl" => course_renderer_util::couse_image($course),
-            "courseurl" => course_renderer_util::course_url($course),
-            "coursename" => $course->get_formatted_name(),
+            "courseimage" => course_renderer_util::couse_image($course),
+            "viewurl" => course_renderer_util::course_url($course),
+            "fullname" => $course->get_formatted_name(),
             "countlessons" => course_renderer_util::count_lessson($course),
             "showinstructor" => true,
             "instructor" => course_renderer_util::get_teachers($course),

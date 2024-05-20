@@ -2,15 +2,15 @@
     <div class="frontpage-coursecat_coursebox d-flex">
         <div class="course-item">
             <div class="course-item-img">
-                <a href="{{courseurl}}" style="background-image: url('{{imgurl}}')">&nbsp;</a>
+                <a href="{{viewurl}}" style="background-image: url('{{courseimage}}')">&nbsp;</a>
             </div>
             <div class="course-content">
                 <div class="course-title-group">
                     <h3>
-                        <a href="{{courseurl}}">{{coursename}}</a>
+                        <a href="{{viewurl}}">{{fullname}}</a>
                     </h3>
                     {{^is_enrolled}}
-                        <!--a href="{{courseurl}}" class="btn btn-primary">BUY NOW</a-->
+                        <!--a href="{{viewurl}}" class="btn btn-primary">BUY NOW</a-->
                     {{/is_enrolled}}
                 </div>
                 <div class="course-info border-bottom-0 pb-0 d-flex align-items-center">

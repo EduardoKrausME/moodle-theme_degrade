@@ -2,7 +2,7 @@
     <div class="frontpage-course-box">
         <div class="course-item">
             <div class="course-item-img">
-                <a href="{{courseurl}}" style="background-image: url('{{imgurl}}')">&nbsp;</a>
+                <a href="{{viewurl}}" style="background-image: url('{{courseimage}}')">&nbsp;</a>
                 {{^is_enrolled}}
                     {{#freename}}
                         <div class="price">
@@ -25,7 +25,7 @@
             <div class="course-content">
 
                 <h3 class="title instructor-text">
-                    <a href="{{courseurl}}">{{{coursename}}}</a>
+                    <a href="{{viewurl}}">{{{fullname}}}</a>
                 </h3>
                 <div class="course-info d-flex align-items-center">
                     <div class="lesson-group d-flex align-items-center" style="width: 100%;">
@@ -53,7 +53,7 @@
                     {{#acessar}}
                         <div class="course-info d-flex align-items-center">
                             <div class="all-btn all-category d-flex align-items-center">
-                                <a href="{{courseurl}}" style="white-space: nowrap;"
+                                <a href="{{viewurl}}" style="white-space: nowrap;"
                                    class="btn btn-primary matricula-se">{{{acessar}}}</a>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                     {{#matricular}}
                         <div class="course-info d-flex align-items-center">
                             <div class="all-btn all-category d-flex align-items-center">
-                                <a href="{{courseurl}}" style="white-space: nowrap;"
+                                <a href="{{viewurl}}" style="white-space: nowrap;"
                                    class="btn btn-primary matricula-se">{{{matricular}}}</a>
                             </div>
                         </div>
