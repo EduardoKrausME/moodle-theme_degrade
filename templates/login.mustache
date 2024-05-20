@@ -75,12 +75,10 @@
     </div>
 </div>
 {{#js}}
-    require(['theme_boost/footer-popover'], function(FooterPopover) {
-    FooterPopover.init();
-    });
-
-    require(['theme_boost/loader', 'theme_boost/drawer'], function(Loader, Drawer) {
-    Drawer.init();
-    M.util.js_complete('theme_boost/loader');
-    });
+    require(['theme_boost/footer-popover', 'theme_boost/drawer', 'theme_boost/loader'],
+        function(FooterPopover, Drawer, Loader) {
+            FooterPopover.init();
+            Drawer.init();
+            M.util.js_complete('theme_boost/loader');
+        });
 {{/js}}

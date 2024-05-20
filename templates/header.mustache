@@ -79,20 +79,20 @@
 
 {{#js}}
     require(['jquery'], function($) {
-    var header = $("#header");
-    $(window).on('scroll', window_scroll);
-    window_scroll();
+        var header = $("#header");
+        $(window).on('scroll', window_scroll);
+        window_scroll();
 
-    function window_scroll() {
-    var top = $(window).scrollTop();
-    if (top > 90) {
-    header.removeClass("animation");
-    header.addClass("fixed-top");
-    header.addClass("animation");
-    }
-    if (top < 15) {
-    header.removeClass("fixed-top");
-    }
-    }
+        function window_scroll() {
+            var top = $(window).scrollTop();
+            if (top > 90) {
+                header.removeClass("animation");
+                header.addClass("fixed-top");
+                header.addClass("animation");
+            }
+            if (top < 15) {
+                header.removeClass("fixed-top");
+            }
+        }
     });
 {{/js}}
