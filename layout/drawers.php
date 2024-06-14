@@ -115,4 +115,12 @@ require_once("{$CFG->dirroot}/theme/degrade/classes/template/footer_data.php");
 require_once("{$CFG->dirroot}/theme/degrade/classes/template/frontapage_data.php");
 $templatedata = array_merge($templatedata, \theme_degrade\template\footer_data::get_data());
 $templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_data::topo());
-echo $OUTPUT->render_from_template('theme_degrade/drawers', $templatedata);
+
+
+$contextcourse = context_course::instance($COURSE->id);
+$course_update = has_capability('moodle/course:update', $contextcourse);
+if (!$course_update && strpos($_SERVER['REQUEST_URI'], "/scorm/player.php") > 1) {
+    echo $OUTPUT->render_from_template('theme_degrade/drawers_scorm', $templatedata);
+} else {
+    echo $OUTPUT->render_from_template('theme_degrade/drawers', $templatedata);
+}
