@@ -637,7 +637,6 @@ body:not(.pagelayout-frontpage) #region-main {
     border: 0;
     border-radius: 0;
     margin: 0;
-    //background: rgb(var(--color_secondary));
     box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.20);
     > li > a {
         font-size: 16px;
@@ -665,7 +664,6 @@ body:not(.pagelayout-frontpage) #region-main {
 .btn.btn-outline-secondary.dropdown-toggle:focus:active,
 .btn.btn-outline-secondary.dropdown-toggle:active {
     color: #fff;
-    // background: rgb(var(--color_primary));
     filter: none;
 }
 .dropdown-menu > .active > a,
@@ -675,11 +673,6 @@ body:not(.pagelayout-frontpage) #region-main {
     text-decoration: none;
     background: rgb(var(--color_primary));
     filter: none;
-}
-.dropdown-item,
-.dropdown-item:hover,
-.dropdown-item:focus {
-    // color: #fff;
 }
 .dropdown-menu .dropdown-item:hover,
 .dropdown-menu .dropdown-item:hover,
@@ -1268,20 +1261,65 @@ tr.discussion .btn i.icon {
 #nav-drawer {
     top: 51px;
 }
-.form-autocomplete-selection span.badge {
-    background: rgb(var(--color_primary));
-    padding: 5px;
-    color: #fff;
+.aabtn.focus, .aabtn:focus,
+.btn-link.focus,
+.btn-link:focus,
+.nav-link.focus,
+.nav-link:focus,
+.editor_atto_toolbar button.focus,
+.editor_atto_toolbar button:focus,
+.editor_atto_toolbar .atto_toolbar_row.focus,
+.editor_atto_toolbar .atto_toolbar_row:focus,
+[role=button].focus,
+[role=button]:focus,
+.list-group-item-action.focus,
+.list-group-item-action:focus,
+input[type=checkbox].focus,
+input[type=checkbox]:focus,
+input[type=radio].focus,
+input[type=radio]:focus,
+input[type=file].focus,
+input[type=file]:focus,
+input[type=image].focus,
+input[type=image]:focus,
+.sr-only-focusable.focus,
+.sr-only-focusable:focus,
+a.dropdown-toggle.focus,
+a.dropdown-toggle:focus,
+.modal-dialog[tabindex="0"].focus,
+.modal-dialog[tabindex="0"]:focus,
+.moodle-dialogue-base .closebutton.focus,
+.moodle-dialogue-base .closebutton:focus,
+button.close.focus,
+button.close:focus,
+.form-autocomplete-selection.focus,
+.form-autocomplete-selection:focus,
+[role=treeitem]:not([aria-expanded=true]).focus,
+[role=treeitem]:not([aria-expanded=true]):focus {
+    outline: none !important;
+    box-shadow: none !important;
 }
-.form-autocomplete-suggestions li:first-child {
-    background: rgb(var(--color_primary));
+.form-autocomplete-selection {
+    span.badge {
+        background: rgb(var(--color_primary));
+        padding: 8px 20px;
+        color: #fff;
+        box-shadow: none;
+    }
 }
-.form-autocomplete-suggestions li:hover,
-.form-autocomplete-suggestions li:focus,
-.form-autocomplete-suggestions li[aria-selected="true"] {
-    color: #fff;
-    background: rgb(var(--color_primary));
-    box-shadow: none;
+.form-autocomplete-suggestions {
+    li {
+        &:first-child {
+            background: rgb(var(--color_primary));
+        }
+        &:hover,
+        &:focus,
+        &[aria-selected="true"] {
+            color: #fff;
+            background: rgb(var(--color_primary));
+            box-shadow: none;
+        }
+    }
 }
 .tag_cloud .s20 {
     font-size: 16px;
@@ -1295,11 +1333,13 @@ tr.discussion .btn i.icon {
 .path-grade-edit-tree .setup-grades td.column-name .gradeitemheader {
     display: inline-block;
 }
-.path-grade-report-singleview .reporttable tbody th {
-    white-space: normal;
-}
-.path-grade-report-singleview .reporttable tbody td.range {
-    white-space: normal;
+.path-grade-report-singleview {
+    .reporttable tbody th {
+        white-space: normal;
+    }
+    .reporttable tbody td.range {
+        white-space: normal;
+    }
 }
 .categoryquestionscontainer table td a img {
     width: 14px;
@@ -1319,12 +1359,9 @@ tr.discussion .btn i.icon {
 }
 #page-mod-quiz-attempt .submitbtns {
     text-align: right;
-}
-#page-mod-quiz-attempt .submitbtns .mod_quiz-next-nav {
-    float: none;
-}
-.userlist .initialbar {
-    margin-bottom: 20px;
+    .mod_quiz-next-nav {
+        float: none;
+    }
 }
 .editor_atto_menu .dropdown-menu > li > a {
     margin: 0;
@@ -1341,16 +1378,21 @@ tr.discussion .btn i.icon {
     margin-bottom: 15px;
     margin-left: 0;
 }
-.userlist .initialbar .pagination .page-item.active .page-link {
-    color: #fff;
-    background-color: rgb(var(--color_primary));
-    border-color: rgb(var(--color_primary));
-}
-.userlist .initialbar .pagination .page-item.active .page-link:hover {
-    color: #fff;
-}
-.userlist .initialbar .pagination .page-item .page-link {
-    color: rgb(var(--color_primary));
+.userlist .initialbar {
+    margin-bottom: 20px;
+    .pagination .page-item {
+        &.active .page-link {
+            color: #fff;
+            background-color: rgb(var(--color_primary));
+            border-color: rgb(var(--color_primary));
+        }
+        &.active .page-link:hover {
+            color: #fff;
+        }
+        .page-link {
+            color: rgb(var(--color_primary));
+        }
+    }
 }
 .listitem .action-menu .dropdown-toggle i.icon {
     margin-right: 0;
@@ -1470,21 +1512,15 @@ button.close:focus,
 .btn-outline-secondary:not(:disabled):not(.disabled):active,
 .btn-outline-secondary:not(:disabled):not(.disabled).active,
 .show > .btn-outline-secondary.dropdown-toggle {
-    // border-top: 3px solid transparent;
-    // border-color: rgb(var(--color_primary));
-    // background-color: rgba(var(--color_primary), 0.26);
     background: transparent;
 }
 .dropdown .dropdown-menu a {
     color: #757575;
-    // background: rgb(var(--color_secondary));
     background: #fff;
     &:hover {
-        //background: rgb(var(--color_primary));
         background: #dcdada;
     }
     &:focus {
-        //background: rgb(var(--color_primary));
         background: #dcdada;
     }
 }
@@ -1521,7 +1557,6 @@ body.limitedwidth #page.drawers .main-inner,
     height: auto;
     padding: 0;
     margin: 0;
-    // overflow-y: hidden;
 }
 .pagelayout-admin #page.drawers {
     overflow-y: auto !important;
@@ -1549,12 +1584,20 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
     padding: 10px 18px !important;
     .pluscontainer {
         border-color: rgb(var(--color_primary));
-        padding: 0.2rem !important;
         &:hover {
             background: none;
         }
     }
-    
+}
+.activity div.divider button,
+.activity-add .pluscontainer,
+.block-add .pluscontainer {
+    min-height: 32px;
+    min-width: 32px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center;
+    padding: 0 !important;
 }
 #header .dropdown-item[aria-current="true"]:focus-within,
 #header .dropdown-item[aria-current="true"]:hover,
@@ -2094,8 +2137,6 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
 /*Header main*/
 #header {
     padding: 12px 0;
-    //position: absolute;
-    //top: 0;
     right: 0;
     left: 0;
     z-index: 999;
@@ -2122,7 +2163,8 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
             align-items: center;
         }
     }
-    &.fixed-top {
+    &.fixed-top,
+    &.ever-fixed-top {
         padding: 0;
         top: 0;
         position: fixed;
@@ -3219,6 +3261,19 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
 .course-content ul li.section.main .section li.activity {
     padding-bottom: 10px;
 }
+.course-content ul.topics li.section,
+.course-content ul.weeks li.section {
+    .administration,
+    .assessment,
+    .collaboration,
+    .communication,
+    .content,
+    .interface,
+    .other {
+        margin: 0;
+        padding: 0;
+    }
+}
 #course-category-listings .item-actions .menubar .action-menu-trigger .dropdown a.dropdown-toggle {
     padding: 0;
 }
@@ -3607,8 +3662,6 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
         font-size: 18px;
         padding: 10px 15px;
         font-weight: normal;
-        //background: rgb(var(--color_titles));
-        //border-bottom: 1px solid rgb(var(--color_names));
         text-transform: initial;
         display: block !important;
     }
@@ -3871,9 +3924,7 @@ button.btn-footer-popover:active {
 }
 #page-wrapper,
 #page {
-    // padding-bottom: 20px;
     margin-top: 0;
-    //margin-top: 60px;
     .card {
         border: 0;
         background: none;

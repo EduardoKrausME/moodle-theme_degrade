@@ -1440,19 +1440,56 @@ tr.discussion .btn i.icon {
   top: 51px;
 }
 
+.aabtn.focus, .aabtn:focus,
+.btn-link.focus,
+.btn-link:focus,
+.nav-link.focus,
+.nav-link:focus,
+.editor_atto_toolbar button.focus,
+.editor_atto_toolbar button:focus,
+.editor_atto_toolbar .atto_toolbar_row.focus,
+.editor_atto_toolbar .atto_toolbar_row:focus,
+[role=button].focus,
+[role=button]:focus,
+.list-group-item-action.focus,
+.list-group-item-action:focus,
+input[type=checkbox].focus,
+input[type=checkbox]:focus,
+input[type=radio].focus,
+input[type=radio]:focus,
+input[type=file].focus,
+input[type=file]:focus,
+input[type=image].focus,
+input[type=image]:focus,
+.sr-only-focusable.focus,
+.sr-only-focusable:focus,
+a.dropdown-toggle.focus,
+a.dropdown-toggle:focus,
+.modal-dialog[tabindex="0"].focus,
+.modal-dialog[tabindex="0"]:focus,
+.moodle-dialogue-base .closebutton.focus,
+.moodle-dialogue-base .closebutton:focus,
+button.close.focus,
+button.close:focus,
+.form-autocomplete-selection.focus,
+.form-autocomplete-selection:focus,
+[role=treeitem]:not([aria-expanded=true]).focus,
+[role=treeitem]:not([aria-expanded=true]):focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .form-autocomplete-selection span.badge {
   background: rgb(var(--color_primary));
-  padding: 5px;
+  padding: 8px 20px;
   color: #fff;
+  box-shadow: none;
 }
 
 .form-autocomplete-suggestions li:first-child {
   background: rgb(var(--color_primary));
 }
-
-.form-autocomplete-suggestions li:hover,
-.form-autocomplete-suggestions li:focus,
-.form-autocomplete-suggestions li[aria-selected=true] {
+.form-autocomplete-suggestions li:hover, .form-autocomplete-suggestions li:focus, .form-autocomplete-suggestions li[aria-selected=true] {
   color: #fff;
   background: rgb(var(--color_primary));
   box-shadow: none;
@@ -1477,7 +1514,6 @@ tr.discussion .btn i.icon {
 .path-grade-report-singleview .reporttable tbody th {
   white-space: normal;
 }
-
 .path-grade-report-singleview .reporttable tbody td.range {
   white-space: normal;
 }
@@ -1506,13 +1542,8 @@ tr.discussion .btn i.icon {
 #page-mod-quiz-attempt .submitbtns {
   text-align: right;
 }
-
 #page-mod-quiz-attempt .submitbtns .mod_quiz-next-nav {
   float: none;
-}
-
-.userlist .initialbar {
-  margin-bottom: 20px;
 }
 
 .editor_atto_menu .dropdown-menu > li > a {
@@ -1533,16 +1564,17 @@ tr.discussion .btn i.icon {
   margin-left: 0;
 }
 
+.userlist .initialbar {
+  margin-bottom: 20px;
+}
 .userlist .initialbar .pagination .page-item.active .page-link {
   color: #fff;
   background-color: rgb(var(--color_primary));
   border-color: rgb(var(--color_primary));
 }
-
 .userlist .initialbar .pagination .page-item.active .page-link:hover {
   color: #fff;
 }
-
 .userlist .initialbar .pagination .page-item .page-link {
   color: rgb(var(--color_primary));
 }
@@ -1784,11 +1816,21 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
 .activity-add .pluscontainer,
 .block-add .pluscontainer {
   border-color: rgb(var(--color_primary));
-  padding: 0.2rem !important;
 }
 .activity-add .pluscontainer:hover,
 .block-add .pluscontainer:hover {
   background: none;
+}
+
+.activity div.divider button,
+.activity-add .pluscontainer,
+.block-add .pluscontainer {
+  min-height: 32px;
+  min-width: 32px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center;
+  padding: 0 !important;
 }
 
 #header .dropdown-item[aria-current=true]:focus-within,
@@ -3093,41 +3135,41 @@ div.dropdown-item:focus-within {
   display: flex;
   align-items: center;
 }
-#header.fixed-top {
+#header.fixed-top, #header.ever-fixed-top {
   padding: 0;
   top: 0;
   position: fixed;
   border: none;
   height: initial;
 }
-#header.fixed-top .logo-color {
+#header.fixed-top .logo-color, #header.ever-fixed-top .logo-color {
   display: initial;
 }
-#header.fixed-top .logo-write {
+#header.fixed-top .logo-write, #header.ever-fixed-top .logo-write {
   display: none;
 }
-#header.fixed-top .nav-link {
+#header.fixed-top .nav-link, #header.ever-fixed-top .nav-link {
   white-space: initial;
   border: none;
 }
-#header.fixed-top .active {
+#header.fixed-top .active, #header.ever-fixed-top .active {
   background: transparent;
 }
-#header.fixed-top #usernavigation {
+#header.fixed-top #usernavigation, #header.ever-fixed-top #usernavigation {
   padding: 0;
 }
-#header.fixed-top .usermenu .login.nav-link {
+#header.fixed-top .usermenu .login.nav-link, #header.ever-fixed-top .usermenu .login.nav-link {
   color: rgb(var(--color_white_26));
 }
-#header.fixed-top .usermenu .dropdown-menu .submenu .header {
+#header.fixed-top .usermenu .dropdown-menu .submenu .header, #header.ever-fixed-top .usermenu .dropdown-menu .submenu .header {
   color: rgb(var(--color_white_26));
 }
-#header.fixed-top .usermenu .moodle-actionmenu .dropdown-menu a.dropdown-item {
+#header.fixed-top .usermenu .moodle-actionmenu .dropdown-menu a.dropdown-item, #header.ever-fixed-top .usermenu .moodle-actionmenu .dropdown-menu a.dropdown-item {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid rgb(var(--color_white_26));
 }
-#header.fixed-top .dropdown .dropdown-menu {
+#header.fixed-top .dropdown .dropdown-menu, #header.ever-fixed-top .dropdown .dropdown-menu {
   max-height: calc(100vh - 60px);
   overflow-y: initial !important;
 }
@@ -4382,6 +4424,24 @@ div.dropdown-item:focus-within {
 
 .course-content ul li.section.main .section li.activity {
   padding-bottom: 10px;
+}
+
+.course-content ul.topics li.section .administration,
+.course-content ul.topics li.section .assessment,
+.course-content ul.topics li.section .collaboration,
+.course-content ul.topics li.section .communication,
+.course-content ul.topics li.section .content,
+.course-content ul.topics li.section .interface,
+.course-content ul.topics li.section .other,
+.course-content ul.weeks li.section .administration,
+.course-content ul.weeks li.section .assessment,
+.course-content ul.weeks li.section .collaboration,
+.course-content ul.weeks li.section .communication,
+.course-content ul.weeks li.section .content,
+.course-content ul.weeks li.section .interface,
+.course-content ul.weeks li.section .other {
+  margin: 0;
+  padding: 0;
 }
 
 #course-category-listings .item-actions .menubar .action-menu-trigger .dropdown a.dropdown-toggle {
