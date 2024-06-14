@@ -16,7 +16,6 @@
 
 /**
  * lib.php
- *
  * This is built using the boost template to allow for new theme's using
  * Moodle's new Boost theme engine
  *
@@ -40,9 +39,7 @@ function theme_degrade_page_init(moodle_page $page) {
 
 /**
  * @param string $colorname
- *
  * @return string
- *
  * @throws coding_exception
  */
 function theme_degrade_process_color_hex($colorname) {
@@ -131,18 +128,15 @@ function theme_degrade_send_cached_css($path, $filename, $lastmodified, $etag) {
 
 /**
  * Returns an object containing HTML for the areas affected by settings.
- *
  * Do not add Clean specific logic in here, child themes should be able to
  * rely on that function just by declaring settings with similar names.
  *
  * @param renderer_base $output Pass in $OUTPUT.
  * @param moodle_page $page Pass in $PAGE.
- *
  * @return stdClass An object with the following properties:
  *      - navbarclass A CSS class to use on the navbar. By default ''.
  *      - heading HTML to use for the heading. A logo if one is selected or the default heading.
  *      - footer_description HTML to use as a footer_description. By default ''.
- *
  * @throws coding_exception
  */
 function theme_degrade_get_html_for_settings(renderer_base $output, moodle_page $page) {
@@ -173,9 +167,7 @@ function theme_degrade_get_html_for_settings(renderer_base $output, moodle_page 
  * Logo Image URL Fetch from theme settings
  *
  * @param string $local
- *
  * @return string $logo
- *
  * @throws dml_exception
  */
 function theme_degrade_get_logo($local = null) {
@@ -207,8 +199,8 @@ function theme_degrade_get_logo($local = null) {
 
 /**
  * theme_degrade_get_body_class
- * @return string
  *
+ * @return string
  * @throws coding_exception
  */
 function theme_degrade_get_body_class() {
@@ -221,7 +213,6 @@ function theme_degrade_get_body_class() {
  *
  * @param string $setting
  * @param bool $format
- *
  * @return bool
  * @throws coding_exception
  */
@@ -251,9 +242,7 @@ function theme_degrade_get_setting($setting, $format = true) {
  * Renderer the slider images.
  *
  * @param string $imagesetting
- *
  * @return string
- *
  * @throws coding_exception
  * @throws dml_exception
  */
@@ -273,9 +262,7 @@ function theme_degrade_get_setting_image($imagesetting) {
  *
  * @param string $setting
  * @param string $filearea
- *
  * @return moodle_url|null
- *
  * @throws dml_exception
  */
 function theme_degrade_setting_file_url($setting, $filearea) {
@@ -311,7 +298,6 @@ function theme_degrade_theme_url() {
  * Display Footer Block Custom Links
  *
  * @param string $menuname Footer block link name.
- *
  * @return string The Footer links are return.
  * @throws coding_exception
  * @throws moodle_exception
@@ -366,7 +352,6 @@ function theme_degrade_hidden_courses_ids() {
  * This function used in course home page.
  *
  * @param string $text
- *
  * @return string
  */
 function theme_degrade_strip_html_tags($text) {
@@ -407,7 +392,6 @@ function theme_degrade_strip_html_tags($text) {
  * @param string $str
  * @param integer $n
  * @param string $endchar
- *
  * @return string $out
  */
 function theme_degrade_course_trim_char($str, $n = 500, $endchar = '&#8230;') {
@@ -430,7 +414,6 @@ function theme_degrade_course_trim_char($str, $n = 500, $endchar = '&#8230;') {
  *
  * @param string $hexa
  * @param int $opacity
- *
  * @return string
  */
 function theme_degrade_get_hexa($hexa, $opacity) {
@@ -452,43 +435,44 @@ function theme_degrade_get_hexa($hexa, $opacity) {
  *
  * @param moodleform_mod $data The moodle quickforms wrapper object.
  * @param MoodleQuickForm $mform The actual form object (required to modify the form).
- *
  * @throws coding_exception
  * @throws dml_exception
  */
 function theme_degrade_coursemodule_standard_elements($data, $mform) {
     global $CFG;
 
-    $mform->addElement('header', 'theme_degrade_icons',
-        get_string('settings_icons_change_icons', 'theme_degrade'));
-    $configuration = get_string('configuration');
-    $link = "<a href='{$CFG->wwwroot}/admin/settings.php?section=themesettingdegrade#theme_degrade_icons'
+    if ($CFG->theme == "degrade") {
+        $mform->addElement('header', 'theme_degrade_icons',
+            get_string('settings_icons_change_icons', 'theme_degrade'));
+        $configuration = get_string('configuration');
+        $link = "<a href='{$CFG->wwwroot}/admin/settings.php?section=themesettingdegrade#theme_degrade_icons'
                 target='_blank'>{$configuration}</a>";
 
-    if ($settingsiconsnum = get_config('theme_degrade', 'settings_icons_num')) {
+        if ($settingsiconsnum = get_config('theme_degrade', 'settings_icons_num')) {
 
-        $choices = [0 => get_string("settings_icons_none", 'theme_degrade')];
-        for ($i = 1; $i <= $settingsiconsnum; $i++) {
-            $name = get_config('theme_degrade', "settings_icons_name_{$i}");
-            $image = get_config('theme_degrade', "settings_icons_image_{$i}");
+            $choices = [0 => get_string("settings_icons_none", 'theme_degrade')];
+            for ($i = 1; $i <= $settingsiconsnum; $i++) {
+                $name = get_config('theme_degrade', "settings_icons_name_{$i}");
+                $image = get_config('theme_degrade', "settings_icons_image_{$i}");
 
-            if ($name && $image) {
-                $choices[$i] = $name;
+                if ($name && $image) {
+                    $choices[$i] = $name;
+                }
             }
+
+            if ($data->get_coursemodule() && isset($data->get_coursemodule()->id)) {
+                $name = "theme_degrade_customicon_{$data->get_coursemodule()->id}";
+                $customicon = get_config('theme_degrade', $name);
+
+                $data->set_data(['theme_degrade_customicon' => $customicon]);
+            }
+
+            $mform->addElement('select', 'theme_degrade_customicon',
+                get_string('settings_icons_select_icon', 'theme_degrade', $link),
+                $choices);
+        } else {
+            $mform->addElement('html', get_string('settings_icons_module_disable', 'theme_degrade', $link));
         }
-
-        if ($data->get_coursemodule() && isset($data->get_coursemodule()->id)) {
-            $name = "theme_degrade_customicon_{$data->get_coursemodule()->id}";
-            $customicon = get_config('theme_degrade', $name);
-
-            $data->set_data(['theme_degrade_customicon' => $customicon]);
-        }
-
-        $mform->addElement('select', 'theme_degrade_customicon',
-            get_string('settings_icons_select_icon', 'theme_degrade', $link),
-            $choices);
-    } else {
-        $mform->addElement('html', get_string('settings_icons_module_disable', 'theme_degrade', $link));
     }
 }
 
@@ -497,9 +481,7 @@ function theme_degrade_coursemodule_standard_elements($data, $mform) {
  *
  * @param moodleform $data Data from the form submission.
  * @param stdClass $course The course.
- *
  * @return moodleform
- *
  * @throws dml_exception
  */
 function theme_degrade_coursemodule_edit_post_actions($data, $course) {
@@ -523,9 +505,7 @@ function theme_degrade_coursemodule_edit_post_actions($data, $course) {
  * @param array $args
  * @param bool $forcedownload
  * @param array $options
- *
  * @return bool
- *
  * @throws coding_exception
  * @throws moodle_exception
  */
@@ -565,9 +545,7 @@ function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $for
  *
  * @param string $css
  * @param string $theme
- *
  * @return string $css
- *
  * @throws coding_exception
  * @throws dml_exception
  */
@@ -658,6 +636,27 @@ function theme_degrade_process_css($css, $theme) {
                 background: {$topscrolltextcolor} !important;
             }
             .fixed-top {
+                background: {$topscrollbackgroundcolor} !important;
+            }
+            
+            .ever-fixed-top .header-menubar .navbar-nav .simplesearchform .btn-open,
+            #header.ever-fixed-top  .popover-region .popover-region-toggle i.icon,
+            .ever-fixed-top .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
+            .ever-fixed-top .header-menubar .navbar-nav .editmode-switch-form .input-group label,
+            .ever-fixed-top .usermenu .moodle-actionmenu a.dropdown-toggle,
+            .navbar-light.ever-fixed-top .navbar-nav .show>.nav-link,
+            .navbar-light.ever-fixed-top .navbar-nav .active>.nav-link,
+            .navbar-light.ever-fixed-top .navbar-nav .nav-link.show,
+            .navbar-light.ever-fixed-top .navbar-nav .nav-link.active,
+            .ever-fixed-top .header-logo a.navbar-brand img,
+            .ever-fixed-top .header-logo a.navbar-brand span,
+            .ever-fixed-top .header-menubar .primary-navigation ul.navbar-nav > li > a {
+                color: {$topscrolltextcolor} !important;
+            }
+            .ever-fixed-top .custom-switch .custom-control-label:after{
+                background: {$topscrolltextcolor} !important;
+            }
+            .ever-fixed-top {
                 background: {$topscrollbackgroundcolor} !important;
             }";
     }
