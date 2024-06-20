@@ -51,14 +51,15 @@ for ($i = 1; $i <= $slideshownumslides; $i++) {
     $setting = new admin_setting_configstoredfile("theme_degrade/slideshow_image_{$i}",
         get_string('slideshow_image', 'theme_degrade'),
         get_string('slideshow_image_desc', 'theme_degrade'),
-        "slideshow_image_{$i}");
+        "slideshow_image_{$i}", 0,
+        ['maxfiles' => 1, 'accepted_types' => ['image']]);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     $setting = new admin_setting_configtext("theme_degrade/slideshow_url_{$i}",
         get_string('slideshow_url', 'theme_degrade'),
         get_string('slideshow_url_desc', 'theme_degrade'),
-        'http://www.example.com/', PARAM_URL);
+        $CFG->wwwroot, PARAM_URL);
     $page->add($setting);
 
     $setting = new admin_setting_configtext("theme_degrade/slideshow_text_{$i}",

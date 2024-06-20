@@ -42,7 +42,8 @@ $link = '<a href="https://www.freepik.com/free-photo/teacher-talking-with-her-st
 $setting = new admin_setting_configstoredfile("theme_degrade/login_backgroundfoto",
     get_string('login_backgroundfoto', 'theme_degrade'),
     get_string('login_backgroundfoto_desc', 'theme_degrade', $link),
-    "login_backgroundfoto");
+    "login_backgroundfoto", 0,
+    ['maxfiles' => 1, 'accepted_types' => ['image']]);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 

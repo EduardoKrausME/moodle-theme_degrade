@@ -46,11 +46,11 @@ for ($i = 1; $i <= 20; $i++) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
-    $optionsdefaults = ['accepted_types' => ['.svg', '.png']];
     $setting = new admin_setting_configstoredfile("theme_degrade/settings_icons_image_{$i}",
         get_string('settings_icons_image', 'theme_degrade'),
         get_string('settings_icons_image_desc', 'theme_degrade'),
-        "settings_icons_image_{$i}", 0, $optionsdefaults);
+        "settings_icons_image_{$i}", 0,
+        ['maxfiles' => 1, 'accepted_types' => ['.svg', '.png']]);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 }

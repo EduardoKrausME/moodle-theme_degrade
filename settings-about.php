@@ -32,7 +32,8 @@ $page->add($setting);
 $setting = new admin_setting_configstoredfile("theme_degrade/frontpage_about_logo",
     get_string('frontpage_about_logo', 'theme_degrade'),
     get_string('frontpage_about_logo_desc', 'theme_degrade'),
-    "frontpage_about_logo");
+    "frontpage_about_logo", 0,
+    ['maxfiles' => 1, 'accepted_types' => ['.svg', '.png']]);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
