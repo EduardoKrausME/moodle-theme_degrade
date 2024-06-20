@@ -45,6 +45,24 @@ $string['slideshow_url_desc'] = 'Insert the destination link for the slide image
 $string['slideshow_text'] = 'Short descriptive text for the Slide';
 $string['slideshow_text_desc'] = 'Insert a short text about the slide.';
 
+// Blocos dos meus cursos.
+$string['settings_mycourses_heading'] = 'My Courses Blocks';
+$string['theme_degrade_mycourses_editbooton'] = 'Edit Blocks';
+
+$string['mycourses_numblocos'] = 'No blocks';
+$string['mycourses_numblocos_desc'] = 'How many images do you want in the SlideShow?';
+$string['mycourses_numblocos_nenhum'] = 'No slides on the homepage';
+
+$string['mycourses_info'] = 'Block {$a}';
+$string['mycourses_icon'] = 'Icon';
+$string['mycourses_icon_desc'] = 'A representative icon for the block. Icon size should be 48x48 pixels.';
+$string['mycourses_url'] = 'Block Link';
+$string['mycourses_url_desc'] = 'The URL to navigate to when clicking the block. It can be an external link or an internal link within the platform.';
+$string['mycourses_color'] = 'Block Background Color';
+$string['mycourses_color_desc'] = 'The background color for the block.';
+$string['mycourses_title'] = 'Short Block Title';
+$string['mycourses_title_desc'] = 'A short and descriptive title for the block.';
+
 // About.
 $string['settings_about_heading'] = 'About your Moodle';
 $string['theme_degrade_about_editbooton'] = 'Edit About block';

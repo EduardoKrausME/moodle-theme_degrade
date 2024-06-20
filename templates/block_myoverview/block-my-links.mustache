@@ -1,0 +1,22 @@
+{{#mycourses_numblock}}
+    <div id="block-my-links" class="row block-my-links" style="display:none">
+        <div class="row" style="width:100%">
+            {{#mycourses_block}}
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-{{{mycourses_col}}}">
+                    <a href="{{{mycourses_url}}}" class="ff_one">
+                        <div class="detais">
+                            <div>{{{mycourses_title}}}</div>
+                        </div>
+                        <div class="ff_icon" style="background-color: {{mycourses_color}}">
+                            <img src="{{{mycourses_icon}}}">
+                        </div>
+                    </a>
+                </div>
+            {{/mycourses_block}}
+        </div>
+
+        {{#mycourses_edit_settings}}
+            {{{mycourses_edit_settings}}}
+        {{/mycourses_edit_settings}}
+    </div>
+{{/mycourses_numblock}}

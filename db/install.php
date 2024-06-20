@@ -29,7 +29,7 @@
  * @throws Exception
  */
 function xmldb_theme_degrade_install() {
-    global $DB, $SITE;
+    global $DB, $SITE, $CFG;
 
     if (method_exists("core_plugin_manager", "reset_caches")) {
         core_plugin_manager::reset_caches();
@@ -45,8 +45,52 @@ function xmldb_theme_degrade_install() {
     for ($i = 1; $i <= 9; $i++) {
         set_config("slideshow_info_{$i}", "", "theme_degrade");
         set_config("slideshow_image_{$i}", "", "theme_degrade");
-        set_config("slideshow_url_{$i}", "", "theme_degrade");
         set_config("slideshow_text_{$i}", "", "theme_degrade");
+        set_config("slideshow_url_{$i}", $CFG->wwwroot, "theme_degrade");
+    }
+
+    set_config("mycourses_numblocos", 4, "theme_degrade");
+    for ($i = 1; $i <= 4; $i++) {
+        $blocks = [
+            [
+                'url' => "{{{config.wwwroot}}}/message/index.php",
+                'title' => get_string('messages', 'message'),
+                'icon' => 'message',
+                'color' => "#2441e7",
+            ], [
+                'url' => "{{{config.wwwroot}}}/user/profile.php",
+                'title' => get_string('profile'),
+                'icon' => 'profile',
+                'color' => "#FF1053",
+            ], [
+                'url' => "{{{config.wwwroot}}}/user/preferences.php",
+                'title' => get_string('preferences'),
+                'icon' => 'preferences',
+                'color' => "#00A78E",
+            ], [
+                'url' => "{{{config.wwwroot}}}/grade/report/overview/index.php",
+                'title' => get_string('grades', 'grades'),
+                'icon' => 'grade',
+                'color' => "#ECD06F",
+            ]
+        ];
+        $block = $blocks[$i - 1];
+
+        $fs = get_file_storage();
+        $filerecord = new stdClass();
+        $filerecord->component = 'theme_degrade';
+        $filerecord->contextid = context_system::instance()->id;
+        $filerecord->userid = get_admin()->id;
+        $filerecord->filearea = "mycourses_icon_{$i}";
+        $filerecord->filepath = '/';
+        $filerecord->itemid = 0;
+        $filerecord->filename = "{$block['icon']}.svg";
+        $file = $fs->create_file_from_pathname($filerecord, "{$CFG->dirroot}/theme/degrade/pix/blocks/{$block['icon']}.svg");
+
+        set_config("mycourses_icon_{$i}", $file->get_id(), "theme_degrade");
+        set_config("mycourses_title_{$i}", $block['title'], "theme_degrade");
+        set_config("mycourses_url_{$i}", $block['url'], "theme_degrade");
+        set_config("mycourses_color_{$i}", $block['color'], "theme_degrade");
     }
 
     set_config("frontpage_about_enable", 0, "theme_degrade");

@@ -23,42 +23,6 @@
     {}
 }}
 
-<div id="block-my-links" class="row block-my-links" style="display:none">
-    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
-        <a href="{{{config.wwwroot}}}/message/index.php" class="ff_one">
-            <div class="detais">
-                <div>{{#str}}messages,message{{/str}}</div>
-            </div>
-            <div class="ff_icon"><i class="fa fa-comment-o fa-fw"></i></div>
-        </a>
-    </div>
-    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
-        <a href="{{{config.wwwroot}}}/user/profile.php" class="ff_one style2">
-            <div class="detais">
-                <div>{{#str}}profile,moodle{{/str}}</div>
-            </div>
-            <div class="ff_icon"><i class="fa fa-graduation-cap fa-fw"></i></div>
-        </a>
-    </div>
-    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
-        <a href="{{{config.wwwroot}}}/user/preferences.php" class="ff_one style3">
-            <div class="detais">
-                <div>{{#str}}preferences,moodle{{/str}}</div>
-            </div>
-            <div class="ff_icon"><i class="fa fa-cog fa-fw"></i></div>
-        </a>
-    </div>
-    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
-        <a href="{{{config.wwwroot}}}/grade/report/overview/index.php"
-           class="ff_one style4">
-            <div class="detais">
-                <div>{{#str}}grades,grades{{/str}}</div>
-            </div>
-            <div class="ff_icon"><i class="fa fa-star fa-fw"></i></div>
-        </a>
-    </div>
-</div>
-
 <div id="block-myoverview-{{uniqid}}" class="block-myoverview block-cards" data-region="myoverview" role="navigation">
     <hr class="mt-0"/>
 
@@ -82,15 +46,27 @@
     </div>
 </div>
 {{#js}}
-    require(['jquery', 'block_myoverview/main',], function($, Main) {
-    var root = $('#block-myoverview-{{uniqid}}');
-    Main.init(root);
+    /*<script>*/
+    require(['jquery', 'block_myoverview/main', 'core/ajax', 'core/notification'], function($, Main, ajax, notification) {
+        var $root = $('#block-myoverview-{{uniqid}}');
+        Main.init($root);
 
-    $("#block-region-content").before("<div id='block-my-links-destination'></div>");
+        ajax.call([{
+            methodname : 'theme_degrade_mycourses_html',
+            args       : {}
+        }])[0].then(function(data) {
 
-    $(".page-mycourses #block-my-links")
-    .show()
-    .appendTo("#block-my-links-destination");
+            $root.before(data.html);
+
+            $("#block-region-content").before("<div id='block-my-links-destination'></div>");
+            $(".page-mycourses #block-my-links")
+                    .show()
+                    .appendTo("#block-my-links-destination");
+
+        }).then(function(msg) {
+            console.error(msg);
+        }).catch(notification.exception);
 
     });
+
 {{/js}}
