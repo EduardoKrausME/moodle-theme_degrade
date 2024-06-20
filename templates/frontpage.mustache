@@ -98,12 +98,25 @@
             <div id="slideshow">
                 <div class="slideshow-container">
                     {{#slideshow_slides}}
-                        <a href="{{{slideshow_url}}}"
-                           class="slideshow-item slideshow-item-{{{slideshow_num}}} slideshow-fade">
-                            <div class="slideshow-numbertext">{{{slideshow_num}}} / {{{slideshow_numslides}}}</div>
-                            <img src="{{{slideshow_image}}}" style="width:100%">
-                            <div class="slideshow-text">{{{slideshow_text}}}</div>
-                        </a>
+                        {{#slideshow_url}}
+                            <a href="{{{slideshow_url}}}"
+                               class="slideshow-item slideshow-item-{{{slideshow_num}}} slideshow-fade">
+                                <div class="slideshow-numbertext">{{{slideshow_num}}} / {{{slideshow_numslides}}}</div>
+                                <img src="{{{slideshow_image}}}" style="width:100%">
+                                {{#slideshow_text}}
+                                    <div class="slideshow-text">{{{slideshow_text}}}</div>
+                                {{/slideshow_text}}
+                            </a>
+                        {{/slideshow_url}}
+                        {{^slideshow_url}}
+                            <span class="slideshow-item slideshow-item-{{{slideshow_num}}} slideshow-fade">
+                                <div class="slideshow-numbertext">{{{slideshow_num}}} / {{{slideshow_numslides}}}</div>
+                                <img src="{{{slideshow_image}}}" style="width:100%">
+                                {{#slideshow_text}}
+                                    <div class="slideshow-text">{{{slideshow_text}}}</div>
+                                {{/slideshow_text}}
+                            </span>
+                        {{/slideshow_url}}
                     {{/slideshow_slides}}
                     <a class="slideshow-prev">❮</a>
                     <a class="slideshow-next">❯</a>
