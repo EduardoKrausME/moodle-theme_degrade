@@ -6809,6 +6809,10 @@ a#message-user-button {
   background-color: rgb(236, 208, 111);
 }
 
+#coursecat-management #course-detail {
+  order: -1;
+}
+
 .activity-item .inplaceeditable input {
   width: 550px;
 }
