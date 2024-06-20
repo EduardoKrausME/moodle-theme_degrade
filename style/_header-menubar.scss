@@ -686,3 +686,166 @@ div.dropdown-item:focus-within {
         right: 0;
     }
 }
+
+/*Header main*/
+#header {
+    padding: 12px 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    &.animation, * {
+        transition: all .3s ease-out;
+    }
+    .logo-color {
+        display: none;
+    }
+    .logo-write {
+        display: initial;
+    }
+    .logo-color,
+    .logo-write {
+        margin-right: 8px;
+    }
+    #usernavigation {
+        padding: 12px 0;
+        .nav-link {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+    }
+    &.navbar-expand .container-fluid {
+        padding: 0 15px;
+    }
+}
+.header-bottom {
+    background: rgb(var(--color_primary));
+}
+.header-main {
+    background: rgb(var(--color_secondary));
+    margin-top: 60px;
+    .search-input-wrapper {
+        height: 100%;
+        padding: 0;
+        margin: 0 5px;
+    }
+    .search-input-wrapper > div {
+        height: 100%;
+    }
+    .search-input-wrapper > div i.icon {
+        color: #fff;
+        margin-top: 17px;
+    }
+    .navbar-toggleable-md {
+        max-height: none;
+        text-align: right;
+        padding: 0;
+        box-shadow: none;
+    }
+    .navbar-toggleable-md .custom-menu > ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: inline-block;
+    }
+    .navbar-toggleable-md .custom-menu > ul .usermenu .menubar .dropdown a:last-child {
+        border-top: 0;
+    }
+    .navbar-toggleable-md .custom-menu > ul .usermenu .menubar .dropdown .dropdown-menu a {
+        padding: 10px;
+    }
+    .navbar-toggleable-md .custom-menu > ul a {
+        font-size: 16px;
+        color: #fff;
+        padding: 15px 18px;
+        display: inline-block;
+    }
+    .navbar-toggleable-md .custom-menu > ul a:hover,
+    .navbar-toggleable-md .custom-menu > ul a:focus {
+        background: rgb(var(--color_primary));
+        text-decoration: none;
+    }
+    .navbar-toggleable-md .custom-menu > ul > .no-divider {
+        background: none;
+    }
+    .navbar-toggleable-md .custom-menu > ul .dropdown.nav-item {
+        margin: 5px 0;
+        display: inline-block;
+    }
+    .navbar-toggleable-md .custom-menu > ul .dropdown.nav-item:hover {
+        background: none;
+    }
+    .navbar-toggleable-md .custom-menu > ul .dropdown.nav-item:last-child {
+        margin: 0;
+    }
+    .navbar-toggleable-md .custom-menu > ul .dropdown.nav-item .dropdown-menu {
+        border: 1px solid rgb(var(--color_white_43));
+        left: auto;
+        right: 0;
+        position: absolute;
+    }
+    .navbar-toggleable-md .custom-menu > ul .dropdown.nav-item .dropdown-menu a {
+        padding: 10px;
+        border-bottom: 1px solid rgb(var(--color_white_43));
+    }
+    .navbar-toggleable-md .custom-menu > ul .dropdown.nav-item .dropdown-menu a:last-child {
+        border: 0;
+    }
+    .navbar-toggleable-md .custom-menu > ul .nav-item {
+        margin: 0;
+        display: inline-block;
+    }
+    .navbar-toggleable-md .custom-menu > ul a.nav-item.nav-link {
+        margin: 0;
+    }
+    .navbar-toggleable-md .custom-menu .dropdown-menu a {
+        display: block;
+    }
+    .navbar-toggleable-md .header-logo a.navbar-brand {
+        padding: 0;
+        margin: 0;
+        background: none;
+    }
+    .navbar-toggleable-md .header-logo a.navbar-brand:hover {
+        background: none;
+    }
+    .navbar-toggleable-md .header-logo a.navbar-brand:focus {
+        background: none;
+    }
+    .navbar-toggleable-md a {
+        color: #fff;
+        font-size: 16px;
+        padding: 15px 20px;
+    }
+    .navbar-toggleable-md a:hover,
+    .navbar-toggleable-md a:focus {
+        background: rgb(var(--color_buttons));
+    }
+    .moodle-actionmenu.show[data-enhanced] .menu a {
+        font-size: 16px;
+    }
+    button.navbar-toggler {
+        padding: 0;
+        margin: 0;
+    }
+    button.navbar-toggler:hover {
+        background: transparent;
+    }
+    button.navbar-toggler:focus {
+        background: transparent;
+    }
+    button.navbar-toggler:before {
+        content: '\f0c9';
+        font-family: fontawesome;
+        color: #fff;
+        font-size: 26px;
+    }
+    button.navbar-toggler.nocontent-navbar {
+        display: none;
+    }
+    button.navbar-toggler .navbar-toggler-icon {
+        display: none;
+    }
+}

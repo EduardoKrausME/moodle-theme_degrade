@@ -3135,44 +3135,6 @@ div.dropdown-item:focus-within {
   display: flex;
   align-items: center;
 }
-#header.fixed-top, #header.ever-fixed-top {
-  padding: 0;
-  top: 0;
-  position: fixed;
-  border: none;
-  height: initial;
-}
-#header.fixed-top .logo-color, #header.ever-fixed-top .logo-color {
-  display: initial;
-}
-#header.fixed-top .logo-write, #header.ever-fixed-top .logo-write {
-  display: none;
-}
-#header.fixed-top .nav-link, #header.ever-fixed-top .nav-link {
-  white-space: initial;
-  border: none;
-}
-#header.fixed-top .active, #header.ever-fixed-top .active {
-  background: transparent;
-}
-#header.fixed-top #usernavigation, #header.ever-fixed-top #usernavigation {
-  padding: 0;
-}
-#header.fixed-top .usermenu .login.nav-link, #header.ever-fixed-top .usermenu .login.nav-link {
-  color: rgb(var(--color_white_26));
-}
-#header.fixed-top .usermenu .dropdown-menu .submenu .header, #header.ever-fixed-top .usermenu .dropdown-menu .submenu .header {
-  color: rgb(var(--color_white_26));
-}
-#header.fixed-top .usermenu .moodle-actionmenu .dropdown-menu a.dropdown-item, #header.ever-fixed-top .usermenu .moodle-actionmenu .dropdown-menu a.dropdown-item {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgb(var(--color_white_26));
-}
-#header.fixed-top .dropdown .dropdown-menu, #header.ever-fixed-top .dropdown .dropdown-menu {
-  max-height: calc(100vh - 60px);
-  overflow-y: initial !important;
-}
 #header.navbar-expand .container-fluid {
   padding: 0 15px;
 }
@@ -6779,7 +6741,6 @@ a#message-user-button {
 }
 .block-my-links .ff_one .ff_icon {
   border-radius: 5px;
-  background-color: #2441e7;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.09);
   height: 110px;
   line-height: 60px;
@@ -6799,18 +6760,52 @@ a#message-user-button {
 .block-my-links .ff_one:hover {
   text-decoration: none;
 }
-.block-my-links .ff_one.style2 .ff_icon {
-  background-color: rgb(255, 16, 83);
-}
-.block-my-links .ff_one.style3 .ff_icon {
-  background-color: rgb(0, 167, 142);
-}
-.block-my-links .ff_one.style4 .ff_icon {
-  background-color: rgb(236, 208, 111);
-}
 
 #coursecat-management #course-detail {
   order: -1;
+}
+
+#page.fixed-top, #page.ever-fixed-top {
+  margin-top: 120px;
+}
+
+#header.fixed-top, #header.ever-fixed-top {
+  padding: 0;
+  top: 0;
+  position: fixed;
+  border: none;
+  height: initial;
+}
+#header.fixed-top .logo-color, #header.ever-fixed-top .logo-color {
+  display: initial;
+}
+#header.fixed-top .logo-write, #header.ever-fixed-top .logo-write {
+  display: none;
+}
+#header.fixed-top .nav-link, #header.ever-fixed-top .nav-link {
+  white-space: initial;
+  border: none;
+}
+#header.fixed-top .active, #header.ever-fixed-top .active {
+  background: transparent;
+}
+#header.fixed-top #usernavigation, #header.ever-fixed-top #usernavigation {
+  padding: 0;
+}
+#header.fixed-top .usermenu .login.nav-link, #header.ever-fixed-top .usermenu .login.nav-link {
+  color: rgb(var(--color_white_26));
+}
+#header.fixed-top .usermenu .dropdown-menu .submenu .header, #header.ever-fixed-top .usermenu .dropdown-menu .submenu .header {
+  color: rgb(var(--color_white_26));
+}
+#header.fixed-top .usermenu .moodle-actionmenu .dropdown-menu a.dropdown-item, #header.ever-fixed-top .usermenu .moodle-actionmenu .dropdown-menu a.dropdown-item {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgb(var(--color_white_26));
+}
+#header.fixed-top .dropdown .dropdown-menu, #header.ever-fixed-top .dropdown .dropdown-menu {
+  max-height: calc(100vh - 60px);
+  overflow-y: initial !important;
 }
 
 .activity-item .inplaceeditable input {

@@ -111,7 +111,7 @@
     #scorm_toc,
     #scorm_toc_toggle,
     #scorm_navpanel,
-    #page-footer{
+    #page-footer {
         display: none !important;
     }
     #scorm_content,
@@ -152,21 +152,25 @@
         Drawer.init();
         M.util.js_complete('theme_boost/loader');
 
-        $("#header")
-                .addClass("ever-fixed-top")
-                .mouseenter(function() {
-                    $(this).css({'z-index' : 1002});
-                })
-                .mouseleave(function() {
-                    $(this).css({'z-index' : 1});
-                });
+        var header = $("#header");
+        var body = $("body");
+
+        header.mouseenter(function() {
+            $(this).css({'z-index' : 1002});
+        });
+        header.mouseleave(function() {
+            $(this).css({'z-index' : 1});
+        });
+
+        header.addClass("ever-fixed-top");
+        body.addClass("ever-fixed-top");
 
         function window_resize() {
             var header_height = $("#header").height();
             var window_height = $(window).height();
             $("#scorm_object").css({
                 width  : '100%',
-                height : window_height - header_height -      20,
+                height : window_height - header_height - 20,
             });
         }
 

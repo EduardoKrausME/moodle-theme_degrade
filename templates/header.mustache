@@ -78,20 +78,28 @@
 {{> theme_boost/primary-drawer-mobile}}
 
 {{#js}}
+    /*
+    <script>*/
     require(['jquery'], function($) {
         var header = $("#header");
+        var page = $("#page");
         $(window).on('scroll', window_scroll);
         window_scroll();
 
         function window_scroll() {
             var top = $(window).scrollTop();
-            if (top > 90) {
+            console.log(top);
+            if (top > 90 ) {
                 header.removeClass("animation");
                 header.addClass("fixed-top");
                 header.addClass("animation");
+
+                page.addClass("fixed-top");
             }
             if (top < 15) {
                 header.removeClass("fixed-top");
+
+                page.removeClass("fixed-top");
             }
         }
     });

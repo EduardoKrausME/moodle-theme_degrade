@@ -1,0 +1,47 @@
+#page {
+    &.fixed-top,
+    &.ever-fixed-top {
+        margin-top: 120px;
+    }
+}
+#header {
+    &.fixed-top,
+    &.ever-fixed-top {
+        padding: 0;
+        top: 0;
+        position: fixed;
+        border: none;
+        height: initial;
+        .logo-color {
+            display: initial;
+        }
+        .logo-write {
+            display: none;
+        }
+        .nav-link {
+            white-space: initial;
+            border: none;
+        }
+        .active {
+            background: transparent;
+        }
+        #usernavigation {
+            padding: 0;
+        }
+        .usermenu .login.nav-link {
+            color: rgb(var(--color_white_26));
+        }
+        .usermenu .dropdown-menu .submenu .header {
+            color: rgb(var(--color_white_26));
+        }
+        .usermenu .moodle-actionmenu .dropdown-menu a.dropdown-item {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgb(var(--color_white_26));
+        }
+        .dropdown .dropdown-menu {
+            max-height: calc(100vh - 60px);
+            overflow-y: initial !important;
+        }
+    }
+}
