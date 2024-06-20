@@ -618,45 +618,45 @@ function theme_degrade_process_css($css, $theme) {
         $topscrolltextcolor = theme_degrade_get_setting("top_scroll_text_color");
 
         $css .= "
-            .fixed-top .header-menubar .navbar-nav .simplesearchform .btn-open,
+            #header.fixed-top .header-menubar .navbar-nav .simplesearchform .btn-open,
             #header.fixed-top  .popover-region .popover-region-toggle i.icon,
-            .fixed-top .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
-            .fixed-top .header-menubar .navbar-nav .editmode-switch-form .input-group label,
-            .fixed-top .usermenu .moodle-actionmenu a.dropdown-toggle,
+            #header.fixed-top .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
+            #header.fixed-top .header-menubar .navbar-nav .editmode-switch-form .input-group label,
+            #header.fixed-top .usermenu .moodle-actionmenu a.dropdown-toggle,
             .navbar-light.fixed-top .navbar-nav .show>.nav-link,
             .navbar-light.fixed-top .navbar-nav .active>.nav-link,
             .navbar-light.fixed-top .navbar-nav .nav-link.show,
             .navbar-light.fixed-top .navbar-nav .nav-link.active,
-            .fixed-top .header-logo a.navbar-brand img,
-            .fixed-top .header-logo a.navbar-brand span,
-            .fixed-top .header-menubar .primary-navigation ul.navbar-nav > li > a {
+            #header.fixed-top .header-logo a.navbar-brand img,
+            #header.fixed-top .header-logo a.navbar-brand span,
+            #header.fixed-top .header-menubar .primary-navigation ul.navbar-nav > li > a {
                 color: {$topscrolltextcolor} !important;
             }
-            .fixed-top .custom-switch .custom-control-label:after{
+            #header.fixed-top .custom-switch .custom-control-label:after{
                 background: {$topscrolltextcolor} !important;
             }
-            .fixed-top {
+            #header.fixed-top {
                 background: {$topscrollbackgroundcolor} !important;
             }
             
-            .ever-fixed-top .header-menubar .navbar-nav .simplesearchform .btn-open,
+            #header.ever-fixed-top .header-menubar .navbar-nav .simplesearchform .btn-open,
             #header.ever-fixed-top  .popover-region .popover-region-toggle i.icon,
-            .ever-fixed-top .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
-            .ever-fixed-top .header-menubar .navbar-nav .editmode-switch-form .input-group label,
-            .ever-fixed-top .usermenu .moodle-actionmenu a.dropdown-toggle,
+            #header.ever-fixed-top .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
+            #header.ever-fixed-top .header-menubar .navbar-nav .editmode-switch-form .input-group label,
+            #header.ever-fixed-top .usermenu .moodle-actionmenu a.dropdown-toggle,
             .navbar-light.ever-fixed-top .navbar-nav .show>.nav-link,
             .navbar-light.ever-fixed-top .navbar-nav .active>.nav-link,
             .navbar-light.ever-fixed-top .navbar-nav .nav-link.show,
             .navbar-light.ever-fixed-top .navbar-nav .nav-link.active,
-            .ever-fixed-top .header-logo a.navbar-brand img,
-            .ever-fixed-top .header-logo a.navbar-brand span,
-            .ever-fixed-top .header-menubar .primary-navigation ul.navbar-nav > li > a {
+            #header.ever-fixed-top .header-logo a.navbar-brand img,
+            #header.ever-fixed-top .header-logo a.navbar-brand span,
+            #header.ever-fixed-top .header-menubar .primary-navigation ul.navbar-nav > li > a {
                 color: {$topscrolltextcolor} !important;
             }
-            .ever-fixed-top .custom-switch .custom-control-label:after{
+            #header.ever-fixed-top .custom-switch .custom-control-label:after{
                 background: {$topscrolltextcolor} !important;
             }
-            .ever-fixed-top {
+            #header.ever-fixed-top {
                 background: {$topscrollbackgroundcolor} !important;
             }";
     }

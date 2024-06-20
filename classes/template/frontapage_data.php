@@ -37,7 +37,6 @@ class frontapage_data {
 
     /**
      * @return array
-     *
      * @throws \dml_exception
      */
     public static function topo() {
@@ -48,7 +47,6 @@ class frontapage_data {
 
     /**
      * @return array
-     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -86,7 +84,6 @@ class frontapage_data {
 
     /**
      * @return array
-     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -133,7 +130,6 @@ class frontapage_data {
 
     /**
      * @return array
-     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -167,15 +163,14 @@ class frontapage_data {
         }
     }
 
+
     /**
      * @param string $hasteg
-     *
      * @return bool|string
-     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    private static function edit_settings($hasteg) {
+    public static function edit_settings($hasteg) {
         global $CFG;
 
         $settingsedit = false;
