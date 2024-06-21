@@ -1,4 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&family=Inter:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Manrope:wght@200..800&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat+Subrayada:wght@400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oxygen:wght@300;400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sora:wght@100..800&display=swap");
+@font-face {
+  font-family: "fontawesome";
+  src: url("[[font:core|fontawesome-webfont.eot]]");
+  src: url("[[font:theme|fontawesome-webfont.eot]]?#iefix") format("embedded-opentype"), url("[[font:theme|fontawesome-webfont.woff2]]") format("woff2"), url("[[font:theme|fontawesome-webfont.woff]]") format("woff"), url("[[font:theme|fontawesome-webfont.ttf]]") format("truetype"), url("[[font:theme|fontawesome-webfont.svg]]#fontawesomeregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
 * {
   outline: none;
 }
