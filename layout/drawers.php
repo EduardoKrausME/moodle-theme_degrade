@@ -111,6 +111,14 @@ $templatedata = [
     'addblockbutton' => $addblockbutton,
 ];
 
+if (isset($_SESSION['return_course_id']) && isset($_SESSION['refcourse_course_id'])) {
+    if ($_SESSION['refcourse_course_id'] == $COURSE->id) {
+        $templatedata['return_course_id'] = $_SESSION['return_course_id'];
+        $templatedata['return_course_name'] = $_SESSION['return_course_name'];
+        $templatedata['refcourse_course_id'] = $_SESSION['refcourse_course_id'];
+    }
+}
+
 require_once("{$CFG->dirroot}/theme/degrade/classes/template/frontapage_data.php");
 $templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_data::topo());
 
