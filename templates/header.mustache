@@ -78,8 +78,6 @@
 {{> theme_boost/primary-drawer-mobile}}
 
 {{#js}}
-    /*
-    <script>*/
     require(['jquery'], function($) {
         var header = $("#header");
         var page = $("#page");
@@ -87,19 +85,27 @@
         window_scroll();
 
         function window_scroll() {
+
+            if ($(window).width() < 800) {
+                header.removeClass("fixed-top");
+                return;
+            }
+
             var top = $(window).scrollTop();
             console.log(top);
-            if (top > 90 ) {
-                header.removeClass("animation");
+            if (top > 90 && !header.hasClass("fixed-top")) {
                 header.addClass("fixed-top");
-                header.addClass("animation");
 
-                page.addClass("fixed-top");
+                page.css({
+                    "margin-top" : header.height() + 14
+                });
             }
-            if (top < 15) {
+            if (top < 15 && header.hasClass("fixed-top")) {
                 header.removeClass("fixed-top");
 
-                page.removeClass("fixed-top");
+                page.css({
+                    "margin-top" : 14
+                });
             }
         }
     });

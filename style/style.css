@@ -6772,16 +6772,13 @@ a#message-user-button {
   order: -1;
 }
 
-#page.fixed-top, #page.ever-fixed-top {
-  margin-top: 120px;
-}
-
 #header.fixed-top, #header.ever-fixed-top {
   padding: 0;
   top: 0;
   position: fixed;
   border: none;
   height: initial;
+  z-index: 10000;
 }
 #header.fixed-top .logo-color, #header.ever-fixed-top .logo-color {
   display: initial;
