@@ -49,7 +49,7 @@ if ($CFG->theme != "boost_training") {
         'black1' => get_string('background_color_black', 'theme_degrade', 1),
     ];
 
-    if (strpos($_SERVER['REQUEST_URI'], "admin/upgradesettings.php") > 0) {
+    if (strpos(@$_SERVER['REQUEST_URI'], "admin/upgradesettings.php") > 0) {
         $htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/degrade/style/initial.css\" />";
         $htmlselect .= "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/degrade/style/style.css\" />";
     } else {

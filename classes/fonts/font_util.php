@@ -28,7 +28,6 @@ class font_util {
      * list_fonts
      *
      * @return array
-     *
      * @throws \dml_exception
      */
     private static function list_fonts($configname) {
@@ -88,7 +87,12 @@ class font_util {
             $fonts = array_merge($fontsuser[1], $fontsdefault);
         }
 
-        $fontlist[$configname] = ['css' => [], 'grapsjs' => [], 'ckeditor' => []];
+        $fontlist[$configname] = [
+            'css' => [],
+            'grapsjs' => [],
+            'ckeditor' => [],
+            'site' => [],
+        ];
         foreach ($fonts as $font) {
 
             preg_match('/family=([A-Z,a-z\+]{2,30})/', $font, $fontinfo);
@@ -117,9 +121,7 @@ class font_util {
      * css
      *
      * @param string $configname
-     *
      * @return string
-     *
      * @throws \dml_exception
      */
     public static function css($configname = 'pagefonts') {
@@ -130,9 +132,7 @@ class font_util {
      * grapsjs
      *
      * @param string $configname
-     *
      * @return string
-     *
      * @throws \dml_exception
      */
     public static function grapsjs($configname = 'pagefonts') {
@@ -143,9 +143,7 @@ class font_util {
      * ckeditor
      *
      * @param string $configname
-     *
      * @return string
-     *
      * @throws \dml_exception
      */
     public static function ckeditor($configname = 'pagefonts') {
@@ -156,9 +154,7 @@ class font_util {
      * ckeditor
      *
      * @param string $configname
-     *
      * @return array
-     *
      * @throws \dml_exception
      */
     public static function site($configname = 'pagefonts') {
@@ -169,9 +165,7 @@ class font_util {
      * print_only_unique
      *
      * @param string $configname
-     *
      * @return string
-     *
      * @throws \dml_exception
      */
     public static function print_only_unique($configname = 'pagefonts') {
