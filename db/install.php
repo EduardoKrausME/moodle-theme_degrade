@@ -53,22 +53,22 @@ function xmldb_theme_degrade_install() {
     for ($i = 1; $i <= 4; $i++) {
         $blocks = [
             [
-                'url' => "{{{config.wwwroot}}}/message/index.php",
+                'url' => "{$CFG->wwwroot}/message/index.php",
                 'title' => get_string('messages', 'message'),
                 'icon' => 'message',
                 'color' => "#2441e7",
             ], [
-                'url' => "{{{config.wwwroot}}}/user/profile.php",
+                'url' => "{$CFG->wwwroot}/user/profile.php",
                 'title' => get_string('profile'),
                 'icon' => 'profile',
                 'color' => "#FF1053",
             ], [
-                'url' => "{{{config.wwwroot}}}/user/preferences.php",
+                'url' => "{$CFG->wwwroot}/user/preferences.php",
                 'title' => get_string('preferences'),
                 'icon' => 'preferences',
                 'color' => "#00A78E",
             ], [
-                'url' => "{{{config.wwwroot}}}/grade/report/overview/index.php",
+                'url' => "{$CFG->wwwroot}/grade/report/overview/index.php",
                 'title' => get_string('grades', 'grades'),
                 'icon' => 'grade',
                 'color' => "#ECD06F",
