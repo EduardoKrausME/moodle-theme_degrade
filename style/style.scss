@@ -412,49 +412,58 @@ input[type="submit"][disabled]:hover {
 [role="treeitem"][aria-expanded="true"]:focus > *:first-child {
     box-shadow: none;
 }
-.custom-switch .custom-control-label:before {
-    border-color: #fff;
-    background: #fff;
-}
-.custom-control.custom-radio .custom-control-input:focus ~ .custom-control-label::before,
-.custom-control.custom-switch .custom-control-input:focus ~ .custom-control-label::before,
-.custom-control.custom-radio .custom-control-input:checked + .custom-control-label:before,
-.custom-control.custom-switch .custom-control-input:checked + .custom-control-label:before,
-.custom-switch .custom-control-label:before {
-    background-color: rgb(var(--color_primary));
-    border-color: rgb(var(--color_primary));
-    box-shadow: none;
-}
 .custom-switch .custom-control-label:after {
     background-color: #fff;
 }
-.custom-control.custom-radio .custom-control-input:active + .custom-control-label:before {
-    background-color: rgba(136, 183, 123, .25);
-}
-.custom-control.custom-radio .custom-control-input:checked:focus + .custom-control-label:before {
-    background-color: rgb(var(--color_primary));
-    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(136, 183, 123, .25);
-}
-.custom-control.custom-radio .custom-control-input:focus ~ .custom-control-label::before {
-    box-shadow: 0 0 0 0.2rem rgb(var(--color_primary_60));
-}
-.custom-control.custom-radio .custom-control-input:not(:disabled):active ~ .custom-control-label:before,
-.custom-control.custom-switch .custom-control-input:not(:disabled):active ~ .custom-control-label:before {
-    border-color: rgb(var(--color_primary));
-    background-color: rgb(var(--color_primary));
-}
-.custom-control.custom-checkbox .custom-control-input:checked ~ .custom-control-label:before {
-    border-color: rgb(var(--color_primary));
-    background-color: rgb(var(--color_primary));
-    box-shadow: none;
-}
-.custom-control.custom-checkbox .custom-control-input:focus:not(:checked) ~ .custom-control-label:before {
-    border-color: rgb(var(--color_primary));
-    box-shadow: none;
-}
-.custom-control.custom-checkbox .custom-control-input:not(:disabled):active ~ .custom-control-label:before {
-    border-color: rgba(var(--color_primary), 0.2);
-    background-color: rgba(var(--color_primary), 0.2);
+.custom-control-input {
+    :before,
+    :after {
+        transition: all .2s ease-out;
+    }
+    &:focus ~ .custom-control-label::before,
+    &:checked + .custom-control-label:before,
+    .custom-control-label:before {
+        background-color: rgb(var(--color_primary));
+        border-color: transparent;
+        box-shadow: none;
+    }
+    &:not(:checked) ~ .custom-control-label {
+        &:before {
+            background-color: #fff !important;
+            border-color: rgb(var(--color_primary)) !important;
+        }
+        &:after {
+            background-color: rgb(var(--color_primary)) !important;
+        }
+    }
+    &:active + .custom-control-label:before {
+        background-color: rgba(136, 183, 123, .25);
+    }
+    &:checked:focus + .custom-control-label:before {
+        background-color: rgb(var(--color_primary));
+        box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(136, 183, 123, .25);
+    }
+    &:focus ~ .custom-control-label::before {
+        box-shadow: 0 0 0 0.2rem rgb(var(--color_primary_60));
+    }
+    &:not(:disabled):active ~ .custom-control-label:before,
+    &:not(:disabled):active ~ .custom-control-label:before {
+        border-color: rgb(var(--color_primary));
+        background-color: rgb(var(--color_primary));
+    }
+    &:checked ~ .custom-control-label:before {
+        border-color: rgb(var(--color_primary));
+        background-color: rgb(var(--color_primary));
+        box-shadow: none;
+    }
+    &:focus:not(:checked) ~ .custom-control-label:before {
+        border-color: rgb(var(--color_primary));
+        box-shadow: none;
+    }
+    &:not(:disabled):active ~ .custom-control-label:before {
+        border-color: rgba(var(--color_primary), 0.2);
+        background-color: rgba(var(--color_primary), 0.2);
+    }
 }
 .switch input:checked + label:before {
     background-color: rgb(var(--color_primary));
