@@ -204,7 +204,7 @@ function theme_degrade_get_logo($local = null) {
  * @throws coding_exception
  */
 function theme_degrade_get_body_class() {
-    return "theme-" . theme_degrade_get_setting("background_color", false);
+    return "degrade-theme-" . theme_degrade_get_setting("background_color", false);
 }
 
 /**
@@ -557,8 +557,8 @@ function theme_degrade_process_css($css, $theme) {
     $css = "@import url('{$fontimport}');\n{$css}";
 
     // Local css.
-    if (@file_exists(__DIR__ . "/style/boost_training.css")) {
-        $customcss = file_get_contents(__DIR__ . "/style/boost_training.css");
+    if (@file_exists(__DIR__ . "/style/degrade.css")) {
+        $customcss = file_get_contents(__DIR__ . "/style/degrade.css");
 
         $css = "{$css}\n{$customcss}";
     }
@@ -566,11 +566,11 @@ function theme_degrade_process_css($css, $theme) {
     // Color list.
     $css =
         ":root {\n" .
-        "    --color_primary:   " . theme_degrade_process_color_hex("theme_color__color_primary") . " !important;\n" .
+        "    --color_primary:   " . theme_degrade_process_color_hex("theme_color__color_primary") . "   !important;\n" .
         "    --color_secondary: " . theme_degrade_process_color_hex("theme_color__color_secondary") . " !important;\n" .
-        "    --color_buttons:   " . theme_degrade_process_color_hex("theme_color__color_buttons") . " !important;\n" .
-        "    --color_names:     " . theme_degrade_process_color_hex("theme_color__color_names") . " !important;\n" .
-        "    --color_titles:    " . theme_degrade_process_color_hex("theme_color__color_titles") . " !important;\n" .
+        "    --color_buttons:   " . theme_degrade_process_color_hex("theme_color__color_buttons") . "   !important;\n" .
+        "    --color_names:     " . theme_degrade_process_color_hex("theme_color__color_names") . "     !important;\n" .
+        "    --color_titles:    " . theme_degrade_process_color_hex("theme_color__color_titles") . "    !important;\n" .
         "}" . $css;
 
     // Custom CSS.
@@ -688,7 +688,26 @@ function theme_degrade_process_css($css, $theme) {
                 font-family : {$fontfamilymenus} Arial, Helvetica, sans-serif
             }";
 
-    $css = "{$css}\n{$fontfamilytext}\n{$fontfamilytitle}\n{$fontfamilysitename}\n{$fontfamilymenus}";
+    $themecss = "";
+    $background_color = theme_degrade_get_setting("background_color", false);
+    if (preg_match('/^#[a-fA-F0-9]{6}$/', $background_color)) {
+        $themecss = "
+            #header,
+            #nav-drawer .list-group-item.active > div,
+            #nav-drawer .list-group-item.active:hover,
+            #footer .footer-main {
+                background: {$background_color};
+            }
+            #site-news-forum,
+            .frontpage-course-list {
+                background: {$background_color}3d;
+            }
+            .frontpage-course-list .btn-primary {
+                background: {$background_color};
+            }";
+    }
+
+    $css = "{$css}\n{$fontfamilytext}\n{$fontfamilytitle}\n{$fontfamilysitename}\n{$fontfamilymenus}\n{$themecss}";
 
     return $css;
 }

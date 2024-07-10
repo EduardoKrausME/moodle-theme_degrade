@@ -1,6 +1,4 @@
-define([
-    "jquery",
-], function($) {
+define(["jquery"], function($) {
     var slideshow_degrade = {
 
         slideIndex : 1,

@@ -66,11 +66,12 @@ for ($i = 1; $i <= $mycoursesnumblocos; $i++) {
     $page->add($setting);
 
     $default = $colors[$mycoursesnumblocos - 1];
-    $setting = new admin_setting_configcolourpicker("theme_degrade/mycourses_color_{$i}",
+    $setting = new admin_setting_configtext("theme_degrade/mycourses_color_{$i}",
         get_string("mycourses_color", 'theme_degrade'),
         get_string("mycourses_color_desc", 'theme_degrade'), $default);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
+    $PAGE->requires->js_call_amd('theme_degrade/settings', 'minicolors', [$setting->get_id()]);
 }
 
 $settings->add($page);

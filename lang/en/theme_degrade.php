@@ -282,10 +282,12 @@ $string['settings_icons_default_download'] = 'Download';
 
 $string['top_color_heading'] = 'Scroll Top Color';
 $string['top_scroll_background_color'] = 'Background Color of Top Menu on Scroll';
-$string['top_scroll_background_color_desc'] = 'Set the background color when scrolling the page.';
+$string['top_scroll_background_color_desc'] = 'Set the background color when scrolling the page. If the field is empty, the color will remain unchanged.';
 $string['top_scroll_text_color'] = 'Text Color of Menu on Scroll';
 $string['top_scroll_text_color_desc'] = 'Set the text color of the menu when scrolling the page.';
 $string['theme_color_heading'] = 'Environment Color Selection';
+$string['theme_color_sugestion'] = 'Color suggestion';
+$string['theme_color_sugestion_text'] = 'Click on the line to apply the color to the fields below:';
 
 // Link para editor da home e footer.
 $string['content_type_home'] = 'Content type for homepage';

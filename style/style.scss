@@ -424,13 +424,12 @@ input[type="submit"][disabled]:hover {
     &:checked + .custom-control-label:before,
     .custom-control-label:before {
         background-color: rgb(var(--color_primary));
-        border-color: transparent;
+        border-color: rgb(var(--color_primary)) !important;
         box-shadow: none;
     }
     &:not(:checked) ~ .custom-control-label {
         &:before {
             background-color: #fff !important;
-            border-color: rgb(var(--color_primary)) !important;
         }
         &:after {
             background-color: rgb(var(--color_primary)) !important;
@@ -4116,6 +4115,8 @@ a#message-user-button {
 @import "coursecat-management";
 
 @import "fixed-top";
+
+@import "minicolors";
 
 .activity-item .inplaceeditable input {
     width: 550px;

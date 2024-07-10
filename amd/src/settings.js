@@ -1,36 +1,37 @@
-define(["jquery"], function($) {
+define(["jquery", "theme_degrade/minicolors"], function($, minicolors) {
     var theme_degrade = {
 
-        theme_color         : function() {
-            var degrade_theme_color = $("#id_s_theme_degrade_theme_color");
-
-            $(".seletor-de-theme-degrade").click(function() {
-                var themename = $(this).attr("data-name");
-                theme_degrade._theme_color_select(themename);
-
-                degrade_theme_color.val(themename);
-            });
-            degrade_theme_color.change(function() {
-                var themename = degrade_theme_color.val();
-                theme_degrade._theme_color_select(themename);
-
-                degrade_theme_color.val(themename);
-            });
+        minicolors : function(elementid) {
+            $("#" + elementid).minicolors();
         },
-        _theme_color_select : function(themename) {
-            var $themename = $("#theme-" + themename);
 
-            var color_primary = $themename.find(".color_primary").attr('data-color');
-            var color_secondary = $themename.find(".color_secondary").attr('data-color');
-            var color_buttons = $themename.find(".color_buttons").attr('data-color');
-            var color_names = $themename.find(".color_names").attr('data-color');
-            var color_titles = $themename.find(".color_titles").attr('data-color');
+        theme_color : function() {
+            $(".degrade-seletor-de-theme").click(function() {
+                var themename = $(this).attr("data-name");
+                var $themename = $("#theme-" + themename);
 
-            $("#id_s_theme_degrade_theme_color__color_primary").val(color_primary);
-            $("#id_s_theme_degrade_theme_color__color_secondary").val(color_secondary);
-            $("#id_s_theme_degrade_theme_color__color_buttons").val(color_buttons);
-            $("#id_s_theme_degrade_theme_color__color_names").val(color_names);
-            $("#id_s_theme_degrade_theme_color__color_titles").val(color_titles);
+                var color_primary = $themename.find(".color_primary").attr('data-color');
+                var color_secondary = $themename.find(".color_secondary").attr('data-color');
+                var color_buttons = $themename.find(".color_buttons").attr('data-color');
+                var color_names = $themename.find(".color_names").attr('data-color');
+                var color_titles = $themename.find(".color_titles").attr('data-color');
+
+                $("#id_s_theme_degrade_theme_color__color_primary")
+                    .val(color_primary)
+                    .minicolors('settings', {value : color_primary});
+                $("#id_s_theme_degrade_theme_color__color_secondary")
+                    .val(color_secondary)
+                    .minicolors('settings', {value : color_secondary});
+                $("#id_s_theme_degrade_theme_color__color_buttons")
+                    .val(color_buttons)
+                    .minicolors('settings', {value : color_buttons});
+                $("#id_s_theme_degrade_theme_color__color_names")
+                    .val(color_names)
+                    .minicolors('settings', {value : color_names});
+                $("#id_s_theme_degrade_theme_color__color_titles")
+                    .val(color_titles)
+                    .minicolors('settings', {value : color_titles});
+            });
         },
 
         login : function() {

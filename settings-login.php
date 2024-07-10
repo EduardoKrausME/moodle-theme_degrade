@@ -47,11 +47,12 @@ $setting = new admin_setting_configstoredfile("theme_degrade/login_backgroundfot
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
-$setting = new admin_setting_configcolourpicker("theme_degrade/login_backgroundcolor",
+$setting = new admin_setting_configtext("theme_degrade/login_backgroundcolor",
     get_string('login_backgroundcolor', 'theme_degrade'),
     get_string('login_backgroundcolor_desc', 'theme_degrade'), "");
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
+$PAGE->requires->js_call_amd('theme_degrade/settings', 'minicolors', [$setting->get_id()]);
 
 $setting = new admin_setting_confightmleditor('theme_degrade/login_login_description',
     get_string('login_login_description', 'theme_degrade'),
