@@ -160,34 +160,37 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2024070900, "theme", "degrade");
     }
 
-    if ($oldversion < 2024071000) {
-        $cores = [
-            'default1' => "#f55ff2",
-            'default2' => "#fd81b5",
-            'green1' => "#00c3b0",
-            'green2' => "#30e8bf",
-            'green3' => "#00bf8f",
-            'blue1' => "#007bc3",
-            'blue2' => "#000428",
-            'blue3' => "#314755",
-            'blue4' => "#7303c0",
-            'blue5' => "#00f0ff",
-            'blue6' => "#83a4d4",
-            'blue7' => "#1a2a6c",
-            'red1' => "#c10f41",
-            'red2' => "#b21f1f",
-            'red3' => "#ceac7a",
-            'red4' => "#e65c00",
-            'red5' => "#d12924",
-            'red6' => "#ff512f",
-            'red7' => "#fc354c",
-            'red8' => "#86377b",
-            'black1' => "#070000",
-        ];
 
-        $cor = get_config("theme_degrade", "background_color");
-        $newcor = $cores[$cor];
-        set_config("background_color", $newcor, "theme_degrade");
+    if ($oldversion < 2024071000) {
+        if ($CFG->theme == "degrade") {
+            $cores = [
+                'default1' => "#f55ff2",
+                'default2' => "#fd81b5",
+                'green1' => "#00c3b0",
+                'green2' => "#30e8bf",
+                'green3' => "#00bf8f",
+                'blue1' => "#007bc3",
+                'blue2' => "#000428",
+                'blue3' => "#314755",
+                'blue4' => "#7303c0",
+                'blue5' => "#00f0ff",
+                'blue6' => "#83a4d4",
+                'blue7' => "#1a2a6c",
+                'red1' => "#c10f41",
+                'red2' => "#b21f1f",
+                'red3' => "#ceac7a",
+                'red4' => "#e65c00",
+                'red5' => "#d12924",
+                'red6' => "#ff512f",
+                'red7' => "#fc354c",
+                'red8' => "#86377b",
+                'black1' => "#070000",
+            ];
+
+            $cor = get_config("theme_degrade", "background_color");
+            $newcolor = $cores[$cor];
+            set_config("background_color", $newcolor, "theme_degrade");
+        }
 
         upgrade_plugin_savepoint(true, 2024071000, "theme", "degrade");
     }

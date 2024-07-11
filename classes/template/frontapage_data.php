@@ -38,10 +38,12 @@ class frontapage_data {
     /**
      * @return array
      * @throws \dml_exception
+     * @throws \coding_exception
      */
     public static function topo() {
         return [
             'logourl_header' => theme_degrade_get_logo("header"),
+            'top_scroll' => theme_degrade_get_setting("top_scroll") ? 1 : 0,
         ];
     }
 

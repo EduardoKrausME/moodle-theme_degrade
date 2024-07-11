@@ -281,6 +281,8 @@ $string['settings_icons_default_download'] = 'Download';
 
 
 $string['top_color_heading'] = 'Scroll Top Color';
+$string['top_scroll'] = 'Pin the menu when scrolling the page';
+$string['top_scroll_desc'] = 'When enabled, the menu will be pinned to the top of the screen while you scroll the page, ensuring easy access to menu options.';
 $string['top_scroll_background_color'] = 'Background Color of Top Menu on Scroll';
 $string['top_scroll_background_color_desc'] = 'Set the background color when scrolling the page. If the field is empty, the color will remain unchanged.';
 $string['top_scroll_text_color'] = 'Text Color of Menu on Scroll';

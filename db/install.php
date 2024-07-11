@@ -35,7 +35,6 @@ function xmldb_theme_degrade_install() {
         core_plugin_manager::reset_caches();
     }
 
-    set_config("background_color", "blue1", "theme_degrade");
     set_config("theme_color", "theme_color_blue", "theme_degrade");
     set_config("theme_color__color_primary", "#2B4E84", "theme_degrade");
     set_config("theme_color__color_secondary", "#3E65A0", "theme_degrade");
@@ -47,7 +46,7 @@ function xmldb_theme_degrade_install() {
     set_config("frontpage_avaliablecourses_text", "", "theme_degrade");
     set_config("frontpage_avaliablecourses_instructor", 1, "theme_degrade");
 
-    set_config("top_scroll_background_color", "", "theme_degrade");
+    set_config("top_scroll_background_color", "#5C5D5F", "theme_degrade");
     set_config("top_scroll_text_color", "#FFFFFF", "theme_degrade");
 
     set_config("slideshow_numslides", 0, "theme_degrade");

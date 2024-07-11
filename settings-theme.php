@@ -37,8 +37,19 @@ $setting = new admin_setting_configstoredfile('theme_degrade/logo_color',
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
+
 // Cores do topo.
 if ($CFG->theme != "boost_training") {
+
+    $setting = new admin_setting_configcheckbox('theme_degrade/top_scroll',
+        get_string('top_scroll', 'theme_degrade'),
+        get_string('top_scroll_desc', 'theme_degrade'),
+        0);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+    $PAGE->requires->js_call_amd('theme_degrade/settings', 'top_scroll');
+
+
     $setting = new admin_setting_heading("theme_degrade/top_color_heading",
         get_string('top_color_heading', 'theme_degrade'), '');
     $page->add($setting);
