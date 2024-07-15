@@ -31,7 +31,7 @@ if (get_config('theme_degrade', 'footer_type') != 0) {
     $emptytext = get_string('content_type_empty', 'theme_degrade');
 
     $text = get_string('editor_link_footer_all', 'theme_degrade');
-    $html = "<a class='btn btn-info mt-1 mb-2'
+    $html = "<a class='btn btn-info mt-1 mb-2' target='_blank'
                 href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=footer&editlang=all'>{$text}</a>";
     if (!isset(get_config("theme_degrade", "footer_htmleditor_all")[3])) {
         $html = "{$html} <strong class='alert-warning'>{$emptytext}</strong>";
@@ -43,7 +43,7 @@ if (get_config('theme_degrade', 'footer_type') != 0) {
         $langname = $listoftranslations[$CFG->lang];
 
         $text = get_string('editor_link_footer', 'theme_degrade', $langname);
-        $html = "<a class='btn btn-info mt-1 mb-2'
+        $html = "<a class='btn btn-info mt-1 mb-2' target='_blank'
                     href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=footer&editlang={$CFG->lang}'>{$text}</a>";
         if (!isset(get_config("theme_degrade", "footer_htmleditor_{$CFG->lang}")[3])) {
             $html = "{$html} <strong class='alert-warning'>{$emptytext}</strong>";
@@ -56,7 +56,7 @@ if (get_config('theme_degrade', 'footer_type') != 0) {
             }
 
             $text = get_string('editor_link_footer', 'theme_degrade', $langname);
-            $html = "<a class='btn btn-info mt-1'
+            $html = "<a class='btn btn-info mt-1' target='_blank'
                         href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=footer&editlang={$langkey}'>{$text}</a>";
             if (!isset(get_config("theme_degrade", "footer_htmleditor_{$langkey}")[3])) {
                 $html = "{$html} <strong class='alert-warning'>{$emptytext}</strong>";
