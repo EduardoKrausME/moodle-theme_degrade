@@ -129,7 +129,7 @@ if ($action) {
 } else {
     //save page
     if ($html) {
-        set_config("{$chave}_htmleditor_{$editlang}", $html, "theme_boost_magnific");
+        set_config("{$chave}_htmleditor_{$editlang}", $html, "theme_degrade");
         echo "Saved successfully";
     } else {
         showError('Html content is empty!');

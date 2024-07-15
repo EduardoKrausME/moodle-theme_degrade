@@ -17,7 +17,7 @@
 /**
  * Editor.
  *
- * @package     theme_boost_magnific
+ * @package     theme_degrade
  * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -30,13 +30,13 @@ $chave = required_param('chave', PARAM_TEXT);
 $editlang = required_param('editlang', PARAM_TEXT);
 
 if (file_exists(__DIR__ . "/_default/default-{$chave}.html")) {
-    $html = get_config("theme_boost_magnific", "{$chave}_htmleditor_{$editlang}");
+    $html = get_config("theme_degrade", "{$chave}_htmleditor_{$editlang}");
     if (isset($html[40])) {
 
         $html = vvveb__add_css($chave, $html);
         die($html);
     } else {
-        $html = "<link href=\"{wwwroot}/theme/boost_magnific/_editor/_default/bootstrap-vvveb.css\" rel=\"stylesheet\">\n\n";
+        $html = "<link href=\"{wwwroot}/theme/degrade/_editor/_default/bootstrap-vvveb.css\" rel=\"stylesheet\">\n\n";
         $html .= file_get_contents(__DIR__ . "/_default/default-{$chave}.html");
 
         $html = vvveb__add_css($chave, $html);

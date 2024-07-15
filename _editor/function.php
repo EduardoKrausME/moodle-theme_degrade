@@ -17,22 +17,22 @@
 /**
  * Editor functions.
  *
- * @package     theme_boost_magnific
+ * @package     theme_degrade
  * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use theme_boost_magnific\output\core\course_renderer_util;
+use theme_degrade\output\core\course_renderer_util;
 
 function vvveb__add_css($chave, $html) {
     global $CFG;
 
     $css = [];
     if (strpos($html, "default-{$chave}.css") === false) {
-        $css[] = "<link href='{$CFG->wwwroot}/theme/boost_magnific/_editor/_default/default-{$chave}.css' rel='stylesheet'>";
+        $css[] = "<link href='{$CFG->wwwroot}/theme/degrade/_editor/_default/default-{$chave}.css' rel='stylesheet'>";
     }
     if (strpos($html, "bootstrap-vvveb.css") === false) {
-        $css[] = "<link href='{$CFG->wwwroot}/theme/boost_magnific/_editor/_default/bootstrap-vvveb.css' rel='stylesheet'>";
+        $css[] = "<link href='{$CFG->wwwroot}/theme/degrade/_editor/_default/bootstrap-vvveb.css' rel='stylesheet'>";
     }
 
     $css = implode("\n", $css);
@@ -51,7 +51,7 @@ function vvveb__changue_langs($html) {
             list($identifier, $component) = explode("|", $identifier);
             $text = get_string($identifier, $component);
         } else {
-            $text = get_string($identifier, "theme_boost_magnific");
+            $text = get_string($identifier, "theme_degrade");
         }
 
         $html = str_replace($lags[0][$key], $text, $html);
@@ -83,7 +83,7 @@ function vvveb__change_courses($html) {
         $course->courseimage = course_renderer_util::couse_image(new core_course_list_element($course));
         $data[] = $course;
     }
-    $courseshtml = $OUTPUT->render_from_template('theme_boost_magnific/vvveb/course', ['couses' => $data]);
+    $courseshtml = $OUTPUT->render_from_template('theme_degrade/vvveb/course', ['couses' => $data]);
 
     return str_replace("{course-itens}", $courseshtml, $html);
 }

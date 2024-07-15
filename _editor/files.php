@@ -17,7 +17,7 @@
 /**
  * Editor.
  *
- * @package     theme_boost_magnific
+ * @package     theme_degrade
  * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -31,7 +31,7 @@ require_capability('moodle/site:config', $context);
 
 $chave = required_param('chave', PARAM_TEXT);
 
-$component = 'theme_boost_magnific';
+$component = 'theme_degrade';
 $contextid = $context->id;
 $adminid = get_admin()->id;
 $filearea = "editor_{$chave}";
@@ -54,7 +54,7 @@ if (isset($_FILES['file']['name'])) {
 
         $url = moodle_url::make_file_url(
             "$CFG->wwwroot/pluginfile.php",
-            "/{$contextid}/theme_boost_magnific/{$filerecord->filearea}/{$filerecord->itemid}{$filerecord->filepath}{$filerecord->filename}");
+            "/{$contextid}/theme_degrade/{$filerecord->filearea}/{$filerecord->itemid}{$filerecord->filepath}{$filerecord->filename}");
 
         echo json_encode([
             "name" => $_FILES['file']['name'],
@@ -78,7 +78,7 @@ $items = [];
 foreach ($files as $file) {
     $url = moodle_url::make_file_url(
         "$CFG->wwwroot/pluginfile.php",
-        "/{$contextid}/theme_boost_magnific/{$file->get_filearea()}/{$file->get_itemid()}{$file->get_filepath()}{$file->get_filename()}");
+        "/{$contextid}/theme_degrade/{$file->get_filearea()}/{$file->get_itemid()}{$file->get_filepath()}{$file->get_filename()}");
     $items[] = [
         "name" => $file->get_filename(),
         "type" => "file",
