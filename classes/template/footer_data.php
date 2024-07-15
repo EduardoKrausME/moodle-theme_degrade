@@ -192,7 +192,6 @@ class footer_data {
     private static function copywriter() {
         return [
             'enable_copywriter' => theme_degrade_get_setting('footer_show_copywriter'),
-            'footerblock_copywriter_text' => get_string('footerblock_copywriter', 'theme_degrade'),
         ];
     }
 
@@ -209,19 +208,15 @@ class footer_data {
         if ($footertype == 1 || $chave == "footer") {
             if ($chave == 'footer') {
                 $htmldata = optional_param('htmldata', false, PARAM_RAW);
-                $cssdata = optional_param('cssdata', false, PARAM_RAW);
-
-                $htmldata = "{$htmldata}\n<style>{$cssdata}</style>";
             } else {
                 $lang = current_language();
                 $htmldata = get_config("theme_degrade", "footer_htmleditor_{$lang}");
                 if (!isset($htmldata[3])) {
                     $htmldata = get_config("theme_degrade", "footer_htmleditor_all");
                 }
-                if (!isset($htmldata[3])) {
-                    $htmldata = get_string('content_type_empty', 'theme_degrade');
-                }
             }
+
+            $htmldata = htmldata::vvveb__change_my_courses($htmldata);
 
             $htmldata .= font_util::print_only_unique();
             return [

@@ -142,9 +142,6 @@ class frontapage_data {
         if ($hometype == 1 || $chave == "home") {
             if ($chave == 'home') {
                 $htmldata = optional_param('htmldata', false, PARAM_RAW);
-                $cssdata = optional_param('cssdata', false, PARAM_RAW);
-
-                $htmldata = "{$htmldata}\n<style>{$cssdata}</style>";
             } else {
                 $lang = current_language();
                 $htmldata = get_config("theme_degrade", "home_htmleditor_{$lang}");
@@ -152,6 +149,8 @@ class frontapage_data {
                     $htmldata = get_config("theme_degrade", "home_htmleditor_all");
                 }
             }
+
+            $htmldata = htmldata::vvveb__change_my_courses($htmldata);
 
             $htmldata .= font_util::print_only_unique();
             return [

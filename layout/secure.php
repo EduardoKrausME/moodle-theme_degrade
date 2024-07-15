@@ -70,7 +70,7 @@ $templatedata = [
     "customclass" => $class,
 ];
 
-echo $OUTPUT->render_from_template('theme_degrade/header', $templatedata);
+echo $OUTPUT->render_from_template('theme_degrade/includes/header', $templatedata);
 ?>
 
 <div id="page">
@@ -114,7 +114,7 @@ $templatedata = [
 ];
 
 $templatedata = array_merge($templatedata, \theme_degrade\template\footer_data::get_data());
-$footerlayout = $OUTPUT->render_from_template('theme_degrade/footer', $templatedata);
+$footerlayout = $OUTPUT->render_from_template('theme_degrade/includes/footer', $templatedata);
 ?>
 
 </body>

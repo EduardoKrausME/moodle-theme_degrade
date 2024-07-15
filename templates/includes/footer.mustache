@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_degrade/footer.
+    @template theme_degrade/includes/footer.
     degrade footer layout template.
 }}
 {{#maintenancefooter}}
@@ -35,14 +35,14 @@
     <footer id="page-footer" class="footer-block">
         {{#footer_html}}
             <div id="footer">
-                {{{footer_htmleditor}}}
-                {{#footer_settings_edit}}
-                    <div class="footer-main text-center mt-0 pb-5">
+                <div class="footer-main text-center mt-0 pb-5">
+                    {{{footer_htmleditor}}}
+                    {{#footer_settings_edit}}
                         <a class="settings-edit" href="{{{footer_settings_edit}}}">
                             {{#pix}}edit, theme_degrade{{/pix}}
                         </a>
-                    </div>
-                {{/footer_settings_edit}}
+                    {{/footer_settings_edit}}
+                </div>
             </div>
         {{/footer_html}}
         {{^footer_html}}
@@ -187,7 +187,7 @@
                             <div class="footer-foot">
                                 <div class="container">
                                     <p class="text-center">
-                                        {{{footerblock_copywriter_text}}}
+                                        {{#str}}footerblock_copywriter_text,theme_degrade{{/str}}
                                         <a href="https://eduardokraus.com" target="_blank">Eduardo Kraus</a>.
                                         Powered by <a href="https://moodle.org" target="_blank">Moodle</a>
                                     </p>
