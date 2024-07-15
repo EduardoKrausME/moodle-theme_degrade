@@ -41,7 +41,6 @@ class course_renderer_util {
         global $CFG, $OUTPUT;
 
         $courseimage = false;
-        $nocourseimage = $OUTPUT->image_url('curso-no-photo', 'theme')->out();
 
         /** @var \stored_file $file */
         foreach ($course->get_course_overviewfiles() as $file) {
@@ -55,7 +54,7 @@ class course_renderer_util {
         }
 
         if (empty($courseimage)) {
-            $courseimage = $nocourseimage;
+            $courseimage = $OUTPUT->image_url('curso-no-photo', 'theme')->out();
         }
 
         return $courseimage;
