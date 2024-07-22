@@ -2523,6 +2523,10 @@ textarea.form-control-lg {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
+.input-group [type=number] {
+    padding-right: 0 !important;
+    min-width: 49px !important;
+}
 .valid-feedback {
     display: none;
     width: 100%;

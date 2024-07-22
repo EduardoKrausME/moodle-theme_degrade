@@ -429,7 +429,10 @@ Vvveb.Components = {
                         }
                         else if (property.htmlAttr == "style") {
                             //keep old style for undo
-                            oldStyle = window.FrameDocument.getElementById("vvvebjs-styles").textContent;
+                            var vvvebjs_styles = window.FrameDocument.getElementById("vvvebjs-styles");
+                            if (vvvebjs_styles) {
+                                var oldStyle = vvvebjs_styles.textContent;
+                            }
                             element = Vvveb.StyleManager.setStyle(element, property.key, value);
                         } else if (property.htmlAttr == "innerHTML") {
                             element = Vvveb.ContentManager.setHtml(element, value);
@@ -806,7 +809,7 @@ Vvveb.WysiwygEditor = {
             newValue : node.innerHTML
         });
     }
-}
+};
 
 Vvveb.Builder = {
 
@@ -1577,10 +1580,33 @@ Vvveb.Builder = {
                     self.selectPadding = 10;
                     self.texteditEl = target = event.target;
 
+                    switch (event.target.tagName) {
+                        case 'A':
+                        case 'SPAN':
+                        case 'EM':
+                        case 'STRONG':
+                        case 'S':
+                        case 'I':
+                            switch (event.target.parentElement.tagName) {
+                                case 'P':
+                                case 'DIV':
+                                case 'H1':
+                                case 'H2':
+                                case 'H3':
+                                case 'H4':
+                                case 'H5':
+                                case 'H6':
+                                    self.texteditEl = target = event.target.parentElement;
+                                    break;
+                            }
+                            break;
+                    }
+
                     Vvveb.WysiwygEditor.edit(self.texteditEl);
 
                     _updateSelectBox = function(event) {
-                        if (!self.texteditEl) return;
+                        if (!self.texteditEl)
+                            return;
                         let pos = offset(self.selectedEl);
 
                         let SelectBox = document.getElementById("select-box");
@@ -1608,18 +1634,40 @@ Vvveb.Builder = {
         self.frameBody.addEventListener("dblclick", highlightDbClick);
 
         let highlightClick = function(event) {
-
             if (Vvveb.Builder.isPreview == false) {
-                if (event.target) {
+                var event_target = event.target;
+                // switch (event.target.tagName) {
+                //     case 'A':
+                //     case 'SPAN':
+                //     case 'EM':
+                //     case 'STRONG':
+                //     case 'S':
+                //     case 'I':
+                //         switch (event.target.parentElement.tagName) {
+                //             case 'P':
+                //             case 'DIV':
+                //             case 'H1':
+                //             case 'H2':
+                //             case 'H3':
+                //             case 'H4':
+                //             case 'H5':
+                //             case 'H6':
+                //                 event_target = event.target.parentElement;
+                //                 break;
+                //         }
+                //         break;
+                // }
+
+                if (event_target) {
                     if (Vvveb.WysiwygEditor.isActive) {
-                        if (self.texteditEl.contains(event.target)) {
+                        if (self.texteditEl && self.texteditEl.contains(event_target)) {
                             return true;
                         }
                     }
 
-                    self.selectNode(event.target);
-                    Vvveb.TreeList.selectComponent(event.target);
-                    self.loadNodeComponent(event.target);
+                    self.selectNode(event_target);
+                    Vvveb.TreeList.selectComponent(event_target);
+                    self.loadNodeComponent(event_target);
 
                     if (Vvveb.component.resizable) {
                         document.getElementById("select-box").classList.add("resizable");
@@ -1633,7 +1681,6 @@ Vvveb.Builder = {
                     return false;
                 }
             }
-
         };
         self.frameBody.addEventListener("click", highlightClick);
     },
@@ -2463,7 +2510,7 @@ Vvveb.Gui = {
         wrapper.style.transform = scale;
         wrapper.style.height = height;
     }
-}
+};
 
 Vvveb.StyleManager = {
 
@@ -2492,7 +2539,7 @@ Vvveb.StyleManager = {
             //if style element does not exist create it
             if (!style) {
                 style = generateElements('<style id="vvvebjs-styles"></style>')[0];
-                doc.head.append(style);
+                doc.body.append(style);
                 return this.cssContainer = style;
             }
 

@@ -72,11 +72,12 @@ Vvveb.WysiwygEditor = {
     editor   : false,
 
     init : function(doc) {
-        this.doc = doc;
+        Vvveb.WysiwygEditor.doc = doc;
     },
 
     edit : function(element) {
-        this.modalHtml = `
+        Vvveb.WysiwygEditor.element = element;
+        Vvveb.WysiwygEditor.modalHtml = `
             <div class="modal fade modal-full" id="TinyMceModal" tabindex="-1" role="dialog" 
                  aria-labelledby="TinyMceModalLabel"
                  aria-hidden="true">
@@ -85,7 +86,7 @@ Vvveb.WysiwygEditor = {
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="TinyMceModalLabel">Editor</h5>
-                            <button type="button" class="btn btn-sm" data-bs-dismiss="modal" aria-label="Close">
+                            <button type="button" class="btn btn-sm" id="btn-tiny-iconclose" aria-label="Close">
                                 <span aria-hidden="true"><i class="la la-times la-lg"></i></span>
                             </button>
                         </div>
@@ -94,27 +95,28 @@ Vvveb.WysiwygEditor = {
                         </div>
                         <div class="modal-footer">
                             <div class="align-right">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" id="btn-tiny-buttonclose">Close</button>
                                 <button type="button" class="btn btn-primary save-btn">Save</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>`;
-        document.body.append(generateElements(this.modalHtml)[0]);
+        document.body.append(generateElements(Vvveb.WysiwygEditor.modalHtml)[0]);
         let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('TinyMceModal'));
         modal.show();
 
-        document.querySelector("#TinyMceModal .save-btn").addEventListener("click", () => this.save());
+        document.querySelector("#TinyMceModal .save-btn").addEventListener("click", Vvveb.WysiwygEditor.save);
+        document.querySelector("#btn-tiny-iconclose").addEventListener("click", Vvveb.WysiwygEditor.destroy);
+        document.querySelector("#btn-tiny-buttonclose").addEventListener("click", Vvveb.WysiwygEditor.destroy);
 
-        this.element = element;
-        this.isActive = true;
-        this.oldValue = element.innerHTML;
+        Vvveb.WysiwygEditor.isActive = true;
+        Vvveb.WysiwygEditor.oldValue = element.innerHTML;
         Vvveb.Builder.selectPadding = 0;
         Vvveb.Builder.highlightEnabled = false;
 
         tinyMceOptions.target = document.getElementById('TinyMceModal-editor');
-        this.editor = tinymce.init(tinyMceOptions);
+        Vvveb.WysiwygEditor.editor = tinymce.init(tinyMceOptions);
 
         setTimeout(function() {
             document.getElementById("select-box").style.display = "none";
@@ -122,36 +124,34 @@ Vvveb.WysiwygEditor = {
     },
 
     save : function() {
-        this.element.outerHTML = tinymce.activeEditor.getContent();
+        console.log(Vvveb.WysiwygEditor.element);
+        Vvveb.WysiwygEditor.element.outerHTML = tinymce.activeEditor.getContent();
 
         Vvveb.Undo.addMutation({
             type     : 'characterData',
-            target   : this.element,
-            oldValue : this.oldValue,
-            newValue : this.element.innerHTML
+            target   : Vvveb.WysiwygEditor.element,
+            oldValue : Vvveb.WysiwygEditor.oldValue,
+            newValue : Vvveb.WysiwygEditor.element.innerHTML
         });
 
-        tinymce.activeEditor.destroy();
-        Vvveb.Builder.highlightEnabled = false;
-        this.isActive = false;
-
-        let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('TinyMceModal'));
-        modal.hide();
-
-        var TinyMceModal = document.getElementById('TinyMceModal');
-        TinyMceModal.parentElement.removeChild(TinyMceModal);
+        Vvveb.WysiwygEditor.destroy();
     },
 
     destroy : function(element) {
 
-        tinymce.activeEditor.destroy();
-        Vvveb.Builder.highlightEnabled = false;
-        this.isActive = false;
+        if (tinymce.activeEditor) {
+            tinymce.activeEditor.destroy();
+        }
 
         let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('TinyMceModal'));
         modal.hide();
 
         var TinyMceModal = document.getElementById('TinyMceModal');
         TinyMceModal.parentElement.removeChild(TinyMceModal);
+        Vvveb.WysiwygEditor.isActive = false;
+
+        Vvveb.Builder.highlightEnabled = false;
+        // enable double click editor
+        Vvveb.Builder.texteditEl = null;
     }
 };

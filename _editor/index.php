@@ -92,7 +92,7 @@ function loadsvg($file) {
 
             <button class="btn btn-light" title="Preview" id="preview-btn" type="button" data-bs-toggle="button"
                     aria-pressed="false" data-vvveb-action="preview">
-                <?php loadsvg("img/icon-eye.svg") ?>
+                <?php loadsvg("img/icon-preview.svg") ?>
             </button>
 
             <button class="btn btn-light" title="Fullscreen (F11)" id="fullscreen-btn" data-bs-toggle="button"
@@ -111,7 +111,7 @@ function loadsvg($file) {
                 <input type="hidden" name="htmldata" id="form-htmldata">
                 <button datatype="--submit" class="btn btn-info btn-sm btn-icon preview-btn mx-2"
                         data-vvveb-action="openPreview">
-                    <?php loadsvg("img/icon-save.svg") ?>
+                    <?php loadsvg("img/icon-preview.svg") ?>
                     <span>Preview</span>
                 </button>
             </form>
@@ -1603,12 +1603,6 @@ Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist
 <script src="libs/tinymce-dist/tinymce.js"></script>
 <script src="libs/builder/plugin-tinymce.js"></script>
 
-<!--
-CKEditor plugin
-Unzip the latest ckeditor release zip from https://github.com/ckeditor/ckeditor4/releases to libs/ckeditor or use the CDN
-<script src="libs/ckeditor/ckeditor.js"></script> <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
-<script src="libs/builder/plugin-ckeditor.js"></script>
--->
 
 <!-- autocomplete plugin used by autocomplete input
 <script src="libs/autocomplete/jquery.autocomplete.js"></script>

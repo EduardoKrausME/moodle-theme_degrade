@@ -42,6 +42,8 @@ if (file_exists(__DIR__ . "/_default/default-{$chave}.html")) {
         $html = vvveb__add_css($chave, $html);
         $html = vvveb__changue_langs($html);
         $html = vvveb__change_courses($html);
+
+        $html = str_replace("<style>", "<style id='vvvebjs-styles'>", $html);
         die($html);
     }
 }
