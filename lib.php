@@ -39,6 +39,7 @@ function theme_degrade_page_init(moodle_page $page) {
 
 /**
  * @param string $colorname
+ *
  * @return string
  * @throws coding_exception
  */
@@ -132,7 +133,8 @@ function theme_degrade_send_cached_css($path, $filename, $lastmodified, $etag) {
  * rely on that function just by declaring settings with similar names.
  *
  * @param renderer_base $output Pass in $OUTPUT.
- * @param moodle_page $page Pass in $PAGE.
+ * @param moodle_page $page     Pass in $PAGE.
+ *
  * @return stdClass An object with the following properties:
  *      - navbarclass A CSS class to use on the navbar. By default ''.
  *      - heading HTML to use for the heading. A logo if one is selected or the default heading.
@@ -167,6 +169,7 @@ function theme_degrade_get_html_for_settings(renderer_base $output, moodle_page 
  * Logo Image URL Fetch from theme settings
  *
  * @param string $local
+ *
  * @return string $logo
  * @throws dml_exception
  */
@@ -213,6 +216,7 @@ function theme_degrade_get_body_class() {
  *
  * @param string $setting
  * @param bool $format
+ *
  * @return bool
  * @throws coding_exception
  */
@@ -242,6 +246,7 @@ function theme_degrade_get_setting($setting, $format = true) {
  * Renderer the slider images.
  *
  * @param string $imagesetting
+ *
  * @return string
  * @throws coding_exception
  * @throws dml_exception
@@ -262,6 +267,7 @@ function theme_degrade_get_setting_image($imagesetting) {
  *
  * @param string $setting
  * @param string $filearea
+ *
  * @return moodle_url|null
  * @throws dml_exception
  */
@@ -298,6 +304,7 @@ function theme_degrade_theme_url() {
  * Display Footer Block Custom Links
  *
  * @param string $menuname Footer block link name.
+ *
  * @return string The Footer links are return.
  * @throws coding_exception
  * @throws moodle_exception
@@ -352,6 +359,7 @@ function theme_degrade_hidden_courses_ids() {
  * This function used in course home page.
  *
  * @param string $text
+ *
  * @return string
  */
 function theme_degrade_strip_html_tags($text) {
@@ -392,6 +400,7 @@ function theme_degrade_strip_html_tags($text) {
  * @param string $str
  * @param integer $n
  * @param string $endchar
+ *
  * @return string $out
  */
 function theme_degrade_course_trim_char($str, $n = 500, $endchar = '&#8230;') {
@@ -414,6 +423,7 @@ function theme_degrade_course_trim_char($str, $n = 500, $endchar = '&#8230;') {
  *
  * @param string $hexa
  * @param int $opacity
+ *
  * @return string
  */
 function theme_degrade_get_hexa($hexa, $opacity) {
@@ -433,8 +443,9 @@ function theme_degrade_get_hexa($hexa, $opacity) {
 /**
  * theme_degrade_coursemodule_standard_elements
  *
- * @param moodleform_mod $data The moodle quickforms wrapper object.
+ * @param moodleform_mod $data   The moodle quickforms wrapper object.
  * @param MoodleQuickForm $mform The actual form object (required to modify the form).
+ *
  * @throws coding_exception
  * @throws dml_exception
  */
@@ -481,15 +492,18 @@ function theme_degrade_coursemodule_standard_elements($data, $mform) {
  *
  * @param moodleform $data Data from the form submission.
  * @param stdClass $course The course.
+ *
  * @return moodleform
  * @throws dml_exception
  */
 function theme_degrade_coursemodule_edit_post_actions($data, $course) {
     $name = "theme_degrade_customicon_{$data->coursemodule}";
     $customicon = get_config('theme_degrade', $name);
-    if ($customicon != $data->theme_degrade_customicon) {
-        set_config($name, $data->theme_degrade_customicon, 'theme_degrade');
-        theme_reset_all_caches();
+    if (isset($data->theme_degrade_customicon)) {
+        if ($customicon != $data->theme_degrade_customicon) {
+            set_config($name, $data->theme_degrade_customicon, 'theme_degrade');
+            theme_reset_all_caches();
+        }
     }
 
     return $data;
@@ -505,6 +519,7 @@ function theme_degrade_coursemodule_edit_post_actions($data, $course) {
  * @param array $args
  * @param bool $forcedownload
  * @param array $options
+ *
  * @return bool
  * @throws coding_exception
  * @throws moodle_exception
@@ -545,6 +560,7 @@ function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $for
  *
  * @param string $css
  * @param string $theme
+ *
  * @return string $css
  * @throws coding_exception
  * @throws dml_exception
