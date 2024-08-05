@@ -124,7 +124,7 @@
     }
     #region-main {
         position: fixed !important;
-        top: 72px !important;
+        top: 72px;
         bottom: 0 !important;
         width: 100% !important;
         padding: 0 !important;
@@ -133,7 +133,7 @@
     #region-main .flex-row-reverse {
         position: fixed !important;
         right: 3px !important;
-        top: 65px !important;
+        top: 65px ;
         z-index: 1001 !important;
     }
     #region-main .flex-row-reverse a {
@@ -165,10 +165,17 @@
 
         function window_resize() {
             var header_height = $("#header").height();
+
             var window_height = $(window).height();
             $("#scorm_object").css({
                 width  : '100%',
                 height : window_height - header_height - 20,
+            });
+            $("#region-main").css({
+                top : header_height + 10
+            });
+            $("#region-main .flex-row-reverse").css({
+                top : header_height
             });
         }
 
