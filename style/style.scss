@@ -10,6 +10,7 @@
     font-weight: normal;
     font-style: normal;
 }
+@import "FontAwesome-free";
 * {
     outline: none;
 }
@@ -412,22 +413,22 @@ input[type="submit"][disabled]:hover {
 [role="treeitem"][aria-expanded="true"]:focus > *:first-child {
     box-shadow: none;
 }
-.custom-switch .custom-control-label:after {
-    background-color: #fff;
+.custom-switch span.custom-control-label:after {
+    background-color: rgb(var(--color_primary));
 }
 .custom-control-input {
     :before,
     :after {
         transition: all .2s ease-out;
     }
-    &:focus ~ .custom-control-label::before,
-    &:checked + .custom-control-label:before,
-    .custom-control-label:before {
+    &:focus ~ span.custom-control-label::before,
+    &:checked + span.custom-control-label:before,
+    span.custom-control-label:before {
         background-color: rgb(var(--color_primary));
         border-color: rgb(var(--color_primary)) !important;
         box-shadow: none;
     }
-    &:not(:checked) ~ .custom-control-label {
+    &:not(:checked) ~ span.custom-control-label {
         &:before {
             background-color: #fff !important;
         }
@@ -435,31 +436,31 @@ input[type="submit"][disabled]:hover {
             background-color: rgb(var(--color_primary)) !important;
         }
     }
-    &:active + .custom-control-label:before {
+    &:active + span.custom-control-label:before {
         background-color: rgba(136, 183, 123, .25);
     }
-    &:checked:focus + .custom-control-label:before {
+    &:checked:focus + span.custom-control-label:before {
         background-color: rgb(var(--color_primary));
         box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(136, 183, 123, .25);
     }
-    &:focus ~ .custom-control-label::before {
+    &:focus ~ span.custom-control-label::before {
         box-shadow: 0 0 0 0.2rem rgb(var(--color_primary_60));
     }
-    &:not(:disabled):active ~ .custom-control-label:before,
-    &:not(:disabled):active ~ .custom-control-label:before {
+    &:not(:disabled):active ~ span.custom-control-label:before,
+    &:not(:disabled):active ~ span.custom-control-label:before {
         border-color: rgb(var(--color_primary));
         background-color: rgb(var(--color_primary));
     }
-    &:checked ~ .custom-control-label:before {
+    &:checked ~ span.custom-control-label:before {
         border-color: rgb(var(--color_primary));
         background-color: rgb(var(--color_primary));
         box-shadow: none;
     }
-    &:focus:not(:checked) ~ .custom-control-label:before {
+    &:focus:not(:checked) ~ span.custom-control-label:before {
         border-color: rgb(var(--color_primary));
         box-shadow: none;
     }
-    &:not(:disabled):active ~ .custom-control-label:before {
+    &:not(:disabled):active ~ span.custom-control-label:before {
         border-color: rgba(var(--color_primary), 0.2);
         background-color: rgba(var(--color_primary), 0.2);
     }
@@ -3098,8 +3099,12 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
 #course-category-listings .listitem[data-selected='1'] {
     border-left-color: rgb(var(--color_primary));
 }
-#course-category-listings #category-listing .course-count i.icon {
-    margin-left: 5px;
+#course-category-listings #category-listing .course-count {
+    margin-right: 0;
+    min-width: 0;
+    i.icon {
+        margin-left: 5px;
+    }
 }
 #course-category-listings .course-listing .listing-pagination a {
     color: #fff;
@@ -3877,6 +3882,15 @@ button.btn-footer-popover:active {
         }
         &:not(:empty) .breadcrumb-item {
             flex-grow: inherit;
+        }
+    }
+    
+    .page-header-headings {
+        display: flex;
+        align-items: center;
+        h1 {
+            padding: 0;
+            margin: 0;
         }
     }
 }

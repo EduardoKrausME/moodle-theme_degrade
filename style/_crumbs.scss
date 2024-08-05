@@ -21,6 +21,9 @@
             display: flex;
             align-items: center;
             white-space: nowrap;
+            @media (max-width: 767px) {
+                font-size: 18px;
+            }
             &:after,
             &:before {
                 content: "";
@@ -58,7 +61,7 @@
         }
         &:last-child a,
         &:last-child span {
-            padding-right: 40px;
+            padding-right: 5px;
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
             &:after {
