@@ -10445,6 +10445,10 @@ body {
   min-height: 100%;
 }
 
+.modal.show {
+  z-index: 99999 !important;
+}
+
 .aabtn.focus,
 .btn-link.focus,
 .nav-link.focus,
@@ -14828,6 +14832,10 @@ div.dropdown-item:focus-within {
 .course-content ul.weeks li.section .other {
   margin: 0;
   padding: 0;
+}
+
+.activityiconcontainer.smaller .activityicon {
+  min-width: 24px;
 }
 
 #course-category-listings .item-actions .menubar .action-menu-trigger .dropdown a.dropdown-toggle {

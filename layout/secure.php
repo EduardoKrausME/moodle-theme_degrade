@@ -115,7 +115,8 @@ $templatedata = [
 
 $templatedata = array_merge($templatedata, \theme_degrade\template\footer_data::get_data());
 $footerlayout = $OUTPUT->render_from_template('theme_degrade/includes/footer', $templatedata);
-?>
 
+echo $OUTPUT->standard_end_of_body_html();
+?>
 </body>
 </html>

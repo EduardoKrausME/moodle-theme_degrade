@@ -22,6 +22,9 @@ body {
     height: auto;
     min-height: 100%;
 }
+.modal.show {
+    z-index: 99999 !important;
+}
 .aabtn.focus,
 .btn-link.focus,
 .nav-link.focus,
@@ -3092,6 +3095,9 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
         margin: 0;
         padding: 0;
     }
+}
+.activityiconcontainer.smaller .activityicon {
+    min-width: 24px;
 }
 #course-category-listings .item-actions .menubar .action-menu-trigger .dropdown a.dropdown-toggle {
     padding: 0;
