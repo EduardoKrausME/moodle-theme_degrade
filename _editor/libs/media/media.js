@@ -99,7 +99,9 @@ class MediaModal {
         let file = document.querySelector("#MediaModal .files input:checked").value ?? false;
         let src = file;
 
-        if (!file) return;
+        if (!file) {
+            return;
+        }
 
         if (file.indexOf("//") == -1) {
             src = file;
@@ -183,7 +185,9 @@ class MediaModal {
         this.init();
 
         let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('MediaModal'));
-        if (this.isModal) modal.show();
+        if (this.isModal) {
+            modal.show();
+        }
     }
 
     initGallery() {
@@ -243,9 +247,7 @@ class MediaModal {
 
                 // Update the hash on every key stroke
                 window.location.hash = 'search=' + value.trim();
-            }
-
-            else {
+            } else {
                 _this.filemanager.classList.remove('searching');
                 window.location.hash = encodeURIComponent(_this.currentPath);
             }
@@ -289,8 +291,7 @@ class MediaModal {
                 if (rendered.length) {
                     this.currentPath = hash[0];
                     this.render(rendered);
-                }
-                else {
+                } else {
                     this.render(rendered);
                 }
             }
@@ -303,8 +304,7 @@ class MediaModal {
                 if (rendered.length) {
                     this.currentPath = hash[0];
                     this.render(rendered);
-                }
-                else {
+                } else {
                     this.currentPath = hash[0];
                     this.render(rendered);
                 }
@@ -355,8 +355,7 @@ class MediaModal {
                     if (d.name.toLowerCase().indexOf(searchTerms) >= 0) {
                         folders.push(d);
                     }
-                }
-                else if (d.type === 'file') {
+                } else if (d.type === 'file') {
                     if (d.name.toLowerCase().indexOf(searchTerms) >= 0) {
                         files.push(d);
                     }
@@ -428,7 +427,13 @@ class MediaModal {
         fileType = fileType[fileType.length - 1];
 
         if (fileType == "jpg" || fileType == "jpeg" || fileType == "png" || fileType == "gif" || fileType == "svg" || fileType == "webp") {
-            icon = `<img class="image" loading="lazy" src="${f.path}">`;
+            icon = `<img class="image" src="${f.path}">`;
+            isImage = true;
+        } else if (fileType == "pdf") {
+            icon = `<embed class="image" src="${f.path}">`;
+            isImage = true;
+        } else if (fileType == "mp4" || fileType == "webm" || fileType == "mp3") {
+            icon = `<video class="image" src="${f.path}" controls muted autoplay loop></video>`;
             isImage = true;
         } else {
             icon = `<span class="icon file f-${fileType}">.${fileType}</span>`;
@@ -464,10 +469,9 @@ class MediaModal {
         return file;
     }
 
-
     render(data) {
-        let scannedFolders = [],
-            scannedFiles   = [];
+        let scannedFolders = [];
+        var scannedFiles = [];
 
         if (Array.isArray(data)) {
             data.forEach(function(d) {
@@ -477,13 +481,12 @@ class MediaModal {
                     scannedFiles.push(d);
                 }
             });
-        }
-        else if (typeof data === 'object') {
+        } else if (typeof data === 'object') {
             scannedFolders = data.folders;
             scannedFiles = data.files;
         }
 
-        this.fileList.replaceChildren();//.style.display = 'none';
+        this.fileList.replaceChildren(); //.style.display = 'none';
         if (!scannedFolders.length && !scannedFiles.length) {
             this.filemanager.querySelector('.nothingfound').style.display = '';
         } else {
@@ -504,15 +507,22 @@ class MediaModal {
 
                 if (itemsLength == 1) {
                     itemsLength += ' item';
-                }
-                else if (itemsLength > 1) {
+                } else if (itemsLength > 1) {
                     itemsLength += ' items';
-                }
-                else {
+                } else {
                     itemsLength = 'Empty';
                 }
 
-                let folder = generateElements('<li class="folders"><a href="' + f.path + '" title="' + f.path + '" class="folders">' + icon + '<div class="info"><span class="name">' + name + '</span> <span class="details">' + itemsLength + '</span></div></a></li>')[0];
+                let folder = generateElements(`
+                    <li class="folders">
+                        <a href="${f.path}" title="${f.path}" class="folders">
+                            ${icon}
+                            <div class="info">
+                                <span class="name">${name}</span>
+                                <span class="details">${itemsLength}</span>
+                            </div>
+                        </a>
+                    </li>`)[0];
                 _this.fileList.append(folder);
             });
         }
@@ -523,37 +533,30 @@ class MediaModal {
             });
         }
 
-
         // Generate the breadcrumbs
-
-        let url = '';
-
         if (this.filemanager.classList.contains('searching')) {
-            url = '<span>Search results: </span>';
             this.fileList.classList.remove('animated');
-        }
-        else {
+        } else {
             this.fileList.classList.add('animated');
         }
 
         this.breadcrumbs.replaceChildren();
-        this.breadcrumbs.appendChild(generateElements('<span href="/"><i class="la la-home"></i><span class="folderName">&ensp;home</span></span>')[0]);
+        this.breadcrumbs.appendChild(generateElements(`
+                <span href="/">
+                    <i class="la la-home"></i>
+                    <span class="folderName">&ensp;home</span>
+                </span>`)[0]);
 
         // Show the generated elements
-
         this.fileList.animate({'display' : 'inline-block'});
     }
 
-
     // This function escapes special html characters in names
-
     escapeHTML(text) {
         return text.replace(/\&/g, '&amp;').replace(/\</g, '&lt;').replace(/\>/g, '&gt;');
     }
 
-
     // Convert file sizes from bytes to human readable units
-
     bytesToSize(bytes) {
         let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
         if (bytes == 0) return '0 Bytes';

@@ -29,17 +29,24 @@ require_login();
 $context = context_system::instance();
 require_capability('moodle/site:config', $context);
 
-$chave = required_param('chave', PARAM_TEXT);
+$page = required_param('page', PARAM_TEXT);
 
 $component = 'theme_degrade';
 $contextid = $context->id;
 $adminid = get_admin()->id;
-$filearea = "editor_{$chave}";
+$filearea = "editor_{$page}";
 
 if (isset($_FILES['file']['name'])) {
 
+    $aloweb = [
+        'png', 'jpg', 'jpeg', 'gif', 'svg', 'webp',
+        'webm', 'mp4',
+        'mp3',
+        'pdf', 'doc', 'docx'
+    ];
+
     $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
-    if (in_array($extension, ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp'])) {
+    if (in_array($extension, $aloweb)) {
         $fs = get_file_storage();
         $filerecord = (object)[
             "component" => $component,

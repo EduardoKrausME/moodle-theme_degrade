@@ -22,8 +22,9 @@ require_once('../../../config.php');
 require_login();
 require_capability('moodle/site:config', context_system::instance());
 
-$chave = required_param('chave', PARAM_TEXT);
-$editlang = required_param('editlang', PARAM_TEXT);
+$page = required_param('page', PARAM_TEXT);
+$id = required_param('id', PARAM_TEXT);
+$link = optional_param('link', '', PARAM_TEXT);
 
 define('MAX_FILE_LIMIT', 1024 * 1024 * 2);//2 Megabytes max html file size
 define('ALLOW_PHP', false);//check if saved html contains php tag and don't save if not allowed
@@ -129,7 +130,27 @@ if ($action) {
 } else {
     //save page
     if ($html) {
-        set_config("{$chave}_htmleditor_{$editlang}", $html, "theme_degrade");
+        if ($page == "webpages") {
+            $webpages = $DB->get_record("degrade_webpages", ["id" => $id]);
+            $webpages->text = $html;
+            $DB->update_record("degrade_webpages", $webpages);
+
+            //redirect(theme_degrade_makeurl("webpages", "page_details", ["id" => $id]));
+        } else if ($page == "notification") {
+            $events = $DB->get_record("degrade_events", ["id" => $id]);
+            $events->message = $html;
+            $DB->update_record("degrade_events", $events);
+
+            //redirect(theme_degrade_makeurl("notifications", "add_segunda_etapa", ["id" => $id]));
+        } else if ($page == 'aceite') {
+            set_config('formulario_pedir_aceite', $html, 'theme_degrade');
+
+            //redirect(theme_degrade_makeurl("pay-setting", "settings"));
+        } else if ($page == 'meiodeposito') {
+            set_config('kopere_pay-meiodeposito-conta', $html, 'theme_degrade');
+
+            //redirect(theme_degrade_makeurl("pay-meio_pagamento", "edit", ["meio" => "MeioDeposito"]));
+        }
         echo "Saved successfully";
     } else {
         showError('Html content is empty!');

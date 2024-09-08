@@ -22,15 +22,10 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use theme_degrade\output\core\course_renderer_util;
-
-function vvveb__add_css($chave, $html) {
+function vvveb__add_css($html) {
     global $CFG;
 
     $css = [];
-    if (strpos($html, "default-{$chave}.css") === false) {
-        $css[] = "<link href='{$CFG->wwwroot}/theme/degrade/_editor/_default/default-{$chave}.css' rel='stylesheet'>";
-    }
     if (strpos($html, "bootstrap-vvveb.css") === false) {
         $css[] = "<link href='{$CFG->wwwroot}/theme/degrade/_editor/_default/bootstrap-vvveb.css' rel='stylesheet'>";
     }
@@ -41,6 +36,9 @@ function vvveb__add_css($chave, $html) {
 
 function vvveb__changue_langs($html) {
     global $CFG, $SITE;
+
+    $CFG->debug = false;
+
     $html = str_replace("{wwwroot}", $CFG->wwwroot, $html);
     $html = str_replace("{shortname}", $SITE->shortname, $html);
     $html = str_replace("{fullname}", $SITE->fullname, $html);
@@ -80,10 +78,38 @@ function vvveb__change_courses($html) {
 
     $data = [];
     foreach ($courses as $course) {
-        $course->courseimage = course_renderer_util::couse_image(new core_course_list_element($course));
+        $course->courseimage = couse_image(new core_course_list_element($course));
         $data[] = $course;
     }
     $courseshtml = $OUTPUT->render_from_template('theme_degrade/vvveb/course', ['couses' => $data]);
 
     return str_replace("{course-itens}", $courseshtml, $html);
+}
+
+/**
+ * @param \core_course_list_element $course
+ *
+ * @return string
+ */
+function couse_image($course) {
+    global $CFG, $OUTPUT;
+
+    $courseimage = false;
+
+    /** @var \stored_file $file */
+    foreach ($course->get_course_overviewfiles() as $file) {
+        $isimage = $file->is_valid_image();
+        if ($isimage) {
+            $courseimage = file_encode_url("{$CFG->wwwroot}/pluginfile.php",
+                "/{$file->get_contextid()}/{$file->get_component()}/" .
+                "{$file->get_filearea()}{$file->get_filepath()}{$file->get_filename()}", !$isimage);
+
+        }
+    }
+
+    if (empty($courseimage)) {
+        $courseimage = $OUTPUT->image_url('curso-no-photo', 'theme')->out();
+    }
+
+    return $courseimage;
 }
