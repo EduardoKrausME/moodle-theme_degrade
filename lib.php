@@ -648,9 +648,6 @@ function theme_degrade_process_css($css, $theme) {
             #header.fixed-top .header-menubar .primary-navigation ul.navbar-nav > li > a {
                 color: {$topscrolltextcolor} !important;
             }
-            #header.fixed-top .custom-switch .custom-control-label:after{
-                background: {$topscrolltextcolor} !important;
-            }
             #header.fixed-top {
                 background: {$topscrollbackgroundcolor} !important;
             }
