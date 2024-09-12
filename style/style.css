@@ -13698,6 +13698,14 @@ div.dropdown-item:focus-within {
   display: none;
 }
 
+.list-group-custom-menus .dropdown-item {
+  padding: 0;
+}
+.list-group-custom-menus .dropdown-toggle:hover {
+  background: transparent;
+  color: rgb(var(--color_secondary));
+}
+
 .pagelayout-maintenance .header-main .navbar-light, .pagelayout-maintenance .header-main .navbar-light * {
   color: #fff;
 }

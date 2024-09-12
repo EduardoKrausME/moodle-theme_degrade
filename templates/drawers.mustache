@@ -178,8 +178,16 @@
 </body>
 </html>
 {{#js}}
-    require(['theme_boost/loader', 'theme_boost/drawer'], function(Loader, Drawer) {
+    require(['theme_boost/loader', 'theme_boost/drawer', 'jquery'], function(Loader, Drawer, $) {
         Drawer.init();
         M.util.js_complete('theme_boost/loader');
+
+        var custommenus = $(".primary-navigation .custom-menu.navigation ul").html();
+        $(".drawer .drawercontent.drag-container").append(`<ul class="list-group list-group-custom-menus">${custommenus}</ul>`);
+        $(".list-group-custom-menus > li")
+                .removeClass("nav-item")
+                .addClass("list-group-item")
+                .addClass("list-group-item-action");
+        $(".list-group-custom-menus > li a").removeClass("nav-link");
     });
 {{/js}}
