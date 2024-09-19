@@ -3096,8 +3096,30 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
         padding: 0;
     }
 }
-.activityiconcontainer.smaller .activityicon {
-    min-width: 24px;
+.activityiconcontainer {
+    background-color: transparent !important;
+    &.smaller .activityicon {
+        min-width: 32px;
+        width: 32px;
+        height: 32px;
+        min-height: 32px;
+    }
+    &.assessment .activityicon:not(.nofilter),
+    &.assessment .icon:not(.nofilter) {
+        filter: invert(36%) sepia(98%) saturate(6969%) hue-rotate(315deg) brightness(90%) contrast(119%);
+    }
+    &.content .activityicon:not(.nofilter),
+    &.content .icon:not(.nofilter) {
+        filter: invert(49%) sepia(52%) saturate(4675%) hue-rotate(156deg) brightness(89%) contrast(102%);
+    }
+    &.collaboration .activityicon:not(.nofilter),
+    &.collaboration .icon:not(.nofilter) {
+        filter: invert(25%) sepia(54%) saturate(6226%) hue-rotate(245deg) brightness(100%) contrast(102%);
+    }
+    &.communication .activityicon:not(.nofilter),
+    &.communication .icon:not(.nofilter) {
+        filter: invert(48%) sepia(74%) saturate(4887%) hue-rotate(11deg) brightness(102%) contrast(101%);
+    }
 }
 #course-category-listings .item-actions .menubar .action-menu-trigger .dropdown a.dropdown-toggle {
     padding: 0;
