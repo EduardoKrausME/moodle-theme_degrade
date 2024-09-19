@@ -22,6 +22,8 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $choices = [
     'default1' => get_string('background_color_default', 'theme_degrade', 1),
     'default2' => get_string('background_color_default', 'theme_degrade', 2),
@@ -56,7 +58,7 @@ foreach ($choices as $choice => $lang) {
     $onclick .= "$('body').attr('class',function(i,c){
                     return c.replace(/(^|\s)degrade-theme-\S+/g,'')+' degrade-theme-{$choice}';})";
     $htmlselect .=
-        "<div id=\"degrade-theme-select-{$choice}\" 
+        "<div id=\"degrade-theme-select-{$choice}\"
               class=\"degrade-theme-select-{$choice} degrade-theme-select-item\" data-theme=\"{$choice}\"
                   onclick=\"{$onclick}\">
                  <div class=\"preview\"></div>
