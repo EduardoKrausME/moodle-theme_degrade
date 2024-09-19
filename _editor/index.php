@@ -24,13 +24,10 @@
 
 require_once('../../../config.php');
 require_once('./function.php');
-require_once('../lib.php');
-require_once('../autoload.php');
 $PAGE->set_context(\context_system::instance());
 
-$page = required_param('page', PARAM_TEXT);
-$id = required_param('id', PARAM_TEXT);
-$link = optional_param('link', '', PARAM_TEXT);
+$chave = required_param('chave', PARAM_TEXT);
+$editlang = required_param('editlang', PARAM_TEXT);
 require_login();
 require_capability('moodle/site:config', context_system::instance());
 
@@ -106,19 +103,10 @@ function loadsvg($file) {
 
 
         <div class="btn-group me-2 float-end" role="group">
-            <?php
-            $pagePreview = false;
-            if ($page == "webpages") {
-                $pagePreview = "{$CFG->wwwroot}/theme/degrade/";
-            } else if ($page == "aceite") {
-                $pagePreview = "{$CFG->wwwroot}/local/kopere_pay/termos.php";
-            }
-            if ($pagePreview) { ?>
             <form class="form-preview" method="post" target="editor-preview"
-                  action="<?php echo $pagePreview ?>">
-                <input type="hidden" name="page" value="<?php echo $page ?>">
-                <input type="hidden" name="link" value="<?php echo $link ?>">
-                <input type="hidden" name="id" value="<?php echo $id ?>">
+                  action="<?php echo $CFG->wwwroot ?>/#<?php echo $chave ?>">
+                <input type="hidden" name="chave" value="<?php echo $chave ?>">
+                <input type="hidden" name="editlang" value="<?php echo $editlang ?>">
                 <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>">
                 <input type="hidden" name="htmldata" id="form-htmldata">
                 <button datatype="--submit" class="btn btn-info btn-sm btn-icon preview-btn mx-2"
@@ -126,12 +114,11 @@ function loadsvg($file) {
                     <?php loadsvg("img/icon-preview.svg") ?>
                     <span>Preview</span>
                 </button>
-                </form><?php
-            } ?>
+            </form>
 
             <button class="btn btn-primary btn-sm btn-icon save-btn" title="Export (Ctrl + E)" id="save-btn"
                     data-vvveb-action="saveAjax"
-                    data-vvveb-url="save.php?page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>"
+                    data-vvveb-url="save.php?chave=<?php echo $chave ?>&editlang=<?php echo $editlang ?>"
                     data-v-vvveb-shortcut="ctrl+e">
                 <span class="loading d-none">
                     <?php loadsvg("img/icon-save.svg") ?>
@@ -140,8 +127,7 @@ function loadsvg($file) {
                     ...
                 </span>
                 <span class="button-text">
-                    <?php loadsvg("img/icon-save.svg") ?>
-                    <span>Save</span>
+                      <?php loadsvg("img/icon-save.svg") ?> <span>Save</span>
                 </span>
             </button>
         </div>
@@ -209,7 +195,7 @@ function loadsvg($file) {
                         <div class="tab-pane sections show active" id="sections-list" data-section="style"
                              role="tabpanel"
                              aria-labelledby="style-tab">
-                            <div class="drag-elements-sidepane sidepane sidepane-1">
+                            <div class="drag-elements-sidepane sidepane">
                                 <div>
                                     <div class="sections-container p-4">
 
@@ -291,7 +277,7 @@ function loadsvg($file) {
                                         <i class="la la-times"></i>
                                     </button>
                                 </div>
-                                <div class="drag-elements-sidepane sidepane sidepane-2">
+                                <div class="drag-elements-sidepane sidepane">
                                     <div class="block-preview"><img src="" style="display:none"></div>
                                     <div>
                                         <ul class="sections-list clearfix" data-type="leftpanel"></ul>
@@ -314,7 +300,7 @@ function loadsvg($file) {
                                         <i class="la la-times"></i>
                                     </button>
                                 </div>
-                                <div class="drag-elements-sidepane sidepane sidepane-3">
+                                <div class="drag-elements-sidepane sidepane">
                                     <div class="block-preview"><img src=""></div>
                                     <div>
                                         <ul class="blocks-list clearfix" data-type="leftpanel">
@@ -339,7 +325,7 @@ function loadsvg($file) {
                                         <i class="la la-times"></i>
                                     </button>
                                 </div>
-                                <div class="drag-elements-sidepane sidepane sidepane-4">
+                                <div class="drag-elements-sidepane sidepane">
                                     <div>
                                         <ul class="components-list clearfix" data-type="leftpanel"></ul>
                                     </div>
@@ -750,7 +736,7 @@ function loadsvg($file) {
 
                 <div class="tab-pane show" id="css-tab" data-section="css" role="tabpanel"
                      aria-labelledby="css-tab">
-                    <div class="drag-elements-sidepane sidepane sidepane-5">
+                    <div class="drag-elements-sidepane sidepane">
                         <div data-offset="80">
                             <textarea id="css-editor" class="form-control" rows="24"></textarea>
                         </div>
@@ -1212,7 +1198,7 @@ function loadsvg($file) {
     <div>
         <img id="thumb-{%=key%}" class="img-thumbnail p-0" data-target-input="#input-{%=key%}"
              data-target-thumb="#thumb-{%=key%}" style="cursor:pointer" src="" width="225" height="225">
-        <input id="input-{%=key%}" name="{%=key%}" type="text" class="form-control mt-1" />
+        <input id="input-{%=key%}" name="{%=key%}" type="text" class="form-control mt-1" id="input-{%=key%}"/>
         <button name="button" class="btn btn-primary btn-sm btn-icon mt-2 width-100"
                 data-target-input="#input-{%=key%}"
                 data-target-thumb="#thumb-{%=key%}">
@@ -1224,10 +1210,10 @@ function loadsvg($file) {
 <script id="vvveb-input-videoinput-gallery" type="text/html">
 
     <div>
-        <video id="thumb-{%=key%}" class="img-thumbnail p-0" data-target-input="#input-{%=key%}"
+        <video id="thumb-v{%=key%}" class="img-thumbnail p-0" data-target-input="#input-v{%=key%}"
                data-target-thumb="#thumb-{%=key%}" style="cursor:pointer" src="" width="225" height="225" playsinline
                loop muted controls></video>
-        <input id="input-{%=key%}" name="{%=key%}" type="text" class="form-control mt-1" />
+        <input id="input-{%=key%}" name="{%=key%}" type="text" class="form-control mt-1" id="input-v{%=key%}"/>
         <button name="button" class="btn btn-primary btn-sm btn-icon mt-2 width-100"
                 data-target-input="#input-{%=key%}"
                 data-target-thumb="#thumb-{%=key%}">
@@ -1552,7 +1538,7 @@ function loadsvg($file) {
 <!-- media gallery -->
 <link href="libs/media/media.css" rel="stylesheet">
 <script>
-    Vvveb.uploadUrl = '<?php echo "files.php?page={$page}&id={$id}&link={$link}" ?>';
+    Vvveb.uploadUrl = "<?php echo "files.php?chave={$chave}&editlang={$editlang}";?>";
     Vvveb.themeBaseUrl = '_sections/';
 </script>
 <script src="libs/media/media.js"></script>
@@ -1566,6 +1552,7 @@ function loadsvg($file) {
 -->
 
 <!-- components-->
+<!--script src="libs/builder/components-server.js"></script-->
 <script src="libs/builder/plugin-google-fonts.js"></script>
 <script src="libs/builder/components-common.js"></script>
 <script src="libs/builder/plugin-aos.js"></script>
@@ -1639,11 +1626,11 @@ Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist
 <script src="libs/autocomplete/jquery.autocomplete.js"></script>
 -->
 <script>
-    var renameUrl = 'save.php?action=rename&page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
-    var deleteUrl = 'save.php?action=delete&page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
-    var oEmbedProxyUrl = 'save.php?action=oembedProxy&page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
+    let renameUrl = "<?php echo "save.php?action=rename&chave={$chave}&editlang={$editlang}"; ?>";
+    let deleteUrl = "<?php echo "save.php?action=delete&chave={$chave}&editlang={$editlang}"; ?>";
+    let oEmbedProxyUrl = "<?php echo "save.php?action=oembedProxy&chave={$chave}&editlang={$editlang}"; ?>";
 
-    var url = "loadpage.php?page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>";
+    var url = "<?php echo "loadpage.php?chave={$chave}&editlang={$editlang}"; ?>";
     Vvveb.Builder.init(url, function() {
         Vvveb.SectionList.loadSections(false);
         Vvveb.TreeList.loadComponents();

@@ -26,34 +26,24 @@ require_once('../../../config.php');
 require_once('./function.php');
 $PAGE->set_context(\context_system::instance());
 
-$page = required_param('page', PARAM_TEXT);
-$id = required_param('id', PARAM_TEXT);
-$link = optional_param('link', '', PARAM_TEXT);
+$chave = required_param('chave', PARAM_TEXT);
+$editlang = required_param('editlang', PARAM_TEXT);
 
+if (file_exists(__DIR__ . "/_default/default-{$chave}.html")) {
+    $html = get_config("theme_degrade", "{$chave}_htmleditor_{$editlang}");
+    if (isset($html[40])) {
 
-$html = "";
-if ($page == "webpages") {
-    $html = $DB->get_field("degrade_webpages", "text", ["id" => $id]);
-} else if ($page == "notification") {
-    $html = $DB->get_field("degrade_events", "message", ["id" => $id]);
-} else if ($page == "aceite") {
-    $html = get_config('theme_degrade', 'formulario_pedir_aceite');
-} else if ($page == "meiodeposito") {
-    $html = get_config('theme_degrade', 'kopere_pay-meiodeposito-conta');
-}
+        $html = vvveb__add_css($chave, $html);
+        die($html);
+    } else {
+        $html = "<link href=\"{wwwroot}/theme/degrade/_editor/_default/bootstrap-vvveb.css\" rel=\"stylesheet\">\n\n";
+        $html .= file_get_contents(__DIR__ . "/_default/default-{$chave}.html");
 
-if (isset($html[40])) {
-    $html = vvveb__add_css($html);
-    die($html);
-} else {
-    $html = "<link href=\"{wwwroot}/theme/degrade/_editor/_default/bootstrap-vvveb.css\" rel=\"stylesheet\">\n\n";
-    $html .= file_get_contents(__DIR__ . "/_default/default-{$chave}.html");
+        $html = vvveb__add_css($chave, $html);
+        $html = vvveb__changue_langs($html);
+        $html = vvveb__change_courses($html);
 
-    $html = vvveb__add_css($html);
-    $html = vvveb__changue_langs($html);
-    $html = vvveb__change_courses($html);
-
-    $html = str_replace("<style>", "<style id='vvvebjs-styles'>", $html);
-
-    die($html);
+        $html = str_replace("<style>", "<style id='vvvebjs-styles'>", $html);
+        die($html);
+    }
 }

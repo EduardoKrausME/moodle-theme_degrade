@@ -29,12 +29,12 @@ require_login();
 $context = context_system::instance();
 require_capability('moodle/site:config', $context);
 
-$page = required_param('page', PARAM_TEXT);
+$chave = required_param('chave', PARAM_TEXT);
 
 $component = 'theme_degrade';
 $contextid = $context->id;
 $adminid = get_admin()->id;
-$filearea = "editor_{$page}";
+$filearea = "editor_{$chave}";
 
 if (isset($_FILES['file']['name'])) {
 
