@@ -15,8 +15,52 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_degrade/includes/footer.
-    degrade footer layout template.
+    @template block_myoverview/main
+
+    This template renders the main content area for the myoverview block.
+
+    Example context (json):
+    {
+      "maintenancefooter": false,
+      "footer_html": true,
+      "footer_htmleditor": "<p>Bem-vindo ao nosso portal de cursos!</p>",
+      "footer_settings_edit": "/footer/edit",
+      "footer_enable_block": true,
+      "enable_block_description": true,
+      "footer_block_class": "col-md-4",
+      "logourl_footer": "https://example.com/images/logo-footer.png",
+      "footer_description": "Aprenda novas habilidades com nossos cursos online.",
+      "enable_block_links": true,
+      "footer_links_title": "Links Rápidos",
+      "footer_links": "<li><a href='/about'>Sobre Nós</a></li><li><a href='/courses'>Cursos</a></li>",
+      "enable_block_social": true,
+      "footer_social_title": "Siga-nos",
+      "social_youtube": "https://youtube.com/example",
+      "youtube_name": "Nosso Canal",
+      "social_linkedin": "https://linkedin.com/in/example",
+      "linkedin_name": "Conecte-se Conosco",
+      "social_twitter": "https://twitter.com/example",
+      "twitter_name": "Nosso Twitter",
+      "social_instagram": "https://instagram.com/example",
+      "instagram_name": "Nosso Instagram",
+      "social_facebook": "https://facebook.com/example",
+      "facebook_name": "Curta Nossa Página",
+      "enable_block_contact": true,
+      "contact_footer_title": "Contato",
+      "contact_address": "Rua Exemplo, 123, Cidade, Estado",
+      "contact_phone": "+55 11 98765-4321",
+      "contact_email": "contato@example.com",
+      "enable_copywriter": true,
+      "str": {
+        "footerblock_copywriter": "Direitos autorais © 2024"
+      },
+      "output": {
+        "standard_footer_html": "<p>Conteúdo padrão do rodapé.</p>",
+        "standard_end_of_body_html": "<script>console.log('Fim do corpo')</script>",
+        "debug_footer_html": "<p>Debug Info: 12345</p>"
+      }
+    }
+
 }}
 {{#maintenancefooter}}
     <footer id="page-footer" class=" footer-popover footer-dark bg-dark text-light">

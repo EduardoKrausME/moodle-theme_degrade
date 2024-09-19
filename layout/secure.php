@@ -22,25 +22,24 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+// phpcs:ignore
 defined('MOODLE_INTERNAL') || die;
 
 // Get the HTML for the settings bits.
 $html = theme_degrade_get_html_for_settings($OUTPUT, $PAGE);
 
-echo $OUTPUT->doctype() ?>
-<html <?php echo $OUTPUT->htmlattributes(); ?>>
+echo "{$OUTPUT->doctype()}
+<html {$OUTPUT->htmlattributes()}>
 <head>
-    <title><?php echo $OUTPUT->page_title(); ?></title>
-    <link rel="shortcut icon" href="<?php echo $OUTPUT->favicon(); ?>"/>
-    <?php echo $OUTPUT->standard_head_html() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{$OUTPUT->page_title()}</title>
+    <link rel=\"shortcut icon\" href=\"{$OUTPUT->favicon()}\"/>
+    {$OUTPUT->standard_head_html()}
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
 </head>
 
-<body data-layout="secure" <?php echo $OUTPUT->body_attributes([theme_degrade_get_body_class()]); ?>>
+<body data-layout=\"secure\" {$OUTPUT->body_attributes([theme_degrade_get_body_class()])}>
 
-<?php echo $OUTPUT->standard_top_of_body_html() ?>
-
-<?php
+{$OUTPUT->standard_top_of_body_html()}";
 
 require_once($CFG->libdir . '/behat/lib.php');
 $extraclasses = [theme_degrade_get_body_class()];
@@ -71,31 +70,28 @@ $templatedata = [
 ];
 
 echo $OUTPUT->render_from_template('theme_degrade/includes/header', $templatedata);
-?>
 
-<div id="page">
-
-    <header id="page-header" class="clearfix">
-        <?php echo $html->heading; ?>
+echo "
+<div id=\"page\">
+    <header id=\"page-header\" class=\"clearfix\">
+        {$html->heading}
     </header>
 
-    <div id="page" class="container">
-        <div id="page-content" class="row">
-            <div id="region-bs-main-and-pre" class="col-md-9">
-                <div class="row">
-                    <section id="region-main" class="col-md-8 pull-right">
-                        <?php echo $OUTPUT->main_content(); ?>
+    <div id=\"page\" class=\"container\">
+        <div id=\"page-content\" class=\"row\">
+            <div id=\"region-bs-main-and-pre\" class=\"col-md-9\">
+                <div class=\"row\">
+                    <section id=\"region-main\" class=\"col-md-8 pull-right\">
+                        {$OUTPUT->main_content()}
                     </section>
-                    <?php echo $OUTPUT->blocks('side-pre', 'col-md-4 desktop-first-column'); ?>
+                    {$OUTPUT->blocks('side-pre', 'col-md-4 desktop-first-column')}
                 </div>
             </div>
-            <?php echo $OUTPUT->blocks('side-post', 'col-md-3'); ?>
+            {$OUTPUT->blocks('side-post', 'col-md-3')}
         </div>
     </div>
+</div>";
 
-</div>
-
-<?php
 $USER->ajax_updatable_user_prefs['drawer-open-nav'] = PARAM_ALPHA;
 $extraclasses = [theme_degrade_get_body_class()];
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
@@ -117,6 +113,6 @@ $templatedata = array_merge($templatedata, \theme_degrade\template\footer_data::
 $footerlayout = $OUTPUT->render_from_template('theme_degrade/includes/footer', $templatedata);
 
 echo $OUTPUT->standard_end_of_body_html();
-?>
-</body>
-</html>
+
+echo "</body>
+</html>";

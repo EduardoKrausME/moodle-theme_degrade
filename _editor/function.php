@@ -86,11 +86,6 @@ function vvveb__change_courses($html) {
     return str_replace("{course-itens}", $courseshtml, $html);
 }
 
-/**
- * @param \core_course_list_element $course
- *
- * @return string
- */
 function couse_image($course) {
     global $CFG, $OUTPUT;
 

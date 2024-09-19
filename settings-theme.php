@@ -13,7 +13,10 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
+ * Theme Settings File
+ *
  * @package     theme_degrade
  * @copyright   2024 Eduardo Kraus https://eduardokraus.com/
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,7 +29,7 @@ $page = new admin_settingpage('theme_degrade_theme',
     get_string('settings_theme_heading', 'theme_degrade'));
 
 if (file_exists(__DIR__ . "/settings-theme-degrade.php")) {
-    require_once __DIR__ . "/settings-theme-degrade.php";
+    require_once(__DIR__ . "/settings-theme-degrade.php");
 }
 
 $setting = new admin_setting_configstoredfile('theme_degrade/logo_color',
@@ -36,7 +39,6 @@ $setting = new admin_setting_configstoredfile('theme_degrade/logo_color',
     ['maxfiles' => 1, 'accepted_types' => ['.jpg', '.png']]);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
-
 
 // Cores do topo.
 if ($CFG->theme != "boost_training") {
@@ -48,7 +50,6 @@ if ($CFG->theme != "boost_training") {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
     $PAGE->requires->js_call_amd('theme_degrade/settings', 'top_scroll');
-
 
     $setting = new admin_setting_heading("theme_degrade/top_color_heading",
         get_string('top_color_heading', 'theme_degrade'), '');
@@ -112,7 +113,7 @@ $colorss = [
         'color_buttons' => '#103430',
         'color_names' => '#c0dcdb',
         'color_titles' => '#e4f7f6',
-    ]
+    ],
 ];
 $description = "<div class='row'>";
 $description .= "<h5 class='col-sm-3'>" . get_string('theme_color_sugestion', 'theme_degrade') . "</h5>";
@@ -144,8 +145,6 @@ $setting = new admin_setting_heading("theme_degrade/theme_color_heading",
     $description . "</div></div>");
 $page->add($setting);
 $PAGE->requires->js_call_amd('theme_degrade/settings', 'theme_color');
-
-
 
 $colors = ['color_primary', 'color_secondary', 'color_buttons', 'color_names', 'color_titles'];
 foreach ($colors as $color) {

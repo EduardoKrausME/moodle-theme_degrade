@@ -37,6 +37,7 @@ use context_system;
 
 /**
  * This class has function for core course renderer
+ *
  * @package     theme_degrade
  * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -175,9 +176,9 @@ class course_renderer extends \core_course_renderer {
      * This is an internal function, to display an information about just one course
      * please use {@link core_course_renderer::course_info_box()}
      *
-     * @param coursecat_helper $chelper various display options
+     * @param coursecat_helper $chelper                            various display options
      * @param stdClass $course
-     * @param string $additionalclasses additional classes to add to the main <div> tag
+     * @param string $additionalclasses                            additional classes to add to the main <div> tag
      *                                                             (usually depend on the course position in list -
      *                                                             first/last/even/odd)
      *
@@ -402,9 +403,9 @@ class course_renderer extends \core_course_renderer {
      * to retrieve display options and attributes, only methods get_show_courses(),
      * get_courses_display_option() and get_and_erase_attributes() are called.
      *
-     * @param coursecat_helper $chelper various display options
-     * @param array $courses the list of courses to display
-     * @param int|null $totalcount total number of courses (affects display mode if it is AUTO or pagination if
+     * @param coursecat_helper $chelper    various display options
+     * @param array $courses               the list of courses to display
+     * @param int|null $totalcount         total number of courses (affects display mode if it is AUTO or pagination if
      *                                     applicable), defaulted to count($courses)
      *
      * @return string
@@ -558,7 +559,7 @@ class course_renderer extends \core_course_renderer {
                 [
                     'browse' => 'categories',
                     'page' => 1,
-                ])
+                ]),
         ])->set_courses_display_options([
             'limit' => $CFG->coursesperpage,
             'viewmoreurl' => new moodle_url('/course/index.php',

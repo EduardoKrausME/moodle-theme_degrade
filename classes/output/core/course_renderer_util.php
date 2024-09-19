@@ -31,13 +31,20 @@ use context_course;
 use moodle_url;
 use user_picture;
 
+/**
+ * Class course_renderer_util
+ *
+ * @package theme_degrade\output\core
+ */
 class course_renderer_util {
     /**
+     * Function couse_image
+     *
      * @param \core_course_list_element $course
      *
-     * @return string
+     * @return bool|string
      */
-    public static function couse_image($course) {
+    public static function couse_image(\core_course_list_element $course) {
         global $CFG, $OUTPUT;
 
         $courseimage = false;
@@ -61,12 +68,13 @@ class course_renderer_util {
     }
 
     /**
-     * @param object $course
+     * Function get_teachers
+     *
+     * @param $course
      *
      * @return array
-     *
+     * @throws \coding_exception
      * @throws \dml_exception
-     * @throws \moodle_exception
      */
     public static function get_teachers($course) {
         global $PAGE, $DB;
@@ -95,10 +103,11 @@ class course_renderer_util {
     }
 
     /**
-     * @param object $course
+     * Function course_url
+     *
+     * @param $course
      *
      * @return string
-     *
      * @throws \moodle_exception
      */
     public static function course_url($course) {
@@ -108,10 +117,11 @@ class course_renderer_util {
     }
 
     /**
-     * @param object $course
+     * Function count_lessson
+     *
+     * @param $course
      *
      * @return string
-     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -128,7 +138,9 @@ class course_renderer_util {
     }
 
     /**
-     * @param object $course
+     * Function is_enrolled
+     *
+     * @param $course
      *
      * @return bool
      */

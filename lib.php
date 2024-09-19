@@ -38,7 +38,9 @@ function theme_degrade_page_init(moodle_page $page) {
 }
 
 /**
- * @param string $colorname
+ * Function theme_degrade_process_color_hex
+ *
+ * @param $colorname
  *
  * @return string
  * @throws coding_exception
@@ -651,7 +653,7 @@ function theme_degrade_process_css($css, $theme) {
             #header.fixed-top {
                 background: {$topscrollbackgroundcolor} !important;
             }
-            
+
             #header.ever-fixed-top .header-menubar .navbar-nav .simplesearchform .btn-open,
             #header.ever-fixed-top  .popover-region .popover-region-toggle i.icon,
             #header.ever-fixed-top .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
@@ -702,21 +704,21 @@ function theme_degrade_process_css($css, $theme) {
             }";
 
     $themecss = "";
-    $background_color = theme_degrade_get_setting("background_color", false);
-    if (preg_match('/^#[a-fA-F0-9]{6}$/', $background_color)) {
+    $backgroundcolor = theme_degrade_get_setting("background_color", false);
+    if (preg_match('/^#[a-fA-F0-9]{6}$/', $backgroundcolor)) {
         $themecss = "
             #header,
             #nav-drawer .list-group-item.active > div,
             #nav-drawer .list-group-item.active:hover,
             #footer .footer-main {
-                background: {$background_color};
+                background: {$backgroundcolor};
             }
             #site-news-forum,
             .frontpage-course-list {
-                background: {$background_color}3d;
+                background: {$backgroundcolor}3d;
             }
             .frontpage-course-list .btn-primary {
-                background: {$background_color};
+                background: {$backgroundcolor};
             }";
     }
 

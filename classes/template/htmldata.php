@@ -27,7 +27,20 @@ namespace theme_degrade\template;
 use core_course_list_element;
 use theme_degrade\output\core\course_renderer_util;
 
+/**
+ * Class htmldata
+ *
+ * @package theme_degrade\template
+ */
 class htmldata {
+    /**
+     * Function vvveb__change_my_courses
+     *
+     * @param $html
+     *
+     * @return null|string|string[]
+     * @throws \dml_exception
+     */
     public static function vvveb__change_my_courses($html) {
         if (strpos($html, "vvveb_home_automatically_my_course") === false) {
             return $html;
@@ -50,6 +63,7 @@ class htmldata {
         }
         $courseshtml = $OUTPUT->render_from_template('theme_degrade/vvveb/course', ['couses' => $data]);
 
-        return preg_replace('/<div.*?vvveb_home_automatically_my_course.*?<\/div>/s', "<div class='row'>{$courseshtml}</div>", $html);
+        return preg_replace('/<div.*?vvveb_home_automatically_my_course.*?<\/div>/s',
+            "<div class='row'>{$courseshtml}</div>", $html);
     }
 }

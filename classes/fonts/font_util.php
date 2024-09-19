@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Font class file
+ *
  * @package     theme_degrade
  * @copyright   2024 Eduardo Kraus https://eduardokraus.com/
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -22,6 +24,11 @@
 
 namespace theme_degrade\fonts;
 
+/**
+ * Class font_util
+ *
+ * @package theme_degrade\fonts
+ */
 class font_util {
 
     /**
@@ -110,7 +117,8 @@ class font_util {
             }
         }
 
-        $fontlist[$configname]['css'] = 'https://fonts.googleapis.com/css2?' . implode('&', $fontlist[$configname]['css']) . '&display=swap';
+        $fontlist[$configname]['css'] = 'https://fonts.googleapis.com/css2?' .
+            implode('&', $fontlist[$configname]['css']) . '&display=swap';
         $fontlist[$configname]['grapsjs'] = implode(",", $fontlist[$configname]['grapsjs']);
         $fontlist[$configname]['ckeditor'] = implode(";", $fontlist[$configname]['ckeditor']);
 

@@ -36,8 +36,9 @@ use theme_degrade\fonts\font_util;
 class footer_data {
 
     /**
-     * @return array
+     * Function get_data
      *
+     * @return array
      * @throws \coding_exception
      * @throws \dml_exception
      * @throws \moodle_exception
@@ -88,6 +89,9 @@ class footer_data {
     }
 
     /**
+     * Function description
+     *
+     * @return array
      * @throws \coding_exception
      */
     private static function description() {
@@ -101,8 +105,9 @@ class footer_data {
     }
 
     /**
-     * @return array
+     * Function links
      *
+     * @return array
      * @throws \coding_exception
      * @throws \moodle_exception
      */
@@ -119,8 +124,9 @@ class footer_data {
     }
 
     /**
-     * @return array
+     * Function social
      *
+     * @return array
      * @throws \coding_exception
      */
     private static function social() {
@@ -162,8 +168,9 @@ class footer_data {
     }
 
     /**
-     * @return array
+     * Function contact
      *
+     * @return array
      * @throws \coding_exception
      */
     private static function contact() {
@@ -185,8 +192,9 @@ class footer_data {
     }
 
     /**
-     * @return array
+     * Function copywriter
      *
+     * @return array
      * @throws \coding_exception
      */
     private static function copywriter() {
@@ -196,8 +204,9 @@ class footer_data {
     }
 
     /**
-     * @return array
+     * Function footer_html
      *
+     * @return array
      * @throws \coding_exception
      * @throws \dml_exception
      */

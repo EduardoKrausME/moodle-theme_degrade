@@ -1,21 +1,43 @@
 {{!
-	This file is part of Moodle - http://moodle.org/
+    This file is part of Moodle - http://moodle.org/
 
-	Moodle is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	(at your option) any later version.
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-	Moodle is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-	Page header.
+    @template block_myoverview/main
+
+    This template renders the main content area for the myoverview block.
+
+    Example context (json):
+    {
+      "config": {
+        "wwwroot": "https://www.exemplo.com"
+      },
+      "logourl_header": "<img src='https://www.exemplo.com/logo.png' alt='Logo'>",
+      "primarymoremenu": true,
+      "output": {
+        "custom_menu": "<li class='nav-item'><a class='nav-link' href='/page1'>Página 1</a></li>",
+        "page_heading_menu": "<li class='nav-item'><a class='nav-link' href='/home'>Início</a></li>",
+        "search_box": "<form class='form-inline'><input class='form-control' type='search' placeholder='Pesquisar' aria-label='Pesquisar'></form>",
+        "navbar_plugin_output": "<li class='nav-item'><a class='nav-link' href='/plugin'>Plugin</a></li>",
+        "edit_switch": "<a href='/edit' class='btn btn-warning'>Editar</a>"
+      },
+      "langmenu": true,
+      "usermenu": true,
+      "top_scroll": 1
+    }
+
 }}
 
 <nav id="header" class="navbar navbar-light navbar-expand"

@@ -88,7 +88,7 @@ function xmldb_theme_degrade_upgrade($oldversion) {
             "&family=Oswald:wght@200..700" .
             "&family=Oxygen:wght@300;400;700" .
             "&family=Poetsen+One" .
-            "&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900" .
+            "&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700" .
             "&family=Raleway:ital,wght@0,100..900;1,100..900" .
             "&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900" .
             "&display=swap');\n</style>";
@@ -125,7 +125,7 @@ function xmldb_theme_degrade_upgrade($oldversion) {
                     'title' => get_string('grades', 'grades'),
                     'icon' => 'grade',
                     'color' => "#ECD06F",
-                ]
+                ],
             ];
             $block = $blocks[$i - 1];
 
@@ -138,7 +138,8 @@ function xmldb_theme_degrade_upgrade($oldversion) {
             $filerecord->filepath = '/';
             $filerecord->itemid = 0;
             $filerecord->filename = "{$block['icon']}.svg";
-            $file = $fs->create_file_from_pathname($filerecord, "{$CFG->dirroot}/theme/degrade/pix/blocks/{$block['icon']}.svg");
+            $file = $fs->create_file_from_pathname($filerecord,
+                "{$CFG->dirroot}/theme/degrade/pix/blocks/{$block['icon']}.svg");
 
             set_config("mycourses_icon_{$i}", $file->get_id(), "theme_degrade");
             set_config("mycourses_title_{$i}", $block['title'], "theme_degrade");
@@ -159,7 +160,6 @@ function xmldb_theme_degrade_upgrade($oldversion) {
 
         upgrade_plugin_savepoint(true, 2024070900, "theme", "degrade");
     }
-
 
     if ($oldversion < 2024071000) {
         if ($CFG->theme == "degrade") {

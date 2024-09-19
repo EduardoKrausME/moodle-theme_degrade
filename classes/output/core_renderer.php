@@ -28,10 +28,15 @@ use custom_menu;
 use custom_menu_item;
 use html_writer;
 
+/**
+ * Class core_renderer
+ *
+ * @package theme_degrade\output
+ */
 class core_renderer extends \theme_boost\output\core_renderer {
 
     /**
-     *custom_menu_drawer
+     * custom_menu_drawer
      *
      * @return string
      *

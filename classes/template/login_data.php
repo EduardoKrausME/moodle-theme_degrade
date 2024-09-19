@@ -34,8 +34,9 @@ namespace theme_degrade\template;
 class login_data {
 
     /**
-     * @return array
+     * Function get_data
      *
+     * @return array
      * @throws \coding_exception
      * @throws \dml_exception
      */

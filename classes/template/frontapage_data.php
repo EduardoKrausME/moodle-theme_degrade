@@ -36,9 +36,11 @@ use theme_degrade\fonts\font_util;
 class frontapage_data {
 
     /**
+     * Function topo
+     *
      * @return array
-     * @throws \dml_exception
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function topo() {
         return [
@@ -48,6 +50,8 @@ class frontapage_data {
     }
 
     /**
+     * Function slideshow
+     *
      * @return array
      * @throws \coding_exception
      * @throws \dml_exception
@@ -85,6 +89,8 @@ class frontapage_data {
     }
 
     /**
+     * Function about
+     *
      * @return array
      * @throws \coding_exception
      * @throws \dml_exception
@@ -131,6 +137,8 @@ class frontapage_data {
     }
 
     /**
+     * Function home_html
+     *
      * @return array
      * @throws \coding_exception
      * @throws \dml_exception
@@ -164,9 +172,11 @@ class frontapage_data {
         }
     }
 
-
     /**
-     * @param string $hasteg
+     * Function edit_settings
+     *
+     * @param $hasteg
+     *
      * @return bool|string
      * @throws \coding_exception
      * @throws \dml_exception

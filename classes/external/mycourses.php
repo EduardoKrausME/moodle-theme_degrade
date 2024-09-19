@@ -17,7 +17,7 @@
 /**
  * Class mod_icon
  *
- * @package    local_kopere_mobile
+ * @package    theme_degrade
  * @copyright  2024 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,12 +26,13 @@ namespace theme_degrade\external;
 
 use theme_degrade\template\frontapage_data;
 
+defined('MOODLE_INTERNAL') || die;
 require_once("{$CFG->libdir}/externallib.php");
 
 /**
- * Class mod_icon
+ * Class mycourses
  *
- * @package local_kopere_mobile\external
+ * @package theme_degrade\external
  */
 class mycourses extends \external_api {
 
