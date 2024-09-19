@@ -64,10 +64,10 @@ Below is an example of how you would create a custom menu:
 Courses
 -All courses | /course/
 -My courses
---Example Course 
+--Example Course
 ---Example Course 7 | /course/view.php?id=7
 ---Example Course 9 | /course/view.php?id=9
---Test Course 
+--Test Course
 ---Test Course 2 | /course/view.php?id=2
 ---Test Course 5 | /course/view.php?id=5
 Google

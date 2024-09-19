@@ -16,6 +16,7 @@
 
 /**
  * Theme Degrade file
+ *
  * @package     theme_degrade
  * @copyright   2024 Eduardo Kraus https://eduardokraus.com/
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -52,9 +53,11 @@ if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], "admin/upg
 }
 foreach ($choices as $choice => $lang) {
     $onclick = "$('#id_s_theme_degrade_background_color').val('{$choice}');";
-    $onclick .= "$('body').attr('class',function(i,c){return c.replace(/(^|\s)degrade-theme-\S+/g,'')+' degrade-theme-{$choice}';})";
+    $onclick .= "$('body').attr('class',function(i,c){
+                    return c.replace(/(^|\s)degrade-theme-\S+/g,'')+' degrade-theme-{$choice}';})";
     $htmlselect .=
-        "<div id=\"degrade-theme-select-{$choice}\" class=\"degrade-theme-select-{$choice} degrade-theme-select-item\" data-theme=\"{$choice}\"
+        "<div id=\"degrade-theme-select-{$choice}\" 
+              class=\"degrade-theme-select-{$choice} degrade-theme-select-item\" data-theme=\"{$choice}\"
                   onclick=\"{$onclick}\">
                  <div class=\"preview\"></div>
              </div>";
