@@ -1,4 +1,5 @@
 $line-height: var(--bs-body-line-height);
+
 @font-face {
   font-family: $la-font-name-lab;
   font-style: normal;
@@ -11,11 +12,13 @@ $line-height: var(--bs-body-line-height);
   url("#{$la-font-path}/la-brands-400.ttf") format("truetype"),
   url("#{$la-font-path}/la-brands-400.svg#lineawesome") format("svg");
 }
+
 .#{$la-css-prefix-lab} {
   font-family: $la-font-name-lab, monospace;
   font-weight: 400;
   line-height:$line-height;
 }
+
 @font-face {
   font-family: $la-font-name-lar;
   font-style: normal;
@@ -28,11 +31,13 @@ $line-height: var(--bs-body-line-height);
   url("#{$la-font-path}/la-regular-400.ttf") format("truetype"),
   url("#{$la-font-path}/la-regular-400.svg#lineawesome") format("svg");
 }
+
 .#{$la-css-prefix-lar} {
   font-family: $la-font-name-lar, monospace;
   font-weight: 400;
   line-height:$line-height;
 }
+
 @font-face {
   font-family: $la-font-name-las;
   font-style: normal;
@@ -45,6 +50,7 @@ $line-height: var(--bs-body-line-height);
   url("#{$la-font-path}/la-solid-900.ttf") format("truetype"),
   url("#{$la-font-path}/la-solid-900.svg#lineawesome") format("svg");
 }
+
 .#{$la-css-prefix-las}, .la {
   font-family: $la-font-name-las, monospace;
   font-weight: 410;

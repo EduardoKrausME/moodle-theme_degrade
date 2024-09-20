@@ -18,7 +18,7 @@ Vvveb.CodeEditor = {
 			});
 			
 			this.isActive = true;
-			this.codemirror.getDoc().on("change", function (e, v) { 
+			this.codemirror.getDoc().on("change", function (e, v) {
 				if (v.origin != "setValue")
 				delay(() => Vvveb.Builder.setHtml(e.getValue()), 1000);
 			});
@@ -55,7 +55,7 @@ Vvveb.CodeEditor = {
 		//save memory by destroying but lose scroll on editor toggle
 		this.codemirror.toTextArea();
 		this.codemirror = false;
-		*/ 
+		*/
 		this.isActive = false;
 	},
 
@@ -68,6 +68,7 @@ Vvveb.CodeEditor = {
 		this.destroy();
 	}
 }
+
 
 // override modal code editor to use code mirror
 Vvveb.ModalCodeEditor.init = function (modal = false, editor = false) {
@@ -103,6 +104,7 @@ Vvveb.ModalCodeEditor.getValue = function (value) {
 	return this.editor.getValue();
 };
 
+
 Vvveb.CssEditor = {
 	
 	oldValue: '',
@@ -127,7 +129,7 @@ Vvveb.CssEditor = {
 			self.setValue(Vvveb.StyleManager.getCss());
 		}));
 		
-		this.editor.getDoc().on("change", function (e, v) { 
+		this.editor.getDoc().on("change", function (e, v) {
 			if (v.origin != "setValue")
 			delay(() => Vvveb.StyleManager.setCss(e.getValue()), 1000);
 		});

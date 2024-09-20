@@ -107,6 +107,20 @@ if (isset($_GET['action'])) {
 if ($action) {
     //file manager actions, delete and rename
     switch ($action) {
+        case 'delete':
+            header('Content-Type: application/json');
+            echo json_encode([
+                "success" => 1,
+                "message" => "Deleted successfully",
+            ]);
+            break;
+        case 'save':
+            set_config("{$chave}_htmleditor_{$editlang}", $html, "theme_degrade");
+            echo json_encode([
+                "success" => 1,
+                "message" => "Saved successfully",
+            ]);
+            break;
         case 'oembedProxy':
             $url = $_GET['url'] ?? '';
             if (validOembedUrl($url)) {
@@ -127,11 +141,8 @@ if ($action) {
             showError("Invalid action '$action'!");
     }
 } else {
-    //save page
-    if ($html) {
-        set_config("{$chave}_htmleditor_{$editlang}", $html, "theme_degrade");
-        echo "Saved successfully";
-    } else {
-        showError('Html content is empty!');
-    }
+    echo json_encode([
+        "success" => 0,
+        "message" => "Ops...",
+    ]);
 }

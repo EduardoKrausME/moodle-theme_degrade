@@ -26,7 +26,7 @@ subtree 				Set to true if mutations to target and target's descendants are to b
 attributeOldValue 		Set to true if attributes is set to true and target's attribute value before the mutation needs to be recorded.
 characterDataOldValue 	Set to true if characterData is set to true and target's data before the mutation needs to be recorded.
 attributeFilter 		Set to an array of attribute local names (without namespace) if not all attribute mutations need to be observed.
-*/ 
+*/
 
 /*
 MutationRecord.type				 	String 		Returns "attributes" if the mutation was an attribute mutation,
@@ -49,7 +49,7 @@ MutationRecord.oldValue 			String 		The return value depends on the MutationReco
 												For characterData, it is the data of the changed node before the change.
 												For childList, it is null.
 */
- 
+
 Vvveb.Undo = {
 	
 	mutations: [],
@@ -77,14 +77,14 @@ Vvveb.Undo = {
 				if (undo == true) {
 					addedNodes = mutation.removedNodes;
 					removedNodes = mutation.addedNodes;
-				} else { //redo 
+				} else { //redo
 					addedNodes = mutation.addedNodes;
 					removedNodes = mutation.removedNodes;
 				}
 				
 				if (addedNodes) for(i in addedNodes) {
 					node = addedNodes[i];
-					if (mutation.nextSibling) { 
+					if (mutation.nextSibling) {
 						mutation.nextSibling.parentNode.insertBefore(node, mutation.nextSibling);
 					} else {
 						mutation.target.append(node);
@@ -104,7 +104,7 @@ Vvveb.Undo = {
 					parent = mutation.newParent;
 					sibling = mutation.newNextSibling;
 				}
-			  
+
 				if (sibling) {
 					sibling.parentNode.insertBefore(mutation.target, sibling);
 				} else {
@@ -131,7 +131,7 @@ Vvveb.Undo = {
 		const event = new CustomEvent("vvveb.undo.restore", {detail: mutation});
 		Vvveb.Builder.frameBody.dispatchEvent(event);
 	 },
-	 
+
 	undo : function() {	
 		if (this.undoIndex >= 0) {
 		  this.restore(this.mutations[this.undoIndex--], true);

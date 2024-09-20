@@ -9,7 +9,7 @@ The edited page should include the aos library https://github.com/michalsnik/aos
   <script>
     AOS.init();
   </script>
-*/ 
+*/
 //clean aos classes on save
 window.addEventListener("vvveb.getHtml.before", function(event) {
 	let doc = event.detail;
@@ -206,7 +206,7 @@ let ComponentBaseAnimateScroll = {
 			if (value == "") {
 				node.removeAttribute("data-aos","data-aos-duration","data-aos-delay");
 			} else {
-				delay(() => node.classList.add("aos-init","aos-animate"), 
+				delay(() => node.classList.add("aos-init","aos-animate"),
 					node.dataset.aosDuration ? node.dataset.aosDuration : 1000);
 			}
 			return node;
@@ -229,7 +229,7 @@ let ComponentBaseAnimateScroll = {
 		section: advanced_section,
 		inputtype: RangeInput,
 		data:{
-			max: 10000, 
+			max: 10000,
 			min:0,
 			step:100
 	   },
@@ -242,7 +242,7 @@ let ComponentBaseAnimateScroll = {
 		section: advanced_section,
 		inputtype: RangeInput,
 		data:{
-			max: 10000, 
+			max: 10000,
 			min:0,
 			step:100
 		},
@@ -257,7 +257,7 @@ let ComponentBaseAnimateScroll = {
 		data: {text:"Play animation", icon:"la-play"},		
 		onChange: function(node, value) {
 			node.classList.remove("aos-init","aos-animate");
-			delay(() => node.classList.add("aos-init","aos-animate"), 
+			delay(() => node.classList.add("aos-init","aos-animate"),
 				node.dataset.aosDuration ? node.dataset.aosDuration : 1000);
 			return node;
 		}

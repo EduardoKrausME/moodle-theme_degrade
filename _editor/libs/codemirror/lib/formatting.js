@@ -27,7 +27,8 @@
             end: curPos + m.index + m[0].length
           });
           curPos += m.index + Math.max(1, m[0].length);
-        } else { // No more matches
+        }
+        else { // No more matches
           break;
         }
       }

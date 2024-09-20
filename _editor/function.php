@@ -22,18 +22,6 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-function vvveb__add_css($html) {
-    global $CFG;
-
-    $css = [];
-    if (strpos($html, "bootstrap-vvveb.css") === false) {
-        $css[] = "<link href='{$CFG->wwwroot}/theme/degrade/_editor/_default/bootstrap-vvveb.css' rel='stylesheet'>";
-    }
-
-    $css = implode("\n", $css);
-    return "{$css}\n\n{$html}";
-}
-
 function vvveb__changue_langs($html) {
     global $CFG, $SITE;
 

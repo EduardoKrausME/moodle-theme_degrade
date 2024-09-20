@@ -86,13 +86,13 @@ Vvveb.Components.extend("_base", "elements/figure", {
         name      : "Width",
         key       : "width",
         child     : "img",
-        htmlAttr  : "style",
+        htmlAttr  : "width",
         inputtype : CssUnitInput
     }, {
         name      : "Height",
         key       : "height",
         child     : "img",
-        htmlAttr  : "style",
+        htmlAttr  : "height",
         inputtype : CssUnitInput
     }, {
         name      : "Alt",
@@ -108,6 +108,7 @@ Vvveb.Components.extend("_base", "elements/figure", {
         inputtype : TextareaInput
     }]
 });
+
 
 //Icon
 Vvveb.Components.extend("_base", "elements/font-icon", {
@@ -168,7 +169,7 @@ V.Resources.Icons =
 [{
 	value: `stopwatch.svg`,
 	text: "Star"
-}, 
+},
 {
 	value: `envelope.svg`,
 	text: "Sections"
@@ -365,6 +366,7 @@ Vvveb.Components.extend("_base", "elements/svg-icon", {
     }]
 });
 
+
 Vvveb.Components.add("elements/svg-element", {
     nodes      : ["path", "line", "polyline", "polygon", "rect", "circle", "ellipse", "g"],
     name       : "Svg element",
@@ -408,6 +410,166 @@ Vvveb.Components.add("elements/svg-element", {
             step : 1
         }
     }]
+});
+
+//Gallery
+Vvveb.Components.add("elements/gallery", {
+    attributes : ["data-component-gallery"],
+    name       : "Gallery",
+    image      : "icons/images.svg",
+    html       : `
+			<div class="gallery masonry has-shadow" data-component-gallery>
+				<div class="item">
+					<a>
+						<img src="${wwwroot}/theme/degrade/_editor/media/posts/1.jpg">
+					</a>
+				</div>
+				<div class="item">
+					<a>
+						<img src="${wwwroot}/theme/degrade/_editor/media/posts/2.jpg">
+					</a>
+				</div>
+				<div class="item">
+					<a>
+						<img src="${wwwroot}/theme/degrade/_editor/media/posts/3.jpg">
+					</a>
+				</div>
+				<div class="item">
+					<a>
+						<img src="${wwwroot}/theme/degrade/_editor/media/posts/4.jpg">
+					</a>
+				</div>
+				<div class="item">
+					<a>
+						<img src="${wwwroot}/theme/degrade/_editor/media/posts/5.jpg">
+					</a>
+				</div>
+				<div class="item">
+					<a>
+						<img src="${wwwroot}/theme/degrade/_editor/media/posts/6.jpg">
+					</a>
+				</div>
+				<div class="item">
+					<a>
+						<img src="${wwwroot}/theme/degrade/_editor/media/posts/7.jpg">
+					</a>
+				</div>
+			</div>
+			`,
+    properties : [{
+        name        : "Masonry layout",
+        key         : "masonry",
+        htmlAttr    : "class",
+        validValues : ["masonry", "flex"],
+        inputtype   : ToggleInput,
+        data        : {
+            on  : "masonry",
+            off : "flex"
+        },
+        setGroup    : group => {
+            document.querySelectorAll(".mb-3[data-group]").forEach(el => el.style.display = "none");
+            document.querySelector('.mb-3[data-group="' + group + '"]').style.display = "";
+        },
+        onChange    : function(node, value, input) {
+            this.setGroup(value);
+            return node;
+        },
+        init        : function(node) {
+            if (node.classList.contains("masonry")) {
+                return "masonry";
+            } else {
+                return "flex";
+            }
+        },
+    }, {
+        name        : "Image shadow",
+        key         : "shadow",
+        htmlAttr    : "class",
+        validValues : ["", "has-shadow"],
+        inputtype   : ToggleInput,
+        data        : {
+            on  : "has-shadow",
+            off : ""
+        },
+    }, {
+        name      : "Horizontal gap",
+        key       : "column-gap",
+        htmlAttr  : "style",
+        inputtype : CssUnitInput,
+        data      : {
+            max  : 100,
+            min  : 0,
+            step : 1
+        }
+    }, {
+        name      : "Vertical gap",
+        key       : "margin-bottom",
+        htmlAttr  : "style",
+        child     : ".item",
+        inputtype : CssUnitInput,
+        data      : {
+            max  : 100,
+            min  : 0,
+            step : 1
+        }
+    }, {
+        name      : "Images per row masonry",
+        key       : "column-count",
+        group     : "masonry",
+        htmlAttr  : "style",
+        inputtype : RangeInput,
+        data      : {
+            max  : 12,
+            min  : 1,
+            step : 1
+        }
+    }, {
+        name      : "Images per row flex",
+        group     : "flex",
+        key       : "flex-basis",
+        child     : ".item",
+        htmlAttr  : "style",
+        inputtype : RangeInput,
+        data      : {
+            max  : 12,
+            min  : 1,
+            step : 1
+        },
+        onChange  : function(node, value, input, component, inputElement) {
+            if (value) {
+                value = 100 / value;
+                value += "%";
+            }
+
+            return value;
+        }
+    }, {
+        name      : "",
+        key       : "addChild",
+        inputtype : ButtonInput,
+        data      : {text : "Add image", icon : "la la-plus"},
+        onChange  : function(node) {
+            node.append(generateElements(`<div class="item"><a><img src="${wwwroot}/theme/degrade/_editor/media/posts/1.jpg"></a></div>`)[0]);
+
+            //render component properties again to include the new image
+            //Vvveb.Components.render("ellements/gallery");
+
+            return node;
+        }
+    }],
+    init(node) {
+
+        document.querySelectorAll(".mb-3[data-group]").forEach(el => el.style.display = "none");
+
+        let source = "flex";
+        if (node.classList.contains("masonry")) {
+            source = "masonry";
+        } else {
+            source = "flex";
+        }
+
+        document.querySelector('.mb-3[data-group="' + source + '"]').style.display = "";
+    }
 });
 
 //Tabs
@@ -529,6 +691,7 @@ Vvveb.Components.add("elements/tabs", {
     ]
 });
 
+
 //Accordion
 Vvveb.Components.add("elements/accordion", {
     classes    : ["accordion"],
@@ -645,6 +808,84 @@ Vvveb.Components.add("elements/accordion", {
             off : ""
         }
     },
+    ]
+});
+
+Vvveb.Components.add("elements/flip-box", {
+    classes    : ["flip-box"],
+    name       : "Flip box",
+    image      : "icons/flipbox.svg",
+    html       : `<div class="flip-box enabled">
+		  <div class="flip-box-inner">
+			<div class="flip-box-front">
+				  <div class="card">
+				  <img src="${wwwroot}/theme/degrade/_editor/media/posts/1.jpg" class="card-img-top" alt="Post">
+				  <div class="card-body">
+					<h5 class="card-title">Card title</h5>
+					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					<a href="#" class="btn btn-primary">Go somewhere</a>
+				  </div>
+				</div>	
+			</div>
+			
+			<div class="flip-box-back">
+				<div class="d-flex align-items-center flex-column">
+				  <div class="flex-shrink-0">
+					<img src="${wwwroot}/theme/degrade/_editor/media/posts/2.jpg" alt="Post">
+				  </div>
+				  <div class="flex-grow-1 ms-3">
+					<p>
+						This is some content from a media component. You can replace this with any content and adjust it as needed.
+					</p>
+					
+					<a href="#" class="btn btn-primary">Go somewhere</a>
+				  </div>
+				</div>
+			</div>
+		  </div>
+		</div>`,
+    properties : [{
+        name      : "Width",
+        key       : "width",
+        htmlAttr  : "style",
+        inputtype : CssUnitInput
+    }, {
+        name      : "Height",
+        key       : "height",
+        htmlAttr  : "style",
+        inputtype : CssUnitInput
+    }, {
+        name        : "Enabled",
+        key         : "enabled",
+        htmlAttr    : "class",
+        validValues : ["enabled"],
+        inputtype   : ToggleInput,
+        data        : {
+            on  : "enabled",
+            off : ""
+        }
+    }, {
+        name        : "Show back",
+        key         : "back",
+        htmlAttr    : "class",
+        validValues : ["back"],
+        inputtype   : ToggleInput,
+        data        : {
+            on  : "back",
+            off : ""
+        }
+    },
+        {
+            name        : "Vertical",
+            key         : "vertical",
+            htmlAttr    : "class",
+            validValues : ["vertical"],
+            inputtype   : ToggleInput,
+            data        : {
+                on  : "vertical",
+                off : ""
+            }
+        },
     ]
 });
 
@@ -771,7 +1012,7 @@ function carouselAfterDrop(node) {
         let link = document.createElement('link');
         let lib = document.createElement('script');
         let code = document.createElement('script');
-        link.href = '../../libs/swiper/swiper-bundle.css';
+        link.href = '../../libs/swiper/swiper-bundle.min.css';
         link.id = 'swiper-css';
         link.rel = 'stylesheet';
         lib.id = 'swiper-js';
@@ -784,11 +1025,11 @@ function carouselAfterDrop(node) {
 			if (typeof Swiper == "undefined") return;
 			let list = document.querySelectorAll('.swiper' + (onlyNew ? ":not(.swiper-initialized)" : "") );
 			list.forEach(el => {
-				let params = {      
+				let params = {
 					navigation: {
 						nextEl: ".swiper-button-next",
 						prevEl: ".swiper-button-prev",
-					},      
+					},
 					pagination: {
 						el: ".swiper-pagination",
 				  },
@@ -832,10 +1073,10 @@ Vvveb.Components.add("elements/carousel", {
     html      : `
 	  <div class="swiper" data-slides-per-view="3" data-draggable="true">
 		<div class="swiper-wrapper">
-		  <div class="swiper-slide"><img src="/media/4.jpg" class="img-fluid"><p>Slide 1</p></div>
-		  <div class="swiper-slide"><img src="/media/2.jpg" class="img-fluid"><p>Slide 2</p></div>
-		  <div class="swiper-slide"><img src="/media/5.jpg" class="img-fluid"><p>Slide 3</p></div>
-		  <div class="swiper-slide"><img src="/media/7.jpg" class="img-fluid"><p>Slide 4</p></div>
+		  <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/4.jpg" class="img-fluid"><p>Slide 1</p></div>
+		  <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/2.jpg" class="img-fluid"><p>Slide 2</p></div>
+		  <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/5.jpg" class="img-fluid"><p>Slide 3</p></div>
+		  <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/7.jpg" class="img-fluid"><p>Slide 4</p></div>
 		</div>
 		<div class="swiper-pagination"></div>
 
@@ -871,8 +1112,7 @@ Vvveb.Components.add("elements/carousel", {
             selector      : ".swiper-slide",
             container     : ".swiper-wrapper",
             prefix        : "Slide ",
-            removeElement : false,//handle manually with removeSlide
-            //"newElement": `<div class="swiper-slide"><img src="../../media/posts/1.jpg" class="img-fluid"><p>Slide 1</p></div>`
+            removeElement : false, //handle manually with removeSlide
         },
         onChange  : function(node, value, input, component, event) {
             let element = node;
@@ -880,13 +1120,12 @@ Vvveb.Components.add("elements/carousel", {
             for (i in element.dataset) {
                 dataset[i] = element.dataset[i];
             }
-            ;
 
             if (event.action) {
                 if (event.action == "add") {
                     let random = Math.floor(Math.random() * 6) + 1;
                     let index = element.swiper.slides.length + 1;
-                    element.swiper.appendSlide(generateElements(`<div class="swiper-slide"><img src="../../media/posts/${random}.jpg" class="img-fluid"><p>Slide ${index}</p></div>`)[0]);
+                    element.swiper.appendSlide(generateElements(`<div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/posts/${random}.jpg" class="img-fluid"><p>Slide ${index}</p></div>`)[0]);
                     element.swiper.slideTo(index);
                     //temporary solution to better update list
                     Vvveb.Components.render("elements/carousel");
@@ -1038,10 +1277,10 @@ Vvveb.Components.add("elements/slider", {
     html      : `
 	  <div class="swiper" data-slides-per-view="1" data-draggable="true" data-navigation='{"nextEl": ".swiper-button-next","prevEl": ".swiper-button-prev"}'>
 		<div class="swiper-wrapper">
-		  <div class="swiper-slide"><img src="/media/posts/1.jpg" class="img-fluid"><p>Slider 1</p></div>
-		  <div class="swiper-slide"><img src="/media/posts/2.jpg" class="img-fluid"><p>Slider 2</p></div>
-		  <div class="swiper-slide"><img src="/media/posts/3.jpg" class="img-fluid"><p>Slider 3</p></div>
-		  <div class="swiper-slide"><img src="/media/posts/4.jpg" class="img-fluid"><p>Slider 4</p></div>
+		  <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/posts/1.jpg" class="img-fluid"><p>Slider 1</p></div>
+		  <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/posts/2.jpg" class="img-fluid"><p>Slider 2</p></div>
+		  <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/posts/3.jpg" class="img-fluid"><p>Slider 3</p></div>
+		  <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/posts/4.jpg" class="img-fluid"><p>Slider 4</p></div>
 		</div>
 		<div class="swiper-pagination"></div>
 
@@ -1053,6 +1292,7 @@ Vvveb.Components.add("elements/slider", {
 	`,
     afterDrop : carouselAfterDrop,
 });
+
 
 Vvveb.Components.add("elements/icon-list", {
     nodes      : [".counter"],
@@ -1148,8 +1388,8 @@ Vvveb.Components.add("elements/image-compare", {
     name       : "Image Compare",
     image      : "icons/image-compare.svg",
     html       : `<div class="c-compare" style="--value:50%;">
-	  <img class="c-compare__left" src="img/color.jpg"  />
-	  <img class="c-compare__right" src="img/bw.jpg"  />
+	  <img class="c-compare__left" src="img/color.jpg" alt="" />
+	  <img class="c-compare__right" src="img/bw.jpg" alt="" />
 	</div>`,
     properties : []
 });

@@ -22,28 +22,31 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once('../../../config.php');
-require_once('./function.php');
+require_once("../../../config.php");
+require_once("./function.php");
 $PAGE->set_context(\context_system::instance());
 
-$chave = required_param('chave', PARAM_TEXT);
-$editlang = required_param('editlang', PARAM_TEXT);
+$chave = required_param("chave", PARAM_TEXT);
+$editlang = required_param("editlang", PARAM_TEXT);
+
+$html = "";
 
 if (file_exists(__DIR__ . "/_default/default-{$chave}.html")) {
     $html = get_config("theme_degrade", "{$chave}_htmleditor_{$editlang}");
-    if (isset($html[40])) {
-
-        $html = vvveb__add_css($chave, $html);
-        die($html);
-    } else {
-        $html = "<link href=\"{wwwroot}/theme/degrade/_editor/_default/bootstrap-vvveb.css\" rel=\"stylesheet\">\n\n";
-        $html .= file_get_contents(__DIR__ . "/_default/default-{$chave}.html");
-
-        $html = vvveb__add_css($chave, $html);
+    if (!isset($html[40])) {
+        $html = file_get_contents(__DIR__ . "/_default/default-{$chave}.html");
         $html = vvveb__changue_langs($html);
         $html = vvveb__change_courses($html);
-
-        $html = str_replace("<style>", "<style id='vvvebjs-styles'>", $html);
-        die($html);
     }
 }
+
+if (!strpos($html, "vvvebjs-styles")) {
+    $html .= "<style id='vvvebjs-styles'>";
+}
+if (!strpos($html, "bootstrap-vvveb.css")) {
+    $html = "<link href='{$CFG->wwwroot}/theme/degrade/_editor/_default/bootstrap-vvveb.css'
+                   rel='stylesheet'>
+                 {$html}";
+}
+
+die($html);

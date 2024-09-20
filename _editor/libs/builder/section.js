@@ -1,5 +1,5 @@
-let bgVideoTemplate = '<video playsinline loop muted autoplay src="' + wwwroot + '/theme/degrade/_editor/media/sample.webm" poster="' + wwwroot + '/theme/degrade/_editor/media/sample.webp" controls><video>';
-let bgImageTemplate = '<img src="../../media/4.jpg">';
+let bgVideoTemplate = `<video playsinline loop muted autoplay src="${wwwroot}/theme/degrade/_editor/media/sample.webm" poster="${wwwroot}/theme/degrade/_editor/media/sample.webp"><video>`;
+let bgImageTemplate =`<img src="${wwwroot}/theme/degrade/_editor/media/4.jpg">`;
 let defaultSeparatorSvg = '<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 41" width="100%" height="300" fill="var(--bs-body-bg)" preserveAspectRatio="none"><defs><style>.cls-1{fill:inherit}</style></defs><title>rough-edges-bottom</title><path class="cls-1" d="M0,185l125-26,33,17,58-12s54,19,55,19,50-11,50-11l56,6,60-8,63,15v15H0Z" transform="translate(0 -159)"/></svg>';
 
 let SectionBackground = [{
@@ -258,6 +258,38 @@ function sectionSeparatorProperties(name, title) {
             }
         }
     }, {
+        name      : "Icon",
+        key       : "icon",
+        inline    : true,
+        group     : `${name}_separator`,
+        child     : `.separator.${name} > svg`,
+        inputtype : HtmlListSelectInput,
+        onChange  : function(element, value, input, component) {
+            let newElement = generateElements(value)[0];
+            let attributes = element.attributes;
+
+            //keep old svg size and colors
+            for (let i = 0; i < attributes.length; i++) {
+                let attr = attributes[i];
+                if (attr.name && attr.name != "viewBox") {
+                    newElement.setAttribute(attr.name, attr.value);
+                }
+            }
+
+            element.replaceWith(newElement);
+            return newElement;
+        },
+        data      : {
+            url           : Vvveb.baseUrl + "../../resources/svg/separators/{value}/index.html",
+            clickElement  : "li",
+            insertElement : "svg",
+            elements      : 'Loading ...',
+            options       : [{
+                value : "digital-red-panther",
+                text  : "Red panther"
+            }]
+        },
+    }, {
         name      : "Width",
         key       : "width",
         htmlAttr  : "width",
@@ -293,7 +325,15 @@ function sectionSeparatorProperties(name, title) {
             min  : 1,
             step : 1
         }
-    }, {
+    }, /*{
+		key: "separator_svg_style_header",
+		inputtype: SectionInput,
+		name:false,
+		group:`${name}_separator`,
+		//sort: base_sort++,
+		//section: style_section,
+		data: {header:"Svg colors"},
+	},*/ {
         name      : "Fill Color",
         key       : "fill",
         //sort: base_sort++,
@@ -407,6 +447,7 @@ let ComponentSectionContent = [{
     ...sectionSeparatorProperties("top", "Top"),
     ...sectionSeparatorProperties("bottom", "Bottom"),
 ];
+
 
 let ComponentSectionStyle = [];
 /*[{
@@ -580,11 +621,11 @@ Vvveb.Components.add("elements/header", {
     nodes      : ["header"],
     name       : "Header",
     image      : "icons/stream-solid.svg",
-    html       : `<div>
+    html       : `<header>
 				<div class="container">
 					<h1>Section</h1>
 				</div>
-			</div>`,
+			</header>`,
     properties : [
         ...ComponentSectionContent,
         ...ComponentSectionStyle,
@@ -608,4 +649,4 @@ Vvveb.Components.add("elements/footer", {
         ...ComponentSectionAdvanced
     ],
     init       : componentsInit
-});  
+});

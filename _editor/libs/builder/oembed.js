@@ -210,7 +210,7 @@ const oEmbedProviders = [
   {
     regex: /https?:\/\/((play|www)\.)?anghami\.com\/.*/,
     url: "https://api.anghami.com/rest/v1/oembed.view"
-  }   
+  }
 ];
 
 const urlTransforms = [
@@ -245,11 +245,11 @@ const urlTransforms = [
   {
 	regex: /(maps|www)\.google\.([a-z]{2,3})\/maps\/(.+)msid=(.+)/,
 	url: '$2.google.com/maps/ms?msid=$3&output=embed"',
-  },  
+  },
   {
 	regex: /(maps|www)\.google\.([a-z]{2,3})\/maps\/@(.+)/,
 	url: '$1.google.com/maps/embed?center=$3"',
-  },  
+  },
   {
 	regex: /dailymotion\.com\/video\/([^_]+)/,
 	url: 'www.dailymotion.com/embed/video/$1',
@@ -271,7 +271,7 @@ async function getOembed(url, maxwidth = 800, maxheight = 600, silent = false) {
 	 }
 
 	 if (oembedUrl === undefined) {
-		 
+
 		const matchTransform = (url, maxwidth, maxheight) => {
 			for (const transforms of urlTransforms) {
 				let matches = transforms.regex.exec(url);
@@ -280,27 +280,27 @@ async function getOembed(url, maxwidth = 800, maxheight = 600, silent = false) {
 					for (let i = 0; i < matches.length; i++) {
 						newUrl = newUrl.replace('$' + i, () => matches[i] ? matches[i] : '');
 					}
-					return `<iframe src="https://${newUrl}" width="${maxwidth}" height="${maxheight}" style="border:0;" allowfullscreen sandbox="allow-scripts allow-same-origin allow-popups" allow=":encrypted-media; :picture-in-picture" ></iframe>`;
+					return `<iframe src="https://${newUrl}" width="${maxwidth}" height="${maxheight}" style="border:0;" loading="lazy" ></iframe>`;
 				}
 			}
 		};
-		 
+
 		 let transform = matchTransform(url, maxwidth, maxheight);
 		 if (transform) {
 			 return {html: transform};
 		 }
-		 
+
 		 if (!silent) {
 			 let message = 'Embed error: URL did not match any provider.';
 			 displayToast("bg-danger", "Error", message);
 		 }
-		 
+
 		 return;
 	 }
 
 	 let remoteResponse;
 	 //try to fetch directly, if CORS error use proxy
-	 for (url of [oembedUrl,oEmbedProxyUrl + "&url=" + encodeURIComponent(oembedUrl)]) { 
+	 for (url of [oembedUrl,oEmbedProxyUrl + "&url=" + encodeURIComponent(oembedUrl)]) {
 
 		 try {
 			 remoteResponse = await window.fetch(url);

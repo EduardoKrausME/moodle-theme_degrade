@@ -18,13 +18,14 @@ https://github.com/givanz/VvvebJs
 
 Vvveb.ComponentsGroup['Server Components'] = ["components/products", "components/product", "components/categories", "components/manufacturers", "components/search", "components/user", "components/product_gallery", "components/cart", "components/checkout", "components/filters", "components/product", "components/slider"];
 
+
 Vvveb.Components.add("components/product", {
     name: "Product",
     attributes: ["data-component-product"],
 
     image: "icons/map.svg",
-    html: '<iframe frameborder="0" src="https://maps.google.com/maps?&z=1&t=q&output=embed" allowfullscreen sandbox="allow-scripts allow-same-origin allow-popups" allow=":encrypted-media; :picture-in-picture"></iframe>',
-    
+    html: '<iframe frameborder="0" src="https://maps.google.com/maps?&z=1&t=q&output=embed"></iframe>',
+
 	properties: [
 	{
         name: "Id",
@@ -71,7 +72,8 @@ Vvveb.Components.add("components/product", {
             }]
        },
     }]
-});    
+});
+
 
 Vvveb.Components.add("components/products", {
     name: "Products",
@@ -118,10 +120,10 @@ Vvveb.Components.add("components/products", {
 			$('.mb-3[data-group="'+ input.value + '"]').show();
 
 			return element;
-		}, 
+		},
 		init: function(node) {
 			return node.dataset.type;
-		},            
+		},
     },{
         name: "Products",
         key: "products",
@@ -142,7 +144,7 @@ Vvveb.Components.add("components/products", {
             min: "1",
             max: "1024",
             step: "1"
-        },        
+        },
         getFromNode: function(node) {
             return 10
         },
@@ -156,7 +158,7 @@ Vvveb.Components.add("components/products", {
             min: "1",
             max: "1024",
             step: "1"
-        },        
+        },
         inputtype: NumberInput,
         getFromNode: function(node) {
             return 0
