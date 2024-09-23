@@ -1,4 +1,1 @@
-<svg height="12" preserveAspectRatio="xMinYMid meet" viewBox="0 0 12 12" width="12" xmlns="http://www.w3.org/2000/svg">
-    <path d="m11 0h-10c-.5 0-1 .5-1 1v10c0 .5.5 1 1 1h10c.5 0 1-.5 1-1v-10c0-.5-.5-1-1-1zm0 10c0 .5-.5 1-1 1h-8c-.5 0-1-.5-1-1v-6c0-.5.5-1 1-1h8c.5 0 1 .5 1 1zm-2-2.5c0 .3-.2.5-.5.5h-5c-.3 0-.5-.2-.5-.5v-1c0-.3.2-.5.5-.5h5c.3 0 .5.2.5.5z"
-          fill="#AAA"/>
-</svg>
+<svg height="12" preserveAspectRatio="xMinYMid meet" viewBox="0 0 12 12" width="12" xmlns="http://www.w3.org/2000/svg"><path d="m11 0h-10c-.5 0-1 .5-1 1v10c0 .5.5 1 1 1h10c.5 0 1-.5 1-1v-10c0-.5-.5-1-1-1zm0 10c0 .5-.5 1-1 1h-8c-.5 0-1-.5-1-1v-6c0-.5.5-1 1-1h8c.5 0 1 .5 1 1zm-2-2.5c0 .3-.2.5-.5.5h-5c-.3 0-.5-.2-.5-.5v-1c0-.3.2-.5.5-.5h5c.3 0 .5.2.5.5z" fill="#aaa"/></svg>

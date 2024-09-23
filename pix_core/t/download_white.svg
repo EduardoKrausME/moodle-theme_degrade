@@ -1,6 +1,1 @@
-<svg height="12" preserveAspectRatio="xMinYMid meet" viewBox="0 0 12 12" width="12" xmlns="http://www.w3.org/2000/svg">
-    <g fill="#AAA">
-        <path d="m5.3 12h-5.3v-9.4l2.6-2.6h7.4v3.8l-1-1v-1.8h-5v3h-3v7h4c0 .4.1.7.3 1z"/>
-        <path d="m11.743 8.05-3.5 3.6c-.4.4-1 .4-1.4 0l-3.5-3.7c-.4-.4-.3-.9.3-.9h2.3v-3c0-.5.5-1 1.1-1h1c.5 0 .9.5.9 1v3h2.5c.5 0 .7.6.3 1z"/>
-    </g>
-</svg>
+<svg height="12" preserveAspectRatio="xMinYMid meet" viewBox="0 0 12 12" width="12" xmlns="http://www.w3.org/2000/svg"><g fill="#aaa"><path d="m5.3 12h-5.3v-9.4l2.6-2.6h7.4v3.8l-1-1v-1.8h-5v3h-3v7h4c0 .4.1.7.3 1z"/><path d="m11.743 8.05-3.5 3.6c-.4.4-1 .4-1.4 0l-3.5-3.7c-.4-.4-.3-.9.3-.9h2.3v-3c0-.5.5-1 1.1-1h1c.5 0 .9.5.9 1v3h2.5c.5 0 .7.6.3 1z"/></g></svg>
