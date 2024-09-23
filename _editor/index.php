@@ -70,7 +70,6 @@ require_capability('moodle/site:config', context_system::instance());
             </button>
         </div>
 
-
         <div class="btn-group me-3" role="group">
             <button class="btn btn-light" title="Designer Mode (Free dragging)" id="designer-mode-btn"
                     data-bs-toggle="button" aria-pressed="false" data-vvveb-action="setDesignerMode">
@@ -93,7 +92,6 @@ require_capability('moodle/site:config', context_system::instance());
             </button>
 
         </div>
-
 
         <div class="btn-group me-2 float-end" role="group">
             <form class="form-preview" method="post" target="editor-preview"
@@ -138,7 +136,6 @@ require_capability('moodle/site:config', context_system::instance());
 
             <div class="btn-group responsive-btns" role="group">
 
-
                 <button id="mobile-view" data-view="mobile" class="btn btn-light" title="Mobile view"
                         data-vvveb-action="viewport">
                     <i class="la la-mobile"></i>
@@ -164,7 +161,6 @@ require_capability('moodle/site:config', context_system::instance());
         </div>
 
     </div>
-
 
     <div id="left-panel">
         <div>
@@ -211,10 +207,8 @@ require_capability('moodle/site:config', context_system::instance());
 
                     <div class="tab-content">
 
-
                         <div class="tab-pane show active sections" id="sections" role="tabpanel"
                              aria-labelledby="sections-tab">
-
 
                             <ul class="nav nav-tabs nav-fill nav-underline  sections-tabs" id="sections-tabs"
                                 role="tablist">
@@ -293,7 +287,6 @@ require_capability('moodle/site:config', context_system::instance());
                                                     </div>
                                                 </div -->
 
-
                                             </div>
                                         </div>
                                     </div>
@@ -301,7 +294,6 @@ require_capability('moodle/site:config', context_system::instance());
 
                                 <div class="tab-pane show active" id="sections-new-tab" data-section="content"
                                      role="tabpanel" aria-labelledby="content-tab">
-
 
                                     <div class="search">
                                         <div class="expand">
@@ -318,7 +310,6 @@ require_capability('moodle/site:config', context_system::instance());
                                             <i class="la la-times"></i>
                                         </button>
                                     </div>
-
 
                                     <div class="drag-elements-sidepane sidepane">
                                         <div class="block-preview"><img src="" style="display:none"></div>
@@ -338,7 +329,6 @@ require_capability('moodle/site:config', context_system::instance());
 
                         <div class="tab-pane show" id="components-tabs" role="tabpanel"
                              aria-labelledby="components-tab">
-
 
                             <ul class="nav nav-tabs nav-fill nav-underline  sections-tabs" role="tablist">
                                 <li class="nav-item components-tab" style="display: none">
@@ -498,7 +488,6 @@ require_capability('moodle/site:config', context_system::instance());
 
                             </div>
 
-
                         </div><!-- end configuration tab -->
 
                     </div>
@@ -507,7 +496,6 @@ require_capability('moodle/site:config', context_system::instance());
             </div>
         </div>
     </div>
-
 
     <div id="canvas">
         <div id="iframe-wrapper">
@@ -590,7 +578,6 @@ require_capability('moodle/site:config', context_system::instance());
                                       stroke-width="2" x1="4" x2="20" y1="22" y2="22"/>
                             </svg>
                         </a>
-
 
                         <a id="strike-btn" class="hint" href="" title="Strikeout" aria-label="Strikeout">
                             <del>S</del>
@@ -843,11 +830,9 @@ require_capability('moodle/site:config', context_system::instance());
                 </div>
             </div>
 
-
             <iframe src="" id="iframe1">
             </iframe>
         </div>
-
 
     </div>
 
@@ -899,9 +884,7 @@ require_capability('moodle/site:config', context_system::instance());
                      aria-labelledby="advanced-tab">
                 </div>
 
-
             </div>
-
 
         </div>
     </div>
@@ -919,7 +902,6 @@ require_capability('moodle/site:config', context_system::instance());
                 </ol>
             </div>
 
-
             <div class="btn-group" role="group">
 
                 <div id="toggleEditorJsExecute" class="form-check mt-1" style="display:none">
@@ -930,12 +912,10 @@ require_capability('moodle/site:config', context_system::instance());
                     </label>&ensp;
                 </div>
 
-
                 <button id="code-editor-btn" class="btn btn-sm btn-light btn-sm" title="Code editor"
                         data-vvveb-action="toggleEditor">
                     <i class="la la-code"></i> Code editor
                 </button>
-
 
             </div>
 
@@ -949,38 +929,27 @@ require_capability('moodle/site:config', context_system::instance());
     </div>
 </div>
 
-
 <!-- templates -->
 
 <script id="vvveb-input-textinput" type="text/html">
-
     <div>
         <input name="{%=key%}" type="text" class="form-control"/>
     </div>
-
 </script>
-
 <script id="vvveb-input-textareainput" type="text/html">
-
     <div>
         <textarea name="{%=key%}" {% if (typeof rows !== 'undefined') { %} rows="{%=rows%}" {% } else { %} rows="3" {% }
         %} class="form-control"/>
     </div>
-
 </script>
-
 <script id="vvveb-input-checkboxinput" type="text/html">
-
     <div class="form-check{% if (typeof className !== 'undefined') { %} {%=className%}{% } %}">
         <input name="{%=key%}" class="form-check-input" type="checkbox" id="{%=key%}_check">
         <label class="form-check-label" for="{%=key%}_check">{% if (typeof text !== 'undefined') { %} {%=text%} {% }
             %}</label>
     </div>
-
 </script>
-
 <script id="vvveb-input-radioinput" type="text/html">
-
     <div>
 
         {% for ( var i = 0; i < options.length; i++ ) { %}
@@ -995,11 +964,8 @@ require_capability('moodle/site:config', context_system::instance());
         {% } %}
 
     </div>
-
 </script>
-
 <script id="vvveb-input-radiobuttoninput" type="text/html">
-
     <div class="btn-group {%if (extraclass) { %}{%=extraclass%}{% } %} clearfix" role="group">
         {% var namespace = 'rb-' + Math.floor(Math.random() * 100); %}
 
@@ -1017,12 +983,8 @@ require_capability('moodle/site:config', context_system::instance());
         {% } %}
 
     </div>
-
 </script>
-
-
 <script id="vvveb-input-toggle" type="text/html">
-
     <div class="form-check form-switch {% if (typeof className !== 'undefined') { %} {%=className%}{% } %}">
         <input
                 type="checkbox"
@@ -1035,18 +997,11 @@ require_capability('moodle/site:config', context_system::instance());
         <label class="form-check-label" for="{%=key%}">
         </label>
     </div>
-
 </script>
-
 <script id="vvveb-input-header" type="text/html">
-
     <h6 class="header">{%=header%}</h6>
-
 </script>
-
-
 <script id="vvveb-input-select" type="text/html">
-
     <div>
 
         <select class="form-select" name="{%=key%}">
@@ -1071,11 +1026,8 @@ require_capability('moodle/site:config', context_system::instance());
         </select>
 
     </div>
-
 </script>
-
 <script id="vvveb-input-icon-select" type="text/html">
-
     <div class="input-list-select">
 
         <div class="elements">
@@ -1091,11 +1043,8 @@ require_capability('moodle/site:config', context_system::instance());
             </div>
         </div>
     </div>
-
 </script>
-
 <script id="vvveb-input-html-list-select" type="text/html">
-
     <div class="input-html-list-select">
 
         <div class="current-element">
@@ -1126,11 +1075,8 @@ require_capability('moodle/site:config', context_system::instance());
             </div>
         </div>
     </div>
-
 </script>
-
 <script id="vvveb-input-html-list-dropdown" type="text/html">
-
     <div class="input-html-list-select" {% if (typeof id !== "undefined") { %} id={%=id%} {% } %}>
 
     <div class="current-element">
@@ -1162,22 +1108,16 @@ require_capability('moodle/site:config', context_system::instance());
         </div>
     </div>
     </div>
-
 </script>
-
 <script id="vvveb-input-dateinput" type="text/html">
-
     <div>
         <input name="{%=key%}" type="date" class="form-control"
                {% if (typeof min_date=== 'undefined') { %} min="{%=min_date%}" {% } %} {% if (typeof max_date ===
         'undefined') { %} max="{%=max_date%}" {% } %}
         />
     </div>
-
 </script>
-
 <script id="vvveb-input-listinput" type="text/html">
-
     <div class="sections-container">
 
         {% for ( var i = 0; i < options.length; i++ ) { %}
@@ -1199,7 +1139,6 @@ require_capability('moodle/site:config', context_system::instance());
                 </div>
             </div>
 
-
             <input class="header_check" type="checkbox" id="section-components-{%=options[i].suffix%}">
 
             <label for="section-components-{%=options[i].suffix%}">
@@ -1211,9 +1150,7 @@ require_capability('moodle/site:config', context_system::instance());
             </div>
         </div>
 
-
         {% } %}
-
 
         {% if (typeof hide_remove === 'undefined') { %}
         <div class="mt-3">
@@ -1226,11 +1163,8 @@ require_capability('moodle/site:config', context_system::instance());
         {% } %}
 
     </div>
-
 </script>
-
 <script id="vvveb-input-grid" type="text/html">
-
     <div class="row">
         <div class="col-6">
 
@@ -1245,7 +1179,6 @@ require_capability('moodle/site:config', context_system::instance());
 
             </select>
         </div>
-
 
         <div class="col-6">
             <label>Small</label>
@@ -1286,7 +1219,6 @@ require_capability('moodle/site:config', context_system::instance());
             </select>
         </div>
 
-
         <div class="col-6">
             <label>Extra large </label>
             <select class="form-select" name="col-xl" autocomplete="off">
@@ -1324,11 +1256,8 @@ require_capability('moodle/site:config', context_system::instance());
         {% } %}
 
     </div>
-
 </script>
-
 <script id="vvveb-input-textvalue" type="text/html">
-
     <div class="row">
         <div class="col-6 mb-1">
             <label>Value</label>
@@ -1351,11 +1280,8 @@ require_capability('moodle/site:config', context_system::instance());
         {% } %}
 
     </div>
-
 </script>
-
 <script id="vvveb-input-rangeinput" type="text/html">
-
     <div class="input-range">
 
         <input name="{%=key%}" type="range" min="{%=min%}" max="{%=max%}" step="{%=step%}" class="form-range"
@@ -1363,20 +1289,14 @@ require_capability('moodle/site:config', context_system::instance());
         <input name="{%=key%}" type="number" min="{%=min%}" max="{%=max%}" step="{%=step%}" class="form-control"
                data-input-value/>
     </div>
-
 </script>
-
 <script id="vvveb-input-imageinput" type="text/html">
-
     <div>
         <input name="{%=key%}" type="text" class="form-control"/>
         <input name="file" type="file" class="form-control"/>
     </div>
-
 </script>
-
 <script id="vvveb-input-imageinput-gallery" type="text/html">
-
     <div>
         <img id="thumb-{%=key%}" class="img-thumbnail p-0" data-target-input="#input-{%=key%}"
              data-target-thumb="#thumb-{%=key%}" style="cursor:pointer" src="" width="225" height="225">
@@ -1386,11 +1306,8 @@ require_capability('moodle/site:config', context_system::instance());
             <i class="la la-image la-lg"></i>
             <span>Change image</span></button>
     </div>
-
 </script>
-
 <script id="vvveb-input-videoinput-gallery" type="text/html">
-
     <div>
         <video id="thumb-v{%=key%}" class="img-thumbnail p-0" data-target-input="#input-v{%=key%}"
                data-target-thumb="#thumb-v{%=key%}" style="cursor:pointer" src="" width="225" height="225" playsinline
@@ -1399,11 +1316,8 @@ require_capability('moodle/site:config', context_system::instance());
         <button name="button" class="btn btn-primary btn-sm btn-icon mt-2" data-target-input="#vinput-v{%=key%}"
                 data-target-thumb="#thumb-v{%=key%}"><i class="la la-video la-lg"></i><span>Change video</span></button>
     </div>
-
 </script>
-
 <script id="vvveb-input-colorinput" type="text/html">
-
     <div>
         <input name="{%=key%}" {% if (typeof palette !== 'undefined') { %} list="{%=key%}-color-palette" {% } %}
         type="color" {% if (typeof value !== 'undefined' && value != false) { %} value="{%=value%}" {% } %}
@@ -1415,11 +1329,8 @@ require_capability('moodle/site:config', context_system::instance());
             {% } %}
             {% } %}
     </div>
-
 </script>
-
 <script id="vvveb-input-bootstrap-color-picker-input" type="text/html">
-
     <div>
         <div id="cp2" class="input-group" title="Using input value">
             <input name="{%=key%}" type="text" {% if (typeof value !== 'undefined' && value != false) { %}
@@ -1429,9 +1340,7 @@ require_capability('moodle/site:config', context_system::instance());
 		  </span>
         </div>
     </div>
-
 </script>
-
 <script id="vvveb-input-numberinput" type="text/html">
     <div>
         <input name="{%=key%}" type="number" value="{%=value%}"
@@ -1441,7 +1350,6 @@ require_capability('moodle/site:config', context_system::instance());
         class="form-control"/>
     </div>
 </script>
-
 <script id="vvveb-input-button" type="text/html">
     <div>
         <button class="btn btn-sm btn-primary">
@@ -1450,7 +1358,6 @@ require_capability('moodle/site:config', context_system::instance());
         </button>
     </div>
 </script>
-
 <script id="vvveb-input-cssunitinput" type="text/html">
     <div class="input-group css-unit" id="cssunit-{%=key%}">
         <input name="number" type="number" {% if (typeof value !== 'undefined' && value != false) { %}
@@ -1476,14 +1383,11 @@ require_capability('moodle/site:config', context_system::instance());
             <option value="">-</option>
         </select>
     </div>
-
 </script>
-
 <script id="vvveb-breadcrumb-navigaton-item" type="text/html">
     <li class="breadcrumb-item"><a href="#" {% if (typeof className !== 'undefined') { %}class="{%=className%}"{% }
         %}>{%=name%}</a></li>
 </script>
-
 <script id="vvveb-input-sectioninput" type="text/html">
     <div>
         {% var namespace = '-' + Math.floor(Math.random() * 1000); %}
@@ -1498,9 +1402,7 @@ require_capability('moodle/site:config', context_system::instance());
     </div>
     </div>
 </script>
-
 <script id="vvveb-property" type="text/html">
-
     <div class="mb-3 {% if (typeof col !== 'undefined' && col != false) { %} col-sm-{%=col%} {% } else { %}row{% } %} {% if (typeof inline !== 'undefined' && inline == true) { %}inline{% } %} "
          data-key="{%=key%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}>
 
@@ -1511,32 +1413,23 @@ require_capability('moodle/site:config', context_system::instance());
     <div class="{% if (typeof inline === 'undefined') { %}col-sm-{% if (typeof name !== 'undefined' && name != false) { %}8{% } else { %}12{% } } %} input"></div>
 
     </div>
-
 </script>
-
 <script id="vvveb-input-autocompletelist" type="text/html">
-
     <div>
         <input name="{%=key%}" type="text" class="form-control"/>
 
         <div class="form-control autocomplete-list" style="min-height: 150px; overflow: auto;">
         </div>
     </div>
-
 </script>
-
 <script id="vvveb-input-tagsinput" type="text/html">
-
     <div>
         <div class="form-control tags-input" style="height:auto;">
-
 
             <input name="{%=key%}" type="text" class="form-control" style="border:none;min-width:60px;"/>
         </div>
     </div>
-
 </script>
-
 <script id="vvveb-input-noticeinput" type="text/html">
     <div>
         <div class="alert alert-dismissible fade show alert-{%=type%}" role="alert">
@@ -1547,7 +1440,6 @@ require_capability('moodle/site:config', context_system::instance());
         </div>
     </div>
 </script>
-
 <script id="vvveb-section" type="text/html">
     {% var suffix = Math.floor(Math.random() * 10000); %}
 
@@ -1568,7 +1460,6 @@ require_capability('moodle/site:config', context_system::instance());
                 <a class="properties-btn" href="" title="Properties"><i class="icon-settings-outline"></i></a>
             </div>
         </div>
-
 
         <input class="header_check" type="checkbox" id="section-components-{%=suffix%}">
 
@@ -1591,12 +1482,9 @@ require_capability('moodle/site:config', context_system::instance());
             </ol>
         </div>
     </div>
-
 </script>
 
-
 <!--// end templates -->
-
 
 <div id="tree-list">
     <div class="header">
@@ -1652,7 +1540,6 @@ require_capability('moodle/site:config', context_system::instance());
             <div class="modal-body p-0">
                 <textarea class="form-control h-100"></textarea>
             </div>
-
 
         </div>
     </div>
@@ -1743,7 +1630,6 @@ require_capability('moodle/site:config', context_system::instance());
 <!-- inputs-->
 <script src="libs/builder/inputs.js"></script>
 
-
 <!-- media gallery -->
 <link href="libs/media/media.css" rel="stylesheet">
 <script src="libs/media/media.js"></script>
@@ -1771,7 +1657,6 @@ require_capability('moodle/site:config', context_system::instance());
 <script src="libs/builder/components-widgets.js"></script>
 <script src="libs/builder/oembed.js"></script>
 <script src="libs/builder/components-embeds.js"></script>
-
 
 <!-- sections-->
 <script src="libs/builder/sections-bootstrap4.js"></script>
@@ -1819,7 +1704,6 @@ require_capability('moodle/site:config', context_system::instance());
 <script src="libs/codemirror/lib/formatting.js"></script>
 <script src="libs/builder/plugin-codemirror.js"></script>
 
-
 <!--
 Tinymce plugin
 Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist
@@ -1827,18 +1711,15 @@ Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist
 <script src="libs/tinymce-dist/tinymce.js"></script>
 <script src="libs/builder/plugin-tinymce.js"></script>
 
-
 <!-- autocomplete plugin used by autocomplete input-->
 <!--
 <script src="libs/autocomplete/jquery.autocomplete.js"></script>	
 -->
 <script>
-    let deleteUrl = "<?php echo "save.php?action=delete&chave={$chave}&editlang={$editlang}"; ?>";
-    let saveUrl = "<?php echo "save.php?action=save&chave={$chave}&editlang={$editlang}"; ?>";
-    let oEmbedProxyUrl = "<?php echo "save.php?action=oembedProxy&chave={$chave}&editlang={$editlang}"; ?>";
-    let mediaScanUrl = "files.php?chave={$chave}&editlang={$editlang}";
-    let chatgptOptions = {"key" : "", "model" : "gpt-3.5-turbo-instruct", "temperature" : 0, "max_tokens" : 300};
-
+    deleteUrl = "<?php echo "save.php?action=delete&chave={$chave}&editlang={$editlang}"; ?>";
+    saveUrl = "<?php echo "save.php?action=save&chave={$chave}&editlang={$editlang}"; ?>";
+    oEmbedProxyUrl = "<?php echo "save.php?action=oembedProxy&chave={$chave}&editlang={$editlang}"; ?>";
+    mediaScanUrl = "<?php echo "files.php?chave={$chave}&editlang={$editlang}"; ?>
 
     var url = "<?php echo "loadpage.php?chave={$chave}&editlang={$editlang}"; ?>";
     Vvveb.Builder.init(url, function() {
