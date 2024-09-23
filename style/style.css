@@ -13484,7 +13484,7 @@ div.dropdown-item:focus-within {
   padding: 12px 0;
   right: 0;
   left: 0;
-  z-index: 999;
+  z-index: 99;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
 }
@@ -17186,6 +17186,11 @@ a#message-user-button {
   bottom: -0.2em;
 }
 
+.que.ddimageortext div.droparea .draghome {
+  min-height: 62px;
+  min-width: 62px;
+}
+
 .block-my-links {
   margin: 0 20px;
 }
@@ -17245,7 +17250,7 @@ a#message-user-button {
   position: fixed;
   border: none;
   height: initial;
-  z-index: 10000;
+  z-index: 99;
 }
 #header.fixed-top .nav-link, #header.ever-fixed-top .nav-link {
   white-space: initial;
