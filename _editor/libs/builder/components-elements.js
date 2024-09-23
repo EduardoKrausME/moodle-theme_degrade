@@ -27,25 +27,25 @@ Vvveb.ComponentsGroup['Elements'] = [
     "elements/flip-box",
     "elements/counter",
     "elements/svg-icon",
-    "elements/figure",
-//"elements/testimonial",
+    //"elements/figure",
+    //"elements/testimonial",
     "elements/social-icons",
-//"elements/icon-list",
-//"elements/divider",
-//"elements/separator",
-//"elements/image-box",
-//"elements/icon-box",
-//"elements/animated-headline",
-//"elements/price-table",
-//"elements/price-list",
-//"elements/reviews",
+    //"elements/icon-list",
+    //"elements/divider",
+    //"elements/separator",
+    //"elements/image-box",
+    //"elements/icon-box",
+    //"elements/animated-headline",
+    //"elements/price-table",
+    //"elements/price-list",
+    //"elements/reviews",
     "elements/code",
-    "elements/image-compare",
-//"elements/back-to-top",
-//"elements/blob",
-//"elements/image-shape",
-//"elements/image-shape",
-//"elements/rating",
+    //"elements/image-compare",
+    //"elements/back-to-top",
+    //"elements/blob",
+    //"elements/image-shape",
+    //"elements/image-shape",
+    //"elements/rating",
 ];
 
 Vvveb.Components.extend("_base", "elements/figure", {
@@ -53,11 +53,12 @@ Vvveb.Components.extend("_base", "elements/figure", {
     name      : "Figure",
     image     : "icons/image.svg",
     resizable : true,
-    html      : `<figure>
-		  <img src="${Vvveb.baseUrl}icons/image.svg" alt="Trulli">
-		  <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
-		  <div class="border"></div>
-		</figure>`,
+    html      : `
+        <figure>
+            <img src="${Vvveb.baseUrl}icons/image.svg" alt="Trulli">
+            <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
+            <div class="border"></div>
+        </figure>`,
 
     stylesheets : [{
         //the css is added in head when the element is added to page
@@ -182,9 +183,10 @@ Vvveb.Components.extend("_base", "elements/svg-icon", {
     nodes      : ["svg"],
     name       : "Svg Icon",
     image      : "icons/star.svg",
-    html       : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64">
-		<path d="M 30.335938 12.546875 L 20.164063 11.472656 L 16 2.132813 L 11.835938 11.472656 L 1.664063 12.546875 L 9.261719 19.394531 L 7.140625 29.398438 L 16 24.289063 L 24.859375 29.398438 L 22.738281 19.394531 Z"/>
-    </svg>`,
+    html       : `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64">
+		    <path d="M 30.335938 12.546875 L 20.164063 11.472656 L 16 2.132813 L 11.835938 11.472656 L 1.664063 12.546875 L 9.261719 19.394531 L 7.140625 29.398438 L 16 24.289063 L 24.859375 29.398438 L 22.738281 19.394531 Z"/>
+        </svg>`,
     properties : [{
         name      : "Icon",
         key       : "icon",
@@ -418,44 +420,43 @@ Vvveb.Components.add("elements/gallery", {
     name       : "Gallery",
     image      : "icons/images.svg",
     html       : `
-			<div class="gallery masonry has-shadow" data-component-gallery>
-				<div class="item">
-					<a>
-						<img src="${wwwroot}/theme/degrade/_editor/media/posts/1.jpg">
-					</a>
-				</div>
-				<div class="item">
-					<a>
-						<img src="${wwwroot}/theme/degrade/_editor/media/posts/2.jpg">
-					</a>
-				</div>
-				<div class="item">
-					<a>
-						<img src="${wwwroot}/theme/degrade/_editor/media/posts/3.jpg">
-					</a>
-				</div>
-				<div class="item">
-					<a>
-						<img src="${wwwroot}/theme/degrade/_editor/media/posts/4.jpg">
-					</a>
-				</div>
-				<div class="item">
-					<a>
-						<img src="${wwwroot}/theme/degrade/_editor/media/posts/5.jpg">
-					</a>
-				</div>
-				<div class="item">
-					<a>
-						<img src="${wwwroot}/theme/degrade/_editor/media/posts/6.jpg">
-					</a>
-				</div>
-				<div class="item">
-					<a>
-						<img src="${wwwroot}/theme/degrade/_editor/media/posts/7.jpg">
-					</a>
-				</div>
-			</div>
-			`,
+        <div class="gallery masonry has-shadow" data-component-gallery>
+            <div class="item">
+                <a>
+                    <img src="${wwwroot}/theme/degrade/_editor/media/posts/1.jpg">
+                </a>
+            </div>
+            <div class="item">
+                <a>
+                    <img src="${wwwroot}/theme/degrade/_editor/media/posts/2.jpg">
+                </a>
+            </div>
+            <div class="item">
+                <a>
+                    <img src="${wwwroot}/theme/degrade/_editor/media/posts/3.jpg">
+                </a>
+            </div>
+            <div class="item">
+                <a>
+                    <img src="${wwwroot}/theme/degrade/_editor/media/posts/4.jpg">
+                </a>
+            </div>
+            <div class="item">
+                <a>
+                    <img src="${wwwroot}/theme/degrade/_editor/media/posts/5.jpg">
+                </a>
+            </div>
+            <div class="item">
+                <a>
+                    <img src="${wwwroot}/theme/degrade/_editor/media/posts/6.jpg">
+                </a>
+            </div>
+            <div class="item">
+                <a>
+                    <img src="${wwwroot}/theme/degrade/_editor/media/posts/7.jpg">
+                </a>
+            </div>
+        </div>`,
     properties : [{
         name        : "Masonry layout",
         key         : "masonry",
@@ -614,25 +615,36 @@ Vvveb.Components.add("elements/tabs", {
     name       : "Tabs",
     image      : "icons/tabs.svg",
     html       : `
-	<div data-component-tabs id="tabs-parentId">
-			<nav>
-			  <div class="nav nav-tabs" role="tablist">
-				<button class="nav-link active" id="nav-tab-parentId-1" data-bs-toggle="tab" data-bs-target="#nav-parentId-1" type="button" role="tab" aria-controls="nav-1" aria-selected="true">Home</button>
-				<button class="nav-link" id="nav-tab-parentId-2" data-bs-toggle="tab" data-bs-target="#nav-parentId-2" type="button" role="tab" aria-controls="nav-2" aria-selected="false">Profile</button>
-				<button class="nav-link" id="nav-tab-parentId-3" data-bs-toggle="tab" data-bs-target="#nav-parentId-3" type="button" role="tab" aria-controls="nav-3" aria-selected="false">Contact</button>	  </div>
-			</nav>
-			<div class="tab-content">
-			  <div class="tab-pane p-4 show active" id="nav-parentId-1" role="tabpanel" aria-labelledby="nav-tab-1" tabindex="0">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis perferendis rem accusantium ducimus animi nesciunt expedita omnis aut quas molestias!</p>
-			  </div>
-			  <div class="tab-pane p-4" id="nav-parentId-2" role="tabpanel" aria-labelledby="nav-tab-2" tabindex="0">
-				<p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin</p>
-			  </div>
-			  <div class="tab-pane p-4" id="nav-parentId-3" role="tabpanel" aria-labelledby="nav-tab-3" tabindex="0">
-				<p>Quisque sagittis non ex eget vestibulum</p>
-			  </div>
-			</div>
-	</div>`,
+        <div data-component-tabs id="tabs-parentId">
+            <nav>
+                <div class="nav nav-tabs" role="tablist">
+                    <button class="nav-link active" id="nav-tab-parentId-1" data-bs-toggle="tab"
+                            data-bs-target="#nav-parentId-1" type="button" role="tab" aria-controls="nav-1"
+                            aria-selected="true">Home
+                    </button>
+                    <button class="nav-link" id="nav-tab-parentId-2" data-bs-toggle="tab" data-bs-target="#nav-parentId-2"
+                            type="button" role="tab" aria-controls="nav-2" aria-selected="false">Profile
+                    </button>
+                    <button class="nav-link" id="nav-tab-parentId-3" data-bs-toggle="tab" data-bs-target="#nav-parentId-3"
+                            type="button" role="tab" aria-controls="nav-3" aria-selected="false">Contact
+                    </button>
+                </div>
+            </nav>
+            <div class="tab-content">
+                <div class="tab-pane p-4 show active" id="nav-parentId-1" role="tabpanel" aria-labelledby="nav-tab-1"
+                     tabindex="0">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis perferendis rem accusantium ducimus
+                        animi nesciunt expedita omnis aut quas molestias!</p>
+                </div>
+                <div class="tab-pane p-4" id="nav-parentId-2" role="tabpanel" aria-labelledby="nav-tab-2" tabindex="0">
+                    <p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna
+                        vehicula, nec maximus est sollicitudin</p>
+                </div>
+                <div class="tab-pane p-4" id="nav-parentId-3" role="tabpanel" aria-labelledby="nav-tab-3" tabindex="0">
+                    <p>Quisque sagittis non ex eget vestibulum</p>
+                </div>
+            </div>
+        </div>`,
     afterDrop  : function(node) {
         //set unique accordion id
         node.outerHTML = node.outerHTML.replaceAll('parentId', Math.ceil(Math.random() * 1000));
@@ -697,44 +709,54 @@ Vvveb.Components.add("elements/accordion", {
     classes    : ["accordion"],
     name       : "Accordeon",
     image      : "icons/accordion.svg",
-    html       : `<div class="accordion" id="accordion-parentId">
-		  <div class="accordion-item">
-			<h2 class="accordion-header" id="headingOne-parentId">
-			  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-parentId" aria-expanded="true" aria-controls="collapseOne-parentId">
-				Accordion Item #1
-			  </button>
-			</h2>
-			<div id="collapseOne-parentId" class="accordion-collapse collapse show" aria-labelledby="headingOne-parentId" data-bs-parent="#accordion-parentId">
-			  <div class="accordion-body">
-				<p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin</p>
-			  </div>
-			</div>
-		  </div>
-		  <div class="accordion-item">
-			<h2 class="accordion-header" id="headingTwo-parentId">
-			  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo-parentId" aria-expanded="false" aria-controls="collapseTwo">
-				Accordion Item #2
-			  </button>
-			</h2>
-			<div id="collapseTwo-parentId" class="accordion-collapse collapse" aria-labelledby="headingTwo-parentId" data-bs-parent="#accordion-parentId">
-			  <div class="accordion-body">
-				<p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin</p>
-			  </div>
-			</div>
-		  </div>
-		  <div class="accordion-item">
-			<h2 class="accordion-header" id="headingThree-parentId">
-			  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree-parentId" aria-expanded="false" aria-controls="collapseThree">
-				Accordion Item #3
-			  </button>
-			</h2>
-			<div id="collapseThree-parentId" class="accordion-collapse collapse" aria-labelledby="headingThree-parentId" data-bs-parent="#accordion-parentId">
-			  <div class="accordion-body">
-				<p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin</p>
-			  </div>
-			</div>
-		  </div>
-		</div>`,
+    html       : `
+        <div class="accordion" id="accordion-parentId">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne-parentId">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne-parentId" aria-expanded="true" aria-controls="collapseOne-parentId">
+                        Accordion Item #1
+                    </button>
+                </h2>
+                <div id="collapseOne-parentId" class="accordion-collapse collapse show" aria-labelledby="headingOne-parentId"
+                     data-bs-parent="#accordion-parentId">
+                    <div class="accordion-body">
+                        <p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna
+                            vehicula, nec maximus est sollicitudin</p>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo-parentId">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo-parentId" aria-expanded="false" aria-controls="collapseTwo">
+                        Accordion Item #2
+                    </button>
+                </h2>
+                <div id="collapseTwo-parentId" class="accordion-collapse collapse" aria-labelledby="headingTwo-parentId"
+                     data-bs-parent="#accordion-parentId">
+                    <div class="accordion-body">
+                        <p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna
+                            vehicula, nec maximus est sollicitudin</p>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree-parentId">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree-parentId" aria-expanded="false" aria-controls="collapseThree">
+                        Accordion Item #3
+                    </button>
+                </h2>
+                <div id="collapseThree-parentId" class="accordion-collapse collapse" aria-labelledby="headingThree-parentId"
+                     data-bs-parent="#accordion-parentId">
+                    <div class="accordion-body">
+                        <p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna
+                            vehicula, nec maximus est sollicitudin</p>
+                    </div>
+                </div>
+            </div>
+        </div>`,
     afterDrop  : function(node) {
         //set unique accordion id
         node.outerHTML = node.outerHTML.replaceAll('parentId', Math.ceil(Math.random() * 1000));
@@ -816,34 +838,35 @@ Vvveb.Components.add("elements/flip-box", {
     name       : "Flip box",
     image      : "icons/flipbox.svg",
     html       : `<div class="flip-box enabled">
-		  <div class="flip-box-inner">
-			<div class="flip-box-front">
-				  <div class="card">
-				  <img src="${wwwroot}/theme/degrade/_editor/media/posts/1.jpg" class="card-img-top" alt="Post">
-				  <div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
-				  </div>
-				</div>	
-			</div>
-			
-			<div class="flip-box-back">
-				<div class="d-flex align-items-center flex-column">
-				  <div class="flex-shrink-0">
-					<img src="${wwwroot}/theme/degrade/_editor/media/posts/2.jpg" alt="Post">
-				  </div>
-				  <div class="flex-grow-1 ms-3">
-					<p>
-						This is some content from a media component. You can replace this with any content and adjust it as needed.
-					</p>
-					
-					<a href="#" class="btn btn-primary">Go somewhere</a>
-				  </div>
-				</div>
-			</div>
-		  </div>
-		</div>`,
+        <div class="flip-box-inner">
+            <div class="flip-box-front">
+                <div class="card">
+                    <img src="${wwwroot}/theme/degrade/_editor/media/posts/1.jpg" class="card-img-top" alt="Post">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                            card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="flip-box-back">
+                <div class="d-flex align-items-center flex-column">
+                    <div class="flex-shrink-0">
+                        <img src="${wwwroot}/theme/degrade/_editor/media/posts/2.jpg" alt="Post">
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <p>
+                            This is some content from a media component. You can replace this with any content and adjust it as
+                            needed.
+                        </p>
+        
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>`,
     properties : [{
         name      : "Width",
         key       : "width",
@@ -901,12 +924,15 @@ Vvveb.Components.add("elements/testimonial", {
     nodes      : [".counter"],
     name       : "Testimonial",
     image      : "icons/testimonial.svg",
-    html       : `<blockquote cite="https://en.wikipedia.org/wiki/Marcus_Aurelius">
-				<p>Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of them due to the offenders' ignorance of what is good or evil.</p>
-				<cite class="small">
-					<a href="https://en.wikipedia.org/wiki/Marcus_Aurelius" class="text-decoration-none" target="blank">Marcus Aurelius</a>
-				</cite>	
-			</blockquote>`,
+    html       : `
+        <blockquote cite="https://en.wikipedia.org/wiki/Marcus_Aurelius">
+            <p>Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of
+                them due to the offenders' ignorance of what is good or evil.</p>
+            <cite class="small">
+                <a href="https://en.wikipedia.org/wiki/Marcus_Aurelius" class="text-decoration-none" target="blank">Marcus
+                    Aurelius</a>
+            </cite>
+        </blockquote>`,
     properties : []
 });
 
@@ -914,33 +940,34 @@ Vvveb.Components.add("elements/social-icons", {
     classes    : ["social-icons"],
     name       : "Social icons",
     image      : "icons/social-icons.svg",
-    html       : `<ul class="social-icons list-unstyled">
-				<li>
-					<a href="https://facebook.com">
-						<i class="lab la-facebook-f la-2x"></i> <span>Facebook</span>
-					</a>
-				</li>
-				<li>
-					<a href="https://linkedin.com">
-						<i class="lab la-linkedin-in la-2x"></i> <span>Linkedin</span>
-					</a>
-				</li>		
-				<li>
-					<a href="https://twitter.com">
-						<i class="lab la-twitter la-2x"></i> <span>Twitter</span>
-					</a>
-				</li>					
-				<li>
-					<a href="https://instagram.com">
-						<i class="lab la-instagram la-2x"></i> <span>Instagram</span>
-					</a>
-				</li>				
-				<li>
-					<a href="https://github.com">
-						<i class="lab la-github la-2x"></i> <span>Github</span>
-					</a>
-				</li>
-			</ul>`,
+    html       : `
+        <ul class="social-icons list-unstyled">
+            <li>
+                <a href="https://facebook.com">
+                    <i class="lab la-facebook-f la-2x"></i> <span>Facebook</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://linkedin.com">
+                    <i class="lab la-linkedin-in la-2x"></i> <span>Linkedin</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://twitter.com">
+                    <i class="lab la-twitter la-2x"></i> <span>Twitter</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://instagram.com">
+                    <i class="lab la-instagram la-2x"></i> <span>Instagram</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com">
+                    <i class="lab la-github la-2x"></i> <span>Github</span>
+                </a>
+            </li>
+        </ul>`,
     properties : [{
         //name: "List",
         key       : "list",
@@ -1071,23 +1098,26 @@ Vvveb.Components.add("elements/carousel", {
     image     : "icons/carousel.svg",
     classes   : ["swiper"],
     html      : `
-	  <div class="swiper" data-slides-per-view="3" data-draggable="true">
-		<div class="swiper-wrapper">
-		  <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/4.jpg" class="img-fluid"><p>Slide 1</p></div>
-		  <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/2.jpg" class="img-fluid"><p>Slide 2</p></div>
-		  <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/5.jpg" class="img-fluid"><p>Slide 3</p></div>
-		  <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/7.jpg" class="img-fluid"><p>Slide 4</p></div>
-		</div>
-		<div class="swiper-pagination"></div>
-
-		<!--
-		<div class="swiper-button-prev"></div>
-		<div class="swiper-button-next"></div>
-		-->
-		
-		<!-- <div class="swiper-scrollbar"></div> -->
-	  </div>	
-	`,
+        <div class="swiper" data-slides-per-view="3" data-draggable="true">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/4.jpg" class="img-fluid">
+                    <p>Slide 1</p></div>
+                <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/2.jpg" class="img-fluid">
+                    <p>Slide 2</p></div>
+                <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/5.jpg" class="img-fluid">
+                    <p>Slide 3</p></div>
+                <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/7.jpg" class="img-fluid">
+                    <p>Slide 4</p></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        
+            <!--
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            -->
+        
+            <!-- <div class="swiper-scrollbar"></div> -->
+        </div>`,
     afterDrop : carouselAfterDrop,
 
     onChange : function(node, property, value) {
@@ -1275,21 +1305,29 @@ Vvveb.Components.add("elements/slider", {
     name      : "Slider",
     image     : "icons/slider.svg",
     html      : `
-	  <div class="swiper" data-slides-per-view="1" data-draggable="true" data-navigation='{"nextEl": ".swiper-button-next","prevEl": ".swiper-button-prev"}'>
-		<div class="swiper-wrapper">
-		  <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/posts/1.jpg" class="img-fluid"><p>Slider 1</p></div>
-		  <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/posts/2.jpg" class="img-fluid"><p>Slider 2</p></div>
-		  <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/posts/3.jpg" class="img-fluid"><p>Slider 3</p></div>
-		  <div class="swiper-slide"><img src="${wwwroot}/theme/degrade/_editor/media/posts/4.jpg" class="img-fluid"><p>Slider 4</p></div>
-		</div>
-		<div class="swiper-pagination"></div>
-
-		<div class="swiper-button-prev"></div>
-		<div class="swiper-button-next"></div>
-		
-		<!-- <div class="swiper-scrollbar"></div> -->
-	  </div>	
-	`,
+        <div class="swiper" data-slides-per-view="1" data-draggable="true"
+             data-navigation='{"nextEl": ".swiper-button-next","prevEl": ".swiper-button-prev"}'>
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="${wwwroot}/theme/degrade/_editor/media/posts/1.jpg" class="img-fluid">
+                    <p>Slider 1</p></div>
+                <div class="swiper-slide">
+                    <img src="${wwwroot}/theme/degrade/_editor/media/posts/2.jpg" class="img-fluid">
+                    <p>Slider 2</p></div>
+                <div class="swiper-slide">
+                    <img src="${wwwroot}/theme/degrade/_editor/media/posts/3.jpg" class="img-fluid">
+                    <p>Slider 3</p></div>
+                <div class="swiper-slide">
+                    <img src="${wwwroot}/theme/degrade/_editor/media/posts/4.jpg" class="img-fluid">
+                    <p>Slider 4</p></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        
+            <!-- <div class="swiper-scrollbar"></div> -->
+        </div>`,
     afterDrop : carouselAfterDrop,
 });
 
@@ -1387,10 +1425,11 @@ Vvveb.Components.add("elements/image-compare", {
     nodes      : [".counter"],
     name       : "Image Compare",
     image      : "icons/image-compare.svg",
-    html       : `<div class="c-compare" style="--value:50%;">
-	  <img class="c-compare__left" src="img/color.jpg" alt="" />
-	  <img class="c-compare__right" src="img/bw.jpg" alt="" />
-	</div>`,
+    html       : `
+        <div class="c-compare" style="--value:50%;">
+            <img class="c-compare__left" src="img/color.jpg" alt="" />
+            <img class="c-compare__right" src="img/bw.jpg" alt="" />
+        </div>`,
     properties : []
 });
 
@@ -1398,12 +1437,13 @@ Vvveb.Components.add("elements/rating", {
     nodes      : [".rating"],
     name       : "Rating stars",
     image      : "icons/rating.svg",
-    html       : `<div class="rating">
-                <i class="la la-star text-warning"></i>
-                <i class="la la-star text-warning"></i>
-                <i class="la la-star text-warning"></i>
-                <i class="la la-star text-warning"></i>
-                <i class="la la-star text-secondary"></i>
-            </div>`,
+    html       : `
+        <div class="rating">
+            <i class="la la-star text-warning"></i>
+            <i class="la la-star text-warning"></i>
+            <i class="la la-star text-warning"></i>
+            <i class="la la-star text-warning"></i>
+            <i class="la la-star text-secondary"></i>
+        </div>`,
     properties : []
 });
