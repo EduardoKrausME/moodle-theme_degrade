@@ -44,14 +44,13 @@ if (!strpos($html, "vvvebjs-styles")) {
     $html .= "<style id=\"vvvebjs-styles\">";
 }
 if (!strpos($html, "bootstrap-vvveb.css")) {
-    $html .= "\n<link href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/_default/bootstrap-vvveb.css\" rel=\"stylesheet\">";
+    $html .= "\n<link href=\"{$CFG->wwwroot}/theme/degrade/_editor/css/bootstrap-vvveb.css\" rel=\"stylesheet\">";
 
 }
 if (!strpos($html, "_editor/libs/aos/aos.js")) {
     $html .=
-        "\n<link href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/libs/aos/aos.css\" rel=\"stylesheet\">" .
-        "\n<link href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/libs/aos/aos.js\" rel=\"stylesheet\">" .
-        $html;
+        "\n<link href=\"{$CFG->wwwroot}/theme/degrade/_editor/libs/aos/aos.css\" rel=\"stylesheet\">" .
+        "\n<link href=\"{$CFG->wwwroot}/theme/degrade/_editor/libs/aos/aos.js\" rel=\"stylesheet\">";
 }
 
 die($html);
