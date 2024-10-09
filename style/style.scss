@@ -3117,6 +3117,9 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
     &.communication .icon:not(.nofilter) {
         filter: invert(48%) sepia(74%) saturate(4887%) hue-rotate(11deg) brightness(102%) contrast(101%);
     }
+    .activityicon.nofilter {
+        filter: none;
+    }
 }
 #course-category-listings .item-actions .menubar .action-menu-trigger .dropdown a.dropdown-toggle {
     padding: 0;
@@ -3846,7 +3849,7 @@ button.btn-footer-popover:active {
 }
 #page-header {
     @import "crumbs";
-
+    
     .menubar .dropdown .dropdown-menu .dropdown-item {
         padding: 0;
         a {
@@ -3909,7 +3912,7 @@ button.btn-footer-popover:active {
             flex-grow: inherit;
         }
     }
-
+    
     .page-header-headings {
         display: flex;
         align-items: center;
@@ -3960,7 +3963,7 @@ button.btn-footer-popover:active {
                 }
             }
         }
-
+        
     }
     .messagearea {
         float: none;
@@ -4020,7 +4023,7 @@ button.btn-footer-popover:active {
             color: rgb(var(--color_primary));
         }
     }
-
+    
 }
 .courseindex {
     .courseindex-section .courseindex-sectioncontent .courseindex-item.pageitem {
@@ -4179,6 +4182,11 @@ a#prev-activity-link,
 a#next-activity-link {
     color: #fff;
     border: none;
+    white-space: nowrap !important;
+    &:hover {
+        text-decoration: none;
+        color: #eee;
+    }
 }
 a#prev-activity-link {
     background-color: rgb(var(--color_secondary));

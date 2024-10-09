@@ -14859,6 +14859,9 @@ div.dropdown-item:focus-within {
 .activityiconcontainer.communication .activityicon:not(.nofilter), .activityiconcontainer.communication .icon:not(.nofilter) {
   filter: invert(48%) sepia(74%) saturate(4887%) hue-rotate(11deg) brightness(102%) contrast(101%);
 }
+.activityiconcontainer .activityicon.nofilter {
+  filter: none;
+}
 
 #course-category-listings .item-actions .menubar .action-menu-trigger .dropdown a.dropdown-toggle {
   padding: 0;
@@ -17634,6 +17637,12 @@ a#prev-activity-link,
 a#next-activity-link {
   color: #fff;
   border: none;
+  white-space: nowrap !important;
+}
+a#prev-activity-link:hover,
+a#next-activity-link:hover {
+  text-decoration: none;
+  color: #eee;
 }
 
 a#prev-activity-link {
