@@ -22,7 +22,6 @@
     Example context (json):
     {
         "url": "http://localhost/",
-        "sesskey": "sesskey",
         "edit": 1,
         "adminedit": true,
         "checked": "",
@@ -47,7 +46,7 @@
             <span class="custom-control-label">&nbsp;</span>
         </div>
     </div>
-    <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+    <input type="hidden" name="sesskey" value="{{globals.config.sesskey}}">
     <input type="hidden" name="pageurl" value="{{{pageurl}}}">
     <input type="hidden" name="context" value="{{{pagecontextid}}}">
     <noscript>
