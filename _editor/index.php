@@ -1719,7 +1719,7 @@ Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist
     deleteUrl = "<?php echo "save.php?action=delete&chave={$chave}&editlang={$editlang}"; ?>";
     saveUrl = "<?php echo "save.php?action=save&chave={$chave}&editlang={$editlang}"; ?>";
     oEmbedProxyUrl = "<?php echo "save.php?action=oembedProxy&chave={$chave}&editlang={$editlang}"; ?>";
-    mediaScanUrl = "<?php echo "files.php?chave={$chave}&editlang={$editlang}"; ?>
+    mediaScanUrl = "<?php echo "files.php?chave={$chave}&editlang={$editlang}"; ?>";
 
     var url = "<?php echo "loadpage.php?chave={$chave}&editlang={$editlang}"; ?>";
     Vvveb.Builder.init(url, function() {

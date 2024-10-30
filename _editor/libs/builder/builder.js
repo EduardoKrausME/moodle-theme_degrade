@@ -844,15 +844,15 @@ Vvveb.Builder = {
 
                 list.append(generateElements(
                     `<li class="header" data-section="${group}"  data-search="">
-					<label class="header" for="${type}_comphead_${group}${count}">
-						${group}<div class="header-arrow"></div>
-					</label>
-					<input class="header_check" type="checkbox" checked="true" id="${type}_comphead_${group}${count}">
-					<ol></ol>
-				</li>`)[0]);
+                    <label class="header" for="${type}_comphead_${group}${count}">
+                        ${group}<div class="header-arrow"></div>
+                    </label>
+                    <input class="header_check" type="checkbox" checked="true" id="${type}_comphead_${group}${count}">
+                    <ol></ol>
+                </li>`)[0]);
 
                 //list.append('<li class="header clearfix" data-section="' + group + '"  data-search=""><label class="header" for="' + type + '_comphead_' + group + count + '">' + group + '  <div class="header-arrow"></div>\
-                //				   </label><input class="header_check" type="checkbox" checked="true" id="' + type + '_comphead_' + group + count + '">  <ol></ol></li>');
+                //                   </label><input class="header_check" type="checkbox" checked="true" id="' + type + '_comphead_' + group + count + '">  <ol></ol></li>');
 
                 let componentsSubList = list.querySelector('li[data-section="' + group + '"]  ol');
 
@@ -864,8 +864,8 @@ Vvveb.Builder = {
 
                     if (component) {
                         item = generateElements(`<li data-section="${group}" data-drag-type="component" data-type="${componentType}" data-search="${component.name.toLowerCase()}">
-							<span>${component.name}</span>
-						</li>`)[0];
+                            <span>${component.name}</span>
+                        </li>`)[0];
 
                         if (component.image) {
 
@@ -892,12 +892,12 @@ Vvveb.Builder = {
             for (group in Vvveb.SectionsGroup) {
                 list.append(generateElements(
                     `<li class="header" data-section="${group}"  data-search="">
-					<label class="header" for="${type}_sectionhead_${group}">
-						${group}<div class="header-arrow"></div>
-					</label>
-					<input class="header_check" type="checkbox" checked="true" id="${type}_sectionhead_${group}">
-					<ol></ol>
-				</li>`)[0]);
+                    <label class="header" for="${type}_sectionhead_${group}">
+                        ${group}<div class="header-arrow"></div>
+                    </label>
+                    <input class="header_check" type="checkbox" checked="true" id="${type}_sectionhead_${group}">
+                    <ol></ol>
+                </li>`)[0]);
 
                 let sectionsSubList = list.querySelector('li[data-section="' + group + '"]  ol');
                 sections = Vvveb.SectionsGroup[group];
@@ -908,20 +908,20 @@ Vvveb.Builder = {
 
                     if (section) {
                         item = generateElements(`<li data-section="${group}" data-drag-type="section" data-type="${sectionType}" data-search="${section.name.toLowerCase()}">
-									<span class="name">${section.name}</span>
-									<div class="add-section-btn" title="Add section"><i class="la la-plus"></i></div>
-									<img class="preview" src="" loading="lazy">
-								</li>`)[0];
+                                    <span class="name">${section.name}</span>
+                                    <div class="add-section-btn" title="Add section"><i class="la la-plus"></i></div>
+                                    <img class="preview" src="" loading="lazy">
+                                </li>`)[0];
 
                         if (section.image) {
 
                             let image = ((section.image.indexOf('/') == -1) ? Vvveb.imgBaseUrl : '') + section.image;
 
                             /*
-							Object.assign(item.style,{
-								//backgroundImage: "url(" + image + ")",
-								//backgroundRepeat: "no-repeat"
-							});*/
+                            Object.assign(item.style,{
+                                //backgroundImage: "url(" + image + ")",
+                                //backgroundRepeat: "no-repeat"
+                            });*/
 
                             item.querySelector("img").setAttribute("src", image);
                         }
@@ -1389,12 +1389,12 @@ Vvveb.Builder = {
 
                     document.getElementById("highlight-box").setAttribute("style",
                         `top:${pos.top - (self.frameDoc.scrollTop ?? 0)}px;
-						 left:${pos.left - (self.frameDoc.scrollLeft ?? 0)}px;
-						 width:${width}px;
-						 height:${height}px;
-						 display:${event.target.hasAttribute('contenteditable') ? "none" : "block"};
-						 border:${self.isDragging ? "1px dashed #0d6efd" : ""};
-					`);
+                         left:${pos.left - (self.frameDoc.scrollLeft ?? 0)}px;
+                         width:${width}px;
+                         height:${height}px;
+                         display:${event.target.hasAttribute('contenteditable') ? "none" : "block"};
+                         border:${self.isDragging ? "1px dashed #0d6efd" : ""};
+                    `);
 
                     if (height < 50) {
                         document.getElementById("section-actions").classList.add("outside");
@@ -2043,6 +2043,9 @@ Vvveb.Builder = {
     },
 
     saveAjax : function(data, saveUrl, callback, error) {
+
+        Vvveb.WysiwygEditor.destroy();
+
         if (!data["startTemplateUrl"]) {
             data["html"] = clearHtml();
         }
@@ -2216,12 +2219,12 @@ Vvveb.CssEditor = {
 
     destroy : function() {
     }
-}
+};
 
 function displayToast(bg, title, message, id = "top-toast") {
     document.querySelector("#" + id + " .toast-body .message").innerHTML = message.replace(/(?:\r\n|\r|\n)/g, '<br>');
     let header = document.querySelector("#" + id + " .toast-header");
-    header.classList.remove("bg-danger", "bg-success")
+    header.classList.remove("bg-danger", "bg-success");
     header.classList.add(bg);
     header.querySelector("strong").innerHTML = title;
     document.querySelector("#" + id + " .toast").classList.add("show");
@@ -2273,6 +2276,8 @@ Vvveb.Gui = {
     },
 
     openPreview : function() {
+        Vvveb.WysiwygEditor.destroy();
+
         var html = clearHtml();
 
         console.log(html);
@@ -2643,12 +2648,12 @@ Vvveb.StyleManager = {
         //let css = "";
         //for (selector in this.styles[media]) {
 
-        //	css += `${selector} {`;
-        //	for (property in this.styles[media][selector]) {
-        //		value = this.styles[media][selector][property];
-        //		css += `${property}: ${value};`;
-        //	}
-        //	css += '}';
+        //    css += `${selector} {`;
+        //    for (property in this.styles[media][selector]) {
+        //        value = this.styles[media][selector][property];
+        //        css += `${property}: ${value};`;
+        //    }
+        //    css += '}';
         //}
 
         //this.cssContainer.innerHTML = css;
@@ -2811,16 +2816,16 @@ function drawComponentsTree(tree) {
 
             if (tree[i].children.length > 0) {
                 li = generateElements('<li data-component="' + node.name + '">\
-								<label for="id' + id + '" style="background-image:url(' + Vvveb.imgBaseUrl + node.image + ')"><span>' + node.name + '</span></label>\
-								<input type="checkbox" id="id' + id + '">\
-							</li>')[0];
+                                <label for="id' + id + '" style="background-image:url(' + Vvveb.imgBaseUrl + node.image + ')"><span>' + node.name + '</span></label>\
+                                <input type="checkbox" id="id' + id + '">\
+                            </li>')[0];
                 li.append(drawComponentsTreeTraverse(node.children));
             }
             else {
                 li = generateElements('<li data-component="' + node.name + '" class="file">\
-							<label for="id' + id + '" style="background-image:url(' + Vvveb.imgBaseUrl + node.image + ')"><span>' + node.name + '</span></label>\
-							<input type="checkbox" id="id' + id + '">\
-							</li>')[0];
+                            <label for="id' + id + '" style="background-image:url(' + Vvveb.imgBaseUrl + node.image + ')"><span>' + node.name + '</span></label>\
+                            <input type="checkbox" id="id' + id + '">\
+                            </li>')[0];
             }
 
             li._treeNode = node.node;
@@ -2931,24 +2936,24 @@ Vvveb.SectionList = {
         })
 
         /*
-		document.querySelector(this.selector).addEventListener("click", ".up-btn", function (e) {
-			let section = e.target.closest(".section-item");
-			let node = section._node;
-			Vvveb.Builder.moveNodeUp(node);
-			Vvveb.Builder.moveNodeUp(section);
+        document.querySelector(this.selector).addEventListener("click", ".up-btn", function (e) {
+            let section = e.target.closest(".section-item");
+            let node = section._node;
+            Vvveb.Builder.moveNodeUp(node);
+            Vvveb.Builder.moveNodeUp(section);
 
-			e.preventDefault();
-		});
+            e.preventDefault();
+        });
 
-		document.querySelector(this.selector).addEventListener("click", ".down-btn", function (e) {
-			let section = e.target.closest(".section-item");
-			let node = section._node;
-			Vvveb.Builder.moveNodeDown(node);
-			Vvveb.Builder.moveNodeDown(section);
+        document.querySelector(this.selector).addEventListener("click", ".down-btn", function (e) {
+            let section = e.target.closest(".section-item");
+            let node = section._node;
+            Vvveb.Builder.moveNodeDown(node);
+            Vvveb.Builder.moveNodeDown(section);
 
-			e.preventDefault();
-		});
-		*/
+            e.preventDefault();
+        });
+        */
 
 
         let self = this;
@@ -2990,12 +2995,12 @@ Vvveb.SectionList = {
                 Vvveb.Builder.selectNode(node);
                 Vvveb.Builder.loadNodeComponent(node);
                 /*
-				Vvveb.Builder.frameHtml.animate({
-					scrollTop: node.offset().top
-				}, 1000);
+                Vvveb.Builder.frameHtml.animate({
+                    scrollTop: node.offset().top
+                }, 1000);
 
-				delay(() => node.click(), 1000);
-				*/
+                delay(() => node.click(), 1000);
+                */
 
 
                 node = node;
