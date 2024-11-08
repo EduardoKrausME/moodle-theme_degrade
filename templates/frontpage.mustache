@@ -92,7 +92,11 @@
 {{/hasblocks}}
 
     <div id="page" data-region="mainpage" data-usertour="scroller"
-         class="drawers {{#courseindexopen}}show-drawer-left{{/courseindexopen}} {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container">
+         class="drawers
+             {{#courseindexopen}}show-drawer-left{{/courseindexopen}}
+             {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}}
+             {{#home_html}}{{^slideshow_numslides}}home-html{{/slideshow_numslides}}{{/home_html}}
+             drag-container">
 
         {{#slideshow_numslides}}
             <div id="slideshow">
