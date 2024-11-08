@@ -35,22 +35,26 @@ if (file_exists(__DIR__ . "/_default/default-{$chave}.html")) {
     $html = get_config("theme_degrade", "{$chave}_htmleditor_{$editlang}");
     if (!isset($html[40])) {
         $html = file_get_contents(__DIR__ . "/_default/default-{$chave}.html");
-        $html = vvveb__changue_langs($html);
-        $html = vvveb__change_courses($html);
+        $html = vvveb__changue_langs($html, "theme_degrade");
+        $html = vvveb__change_courses($html, "theme_degrade");
     }
 }
 
 if (!strpos($html, "vvvebjs-styles")) {
-    $html .= "<style id=\"vvvebjs-styles\">";
+    $html .= "\n<style id=\"vvvebjs-styles\"></style>";
 }
-if (!strpos($html, "bootstrap-vvveb.css")) {
-    $html .= "\n<link href=\"{$CFG->wwwroot}/theme/degrade/_editor/css/bootstrap-vvveb.css\" rel=\"stylesheet\">";
 
-}
-if (!strpos($html, "_editor/libs/aos/aos.js")) {
-    $html .=
-        "\n<link href=\"{$CFG->wwwroot}/theme/degrade/_editor/libs/aos/aos.css\" rel=\"stylesheet\">" .
-        "\n<link href=\"{$CFG->wwwroot}/theme/degrade/_editor/libs/aos/aos.js\" rel=\"stylesheet\">";
-}
+$html = "
+<html>
+    <head>
+        <link vvveb-remove=\"true\" href=\"{$CFG->wwwroot}/theme/degrade/_editor/css/bootstrap-vvveb.css\" rel=\"stylesheet\">
+        <link href=\"{$CFG->wwwroot}/theme/degrade/_editor/libs/aos/aos.css\" rel=\"stylesheet\">
+        <link href=\"{$CFG->wwwroot}/theme/degrade/_editor/libs/aos/aos.js\" rel=\"stylesheet\">
+    </head>
+    <body>
+        {$html}
+    </body>
+</html>";
+
 
 die($html);

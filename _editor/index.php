@@ -117,7 +117,7 @@ require_capability('moodle/site:config', context_system::instance());
                 </div>
 
                 <div class="button-text">
-                      <i class="icon-save-outline"></i>
+                    <i class="icon-save-outline"></i>
                     <span>Save</span>
                 </div>
 
@@ -1671,8 +1671,8 @@ require_capability('moodle/site:config', context_system::instance());
         foreach ($files as $file) {
             $html = file_get_contents($file);
             $html = str_replace("{wwwroot}", $CFG->wwwroot, $html);
-            $html = vvveb__changue_langs($html);
-            $html = vvveb__change_courses($html);
+            $html = vvveb__changue_langs($html, "theme_degrade");
+            $html = vvveb__change_courses($html, "theme_degrade");
 
             preg_match('/\/([a-z0-9\-]*)\/([a-z0-9\-]*)\.html/', $file, $info);
             $name = ucfirst(str_replace("-", " ", $info[2]));
@@ -1720,7 +1720,7 @@ Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist
     deleteUrl = "<?php echo "save.php?action=delete&chave={$chave}&editlang={$editlang}"; ?>";
     saveUrl = "<?php echo "save.php?action=save&chave={$chave}&editlang={$editlang}"; ?>";
     oEmbedProxyUrl = "<?php echo "save.php?action=oembedProxy&chave={$chave}&editlang={$editlang}"; ?>";
-    mediaScanUrl = "<?php echo "files.php?chave={$chave}&editlang={$editlang}"; ?>";
+    mediaServerUrl = "<?php echo "files.php?chave={$chave}&editlang={$editlang}"; ?>";
 
     var url = "<?php echo "loadpage.php?chave={$chave}&editlang={$editlang}"; ?>";
     Vvveb.Builder.init(url, function() {

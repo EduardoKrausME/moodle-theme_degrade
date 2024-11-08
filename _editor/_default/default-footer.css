@@ -2951,6 +2951,9 @@
 .social-media > ul > li > a > span {
   display: inline-block;
 }
+.social-media > ul > li > a > span.media-name {
+  min-width: 73px;
+}
 .social-media > ul > li > a > .media-icon {
   width: 36px;
   height: 36px;

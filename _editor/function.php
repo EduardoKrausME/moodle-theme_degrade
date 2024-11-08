@@ -22,7 +22,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-function vvveb__changue_langs($html) {
+function vvveb__changue_langs($html, $component) {
     global $CFG, $SITE;
 
     $CFG->debug = false;
@@ -37,7 +37,7 @@ function vvveb__changue_langs($html) {
             list($identifier, $component) = explode("|", $identifier);
             $text = get_string($identifier, $component);
         } else {
-            $text = get_string($identifier, "theme_degrade");
+            $text = get_string($identifier, $component);
         }
 
         $html = str_replace($lags[0][$key], $text, $html);
@@ -46,13 +46,13 @@ function vvveb__changue_langs($html) {
     return $html;
 }
 
-function vvveb__change_courses($html) {
+function vvveb__change_courses($html, $component) {
 
     if (strpos($html, "{course-itens}") === false) {
         return $html;
     }
 
-    global $OUTPUT, $DB;
+    global $OUTPUT, $DB, $CFG;
     $sql = "
         SELECT c.*,
                COUNT(ue.id) AS enrolments
@@ -61,15 +61,24 @@ function vvveb__change_courses($html) {
           JOIN {user_enrolments} AS ue ON ue.enrolid = e.id
       GROUP BY c.id
       ORDER BY enrolments DESC
-         LIMIT 8";
+         LIMIT 12";
     $courses = $DB->get_records_sql($sql);
 
     $data = [];
     foreach ($courses as $course) {
         $course->courseimage = couse_image(new core_course_list_element($course));
+
+        $course->accesslink = "{$CFG->wwwroot}/course/view.php?id={$course->id}";
+        if (get_config('local_kopere_dashboard', "builder_enable_{$course->id}")) {
+            $course->accesslink = "{$CFG->wwwroot}/local/kopere_pay/view.php?id={$course->id}";
+        }
+
         $data[] = $course;
     }
-    $courseshtml = $OUTPUT->render_from_template('theme_degrade/vvveb/course', ['couses' => $data]);
+
+
+
+    $courseshtml = $OUTPUT->render_from_template("{$component}/vvveb/course", ['couses' => $data]);
 
     return str_replace("{course-itens}", $courseshtml, $html);
 }
