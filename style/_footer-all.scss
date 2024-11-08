@@ -88,6 +88,9 @@
         }
         > span {
             display: inline-block;
+            &.media-name {
+                min-width: 73px;
+            }
         }
         > .media-icon {
             width: 36px;

@@ -12149,9 +12149,6 @@ button.close:focus,
   border-radius: 0;
 }
 
-.dropdown .dropdown-toggle:hover,
-.dropdown .dropdown-toggle:focus,
-.dropdown .dropdown-toggle:active,
 .btn-outline-secondary:not(:disabled):not(.disabled):active,
 .btn-outline-secondary:not(:disabled):not(.disabled).active,
 .show > .btn-outline-secondary.dropdown-toggle {
@@ -12159,16 +12156,9 @@ button.close:focus,
 }
 
 .dropdown .dropdown-menu a {
-  color: #757575;
+  color: #404040;
   background: #fff;
 }
-.dropdown .dropdown-menu a:hover {
-  background: #dcdada;
-}
-.dropdown .dropdown-menu a:focus {
-  background: #dcdada;
-}
-
 .nav-tabs:not(.more-nav) .nav-link,
 .nav-pills .nav-link {
   background: none;
@@ -12206,10 +12196,7 @@ body.limitedwidth #page.drawers .main-inner,
   height: auto;
   padding: 0;
   margin: 0;
-}
-
-.pagelayout-admin #page.drawers {
-  overflow-y: auto !important;
+  overflow-y: initial !important;
 }
 
 body.limitedwidth #page.drawers .main-inner #page-content {
@@ -15710,6 +15697,9 @@ div.dropdown-item:focus-within {
 #footer .social-media > ul > li > a > span {
   display: inline-block;
 }
+#footer .social-media > ul > li > a > span.media-name {
+  min-width: 73px;
+}
 #footer .social-media > ul > li > a > .media-icon {
   width: 36px;
   height: 36px;
@@ -18145,6 +18135,12 @@ a#next-activity-link {
 }
 .degrade-theme-black1[data-templates=login] {
   background-color: #4c0001;
+}
+
+#page-contentbank .cb-toolbar-container .dropdown-scrollable {
+  max-height: 290px;
+  width: 300px;
+  margin-left: -72px;
 }
 
 /*# sourceMappingURL=style.css.map */
