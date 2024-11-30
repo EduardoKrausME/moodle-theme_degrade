@@ -1269,7 +1269,7 @@ tr.discussion .btn i.icon {
     }
 }
 .menubar .icon {
-    width: 14px;
+    //width: 14px;
 }
 .menubar img {
     width: 14px;
@@ -1610,6 +1610,8 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
 .block-add {
     width: auto;
     padding: 10px 18px !important;
+    display: flex;
+    align-items: center;
     .pluscontainer {
         border-color: rgb(var(--color_primary));
         &:hover {
@@ -3162,6 +3164,11 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
     margin-top: 0;
     margin-bottom: 5px;
     margin-right: 0;
+    display: flex;
+    align-items: center;
+    a i {
+        font-size: 24px;
+    }
 }
 .pagelayout-incourse #page .action-menu .menubar .dropdown .dropdown-menu .dropdown-item {
     padding-top: 5px;
@@ -4060,6 +4067,23 @@ button.btn-footer-popover:active {
         }
     }
 }
+#plugins-control-panel .c4 a {
+    display: inline-block;
+    padding: 9rem 14rem;
+    margin: 1px 4px 1px 1px;
+    background-color: #feeded;
+    color: #910808;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 30px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+        background-color: #910808;
+        color: #feeded;
+    }
+}
 .simplesearchform {
     .form-control {
         max-width: 250px;
@@ -4197,3 +4221,4 @@ a#next-activity-link {
 .moodle-dialogue {
     min-width: 600px;
 }
+@import "dark-mode";

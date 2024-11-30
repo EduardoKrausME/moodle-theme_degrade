@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of the Local Analytics plugin for Moodle
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * service file
+ * Hooks
  *
  * @package    theme_degrade
  * @copyright  2024 Eduardo Kraus {@link http://eduardokraus.com}
@@ -23,26 +23,9 @@
  */
 
 defined('MOODLE_INTERNAL') || die;
-
-$functions = [
-
-    'theme_degrade_mycourses_html' => [
-        'classname' => '\theme_degrade\external\mycourses',
-        'classpath' => 'theme/degrade/classes/external/mycourses.php',
-        'methodname' => 'html',
-        'description' => 'Returns a HTML from my courses',
-        'type' => 'read',
-        'services' => [MOODLE_OFFICIAL_MOBILE_SERVICE],
-        'ajax' => true,
-        'loginrequired' => false,
-    ],
-    'theme_degrade_userprerence_layout' => [
-        'classname' => '\theme_degrade\external\userprerence',
-        'classpath' => 'theme/degrade/classes/external/userprerence.php',
-        'methodname' => 'layout',
-        'description' => 'Save user preference Layout',
-        'type' => 'write',
-        'ajax' => true,
-        'loginrequired' => false,
+$callbacks = [
+    [
+        'hook' => \core\hook\output\before_html_attributes::class,
+        'callback' => "\\theme_degrade\\core_hook_output::before_html_attributes",
     ],
 ];

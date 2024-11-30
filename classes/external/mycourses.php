@@ -46,7 +46,7 @@ class mycourses extends \external_api {
     }
 
     /**
-     * icon function
+     * html function
      *
      * @return array
      * @throws \coding_exception

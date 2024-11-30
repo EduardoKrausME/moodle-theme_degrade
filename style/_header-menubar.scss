@@ -10,7 +10,7 @@
     .navbar-nav {
         flex-wrap: nowrap;
     }
-
+    
     .navbar-nav .langmenu .dropdown .dropdown-menu {
         left: auto;
         right: 0;
@@ -131,6 +131,23 @@
             height: 100%;
             display: flex;
             align-items: center;
+        }
+        .input-group {
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+        .layout-mode {
+            display: flex;
+            align-items: center;
+            img {
+                width: 24px;
+                height: 24px;
+            }
+            .dark-mode {
+            }
+            .light-mode {
+                display: none;
+            }
         }
     }
     .navbar-nav {

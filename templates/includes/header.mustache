@@ -77,6 +77,14 @@
             </ul>
 
             <div id="usernavigation" class="navbar-nav ml-auto">
+                <div class="layout-mode">
+                    <div class="dark-mode">
+                        {{#pix}}dark/dark-lua, theme_degrade{{/pix}}
+                    </div>
+                    <div class="light-mode">
+                        {{#pix}}dark/dark-sol, theme_degrade{{/pix}}
+                    </div>
+                </div>
                 {{#output.search_box}}
                     {{{output.search_box}}}
                     <div class="divider border-left h-75 align-self-center mx-1"></div>
@@ -101,7 +109,8 @@
 
 {{#js}}
     //<script>
-    require(['jquery'], function($) {
+    require(['jquery', "core/ajax"], function($, ajax) {
+
         var top_scroll = Math.floor("{{top_scroll}}");
         if (!top_scroll) {
             var header = $("#header");
@@ -133,5 +142,25 @@
                 }
             }
         }
+
+        // layout-mode
+        var $layoutMode = $(".layout-mode div");
+        $layoutMode.click(function() {
+            $("body").addClass("dark-animation");
+            setTimeout(function() {
+                $("body").removeClass("dark-animation");
+            }, 500);
+
+            var layout = "dark";
+            if ($("html").attr("data-bs-theme") == "dark") {
+                layout = "light";
+            }
+            $("html").attr("data-bs-theme", layout);
+
+            ajax.call([{
+                methodname : "theme_degrade_userprerence_layout",
+                args       : {layout : layout}
+            }]);
+        });
     });
 {{/js}}
