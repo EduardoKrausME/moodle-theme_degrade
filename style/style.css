@@ -10520,6 +10520,9 @@ body {
 
 .btn-link {
   color: rgb(var(--color_primary));
+  border: none !important;
+  text-transform: initial !important;
+  padding: 4px 9px !important;
 }
 
 .btn-link:hover,
@@ -11163,27 +11166,6 @@ body:not(.pagelayout-frontpage) #region-main {
   filter: none;
 }
 
-.dropdown-menu .dropdown-item:hover,
-.dropdown-menu .dropdown-item:hover,
-.dropdown-menu .dropdown-item:focus,
-.dropdown-menu .dropdown-item:active,
-.dropdown-menu .dropdown-item:focus-within,
-.dropdown-menu .dropdown-item.active {
-  color: #fff;
-  text-decoration: none;
-  background: rgb(var(--color_primary));
-}
-
-.dropdown-menu .dropdown-item:hover a,
-.dropdown-menu .dropdown-item:focus a,
-.dropdown-menu .dropdown-item:active a,
-.dropdown-menu .dropdown-item:focus-within a,
-.dropdown-menu .dropdown-item.active a {
-  color: #fff;
-  text-decoration: none;
-  background: rgb(var(--color_primary));
-}
-
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   background: rgb(var(--color_primary));
@@ -11824,20 +11806,34 @@ tr.discussion .btn i.icon {
 }
 
 .menubar .dropdown .dropdown-menu .dropdown-item {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 50px;
 }
-
-.menubar .dropdown .dropdown-menu .dropdown-item:hover {
-  text-decoration: none;
+.menubar .dropdown .dropdown-menu .dropdown-item, .menubar .dropdown .dropdown-menu .dropdown-item {
+  color: #404040;
+  white-space: nowrap;
 }
-
 .menubar .dropdown .dropdown-menu .dropdown-item i {
-  color: #fff;
+  width: 24px;
+  height: 24px;
 }
-
 .menubar .dropdown .dropdown-menu .dropdown-item img {
   margin: 0 5px;
+}
+.menubar .dropdown .dropdown-menu .dropdown-item:hover, .menubar .dropdown .dropdown-menu .dropdown-item:hover *, .menubar .dropdown .dropdown-menu .dropdown-item:hover, .menubar .dropdown .dropdown-menu .dropdown-item:hover *, .menubar .dropdown .dropdown-menu .dropdown-item:focus, .menubar .dropdown .dropdown-menu .dropdown-item:focus *, .menubar .dropdown .dropdown-menu .dropdown-item:active, .menubar .dropdown .dropdown-menu .dropdown-item:active *, .menubar .dropdown .dropdown-menu .dropdown-item.active, .menubar .dropdown .dropdown-menu .dropdown-item.active * {
+  color: #fff;
+  text-decoration: none;
+  background: rgb(var(--color_primary));
+}
+.menubar .dropdown .dropdown-menu .dropdown-item.editing_delete {
+  background: #e91e63;
+}
+.menubar .dropdown .dropdown-menu .dropdown-item.editing_delete, .menubar .dropdown .dropdown-menu .dropdown-item.editing_delete * {
+  color: #fff;
 }
 
 .menubar .icon {
@@ -15818,35 +15814,6 @@ button.btn-footer-popover:active {
   border: 0;
   background: none;
 }
-#page-wrapper .action-menu .menubar .dropdown .dropdown-menu .dropdown-item a,
-#page .action-menu .menubar .dropdown .dropdown-menu .dropdown-item a {
-  margin: 0;
-  background: none;
-}
-#page-wrapper .action-menu .menubar .dropdown .dropdown-menu .dropdown-item a:hover,
-#page .action-menu .menubar .dropdown .dropdown-menu .dropdown-item a:hover {
-  text-decoration: none;
-}
-#page-wrapper .action-menu .menubar .dropdown .dropdown-menu .dropdown-item:hover,
-#page .action-menu .menubar .dropdown .dropdown-menu .dropdown-item:hover {
-  background: rgb(var(--color_primary));
-}
-#page-wrapper .action-menu .menubar .dropdown .dropdown-menu .dropdown-item:focus,
-#page .action-menu .menubar .dropdown .dropdown-menu .dropdown-item:focus {
-  background: rgb(var(--color_primary));
-}
-#page-wrapper .action-menu .menubar .dropdown .dropdown-menu .dropdown-item a.m-l-1,
-#page .action-menu .menubar .dropdown .dropdown-menu .dropdown-item a.m-l-1 {
-  padding-left: 25px;
-}
-#page-wrapper .action-menu .menubar .dropdown .dropdown-menu .dropdown-item a i,
-#page .action-menu .menubar .dropdown .dropdown-menu .dropdown-item a i {
-  color: #fff;
-}
-#page-wrapper .action-menu .menubar .dropdown a.dropdown-toggle,
-#page .action-menu .menubar .dropdown a.dropdown-toggle {
-  background: none;
-}
 #page-wrapper .section .actions .action-menu .menubar .dropdown .dropdown-menu a.dropdown-item,
 #page .section .actions .action-menu .menubar .dropdown .dropdown-menu a.dropdown-item {
   padding: 8px 20px;
@@ -17604,6 +17571,14 @@ a#message-user-button {
   text-indent: 30px;
 }
 
+#repositoriessetting td.centeralign .mdl-left br {
+  display: none;
+}
+
+.fp-repo-items .btn {
+  padding: 6px 13px !important;
+}
+
 .activity-item .inplaceeditable input {
   width: 550px;
 }
@@ -18141,6 +18116,10 @@ a#next-activity-link {
   max-height: 290px;
   width: 300px;
   margin-left: -72px;
+}
+
+.moodle-dialogue {
+  min-width: 600px;
 }
 
 /*# sourceMappingURL=style.css.map */

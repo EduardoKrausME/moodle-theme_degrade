@@ -91,6 +91,9 @@ body {
 }
 .btn-link {
     color: rgb(var(--color_primary));
+    border: none !important;
+    text-transform: initial !important;
+    padding: 4px 9px !important;
 }
 .btn-link:hover,
 .btn-link:focus,
@@ -694,25 +697,6 @@ body:not(.pagelayout-frontpage) #region-main {
     background: rgb(var(--color_primary));
     filter: none;
 }
-.dropdown-menu .dropdown-item:hover,
-.dropdown-menu .dropdown-item:hover,
-.dropdown-menu .dropdown-item:focus,
-.dropdown-menu .dropdown-item:active,
-.dropdown-menu .dropdown-item:focus-within,
-.dropdown-menu .dropdown-item.active {
-    color: #fff;
-    text-decoration: none;
-    background: rgb(var(--color_primary));
-}
-.dropdown-menu .dropdown-item:hover a,
-.dropdown-menu .dropdown-item:focus a,
-.dropdown-menu .dropdown-item:active a,
-.dropdown-menu .dropdown-item:focus-within a,
-.dropdown-menu .dropdown-item.active a {
-    color: #fff;
-    text-decoration: none;
-    background: rgb(var(--color_primary));
-}
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
     background: rgb(var(--color_primary));
@@ -1249,17 +1233,40 @@ tr.discussion .btn i.icon {
     margin-right: 5px;
 }
 .menubar .dropdown .dropdown-menu .dropdown-item {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-.menubar .dropdown .dropdown-menu .dropdown-item:hover {
-    text-decoration: none;
-}
-.menubar .dropdown .dropdown-menu .dropdown-item i {
-    color: #fff;
-}
-.menubar .dropdown .dropdown-menu .dropdown-item img {
-    margin: 0 5px;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 50px;
+    &, & {
+        color: #404040;
+        white-space: nowrap;
+    }
+    i {
+        width: 24px;
+        height: 24px;
+    }
+    img {
+        margin: 0 5px;
+    }
+    &:hover,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+        &, * {
+            color: #fff;
+            text-decoration: none;
+            background: rgb(var(--color_primary));
+        }
+    }
+    &.editing_delete {
+        background: #e91e63;
+        &, * {
+            color: #fff;
+        }
+    }
 }
 .menubar .icon {
     width: 14px;
@@ -3781,28 +3788,6 @@ button.btn-footer-popover:active {
         border: 0;
         background: none;
     }
-    .action-menu .menubar .dropdown .dropdown-menu .dropdown-item a {
-        margin: 0;
-        background: none;
-    }
-    .action-menu .menubar .dropdown .dropdown-menu .dropdown-item a:hover {
-        text-decoration: none;
-    }
-    .action-menu .menubar .dropdown .dropdown-menu .dropdown-item:hover {
-        background: rgb(var(--color_primary));
-    }
-    .action-menu .menubar .dropdown .dropdown-menu .dropdown-item:focus {
-        background: rgb(var(--color_primary));
-    }
-    .action-menu .menubar .dropdown .dropdown-menu .dropdown-item a.m-l-1 {
-        padding-left: 25px;
-    }
-    .action-menu .menubar .dropdown .dropdown-menu .dropdown-item a i {
-        color: #fff;
-    }
-    .action-menu .menubar .dropdown a.dropdown-toggle {
-        background: none;
-    }
     .section .actions .action-menu .menubar .dropdown .dropdown-menu a.dropdown-item {
         padding: 8px 20px;
     }
@@ -4162,6 +4147,8 @@ a#message-user-button {
 
 @import "minicolors";
 
+@import "repositoriessetting";
+
 .activity-item .inplaceeditable input {
     width: 550px;
 }
@@ -4206,4 +4193,7 @@ a#next-activity-link {
             margin-left: -72px;
         }
     }
+}
+.moodle-dialogue {
+    min-width: 600px;
 }
