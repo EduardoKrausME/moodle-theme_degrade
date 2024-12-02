@@ -733,5 +733,11 @@ function theme_degrade_process_css($css, $theme) {
  * @return array
  */
 function theme_degrade_add_htmlattributes() {
-    // \theme_degrade\core_hook_output::before_html_attributes();
+    $layout = get_user_preferences("layout", "light");
+    $layouturl = optional_param("layout", false, PARAM_TEXT);
+    if ($layouturl) {
+        $layout = $layouturl;
+        set_user_preference("layout", $layout);
+    }
+    return ['data-bs-theme' => $layout];
 }
