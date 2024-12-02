@@ -1,5 +1,5 @@
 <?php
-// This file is part of the Local Analytics plugin for Moodle
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die;
 $callbacks = [
     [
-        'hook' => \core\hook\output\before_html_attributes::class,
-        'callback' => "\\theme_degrade\\core_hook_output::before_html_attributes",
+        "hook" => \core\hook\output\before_html_attributes::class,
+        "callback" => "\\theme_degrade\\core_hook_output::before_html_attributes",
     ],
 ];

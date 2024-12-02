@@ -28,7 +28,6 @@
       "freename": "Free",
       "priceval": "$199.99",
       "has_course_create": true,
-      "edit_course": "/course/edit.php?id=15",
       "countlessons": 30,
       "showinstructor": true,
       "instructor": {
@@ -60,7 +59,7 @@
                     {{/priceval}}
                 {{/is_enrolled}}
                 {{#has_course_create}}
-                    <a class="edit-icon" href="{{edit_course}}" target="_blank"
+                    <a class="edit-icon" href="{{viewurl}}" target="_blank"
                        title="Edit Course">
                         {{#pix}}edit, theme_degrade{{/pix}}
                     </a>

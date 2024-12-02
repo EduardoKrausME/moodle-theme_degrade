@@ -3818,10 +3818,6 @@ button.btn-footer-popover:active {
 .pagelayout-maintenance #page {
     margin-top: 0 !important;
 }
-.drawer-left,
-.drawer-right {
-    top: 108px !important;
-}
 #page-course-management #page .action-menu .menubar .dropdown {
     .dropdown-menu .dropdown-item {
         padding: 8px 20px;
@@ -3992,6 +3988,12 @@ button.btn-footer-popover:active {
     box-shadow: none;
 }
 .drawer {
+    &.drawer-left,
+    &.drawer-right {
+        //position: sticky;
+        //top: 0 !important;
+        top: 108px !important;
+    }
     .drawerheader .drawertoggle {
         width: 40px;
         height: 40px;
@@ -4069,7 +4071,7 @@ button.btn-footer-popover:active {
 }
 #plugins-control-panel .c4 a {
     display: inline-block;
-    padding: 9rem 14rem;
+    padding: 9px 14px;
     margin: 1px 4px 1px 1px;
     background-color: #feeded;
     color: #910808;
@@ -4220,5 +4222,22 @@ a#next-activity-link {
 }
 .moodle-dialogue {
     min-width: 600px;
+}
+.modal {
+    .modal-content {
+        padding-bottom: 0 !important;
+        padding-top: 0 !important;
+    }
+    .modchooser{
+        .modal-footer{
+            display: none;
+        }
+    }
+    [data-action="show-moodlenet"]{
+        display: none;
+    }
+}
+#participants div[data-enrolinstancename] {
+    display: flex;
 }
 @import "dark-mode";

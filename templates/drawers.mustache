@@ -183,7 +183,7 @@
         M.util.js_complete('theme_boost/loader');
 
         var custommenus = $(".primary-navigation .custom-menu.navigation ul").html();
-        $(".drawer .drawercontent.drag-container").append(`<ul class="list-group list-group-custom-menus">${custommenus}</ul>`);
+        $(".drawer.drawer-left .drawercontent.drag-container").append(`<ul class="list-group list-group-custom-menus">${custommenus}</ul>`);
         $(".list-group-custom-menus > li")
                 .removeClass("nav-item")
                 .addClass("list-group-item")

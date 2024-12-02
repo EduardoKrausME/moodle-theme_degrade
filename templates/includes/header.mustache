@@ -108,14 +108,13 @@
 {{> theme_boost/primary-drawer-mobile}}
 
 {{#js}}
-    //<script>
-    require(['jquery', "core/ajax"], function($, ajax) {
+    require(["jquery", "core/ajax"], function($, ajax) {
 
         var top_scroll = Math.floor("{{top_scroll}}");
         if (!top_scroll) {
             var header = $("#header");
             var page = $("#page");
-            $(window).on('scroll', window_scroll);
+            $(window).on("scroll", window_scroll);
             window_scroll();
 
             function window_scroll() {

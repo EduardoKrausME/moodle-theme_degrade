@@ -1,5 +1,5 @@
 <?php
-// This file is part of the Local Analytics plugin for Moodle
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,6 +36,12 @@ class core_hook_output {
      * @return array
      */
     public static function before_html_attributes(\core\hook\output\before_html_attributes $hook): void {
-        $hook->add_attribute('data-bs-theme', get_user_preferences("layout", "light"));
+        $layout = get_user_preferences("layout", "light");
+        $layouturl = optional_param("layout", false, PARAM_TEXT);
+        if ($layouturl) {
+            $layout = $layouturl;
+            set_user_preference("layout", $layout);
+        }
+        $hook->add_attribute('data-bs-theme', $layout);
     }
 }

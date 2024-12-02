@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Class mod_icon
+ * Class userprerence
  *
  * @package    theme_degrade
  * @copyright  2024 Eduardo Kraus {@link http://eduardokraus.com}
@@ -41,7 +41,7 @@ class userprerence extends \external_api {
      */
     public static function layout_parameters() {
         return new \external_function_parameters([
-            'layout' => new \external_value(PARAM_TEXT, 'The layout mode')
+            'layout' => new \external_value(PARAM_TEXT, 'The layout mode'),
         ]);
     }
 

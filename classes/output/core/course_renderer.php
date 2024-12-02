@@ -100,7 +100,6 @@ class course_renderer extends \core_course_renderer {
 
             $datacursos["courses"][] = [
                 "couse_class" => "col-xg-3 col-lg-4 col-sm-6",
-                "edit_course" => "{$CFG->wwwroot}/course/edit.php?id={$course->id}#fitem_id_overviewfiles_filemanager",
                 "courseimage" => course_renderer_util::couse_image($course),
                 "viewurl" => $viewurl,
                 "fullname" => $course->get_formatted_name(),
@@ -154,7 +153,6 @@ class course_renderer extends \core_course_renderer {
 
             $datacursos["courses"][] = [
                 "couse_class" => "col-xg-3 col-lg-4 col-sm-6",
-                "edit_course" => "{$CFG->wwwroot}/course/edit.php?id={$course->id}#fitem_id_overviewfiles_filemanager",
                 "courseimage" => course_renderer_util::couse_image($course),
                 "viewurl" => course_renderer_util::course_url($course),
                 "fullname" => $course->get_formatted_name(),
@@ -205,7 +203,6 @@ class course_renderer extends \core_course_renderer {
 
         $datacurso = [
             "couse_class" => "col-xg-3 col-lg-4 col-sm-6",
-            "edit_course" => "{$CFG->wwwroot}/course/edit.php?id={$course->id}#fitem_id_overviewfiles_filemanager",
             "courseimage" => course_renderer_util::couse_image($course),
             "viewurl" => course_renderer_util::course_url($course),
             "fullname" => $course->get_formatted_name(),
@@ -238,7 +235,6 @@ class course_renderer extends \core_course_renderer {
 
         $datacurso = [
             "couse_class" => "col-xg-3 col-lg-4 col-sm-6",
-            "edit_course" => "{$CFG->wwwroot}/course/edit.php?id={$course->id}#fitem_id_overviewfiles_filemanager",
             "courseimage" => course_renderer_util::couse_image($course),
             "viewurl" => course_renderer_util::course_url($course),
             "fullname" => $course->get_formatted_name(),
