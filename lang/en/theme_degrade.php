@@ -267,3 +267,11 @@ $string['vvveb_home_mycourses_heading'] = 'My Courses';
 $string['vvveb_home_popular_course'] = 'Popular Courses';
 $string['vvveb_home_team_subtitle'] = 'We are a group of professionals dedicated to their work';
 $string['vvveb_home_team_title'] = 'Meet Our Team';
+
+$string['course_access'] = 'Access the course';
+$string['course_moore'] = 'More details';
+$string['vvveb_home_automatically_popular'] = 'Do not edit. This block will be automatically replaced with the most popular courses.';
+$string['vvveb_home_automatically_catalogo'] = 'Do not edit. This block will be automatically replaced with the course catalog.';
+$string['vvveb_home_catalogo_heading'] = 'Course catalog';
+$string['vvveb_home_automatically_category'] = 'Do not edit. This block will be automatically replaced with course categories.';
+$string['vvveb_home_category_heading'] = 'Course categories';

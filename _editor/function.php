@@ -22,6 +22,14 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/**
+ * Function vvveb__changue_langs
+ *
+ * @param $html
+ * @param $component
+ *
+ * @return mixed
+ */
 function vvveb__changue_langs($html, $component) {
     global $CFG, $SITE;
 
@@ -46,43 +54,13 @@ function vvveb__changue_langs($html, $component) {
     return $html;
 }
 
-function vvveb__change_courses($html, $component) {
-
-    if (strpos($html, "{course-itens}") === false) {
-        return $html;
-    }
-
-    global $OUTPUT, $DB, $CFG;
-    $sql = "
-        SELECT c.*,
-               COUNT(ue.id) AS enrolments
-          FROM {course}          AS  c
-          JOIN {enrol}           AS  e ON e.courseid = c.id
-          JOIN {user_enrolments} AS ue ON ue.enrolid = e.id
-      GROUP BY c.id
-      ORDER BY enrolments DESC
-         LIMIT 12";
-    $courses = $DB->get_records_sql($sql);
-
-    $data = [];
-    foreach ($courses as $course) {
-        $course->courseimage = couse_image(new core_course_list_element($course));
-
-        $course->accesslink = "{$CFG->wwwroot}/course/view.php?id={$course->id}";
-        if (get_config('local_kopere_dashboard', "builder_enable_{$course->id}")) {
-            $course->accesslink = "{$CFG->wwwroot}/local/kopere_pay/view.php?id={$course->id}";
-        }
-
-        $data[] = $course;
-    }
-
-
-
-    $courseshtml = $OUTPUT->render_from_template("{$component}/vvveb/course", ['couses' => $data]);
-
-    return str_replace("{course-itens}", $courseshtml, $html);
-}
-
+/**
+ * Function couse_image
+ *
+ * @param $course
+ *
+ * @return bool|string
+ */
 function couse_image($course) {
     global $CFG, $OUTPUT;
 
@@ -100,8 +78,54 @@ function couse_image($course) {
     }
 
     if (empty($courseimage)) {
-        $courseimage = $OUTPUT->image_url('curso-no-photo', 'theme')->out();
+        $courseimage = $OUTPUT->image_url('course-default', 'theme')->out();
     }
 
     return $courseimage;
+}
+
+/**
+ * Function sections_folders
+ */
+function sections_folders($chave) {
+    global $CFG;
+
+    $pastas = glob("./_sections/*");
+    foreach ($pastas as $pasta) {
+        $files = glob("{$pasta}/*.html");
+        $groups = [];
+        foreach ($files as $file) {
+
+            if (strpos($file, "catalogo-de-cursos") > 0) {
+                if (!file_exists("{$CFG->dirroot}/local/kopere_pay/view.php")) {
+                    continue;
+                }
+            }
+
+            if ($chave == "footer" && strpos($file, "courses") > 0) {
+                continue;
+            }
+
+            $html = file_get_contents($file);
+            $html = str_replace("{wwwroot}", $CFG->wwwroot, $html);
+            $html = vvveb__changue_langs($html, "theme_degrade");
+
+            preg_match('/\/([a-z0-9\-]*)\/([a-z0-9\-]*)\.html/', $file, $info);
+            $name = ucfirst(str_replace("-", " ", $info[2]));
+            $groupname = ucfirst(str_replace("-", " ", $info[1]));;
+            $groups[] = "{$info[1]}/{$info[2]}";
+            echo "
+                Vvveb.Sections.add('{$info[1]}/{$info[2]}', {
+                    name  : '{$name}',
+                    image : '_sections/{$info[1]}/{$info[2]}.jpg',
+                    html  : `{$html}`
+                });";
+        }
+
+        if (isset($groups[0])) {
+            $group = implode("', '", $groups);
+            echo "
+                Vvveb.SectionsGroup['{$groupname}'] = [ '{$group}' ];\n\n\n";
+        }
+    }
 }

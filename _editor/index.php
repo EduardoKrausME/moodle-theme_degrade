@@ -1659,40 +1659,15 @@ require_capability('moodle/site:config', context_system::instance());
 <script src="libs/builder/oembed.js"></script>
 <script src="libs/builder/components-embeds.js"></script>
 
-<!-- sections-->
-<script src="libs/builder/sections-bootstrap4.js"></script>
-
-<script>
+<?php if ($chave != "footer") { ?>
+    <script src="libs/builder/sections-bootstrap4.js"></script>
     <?php
-    $pastas = glob("./_sections/*");
-    foreach ($pastas as $pasta) {
-        $files = glob("{$pasta}/*.html");
-        $groups = [];
-        foreach ($files as $file) {
-            $html = file_get_contents($file);
-            $html = str_replace("{wwwroot}", $CFG->wwwroot, $html);
-            $html = vvveb__changue_langs($html, "theme_degrade");
-            $html = vvveb__change_courses($html, "theme_degrade");
-
-            preg_match('/\/([a-z0-9\-]*)\/([a-z0-9\-]*)\.html/', $file, $info);
-            $name = ucfirst(str_replace("-", " ", $info[2]));
-            $groupname = ucfirst(str_replace("-", " ", $info[1]));;
-            $groups[] = "{$info[1]}/{$info[2]}";
-            echo "
-                Vvveb.Sections.add('{$info[1]}/{$info[2]}', {
-                    name  : '{$name}',
-                    image : '_sections/{$info[1]}/{$info[2]}.jpg',
-                    html  : `{$html}`
-                });";
-        }
-
-        if (isset($groups[0])) {
-            $group = implode("', '", $groups);
-            echo "
-                Vvveb.SectionsGroup['{$groupname}'] = [ '{$group}' ];\n\n\n";
-        }
-    }?>
-</script>
+}
+?>
+<!-- sections-->
+<script><?php
+    sections_folders($chave);
+    ?></script>
 
 <!-- plugins -->
 

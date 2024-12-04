@@ -567,7 +567,6 @@ tiny-math-inline {
     bottom: -1px;
     content: '';
     left: -1px;
-    mix-blend-mode: multiply;
     position: absolute;
     right: -1px;
     top: -1px;

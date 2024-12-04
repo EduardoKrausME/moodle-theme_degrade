@@ -1334,6 +1334,9 @@ button.close:focus,
         box-shadow: none;
     }
 }
+.badge {
+    mix-blend-mode: initial !important;
+}
 .form-autocomplete-suggestions {
     li {
         &:first-child {
@@ -4153,6 +4156,7 @@ a#message-user-button {
 @import "frontpage_search";
 @import "frontpage_courselist";
 @import "frontpage_categories";
+@import "frontpage_vvveb_couse";
 @import "login";
 
 @import "replace-boost";
@@ -4228,16 +4232,22 @@ a#next-activity-link {
         padding-bottom: 0 !important;
         padding-top: 0 !important;
     }
-    .modchooser{
-        .modal-footer{
+    .modchooser {
+        .modal-footer {
             display: none;
         }
     }
-    [data-action="show-moodlenet"]{
+    [data-action="show-moodlenet"] {
         display: none;
     }
 }
 #participants div[data-enrolinstancename] {
     display: flex;
+}
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 800px;
+        margin: 1.75rem auto;
+    }
 }
 @import "dark-mode";

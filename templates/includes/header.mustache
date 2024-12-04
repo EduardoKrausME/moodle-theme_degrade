@@ -65,7 +65,7 @@
             {{/primarymoremenu}}
             <div class="primary-navigation">
                 <div class="custom-menu navigation">
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav dropdown mr-auto">
                         {{{output.custom_menu}}}
                     </ul>
                 </div>
@@ -78,10 +78,10 @@
 
             <div id="usernavigation" class="navbar-nav ml-auto">
                 <div class="layout-mode">
-                    <div class="dark-mode">
+                    <div class="dark-mode" data-toggle="tooltip" title="Dark Mode">
                         {{#pix}}dark/dark-lua, theme_degrade{{/pix}}
                     </div>
-                    <div class="light-mode">
+                    <div class="light-mode" data-toggle="tooltip" title="Light Mode">
                         {{#pix}}dark/dark-sol, theme_degrade{{/pix}}
                     </div>
                 </div>

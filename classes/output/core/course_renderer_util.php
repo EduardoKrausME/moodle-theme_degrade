@@ -61,7 +61,7 @@ class course_renderer_util {
         }
 
         if (empty($courseimage)) {
-            $courseimage = $OUTPUT->image_url('curso-no-photo', 'theme')->out();
+            $courseimage = $OUTPUT->image_url('course-default', 'theme')->out();
         }
 
         return $courseimage;

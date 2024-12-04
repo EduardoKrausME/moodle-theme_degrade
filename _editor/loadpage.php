@@ -36,7 +36,6 @@ if (file_exists(__DIR__ . "/_default/default-{$chave}.html")) {
     if (!isset($html[40])) {
         $html = file_get_contents(__DIR__ . "/_default/default-{$chave}.html");
         $html = vvveb__changue_langs($html, "theme_degrade");
-        $html = vvveb__change_courses($html, "theme_degrade");
     }
 }
 
@@ -48,13 +47,12 @@ $html = "
 <html>
     <head>
         <link vvveb-remove=\"true\" href=\"{$CFG->wwwroot}/theme/degrade/_editor/css/bootstrap-vvveb.css\" rel=\"stylesheet\">
-        <link href=\"{$CFG->wwwroot}/theme/degrade/_editor/libs/aos/aos.css\" rel=\"stylesheet\">
-        <link href=\"{$CFG->wwwroot}/theme/degrade/_editor/libs/aos/aos.js\" rel=\"stylesheet\">
+        <link vvveb-remove=\"true\" href=\"{$CFG->wwwroot}/theme/degrade/_editor/libs/aos/aos.css\" rel=\"stylesheet\">
+        <link vvveb-remove=\"true\" href=\"{$CFG->wwwroot}/theme/degrade/_editor/libs/aos/aos.js\" rel=\"stylesheet\">
     </head>
     <body>
         {$html}
     </body>
 </html>";
-
 
 die($html);

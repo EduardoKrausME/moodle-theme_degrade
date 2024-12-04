@@ -225,7 +225,7 @@ class footer_data {
                 }
             }
 
-            $htmldata = htmldata::vvveb__change_my_courses($htmldata);
+            $htmldata = htmldata::vvveb__change_courses($htmldata);
 
             $htmldata .= font_util::print_only_unique();
             return [

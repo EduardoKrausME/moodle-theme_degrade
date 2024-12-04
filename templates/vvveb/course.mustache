@@ -19,31 +19,48 @@
 
     Example context (json):
     {
+        "courses": [
+            {
+                "link": "https://example.com/course-detail",
+                "imagem": "https://example.com/images/course-thumbnail.jpg",
+                "title": "Curso de Desenvolvimento Web",
+                "text": "Aprenda a desenvolver aplicações web modernas com tecnologias avançadas.",
+                "cursopreco": "R$ 199,90",
+                "offprice": "R$ 299,90",
+                "access": "Acessar Curso"
+            }
+        ]
     }
 }}
 
-{{#couses}}
+<div class="row">
+    {{#courses}}
 
-    <div class="col-lg-3 col-md-4 col-6 mb-4">
-        <a href="{{accesslink}}"
-           class="d-block mb-1">
-            <img src="{{{courseimage}}}"
-                 class="img-fluid img-thumbnail">
-        </a>
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+            <div class="box-page">
+                <div class="thumbnail">
+                    <a href="{{{link}}}">
+                        <span style="background-image:url({{{courseimage}}})"></span>
+                    </a>
+                </div>
+                <div class="content">
+                    <h5 class="title"><a href="{{{link}}}">{{{title}}}</a></h5>
+                    {{#text}}
+                        <p>{{{text}}}</p>
+                    {{/text}}
 
-        <h6 data-v-course-name="">
-            {{{fullname}}}
-        </h6>
-
-        <div class="hover-content">
-            <div class="add-to-cart-btn">
-                <a href="{{accesslink}}"
-                    class="btn btn-primary w-100"
-                    data-id="{{id}}">
-                    {{#str}}vvveb_home_access, local_kopere_dashboard{{/str}}
-                </a>
+                    {{#cursopreco}}
+                        <div class="price">
+                            <span class="current-price">{{{cursopreco}}}</span>
+                            {{#offprice}}
+                                <span class="off-price">{{{offprice}}}</span>
+                            {{/offprice}}
+                        </div>
+                    {{/cursopreco}}
+                    <a href="{{{link}}}" class="btn btn-primary">{{{access}}}</a>
+                </div>
             </div>
         </div>
-    </div>
 
-{{/couses}}
+    {{/courses}}
+</div>
