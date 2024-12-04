@@ -130,5 +130,6 @@ $courseupdate = has_capability('moodle/course:update', $contextcourse);
 if (!$courseupdate && strpos($_SERVER['REQUEST_URI'], "/scorm/player.php") > 1) {
     echo $OUTPUT->render_from_template('theme_degrade/drawers_scorm', $templatedata);
 } else {
+    $PAGE->requires->js_call_amd('theme_degrade/drawers', 'init', []);
     echo $OUTPUT->render_from_template('theme_degrade/drawers', $templatedata);
 }
