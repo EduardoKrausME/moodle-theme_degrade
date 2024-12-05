@@ -22,6 +22,8 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+// phpcs:ignoreFile moodle.Files.LangFilesOrdering.IncorrectOrder
+
 $string['acessar'] = 'Access Course';
 $string['background_color'] = 'Background Color';
 $string['background_color_black'] = 'Black Theme {$a}';
