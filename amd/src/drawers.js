@@ -1,4 +1,4 @@
-define(["jquery", "theme_boost/tooltip"], function($) {
+define(["jquery", "jqueryui"], function($, ui) {
     return {
         init : function() {
             $('[data-toggle="tooltip"]').tooltip();
