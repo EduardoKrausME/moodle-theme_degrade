@@ -41,21 +41,20 @@ class userprerence extends \external_api {
      */
     public static function layout_parameters() {
         return new \external_function_parameters([
-            'layout' => new \external_value(PARAM_TEXT, 'The layout mode'),
+            'thememode' => new \external_value(PARAM_TEXT, 'The layout mode'),
         ]);
     }
 
     /**
      * layout function
      *
+     * @param string $thememode
+     *
      * @return array
-     * @throws \coding_exception
-     * @throws \dml_exception
-     * @throws \moodle_exception
      */
-    public static function layout($layout) {
+    public static function layout($thememode) {
 
-        set_user_preference("layout", $layout);
+        set_user_preference("theme_mode", $thememode);
 
         return ["status" => true];
     }

@@ -150,15 +150,15 @@
                 $("body").removeClass("dark-animation");
             }, 500);
 
-            var layout = "dark";
+            var thememode = "dark";
             if ($("html").attr("data-bs-theme") == "dark") {
-                layout = "light";
+                thememode = "light";
             }
-            $("html").attr("data-bs-theme", layout);
+            $("html").attr("data-bs-theme", thememode);
 
             ajax.call([{
                 methodname : "theme_degrade_userprerence_layout",
-                args       : {layout : layout}
+                args       : {thememode : thememode}
             }]);
         });
     });
