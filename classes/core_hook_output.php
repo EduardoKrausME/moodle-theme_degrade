@@ -36,12 +36,11 @@ class core_hook_output {
      * @return array
      */
     public static function before_html_attributes(\core\hook\output\before_html_attributes $hook): void {
-        $layout = get_user_preferences("layout", "light");
-        $layouturl = optional_param("layout", false, PARAM_TEXT);
+        $thememode = get_user_preferences("theme_mode", "light");
+        $layouturl = optional_param("theme_mode", false, PARAM_TEXT);
         if ($layouturl) {
-            $layout = $layouturl;
-            set_user_preference("layout", $layout);
+            $thememode = $layouturl;
         }
-        $hook->add_attribute('data-bs-theme', $layout);
+        $hook->add_attribute('data-bs-theme', $thememode);
     }
 }

@@ -77,7 +77,7 @@
             </ul>
 
             <div id="usernavigation" class="navbar-nav ml-auto">
-                <div class="layout-mode">
+                <div class="kraus-layout-dark">
                     <div class="dark-mode" data-toggle="tooltip" title="Dark Mode">
                         {{#pix}}dark/dark-lua, theme_degrade{{/pix}}
                     </div>
@@ -142,8 +142,8 @@
             }
         }
 
-        // layout-mode
-        var $layoutMode = $(".layout-mode div");
+        // kraus-layout-dark
+        var $layoutMode = $(".kraus-layout-dark div");
         $layoutMode.click(function() {
             $("body").addClass("dark-animation");
             setTimeout(function() {
