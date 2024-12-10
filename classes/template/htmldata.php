@@ -117,14 +117,13 @@ class htmldata {
     }
 
     /**
-     * phpcs: moodle.Strings.ForbiddenStrings.Found
      * Function vvveb__change_popular_courses
      *
      * @param $html
      *
      * @return mixed
      */
-    private static function vvveb__change_popular_courses($html) {
+    private static function vvveb__change_popular_courses($html) { // phpcs: moodle.Strings.ForbiddenStrings.Found
 
         if (strpos($html, "vvveb_home_automatically_popular") === false) {
             return $html;
