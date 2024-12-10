@@ -147,7 +147,6 @@ class htmldata {
         foreach ($courses as $course) {
             $course->title = $course->fullname;
             $course->text = self::truncate_text(strip_tags($course->summary), 300);
-            $course->access = get_string("course_access", "theme_degrade");
 
             $course->link = "{$CFG->wwwroot}/course/view.php?id={$course->id}";
 
@@ -176,10 +175,10 @@ class htmldata {
 
                             $course->offprice = get_config("local_kopere_dashboard", "builder_offprice_{$course->id}");
 
-                            $course->link = "{$CFG->wwwroot}/local/kopere_pay/view.php?id={$course->id}";
-
                             $text = get_config("local_kopere_dashboard", "builder_topo_{$course->id}");
                             $course->text = self::truncate_text(strip_tags($text), 300);
+                        } else {
+                            $course->link = "{$CFG->wwwroot}/local/kopere_pay/?id={$course->id}";
                         }
                     }
                 }
@@ -228,21 +227,22 @@ class htmldata {
                 continue;
             }
 
-            $course = new \stdClass();
-
-            $precoint = str_replace(".", "", $koperepaydetalhe->preco);
-            $precoint = str_replace(",", ".", $precoint);
-            $precoint = floatval("0{$precoint}");
-
-            if (!$precoint) {
-                $course->cursopreco = "Gratis";
-            } else {
-                $course->cursopreco = "R$ {$koperepaydetalhe->preco}";
-            }
             if (self::enrolled($koperepaydetalhe->course)) {
                 $course->access = get_string("course_access", "theme_degrade");
+                $course->link = "{$CFG->wwwroot}/course/view.php?id={$course->id}";
+                $course->title = $course->fullname;
             } else {
                 $course->access = get_string("course_moore", "theme_degrade");
+
+                $precoint = str_replace(".", "", $koperepaydetalhe->preco);
+                $precoint = str_replace(",", ".", $precoint);
+                $precoint = floatval("0{$precoint}");
+
+                if (!$precoint) {
+                    $course->cursopreco = get_string("webpages_free", "local_kopere_dashboard");
+                } else {
+                    $course->cursopreco = "R$ {$koperepaydetalhe->preco}";
+                }
 
                 $enable = get_config("local_kopere_dashboard", "builder_enable_{$koperepaydetalhe->course}");
                 if ($enable) {
@@ -332,10 +332,10 @@ class htmldata {
 
                                 $course->offprice = get_config("local_kopere_dashboard", "builder_offprice_{$course->id}");
 
-                                $course->link = "{$CFG->wwwroot}/local/kopere_pay/view.php?id={$course->id}";
-
                                 $text = get_config("local_kopere_dashboard", "builder_topo_{$course->id}");
                                 $course->text = self::truncate_text(strip_tags($text), 300);
+                            } else {
+                                $course->link = "{$CFG->wwwroot}/local/kopere_pay/?id={$course->id}";
                             }
                         }
                     }
