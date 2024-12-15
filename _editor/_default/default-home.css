@@ -5184,6 +5184,21 @@ section.pricing {
 .product-course-1 {
   padding: 3rem;
 }
+@media (max-width: 1200px) {
+  .product-course-1 {
+    padding: 1.5rem;
+  }
+}
+@media (max-width: 992px) {
+  .product-course-1 {
+    padding: 1rem;
+  }
+}
+@media (max-width: 500px) {
+  .product-course-1 {
+    padding: 0.5rem;
+  }
+}
 
 /*
  * Style common for all sections

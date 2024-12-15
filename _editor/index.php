@@ -27,7 +27,7 @@ require_once('./function.php');
 $PAGE->set_context(\context_system::instance());
 
 $chave = required_param('chave', PARAM_TEXT);
-$editlang = required_param('editlang', PARAM_TEXT);
+$lang = required_param('lang', PARAM_TEXT);
 require_login();
 require_capability('moodle/site:config', context_system::instance());
 
@@ -96,9 +96,9 @@ require_capability('moodle/site:config', context_system::instance());
 
         <div class="btn-group me-2 float-end" role="group">
             <form class="form-preview" method="post" target="editor-preview"
-                  action="<?php echo $CFG->wwwroot ?>/#<?php echo $chave ?>">
+                  action="<?php echo $CFG->wwwroot ?>/?redirect=0#<?php echo $chave ?>">
                 <input type="hidden" name="chave" value="<?php echo $chave ?>">
-                <input type="hidden" name="editlang" value="<?php echo $editlang ?>">
+                <input type="hidden" name="lang" value="<?php echo $lang ?>">
                 <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>">
                 <input type="hidden" name="htmldata" id="form-htmldata">
                 <button datatype="submit" class="btn btn-info btn-sm btn-icon save-btn"
@@ -1692,12 +1692,12 @@ Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist
 <script src="libs/autocomplete/jquery.autocomplete.js"></script>	
 -->
 <script>
-    deleteUrl = "<?php echo "save.php?action=delete&chave={$chave}&editlang={$editlang}"; ?>";
-    saveUrl = "<?php echo "save.php?action=save&chave={$chave}&editlang={$editlang}"; ?>";
-    oEmbedProxyUrl = "<?php echo "save.php?action=oembedProxy&chave={$chave}&editlang={$editlang}"; ?>";
-    mediaServerUrl = "<?php echo "files.php?chave={$chave}&editlang={$editlang}"; ?>";
+    deleteUrl = "<?php echo "save.php?action=delete&chave={$chave}&lang={$lang}"; ?>";
+    saveUrl = "<?php echo "save.php?action=save&chave={$chave}&lang={$lang}"; ?>";
+    oEmbedProxyUrl = "<?php echo "save.php?action=oembedProxy&chave={$chave}&lang={$lang}"; ?>";
+    mediaServerUrl = "<?php echo "files.php?chave={$chave}&lang={$lang}"; ?>";
 
-    var url = "<?php echo "loadpage.php?chave={$chave}&editlang={$editlang}"; ?>";
+    var url = "<?php echo "loadpage.php?chave={$chave}&lang={$lang}"; ?>";
     Vvveb.Builder.init(url, function() {
         Vvveb.SectionList.loadSections(false);
         Vvveb.TreeList.loadComponents();

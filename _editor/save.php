@@ -23,7 +23,7 @@ require_login();
 require_capability('moodle/site:config', context_system::instance());
 
 $chave = required_param('chave', PARAM_TEXT);
-$editlang = required_param('editlang', PARAM_TEXT);
+$lang = required_param('lang', PARAM_TEXT);
 
 define('MAX_FILE_LIMIT', 1024 * 1024 * 2);//2 Megabytes max html file size
 define('ALLOW_PHP', false);//check if saved html contains php tag and don't save if not allowed
@@ -109,14 +109,36 @@ if ($action) {
     //file manager actions, delete and rename
     switch ($action) {
         case 'delete':
-            header('Content-Type: application/json');
-            echo json_encode([
+            $return =[
                 "success" => 1,
                 "message" => "Deleted successfully",
-            ]);
+            ];
+
+            $json = file_get_contents('php://input');
+            $data = json_decode($json);
+            preg_match('/pluginfile.php\/(\d+)\/theme_degrade\/(editor_\w+)\/(\d+)\/(.*)/', $data->file, $filePartes);
+
+            if (isset($filePartes[4])) {
+                $contextid = $filePartes[1];
+                $component = "theme_degrade";
+                $filearea = $filePartes[2];
+                $itemid = $filePartes[3];
+                $filename = $filePartes[4];
+
+                $return['$contextid'] = $contextid;
+                $return['$component'] = $component;
+                $return['$filearea'] = $filearea;
+                $return['$itemid'] = $itemid;
+
+                $fs = get_file_storage();
+                $fs->delete_area_files($contextid, $component, $filearea, $itemid);
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($return);
             break;
         case 'save':
-            set_config("{$chave}_htmleditor_{$editlang}", $html, "theme_degrade");
+            set_config("{$chave}_htmleditor_{$lang}", $html, "theme_degrade");
             echo json_encode([
                 "success" => 1,
                 "message" => "Saved successfully",

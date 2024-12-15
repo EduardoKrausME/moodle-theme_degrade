@@ -83,7 +83,7 @@ let TextInput = {
             return this.render("textinput", data);
         },
     }
-};
+}
 
 let TextareaInput = {
     ...Input, ...{
@@ -106,7 +106,7 @@ let TextareaInput = {
             return this.render("textareainput", data);
         },
     }
-};
+}
 
 let CheckboxInput = {
     ...Input, ...{
@@ -138,7 +138,7 @@ let CheckboxInput = {
             return this.render("checkboxinput", data);
         },
     }
-};
+}
 
 let SelectInput = {
     ...Input, ...{
@@ -162,7 +162,7 @@ let SelectInput = {
             return this.render("select", data);
         },
     }
-};
+}
 
 let IconSelectInput = {
     ...Input, ...{
@@ -186,7 +186,7 @@ let IconSelectInput = {
             return this.render("icon-select", data);
         },
     }
-};
+}
 
 let HtmlListSelectInput = {
     ...Input, ...{
@@ -286,7 +286,7 @@ let HtmlListSelectInput = {
             return template;
         },
     }
-};
+}
 
 let LinkInput = {
     ...TextInput, ...{
@@ -304,7 +304,7 @@ let LinkInput = {
             return this.render("textinput", data);
         },
     }
-};
+}
 
 let DateInput = {
     ...TextInput, ...{
@@ -317,7 +317,7 @@ let DateInput = {
             return this.render("dateinput", data);
         },
     }
-};
+}
 
 let RangeInput = {
     ...Input, ...{
@@ -341,7 +341,7 @@ let RangeInput = {
             return this.render("rangeinput", data);
         },
     }
-};
+}
 
 let NumberInput = {
     ...Input, ...{
@@ -354,7 +354,7 @@ let NumberInput = {
             return this.render("numberinput", data);
         },
     }
-};
+}
 
 let CssUnitInput = {
     ...Input, ...{
@@ -409,7 +409,7 @@ let CssUnitInput = {
             return this.render("cssunitinput", data);
         },
     }
-};
+}
 
 let ColorInput = {
     ...Input, ...{
@@ -454,7 +454,7 @@ let ColorInput = {
             return this.render("colorinput", data);
         },
     }
-};
+}
 
 let ImageInput = {
     ...Input, ...{
@@ -515,7 +515,7 @@ let ImageInput = {
             }
         }
     }
-};
+}
 
 let FileUploadInput = {
     ...TextInput, ...{
@@ -528,7 +528,7 @@ let FileUploadInput = {
             return this.render("textinput", data);
         },
     }
-};
+}
 
 let RadioInput = {
     ...Input, ...{
@@ -558,7 +558,7 @@ let RadioInput = {
             return this.render("radioinput", data);
         },
     }
-};
+}
 
 let RadioButtonInput = {
     ...RadioInput, ...{
@@ -584,7 +584,7 @@ let RadioButtonInput = {
             return this.render("radiobuttoninput", data);
         },
     }
-};
+}
 
 let ToggleInput = {
     ...Input, ...{
@@ -617,7 +617,7 @@ let ToggleInput = {
             return this.render("toggle", data);
         },
     }
-};
+}
 
 let ValueTextInput = {
     ...TextInput, ...{
@@ -630,7 +630,7 @@ let ValueTextInput = {
             return this.render("textinput", data);
         },
     }
-};
+}
 
 let GridLayoutInput = {
     ...TextInput, ...{
@@ -643,7 +643,7 @@ let GridLayoutInput = {
             return this.render("textinput", data);
         },
     }
-};
+}
 
 let ProductsInput = {
     ...TextInput, ...{
@@ -656,7 +656,7 @@ let ProductsInput = {
             return this.render("textinput", data);
         },
     }
-};
+}
 
 let GridInput = {
     ...Input, ...{
@@ -683,7 +683,7 @@ let GridInput = {
             return this.render("grid", data);
         },
     }
-};
+}
 
 let TextValueInput = {
     ...Input, ...{
@@ -702,7 +702,7 @@ let TextValueInput = {
             return this.render("textvalue", data);
         },
     }
-};
+}
 
 let ButtonInput = {
     ...Input, ...{
@@ -726,7 +726,7 @@ let ButtonInput = {
             return this.render("button", data);
         },
     }
-};
+}
 
 let SectionInput = {
     ...Input, ...{
@@ -744,7 +744,7 @@ let SectionInput = {
             return this.render("sectioninput", data);
         },
     }
-};
+}
 
 let ListInput = {
     ...Input, ...{
@@ -827,7 +827,7 @@ let ListInput = {
             return this.render("listinput", data);
         },
     }
-};
+}
 
 let AutocompleteInput = {
     ...Input, ...{
@@ -850,7 +850,7 @@ let AutocompleteInput = {
             return this.element;
         }
     }
-};
+}
 
 let AutocompleteList = {
     ...Input, ...{
@@ -885,7 +885,7 @@ let AutocompleteList = {
             return this.element;
         }
     }
-};
+}
 
 let TagsInput = {
     ...Input, ...{
@@ -919,7 +919,7 @@ let TagsInput = {
             return this.element;
         }
     }
-};
+}
 
 let NoticeInput = {
     ...Input, ...{
@@ -930,4 +930,4 @@ let NoticeInput = {
             return this.render("noticeinput", data);
         },
     }
-};
+}

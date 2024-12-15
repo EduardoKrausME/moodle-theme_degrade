@@ -76,16 +76,10 @@ Vvveb.WysiwygEditor = {
     },
 
     edit : function(element) {
-        console.log(element.getAttribute("data-v-editor"));
-        if (element.getAttribute("data-v-editor") == "false") {
-            displayToast("bg-danger", "Forbidden", "The component cannot be edited.");
+        if(element.tagName =="BODY"){
+            alert("The <body> component cannot be edited.");
             return;
         }
-        if (element.tagName == "BODY") {
-            displayToast("bg-danger", "Forbidden", "The &lt;body&gt; component cannot be edited.");
-            return;
-        }
-
         this.element = element;
         this.isActive = true;
         this.oldValue = element.innerHTML;

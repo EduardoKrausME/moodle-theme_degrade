@@ -27,12 +27,12 @@ require_once("./function.php");
 $PAGE->set_context(\context_system::instance());
 
 $chave = required_param("chave", PARAM_TEXT);
-$editlang = required_param("editlang", PARAM_TEXT);
+$lang = required_param("lang", PARAM_TEXT);
 
 $html = "";
 
 if (file_exists(__DIR__ . "/_default/default-{$chave}.html")) {
-    $html = get_config("theme_degrade", "{$chave}_htmleditor_{$editlang}");
+    $html = get_config("theme_degrade", "{$chave}_htmleditor_{$lang}");
     if (!isset($html[40])) {
         $html = file_get_contents(__DIR__ . "/_default/default-{$chave}.html");
         $html = vvveb__changue_langs($html, "theme_degrade");
