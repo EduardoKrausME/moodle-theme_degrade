@@ -71,3 +71,9 @@ $setting = new admin_setting_configselect('theme_degrade/background_color',
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
+$setting = new admin_setting_configtext('theme_degrade/background_text_color',
+    get_string('background_text_color', 'theme_degrade'),
+    get_string('background_text_color_desc', 'theme_degrade') . $htmlselect,
+    '#FFFFFF');
+$setting->set_updatedcallback('theme_reset_all_caches');
+$page->add($setting);

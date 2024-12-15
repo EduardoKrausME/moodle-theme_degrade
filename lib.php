@@ -665,7 +665,8 @@ function theme_degrade_process_css($css, $theme) {
             .navbar-light.ever-fixed-top .navbar-nav .nav-link.active,
             #header.ever-fixed-top .header-logo a.navbar-brand img,
             #header.ever-fixed-top .header-logo a.navbar-brand span,
-            #header.ever-fixed-top .header-menubar .primary-navigation ul.navbar-nav > li > a {
+            #header.ever-fixed-top .header-menubar .primary-navigation ul.navbar-nav > li > a,
+            .header-menubar .navbar-toggler .navbar-toggler-icon:before {
                 color: {$topscrolltextcolor} !important;
             }
             #header.ever-fixed-top .custom-switch .custom-control-label:after{
@@ -691,7 +692,11 @@ function theme_degrade_process_css($css, $theme) {
 
     $fontfamilymenus = theme_degrade_get_setting("fontfamily_menus");
     $fontfamilymenus = isset($fontfamilymenus[3]) ? "{$fontfamilymenus}," : "";
-    $fontfamilymenus = ".header-menubar .primary-navigation ul.navbar-nav li a,
+
+    $backgroundcolor = theme_degrade_get_setting("background_color", false);
+    $textcolor = theme_degrade_get_setting("background_text_color", false);
+    $themecss = "
+            .header-menubar .primary-navigation ul.navbar-nav li a,
             .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
             .header-menubar .navbar-nav .editmode-switch-form .input-group label,
             .usermenu .moodle-actionmenu a.dropdown-toggle,
@@ -700,18 +705,31 @@ function theme_degrade_process_css($css, $theme) {
             .navbar-light .navbar-nav .nav-link.show,
             .navbar-light .navbar-nav .nav-link.active,
             .header-logo a.navbar-brand img {
-                font-family : {$fontfamilymenus} Arial, Helvetica, sans-serif
-            }";
+                font-family : {$fontfamilymenus} Arial, Helvetica, sans-serif;
+            }
 
-    $themecss = "";
-    $backgroundcolor = theme_degrade_get_setting("background_color", false);
-    if (preg_match('/^#[a-fA-F0-9]{6}$/', $backgroundcolor)) {
-        $themecss = "
+            [data-bs-theme=light] .header-menubar .primary-navigation ul.navbar-nav li a,
+            [data-bs-theme=light] .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
+            [data-bs-theme=light] .header-menubar .navbar-nav .editmode-switch-form .input-group label,
+            [data-bs-theme=light] .usermenu .moodle-actionmenu a.dropdown-toggle,
+            [data-bs-theme=light] .navbar-light .navbar-nav .show>.nav-link,
+            [data-bs-theme=light] .navbar-light .navbar-nav .active>.nav-link,
+            [data-bs-theme=light] .navbar-light .navbar-nav .nav-link.show,
+            [data-bs-theme=light] .navbar-light .navbar-nav .nav-link.active,
+            [data-bs-theme=light] .header-logo a.navbar-brand img,
+            [data-bs-theme=light] #header .popover-region .popover-region-toggle i.icon{
+                color: {$textcolor} !important;
+            }
+            [data-bs-theme=light] .header-menubar #usernavigation .kraus-layout-dark svg path{
+                fill: {$textcolor};
+            }
+
             #header,
             #nav-drawer .list-group-item.active > div,
             #nav-drawer .list-group-item.active:hover,
             #footer .footer-main {
                 background: {$backgroundcolor};
+                color: {$textcolor} !important;
             }
             #site-news-forum,
             .frontpage-course-list {
@@ -719,8 +737,8 @@ function theme_degrade_process_css($css, $theme) {
             }
             .frontpage-course-list .btn-primary {
                 background: {$backgroundcolor};
+                color: {$textcolor} !important;
             }";
-    }
 
     $css = "{$css}\n{$fontfamilytext}\n{$fontfamilytitle}\n{$fontfamilysitename}\n{$fontfamilymenus}\n{$themecss}";
 

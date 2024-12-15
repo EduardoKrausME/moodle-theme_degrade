@@ -35,7 +35,7 @@ if (get_config('theme_degrade', 'home_type') != 0) {
 
     $text = get_string('editor_link_home_all', 'theme_degrade');
     $html = "<a class='btn btn-info mt-1 mb-2' target='_blank'
-                href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&editlang=all'>{$text}</a>";
+                href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&lang=all'>{$text}</a>";
     if (!isset(get_config("theme_degrade", "home_htmleditor_all")[40])) {
         $html = "{$html} <strong class='alert-warning'>{$emptytext}</strong>";
     }
@@ -47,7 +47,7 @@ if (get_config('theme_degrade', 'home_type') != 0) {
 
         $text = get_string('editor_link_home', 'theme_degrade', $langname);
         $html = "<a class='btn btn-info mt-1 mb-2' target='_blank'
-                    href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&editlang={$CFG->lang}'>{$text}</a>";
+                    href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&lang={$CFG->lang}'>{$text}</a>";
         if (!isset(get_config("theme_degrade", "home_htmleditor_{$CFG->lang}")[40])) {
             $html = "{$html} <strong class='alert-warning'>{$emptytext}</strong>";
         }
@@ -60,7 +60,7 @@ if (get_config('theme_degrade', 'home_type') != 0) {
 
             $text = get_string('editor_link_home', 'theme_degrade', $langname);
             $html = "<a class='btn btn-info mt-1' target='_blank'
-                        href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&editlang={$langkey}'>{$text}</a>";
+                        href='{$CFG->wwwroot}/theme/degrade/_editor/?chave=home&lang={$langkey}'>{$text}</a>";
             if (!isset(get_config("theme_degrade", "home_htmleditor_{$langkey}")[40])) {
                 $html = "{$html} <strong class='alert-warning'>{$emptytext}</strong>";
             }

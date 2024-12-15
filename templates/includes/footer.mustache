@@ -79,10 +79,10 @@
     <footer id="page-footer" class="footer-block">
         {{#footer_html}}
             <div id="footer">
-                <div class="footer-main text-center mt-0 pb-5">
+                <div class="footer-main text-center mt-0">
                     {{{footer_htmleditor}}}
                     {{#footer_settings_edit}}
-                        <a class="settings-edit" href="{{{footer_settings_edit}}}">
+                        <a class="settings-edit settings-edit-html" href="{{{footer_settings_edit}}}">
                             {{#pix}}edit, theme_degrade{{/pix}}
                         </a>
                     {{/footer_settings_edit}}
@@ -242,6 +242,7 @@
                 </div>
             {{/footer_enable_block}}
         {{/footer_html}}
+        {{{footer_extra}}}
 
         <div class="footer-content-debugging footer-dark bg-dark text-light">
             <div class="container-fluid footer-dark-inner">
