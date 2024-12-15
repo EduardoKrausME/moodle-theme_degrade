@@ -45,26 +45,26 @@ class login_data {
 
         $backgroundurl = theme_degrade_get_setting_image("login_backgroundfoto");
         if (!$backgroundurl) {
-            $backgroundurl = $OUTPUT->image_url("backgroundfoto", 'theme');
+            $backgroundurl = $OUTPUT->image_url("backgroundfoto", "theme");
         }
 
-        $theme = theme_degrade_get_setting('login_theme');
+        $theme = theme_degrade_get_setting("login_theme");
 
         $background = "background-image: url({$backgroundurl});";
-        if ($theme == 'login_theme_block') {
+        if ($theme == "login_theme_block") {
             $backgroundcolor = theme_degrade_get_setting("login_backgroundcolor");
             $background = "background-color: {$backgroundcolor};background-image: url({$backgroundurl});";
         }
 
         return [
-            'logourl_header' => theme_degrade_get_logo("header"),
-            'login_theme' => $theme,
-            'login_backgroundcolor' => theme_degrade_get_setting('login_backgroundcolor'),
-            'login_background_image' => $background,
+            "logourl_header" => theme_degrade_get_logo("header"),
+            "login_theme" => $theme,
+            "login_backgroundcolor" => theme_degrade_get_setting("login_backgroundcolor"),
+            "login_background_image" => $background,
 
-            'login_login_description' => theme_degrade_get_setting('login_login_description', FORMAT_HTML),
-            'login_forgot_description' => theme_degrade_get_setting('login_forgot_description', FORMAT_HTML),
-            'login_signup_description' => theme_degrade_get_setting('login_signup_description', FORMAT_HTML),
+            "login_login_description" => theme_degrade_get_setting("login_login_description", FORMAT_HTML),
+            "login_forgot_description" => theme_degrade_get_setting("login_forgot_description", FORMAT_HTML),
+            "login_signup_description" => theme_degrade_get_setting("login_signup_description", FORMAT_HTML),
         ];
     }
 }

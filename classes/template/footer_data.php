@@ -55,35 +55,35 @@ class footer_data {
             self::footer_html()
         );
 
-        $footerenableblock = $data['enable_block_description'] +
-            $data['enable_block_links'] +
-            $data['enable_block_social'] +
-            $data['enable_block_contact'];
+        $footerenableblock = $data["enable_block_description"] +
+            $data["enable_block_links"] +
+            $data["enable_block_social"] +
+            $data["enable_block_contact"];
 
         switch ($footerenableblock) {
             case 1:
-                $footerblockclass = 'col-md-12';
+                $footerblockclass = "col-md-12";
                 break;
             case 2:
-                $footerblockclass = 'col-md-6';
+                $footerblockclass = "col-md-6";
                 break;
             case 3:
-                $footerblockclass = 'col-md-4';
+                $footerblockclass = "col-md-4";
                 break;
             case 4:
-                $footerblockclass = 'col-md-3';
+                $footerblockclass = "col-md-3";
                 break;
             default:
-                $footerblockclass = '';
+                $footerblockclass = "";
         }
 
-        $data['footer_enable_block'] = $footerenableblock;
-        $data['footer_block_class'] = $footerblockclass;
-        if (has_capability('moodle/site:config', \context_system::instance())) {
-            $data['footer_settings_edit'] =
+        $data["footer_enable_block"] = $footerenableblock;
+        $data["footer_block_class"] = $footerblockclass;
+        if (has_capability("moodle/site:config", \context_system::instance())) {
+            $data["footer_settings_edit"] =
                 "{$CFG->wwwroot}/admin/settings.php?section=themesettingdegrade#theme_degrade_footer";
         }
-        $data['logourl_footer'] = theme_degrade_get_logo("footer");
+        $data["logourl_footer"] = theme_degrade_get_logo("footer");
 
         return $data;
     }
@@ -95,12 +95,12 @@ class footer_data {
      * @throws \coding_exception
      */
     private static function description() {
-        $footerdescription = theme_degrade_get_setting('footer_description');
-        $footerdescription = !empty($footerdescription) ? $footerdescription : '';
+        $footerdescription = theme_degrade_get_setting("footer_description");
+        $footerdescription = !empty($footerdescription) ? $footerdescription : "";
 
         return [
-            'enable_block_description' => 1,
-            'footer_description' => $footerdescription,
+            "enable_block_description" => 1,
+            "footer_description" => $footerdescription,
         ];
     }
 
@@ -112,14 +112,14 @@ class footer_data {
      * @throws \moodle_exception
      */
     private static function links() {
-        $footerlinkstitle = theme_degrade_get_setting('footer_links_title');
-        $footerlinkstitle = !empty($footerlinkstitle) ? $footerlinkstitle : '';
-        $footerlinks = theme_degrade_generate_links('footer_links');
+        $footerlinkstitle = theme_degrade_get_setting("footer_links_title");
+        $footerlinkstitle = !empty($footerlinkstitle) ? $footerlinkstitle : "";
+        $footerlinks = theme_degrade_generate_links("footer_links");
 
         return [
-            'enable_block_links' => 0 + ($footerlinks != ''),
-            'footer_links' => $footerlinks,
-            'footer_links_title' => $footerlinkstitle,
+            "enable_block_links" => 0 + ($footerlinks != ""),
+            "footer_links" => $footerlinks,
+            "footer_links_title" => $footerlinkstitle,
         ];
     }
 
@@ -130,40 +130,40 @@ class footer_data {
      * @throws \coding_exception
      */
     private static function social() {
-        $footersocialtitle = theme_degrade_get_setting('footer_social_title');
-        $footersocialtitle = !empty($footersocialtitle) ? $footersocialtitle : '';
+        $footersocialtitle = theme_degrade_get_setting("footer_social_title");
+        $footersocialtitle = !empty($footersocialtitle) ? $footersocialtitle : "";
 
-        $socialfacebook = trim(theme_degrade_get_setting('social_facebook'));
-        $socialyoutube = trim(theme_degrade_get_setting('social_youtube'));
-        $sociallinkedin = trim(theme_degrade_get_setting('social_linkedin'));
-        $socialtwitter = trim(theme_degrade_get_setting('social_twitter'));
-        $socialinstagram = trim(theme_degrade_get_setting('social_instagram'));
+        $socialfacebook = trim(theme_degrade_get_setting("social_facebook"));
+        $socialyoutube = trim(theme_degrade_get_setting("social_youtube"));
+        $sociallinkedin = trim(theme_degrade_get_setting("social_linkedin"));
+        $socialtwitter = trim(theme_degrade_get_setting("social_twitter"));
+        $socialinstagram = trim(theme_degrade_get_setting("social_instagram"));
 
         $socialurls = (
-            $socialfacebook != '' ||
-            $socialyoutube != '' ||
-            $sociallinkedin != '' ||
-            $socialinstagram != '' ||
-            $socialtwitter != '') ? 1 : 0;
+            $socialfacebook != "" ||
+            $socialyoutube != "" ||
+            $sociallinkedin != "" ||
+            $socialinstagram != "" ||
+            $socialtwitter != "") ? 1 : 0;
 
         return [
-            'enable_block_social' => 0 + ($socialurls != 0),
-            'footer_social_title' => $footersocialtitle,
+            "enable_block_social" => 0 + ($socialurls != 0),
+            "footer_social_title" => $footersocialtitle,
 
-            'social_youtube' => $socialyoutube,
-            'youtube_name' => "Youtube",
+            "social_youtube" => $socialyoutube,
+            "youtube_name" => "Youtube",
 
-            'social_linkedin' => $sociallinkedin,
-            'linkedin_name' => "Linkedin",
+            "social_linkedin" => $sociallinkedin,
+            "linkedin_name" => "Linkedin",
 
-            'social_facebook' => $socialfacebook,
-            'facebook_name' => "Facebook",
+            "social_facebook" => $socialfacebook,
+            "facebook_name" => "Facebook",
 
-            'social_instagram' => $socialinstagram,
-            'instagram_name' => "Instagram",
+            "social_instagram" => $socialinstagram,
+            "instagram_name" => "Instagram",
 
-            'social_twitter' => $socialtwitter,
-            'twitter_name' => "Twitter",
+            "social_twitter" => $socialtwitter,
+            "twitter_name" => "Twitter",
         ];
     }
 
@@ -174,20 +174,20 @@ class footer_data {
      * @throws \coding_exception
      */
     private static function contact() {
-        $contactfootertitle = theme_degrade_get_setting('contact_footer_title');
-        $contactfootertitle = !empty($contactfootertitle) ? $contactfootertitle : '';
+        $contactfootertitle = theme_degrade_get_setting("contact_footer_title");
+        $contactfootertitle = !empty($contactfootertitle) ? $contactfootertitle : "";
 
-        $contactaddress = theme_degrade_get_setting('contact_address') ?
-            theme_degrade_get_setting('contact_address') : '';
-        $contactemail = theme_degrade_get_setting('contact_email');
-        $contactphone = theme_degrade_get_setting('contact_phone');
+        $contactaddress = theme_degrade_get_setting("contact_address") ?
+            theme_degrade_get_setting("contact_address") : "";
+        $contactemail = theme_degrade_get_setting("contact_email");
+        $contactphone = theme_degrade_get_setting("contact_phone");
 
         return [
-            'enable_block_contact' => 0 + ($contactaddress != '' || $contactemail != '' || $contactphone != ''),
-            'contact_footer_title' => $contactfootertitle,
-            'contact_address' => $contactaddress,
-            'contact_phone' => $contactphone,
-            'contact_email' => $contactemail,
+            "enable_block_contact" => 0 + ($contactaddress != "" || $contactemail != "" || $contactphone != ""),
+            "contact_footer_title" => $contactfootertitle,
+            "contact_address" => $contactaddress,
+            "contact_phone" => $contactphone,
+            "contact_email" => $contactemail,
         ];
     }
 
@@ -199,7 +199,7 @@ class footer_data {
      */
     private static function copywriter() {
         return [
-            'enable_copywriter' => theme_degrade_get_setting('footer_show_copywriter'),
+            "enable_copywriter" => theme_degrade_get_setting("footer_show_copywriter"),
         ];
     }
 
@@ -212,29 +212,34 @@ class footer_data {
      */
     private static function footer_html() {
         $footertype = get_config("theme_degrade", "footer_type");
-        $chave = optional_param('chave', false, PARAM_TEXT);
+        $chave = optional_param("chave", false, PARAM_TEXT);
 
-        if ($footertype == 1 || $chave == "footer") {
-            if ($chave == 'footer') {
-                $htmldata = optional_param('htmldata', false, PARAM_RAW);
-            } else {
-                $lang = current_language();
-                $htmldata = get_config("theme_degrade", "footer_htmleditor_{$lang}");
-                if (!isset($htmldata[3])) {
-                    $htmldata = get_config("theme_degrade", "footer_htmleditor_all");
-                }
+        $htmldata = optional_param("htmldata", false, PARAM_RAW);
+        if ($chave == "footer" && $htmldata) {
+            return [
+                "footer_html" => true,
+                "footer_htmleditor" => $htmldata,
+                "footer_extra" => font_util::print_only_unique(),
+            ];
+        }
+
+        if ($footertype == 1) {
+            $lang = current_language();
+            $htmldata = get_config("theme_degrade", "footer_htmleditor_{$lang}");
+            if (!isset($htmldata[3])) {
+                $htmldata = get_config("theme_degrade", "footer_htmleditor_all");
             }
 
             $htmldata = htmldata::vvveb__change_courses($htmldata);
-
-            $htmldata .= font_util::print_only_unique();
             return [
-                'footer_html' => true,
-                'footer_htmleditor' => $htmldata,
+                "footer_html" => true,
+                "footer_htmleditor" => $htmldata,
+                "footer_extra" => font_util::print_only_unique(),
             ];
         } else {
             return [
-                'footer_html' => false,
+                "footer_html" => false,
+                "footer_extra" => font_util::print_only_unique(),
             ];
         }
     }

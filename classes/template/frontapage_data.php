@@ -44,8 +44,8 @@ class frontapage_data {
      */
     public static function topo() {
         return [
-            'logourl_header' => theme_degrade_get_logo("header"),
-            'top_scroll' => theme_degrade_get_setting("top_scroll") ? 1 : 0,
+            "logourl_header" => theme_degrade_get_logo("header"),
+            "top_scroll" => theme_degrade_get_setting("top_scroll") ? 1 : 0,
         ];
     }
 
@@ -145,11 +145,11 @@ class frontapage_data {
      */
     public static function home_html() {
         $hometype = get_config("theme_degrade", "home_type");
-        $chave = optional_param('chave', false, PARAM_TEXT);
+        $chave = optional_param("chave", false, PARAM_TEXT);
 
         if ($hometype == 1 || $chave == "home") {
-            if ($chave == 'home') {
-                $htmldata = optional_param('htmldata', false, PARAM_RAW);
+            if ($chave == "home") {
+                $htmldata = optional_param("htmldata", false, PARAM_RAW);
             } else {
                 $lang = current_language();
                 $htmldata = get_config("theme_degrade", "home_htmleditor_{$lang}");
@@ -162,12 +162,12 @@ class frontapage_data {
 
             $htmldata .= font_util::print_only_unique();
             return [
-                'home_html' => true,
-                'home_htmleditor' => $htmldata,
+                "home_html" => true,
+                "home_htmleditor" => $htmldata,
             ];
         } else {
             return [
-                'home_html' => false,
+                "home_html" => false,
             ];
         }
     }
@@ -185,12 +185,12 @@ class frontapage_data {
         global $CFG;
 
         $settingsedit = false;
-        if (has_capability('moodle/site:config', \context_system::instance())) {
-            $editlang = get_string("{$hasteg}_editbooton", "theme_degrade");
+        if (has_capability("moodle/site:config", \context_system::instance())) {
+            $lang = get_string("{$hasteg}_editbooton", "theme_degrade");
             $settingsedit = "<a href='{$CFG->wwwroot}/admin/settings.php?section=themesettingdegrade#{$hasteg}'";
             $settingsedit .= "   class='bt-edit-setting' target='_blank'>";
             $settingsedit .= "    <img src = '{$CFG->wwwroot}/theme/degrade/pix/edit.svg' >";
-            $settingsedit .= "    {$editlang}";
+            $settingsedit .= "    {$lang}";
             $settingsedit .= "</a>";
         }
 
