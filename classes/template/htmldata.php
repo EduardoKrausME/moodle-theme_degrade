@@ -57,7 +57,7 @@ class htmldata {
         self::vvveb__change_catalogo($html);
         self::vvveb__change_category($html);
 
-        $html = preg_replace('/<link vvveb-remove="true".*>/', '', $html);
+        $html = preg_replace('/<link vvveb-remove="true".*?>/', '', $html);
         foreach (self::$replaces as $replace) {
             foreach ($replace["from"] as $from) {
                 $html = str_replace($from, $replace["to"], $html);
@@ -81,7 +81,16 @@ class htmldata {
     private static function vvveb__change_my_courses($html) {
 
         if (strpos($html, "vvveb_home_automatically_my_course") === false) {
-            return $html;
+            return;
+        }
+
+        if (!isloggedin()) {
+            preg_match_all('/<div.*?vvveb_home_automatically_my_course.*?>(.*?)<\/div>/s', $html, $htmls);
+            self::$replaces[] = [
+                "from" => $htmls[1],
+                "to" => "",
+            ];
+            return;
         }
 
         global $OUTPUT, $DB, $USER, $CFG;
@@ -103,7 +112,7 @@ class htmldata {
 
             $course->courseimage = course_renderer_util::couse_image(new core_course_list_element($course));
             if (!isset($course->courseimage[3])) {
-                $course->courseimage = $OUTPUT->image_url('course-default', 'theme')->out();
+                $course->courseimage = $OUTPUT->image_url("course-default", "theme")->out();
             }
             $data[] = $course;
         }
@@ -126,7 +135,7 @@ class htmldata {
     private static function vvveb__change_popular_courses($html) {
 
         if (strpos($html, "vvveb_home_automatically_popular") === false) {
-            return $html;
+            return;
         }
 
         global $OUTPUT, $DB, $CFG;
@@ -144,9 +153,8 @@ class htmldata {
         $data = [];
         foreach ($courses as $course) {
             $course->title = $course->fullname;
-            $course->text = self::truncate_text(strip_tags($course->summary), 300);
-
             $course->link = "{$CFG->wwwroot}/course/view.php?id={$course->id}";
+            $course->text = self::text_course($course);
 
             if (self::enrolled($course->id)) {
                 $course->access = get_string("course_access", "theme_degrade");
@@ -174,7 +182,6 @@ class htmldata {
                             $course->offprice = get_config("local_kopere_dashboard", "builder_offprice_{$course->id}");
 
                             $text = get_config("local_kopere_dashboard", "builder_topo_{$course->id}");
-                            $course->text = self::truncate_text(strip_tags($text), 300);
                         } else {
                             $course->link = "{$CFG->wwwroot}/local/kopere_pay/?id={$course->id}";
                         }
@@ -184,7 +191,7 @@ class htmldata {
 
             $course->courseimage = course_renderer_util::couse_image(new core_course_list_element($course));
             if (!isset($course->courseimage[3])) {
-                $course->courseimage = $OUTPUT->image_url('course-default', 'theme')->out();
+                $course->courseimage = $OUTPUT->image_url("course-default", "theme")->out();
             }
 
             $data[] = $course;
@@ -207,9 +214,13 @@ class htmldata {
      * @return mixed
      */
     private static function vvveb__change_catalogo($html) {
-
         if (strpos($html, "vvveb_home_automatically_catalogo") === false) {
-            return $html;
+            return;
+        }
+
+        global $CFG;
+        if (!file_exists("{$CFG->dirroot}/local/kopere_pay/lib.php")) {
+            return;
         }
 
         global $OUTPUT, $DB, $CFG;
@@ -224,6 +235,8 @@ class htmldata {
             if (!$course) {
                 continue;
             }
+
+            $course->text = self::text_course($course);
 
             if (self::enrolled($koperepaydetalhe->course)) {
                 $course->access = get_string("course_access", "theme_degrade");
@@ -247,9 +260,6 @@ class htmldata {
                     $course->link = "{$CFG->wwwroot}/local/kopere_pay/view.php?id={$koperepaydetalhe->course}";
                     $course->title = get_config("local_kopere_dashboard", "builder_titulo_{$koperepaydetalhe->course}");
                     $course->offprice = get_config("local_kopere_dashboard", "builder_offprice_{$koperepaydetalhe->course}");
-
-                    $course->text = get_config("local_kopere_dashboard", "builder_topo_{$koperepaydetalhe->course}");
-                    $course->text = self::truncate_text(strip_tags($course->text), 300);
                 } else {
                     $course->link = "{$CFG->wwwroot}/local/kopere_pay/?id={$koperepaydetalhe->course}";
                 }
@@ -257,7 +267,7 @@ class htmldata {
 
             $course->courseimage = course::overview_image($koperepaydetalhe->course);
             if (!isset($course->courseimage[3])) {
-                $course->courseimage = $OUTPUT->image_url('course-default', 'theme')->out();
+                $course->courseimage = $OUTPUT->image_url("course-default", "theme")->out();
             }
 
             $data[] = $course;
@@ -276,12 +286,10 @@ class htmldata {
      * Function vvveb__change_category
      *
      * @param $html
-     *
-     * @return mixed
      */
     private static function vvveb__change_category($html) {
         if (strpos($html, "vvveb_home_automatically_category") === false) {
-            return $html;
+            return;
         }
 
         global $OUTPUT, $DB, $CFG;
@@ -301,10 +309,10 @@ class htmldata {
             $data = [];
             foreach ($courses as $course) {
                 $course->title = $course->fullname;
-                $course->text = self::truncate_text(strip_tags($course->summary), 300);
                 $course->access = get_string("course_access", "theme_degrade");
-
                 $course->link = "{$CFG->wwwroot}/course/view.php?id={$course->id}";
+
+                $course->text = self::text_course($course);
 
                 if (self::enrolled($course->id)) {
                     $course->access = get_string("course_access", "theme_degrade");
@@ -329,9 +337,6 @@ class htmldata {
                                 $course->title = get_config("local_kopere_dashboard", "builder_titulo_{$course->id}");
 
                                 $course->offprice = get_config("local_kopere_dashboard", "builder_offprice_{$course->id}");
-
-                                $text = get_config("local_kopere_dashboard", "builder_topo_{$course->id}");
-                                $course->text = self::truncate_text(strip_tags($text), 300);
                             } else {
                                 $course->link = "{$CFG->wwwroot}/local/kopere_pay/?id={$course->id}";
                             }
@@ -341,7 +346,7 @@ class htmldata {
 
                 $course->courseimage = course_renderer_util::couse_image(new core_course_list_element($course));
                 if (!isset($course->courseimage[3])) {
-                    $course->courseimage = $OUTPUT->image_url('course-default', 'theme')->out();
+                    $course->courseimage = $OUTPUT->image_url("course-default", "theme")->out();
                 }
                 $data[] = $course;
             }
@@ -357,6 +362,25 @@ class htmldata {
             "from" => $htmls[1],
             "to" => $courseshtml,
         ];
+    }
+
+    /**
+     * Function text_course
+     *
+     * @param $course
+     *
+     * @return string
+     */
+    private static function text_course($course) {
+        $text = get_config("local_kopere_dashboard", "builder_topo_{$course->id}");
+
+        if (!isset($text[50])) {
+            $text = $course->summary;
+        }
+
+        $text = preg_replace('/<h\d.*?<\/h\d>/', '', $text);
+        $text = strip_tags($text);
+        return self::truncate_text($text, 300);
     }
 
     /**
@@ -376,19 +400,19 @@ class htmldata {
         }
 
         $enrol = $DB->get_record("enrol",
-            ["courseid" => $courseid, "enrol" => "manual"], '*', IGNORE_MULTIPLE);
+            ["courseid" => $courseid, "enrol" => "manual"], "*", IGNORE_MULTIPLE);
         if ($enrol == null) {
             return false;
         }
 
         $testroleassignments = $DB->get_record("role_assignments",
-            ["roleid" => 5, "contextid" => $context->id, "userid" => $USER->id], '*', IGNORE_MULTIPLE);
+            ["roleid" => 5, "contextid" => $context->id, "userid" => $USER->id], "*", IGNORE_MULTIPLE);
         if ($testroleassignments == null) {
             return false;
         }
 
         $userenrolments = $DB->get_record("user_enrolments",
-            ["enrolid" => $enrol->id, "userid" => $USER->id], '*', IGNORE_MULTIPLE);
+            ["enrolid" => $enrol->id, "userid" => $USER->id], "*", IGNORE_MULTIPLE);
         if ($userenrolments != null) {
             return !$userenrolments->status;
         } else {
