@@ -7,12 +7,17 @@
     }
 }
 #footer {
+    position: relative;
     .settings-edit {
         img {
-            filter: invert(100%);
+            filter: none;
             width: 20px;
             height: 20px;
         }
+    }
+    .settings-edit-html {
+        position: absolute;
+        bottom: 20px;
     }
     @import "footer-all";
 }

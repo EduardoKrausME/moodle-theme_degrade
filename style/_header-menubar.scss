@@ -139,7 +139,9 @@
         .kraus-layout-dark {
             display: flex;
             align-items: center;
-            img {
+            padding-right: 0.5rem;
+            padding-left: 0.5rem;
+            img, svg {
                 width: 24px;
                 height: 24px;
             }
@@ -169,13 +171,18 @@
                     color: #fff;
                 }
             }
+            img.userpicture {
+                min-width: 35px;
+                height: 35px;
+                margin-right: 0;
+            }
         }
         .editmode-switch-form {
             margin-bottom: 0;
             .input-group label {
                 color: #fff;
                 margin-bottom: 0;
-                @media (max-width: 900px) {
+                @media (max-width: 1200px) {
                     display: none !important;
                 }
             }
@@ -715,10 +722,15 @@ div.dropdown-item:focus-within {
     }
     .popover-region {
         float: left;
-    }
-    .popover-region .popover-region-toggle i.icon {
-        font-weight: normal;
-        color: #fff;
+        .popover-region-toggle {
+            height: 43px;
+            i.icon {
+                font-weight: normal;
+                color: #fff;
+                font-size: 25px;
+                height: 25px;
+            }
+        }
     }
     nav.nav a.nav-link {
         color: rgb(var(--color_primary));
@@ -878,5 +890,10 @@ div.dropdown-item:focus-within {
     .dropdown-toggle:hover {
         background: transparent;
         color: rgb(var(--color_secondary));
+    }
+}
+.content-item-container {
+    .context-link{
+        color: rgb(var(--color_primary));
     }
 }

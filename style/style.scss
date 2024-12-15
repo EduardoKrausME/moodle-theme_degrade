@@ -4251,3 +4251,10 @@ a#next-activity-link {
     }
 }
 @import "dark-mode";
+@import "jquery-ui";
+
+.notloggedin {
+    .hide-nologin {
+        display: none;
+    }
+}
