@@ -4,18 +4,23 @@
 .dark-animation *::after {
     transition: all .4s ease !important;
 }
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    border-radius: 20px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    border: 0;
+}
 @mixin darkmodecode {
-    ::-webkit-scrollbar {
-        width: 6px;
-    }
     ::-webkit-scrollbar-track {
         background: #121215;
         border-radius: 20px;
     }
     ::-webkit-scrollbar-thumb {
         background-color: #595959;
-        border-radius: 20px;
-        border: 0;
         &:hover {
             background-color: #525151;
         }
@@ -40,6 +45,9 @@
         }
         .light-mode {
             display: block !important;
+            svg path {
+                fill: #fff !important;
+            }
         }
     }
     
@@ -840,7 +848,34 @@
         }
     }
     
-    @import "//code.jquery.com/ui/1.11.4/themes/ui-darkness/jquery-ui.css";
+    // Icons
+    .subcategories .coursebox > .info > .coursename a,
+    #frontpage-category-names .coursebox > .info > .coursename a,
+    #frontpage-category-combo .coursebox > .info > .coursename a {
+        background-image: url([[pix:theme_degrade|dark/i/course]]);
+    }
+    .path-tag {
+        .tag-management-box li {
+            a.edittag {
+                background-image: url([[pix:theme_degrade|dark/i/settings]]);
+            }
+            a.flagasinappropriate {
+                background-image: url([[pix:theme_degrade|dark/i/flagged]]);
+            }
+            a.removefrommyinterests {
+                background-image: url([[pix:theme_degrade|dark/t/delete]]);
+            }
+            a.addtomyinterests {
+                background-image: url([[pix:theme_degrade|dark/t/add]]);
+            }
+        }
+    }
+    .course_category_tree .category.with_children > .info > .categoryname {
+        background-image: url([[pix:theme_degrade|dark/t/expanded);
+    }
+    .course_category_tree .category.with_children.collapsed > .info > .categoryname {
+        background-image: url([[pix:theme_degrade|dark/t/collapsed]]);
+    }
 }
 @media (prefers-color-scheme: dark) {
     html:not([data-bs-theme="light"]) {
@@ -899,7 +934,7 @@
             --bs-form-invalid-color: #ea868f;
             --bs-form-invalid-border-color: #ea868f;
         }
-    
+        
         @include darkmodecode;
     }
 }
