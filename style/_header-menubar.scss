@@ -893,7 +893,25 @@ div.dropdown-item:focus-within {
     }
 }
 .content-item-container {
-    .context-link{
+    .context-link {
         color: rgb(var(--color_primary));
     }
+}
+.dropdown-item.active,
+.dropdown-item:active,
+.dropdown-item:hover,
+.dropdown-item:focus,
+.dropdown-item:focus-within {
+    background-color: #00000033;
+}
+.header-menubar .primary-navigation ul.navbar-nav .dropdown .dropdown-menu a,
+.header-menubar .usernavigation ul.navbar-nav .dropdown .dropdown-menu a {
+    color: rgb(var(--color_primary)) !important;
+}
+.nav-link {
+    color: rgb(var(--color_primary)) !important;
+}
+.header-maxwidth .navigation .nav-tabs .nav-item .nav-link.active,
+.secondary-navigation .navigation .nav-tabs .nav-item .nav-link.active{
+    border-color: transparent !important;
 }

@@ -36,31 +36,31 @@
         margin-bottom: 50px;
     }
 }
-.course-box {
-    @media (min-width: 500px) {
-        width: 100%; // 1
-    }
-    @media (min-width: 800px) {
-        width: calc(25% - 14px); // 2
-        margin: 0 6px;
-    }
-    @media (min-width: 1040px) {
-        width: calc(33% - 14px); // 3
-        margin: 0 6px;
-    }
-    @media (min-width: 1210px) {
-        width: calc(25% - 14px); // 4
-        margin: 0 6px;
-    }
-    @media (min-width: 1560px) {
-        width: calc(20% - 10px); // 5
-        margin: 0 4px;
-    }
-    @media (min-width: 2060px) {
-        width: calc(16% - 10px); // 6
-        margin: 0 4px;
-    }
-}
+//.course-box {
+//    @media (min-width: 500px) {
+//        width: 100%; // 1
+//    }
+//    @media (min-width: 800px) {
+//        width: calc(25% - 14px); // 2
+//        margin: 0 6px;
+//    }
+//    @media (min-width: 1040px) {
+//        width: calc(33% - 14px); // 3
+//        margin: 0 6px;
+//    }
+//    @media (min-width: 1210px) {
+//        width: calc(25% - 14px); // 4
+//        margin: 0 6px;
+//    }
+//    @media (min-width: 1560px) {
+//        width: calc(20% - 10px); // 5
+//        margin: 0 4px;
+//    }
+//    @media (min-width: 2060px) {
+//        width: calc(16% - 10px); // 6
+//        margin: 0 4px;
+//    }
+//}
 .frontpage-course-box {
     border: 1px solid #e9ecef;
     border-radius: 10px;
