@@ -95,7 +95,7 @@ if (isset($_POST['startTemplateUrl']) && !empty($_POST['startTemplateUrl'])) {
         }
     }
 }
-$html = preg_replace('/<link vvveb-remove="true".*>/', '', $html);
+$html = preg_replace('/<.*?vvveb-remove.*?>/si', '', $html);
 
 if (isset($_POST['file'])) {
     $file = sanitizeFileName($_POST['file']);

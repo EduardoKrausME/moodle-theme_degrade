@@ -57,7 +57,7 @@ class htmldata {
         self::vvveb__change_catalogo($html);
         self::vvveb__change_category($html);
 
-        $html = preg_replace('/<link vvveb-remove="true".*?>/', '', $html);
+        $html = preg_replace('/<.*?vvveb-remove.*?>/', '', $html);
         foreach (self::$replaces as $replace) {
             foreach ($replace["from"] as $from) {
                 $html = str_replace($from, $replace["to"], $html);
