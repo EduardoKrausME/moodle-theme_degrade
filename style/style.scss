@@ -4213,8 +4213,6 @@ a#prev-activity-link {
 a#next-activity-link {
     background-color: rgb(var(--color_primary));
 }
-@import "degrade";
-
 #page-contentbank {
     .cb-toolbar-container {
         .dropdown-scrollable {
@@ -4250,11 +4248,12 @@ a#next-activity-link {
         margin: 1.75rem auto;
     }
 }
-@import "dark-mode";
-@import "jquery-ui";
-
 .notloggedin {
     .hide-nologin {
         display: none;
     }
 }
+
+@import "dark-mode";
+@import "jquery-ui";
+@import "degrade";

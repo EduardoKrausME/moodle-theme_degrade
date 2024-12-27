@@ -1,3 +1,14 @@
+
+[data-bs-theme=dark] {
+    .moremenu {
+        .show > .nav-link,
+        .active > .nav-link,
+        .nav-link.show,
+        .nav-link.active {
+           // background: #f8f9fa1c !important;
+        }
+    }
+}
 ///////////////////
 // heme-select-item
 .degrade-theme-select-item {
