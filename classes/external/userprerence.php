@@ -55,12 +55,12 @@ class userprerence extends \external_api {
     public static function layout($darkmode) {
         global $CFG;
 
-        // Check if the user is a guest (not logged in)
+        // Check if the user is a guest (not logged in).
         if (isguestuser()) {
-            // Calculate the expiration date (1 year from now)
-            $expiry = time() + (365 * 24 * 60 * 60); // 1 year in seconds
+            // Calculate the expiration date (1 year from now).
+            $expiry = time() + (365 * 24 * 60 * 60); // 1 year in seconds.
 
-            // Set the cookie
+            // Set the cookie.
             setcookie("darkmode", $darkmode, $expiry, $CFG->sessioncookiepath);
 
             return ["status" => true];
