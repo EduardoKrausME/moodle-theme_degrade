@@ -1560,7 +1560,7 @@ button.close:focus,
 }
 .nav-tabs:not(.more-nav) .nav-link:hover,
 .nav-pills .nav-link:hover {
-    color: #fff;
+    color: #fff !important;
     background: rgb(var(--color_primary));
 }
 .nav-tabs:not(.more-nav) .nav-link.active:not(:disabled):not(.disabled):active,
@@ -1569,7 +1569,7 @@ button.close:focus,
 .nav-pills .nav-link.active:not(:disabled):not(.disabled):active,
 .nav-pills .nav-link.active:not(:disabled):not(.disabled).active,
 .show > .nav-pills .nav-link.active.dropdown-toggle {
-    color: #fff;
+    color: #fff !important;
     background: rgb(var(--color_primary));
 }
 .nav-tabs:not(.more-nav) .nav-link.active:not(:disabled):not(.disabled):active:focus,
@@ -4253,7 +4253,6 @@ a#next-activity-link {
         display: none;
     }
 }
-
 @import "dark-mode";
 @import "jquery-ui";
 @import "degrade";
