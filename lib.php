@@ -60,9 +60,9 @@ function theme_degrade_process_color_hex($colorname) {
 function theme_degrade_serve_css($filename) {
     global $CFG;
     if (!empty($CFG->themedir)) {
-        $thestylepath = $CFG->themedir . '/degrade/style/';
+        $thestylepath = $CFG->themedir . "/degrade/style/";
     } else {
-        $thestylepath = $CFG->dirroot . '/theme/degrade/style/';
+        $thestylepath = $CFG->dirroot . "/theme/degrade/style/";
     }
 
     $thesheet = $thestylepath . $filename;
@@ -70,8 +70,8 @@ function theme_degrade_serve_css($filename) {
     // File.
     $lastmodified = filemtime($thesheet);
     // Header.
-    $ifmodifiedsince = (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? $_SERVER['HTTP_IF_MODIFIED_SINCE'] : false);
-    $etagheader = (isset($_SERVER['HTTP_IF_NONE_MATCH']) ? trim($_SERVER['HTTP_IF_NONE_MATCH']) : false);
+    $ifmodifiedsince = (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) ? $_SERVER["HTTP_IF_MODIFIED_SINCE"] : false);
+    $etagheader = (isset($_SERVER["HTTP_IF_NONE_MATCH"]) ? trim($_SERVER["HTTP_IF_NONE_MATCH"]) : false);
 
     if ((($ifmodifiedsince) && (strtotime($ifmodifiedsince) == $lastmodified)) || $etagheader == $etagfile) {
         theme_degrade_send_unmodified($lastmodified, $etagfile);
@@ -87,13 +87,13 @@ function theme_degrade_serve_css($filename) {
  */
 function theme_degrade_send_unmodified($lastmodified, $etag) {
     $lifetime = 60 * 60 * 24 * 60;
-    header('HTTP/1.1 304 Not Modified');
-    header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $lifetime) . ' GMT');
-    header('Cache-Control: public, max-age=' . $lifetime);
-    header('Content-Type: text/css; charset=utf-8');
+    header("HTTP/1.1 304 Not Modified");
+    header("Expires: " . gmdate("D, d M Y H:i:s", time() + $lifetime) . " GMT");
+    header("Cache-Control: public, max-age=" . $lifetime);
+    header("Content-Type: text/css; charset=utf-8");
     header('Etag: "' . $etag . '"');
     if ($lastmodified) {
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $lastmodified) . ' GMT');
+        header("Last-Modified: " . gmdate("D, d M Y H:i:s", $lastmodified) . " GMT");
     }
     die;
 }
@@ -108,21 +108,21 @@ function theme_degrade_send_unmodified($lastmodified, $etag) {
  */
 function theme_degrade_send_cached_css($path, $filename, $lastmodified, $etag) {
     global $CFG;
-    require_once($CFG->dirroot . '/lib/configonlylib.php');
+    require_once($CFG->dirroot . "/lib/configonlylib.php");
     // For min_enable_zlib_compression.
     // 60 days only - the revision may get incremented quite often.
     $lifetime = 60 * 60 * 24 * 60;
 
     header('Etag: "' . $etag . '"');
     header('Content-Disposition: inline; filename="' . $filename . '"');
-    header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $lastmodified) . ' GMT');
-    header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $lifetime) . ' GMT');
-    header('Pragma: ');
-    header('Cache-Control: public, max-age=' . $lifetime);
-    header('Accept-Ranges: none');
-    header('Content-Type: text/css; charset=utf-8');
+    header("Last-Modified: " . gmdate("D, d M Y H:i:s", $lastmodified) . " GMT");
+    header("Expires: " . gmdate("D, d M Y H:i:s", time() + $lifetime) . " GMT");
+    header("Pragma: ");
+    header("Cache-Control: public, max-age=" . $lifetime);
+    header("Accept-Ranges: none");
+    header("Content-Type: text/css; charset=utf-8");
     if (!min_enable_zlib_compression()) {
-        header('Content-Length: ' . filesize($path . $filename));
+        header("Content-Length: " . filesize($path . $filename));
     }
 
     readfile($path . $filename);
@@ -138,30 +138,30 @@ function theme_degrade_send_cached_css($path, $filename, $lastmodified, $etag) {
  * @param moodle_page $page     Pass in $PAGE.
  *
  * @return stdClass An object with the following properties:
- *      - navbarclass A CSS class to use on the navbar. By default ''.
+ *      - navbarclass A CSS class to use on the navbar. By default "".
  *      - heading HTML to use for the heading. A logo if one is selected or the default heading.
- *      - footer_description HTML to use as a footer_description. By default ''.
+ *      - footer_description HTML to use as a footer_description. By default "".
  * @throws coding_exception
  */
 function theme_degrade_get_html_for_settings(renderer_base $output, moodle_page $page) {
     global $CFG;
     $return = new stdClass;
 
-    $return->navbarclass = '';
+    $return->navbarclass = "";
     if (!empty($page->theme->settings->invert)) {
-        $return->navbarclass .= ' navbar-inverse';
+        $return->navbarclass .= " navbar-inverse";
     }
 
     if (!empty($page->theme->settings->logo)) {
-        $return->heading = html_writer::link($CFG->wwwroot, '', ['title' => get_string('home'), 'class' => 'logo']);
+        $return->heading = html_writer::link($CFG->wwwroot, "", ["title" => get_string("home"), "class" => "logo"]);
     } else {
         $return->heading = $output->page_heading();
     }
 
-    $return->footer_description = '';
+    $return->footer_description = "";
     if (!empty($page->theme->settings->footer_description)) {
         $return->footer_description = '<div class="footer_description text-center">';
-        $return->footer_description .= format_text($page->theme->settings->footer_description) . '</div>';
+        $return->footer_description .= format_text($page->theme->settings->footer_description) . "</div>";
     }
 
     return $return;
@@ -178,15 +178,15 @@ function theme_degrade_get_html_for_settings(renderer_base $output, moodle_page 
 function theme_degrade_get_logo($local = null) {
     global $SITE;
 
-    $logocolor = get_config('theme_degrade', 'logo_color');
-    $logowrite = get_config('theme_degrade', 'logo_write');
+    $logocolor = get_config("theme_degrade", "logo_color");
+    $logowrite = get_config("theme_degrade", "logo_write");
     if (empty($logocolor)) {
         return "<span>{$SITE->shortname}</span>";
     }
 
-    $urllogocolor = moodle_url::make_pluginfile_url(context_system::instance()->id, 'theme_degrade', 'logo_color', '',
+    $urllogocolor = moodle_url::make_pluginfile_url(context_system::instance()->id, "theme_degrade", "logo_color", "",
         theme_get_revision(), $logocolor);
-    $urllogowrite = moodle_url::make_pluginfile_url(context_system::instance()->id, 'theme_degrade', 'logo_write', '',
+    $urllogowrite = moodle_url::make_pluginfile_url(context_system::instance()->id, "theme_degrade", "logo_write", "",
         theme_get_revision(), $logowrite);
 
     if ($urllogocolor) {
@@ -225,10 +225,10 @@ function theme_degrade_get_body_class() {
 function theme_degrade_get_setting($setting, $format = true) {
     global $CFG;
 
-    require_once($CFG->dirroot . '/lib/weblib.php');
+    require_once($CFG->dirroot . "/lib/weblib.php");
     static $theme;
     if (empty($theme)) {
-        $theme = theme_config::load('degrade');
+        $theme = theme_config::load("degrade");
     }
 
     if (empty($theme->settings->$setting)) {
@@ -258,7 +258,7 @@ function theme_degrade_get_setting_image($imagesetting) {
         $imagesettingurl = theme_degrade_setting_file_url($imagesetting, $imagesetting);
     }
     if (empty($imagesettingurl)) {
-        $imagesettingurl = '';
+        $imagesettingurl = "";
     }
 
     return $imagesettingurl;
@@ -298,7 +298,7 @@ function theme_degrade_setting_file_url($setting, $filearea) {
  */
 function theme_degrade_theme_url() {
     global $CFG, $PAGE;
-    $themeurl = $CFG->wwwroot . '/theme/' . $PAGE->theme->name;
+    $themeurl = $CFG->wwwroot . "/theme/" . $PAGE->theme->name;
     return $themeurl;
 }
 
@@ -311,8 +311,8 @@ function theme_degrade_theme_url() {
  * @throws coding_exception
  * @throws moodle_exception
  */
-function theme_degrade_generate_links($menuname = '') {
-    $htmlstr = '';
+function theme_degrade_generate_links($menuname = "") {
+    $htmlstr = "";
     $menustr = theme_degrade_get_setting($menuname);
     $menusettings = explode("\n", $menustr);
     foreach ($menusettings as $menukey => $menuval) {
@@ -325,10 +325,10 @@ function theme_degrade_generate_links($menuname = '') {
                 continue;
             }
             if (empty($lurl)) {
-                $lurl = 'javascript:void(0);';
+                $lurl = "javascript:void(0);";
             }
 
-            $pos = strpos($lurl, 'http');
+            $pos = strpos($lurl, "http");
             if ($pos === false) {
                 $lurl = new moodle_url($lurl);
             }
@@ -405,12 +405,12 @@ function theme_degrade_strip_html_tags($text) {
  *
  * @return string $out
  */
-function theme_degrade_course_trim_char($str, $n = 500, $endchar = '&#8230;') {
+function theme_degrade_course_trim_char($str, $n = 500, $endchar = "&#8230;") {
     if (strlen($str) < $n) {
         return $str;
     }
 
-    $str = preg_replace("/\s+/", ' ', str_replace(["\r\n", "\r", "\n"], ' ', $str));
+    $str = preg_replace("/\s+/", " ", str_replace(["\r\n", "\r", "\n"], " ", $str));
     if (strlen($str) <= $n) {
         return $str;
     }
@@ -431,7 +431,7 @@ function theme_degrade_course_trim_char($str, $n = 500, $endchar = '&#8230;') {
 function theme_degrade_get_hexa($hexa, $opacity) {
     if (!empty($hexa)) {
         list($r, $g, $b) = sscanf($hexa, "#%02x%02x%02x");
-        if ($opacity == '') {
+        if ($opacity == "") {
             $opacity = 0.0;
         } else {
             $opacity = $opacity / 10;
@@ -455,18 +455,18 @@ function theme_degrade_coursemodule_standard_elements($data, $mform) {
     global $CFG;
 
     if ($CFG->theme == "degrade") {
-        $mform->addElement('header', 'theme_degrade_icons',
-            get_string('settings_icons_change_icons', 'theme_degrade'));
-        $configuration = get_string('configuration');
+        $mform->addElement("header", "theme_degrade_icons",
+            get_string("settings_icons_change_icons", "theme_degrade"));
+        $configuration = get_string("configuration");
         $link = "<a href='{$CFG->wwwroot}/admin/settings.php?section=themesettingdegrade#theme_degrade_icons'
                 target='_blank'>{$configuration}</a>";
 
-        if ($settingsiconsnum = get_config('theme_degrade', 'settings_icons_num')) {
+        if ($settingsiconsnum = get_config("theme_degrade", "settings_icons_num")) {
 
-            $choices = [0 => get_string("settings_icons_none", 'theme_degrade')];
+            $choices = [0 => get_string("settings_icons_none", "theme_degrade")];
             for ($i = 1; $i <= $settingsiconsnum; $i++) {
-                $name = get_config('theme_degrade', "settings_icons_name_{$i}");
-                $image = get_config('theme_degrade', "settings_icons_image_{$i}");
+                $name = get_config("theme_degrade", "settings_icons_name_{$i}");
+                $image = get_config("theme_degrade", "settings_icons_image_{$i}");
 
                 if ($name && $image) {
                     $choices[$i] = $name;
@@ -475,16 +475,16 @@ function theme_degrade_coursemodule_standard_elements($data, $mform) {
 
             if ($data->get_coursemodule() && isset($data->get_coursemodule()->id)) {
                 $name = "theme_degrade_customicon_{$data->get_coursemodule()->id}";
-                $customicon = get_config('theme_degrade', $name);
+                $customicon = get_config("theme_degrade", $name);
 
-                $data->set_data(['theme_degrade_customicon' => $customicon]);
+                $data->set_data(["theme_degrade_customicon" => $customicon]);
             }
 
-            $mform->addElement('select', 'theme_degrade_customicon',
-                get_string('settings_icons_select_icon', 'theme_degrade', $link),
+            $mform->addElement("select", "theme_degrade_customicon",
+                get_string("settings_icons_select_icon", "theme_degrade", $link),
                 $choices);
         } else {
-            $mform->addElement('html', get_string('settings_icons_module_disable', 'theme_degrade', $link));
+            $mform->addElement("html", get_string("settings_icons_module_disable", "theme_degrade", $link));
         }
     }
 }
@@ -500,10 +500,10 @@ function theme_degrade_coursemodule_standard_elements($data, $mform) {
  */
 function theme_degrade_coursemodule_edit_post_actions($data, $course) {
     $name = "theme_degrade_customicon_{$data->coursemodule}";
-    $customicon = get_config('theme_degrade', $name);
+    $customicon = get_config("theme_degrade", $name);
     if (isset($data->theme_degrade_customicon)) {
         if ($customicon != $data->theme_degrade_customicon) {
-            set_config($name, $data->theme_degrade_customicon, 'theme_degrade');
+            set_config($name, $data->theme_degrade_customicon, "theme_degrade");
             theme_reset_all_caches();
         }
     }
@@ -530,20 +530,20 @@ function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $for
     static $theme;
 
     if (empty($theme)) {
-        $theme = theme_config::load('degrade');
+        $theme = theme_config::load("degrade");
     }
     if ($context->contextlevel == CONTEXT_SYSTEM) {
-        if ($filearea === 'style') {
+        if ($filearea === "style") {
             theme_degrade_serve_css($args[1]);
-        } else if ($filearea === 'editor_home' || $filearea === 'editor_footer') {
+        } else if ($filearea === "editor_home" || $filearea === "editor_footer") {
             $fullpath = sha1("/{$context->id}/theme_degrade/{$filearea}/{$args[0]}/{$args[1]}");
             $fs = get_file_storage();
             if ($file = $fs->get_file_by_hash($fullpath)) {
                 return send_stored_file($file, 0, 0, false, $options);
             }
             send_file_not_found();
-        } else if ($filearea === 'pagebackground') {
-            return $theme->setting_file_serve('pagebackground', $args, $forcedownload, $options);
+        } else if ($filearea === "pagebackground") {
+            return $theme->setting_file_serve("pagebackground", $args, $forcedownload, $options);
         } else if (preg_match("/slide[1-9][0-9]*image/", $filearea) !== false) {
             return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
         } else {
@@ -571,7 +571,7 @@ function theme_degrade_process_css($css, $theme) {
     global $DB;
 
     // Import site fonts.
-    $fontimport = \theme_degrade\fonts\font_util::css('sitefonts');
+    $fontimport = \theme_degrade\fonts\font_util::css("sitefonts");
     $css = "@import url('{$fontimport}');\n{$css}";
 
     // Local css.
@@ -751,10 +751,16 @@ function theme_degrade_process_css($css, $theme) {
  * @return array
  */
 function theme_degrade_add_htmlattributes() {
-    $thememode = get_user_preferences("theme_mode", "light");
-    $layouturl = optional_param("theme_mode", false, PARAM_TEXT);
-    if ($layouturl) {
-        $thememode = $layouturl;
+    $darkmode = "auto";
+    if (isset($_COOKIE["darkmode"])) {
+        $darkmode = $_COOKIE["darkmode"];
     }
-    return ['data-bs-theme' => $thememode];
+
+    if (!isguestuser()) {
+        $darkmode = get_user_preferences("darkmode", $darkmode);
+    }
+    if ($layouturl = optional_param("darkmode", false, PARAM_TEXT)) {
+        $darkmode = $layouturl;
+    }
+    return ["data-bs-theme" => $darkmode];
 }

@@ -36,11 +36,18 @@ class core_hook_output {
      * @return array
      */
     public static function before_html_attributes(\core\hook\output\before_html_attributes $hook): void {
-        $thememode = get_user_preferences("theme_mode", "light");
-        $layouturl = optional_param("theme_mode", false, PARAM_TEXT);
-        if ($layouturl) {
-            $thememode = $layouturl;
+
+        $darkmode = "auto";
+        if (isset($_COOKIE["darkmode"])) {
+            $darkmode = $_COOKIE["darkmode"];
         }
-        $hook->add_attribute('data-bs-theme', $thememode);
+
+        if (!isguestuser()) {
+            $darkmode = get_user_preferences("darkmode", $darkmode);
+        }
+        if ($layouturl = optional_param("darkmode", false, PARAM_TEXT)) {
+            $darkmode = $layouturl;
+        }
+        $hook->add_attribute("data-bs-theme", $darkmode);
     }
 }

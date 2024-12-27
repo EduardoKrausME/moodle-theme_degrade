@@ -41,20 +41,32 @@ class userprerence extends \external_api {
      */
     public static function layout_parameters() {
         return new \external_function_parameters([
-            'thememode' => new \external_value(PARAM_TEXT, 'The layout mode'),
+            "thememode" => new \external_value(PARAM_TEXT, "The layout mode"),
         ]);
     }
 
     /**
      * layout function
      *
-     * @param string $thememode
+     * @param string $darkmode
      *
      * @return array
      */
-    public static function layout($thememode) {
+    public static function layout($darkmode) {
+        global $CFG;
 
-        set_user_preference("theme_mode", $thememode);
+        // Check if the user is a guest (not logged in)
+        if (isguestuser()) {
+            // Calculate the expiration date (1 year from now)
+            $expiry = time() + (365 * 24 * 60 * 60); // 1 year in seconds
+
+            // Set the cookie
+            setcookie("darkmode", $darkmode, $expiry, $CFG->sessioncookiepath);
+
+            return ["status" => true];
+        }
+
+        set_user_preference("darkmode", $darkmode);
 
         return ["status" => true];
     }
@@ -66,7 +78,7 @@ class userprerence extends \external_api {
      */
     public static function layout_returns() {
         return new \external_single_structure([
-            'status' => new \external_value(PARAM_BOOL, 'the status'),
+            "status" => new \external_value(PARAM_BOOL, "the status"),
         ]);
     }
 }

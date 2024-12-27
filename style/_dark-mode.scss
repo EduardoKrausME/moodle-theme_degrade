@@ -878,7 +878,7 @@
     }
 }
 @media (prefers-color-scheme: dark) {
-    html:not([data-bs-theme="light"]) {
+    [data-bs-theme=auto] {
         body, html {
             color-scheme: dark;
             --bs-body-color: #dee2e6;
