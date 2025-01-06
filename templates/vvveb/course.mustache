@@ -33,34 +33,30 @@
     }
 }}
 
-<div class="row">
-    {{#courses}}
+{{#courses}}
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+        <div class="box-page">
+            <div class="thumbnail">
+                <a href="{{{link}}}">
+                    <span style="background-image:url({{{courseimage}}})"></span>
+                </a>
+            </div>
+            <div class="content">
+                <h5 class="title"><a href="{{{link}}}">{{{title}}}</a></h5>
+                {{#text}}
+                    <p>{{{text}}}</p>
+                {{/text}}
 
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
-            <div class="box-page">
-                <div class="thumbnail">
-                    <a href="{{{link}}}">
-                        <span style="background-image:url({{{courseimage}}})"></span>
-                    </a>
-                </div>
-                <div class="content">
-                    <h5 class="title"><a href="{{{link}}}">{{{title}}}</a></h5>
-                    {{#text}}
-                        <p>{{{text}}}</p>
-                    {{/text}}
-
-                    {{#cursopreco}}
-                        <div class="price">
-                            <span class="current-price">{{{cursopreco}}}</span>
-                            {{#offprice}}
-                                <span class="off-price">{{{offprice}}}</span>
-                            {{/offprice}}
-                        </div>
-                    {{/cursopreco}}
-                    <a href="{{{link}}}" class="btn btn-primary">{{{access}}}</a>
-                </div>
+                {{#cursopreco}}
+                    <div class="price">
+                        <span class="current-price">{{{cursopreco}}}</span>
+                        {{#offprice}}
+                            <span class="off-price">{{{offprice}}}</span>
+                        {{/offprice}}
+                    </div>
+                {{/cursopreco}}
+                <a href="{{{link}}}" class="btn btn-primary">{{{access}}}</a>
             </div>
         </div>
-
-    {{/courses}}
-</div>
+    </div>
+{{/courses}}
