@@ -9,7 +9,7 @@ define(["jquery", "theme_degrade/minicolors"], function($, minicolors) {
 
             function top_scroll_changue(timeDelay) {
                 timeDelay = (timeDelay === 0) ? 0 : 300;
-                if (!top_scroll.is(":checked")) {
+                if (top_scroll.is(":checked")) {
                     $("#admin-top_scroll_background_color").hide(timeDelay)
                         .prev().hide(timeDelay);
                     $("#admin-top_scroll_text_color").hide(timeDelay);
