@@ -39,51 +39,59 @@ class footer_data {
      * Function get_data
      *
      * @return array
-     * @throws \coding_exception
-     * @throws \dml_exception
-     * @throws \moodle_exception
+     *
+     * @throws \Exception
      */
     public static function get_data() {
-        global $CFG;
-
-        $data = array_merge(
-            self::description(),
-            self::links(),
-            self::social(),
-            self::contact(),
-            self::copywriter(),
-            self::footer_html()
-        );
-
-        $footerenableblock = $data["enable_block_description"] +
-            $data["enable_block_links"] +
-            $data["enable_block_social"] +
-            $data["enable_block_contact"];
-
-        switch ($footerenableblock) {
-            case 1:
-                $footerblockclass = "col-md-12";
-                break;
-            case 2:
-                $footerblockclass = "col-md-6";
-                break;
-            case 3:
-                $footerblockclass = "col-md-4";
-                break;
-            case 4:
-                $footerblockclass = "col-md-3";
-                break;
-            default:
-                $footerblockclass = "";
+        $cache = \cache::make("theme_degrade", "layout_cache");
+        $cachekey = "get_data-" . current_language();
+        if ($cache->has($cachekey)) {
+            $data = $cache->get($cachekey);
         }
+        if (!isset($data["footer_block_class"])) {
+            global $CFG;
 
-        $data["footer_enable_block"] = $footerenableblock;
-        $data["footer_block_class"] = $footerblockclass;
-        if (has_capability("moodle/site:config", \context_system::instance())) {
-            $data["footer_settings_edit"] =
-                "{$CFG->wwwroot}/admin/settings.php?section=themesettingdegrade#theme_degrade_footer";
+            $data = array_merge(
+                self::description(),
+                self::links(),
+                self::social(),
+                self::contact(),
+                self::copywriter(),
+                self::footer_html()
+            );
+
+            $footerenableblock = $data["enable_block_description"] +
+                $data["enable_block_links"] +
+                $data["enable_block_social"] +
+                $data["enable_block_contact"];
+
+            switch ($footerenableblock) {
+                case 1:
+                    $footerblockclass = "col-md-12";
+                    break;
+                case 2:
+                    $footerblockclass = "col-md-6";
+                    break;
+                case 3:
+                    $footerblockclass = "col-md-4";
+                    break;
+                case 4:
+                    $footerblockclass = "col-md-3";
+                    break;
+                default:
+                    $footerblockclass = "";
+            }
+
+            $data["footer_enable_block"] = $footerenableblock;
+            $data["footer_block_class"] = $footerblockclass;
+            if (has_capability("moodle/site:config", \context_system::instance())) {
+                $data["footer_settings_edit"] =
+                    "{$CFG->wwwroot}/admin/settings.php?section=themesettingdegrade#theme_degrade_footer";
+            }
+            $data["logourl_footer"] = theme_degrade_get_logo("footer");
+
+            $cache->set($cachekey, $data);
         }
-        $data["logourl_footer"] = theme_degrade_get_logo("footer");
 
         return $data;
     }
@@ -108,8 +116,7 @@ class footer_data {
      * Function links
      *
      * @return array
-     * @throws \coding_exception
-     * @throws \moodle_exception
+     * @throws \Exception
      */
     private static function links() {
         $footerlinkstitle = theme_degrade_get_setting("footer_links_title");
