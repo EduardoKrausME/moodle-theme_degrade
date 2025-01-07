@@ -686,7 +686,7 @@ body:not(.pagelayout-frontpage) #region-main {
 .btn.btn-outline-secondary.dropdown-toggle:focus,
 .btn.btn-outline-secondary.dropdown-toggle:focus:active,
 .btn.btn-outline-secondary.dropdown-toggle:active {
-    color: #fff;
+    color: #666;
     filter: none;
 }
 .dropdown-menu > .active > a,
@@ -1263,8 +1263,14 @@ tr.discussion .btn i.icon {
     }
     &.editing_delete {
         background: #e91e63;
+        &:hover {
+            background: #f84a5b;
+        }
         &, * {
             color: #fff;
+        }
+        * {
+            background: transparent;
         }
     }
 }
@@ -4200,7 +4206,7 @@ a#prev-activity-link,
 a#next-activity-link {
     color: #fff;
     border: none;
-    white-space: nowrap !important;
+    //white-space: nowrap !important;
     &:hover {
         text-decoration: none;
         color: #eee;
