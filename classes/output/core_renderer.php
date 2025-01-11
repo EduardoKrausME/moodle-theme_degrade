@@ -27,6 +27,8 @@ namespace theme_degrade\output;
 use custom_menu;
 use custom_menu_item;
 use html_writer;
+use moodle_url;
+use single_button;
 
 /**
  * Class core_renderer
@@ -257,4 +259,89 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         return $text;
     }
+
+    /**
+     * Print a message along with button choices for Continue/Cancel
+     *
+     * If a string or moodle_url is given instead of a single_button, method defaults to post.
+     *
+     * @param string $message                           The question to ask the user
+     * @param single_button|moodle_url|string $continue The single_button component representing the Continue answer.
+     *                                                  Can also be a moodle_url or string URL
+     * @param single_button|moodle_url|string $cancel   The single_button component representing the Cancel answer. Can
+     *                                                  also be a moodle_url or string URL
+     * @param array $displayoptions                     optional extra display options
+     *
+     * @return string HTML fragment
+     */
+    public function confirm($message, $continue, $cancel, array $displayoptions = []) {
+
+        // Check existing displayoptions.
+        $displayoptions['confirmtitle'] = $displayoptions['confirmtitle'] ?? get_string('confirm');
+        $displayoptions['continuestr'] = $displayoptions['continuestr'] ?? get_string('continue');
+        $displayoptions['cancelstr'] = $displayoptions['cancelstr'] ?? get_string('cancel');
+
+        if ($continue instanceof single_button) {
+            // Continue button should be primary if set to secondary type as it is the fefault.
+            if ($continue->type === single_button::BUTTON_SECONDARY) {
+                $continue->type = single_button::BUTTON_PRIMARY;
+            }
+        } else if (is_string($continue)) {
+            $continue = new single_button(
+                new moodle_url($continue),
+                $displayoptions['continuestr'],
+                'post',
+                $displayoptions['type'] ?? single_button::BUTTON_PRIMARY
+            );
+        } else if ($continue instanceof moodle_url) {
+            $continue = new single_button(
+                $continue,
+                $displayoptions['continuestr'],
+                'post',
+                $displayoptions['type'] ?? single_button::BUTTON_PRIMARY
+            );
+        } else {
+            throw new coding_exception('The continue param to $OUTPUT->confirm() must be either a URL (string/moodle_url) or a single_button instance.');
+        }
+        if ($continue->label == get_string("delete")) {
+            $continue->type = \single_button::BUTTON_DANGER;
+        }
+
+        if ($cancel instanceof single_button) {
+            // ok
+        } else if (is_string($cancel)) {
+            $cancel = new single_button(new moodle_url($cancel), $displayoptions['cancelstr'], 'get');
+        } else if ($cancel instanceof moodle_url) {
+            $cancel = new single_button($cancel, $displayoptions['cancelstr'], 'get');
+        } else {
+            throw new coding_exception('The cancel param to $OUTPUT->confirm() must be either a URL (string/moodle_url) or a single_button instance.');
+        }
+
+        $attributes = [
+            'role' => 'alertdialog',
+            'aria-labelledby' => 'modal-header',
+            'aria-describedby' => 'modal-body',
+            'aria-modal' => 'true',
+        ];
+
+        $output = $this->box_start('generalbox modal modal-dialog modal-in-page show', 'notice', $attributes);
+        $output .= $this->box_start('modal-content', 'modal-content');
+        $output .= $this->box_start('modal-header px-3', 'modal-header');
+        $output .= html_writer::tag('h4', $displayoptions['confirmtitle']);
+        $output .= $this->box_end();
+        $attributes = [
+            'role' => 'alert',
+            'data-aria-autofocus' => 'true',
+        ];
+        $output .= $this->box_start('modal-body', 'modal-body', $attributes);
+        $output .= html_writer::tag('p', $message);
+        $output .= $this->box_end();
+        $output .= $this->box_start('modal-footer', 'modal-footer');
+        $output .= html_writer::tag('div', $this->render($cancel) . $this->render($continue), ['class' => 'buttons']);
+        $output .= $this->box_end();
+        $output .= $this->box_end();
+        $output .= $this->box_end();
+        return $output;
+    }
 }
+
