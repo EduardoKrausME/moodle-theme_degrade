@@ -4,22 +4,18 @@
 .dark-animation *::after {
     transition: all .4s ease !important;
 }
-::-webkit-scrollbar {
-    width: 6px;
-}
-::-webkit-scrollbar-track {
-    border-radius: 20px;
-}
-::-webkit-scrollbar-thumb {
-    border-radius: 20px;
-    border: 0;
-}
 @mixin darkmodecode {
+    ::-webkit-scrollbar {
+        width: 9px;
+    }
     ::-webkit-scrollbar-track {
+        border-radius: 20px;
         background: #121215;
         border-radius: 20px;
     }
     ::-webkit-scrollbar-thumb {
+        border-radius: 20px;
+        border: 0;
         background-color: #595959;
         &:hover {
             background-color: #525151;
