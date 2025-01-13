@@ -273,6 +273,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @param array $displayoptions                     optional extra display options
      *
      * @return string HTML fragment
+     * @throws \coding_exception
+     * @throws \core\exception\moodle_exception
      */
     public function confirm($message, $continue, $cancel, array $displayoptions = []) {
 
@@ -301,20 +303,22 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 $displayoptions['type'] ?? single_button::BUTTON_PRIMARY
             );
         } else {
-            throw new coding_exception('The continue param to $OUTPUT->confirm() must be either a URL (string/moodle_url) or a single_button instance.');
+            throw new coding_exception(
+                'The continue param to $OUTPUT->confirm() must be either a URL (string/moodle_url) or a single_button instance.');
         }
-        if ($continue->label == get_string("delete")) {
-            $continue->type = \single_button::BUTTON_DANGER;
+        if ($continue->type == single_button::BUTTON_PRIMARY) {
+            $continue->type = single_button::BUTTON_DANGER;
         }
 
-        if ($cancel instanceof single_button) {
-            // ok
+        if ($cancel instanceof single_button) { // phpcs:disable
+            // Ok.
         } else if (is_string($cancel)) {
             $cancel = new single_button(new moodle_url($cancel), $displayoptions['cancelstr'], 'get');
         } else if ($cancel instanceof moodle_url) {
             $cancel = new single_button($cancel, $displayoptions['cancelstr'], 'get');
         } else {
-            throw new coding_exception('The cancel param to $OUTPUT->confirm() must be either a URL (string/moodle_url) or a single_button instance.');
+            throw new coding_exception(
+                'The cancel param to $OUTPUT->confirm() must be either a URL (string/moodle_url) or a single_button instance.');
         }
 
         $attributes = [
