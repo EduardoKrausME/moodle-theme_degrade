@@ -51,7 +51,5 @@ class event_observers {
                 \cache::make("theme_degrade", "logo_cache")->purge();
                 break;
         }
-
-        error_log($eventname);
     }
 }
