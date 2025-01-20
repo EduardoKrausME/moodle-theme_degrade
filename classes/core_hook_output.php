@@ -35,6 +35,7 @@ class core_hook_output {
      * Function html_attributes
      *
      * @return array
+     * @throws \coding_exception
      */
     public static function html_attributes() {
         global $CFG;
