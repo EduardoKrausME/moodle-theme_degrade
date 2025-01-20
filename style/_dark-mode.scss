@@ -5,6 +5,8 @@
     transition: all .4s ease !important;
 }
 @mixin darkmodecode {
+    
+    // scrollbar
     ::-webkit-scrollbar {
         width: 9px;
     }
@@ -21,6 +23,34 @@
             background-color: #525151;
         }
     }
+    
+    @keyframes bg-pulse-grey {
+        0% {
+            background-color: #050606;
+        }
+        
+        50% {
+            background-color: #242b2b;
+        }
+        
+        100% {
+            background-color: #3f4b4b;
+        }
+    }
+    
+    // top button
+    .kraus-layout-dark {
+        .dark-mode {
+            display: none !important;
+        }
+        .light-mode {
+            display: flex !important;
+            svg path {
+                fill: #fff !important;
+            }
+        }
+    }
+    
     a {
         color: #98b6d9;
         &:hover {
@@ -31,20 +61,31 @@
             color: #95b2d5;
         }
     }
+    .aalink.focus,
+    a.focus.autolink,
+    .aalink:focus,
+    a.autolink:focus,
+    #page-footer a:not([class]).focus,
+    #page-footer a:not([class]):focus,
+    .arrow_link.focus,
+    .arrow_link:focus,
+    a:not([class]).focus,
+    a:not([class]):focus,
+    .activityinstance > a.focus,
+    .activityinstance > a:focus {
+        background-color: #ffffff1f;
+        box-shadow: 0 -0.2rem #ffffff1f, 0 0.2rem #343a40;
+    }
+    .bg-secondary {
+        background: #575757 !important;
+        background-color: #575757 !important;
+    }
     pre {
         color: #8a8e91;
     }
-    
-    .kraus-layout-dark {
-        .dark-mode {
-            display: none !important;
-        }
-        .light-mode {
-            display: block !important;
-            svg path {
-                fill: #fff !important;
-            }
-        }
+    .activity-item.hiddenactivity .activityiconcontainer,
+    .activity-item.hiddenactivity .badge {
+        mix-blend-mode: initial;
     }
     
     body,
@@ -871,6 +912,16 @@
     }
     .course_category_tree .category.with_children.collapsed > .info > .categoryname {
         background-image: url([[pix:theme_degrade|dark/t/collapsed]]);
+    }
+    
+    .action-menu .dropdown-subpanel.content-displayed {
+        background-color: #e9ecef1f;
+        .bg-primary-light {
+            background-color: #e9ecef1f;
+            a:hover {
+                background-color: #00000000 !important;
+            }
+        }
     }
 }
 @media (prefers-color-scheme: dark) {
