@@ -13879,7 +13879,7 @@ a#message-user-button {
     text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
 }
 .login-wrapper.login_theme--login_theme_block .login-area {
-    padding: 15px 60px 60px;
+    padding-top: 15px;
 }
 .login-wrapper.login_theme--login_theme_block .login-area .login-background-area {
     width: 100%;
@@ -13937,6 +13937,20 @@ a#message-user-button {
 }
 #page-login-signup .login_theme--login_theme_imagetext_login.login-wrapper .login-area .login-background-area .login-color-area {
     background-color: rgba(0, 0, 0, 0.6);
+}
+@media (prefers-color-scheme: dark) {
+    [data-bs-theme=auto] .login-wrapper.login_theme--login_theme_block .login-area .login-form-area .form-content {
+        background: rgba(74, 76, 88, 0.768627451);
+    }
+    [data-bs-theme=auto] .login-wrapper .login-area .login-form-area a {
+        color: #fff;
+    }
+}
+[data-bs-theme=dark] .login-wrapper.login_theme--login_theme_block .login-area .login-form-area .form-content {
+    background: rgba(74, 76, 88, 0.768627451);
+}
+[data-bs-theme=dark] .login-wrapper .login-area .login-form-area a {
+    color: #fff;
 }
 .btn-danger {
     color: #fff;

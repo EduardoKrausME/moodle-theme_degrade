@@ -208,7 +208,7 @@
             }
         }
     }
-
+    
     &.login_theme--login_theme_block {
         .login-logo-area {
             position: initial;
@@ -226,7 +226,7 @@
             }
         }
         .login-area {
-            padding: 15px 60px 60px;
+            padding-top: 15px;
             .login-background-area {
                 width: 100%;
                 left: 0;
@@ -292,4 +292,21 @@
     &.login-wrapper .login-area .login-background-area .login-color-area {
         background-color: rgba(0, 0, 0, 0.6);
     }
+}
+// Dark
+@mixin darkmodelogin {
+    .login-wrapper.login_theme--login_theme_block .login-area .login-form-area .form-content {
+        background: #4a4c58c4;
+    }
+    .login-wrapper .login-area .login-form-area a {
+        color: #fff;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    [data-bs-theme=auto] {
+        @include darkmodelogin;
+    }
+}
+[data-bs-theme=dark] {
+    @include darkmodelogin;
 }
