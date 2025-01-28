@@ -113,28 +113,6 @@ define(["jquery", "theme_degrade/minicolors"], function($, minicolors) {
             }
         },
 
-        icons : function() {
-
-            var settings_icons_num = $("#id_s_theme_degrade_settings_icons_num");
-
-            settings_icons_num.change(icons_changue);
-            icons_changue();
-
-            function icons_changue() {
-                for (var i = 0; i <= 50; i++) {
-                    if (settings_icons_num.val() >= i) {
-                        $("#admin-settings_icons_block_" + i).parent().show(300);
-                        $("#admin-settings_icons_name_" + i).show(300);
-                        $("#admin-settings_icons_image_" + i).show(300);
-                    } else {
-                        $("#admin-settings_icons_block_" + i).parent().hide(300);
-                        $("#admin-settings_icons_name_" + i).hide(300);
-                        $("#admin-settings_icons_image_" + i).hide(300);
-                    }
-                }
-            }
-        },
-
         autosubmit : function(element_id) {
             $("#" + element_id).change(function() {
                 $("#adminsettings").submit();

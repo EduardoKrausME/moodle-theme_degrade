@@ -34,7 +34,6 @@ function xmldb_theme_degrade_upgrade($oldversion) {
 
     if ($oldversion < 2024031007) {
         require_once(__DIR__ . "/install.php");
-        degrade_install_settings_icons();
 
         upgrade_plugin_savepoint(true, 2024031007, "theme", "degrade");
     }

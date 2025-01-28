@@ -32,8 +32,6 @@
 function theme_degrade_page_init(moodle_page $page) {
     global $CFG;
 
-    $page->requires->jquery();
-
     $CFG->enableuserfeedback = false;
 }
 
@@ -455,47 +453,42 @@ function theme_degrade_get_hexa($hexa, $opacity) {
 /**
  * theme_degrade_coursemodule_standard_elements
  *
- * @param moodleform_mod $data   The moodle quickforms wrapper object.
- * @param MoodleQuickForm $mform The actual form object (required to modify the form).
+ * @param moodleform_mod $formwrapper The moodle quickforms wrapper object.
+ * @param MoodleQuickForm $mform      The actual form object (required to modify the form).
  *
  * @throws coding_exception
- * @throws dml_exception
  */
-function theme_degrade_coursemodule_standard_elements($data, $mform) {
+function theme_degrade_coursemodule_standard_elements(&$formwrapper, $mform) {
     global $CFG;
+
+    if ($formwrapper->get_current()->modulename == "label") {
+        return;
+    }
 
     if ($CFG->theme == "degrade") {
         $mform->addElement("header", "theme_degrade_icons",
             get_string("settings_icons_change_icons", "theme_degrade"));
-        $configuration = get_string("configuration");
-        $link = "<a href='{$CFG->wwwroot}/admin/settings.php?section=themesettingdegrade#theme_degrade_icons'
-                target='_blank'>{$configuration}</a>";
 
-        if ($settingsiconsnum = get_config("theme_degrade", "settings_icons_num")) {
+        $context = context_module::instance($formwrapper->get_current()->coursemodule);
 
-            $choices = [0 => get_string("settings_icons_none", "theme_degrade")];
-            for ($i = 1; $i <= $settingsiconsnum; $i++) {
-                $name = get_config("theme_degrade", "settings_icons_name_{$i}");
-                $image = get_config("theme_degrade", "settings_icons_image_{$i}");
+        $draftitemid = file_get_submitted_draft_itemid("theme_degrade_customicon");
+        file_prepare_draft_area(
+            $draftitemid,
+            $context->id,
+            "theme_degrade", "theme_degrade_customicon", $formwrapper->get_current()->coursemodule);
 
-                if ($name && $image) {
-                    $choices[$i] = $name;
-                }
-            }
+        $formwrapper->set_data([
+            "theme_degrade_customicon" => $draftitemid,
+        ]);
 
-            if ($data->get_coursemodule() && isset($data->get_coursemodule()->id)) {
-                $name = "theme_degrade_customicon_{$data->get_coursemodule()->id}";
-                $customicon = get_config("theme_degrade", $name);
-
-                $data->set_data(["theme_degrade_customicon" => $customicon]);
-            }
-
-            $mform->addElement("select", "theme_degrade_customicon",
-                get_string("settings_icons_select_icon", "theme_degrade", $link),
-                $choices);
-        } else {
-            $mform->addElement("html", get_string("settings_icons_module_disable", "theme_degrade", $link));
-        }
+        $filemanageroptions = [
+            "accepted_types" => [".svg", ".png"],
+            "maxbytes" => -1,
+            "maxfiles" => 1,
+        ];
+        $mform->addElement("filemanager", "theme_degrade_customicon",
+            get_string("settings_icons_select_icon", "theme_degrade"),
+            null, $filemanageroptions);
     }
 }
 
@@ -506,16 +499,26 @@ function theme_degrade_coursemodule_standard_elements($data, $mform) {
  * @param stdClass $course The course.
  *
  * @return moodleform
- * @throws dml_exception
+ *
+ * @throws coding_exception
  */
 function theme_degrade_coursemodule_edit_post_actions($data, $course) {
-    $name = "theme_degrade_customicon_{$data->coursemodule}";
-    $customicon = get_config("theme_degrade", $name);
+    $context = context_module::instance($data->coursemodule);
     if (isset($data->theme_degrade_customicon)) {
-        if ($customicon != $data->theme_degrade_customicon) {
-            set_config($name, $data->theme_degrade_customicon, "theme_degrade");
-            theme_reset_all_caches();
-        }
+        $options = [
+            "subdirs" => true,
+            "embed" => true,
+        ];
+        $filesave = file_save_draft_area_files(
+            $data->theme_degrade_customicon,
+            $context->id,
+            "theme_degrade", "theme_degrade_customicon", $data->coursemodule,
+            $options);
+
+        $name = "theme_degrade_customicon_{$data->coursemodule}";
+        set_config($name, $filesave, "theme_degrade");
+
+        \cache::make("theme_degrade", "css_cache")->purge();
     }
 
     return $data;
@@ -559,6 +562,12 @@ function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $for
         } else {
             send_file_not_found();
         }
+    } else if ($context->contextlevel == CONTEXT_MODULE) {
+        $fullpath = sha1("/{$context->id}/theme_degrade/{$filearea}/{$args[0]}/{$args[1]}");
+        $fs = get_file_storage();
+        if ($file = $fs->get_file_by_hash($fullpath)) {
+            return send_stored_file($file, 0, 0, false, $options);
+        }
     } else {
         send_file_not_found();
     }
@@ -578,7 +587,7 @@ function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $for
  * @throws dml_exception
  */
 function theme_degrade_process_css($css, $theme) {
-    global $DB;
+    global $DB, $CFG;
 
     $cache = \cache::make("theme_degrade", "css_cache");
     $cachekey = "theme_degrade_process_css";
@@ -594,7 +603,7 @@ function theme_degrade_process_css($css, $theme) {
     if (@file_exists(__DIR__ . "/style/degrade.css")) {
         $customcss = file_get_contents(__DIR__ . "/style/degrade.css");
 
-        $css = "{$css}\n{$customcss}";
+        $css .= "{$customcss}";
     }
 
     // Color list.
@@ -605,42 +614,55 @@ function theme_degrade_process_css($css, $theme) {
         "    --color_buttons:   " . theme_degrade_process_color_hex("theme_color__color_buttons") . "   !important;\n" .
         "    --color_names:     " . theme_degrade_process_color_hex("theme_color__color_names") . "     !important;\n" .
         "    --color_titles:    " . theme_degrade_process_color_hex("theme_color__color_titles") . "    !important;\n" .
-        "}" . $css;
+        "}{$css}";
 
     // Custom CSS.
     $customcss = str_replace("&gt;", ">", theme_degrade_get_setting("customcss"));
-    $css = "{$css}\n{$customcss}";
+    $css .= "{$customcss}";
 
     // Icons modules.
-    $sql = "SELECT name, value  FROM {config_plugins} WHERE name LIKE 'theme_degrade_customicon_%'";
+    $sql = "
+        SELECT *
+          FROM {files}
+         WHERE component LIKE 'theme_degrade'
+           AND filearea  LIKE 'theme_degrade_customicon'
+           AND filename  LIKE '__%'";
     $customicons = $DB->get_records_sql($sql);
     foreach ($customicons as $customicon) {
-        $moduleid = str_replace("theme_degrade_customicon_", "", $customicon->name);
-        $slideshowimage = theme_degrade_get_setting_image("settings_icons_image_{$customicon->value}");
+        $imageurl = moodle_url::make_file_url(
+            "$CFG->wwwroot/pluginfile.php",
+            implode("/", [
+                "",
+                $customicon->contextid,
+                "theme_degrade",
+                "theme_degrade_customicon",
+                $customicon->itemid,
+                $customicon->filename,
+            ]));
         $css .= "
-            #module-{$moduleid} .courseicon img,
-            .cmid-{$moduleid} #page-header .activityiconcontainer img {
-                content : url('{$slideshowimage}');
+            #module-{$customicon->itemid} .courseicon img,
+            .cmid-{$customicon->itemid} #page-header .activityiconcontainer img {
+                content : url('{$imageurl}');
             }
-            #course-index-cm-{$moduleid} .courseindex-link {
+            #course-index-cm-{$customicon->itemid} .courseindex-link {
                 display     : flex;
                 align-items : center;
             }
-            #course-index-cm-{$moduleid} .courseindex-link::before {
+            #course-index-cm-{$customicon->itemid} .courseindex-link::before {
                 content           : '';
                 display           : block;
                 height            : 20px;
                 width             : 20px;
                 min-width         : 20px;
-                background-image  : url('{$slideshowimage}');
+                background-image  : url('{$imageurl}');
                 background-size   : contain;
                 background-repeat : no-repeat;
                 margin-right      : 5px;
             }
-            #course-index-cm-{$moduleid}.pageitem .courseindex-link::before {
+            #course-index-cm-{$customicon->itemid}.pageitem .courseindex-link::before {
                 filter: invert(1);
             }
-            #course-index-cm-{$moduleid}.pageitem:hover .courseindex-link::before {
+            #course-index-cm-{$customicon->itemid}.pageitem:hover .courseindex-link::before {
                 filter: invert(0);
             }";
     }
@@ -764,7 +786,7 @@ function theme_degrade_process_css($css, $theme) {
                 color: {$textcolor} !important;
             }";
 
-    $css = "{$css}\n{$fontfamilytext}\n{$fontfamilytitle}\n{$fontfamilysitename}\n{$fontfamilymenus}\n{$themecss}";
+    $css .= "{$fontfamilytext}\n{$fontfamilytitle}\n{$fontfamilysitename}\n{$fontfamilymenus}\n{$themecss}";
 
     $cache->set($cachekey, $css);
     return $css;
@@ -774,6 +796,8 @@ function theme_degrade_process_css($css, $theme) {
  * Function theme_degrade_add_htmlattributes
  *
  * @return array
+ *
+ * @throws coding_exception
  */
 function theme_degrade_add_htmlattributes() {
     return \theme_degrade\core_hook_output::html_attributes();

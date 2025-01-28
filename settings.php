@@ -34,8 +34,6 @@ if ($ADMIN->fulltree) {
 
     require_once(__DIR__ . "/settings-css.php");
 
-    require_once(__DIR__ . "/settings-icons.php");
-
     require_once(__DIR__ . "/settings-topo.php");
 
     require_once(__DIR__ . "/settings-home.php");
