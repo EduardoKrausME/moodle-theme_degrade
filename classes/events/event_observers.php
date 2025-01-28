@@ -24,6 +24,8 @@
 
 namespace theme_degrade\events;
 
+use core\event\course_module_deleted;
+
 /**
  * Class event_observers
  *
@@ -50,6 +52,33 @@ class event_observers {
                 \cache::make("theme_degrade", "css_cache")->purge();
                 \cache::make("theme_degrade", "logo_cache")->purge();
                 break;
+        }
+    }
+
+    /**
+     * Function course_module_deleted
+     *
+     * @param course_module_deleted $event
+     *
+     * @throws \Exception
+     */
+    public static function course_module_deleted(course_module_deleted $event) {
+        global $DB;
+
+        $coursemodule = $event->other['coursemodule'];
+        $sql = "
+            SELECT *
+              FROM {files}
+             WHERE component    = 'theme_degrade'
+               AND filearea     = 'theme_degrade_customicon'
+               AND itemid       = :coursemodule
+               AND filename  LIKE '__%'";
+        $files = $DB->get_records_sql($sql, ["coursemodule" => $coursemodule]);
+
+        $fs = get_file_storage();
+        foreach ($files as $file) {
+            $f = $fs->get_file($file->contextid, $file->component, $file->filearea, $file->itemid, $file->filepath, $file->filename);
+            $f->delete();
         }
     }
 }

@@ -41,4 +41,8 @@ $observers = [
         "eventname" => "\\core\\event\\config_log_created",
         "callback" => "\\theme_degrade\\events\\event_observers::process_event",
     ],
+    [
+        "eventname" => "\\core\\event\\course_module_deleted",
+        "callback" => "\\theme_degrade\\events\\event_observers::course_module_deleted",
+    ],
 ];
