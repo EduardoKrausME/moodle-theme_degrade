@@ -90,10 +90,11 @@
     
     body,
     #page-wrapper,
-    #page,
+    &:not([data-basename=academi]) #page,
     #page.drawers .main-inner,
     #region-main {
         color: #cbd0d4 !important;
+        background: #0e0e11 !important;
         background-color: #0e0e11 !important;
     }
     .card,
@@ -167,6 +168,9 @@
     .bg-light,
     .bg-white {
         background-color: #000 !important;
+    }
+    .bg-primary-light {
+        background-color: #f3f8f217 !important;
     }
     .text-dark {
         color: #fff !important;
