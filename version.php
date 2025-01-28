@@ -27,11 +27,11 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version = 2025012300;
-$plugin->release = '8.1.3';
+$plugin->version = 2025012800;
+$plugin->release = "8.2.0";
 $plugin->maturity = MATURITY_STABLE;
 $plugin->requires = 2022041900;
-$plugin->component = 'theme_degrade';
+$plugin->component = "theme_degrade";
 $plugin->dependencies = [
-    'theme_boost' => 2022041900,
+    "theme_boost" => 2022041900,
 ];
