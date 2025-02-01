@@ -77,7 +77,10 @@ class event_observers {
 
         $fs = get_file_storage();
         foreach ($files as $file) {
-            $f = $fs->get_file($file->contextid, $file->component, $file->filearea, $file->itemid, $file->filepath, $file->filename);
+            $f = $fs->get_file(
+                $file->contextid, $file->component,
+                $file->filearea, $file->itemid,
+                $file->filepath, $file->filename);
             $f->delete();
         }
     }

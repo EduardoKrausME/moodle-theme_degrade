@@ -24,6 +24,8 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use theme_degrade\core_hook_output;
+
 /**
  * Page init functions runs every time page loads.
  *
@@ -587,7 +589,6 @@ function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $for
  * @throws dml_exception
  */
 function theme_degrade_process_css($css, $theme) {
-    global $DB, $CFG;
 
     $cache = \cache::make("theme_degrade", "css_cache");
     $cachekey = "theme_degrade_process_css";
@@ -619,53 +620,6 @@ function theme_degrade_process_css($css, $theme) {
     // Custom CSS.
     $customcss = str_replace("&gt;", ">", theme_degrade_get_setting("customcss"));
     $css .= "{$customcss}";
-
-    // Icons modules.
-    $sql = "
-        SELECT *
-          FROM {files}
-         WHERE component LIKE 'theme_degrade'
-           AND filearea  LIKE 'theme_degrade_customicon'
-           AND filename  LIKE '__%'";
-    $customicons = $DB->get_records_sql($sql);
-    foreach ($customicons as $customicon) {
-        $imageurl = moodle_url::make_file_url(
-            "$CFG->wwwroot/pluginfile.php",
-            implode("/", [
-                "",
-                $customicon->contextid,
-                "theme_degrade",
-                "theme_degrade_customicon",
-                $customicon->itemid,
-                $customicon->filename,
-            ]));
-        $css .= "
-            #module-{$customicon->itemid} .courseicon img,
-            .cmid-{$customicon->itemid} #page-header .activityiconcontainer img {
-                content : url('{$imageurl}');
-            }
-            #course-index-cm-{$customicon->itemid} .courseindex-link {
-                display     : flex;
-                align-items : center;
-            }
-            #course-index-cm-{$customicon->itemid} .courseindex-link::before {
-                content           : '';
-                display           : block;
-                height            : 20px;
-                width             : 20px;
-                min-width         : 20px;
-                background-image  : url('{$imageurl}');
-                background-size   : contain;
-                background-repeat : no-repeat;
-                margin-right      : 5px;
-            }
-            #course-index-cm-{$customicon->itemid}.pageitem .courseindex-link::before {
-                filter: invert(1);
-            }
-            #course-index-cm-{$customicon->itemid}.pageitem:hover .courseindex-link::before {
-                filter: invert(0);
-            }";
-    }
 
     // Color on roll page.
     global $CFG;
@@ -790,6 +744,15 @@ function theme_degrade_process_css($css, $theme) {
 
     $cache->set($cachekey, $css);
     return $css;
+}
+
+/**
+ * Function theme_degrade_before_footer
+ *
+ * @throws dml_exception
+ */
+function theme_degrade_before_footer() {
+    core_hook_output::before_footer_html_generation();
 }
 
 /**

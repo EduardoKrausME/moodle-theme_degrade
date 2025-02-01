@@ -24,6 +24,8 @@
 
 namespace theme_degrade;
 
+use moodle_url;
+
 /**
  * Class core_hook_output
  *
@@ -215,6 +217,8 @@ class core_hook_output {
 
     /**
      * Function before_html_attributes
+     *
+     * @throws \coding_exception
      */
     public static function before_html_attributes(\core\hook\output\before_html_attributes $hook): void {
 
@@ -222,6 +226,69 @@ class core_hook_output {
 
         foreach ($atributes as $id => $value) {
             $hook->add_attribute($id, $value);
+        }
+    }
+
+    /**
+     * Function before_footer_html_generation
+     *
+     * @throws \dml_exception
+     */
+    public static function before_footer_html_generation() {
+        global $CFG, $DB, $COURSE;
+
+        $css = "";
+
+        if ($COURSE->id) {
+            // Icons modules.
+            $sql = "
+                SELECT *
+                  FROM {files}
+                 WHERE component LIKE 'theme_degrade'
+                   AND filearea  LIKE 'theme_degrade_customicon'
+                   AND filename  LIKE '__%'";
+            $customicons = $DB->get_records_sql($sql);
+            foreach ($customicons as $customicon) {
+                $imageurl = moodle_url::make_file_url(
+                    "{$CFG->wwwroot}/pluginfile.php",
+                    implode("/", [
+                        "",
+                        $customicon->contextid,
+                        "theme_degrade",
+                        "theme_degrade_customicon",
+                        $customicon->itemid,
+                        $customicon->filename,
+                    ]));
+                $css .= "
+                    #module-{$customicon->itemid} .courseicon img,
+                    .cmid-{$customicon->itemid} #page-header .activityiconcontainer img {
+                        content : url('{$imageurl}');
+                    }
+                    #course-index-cm-{$customicon->itemid} .courseindex-link {
+                        display     : flex;
+                        align-items : center;
+                    }
+                    #course-index-cm-{$customicon->itemid} .courseindex-link::before {
+                        content           : '';
+                        display           : block;
+                        height            : 20px;
+                        width             : 20px;
+                        min-width         : 20px;
+                        background-image  : url('{$imageurl}');
+                        background-size   : contain;
+                        background-repeat : no-repeat;
+                        margin-right      : 5px;
+                    }
+                    #course-index-cm-{$customicon->itemid}.pageitem .courseindex-link::before {
+                        filter: invert(1);
+                    }
+                    #course-index-cm-{$customicon->itemid}.pageitem:hover .courseindex-link::before {
+                        filter: invert(0);
+                    }\n";
+            }
+
+            $css = preg_replace('/\s+/s', ' ', $css);
+            echo "<style>{$css}</style>";
         }
     }
 }
