@@ -103,7 +103,7 @@ MicAccessTool.prototype.buildToolBox = function() {
         </button>
         <div id="mic-access-tool-box" class="mic-access-tool-box">
             <div class="mic-access-tool-box-header">
-                ${thie.locale.toolbar}
+                ${this.locale.toolbar}
                 <button title="${this.locale.btn_close}" id="mic-access-tool-box-close-button">
                     ${this.locale.btn_close}
                 </button>
