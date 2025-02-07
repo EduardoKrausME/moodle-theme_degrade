@@ -17,9 +17,9 @@
 /**
  * Theme Settings File
  *
- * @package     theme_degrade
- * @copyright   2024 Eduardo Kraus https://eduardokraus.com/
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   theme_degrade
+ * @copyright 2024 Eduardo Kraus https://eduardokraus.com/
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
@@ -36,7 +36,7 @@ $setting = new admin_setting_configstoredfile('theme_degrade/logo_color',
     get_string('logo_color', 'theme_degrade'),
     get_string('logo_color_desc', 'theme_degrade'),
     'logo_color', 0,
-    ['maxfiles' => 1, 'accepted_types' => ['.jpg', '.png']]);
+    ['maxfiles' => 1, 'accepted_types' => [".jpg", ".jpeg", ".svg", ".png"]]);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
@@ -73,7 +73,7 @@ if ($CFG->theme != "boost_training") {
         get_string('logo_write', 'theme_degrade'),
         get_string('logo_write_desc', 'theme_degrade'),
         'logo_write', 0,
-        ['maxfiles' => 1, 'accepted_types' => ['.jpg', '.png']]);
+        ['maxfiles' => 1, 'accepted_types' => [".jpg", ".jpeg", ".svg", ".png"]]);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 }

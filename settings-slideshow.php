@@ -17,9 +17,9 @@
 /**
  * SlideShow Settings File
  *
- * @package     theme_degrade
- * @copyright   2024 Eduardo Kraus https://eduardokraus.com/
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   theme_degrade
+ * @copyright 2024 Eduardo Kraus https://eduardokraus.com/
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
@@ -55,7 +55,7 @@ for ($i = 1; $i <= $slideshownumslides; $i++) {
         get_string('slideshow_image', 'theme_degrade'),
         get_string('slideshow_image_desc', 'theme_degrade'),
         "slideshow_image_{$i}", 0,
-        ['maxfiles' => 1, 'accepted_types' => ['image']]);
+        ['maxfiles' => 1, 'accepted_types' => [".jpg", ".jpeg", ".svg", ".png"]]);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
