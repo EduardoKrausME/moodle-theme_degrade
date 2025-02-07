@@ -17,17 +17,28 @@
 /**
  * Theme Settings File
  *
- * @package     theme_degrade
- * @copyright   2024 Eduardo Kraus https://eduardokraus.com/
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   theme_degrade
+ * @copyright 2024 Eduardo Kraus https://eduardokraus.com/
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$page = new admin_settingpage('theme_degrade_topo', get_string('settings_top_heading', 'theme_degrade'));
+$page = new admin_settingpage("theme_degrade_top", get_string("settings_top_heading", "theme_degrade"));
 
-$page->add(new admin_setting_configtextarea('custommenuitems',
-    get_string('custommenuitems', 'theme_degrade'),
-    get_string('custommenuitems_desc', 'theme_degrade'), '', PARAM_RAW, '50', '10'));
+// Profile background image.
+$setting = new admin_setting_configstoredfile("theme_degrade/background_profile_image",
+    get_string("background_profile_image", "theme_degrade"),
+    get_string("background_profile_image_desc", "theme_degrade"),
+    "background_profile_image", 0,
+    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".svg", ".png"]]);
+$setting->set_updatedcallback("theme_reset_all_caches");
+$page->add($setting);
+
+$setting = new admin_setting_configtextarea("custommenuitems",
+    get_string("custommenuitems", "theme_degrade"),
+    get_string("custommenuitems_desc", "theme_degrade"),
+    "", PARAM_RAW, "50", "10");
+$page->add($setting);
 
 $settings->add($page);

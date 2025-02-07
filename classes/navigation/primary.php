@@ -24,10 +24,9 @@ use renderer_base;
  * This file combines primary nav, custom menu, lang menu and
  * usermenu into a standardized format for the frontend
  *
- * @package     theme_degrade
- * @category    navigation
- * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   theme_degrade
+ * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class primary extends \core\navigation\output\primary {
 
@@ -110,7 +109,8 @@ class primary extends \core\navigation\output\primary {
 
         $usermenudata = [];
         $submenusdata = [];
-        $info = user_get_user_navigation_info($USER, $this->page);
+
+        $info = user_get_user_navigation_info($USER, $this->page, ["avatarsize" => 1]);
         if (isset($info->unauthenticateduser)) {
             $info->unauthenticateduser['content'] = get_string($info->unauthenticateduser['content']);
             $info->unauthenticateduser['url'] = get_login_url();

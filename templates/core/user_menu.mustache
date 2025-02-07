@@ -65,44 +65,129 @@
         </span>
     {{/unauthenticateduser}}
     {{^unauthenticateduser}}
-        <div class="dropdown show">
-            <a href="#" role="button" id="user-menu-toggle" data-toggle="dropdown" aria-label="{{#str}}usermenu{{/str}}"
-               aria-haspopup="true" aria-controls="user-action-menu" class="btn dropdown-toggle">
-                <span class="userbutton">
-                    {{> core/user_menu_metadata }}
-                </span>
-            </a>
-            <div id="user-action-menu" class="dropdown-menu dropdown-menu-right">
-                <div id="usermenu-carousel" class="carousel slide" data-touch="false" data-interval="false" data-keyboard="false">
-                    <div class="carousel-inner">
-                        <div id="carousel-item-main" class="carousel-item active" role="menu" tabindex="-1" aria-label="{{#str}}user{{/str}}">
-                            {{> core/user_action_menu_items }}
-                        </div>
-                        {{#submenus}}
-                            <div id="carousel-item-{{id}}" role="menu" class="carousel-item submenu" tabindex="-1" aria-label="{{title}}">
-                                <div class="d-flex flex-column h-100">
-                                    <div class="header">
-                                        <button type="button" class="btn btn-icon carousel-navigation-link text-decoration-none text-body" data-carousel-target-id="carousel-item-main" aria-label="{{#str}}usermenugoback{{/str}}">
-                                            <span class="dir-rtl-hide">{{#pix}}i/arrow-left{{/pix}}</span>
-                                            <span class="dir-ltr-hide">{{#pix}}i/arrow-right{{/pix}}</span>
-                                        </button>
-                                        <span class="pl-2" id="carousel-item-title-{{id}}">{{title}}</span>
-                                    </div>
-                                    <div class="dropdown-divider"></div>
-                                    <div class="items h-100 overflow-auto" role="menu" aria-labelledby="carousel-item-title-{{id}}">
-                                        {{> core/user_action_menu_submenu_items }}
-                                    </div>
-                                </div>
-                            </div>
-                        {{/submenus}}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <a href="#" id="user-menu-toggle">
+            <span class="userbutton">
+                {{> core/user_menu_metadata }}
+            </span>
+        </a>
+
     {{/unauthenticateduser}}
 </div>
 {{#js}}
-    require(['core/usermenu'], function(UserMenu) {
-        UserMenu.init();
+    /*
+    <script>*/
+    require(["jquery", "core/modal_factory"], function($, ModalFactory) {
+        var modal;
+        ModalFactory.create({
+            type: ModalFactory.types.DEFAULT,
+            title: "{{{userfullname}}}",
+            body: `{{#avatardata}}
+                       <span class="avatar d-none {{classes}}">
+                           {{{content}}}
+                       </span>
+                   {{/avatardata}}
+                   <div class="usermenu-modal-tabs">
+                       <div class="tabs-menu-link">
+                           {{> core/user_action_menu_items }}
+                       </div>
+                       <div class="usermenu-modal-tabs-content"></div>
+                   </div>`,
+        }).then(function(_modal) {
+            window.wmodal= modal = _modal;
+
+            if (!modal.root) {
+                modal.root = modal._root;
+            }
+
+            modal.root.find(".modal-dialog").addClass("modal-xl usermenu-modal-userlinks");
+
+            modal.root.find(".modal-header").append(`
+                    <div class="user-action d-flex">
+                        <div class="languages dropdown">
+                            <a href="#" class="dropdown-toggle nav-link">{{#str}}language{{/str}}</a>
+                            <div class="submenus">
+                                {{#submenus}}
+                                    {{>core/user_action_menu_submenu_items}}
+                                {{/submenus}}
+                            </div>
+                        </div>
+                    </div>`);
+            modal.root.find(".modal-header button").appendTo(modal.root.find(".modal-header .user-action"));
+
+            usermodal_init();
+        });
+
+        $("#user-menu-toggle").click(function(event) {
+            event.preventDefault();
+            modal.show();
+
+            if ($(window).width() <= 575) {
+                /* se menor não faz nada */
+            } else {
+                var $menu = modal.root.find(".usermenu-modal-tabs .tabs-menu-link a:first-child");
+                console.log($menu);
+                setIframeUrl($menu);
+            }
+        });
+
+        function usermodal_init() {
+            modal.root.find(".usermenu-modal-tabs .tabs-menu-link a:first-child").addClass("active");
+            modal.root.find(".usermenu-modal-tabs .tabs-menu-link a").click(function() {
+                event.preventDefault();
+
+                var $menu = $(this);
+                setIframeUrl($menu);
+            });
+        }
+
+        function setIframeUrl($menu) {
+            modal.root.find(".usermenu-modal-tabs .tabs-menu-link a").removeClass("active");
+            $menu.addClass("active");
+
+            var href = $menu.attr("href");
+
+            if ($(window).width() <= 575) {
+                location.href = href;
+            }
+
+            if (href.includes("login/logout.php") ||
+                    href.includes("switchrole.php") ||
+                    href.includes("reportbuilder") ||
+                    href.includes("user/files.php")) {
+                location.href = href;
+            } else if (href == "#") {
+                alert("ops...");
+            } else {
+                if (href.includes('?')) {
+                    href += '&embed-frame-top=1';
+                } else {
+                    href += '?embed-frame-top=1';
+                }
+
+                if (href.includes("user/profile.php")) {
+                    modal.root.find(".modal-header").addClass("show-avatar");
+
+                    modal.root.find(".usermenu-modal-tabs-content").html(`
+                        <div class="user m-2">
+                            {{#avatardata}}
+                                <span class="avatar d-none {{classes}}">
+                                    {{{content}}}
+                                </span>
+                            {{/avatardata}}
+                            <h2>{{{userfullname}}}</h2>
+                        </div>
+                        <div class="usermenu-modal-tabs-content-internal"></div>`);
+
+                    modal.root.find(".usermenu-modal-tabs-content-internal")
+                            .load(href);
+                } else {
+                    modal.root.find(".modal-header").removeClass("show-avatar");
+
+                    modal.root.find(".usermenu-modal-tabs-content")
+                            .load(href);
+                }
+            }
+        }
     });
+
 {{/js}}

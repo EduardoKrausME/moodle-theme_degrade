@@ -17,19 +17,6 @@
         #usernavigation {
             padding: 0;
         }
-        .usermenu {
-            .login.nav-link {
-                color: rgb(var(--color_white_26));
-            }
-            .dropdown-menu .submenu .header {
-                color: rgb(var(--color_white_26));
-            }
-            .moodle-actionmenu .dropdown-menu a.dropdown-item {
-                padding-top: 0.5rem;
-                padding-bottom: 0.5rem;
-                border-bottom: 1px solid rgb(var(--color_white_26));
-            }
-        }
         .dropdown .dropdown-menu {
             max-height: calc(100vh - 60px);
             overflow-y: initial !important;
