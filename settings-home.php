@@ -17,9 +17,9 @@
 /**
  * Home Settings File
  *
- * @package     theme_degrade
- * @copyright   2024 Eduardo Kraus https://eduardokraus.com/
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   theme_degrade
+ * @copyright 2024 Eduardo Kraus https://eduardokraus.com/
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
@@ -83,9 +83,12 @@ $PAGE->requires->js_call_amd('theme_degrade/settings', 'autosubmit', [$setting->
 
 if (get_config('theme_degrade', 'home_type') != 0) {
     $icon = $OUTPUT->image_url("google-fonts", "theme_degrade")->out(false);
-    $setting = new admin_setting_configtextarea('theme_degrade/pagefonts',
-        get_string('content_pagefonts', 'theme_degrade'),
-        get_string('content_pagefonts_desc', 'theme_degrade', $icon), "");
+    $extra = "<br><a href=\"https://fonts.google.com/selection/embed\"
+                 target=\"google\">Embed code Page</a><br><img src=\"{$icon}\"
+                 style=\"max-width: 100%;width: 420px;\">";
+    $setting = new admin_setting_configtextarea('theme_degrade/sitefonts',
+        get_string('sitefonts', 'theme_degrade'),
+        get_string('sitefonts_desc', 'theme_degrade') . $extra, "");
     $page->add($setting);
 }
 
