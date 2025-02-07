@@ -35,7 +35,7 @@
         "instructortitle": "Senior Data Scientist",
         "instructorurl": "https://example.com/images/instructor-avatar.jpg"
       },
-      "acessar": "Access Course",
+      "access_course": "Access Course",
       "matricular": "Enroll Now"
     }
 
@@ -93,14 +93,14 @@
                 {{/showinstructor}}
 
                 {{#is_enrolled}}
-                    {{#acessar}}
+                    {{#access_course}}
                         <div class="course-info d-flex align-items-center">
                             <div class="all-btn all-category d-flex align-items-center">
                                 <a href="{{viewurl}}" style="white-space: nowrap;"
-                                   class="btn btn-primary matricula-se">{{{acessar}}}</a>
+                                   class="btn btn-primary matricula-se">{{{access_course}}}</a>
                             </div>
                         </div>
-                    {{/acessar}}
+                    {{/access_course}}
                 {{/is_enrolled}}
                 {{^is_enrolled}}
                     {{#matricular}}

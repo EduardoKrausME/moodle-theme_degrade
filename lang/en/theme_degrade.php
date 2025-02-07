@@ -17,9 +17,9 @@
 /**
  * Strings for component 'theme_degrade', language 'en'
  *
- * @package     theme_degrade
- * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   theme_degrade
+ * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 // phpcs:ignoreFile moodle.Files.LangFilesOrdering.IncorrectOrder
@@ -40,6 +40,7 @@ $string['acctoolbar_btn_underline_links'] = 'underline<br>links';
 $string['acctoolbar_btn_underline_headers'] = 'underline<br>headers';
 $string['acctoolbar_btn_open'] = 'Accessibility menu';
 $string['acctoolbar_btn_zoom_in'] = 'zoom<br>screen';
+$string['acctoolbar_dyslexic'] = 'Dyslexia Legible Font';
 $string['acctoolbar_content_block_header'] = 'highlighting content';
 $string['acctoolbar_contrast_block_header'] = 'color contrast';
 $string['acctoolbar_debug_contacts'] = 'report an accessibility problem';
@@ -58,6 +59,10 @@ $string['background_color_desc'] = 'Top and Footer background color!';
 $string['background_color_green'] = 'Green Theme {$a}';
 $string['background_color_random'] = 'Random Theme {$a}';
 $string['background_color_red'] = 'Red Theme {$a}';
+$string['background_course_image'] = 'Default course background image';
+$string['background_course_image_desc'] = 'Sets a default background image for the header of all courses. This image will be displayed at the top of the course page and can be individually replaced in the course settings.';
+$string['background_profile_image'] = 'Profile background image';
+$string['background_profile_image_desc'] = 'Background image displayed on the user profile.';
 $string['background_text_color'] = 'Text Color';
 $string['background_text_color_desc'] = 'Top and Footer Text color!';
 $string['cachedef_css_cache'] = 'CSS cache';
@@ -81,6 +86,7 @@ $string['countlesson'] = '{$a} lesson';
 $string['countlessons'] = '{$a} lessons';
 $string['customcss'] = 'Custom CSS';
 $string['customcss_desc'] = 'Any CSS rules you add to this text area will be reflected on all pages, making it easy to customize this theme.';
+$string['customfield_picture_missing'] = '<div class="alert alert-warning">You need to install the <a href="https://moodle.org/plugins/customfield_picture" target="_blank">customfield_picture</a> plugin in order to customize the background image.</div>';
 $string['custommenuitems'] = 'Custom Top Menu Items';
 $string['custommenuitems_desc'] = 'You can create a custom menu alongside the top menus. The root menu should start flush with the edge, and submenus should be preceded by a hyphen (-). The number of hyphens determines the item depth. Thus, items with a single hyphen appear in a submenu below the previous top-level item, and items with two hyphens appear in a submenu below the preceding submenu.
 The content of each menu item should consist of up to three elements (<strong>label</strong> | <strong>url</strong> | <strong>tooltip</strong> | <strong>lang</strong>), each separated by the "|" character.
@@ -213,6 +219,7 @@ $string['settings_about_heading'] = 'About your Moodle';
 $string['settings_accessibility_heading'] = 'Accessibility';
 $string['settings_accessibility'] = 'Enable accessibility options';
 $string['settings_accessibility_desc'] = 'Allows customization of options to improve platform accessibility, such as contrast, font size, and keyboard navigation.';
+$string['settings_course_heading'] = 'Course Settings';
 $string['settings_css_heading'] = 'Fonts and CSS';
 $string['settings_footer_heading'] = 'Footer Block';
 $string['settings_icons_block'] = 'Icon {$a}';

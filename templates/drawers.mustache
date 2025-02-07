@@ -55,124 +55,127 @@
 {{> core/local/toast/wrapper}}
 <div id="page-wrapper" class="d-print-block position-relative">
 
-{{{output.standard_top_of_body_html}}}
+    {{{output.standard_top_of_body_html}}}
 
-{{>theme_degrade/includes/header}}
-{{#courseindex}}
-    {{< theme_boost/drawer}}
-    {{$id}}theme_boost-drawers-courseindex{{/id}}
-{{$drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
-{{$drawerheading}}
-{{#str}}courseindex, core_courseformat{{/str}}
-{{/drawerheading}}
-{{$drawercontent}}
-{{{courseindex}}}
-{{/drawercontent}}
-{{$drawerpreferencename}}drawer-open-index{{/drawerpreferencename}}
-{{$drawerstate}}show-drawer-left{{/drawerstate}}
-{{/theme_boost/drawer}}
-{{/courseindex}}
-{{#hasblocks}}
-    {{< theme_boost/drawer}}
-    {{$id}}theme_boost-drawers-blocks{{/id}}
-{{$drawerclasses}}drawer drawer-right{{#blockdraweropen}} show{{/blockdraweropen}}{{/drawerclasses}}
-{{$drawercontent}}
-    <section class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
-        {{{addblockbutton}}}
-        {{{sidepreblocks}}}
-    </section>
-{{/drawercontent}}
-{{$drawerpreferencename}}drawer-open-block{{/drawerpreferencename}}
-{{$forceopen}}{{#forceblockdraweropen}}1{{/forceblockdraweropen}}{{/forceopen}}
-{{$drawerstate}}show-drawer-right{{/drawerstate}}
-{{$tooltipplacement}}left{{/tooltipplacement}}
-{{$drawercloseonresize}}1{{/drawercloseonresize}}
-{{$closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}
-{{/theme_boost/drawer}}
-{{/hasblocks}}
-    <div id="page" data-region="mainpage" data-usertour="scroller"
-         class="drawers {{#courseindexopen}}show-drawer-left{{/courseindexopen}} {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container">
-        <div id="topofscroll" class="main-inner">
-            <div class="drawer-toggles d-flex">
-                {{#courseindex}}
-                    <div class="drawer-toggler drawer-left-toggle open-nav d-print-none">
-                        <button class="btn icon-no-margin"
-                                data-toggler="drawers"
-                                data-action="toggle"
-                                data-target="theme_boost-drawers-courseindex"
-                                data-toggle="tooltip"
-                                data-placement="right"
-                                title="{{#str}}opendrawerindex, core{{/str}}">
-                            <span class="sr-only">{{#str}}opendrawerindex, core{{/str}}</span>
-                            {{#pix}} t/index_drawer, moodle {{/pix}}
-                        </button>
-                    </div>
-                {{/courseindex}}
-                {{#hasblocks}}
-                    <div class="drawer-toggler drawer-right-toggle ml-auto d-print-none">
-                        <button class="btn icon-no-margin"
-                                data-toggler="drawers"
-                                data-action="toggle"
-                                data-target="theme_boost-drawers-blocks"
-                                data-toggle="tooltip"
-                                data-placement="right"
-                                title="{{#str}}opendrawerblocks, core{{/str}}">
-                            <span class="sr-only">{{#str}}opendrawerblocks, core{{/str}}</span>
-                            <span class="dir-rtl-hide">{{#pix}}t/blocks_drawer, core{{/pix}}</span>
-                            <span class="dir-ltr-hide">{{#pix}}t/blocks_drawer_rtl, core{{/pix}}</span>
-                        </button>
-                    </div>
-                {{/hasblocks}}
-            </div>
-            {{{output.full_header}}}
-            {{#secondarymoremenu}}
-                <div class="secondary-navigation d-print-none">
-                    {{> core/moremenu}}
-                </div>
-            {{/secondarymoremenu}}
-            <div id="page-content" class="pb-3 d-print-block">
-                <div id="region-main-box">
-                    {{#hasregionmainsettingsmenu}}
-                        <div id="region-main-settings-menu" class="d-print-none">
-                            <div> {{{regionmainsettingsmenu}}} </div>
+    {{>theme_degrade/includes/header}}
+    {{#courseindex}}
+        {{< theme_boost/drawer}}
+            {{$id}}theme_boost-drawers-courseindex{{/id}}
+            {{$drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
+            {{$drawerpreferencename}}drawer-open-index{{/drawerpreferencename}}
+            {{$drawerstate}}show-drawer-left{{/drawerstate}}
+            {{$drawerheading}}
+                {{#str}}courseindex, core_courseformat{{/str}}
+            {{/drawerheading}}
+            {{$drawercontent}}
+                {{{courseindex}}}
+            {{/drawercontent}}
+        {{/theme_boost/drawer}}
+    {{/courseindex}}
+    {{#hasblocks}}
+        {{< theme_boost/drawer}}
+            {{$id}}theme_boost-drawers-blocks{{/id}}
+            {{$drawerclasses}}drawer drawer-right{{#blockdraweropen}} show{{/blockdraweropen}}{{/drawerclasses}}
+            {{$drawercontent}}
+                <section class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
+                    {{{addblockbutton}}}
+                    {{{sidepreblocks}}}
+                </section>
+            {{/drawercontent}}
+            {{$drawerpreferencename}}drawer-open-block{{/drawerpreferencename}}
+            {{$forceopen}}{{#forceblockdraweropen}}1{{/forceblockdraweropen}}{{/forceopen}}
+            {{$drawerstate}}show-drawer-right{{/drawerstate}}
+            {{$tooltipplacement}}left{{/tooltipplacement}}
+            {{$drawercloseonresize}}1{{/drawercloseonresize}}
+            {{$closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}
+        {{/theme_boost/drawer}}
+    {{/hasblocks}}
+    <div class="container">
+        <div id="page" data-region="mainpage" data-usertour="scroller"
+             class="drawers {{#courseindexopen}}show-drawer-left{{/courseindexopen}} {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container">
+            <div id="topofscroll" class="main-inner">
+                <div class="drawer-toggles d-flex">
+                    {{#courseindex}}
+                        <div class="drawer-toggler drawer-left-toggle open-nav d-print-none">
+                            <button class="btn icon-no-margin"
+                                    data-toggler="drawers"
+                                    data-action="toggle"
+                                    data-target="theme_boost-drawers-courseindex"
+                                    data-toggle="tooltip"
+                                    data-placement="right"
+                                    title="{{#str}}opendrawerindex, core{{/str}}">
+                                <span class="sr-only">{{#str}}opendrawerindex, core{{/str}}</span>
+                                {{#pix}} t/index_drawer, moodle {{/pix}}
+                            </button>
                         </div>
-                    {{/hasregionmainsettingsmenu}}
-                    <section id="region-main" aria-label="{{#str}}content{{/str}}">
-
+                    {{/courseindex}}
+                    {{#hasblocks}}
+                        <div class="drawer-toggler drawer-right-toggle ml-auto d-print-none">
+                            <button class="btn icon-no-margin"
+                                    data-toggler="drawers"
+                                    data-action="toggle"
+                                    data-target="theme_boost-drawers-blocks"
+                                    data-toggle="tooltip"
+                                    data-placement="right"
+                                    title="{{#str}}opendrawerblocks, core{{/str}}">
+                                <span class="sr-only">{{#str}}opendrawerblocks, core{{/str}}</span>
+                                <span class="dir-rtl-hide">{{#pix}}t/blocks_drawer, core{{/pix}}</span>
+                                <span class="dir-ltr-hide">{{#pix}}t/blocks_drawer_rtl, core{{/pix}}</span>
+                            </button>
+                        </div>
+                    {{/hasblocks}}
+                </div>
+                {{{output.full_header}}}
+                {{#secondarymoremenu}}
+                    <div class="secondary-navigation d-print-none">
+                        {{> core/moremenu}}
+                    </div>
+                {{/secondarymoremenu}}
+                <div id="page-content" class="pb-3 d-print-block">
+                    <div id="region-main-box">
                         {{#hasregionmainsettingsmenu}}
-                            <div class="region_main_settings_menu_proxy"></div>
+                            <div id="region-main-settings-menu" class="d-print-none">
+                                <div> {{{regionmainsettingsmenu}}} </div>
+                            </div>
                         {{/hasregionmainsettingsmenu}}
-                        {{{output.course_content_header}}}
-                        {{#headercontent}}
-                            {{> core/activity_header}}
-                        {{/headercontent}}
-                        {{#overflow}}
-                            <div class="container-fluid tertiary-navigation">
-                                <div class="navitem">
-                                    {{> core/url_select}}
+                        <section id="region-main" aria-label="{{#str}}content{{/str}}">
+
+                            {{#hasregionmainsettingsmenu}}
+                                <div class="region_main_settings_menu_proxy"></div>
+                            {{/hasregionmainsettingsmenu}}
+                            {{{output.course_content_header}}}
+                            {{#headercontent}}
+                                {{> core/activity_header}}
+                            {{/headercontent}}
+                            {{#overflow}}
+                                <div class="container-fluid tertiary-navigation">
+                                    <div class="navitem">
+                                        {{> core/url_select}}
+                                    </div>
                                 </div>
-                            </div>
-                        {{/overflow}}
-                        {{{output.main_content}}}
-                        {{{output.activity_navigation}}}
+                            {{/overflow}}
+                            {{{output.main_content}}}
+                            {{{output.activity_navigation}}}
 
-                        {{#return_course_id}}
-                            <div class="mt-5 mb-1 activity-navigation container-fluid">
-                                <a href="/course/view.php?id={{return_course_id}}" class="btn btn-link btn-primary"
-                                    style="color:#ffffff;">
-                                << Voltar ao curso "{{{return_course_name}}}"
-                                </a>
-                            </div>
-                        {{/return_course_id}}
+                            {{#return_course_id}}
+                                <div class="mt-5 mb-1 activity-navigation container-fluid">
+                                    <a href="/course/view.php?id={{return_course_id}}" class="btn btn-link btn-primary"
+                                        style="color:#ffffff;">
+                                    << Voltar ao curso "{{{return_course_name}}}"
+                                    </a>
+                                </div>
+                            {{/return_course_id}}
 
-                        {{{output.course_content_footer}}}
-                    </section>
+                            {{{output.course_content_footer}}}
+                        </section>
+                    </div>
                 </div>
             </div>
         </div>
-        {{> theme_degrade/includes/footer}}
     </div>
-{{{output.standard_after_main_region_html}}}
+
+    {{> theme_degrade/includes/footer}}
+    {{{output.standard_after_main_region_html}}}
 </div>
 
 </body>

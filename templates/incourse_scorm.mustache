@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_degrade/drawers_scorm
+    @template theme_degrade/drawers
 
     Boost drawer template.
 
@@ -60,36 +60,35 @@
 {{>theme_degrade/includes/header}}
 {{#courseindex}}
     {{< theme_boost/drawer}}
-        {{$id}}theme_boost-drawers-courseindex{{/id}}
-        {{$drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
-        {{$drawerheading}}
-            {{#str}}courseindex, core_courseformat{{/str}}
-        {{/drawerheading}}
-        {{$drawercontent}}
-            {{{courseindex}}}
-        {{/drawercontent}}
-        {{$drawerpreferencename}}drawer-open-index{{/drawerpreferencename}}
-        {{$drawerstate}}show-drawer-left{{/drawerstate}}
-    {{/theme_boost/drawer}}
+    {{$id}}theme_boost-drawers-courseindex{{/id}}
+{{$drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
+{{$drawerheading}}
+{{#str}}courseindex, core_courseformat{{/str}}
+{{/drawerheading}}
+{{$drawercontent}}
+{{{courseindex}}}
+{{/drawercontent}}
+{{$drawerpreferencename}}drawer-open-index{{/drawerpreferencename}}
+{{$drawerstate}}show-drawer-left{{/drawerstate}}
+{{/theme_boost/drawer}}
 {{/courseindex}}
-
 {{#hasblocks}}
     {{< theme_boost/drawer}}
-        {{$id}}theme_boost-drawers-blocks{{/id}}
-        {{$drawerclasses}}drawer drawer-right{{#blockdraweropen}} show{{/blockdraweropen}}{{/drawerclasses}}
-        {{$drawercontent}}
-            <section class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
-                {{{addblockbutton}}}
-                {{{sidepreblocks}}}
-            </section>
-        {{/drawercontent}}
-        {{$drawerpreferencename}}drawer-open-block{{/drawerpreferencename}}
-        {{$forceopen}}{{#forceblockdraweropen}}1{{/forceblockdraweropen}}{{/forceopen}}
-        {{$drawerstate}}show-drawer-right{{/drawerstate}}
-        {{$tooltipplacement}}left{{/tooltipplacement}}
-        {{$drawercloseonresize}}1{{/drawercloseonresize}}
-        {{$closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}
-    {{/theme_boost/drawer}}
+    {{$id}}theme_boost-drawers-blocks{{/id}}
+{{$drawerclasses}}drawer drawer-right{{#blockdraweropen}} show{{/blockdraweropen}}{{/drawerclasses}}
+{{$drawercontent}}
+    <section class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
+        {{{addblockbutton}}}
+        {{{sidepreblocks}}}
+    </section>
+{{/drawercontent}}
+{{$drawerpreferencename}}drawer-open-block{{/drawerpreferencename}}
+{{$forceopen}}{{#forceblockdraweropen}}1{{/forceblockdraweropen}}{{/forceopen}}
+{{$drawerstate}}show-drawer-right{{/drawerstate}}
+{{$tooltipplacement}}left{{/tooltipplacement}}
+{{$drawercloseonresize}}1{{/drawercloseonresize}}
+{{$closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}
+{{/theme_boost/drawer}}
 {{/hasblocks}}
     <div id="page" data-region="mainpage" data-usertour="scroller"
          class="drawers {{#courseindexopen}}show-drawer-left{{/courseindexopen}} {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container">
@@ -104,7 +103,7 @@
         </div>
         {{> theme_degrade/includes/footer}}
     </div>
-    {{{output.standard_after_main_region_html}}}
+{{{output.standard_after_main_region_html}}}
 </div>
 
 <style>
@@ -134,7 +133,7 @@
     #region-main .flex-row-reverse {
         position: fixed !important;
         right: 3px !important;
-        top: 65px;
+        top: 65px ;
         z-index: 1001 !important;
     }
     #region-main .flex-row-reverse a {
@@ -155,10 +154,10 @@
         var body = $("body");
 
         header.mouseenter(function() {
-            $(this).css({'z-index': 1002});
+            $(this).css({'z-index' : 1002});
         });
         header.mouseleave(function() {
-            $(this).css({'z-index': 1});
+            $(this).css({'z-index' : 1});
         });
 
         header.addClass("ever-fixed-top");
@@ -169,14 +168,14 @@
 
             var window_height = $(window).height();
             $("#scorm_object").css({
-                width: '100%',
-                height: window_height - header_height - 20,
+                width  : '100%',
+                height : window_height - header_height - 20,
             });
             $("#region-main").css({
-                top: header_height + 10
+                top : header_height + 10
             });
             $("#region-main .flex-row-reverse").css({
-                top: header_height
+                top : header_height
             });
         }
 

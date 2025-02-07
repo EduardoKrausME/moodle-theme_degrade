@@ -132,16 +132,12 @@
                 if (top > 90 && !header.hasClass("fixed-top")) {
                     header.addClass("fixed-top");
 
-                    page.css({
-                        "margin-top" : header.height() + 14
-                    });
+                    page.css({ "margin-top" : header.height() });
                 }
                 if (top < 15 && header.hasClass("fixed-top")) {
                     header.removeClass("fixed-top");
 
-                    page.css({
-                        "margin-top" : 14
-                    });
+                    page.css({ "margin-top" : 0 });
                 }
             }
         }

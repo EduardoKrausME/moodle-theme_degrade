@@ -17,9 +17,9 @@
 /**
  * Footer template data
  *
- * @package     theme_degrade
- * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   theme_degrade
+ * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace theme_degrade\template;
@@ -52,6 +52,8 @@ class htmldata {
      * @return mixed|null|string|string[]
      */
     public static function vvveb__change_courses($html) {
+        global $CFG;
+
         self::vvveb__change_my_courses($html);
         self::vvveb__change_popular_courses($html);
         self::vvveb__change_catalogo($html);
@@ -65,8 +67,8 @@ class htmldata {
         }
 
         $html = "
-            <link href=\"https://moodle.aulaemvideo.com.br/theme/degrade/_editor/libs/aos/aos.css\" rel=\"stylesheet\">
-            <link href=\"https://moodle.aulaemvideo.com.br/theme/degrade/_editor/libs/aos/aos.js\" rel=\"stylesheet\">
+            <link href=\"{$CFG->wwwroot}/theme/degrade/_editor/libs/aos/aos.css\" rel=\"stylesheet\">
+            <link href=\"{$CFG->wwwroot}/theme/degrade/_editor/libs/aos/aos.js\" rel=\"stylesheet\">
             " . trim($html);
         return $html;
     }
@@ -118,9 +120,6 @@ class htmldata {
                 $course->access = get_string("course_access", "theme_degrade");
 
                 $course->courseimage = course_renderer_util::couse_image(new core_course_list_element($course));
-                if (!isset($course->courseimage[3])) {
-                    $course->courseimage = $OUTPUT->image_url("course-default", "theme")->out();
-                }
                 $datasave[] = $course;
             }
             $courseshtml = $OUTPUT->render_from_template("theme_degrade/vvveb/course", ["courses" => $datasave]);
@@ -206,10 +205,6 @@ class htmldata {
                 }
 
                 $course->courseimage = course_renderer_util::couse_image(new core_course_list_element($course));
-                if (!isset($course->courseimage[3])) {
-                    $course->courseimage = $OUTPUT->image_url("course-default", "theme")->out();
-                }
-
                 $datasave[] = $course;
             }
 
@@ -383,9 +378,6 @@ class htmldata {
                     }
 
                     $course->courseimage = course_renderer_util::couse_image(new core_course_list_element($course));
-                    if (!isset($course->courseimage[3])) {
-                        $course->courseimage = $OUTPUT->image_url("course-default", "theme")->out();
-                    }
                     $datasave[] = $course;
                 }
 

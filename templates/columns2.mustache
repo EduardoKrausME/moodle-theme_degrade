@@ -58,37 +58,39 @@
 
     {{>theme_degrade/includes/header}}
 
-    <div id="page" class="container-fluid">
-        <ul class="navbar-nav mr-auto">
-            {{{output.custom_menu}}}
-        </ul>
-        <div class="secondarynavigation">
-            {{#secondarymoremenu}}
-                {{> core/moremenu}}
-            {{/secondarymoremenu}}
-        </div>
+    <div class="container">
+        <div id="page" class="container-fluid">
+            <ul class="navbar-nav mr-auto">
+                {{{output.custom_menu}}}
+            </ul>
+            <div class="secondarynavigation">
+                {{#secondarymoremenu}}
+                    {{> core/moremenu}}
+                {{/secondarymoremenu}}
+            </div>
 
-        <div id="page-content" class="row pb-3">
-            <div id="region-main-box" class="col-12">
-                {{#hasregionmainsettingsmenu}}
-                    <div id="region-main-settings-menu" class="d-print-none {{#hasblocks}}has-blocks{{/hasblocks}}">
-                        <div> {{{output.region_main_settings_menu}}} </div>
-                    </div>
-                {{/hasregionmainsettingsmenu}}
-                <section id="region-main" {{#hasblocks}}class="has-blocks mb-3"{{/hasblocks}}>
+            <div id="page-content" class="row pb-3">
+                <div id="region-main-box" class="col-12">
                     {{#hasregionmainsettingsmenu}}
-                        <div class="region_main_settings_menu_proxy"></div>
+                        <div id="region-main-settings-menu" class="d-print-none {{#hasblocks}}has-blocks{{/hasblocks}}">
+                            <div> {{{output.region_main_settings_menu}}} </div>
+                        </div>
                     {{/hasregionmainsettingsmenu}}
-                    {{{output.course_content_header}}}
-                    {{{output.main_content}}}
-                    {{{output.activity_navigation}}}
-                    {{{output.course_content_footer}}}
-                </section>
-                {{#hasblocks}}
-                    <section data-region="blocks-column" class="d-print-none">
-                        {{{sidepreblocks}}}
+                    <section id="region-main" {{#hasblocks}}class="has-blocks mb-3"{{/hasblocks}}>
+                        {{#hasregionmainsettingsmenu}}
+                            <div class="region_main_settings_menu_proxy"></div>
+                        {{/hasregionmainsettingsmenu}}
+                        {{{output.course_content_header}}}
+                        {{{output.main_content}}}
+                        {{{output.activity_navigation}}}
+                        {{{output.course_content_footer}}}
                     </section>
-                {{/hasblocks}}
+                    {{#hasblocks}}
+                        <section data-region="blocks-column" class="d-print-none">
+                            {{{sidepreblocks}}}
+                        </section>
+                    {{/hasblocks}}
+                </div>
             </div>
         </div>
     </div>

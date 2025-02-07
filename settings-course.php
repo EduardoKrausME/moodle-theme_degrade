@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * settings.php
+ * settings-course.php
  *
  * This is built using the boost template to allow for new theme's using
  * Moodle's new Boost theme engine
@@ -27,23 +27,23 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-if (is_siteadmin()) {
-    $settings = new theme_boost_admin_settingspage_tabs('themesettingdegrade',
-        get_string('pluginname', 'theme_degrade'));
+$page = new admin_settingpage("theme_degrade_course", get_string("settings_course_heading", "theme_degrade"));
 
-    $ADMIN->add('themes', new admin_category('theme_degrade', get_string('pluginname', 'theme_degrade')));
+// Profile background image.
+$setting = new admin_setting_configstoredfile("theme_degrade/background_course_image",
+    get_string("background_course_image", "theme_degrade"),
+    get_string("background_course_image_desc", "theme_degrade"),
+    "background_course_image", 0,
+    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".svg", ".png"]]);
+$setting->set_updatedcallback("theme_reset_all_caches");
+$page->add($setting);
 
-    require_once(__DIR__ . "/settings-theme.php");
-    require_once(__DIR__ . "/settings-css.php");
-    require_once(__DIR__ . "/settings-accessibility.php");
-    require_once(__DIR__ . "/settings-course.php");
-    require_once(__DIR__ . "/settings-topo.php");
-    require_once(__DIR__ . "/settings-home.php");
-    require_once(__DIR__ . "/settings-slideshow.php");
-    require_once(__DIR__ . "/settings-mycourses.php");
-    if (get_config('theme_degrade', 'home_type') == 0) {
-        require_once(__DIR__ . "/settings-about.php");
-    }
-    require_once(__DIR__ . "/settings-footer.php");
-    require_once(__DIR__ . "/settings-login.php");
+if (file_exists("{$CFG->dirroot}/customfield/field/picture/version.php")) {
+    require_once(__DIR__ . "/db/version-background_course_image.php");
+} else {
+    $setting = new admin_setting_description("theme_degrade/customfield_picture_missing",
+        "", get_string("customfield_picture_missing", "theme_degrade"));
+    $page->add($setting);
 }
+
+$settings->add($page);

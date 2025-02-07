@@ -17,9 +17,9 @@
 /**
  * Class core_hook_output
  *
- * @package    theme_degrade
- * @copyright  2024 Eduardo Kraus {@link http://eduardokraus.com}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   theme_degrade
+ * @copyright 2024 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace theme_degrade;
@@ -310,13 +310,14 @@ class core_hook_output {
         if (get_config("theme_degrade", "enable_accessibility")) {
             $PAGE->requires->strings_for_js([
                 "acctoolbar_toolbar", "acctoolbar_btn_open", "acctoolbar_btn_close", "acctoolbar_keyboard_root",
-                "acctoolbar_disable_animattions", "acctoolbar_access_declaration", "acctoolbar_debug_contacts",
-                "acctoolbar_reset_all_settings", "acctoolbar_image_without_alt", "acctoolbar_contrast_block_header",
-                "acctoolbar_btn_monochrome", "acctoolbar_btn_bright", "acctoolbar_btn_invert",
-                "acctoolbar_text_block_header", "acctoolbar_btn_font_up", "acctoolbar_btn_font_down",
-                "acctoolbar_btn_font_readable", "acctoolbar_content_block_header", "acctoolbar_btn_underline_links",
-                "acctoolbar_btn_underline_headers", "acctoolbar_btn_images_titles", "acctoolbar_zoom_block_header",
-                "acctoolbar_btn_cursor_white", "acctoolbar_btn_cursor_black", "acctoolbar_btn_zoom_in",
+                "acctoolbar_disable_animattions", "acctoolbar_dyslexic", "acctoolbar_access_declaration",
+                "acctoolbar_debug_contacts", "acctoolbar_reset_all_settings", "acctoolbar_image_without_alt",
+                "acctoolbar_contrast_block_header", "acctoolbar_btn_monochrome", "acctoolbar_btn_bright",
+                "acctoolbar_btn_invert", "acctoolbar_text_block_header", "acctoolbar_btn_font_up",
+                "acctoolbar_btn_font_down", "acctoolbar_btn_font_readable", "acctoolbar_content_block_header",
+                "acctoolbar_btn_underline_links", "acctoolbar_btn_underline_headers", "acctoolbar_btn_images_titles",
+                "acctoolbar_zoom_block_header", "acctoolbar_btn_cursor_white", "acctoolbar_btn_cursor_black",
+                "acctoolbar_btn_zoom_in",
             ], "theme_degrade");
             $PAGE->requires->js_call_amd('theme_degrade/acctoolbar', 'init', [$OUTPUT->image_url('acctoolbar/icon', 'theme')->out()]);
         }
