@@ -10,6 +10,7 @@ define([], function() {
                 btn_close: M.util.get_string("acctoolbar_btn_close", "theme_degrade"),
                 keyboard_root: M.util.get_string("acctoolbar_keyboard_root", "theme_degrade"),
                 disable_animattions: M.util.get_string("acctoolbar_disable_animattions", "theme_degrade"),
+                dyslexic: M.util.get_string("acctoolbar_dyslexic", "theme_degrade"),
                 access_declaration: M.util.get_string("acctoolbar_access_declaration", "theme_degrade"),
                 debug_contacts: M.util.get_string("acctoolbar_debug_contacts", "theme_degrade"),
                 reset_all_settings: M.util.get_string("acctoolbar_reset_all_settings", "theme_degrade"),
@@ -65,8 +66,10 @@ function MicAccessTool(iconurl, locale) {
     this.micContrastSoft.addEventListener("click", this.contrastChange);
     this.micContrastHard.addEventListener("click", this.contrastChange);
     this.micDisableButtonsAnimations = document.getElementById("mic-toolbox-disable-buttons-animations");
-    this.micDisableButtonsKeyboard = document.getElementById("mic-toolbox-disable-buttons-keyboard");
     this.micDisableButtonsAnimations.addEventListener("click", this.onceButtonChange);
+    this.micdyslexic = document.getElementById("mic-dyslexic-buttons");
+    this.micdyslexic.addEventListener("click", this.onceButtonChange);
+    this.micDisableButtonsKeyboard = document.getElementById("mic-toolbox-disable-buttons-keyboard");
     this.micDisableButtonsKeyboard.addEventListener("click", this.onceButtonChange);
     this.micToolboxFontsUp = document.getElementById("mic-toolbox-fonts-up");
     this.micToolboxFontsDown = document.getElementById("mic-toolbox-fonts-down");
@@ -118,6 +121,11 @@ MicAccessTool.prototype.buildToolBox = function() {
                     <span>${this.locale.disable_animattions}</span>
                     <img src="${this.init.iconurl.replace('icon','disable_animattions')}"
                          alt="${this.locale.disable_animattions}">
+                </button>
+                <button title="${this.locale.dyslexic}" id="mic-dyslexic-buttons">
+                    <span>${this.locale.dyslexic}</span>
+                    <img src="${this.init.iconurl.replace('icon','dyslexic')}"
+                         alt="${this.locale.dyslexic}" width="32" height="32">
                 </button>
             </div>
             <div id="mic-toolbox-contrast-block" class="mic-contrast-block mic-buttons-block">
@@ -242,141 +250,314 @@ MicAccessTool.prototype.buildToolBox = function() {
     document.body.insertBefore(i, document.body.firstChild)
 };
 
-MicAccessTool.prototype.contrastChange = function(A) {
-    if (A.preventDefault(), document.body.classList.contains(this.id)) this.classList.remove("vi-enabled"), document.body.classList.remove(this.id), delete window.MICTOOLBOXAPPSTATE.bodyClassList[this.id]; else {
-        for (var o = document.querySelectorAll(".mic-contrast-block button"), t = 0; t < o.length; t++) o[t].classList.remove("vi-enabled"), document.body.classList.remove(o[t].id), delete window.MICTOOLBOXAPPSTATE.bodyClassList[o[t].id];
-        this.classList.add("vi-enabled"), document.body.classList.add(this.id), window.MICTOOLBOXAPPSTATE.bodyClassList[this.id] = this.id
+// CONTRAST FUNCTION
+MicAccessTool.prototype.contrastChange = function(event) {
+    event.preventDefault();
+
+    if (document.body.classList.contains(this.id)) {
+        this.classList.remove('vi-enabled');
+        document.body.classList.remove(this.id);
+
+        delete window.MICTOOLBOXAPPSTATE.bodyClassList[this.id];
     }
-    MicAccessTool.prototype.updateState()
+    else {
+        var buttons = document.querySelectorAll('.mic-contrast-block button');
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove('vi-enabled');
+            document.body.classList.remove(buttons[i].id);
+
+            delete window.MICTOOLBOXAPPSTATE.bodyClassList[buttons[i].id];
+        }
+        this.classList.add('vi-enabled');
+        document.body.classList.add(this.id);
+
+        window.MICTOOLBOXAPPSTATE.bodyClassList[this.id] = this.id;
+    }
+    MicAccessTool.prototype.updateState();
 };
 
-MicAccessTool.prototype.cursorChange = function(A) {
-    if (A.preventDefault(), document.body.classList.contains(this.id)) this.classList.remove("vi-enabled"), document.body.classList.remove(this.id), delete window.MICTOOLBOXAPPSTATE.bodyClassList[this.id]; else {
-        for (var o = document.querySelectorAll("#mic-toolbox-cursor-big-black,#mic-toolbox-cursor-big-white"), t = 0; t < o.length; t++) o[t].classList.remove("vi-enabled"), document.body.classList.remove(o[t].id), delete window.MICTOOLBOXAPPSTATE.bodyClassList[o[t].id];
-        this.classList.add("vi-enabled"), document.body.classList.add(this.id), window.MICTOOLBOXAPPSTATE.bodyClassList[this.id] = this.id
+// CURSOR CHANGE
+MicAccessTool.prototype.cursorChange = function(event) {
+    event.preventDefault();
+
+    if (document.body.classList.contains(this.id)) {
+        this.classList.remove('vi-enabled');
+        document.body.classList.remove(this.id);
+        delete window.MICTOOLBOXAPPSTATE.bodyClassList[this.id];
     }
-    MicAccessTool.prototype.updateState()
+    else {
+        var buttons = document.querySelectorAll('#mic-toolbox-cursor-big-black,#mic-toolbox-cursor-big-white');
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove('vi-enabled');
+            document.body.classList.remove(buttons[i].id);
+
+            delete window.MICTOOLBOXAPPSTATE.bodyClassList[buttons[i].id];
+        }
+        this.classList.add('vi-enabled');
+        document.body.classList.add(this.id);
+
+        window.MICTOOLBOXAPPSTATE.bodyClassList[this.id] = this.id;
+    }
+    MicAccessTool.prototype.updateState();
 };
 
-MicAccessTool.prototype.onceButtonChange = function(A) {
-    A.preventDefault(), "mic-toolbox-disable-buttons-keyboard" === this.id && (window.MICTOOLBOXAPPSTATE.keyboardRoot = !window.MICTOOLBOXAPPSTATE.keyboardRoot, MicAccessTool.prototype.keyboardRootEnable()), "mic-toolbox-content-images" === this.id && MicAccessTool.prototype.imagesChange(), document.body.classList.contains(this.id) ? (this.classList.remove("vi-enabled"), document.body.classList.remove(this.id), delete window.MICTOOLBOXAPPSTATE.bodyClassList[this.id]) : (this.classList.add("vi-enabled"), document.body.classList.add(this.id), window.MICTOOLBOXAPPSTATE.bodyClassList[this.id] = this.id), MicAccessTool.prototype.updateState()
+MicAccessTool.prototype.onceButtonChange = function(event) {
+    event.preventDefault();
+
+    if (this.id === 'mic-toolbox-disable-buttons-keyboard') {
+        window.MICTOOLBOXAPPSTATE.keyboardRoot = !window.MICTOOLBOXAPPSTATE.keyboardRoot;
+        MicAccessTool.prototype.keyboardRootEnable();
+    }
+
+    if (this.id === 'mic-toolbox-content-images') {
+        MicAccessTool.prototype.imagesChange();
+    }
+
+    if (document.body.classList.contains(this.id)) {
+        this.classList.remove('vi-enabled');
+        document.body.classList.remove(this.id);
+
+        delete window.MICTOOLBOXAPPSTATE.bodyClassList[this.id];
+    }
+    else {
+        this.classList.add('vi-enabled');
+        document.body.classList.add(this.id);
+
+        window.MICTOOLBOXAPPSTATE.bodyClassList[this.id] = this.id;
+    }
+    MicAccessTool.prototype.updateState();
 };
 
 MicAccessTool.prototype.keyboardRootEnable = function() {
-    if (window.MICTOOLBOXAPPSTATE.keyboardRoot) for (var A = document.querySelectorAll("h1,h2,h3,h4,h5,h6,p,a,button,input,select,textarea"), o = 0; o < A.length; o++) {
-        A[o].tabIndex = o + 1
-    } else window.location.reload()
+    if (window.MICTOOLBOXAPPSTATE.keyboardRoot) {
+        var headers = document.querySelectorAll('h1,h2,h3,h4,h5,h6,p,a,button,input,select,textarea');
+        for (var i = 0; i < headers.length; i++) {
+            var item = headers[i];
+            item.tabIndex = i + 1
+        }
+    }
+    else {
+        window.location.reload();
+    }
 };
 
-MicAccessTool.prototype.fontsChange = function(A) {
-    A.preventDefault();
-    var o = window.MICTOOLBOXAPPSTATE.fontSize;
-    if ("mic-toolbox-fonts-up" === this.id) {
-        if (1.6 <= o) return;
-        for (var t = document.querySelectorAll("body,h1,h2,h3,h4,h5,h6,p,a,button,input,textarea,li,td,th,strong,span,blockquote,div"), i = 0; i < t.length; i++) {
-            var e = t[i], c = window.getComputedStyle(e).getPropertyValue("font-size").split("px"), n = Number(c[0]);
-            e.style.fontSize = (1.1 * n).toFixed() + "px"
+// FONTS CHANGE
+MicAccessTool.prototype.fontsChange = function(event) {
+    event.preventDefault();
+
+    // var mainBody = Number(document.body.style.fontSize.split('px')[0]);
+
+    var counter = window.MICTOOLBOXAPPSTATE.fontSize;
+
+    if (this.id === 'mic-toolbox-fonts-up') {
+        if (counter >= 1.6) {return}
+        var items = document.querySelectorAll('body,h1,h2,h3,h4,h5,h6,p,a,button,input,textarea,li,td,th,strong,span,blockquote,div');
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            var font = window.getComputedStyle(item).getPropertyValue('font-size').split('px');
+            var fontSize = Number(font[0]);
+            item.style.fontSize = (fontSize * 1.1).toFixed() + 'px';
         }
-        o = (1.1 * o).toFixed(2)
+        counter = (counter * 1.1).toFixed(2);
     }
-    if ("mic-toolbox-fonts-down" === this.id) {
-        if (o <= 1) return window.MICTOOLBOXAPPSTATE.fontSize = 1, void MicAccessTool.prototype.updateState();
-        for (t = document.querySelectorAll("body,h1,h2,h3,h4,h5,h6,p,a,button,input,textarea,li,td,th,strong,span,blockquote,div"), i = 0; i < t.length; i++) {
-            e = t[i], c = window.getComputedStyle(e).getPropertyValue("font-size").split("px"), n = Number(c[0]);
-            e.style.fontSize = (n / 1.1).toFixed() + "px"
+    if (this.id === 'mic-toolbox-fonts-down') {
+        if (counter <= 1) {
+            window.MICTOOLBOXAPPSTATE.fontSize = 1;
+            MicAccessTool.prototype.updateState();
+            return;
         }
-        o = (o / 1.1).toFixed(2)
+        var items = document.querySelectorAll('body,h1,h2,h3,h4,h5,h6,p,a,button,input,textarea,li,td,th,strong,span,blockquote,div');
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            var font = window.getComputedStyle(item).getPropertyValue('font-size').split('px');
+            var fontSize = Number(font[0]);
+            item.style.fontSize = (fontSize / 1.1).toFixed() + 'px';
+        }
+        counter = (counter / 1.1).toFixed(2);
     }
-    window.MICTOOLBOXAPPSTATE.fontSize = o, MicAccessTool.prototype.getFontsChanges(o), MicAccessTool.prototype.updateState()
+
+    window.MICTOOLBOXAPPSTATE.fontSize = counter;
+    MicAccessTool.prototype.getFontsChanges(counter);
+    MicAccessTool.prototype.updateState();
+
 };
 
+// INITIAL FONT SIZE
 MicAccessTool.prototype.initFontsChange = function() {
-    for (var A = document.querySelectorAll("body,h1,h2,h3,h4,h5,h6,p,a,button,input,textarea,li,td,th,strong,span,blockquote,div"), o = window.MICTOOLBOXAPPSTATE.fontSize, t = 0; t < A.length; t++) {
-        var i = A[t], e = window.getComputedStyle(i).getPropertyValue("font-size");
-        i.style.fontSize = e;
-        var c = i.style.fontSize.split("px")
+    var items = document.querySelectorAll('body,h1,h2,h3,h4,h5,h6,p,a,button,input,textarea,li,td,th,strong,span,blockquote,div');
+    var initFontSize = window.MICTOOLBOXAPPSTATE.fontSize;
+    for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        var font = window.getComputedStyle(item).getPropertyValue('font-size');
+        item.style.fontSize = font;
+        var fs = item.style.fontSize.split('px');
     }
-    for (t = 0; t < A.length; t++) {
-        i = A[t], e = window.getComputedStyle(i).getPropertyValue("font-size").split("px"), c = Number(e[0]);
-        i.style.fontSize = (c * o).toFixed() + "px"
+    for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        var font = window.getComputedStyle(item).getPropertyValue('font-size').split('px');
+        var fs = Number(font[0]);
+        item.style.fontSize = (fs * initFontSize).toFixed() + 'px';
     }
-    o && this.getFontsChanges(o)
+    if (initFontSize) {
+        this.getFontsChanges(initFontSize);
+    }
 };
 
 MicAccessTool.prototype.initFontsChangeFirst = function() {
-    for (var A = document.querySelectorAll("body,h1,h2,h3,h4,h5,h6,p,a,button,input,textarea,li,td,th,strong,span,blockquote,div"), o = 0; o < A.length; o++) {
-        var t = A[o], i = window.getComputedStyle(t).getPropertyValue("font-size");
-        t.style.fontSize = i;
-        t.style.fontSize.split("px")
+    var items = document.querySelectorAll('body,h1,h2,h3,h4,h5,h6,p,a,button,input,textarea,li,td,th,strong,span,blockquote,div');
+    for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        var font = window.getComputedStyle(item).getPropertyValue('font-size');
+        item.style.fontSize = font;
+        var fs = item.style.fontSize.split('px');
     }
 };
 
-MicAccessTool.prototype.getFontsChanges = function(A) {
-    if (1 < A) {
-        document.getElementById("mic-toolbox-fonts-up").classList.add("vi-font-enabled");
-        var o = "+" + (100 * Number(A) - 100).toFixed() + "%";
-        document.getElementById("mic-toolbox-fonts-up-enabled").textContent = o
-    } else document.getElementById("mic-toolbox-fonts-up").classList.remove("vi-font-enabled"), document.getElementById("mic-toolbox-fonts-up-enabled").textContent = ""
+MicAccessTool.prototype.getFontsChanges = function(initFontSize) {
+    if (initFontSize > 1) {
+        document.getElementById('mic-toolbox-fonts-up').classList.add('vi-font-enabled');
+        var initPerc = (Number(initFontSize) * 100 - 100).toFixed();
+        var perc = '+' + initPerc + '%';
+        document.getElementById('mic-toolbox-fonts-up-enabled').textContent = perc;
+    }
+    else {
+        document.getElementById('mic-toolbox-fonts-up').classList.remove('vi-font-enabled');
+        document.getElementById('mic-toolbox-fonts-up-enabled').textContent = '';
+    }
 };
 
+// IMAGES CHANGE
 MicAccessTool.prototype.imagesChange = function() {
-    if (document.body.classList.contains("mic-toolbox-content-images")) {
-        for (var A = document.querySelectorAll(".mic-toolbox-images-titles"), o = 0; o < A.length; o++) {
-            A[o].parentElement.removeChild(A[o])
+
+    if (document.body.classList.contains('mic-toolbox-content-images')) {
+
+        var titles = document.querySelectorAll('.mic-toolbox-images-titles');
+        for (var i = 0; i < titles.length; i++) {
+            var parent = titles[i].parentElement;
+            parent.removeChild(titles[i]);
         }
-        window.MICTOOLBOXAPPSTATE.imagesTitle = !1
-    } else this.imagesAddTitles(), window.MICTOOLBOXAPPSTATE.imagesTitle = !0
+        window.MICTOOLBOXAPPSTATE.imagesTitle = false;
+    }
+
+    else {
+        this.imagesAddTitles();
+        window.MICTOOLBOXAPPSTATE.imagesTitle = true;
+    }
 };
 
 MicAccessTool.prototype.imagesAddTitles = function() {
-    for (var A = document.images, o = 0; o < A.length; o++) {
-        var t, i = A[o];
-        if (i.alt) (t = document.createElement("span")).className = "mic-toolbox-images-titles", t.textContent = i.alt, i.parentNode.insertBefore(t, i); else (t = document.createElement("span")).className = "mic-toolbox-images-titles", t.textContent = "image without text", i.parentNode.insertBefore(t, i)
+
+    var images = document.images;
+    for (var i = 0; i < images.length; i++) {
+        var img = images[i];
+        if (img.alt) {
+            var title = document.createElement('span');
+            title.className = 'mic-toolbox-images-titles';
+            title.textContent = img.alt;
+            img.parentNode.insertBefore(title, img);
+        }
+        else {
+            var title = document.createElement('span');
+            title.className = 'mic-toolbox-images-titles';
+            title.textContent = 'image without text';
+            img.parentNode.insertBefore(title, img);
+        }
+    }
+
+};
+
+
+MicAccessTool.prototype.updateState = function() {
+    var jsonSting = JSON.stringify(window.MICTOOLBOXAPPSTATE);
+    if (typeof(Storage) !== "undefined") {
+        localStorage.setItem('MICTOOLBOXAPPSTATE', jsonSting);
+    } else {
+        console.log('No Storage Found');
     }
 };
 
-MicAccessTool.prototype.updateState = function() {
-    var A = JSON.stringify(window.MICTOOLBOXAPPSTATE);
-    "undefined" != typeof Storage ? localStorage.setItem("MICTOOLBOXAPPSTATE", A) : console.log("No Storage Found")
+
+MicAccessTool.prototype.openBox = function(event) {
+    this.toolBox.classList.add('opened-mic-access-tool');
+    if (!window.MICTOOLBOXAPPSTATE.initFontSize || window.MICTOOLBOXAPPSTATE.fontSize <= 1) {
+        this.initFontsChangeFirst();
+        window.MICTOOLBOXAPPSTATE.initFontSize = true;
+    }
+    this.toolBoxCloseButton.focus();
 };
 
-MicAccessTool.prototype.openBox = function(A) {
-    this.toolBox.classList.add("opened-mic-access-tool"), (!window.MICTOOLBOXAPPSTATE.initFontSize || window.MICTOOLBOXAPPSTATE.fontSize <= 1) && (this.initFontsChangeFirst(), window.MICTOOLBOXAPPSTATE.initFontSize = !0), this.toolBoxCloseButton.focus()
+MicAccessTool.prototype.closeBox = function(event) {
+    this.toolBox.classList.remove('opened-mic-access-tool');
 };
 
-MicAccessTool.prototype.closeBox = function(A) {
-    this.toolBox.classList.remove("opened-mic-access-tool")
+MicAccessTool.prototype.openCloseBoxKeyboard = function(event) {
+    if (event.keyCode == 27) {
+        this.closeBox();
+    }
+    if (event.ctrlKey && event.keyCode == 113) {
+        this.openBox();
+    }
 };
 
-MicAccessTool.prototype.openCloseBoxKeyboard = function(A) {
-    27 == A.keyCode && this.closeBox(), A.ctrlKey && 113 == A.keyCode && this.openBox()
-};
-
-MicAccessTool.prototype.resetApp = function(A) {
-    localStorage.removeItem("MICTOOLBOXAPPSTATE"), window.location.reload()
+MicAccessTool.prototype.resetApp = function(event) {
+    localStorage.removeItem('MICTOOLBOXAPPSTATE');
+    window.location.reload();
 };
 
 MicAccessTool.prototype.initialApp = function() {
-    if (window.MICTOOLBOXAPPSTATE = JSON.parse(localStorage.getItem("MICTOOLBOXAPPSTATE")) || {
+    window.MICTOOLBOXAPPSTATE = JSON.parse(localStorage.getItem('MICTOOLBOXAPPSTATE')) || {
         bodyClassList: {},
         fontSize: 1,
-        imagesTitle: !1,
-        keyboardRoot: !1,
-        initFontSize: !1
-    }, window.MICTOOLBOXAPPSTATE.bodyClassList) for (var A in window.MICTOOLBOXAPPSTATE.bodyClassList) {
-        var o = window.MICTOOLBOXAPPSTATE.bodyClassList[A], t = document.getElementById(o);
-        t && t.classList.add("vi-enabled"), document.body.classList.add(o)
+        imagesTitle: false,
+        keyboardRoot: false,
+        initFontSize: false
+    };
+
+
+    // INIT ADDING CLASSES TO BODY
+    if (window.MICTOOLBOXAPPSTATE.bodyClassList) {
+        for (var bodyClass in window.MICTOOLBOXAPPSTATE.bodyClassList) {
+            var initBodyClassList = window.MICTOOLBOXAPPSTATE.bodyClassList[bodyClass];
+            var enabledButton = document.getElementById(initBodyClassList);
+            if (enabledButton) {
+                enabledButton.classList.add('vi-enabled');
+            }
+            document.body.classList.add(initBodyClassList);
+        }
     }
-    (1 < window.MICTOOLBOXAPPSTATE.fontSize && this.initFontsChange(), window.MICTOOLBOXAPPSTATE.imagesTitle && this.imagesAddTitles(), window.MICTOOLBOXAPPSTATE.keyboardRoot && this.keyboardRootEnable(), !window.MSInputMethodContext || !document.documentMode) || (document.getElementById("mic-toolbox-contrast-block").style.display = "none");
+
+    // FONT SIZE INIT
+    if (window.MICTOOLBOXAPPSTATE.fontSize > 1) {
+        this.initFontsChange();
+    }
+
+    // SET IMAGES TITLES
+    if (window.MICTOOLBOXAPPSTATE.imagesTitle) {
+        this.imagesAddTitles();
+    }
+
+    // SET KEBOARD ROOTING
+    if (window.MICTOOLBOXAPPSTATE.keyboardRoot) {
+        this.keyboardRootEnable();
+    }
+
+    var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
+    if (isIE11) {
+        var contrastBlock = document.getElementById('mic-toolbox-contrast-block');
+        contrastBlock.style.display = 'none';
+    }
     if (this.init.link) {
-        var i = document.getElementById("mic-toolbox-link-nagishut") || {};
-        i.classList.remove("atb-hide-if-empty"), i.href = this.init.link
+        var initLink = document.getElementById('mic-toolbox-link-nagishut') || {};
+        initLink.classList.remove('atb-hide-if-empty');
+        initLink.href = this.init.link;
     }
     if (this.init.contact) {
-        var e = document.getElementById("mic-toolbox-link-contact") || {};
-        e.classList.remove("atb-hide-if-empty"), e.href = this.init.contact
+        var initContact = document.getElementById('mic-toolbox-link-contact') || {};
+        initContact.classList.remove('atb-hide-if-empty');
+        initContact.href = this.init.contact;
     }
-    "right" === this.init.buttonPosition && (document.getElementById("mic-access-tool-general-button").classList.add("mic-access-tool-general-button-right"), document.getElementById("mic-access-tool-box").classList.add("mic-access-tool-box-right"))
-}, window.onload = function() {
-    window.micAccessTool = new MicAccessTool
+    if (this.init.buttonPosition === 'right') {
+        document.getElementById('mic-access-tool-general-button').classList.add('mic-access-tool-general-button-right');
+        document.getElementById('mic-access-tool-box').classList.add('mic-access-tool-box-right');
+    }
 };
