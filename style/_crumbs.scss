@@ -9,14 +9,12 @@
     li {
         display: inline;
         a, span {
-            background: #f3f5fa;
             text-align: center;
-            padding: 4px 8px 4px 21px;
+            padding: 4px 5px 4px 0;
             position: relative;
-            margin: 9px 10px 0 0;
             font-size: 20px;
             text-decoration: none;
-            color: rgb(var(--color_primary));
+            color: #2b2f30;
             height: 34px;
             display: flex;
             align-items: center;
@@ -24,48 +22,25 @@
             @media (max-width: 767px) {
                 font-size: 18px;
             }
-            &:after,
             &:before {
                 content: "";
-                top: 0;
-                position: absolute;
-                border-top: 17px solid transparent;
-                border-bottom: 17px solid transparent;
-            }
-            &:after {
-                border-left: 15px solid #f3f5fa;
-                right: -15px;
-                z-index: 1;
-            }
-            &:before {
-                border-left: 15px solid #f7f8fa;
-                left: 0;
+                width: 11px;
+                height: 18px;
+                background-image: url([[pix:theme_degrade|material/crumbs-divisor]]);
+                background-size: cover;
+                margin-right: 5px;
             }
         }
         a:hover {
-            background: rgb(var(--color_primary));
-            color: #fff;
-            &:after {
-                border-left-color: rgb(var(--color_primary));
-                color: #fff;
-            }
+            color: rgb(var(--color_primary));
         }
-        &:first-child a,
-        &:first-child span {
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
-            padding-left: 8px;
+        &:first-child a {
+            font-size: 0;
             &:before {
-                display: none;
-            }
-        }
-        &:last-child a,
-        &:last-child span {
-            padding-right: 5px;
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
-            &:after {
-                display: none;
+                width: 18px;
+                height: 18px;
+                background-image: url([[pix:theme_degrade|material/crumbs-home]]);
+                background-size: cover;
             }
         }
     }
