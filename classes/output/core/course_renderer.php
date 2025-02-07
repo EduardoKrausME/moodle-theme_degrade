@@ -20,9 +20,9 @@
  * This is built using the boost template to allow for new theme's using
  * Moodle's new Boost theme engine
  *
- * @package     theme_degrade
- * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   theme_degrade
+ * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace theme_degrade\output\core;
@@ -38,9 +38,9 @@ use context_system;
 /**
  * This class has function for core course renderer
  *
- * @package     theme_degrade
- * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   theme_degrade
+ * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_renderer extends \core_course_renderer {
 
@@ -108,9 +108,9 @@ class course_renderer extends \core_course_renderer {
                     && count(course_renderer_util::get_teachers($course)),
                 "instructor" => course_renderer_util::get_teachers($course),
                 "is_enrolled" => $hascoursecreate || course_renderer_util::is_enrolled($course),
-                "acessar" => get_string("acessar", "theme_degrade"),
+                "access_course" => get_string("access_course", "theme_degrade"),
                 "matricular" =>
-                    $priceval ? get_string("matricular", "theme_degrade") : get_string("acessar", "theme_degrade"),
+                    $priceval ? get_string("matricular", "theme_degrade") : get_string("access_course", "theme_degrade"),
                 "freename" => $freename,
                 "priceval" => $priceval,
             ];
@@ -161,7 +161,7 @@ class course_renderer extends \core_course_renderer {
                     count(course_renderer_util::get_teachers($course)),
                 "instructor" => course_renderer_util::get_teachers($course),
                 "is_enrolled" => true,
-                "acessar" => get_string("continuar", "theme_degrade"),
+                "access_course" => get_string("continuar", "theme_degrade"),
             ];
         }
 
