@@ -1,0 +1,409 @@
+
+/*Blocks*/
+.block {
+    border: 0;
+    border-color: rgb(var(--color_names));
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    margin: 0 5px;
+}
+#block-region-content .block {
+    margin: 0;
+}
+.block_timeline .input-group.searchbar input.form-control {
+    margin-left: auto;
+}
+.block .block-controls.header {
+    background: none;
+    border: 0;
+    position: absolute;
+    top: 10px;
+    right: 5px;
+}
+.block .block-controls .dropdown-toggle {
+    padding: 0;
+}
+.block .header {
+    background: rgb(var(--color_titles));
+    border: 0;
+}
+.block .maincalendar .header {
+    background: none;
+}
+.block .maincalendar .header .custom-select {
+    height: 42px;
+}
+.block .maincalendar .calendarwrapper .calendar-controls h4 {
+    font-size: 18px;
+}
+.maincalendar .calendarmonth td.today .day-number-circle {
+    background-color: rgb(var(--color_primary));
+}
+.block .bottom span.footer-link:after {
+    color: rgb(var(--color_primary));
+}
+.block .header h2 {
+    font-weight: normal;
+    font-size: 26px;
+    color: rgb(var(--color_primary));
+    line-height: 32px;
+    padding: 10px 15px;
+    text-shadow: none;
+    text-transform: none;
+}
+.block .header .block_action {
+    padding: 15px 15px 17px;
+}
+.block .content {
+    padding: 10px 15px;
+}
+.block .content .userpicture {
+    margin-right: 5px;
+}
+.block .minicalendar td.day.today {
+    color: #fff;
+    background: rgb(var(--color_primary));
+}
+.block .minicalendar td.day.today > a {
+    color: #fff;
+}
+.block .minicalendar td.day:hover {
+    color: #fff;
+    background: rgb(var(--color_primary));
+}
+.block .minicalendar td.day.calendar_event_site:hover a {
+    color: #fff;
+}
+.block .minicalendar td.day.calendar_event_course:hover {
+    background-color: rgb(var(--color_pink));
+}
+.block .minicalendar td.day.calendar_event_global:hover {
+    background-color: rgb(var(--color_green_7));
+}
+.block .minicalendar td.day.calendar_event_group:hover {
+    background-color: rgb(var(--color_yelow));
+}
+.block .minicalendar td.day.calendar_event_user:hover {
+    background-color: rgb(var(--color_blue_49));
+}
+.block .minicalendar td.day.weekend:hover {
+    color: #fff;
+}
+.block .minicalendar td .calendar-event-panel {
+    color: rgb(var(--color_white_171));
+}
+.block .minicalendar td .calendar-event-panel div {
+    margin: 0;
+}
+.block .minicalendar th > abbr {
+    font-weight: normal;
+    border-bottom: 0;
+    text-decoration: none;
+}
+
+.block_navigation .content {
+    padding: 5px 10px;
+}
+.block_navigation .block_tree {
+    font-size: 16px;
+    line-height: 22px;
+}
+.block_navigation .block_tree .tree_item {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin: 0;
+}
+.block_navigation .block_tree .tree_item > a {
+    color: rgb(var(--color_white_171));
+}
+.block_navigation .block_tree .tree_item > a:hover,
+.block_navigation .block_tree .tree_item > a:focus {
+    color: rgb(var(--color_primary));
+}
+.block_navigation .block_tree .tree_item.branch.navigation_node {
+    padding: 8px 15px;
+    padding-left: 0;
+    padding-right: 0;
+}
+.block_navigation .block_tree li.contains_branch ul > li {
+    padding: 0;
+    padding-right: 15px;
+}
+.block_navigation .block_tree li.item_with_icon > p img {
+    top: 10px;
+}
+.block_navigation .block_tree li > p.hasicon img {
+    top: 10px;
+}
+.block_navigation .block_tree .active_tree_node > a {
+    color: rgb(var(--color_primary));
+}
+.block_navigation .block_tree .type_activity > p.tree_item.branch.hasicon.active_tree_node {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin: 0;
+}
+.block_navigation .block_tree .type_activity > p.tree_item.active_tree_node img {
+    top: 10px;
+}
+.block_settings .content {
+    padding: 5px 10px;
+}
+.block_settings .content hr {
+    display: none;
+}
+.block_settings .block_tree {
+    font-size: 16px;
+}
+.block_settings .block_tree > li {
+    padding: 0;
+    padding-right: 15px;
+    padding-left: 10px;
+}
+.block_settings .block_tree li > p.tree_item {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin: 0;
+}
+.block_settings .block_tree li.item_with_icon > p img {
+    top: 10px;
+}
+.block_settings .block_tree .tree_item > a {
+    color: rgb(var(--color_white_171));
+}
+.block_settings .block_tree .tree_item > a:hover,
+.block_settings .block_tree .tree_item > a:focus {
+    color: rgb(var(--color_primary));
+}
+.block_settings .block_tree .tree_item.branch {
+    background-position: 0 10px;
+}
+.block_settings .block_tree .active_tree_node > a {
+    color: rgb(var(--color_primary));
+}
+.block_settings .footer {
+    padding: 10px 0 0;
+    margin-bottom: 0;
+}
+.block_settings .footer .simplesearchform .input-group input.form-control {
+    border-radius: 5px;
+}
+.block_settings .footer .simplesearchform .input-group .input-group-append .btn {
+    border: 0;
+}
+.block_settings .footer .adminsearchform div > input[type="submit"] {
+    margin-left: 0;
+}
+.block_settings #adminsearchquery {
+    max-width: none;
+    height: 40px;
+    box-sizing: border-box;
+}
+.block_navigation .block_tree .tree_item.branch {
+    background-position: 0 10px;
+}
+.block_search_forums #searchform_search {
+    width: 100%;
+}
+.block-region .block .card-body {
+    padding: 0 !important;
+    border: 1px solid rgb(var(--color_names));
+    .card-text .block_tree_box {
+        padding: 0 !important;
+    }
+    .card-title {
+        font-size: 18px;
+        padding: 10px 15px;
+        font-weight: normal;
+        text-transform: initial;
+        display: block !important;
+    }
+    .card-text {
+        padding: 20px;
+        padding-top: 0;
+    }
+    .card-text + .card-text {
+        padding: 0;
+    }
+    .card-text .footer {
+        margin-top: 10px;
+    }
+    .dashboard-card {
+        border: 1px solid rgb(var(--color_names)) !important;
+    }
+    .course-info-container {
+        padding: 10px !important;
+        border: 0;
+    }
+    .course-info-container .text-muted {
+        margin-bottom: 10px;
+    }
+    .course-info-container + .d-flex {
+        padding: 10px;
+    }
+    .course-info-container + .d-flex .card-footer {
+        padding: 0;
+    }
+    .card-text .badges {
+        text-align: center;
+        padding-left: 0;
+    }
+    .card-text .badges li {
+        width: 100%;
+        margin-right: 10px;
+    }
+}
+.block-region .block.block_news_items .card-body .card-text .unlist .post {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.block-region .block.block_private_files .card-body .card-text .box {
+    padding: 0;
+}
+.block-region .block.block_recentlyaccesseditems .card-body .card-text .block-recentlyaccesseditems .card-deck .card .card-body {
+    border: 0;
+}
+.block-region .block.block_online_users .card-body .card-text .info {
+    margin-bottom: 10px;
+}
+.block-region .block .card-body .card-text .block-timeline .tab-content
+.tab-pane .list-group-flush .list-group-item h6.event-action {
+    padding-left: 0;
+}
+.block .card-body .block-controls .menubar .dropdown a.dropdown-toggle {
+    background: none;
+}
+.block .card-body .block-controls .menubar .dropdown .dropdown-menu a.dropdown-toggle {
+    background: none;
+}
+.block .card-body .block-controls .menubar .dropdown .dropdown-menu a.dropdown-toggle i {
+    color: #fff;
+    margin: 0 0 0 5px;
+}
+.block .calendar_filters ul li a span {
+    padding: 0 2px;
+    margin: 0;
+    display: inline-block;
+}
+.block .calendar_filters ul li a i.icon {
+    margin: 0;
+}
+.block .calendar_filters ul li a span.eventname {
+    margin: 0;
+}
+.block .block-controls .menubar .dropdown .dropdown-toggle i {
+    margin: 0 0 0 5px;
+}
+.block_myoverview .content-centred .nav.nav-pills .nav-item .nav-link.active {
+    background-color: rgb(var(--color_primary));
+}
+.block-myoverview .list-group .list-group-item a.btn {
+    color: rgb(var(--color_white_206)) !important;
+}
+.block-myoverview .dropdown-menu .dropdown-item:hover,
+.block-myoverview .dropdown-menu .dropdown-item:focus,
+.block-myoverview .dropdown-menu .dropdown-item.active {
+    color: #fff;
+    background: rgb(var(--color_primary));
+}
+.block-myoverview .dropdown-menu .dropdown-item i.icon {
+    color: #fff;
+}
+.block-region .block.block_myoverview .card-body .card-text .block-myoverview > hr {
+    display: none;
+}
+.drawer .block-region .block.block_myoverview .card-body .card-text .block-myoverview > hr + div {
+    display: block !important;
+}
+.block-region .block.block_myoverview .card-body .card-text .block-myoverview > hr + div > div {
+    margin-bottom: 10px;
+    display: flex;
+}
+.block-recentlyaccessedcourses .card .card-body.course-info-container {
+    padding: 1.25rem;
+}
+.block_recentlyaccessedcourses .paging-bar-container {
+    margin-top: 0;
+}
+.block_recentlyaccessedcourses .paging-bar-container .pagination .page-item .page-link {
+    color: rgb(var(--color_primary));
+}
+#block-region-side-pre .block_globalsearch .searchform input[type="text"] {
+    display: inline-block;
+}
+#block-region-side-pre .block-starredcourses .card-body {
+    padding: 10px !important;
+}
+.block .card-body .content .block-myoverview .searchbar .searchinput {
+    height: 44px !important;
+}
+.block .card-body .content .block-myoverview .searchbar .input-group-append .input-group-text {
+    height: 100%;
+    color: #fff;
+    border: 0;
+    padding: 0 10px;
+    background: rgb(var(--color_primary));
+}
+.block .card-body .content .block-myoverview .searchbar .searchinput:focus + .input-group-append .input-group-text {
+    color: #fff;
+    background: rgb(var(--color_primary));
+}
+.block .card-body .content .block-myoverview .searchbar .input-group-append .input-group-text button {
+    height: 100%;
+    color: #fff;
+    margin: 0;
+    background: none;
+}
+#page-my-index .block .block-cards .text-primary,
+.header-main .message-drawer .text-primary {
+    color: inherit !important;
+}
+.block-region .block .card-body .block-myoverview .card-title {
+    padding: 0;
+    background: none;
+    border: 0;
+    margin-right: 0 !important;
+    a {
+        font-size: 16px;
+        color: rgb(var(--color_primary));
+    }
+}
+.jsenabled .block_navigation .block_tree .tree_item.emptybranch {
+    background-position: 0 10px;
+}
+#region-main {
+    &.has-blocks .dashboard-card-deck .dashboard-card .card-body .card-title {
+        font-size: 16px;
+        width: 100%;
+        border: 0;
+        padding: 10px;
+        margin-right: 0;
+        i.icon {
+            color: inherit;
+        }
+    }
+    .block-myoverview .dashboard-card-deck .dashboard-card .card-body {
+        padding: 10px;
+        .card-title {
+            padding: 0;
+        }
+    }
+}
+.pagelayout-frontpage #region-main {
+    margin: 0 20px;
+}
+@media (min-width: 576px) {
+    .block-region .block.block_myoverview .card-body .card-text .block-myoverview > hr + div > div .dropdown .btn {
+        font-size: 13px;
+    }
+}
+@media (max-width: 575px) {
+    .pagelayout-mycourses .block-region .block.block_myoverview .card-body .card-text .block-myoverview > hr + div {
+        display: block !important;
+    }
+    .pagelayout-mycourses .block-region .block.block_myoverview .card-body .card-text .block-myoverview > hr + div > div {
+        display: inline-block;
+        vertical-align: top;
+    }
+}
