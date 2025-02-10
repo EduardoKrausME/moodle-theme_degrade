@@ -32,8 +32,8 @@ foreach ($fontslist as $font) {
                          <a href='https://fonts.google.com/specimen/{$font}'
                             target='_blank' style='font-family:\"{$font}\"'>{$font}</a>
                          - \"Lorem ipsum dolor sit amet.
-                            <strong style='font-family:\"{$font}\"'>strong</strong>  
-                            <em style='font-family:\"{$font}\"'>em</em> 
+                            <strong style='font-family:\"{$font}\"'>strong</strong>
+                            <em style='font-family:\"{$font}\"'>em</em>
                             <strong><em style='font-family:\"{$font}\"'>strong/em</em></strong>\"</div>";
 }
 

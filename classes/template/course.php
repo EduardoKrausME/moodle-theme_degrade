@@ -53,7 +53,6 @@ class course {
             "count-completion" => 0,
         ];
 
-
         $courseformat = course_get_format($courseid);
         $modinfo = $courseformat->get_modinfo();
         $completioninfo = new \completion_info(get_course($courseid));
@@ -114,7 +113,8 @@ class course {
                                     $class[] = "completioninfo-completion";
                                     $result["count-completion"]++;
 
-                                    $iscompletion = $completioninfo->internal_get_state($cminfo, $USER->id, null) == COMPLETION_COMPLETE;
+                                    $state = $completioninfo->internal_get_state($cminfo, $USER->id, null);
+                                    $iscompletion = $state == COMPLETION_COMPLETE;
                                     if ($iscompletion) {
                                         $result["all-completion"]++;
                                         if ($isautomatic) {
@@ -154,10 +154,6 @@ class course {
         } else {
             $result["percentage"] = intval(($result["all-completion"] / $result["count-completion"]) * 100);
         }
-
-        //echo "<pre>";
-        //print_r($result);
-        //echo "</pre>";die;
 
         return $OUTPUT->render_from_template("theme_degrade/includes/courseindex", $result);
     }
@@ -247,7 +243,7 @@ class course {
                AND filearea  = 'file'
                AND itemid    = :itemid
                AND filesize  > 10";
-        $file = $DB->get_record_sql($sql, ["itemid"=>$data->id]);
+        $file = $DB->get_record_sql($sql, ["itemid" => $data->id]);
         if ($file) {
             return moodle_url::make_pluginfile_url($file->contextid, "customfield_picture", "file",
                 $file->itemid, "/", $file->filename)->out(true);

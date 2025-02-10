@@ -109,8 +109,9 @@ class course_renderer extends \core_course_renderer {
                 "instructor" => course_renderer_util::get_teachers($course),
                 "is_enrolled" => $hascoursecreate || course_renderer_util::is_enrolled($course),
                 "access_course" => get_string("access_course", "theme_degrade"),
-                "matricular" =>
-                    $priceval ? get_string("matricular", "theme_degrade") : get_string("access_course", "theme_degrade"),
+                "matricular" => $priceval ?
+                    get_string("matricular", "theme_degrade") :
+                    get_string("access_course", "theme_degrade"),
                 "freename" => $freename,
                 "priceval" => $priceval,
             ];

@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-// Category
+// Category.
 $category = $DB->get_record("customfield_category",
     ["id" => intval(@$CFG->theme_customfield_picture)]);
 if (!$category) {

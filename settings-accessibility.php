@@ -24,7 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$page = new admin_settingpage("theme_degrade_accessibility", get_string("settings_accessibility_heading", "theme_degrade"));
+$page = new admin_settingpage("theme_degrade_accessibility",
+    get_string("settings_accessibility_heading", "theme_degrade"));
 
 $page->add(new admin_setting_configcheckbox("theme_degrade/enable_accessibility",
     get_string("settings_accessibility", "theme_degrade"),

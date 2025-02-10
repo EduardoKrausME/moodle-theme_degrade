@@ -110,7 +110,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $content = "
                 <li class='nav-item dropdown my-auto'>
                     <a href='{$url}'
-                       class='dropdown-item dropdown-toggle nav-link aaaa'
+                       class='dropdown-item dropdown-toggle nav-link'
                        role='button'
                        id='{$menuid}{$submenucount}'
                        aria-haspopup='true'
