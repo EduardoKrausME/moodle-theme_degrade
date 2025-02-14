@@ -1337,8 +1337,8 @@ require_capability('moodle/site:config', context_system::instance());
             <input name="{%=key%}" type="text" {% if (typeof value !== 'undefined' && value != false) { %}
             value="{%=value%}" {% } %} class="form-control"/>
             <span class="input-group-append">
-			<span class="input-group-text colorpicker-input-addon"><i></i></span>
-		  </span>
+            <span class="input-group-text colorpicker-input-addon"><i></i></span>
+          </span>
         </div>
     </div>
 </script>
@@ -1525,15 +1525,15 @@ require_capability('moodle/site:config', context_system::instance());
                     </button>
 
                     <button class="btn btn-primary btn-icon save-btn" title="Save changes">
-				<span class="loading d-none">
-				<i class="la la-save"></i>
-				  <span class="spinner-border spinner-border-sm align-middle" role="status" aria-hidden="true">
-				  </span>
-				  <span>Saving </span> ... </span>
+                <span class="loading d-none">
+                <i class="la la-save"></i>
+                  <span class="spinner-border spinner-border-sm align-middle" role="status" aria-hidden="true">
+                  </span>
+                  <span>Saving </span> ... </span>
 
                         <span class="button-text">
-				  <i class="la la-save"></i> <span>Save changes</span>
-				</span>
+                  <i class="la la-save"></i> <span>Save changes</span>
+                </span>
                     </button>
                 </div>
             </div>
@@ -1689,7 +1689,7 @@ Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist
 
 <!-- autocomplete plugin used by autocomplete input-->
 <!--
-<script src="libs/autocomplete/jquery.autocomplete.js"></script>	
+<script src="libs/autocomplete/jquery.autocomplete.js"></script>
 -->
 <script>
     deleteUrl = "<?php echo "save.php?action=delete&chave={$chave}&lang={$lang}"; ?>";
