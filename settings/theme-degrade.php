@@ -78,11 +78,11 @@ if (isset($_SERVER["REQUEST_URI"]) && strpos($_SERVER["REQUEST_URI"], "admin/upg
     $htmlselect = "";
 }
 foreach ($choices as $choice => $lang) {
-    $arraycolors=[];
-    foreach ($colors as $name => $color ){
-        $arraycolors[]=[
-            "name"=>$name,
-            "color"=>$color,
+    $arraycolors = [];
+    foreach ($colors as $name => $color) {
+        $arraycolors[] = [
+            "name" => $name,
+            "color" => $color,
         ];
     }
     $htmlselect .= $OUTPUT->render_from_template("theme_degrade/settings/theme-degrade", [
