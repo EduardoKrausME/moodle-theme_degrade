@@ -8,6 +8,7 @@
     margin: 0;
     li {
         display: inline;
+        max-width: 100%;
         a, span {
             text-align: center;
             padding: 4px 5px 4px 0;
@@ -19,13 +20,22 @@
             display: flex;
             align-items: center;
             white-space: nowrap;
+            em {
+                font-style: normal !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: block;
+            }
             @media (max-width: 767px) {
                 font-size: 18px;
             }
             &:before {
                 content: "";
                 width: 11px;
+                min-width: 11px;
                 height: 18px;
+                min-height: 18px;
                 background-image: url([[pix:theme_degrade|material/crumbs-divisor]]);
                 background-size: cover;
                 margin-right: 5px;

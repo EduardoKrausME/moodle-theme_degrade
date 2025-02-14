@@ -69,11 +69,17 @@
             {{#has_action}}
                 <li class="crumbs-item{{#is_hidden}} dimmed_text{{/is_hidden}}">
                     <a href="{{{action}}}"
-                       {{#is_last}}aria-current="page"{{/is_last}} {{#get_title}}title="{{get_title}}"{{/get_title}}>{{{get_content}}}</a>
+                       {{#is_last}}aria-current="page"{{/is_last}} {{#get_title}}title="{{get_title}}"{{/get_title}}>
+                        <em>{{{get_content}}}</em>
+                    </a>
                 </li>
             {{/has_action}}
             {{^has_action}}
-                <li class="crumbs-item{{#is_hidden}} dimmed_text{{/is_hidden}}"><span>{{{text}}}</span></li>
+                <li class="crumbs-item{{#is_hidden}} dimmed_text{{/is_hidden}}">
+                    <span>
+                        <em>{{{text}}}</em>
+                    </span>
+                </li>
             {{/has_action}}
         {{/get_items}}
     </ol>
