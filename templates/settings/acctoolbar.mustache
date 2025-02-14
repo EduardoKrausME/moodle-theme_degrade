@@ -1,0 +1,120 @@
+<button title="{{#str}}acctoolbar_btn_open, theme_degrade{{/str}}" tabindex="1"
+        id="mic-access-tool-general-button"
+        class="mic-access-tool-general-button">
+    <div>
+        <span>CTRL+F2</span>
+        {{#pix}}acctoolbar/icon, theme_degrade{{/pix}}
+    </div>
+</button>
+<div id="mic-access-tool-box" class="mic-access-tool-box">
+    <div class="mic-access-tool-box-header">
+        {{#str}}acctoolbar_toolbar, theme_degrade{{/str}}
+        <button title="✕"
+                id="mic-access-tool-box-close-button">✕</button>
+    </div>
+    <div class="mic-buttons-block">
+        <button title="{{#str}}acctoolbar_keyboard_root, theme_degrade{{/str}}"
+                id="mic-toolbox-disable-buttons-keyboard">
+            <span>{{#str}}acctoolbar_keyboard_root, theme_degrade{{/str}}</span>
+            {{#pix}}acctoolbar/keyboard_root, theme_degrade{{/pix}}
+        </button>
+        <button title="{{#str}}acctoolbar_disable_animattions, theme_degrade{{/str}}"
+                id="mic-toolbox-disable-buttons-animations">
+            <span>{{#str}}acctoolbar_disable_animattions, theme_degrade{{/str}}</span>
+            {{#pix}}acctoolbar/disable_animattions, theme_degrade{{/pix}}
+        </button>
+        <button title="{{#str}}acctoolbar_dyslexic, theme_degrade{{/str}}"
+                id="mic-dyslexic-buttons">
+            <span>{{#str}}acctoolbar_dyslexic, theme_degrade{{/str}}</span>
+            {{#pix}}acctoolbar/dyslexic, theme_degrade{{/pix}}
+        </button>
+    </div>
+    <div class="mic-buttons-block">
+        <h3>{{#str}}acctoolbar_contrast_block_header, theme_degrade{{/str}}</h3>
+        <div class="d-flex">
+            <button title="{{#str}}acctoolbar_btn_monochrome, theme_degrade{{/str}}"
+                    id="mic-toolbox-contrast-monochrome">
+                {{#pix}}acctoolbar/btn_monochrome, theme_degrade{{/pix}}
+                <span>{{#str}}acctoolbar_btn_monochrome, theme_degrade{{/str}}</span>
+            </button>
+            <button title="{{#str}}acctoolbar_btn_bright, theme_degrade{{/str}}"
+                    id="mic-toolbox-contrast-soft">
+                {{#pix}}acctoolbar/btn_bright, theme_degrade{{/pix}}
+                <span>{{#str}}acctoolbar_btn_bright, theme_degrade{{/str}}</span>
+            </button>
+            <button title="{{#str}}acctoolbar_btn_invert, theme_degrade{{/str}}"
+                    id="mic-toolbox-contrast-hard">
+                {{#pix}}acctoolbar/btn_invert, theme_degrade{{/pix}}
+                <span>{{#str}}acctoolbar_btn_invert, theme_degrade{{/str}}</span>
+            </button>
+        </div>
+    </div>
+    <div class="mic-buttons-block">
+        <h3>{{#str}}acctoolbar_text_block_header, theme_degrade{{/str}}</h3>
+        <div class="d-flex">
+            <button title="{{#str}}acctoolbar_btn_font_up, theme_degrade{{/str}}"
+                    id="mic-toolbox-fonts-up">
+                {{#pix}}acctoolbar/btn_font_up, theme_degrade{{/pix}}
+                <span>{{#str}}acctoolbar_btn_font_up, theme_degrade{{/str}}</span>
+                <span id="mic-toolbox-fonts-up-enabled"></span>
+            </button>
+            <button title="{{#str}}acctoolbar_btn_font_down, theme_degrade{{/str}}"
+                    id="mic-toolbox-fonts-down">
+                {{#pix}}acctoolbar/btn_font_down, theme_degrade{{/pix}}
+                <span>{{#str}}acctoolbar_btn_font_down, theme_degrade{{/str}}</span>
+            </button>
+            <button title="{{#str}}acctoolbar_btn_font_readable, theme_degrade{{/str}}"
+                    id="mic-toolbox-fonts-simple">
+                {{#pix}}acctoolbar/btn_font_readable, theme_degrade{{/pix}}
+                <span>{{#str}}acctoolbar_btn_font_readable, theme_degrade{{/str}}</span>
+            </button>
+        </div>
+    </div>
+    <div class="mic-buttons-block">
+        <h3>{{#str}}acctoolbar_content_block_header, theme_degrade{{/str}}</h3>
+        <div class="d-flex">
+            <button title="{{#str}}acctoolbar_btn_underline_links, theme_degrade{{/str}}"
+                    id="mic-toolbox-content-links">
+                {{#pix}}acctoolbar/btn_underline_links, theme_degrade{{/pix}}
+                <span>{{#str}}acctoolbar_btn_underline_links, theme_degrade{{/str}}</span>
+            </button>
+            <button title="{{#str}}acctoolbar_btn_underline_headers, theme_degrade{{/str}}"
+                    id="mic-toolbox-content-headers">
+                {{#pix}}acctoolbar/btn_underline_headers, theme_degrade{{/pix}}
+                <span>{{#str}}acctoolbar_btn_underline_headers, theme_degrade{{/str}}</span>
+            </button>
+            <button title="{{#str}}acctoolbar_btn_images_titles, theme_degrade{{/str}}"
+                    id="mic-toolbox-content-images">
+                {{#pix}}acctoolbar/btn_images_titles, theme_degrade{{/pix}}
+                <span>{{#str}}acctoolbar_btn_images_titles, theme_degrade{{/str}}</span>
+            </button>
+        </div>
+    </div>
+    <div class="mic-buttons-block">
+        <h3>{{#str}}acctoolbar_zoom_block_header, theme_degrade{{/str}}</h3>
+        <div class="d-flex">
+            <button title="{{#str}}acctoolbar_btn_cursor_white, theme_degrade{{/str}}"
+                    id="mic-toolbox-cursor-big-white">
+                {{#pix}}acctoolbar/btn_cursor_white, theme_degrade{{/pix}}
+                <span>{{#str}}acctoolbar_btn_cursor_white, theme_degrade{{/str}}</span>
+            </button>
+            <button title="{{#str}}acctoolbar_btn_cursor_black, theme_degrade{{/str}}"
+                    id="mic-toolbox-cursor-big-black">
+                {{#pix}}acctoolbar/btn_cursor_black, theme_degrade{{/pix}}
+                <span>{{#str}}acctoolbar_btn_cursor_black, theme_degrade{{/str}}</span>
+            </button>
+            <button title="{{#str}}acctoolbar_btn_zoom_in, theme_degrade{{/str}}"
+                    id="mic-toolbox-zoom-up">
+                {{#pix}}acctoolbar/btn_zoom_in, theme_degrade{{/pix}}
+                <span>{{#str}}acctoolbar_btn_zoom_in, theme_degrade{{/str}}</span>
+            </button>
+        </div>
+    </div>
+    <div class="mic-buttons-block">
+        <button title="{{#str}}acctoolbar_reset_all_settings, theme_degrade{{/str}}"
+                id="mic-toolbox-disable-buttons-reset-all">
+            <span>{{#str}}acctoolbar_reset_all_settings, theme_degrade{{/str}}</span>
+            {{#pix}}acctoolbar/reset_all_settings, theme_degrade{{/pix}}
+        </button>
+    </div>
+</div>
