@@ -383,7 +383,9 @@ class htmldata {
 
                 $courseshtml .= "<fieldset>";
                 $courseshtml .= "<legend class='category'>{$category->name}</legend>";
+                $courseshtml .= "<div class='row vvveb_home_automatically_category'>";
                 $courseshtml .= $OUTPUT->render_from_template("theme_degrade/vvveb/course", ["courses" => $datasave]);
+                $courseshtml .= "</div>";
                 $courseshtml .= "</fieldset>";
             }
 
@@ -414,7 +416,7 @@ class htmldata {
 
         $text = preg_replace('/<h\d.*?<\/h\d>/', '', $text);
         $text = strip_tags($text);
-        return self::truncate_text($text, 300);
+        return self::truncate_text($text, 800);
     }
 
     /**
@@ -425,33 +427,10 @@ class htmldata {
      * @return bool
      */
     private static function enrolled($courseid) {
-        global $DB, $USER;
+        global $USER;
 
-        // Evita erro.
-        $context = \context_course::instance($courseid, IGNORE_MISSING);
-        if ($context == null) {
-            return false;
-        }
-
-        $enrol = $DB->get_record("enrol",
-            ["courseid" => $courseid, "enrol" => "manual"], "*", IGNORE_MULTIPLE);
-        if ($enrol == null) {
-            return false;
-        }
-
-        $testroleassignments = $DB->get_record("role_assignments",
-            ["roleid" => 5, "contextid" => $context->id, "userid" => $USER->id], "*", IGNORE_MULTIPLE);
-        if ($testroleassignments == null) {
-            return false;
-        }
-
-        $userenrolments = $DB->get_record("user_enrolments",
-            ["enrolid" => $enrol->id, "userid" => $USER->id], "*", IGNORE_MULTIPLE);
-        if ($userenrolments != null) {
-            return !$userenrolments->status;
-        } else {
-            return false;
-        }
+        $context = \context_course::instance($courseid);
+        return is_enrolled($context, $USER, '', true);
     }
 
     /**
