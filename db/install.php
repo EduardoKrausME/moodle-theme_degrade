@@ -39,8 +39,6 @@ function xmldb_theme_degrade_install() {
     set_config("theme_color__color_primary", "#2B4E84", "theme_degrade");
     set_config("theme_color__color_secondary", "#3E65A0", "theme_degrade");
     set_config("theme_color__color_buttons", "#183054", "theme_degrade");
-    set_config("theme_color__color_names", "#C0CCDC", "theme_degrade");
-    set_config("theme_color__color_titles", "#E8F0FB", "theme_degrade");
 
     set_config("frontpage_about_title", "", "theme_degrade");
     set_config("frontpage_avaliablecourses_text", "", "theme_degrade");

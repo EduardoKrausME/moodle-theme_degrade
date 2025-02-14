@@ -38,14 +38,14 @@ function theme_degrade_page_init(moodle_page $page) {
 }
 
 /**
- * Function theme_degrade_process_color_hex
+ * Function theme_degrade_color
  *
  * @param $colorname
  *
  * @return string
  * @throws coding_exception
  */
-function theme_degrade_process_color_hex($colorname) {
+function theme_degrade_color($colorname) {
     $color = theme_degrade_get_setting($colorname);
 
     $hex = [hexdec(substr($color, 1, 2)), hexdec(substr($color, 3, 2)), hexdec(substr($color, 5, 2))];
@@ -591,6 +591,8 @@ function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $for
  * @throws dml_exception
  */
 function theme_degrade_process_css($css, $theme) {
+    global $CFG;
+
     $cache = \cache::make("theme_degrade", "css_cache");
     $cachekey = "theme_degrade_process_css";
     if ($cache->has($cachekey)) {
@@ -603,153 +605,62 @@ function theme_degrade_process_css($css, $theme) {
 
     // Local css.
     if (@file_exists(__DIR__ . "/style/degrade.css")) {
-        $customcss = file_get_contents(__DIR__ . "/style/degrade.css");
-
-        $css .= "{$customcss}";
+        $css .= file_get_contents(__DIR__ . "/style/degrade.css");
     }
-
-    // Color list.
-    $css =
-        ":root {\n" .
-        "    --color_primary:   " . theme_degrade_process_color_hex("theme_color__color_primary") . "   !important;\n" .
-        "    --color_secondary: " . theme_degrade_process_color_hex("theme_color__color_secondary") . " !important;\n" .
-        "    --color_buttons:   " . theme_degrade_process_color_hex("theme_color__color_buttons") . "   !important;\n" .
-        "    --color_names:     " . theme_degrade_process_color_hex("theme_color__color_names") . "     !important;\n" .
-        "    --color_titles:    " . theme_degrade_process_color_hex("theme_color__color_titles") . "    !important;\n" .
-        "}{$css}";
 
     // Custom CSS.
     $customcss = str_replace("&gt;", ">", theme_degrade_get_setting("customcss"));
-    $css .= "{$customcss}";
+    $css .= $customcss;
 
-    // Color on roll page.
-    global $CFG;
-    if ($CFG->theme != "boost_training") {
-        $topscrollbackgroundcolor = theme_degrade_get_setting("top_scroll_background_color");
-        $topscrolltextcolor = theme_degrade_get_setting("top_scroll_text_color");
-
-        $css .= "
-            html:not([data-bs-theme=dark]) #header.fixed-top .header-menubar .navbar-nav .simplesearchform .btn-open,
-            html:not([data-bs-theme=dark]) #header.fixed-top  .popover-region .popover-region-toggle i.icon,
-            html:not([data-bs-theme=dark]) #header.fixed-top .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
-            html:not([data-bs-theme=dark]) #header.fixed-top .header-menubar .navbar-nav .editmode-switch-form .input-group label,
-            html:not([data-bs-theme=dark]) #header.fixed-top .usermenu .moodle-actionmenu a.dropdown-toggle,
-            html:not([data-bs-theme=dark]) #header.fixed-top .header-logo a.navbar-brand img,
-            html:not([data-bs-theme=dark]) #header.fixed-top .header-logo a.navbar-brand span,
-            html:not([data-bs-theme=dark]) #header.fixed-top .header-menubar .primary-navigation ul.navbar-nav > li > a,
-            html:not([data-bs-theme=dark]) #header .popover-region .popover-region-toggle i.icon,
-
-            html:not([data-bs-theme=dark]) .navbar-light.fixed-top .navbar-nav .show>.nav-link,
-            html:not([data-bs-theme=dark]) .navbar-light.fixed-top .navbar-nav .active>.nav-link,
-            html:not([data-bs-theme=dark]) .navbar-light.fixed-top .navbar-nav .nav-link.show,
-            html:not([data-bs-theme=dark]) .navbar-light.fixed-top .navbar-nav .nav-link.active,
-            html:not([data-bs-theme=dark]) .header-menubar .navbar-nav .editmode-switch-form .input-group label,
-            html:not([data-bs-theme=dark]) .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle{
-                color: {$topscrolltextcolor} !important;
-            }
-            html:not([data-bs-theme=dark]) .header-menubar #usernavigation .kraus-layout-dark svg path{
-                fill: {$topscrolltextcolor} !important;
-            }
-            #header.fixed-top {
-                background: {$topscrollbackgroundcolor} !important;
-            }
-
-            #header.ever-fixed-top .header-menubar .navbar-nav .simplesearchform .btn-open,
-            #header.ever-fixed-top  .popover-region .popover-region-toggle i.icon,
-            #header.ever-fixed-top .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
-            #header.ever-fixed-top .header-menubar .navbar-nav .editmode-switch-form .input-group label,
-            #header.ever-fixed-top .usermenu .moodle-actionmenu a.dropdown-toggle,
-            .navbar-light.ever-fixed-top .navbar-nav .show>.nav-link,
-            .navbar-light.ever-fixed-top .navbar-nav .active>.nav-link,
-            .navbar-light.ever-fixed-top .navbar-nav .nav-link.show,
-            .navbar-light.ever-fixed-top .navbar-nav .nav-link.active,
-            #header.ever-fixed-top .header-logo a.navbar-brand img,
-            #header.ever-fixed-top .header-logo a.navbar-brand span,
-            #header.ever-fixed-top .header-menubar .primary-navigation ul.navbar-nav > li > a,
-            .header-menubar .navbar-toggler .navbar-toggler-icon:before {
-                color: {$topscrolltextcolor} !important;
-            }
-            #header.ever-fixed-top .custom-switch .custom-control-label:after{
-                background: {$topscrolltextcolor} !important;
-            }
-            #header.ever-fixed-top {
-                background: {$topscrollbackgroundcolor} !important;
-            }";
-    }
+    // Color list.
+    $backgroundcolor = theme_degrade_get_setting("background_color", false);
+    $primary = theme_degrade_color("theme_color__color_primary");
+    $secondary = theme_degrade_color("theme_color__color_secondary");
+    $buttons = theme_degrade_color("theme_color__color_buttons");
 
     // Fonts.
     $fontfamilytext = theme_degrade_get_setting("fontfamily");
     $fontfamilytext = isset($fontfamilytext[3]) ? "{$fontfamilytext}," : "";
-    $fontfamilytext = "body,* {font-family:{$fontfamilytext} Arial, Helvetica, sans-serif}";
 
     $fontfamilytitle = theme_degrade_get_setting("fontfamily_title");
     $fontfamilytitle = isset($fontfamilytitle[3]) ? "{$fontfamilytitle}," : "";
-    $fontfamilytitle = "h1,h2,h3,h4,h5,h6 {font-family:{$fontfamilytitle} Arial, Helvetica, sans-serif}";
 
     $fontfamilysitename = theme_degrade_get_setting("fontfamily_sitename");
     $fontfamilysitename = isset($fontfamilysitename[3]) ? "{$fontfamilysitename}," : "";
-    $fontfamilysitename = ".header-logo a.navbar-brand span {font-family:{$fontfamilysitename} Arial, Helvetica, sans-serif}";
 
     $fontfamilymenus = theme_degrade_get_setting("fontfamily_menus");
     $fontfamilymenus = isset($fontfamilymenus[3]) ? "{$fontfamilymenus}," : "";
 
-    $backgroundcolor = theme_degrade_get_setting("background_color", false);
     $textcolor = theme_degrade_get_setting("background_text_color", false);
-    $themecss = "
-            .header-menubar .primary-navigation ul.navbar-nav li a,
-            .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
-            .header-menubar .navbar-nav .editmode-switch-form .input-group label,
-            .usermenu .moodle-actionmenu a.dropdown-toggle,
-            .navbar-light .navbar-nav .show>.nav-link,
-            .navbar-light .navbar-nav .active>.nav-link,
-            .navbar-light .navbar-nav .nav-link.show,
-            .navbar-light .navbar-nav .nav-link.active,
-            .header-logo a.navbar-brand img {
-                font-family : {$fontfamilymenus} Arial, Helvetica, sans-serif;
-            }
+    $backgroundprofileurl = theme_degrade_get_setting_image("background_profile_image");
 
-            [data-bs-theme=light] .header-menubar .primary-navigation ul.navbar-nav li a,
-            [data-bs-theme=light] .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
-            [data-bs-theme=light] .header-menubar .navbar-nav .editmode-switch-form .input-group label,
-            [data-bs-theme=light] .usermenu .moodle-actionmenu a.dropdown-toggle,
-            [data-bs-theme=light] .navbar-light .navbar-nav .show>.nav-link,
-            [data-bs-theme=light] .navbar-light .navbar-nav .active>.nav-link,
-            [data-bs-theme=light] .navbar-light .navbar-nav .nav-link.show,
-            [data-bs-theme=light] .navbar-light .navbar-nav .nav-link.active,
-            [data-bs-theme=light] .header-logo a.navbar-brand img,
-            [data-bs-theme=light] #header .popover-region .popover-region-toggle i.icon,
-            .header-menubar .primary-navigation ul.navbar-nav li a{
-                color: {$textcolor} !important;
-            }
-            [data-bs-theme=light] .header-menubar #usernavigation .kraus-layout-dark svg path{
-                fill: {$textcolor};
-            }
+    // Color on roll page.
+    $topscroll = "";
+    if ($CFG->theme != "boost_training" && $CFG->theme != "degrade") {
+        $topscrollbackground = theme_degrade_get_setting("top_scroll_background_color");
+        $topscrolltext = theme_degrade_get_setting("top_scroll_text_color");
 
-            #header,
-            #nav-drawer .list-group-item.active > div,
-            #nav-drawer .list-group-item.active:hover,
-            #footer .footer-main {
-                background: {$backgroundcolor};
-                color: {$textcolor} !important;
-            }
-            #site-news-forum,
-            .frontpage-course-list {
-                /* background: {$backgroundcolor}3d;*/
-            }
-            .frontpage-course-list .btn-primary {
-                background: {$backgroundcolor};
-                color: {$textcolor} !important;
-            }";
-
-    $css .= "{$fontfamilytext}\n{$fontfamilytitle}\n{$fontfamilysitename}\n{$fontfamilymenus}\n{$themecss}";
-
-    $backgroundurl = theme_degrade_get_setting_image("background_profile_image");
-    if ($backgroundurl) {
-        $css .= "
-            .usermenu-modal-userlinks .modal-content .modal-header{
-                background-image: url({$backgroundurl});
-            }";
+        $topscroll = "
+                --topscroll_background: {$topscrollbackground};
+                --topscroll_text:       {$topscrolltext};";
     }
+
+    $css .= "
+        :root{
+            --background_color:    var(--background_color_edit, {$backgroundcolor}) !important;
+            --color_primary:       var(--color_primary_edit,    {$primary})         !important;
+            --color_secondary:     var(--color_secondary_edit,  {$secondary})       !important;
+            --color_buttons:       var(--color_buttons_edit,    {$buttons})         !important;
+
+            --fontfamily_text:     {$fontfamilytext}     Arial, Helvetica, sans-serif;
+            --fontfamily_title:    {$fontfamilytitle}    Arial, Helvetica, sans-serif;
+            --fontfamily_sitename: {$fontfamilysitename} Arial, Helvetica, sans-serif;
+            --fontfamily_menus:    {$fontfamilymenus}    Arial, Helvetica, sans-serif;
+            --text_color:          {$textcolor};
+            --background_profile:  url({$backgroundprofileurl});
+
+            {$topscroll}
+        }";
 
     $cache->set($cachekey, $css);
     return $css;
