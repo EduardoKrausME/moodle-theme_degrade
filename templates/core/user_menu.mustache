@@ -54,15 +54,9 @@
 }}
 <div class="usermenu">
     {{#unauthenticateduser}}
-        <span class="login pl-2 btn btn-primary">
-            {{#guest}}
-                {{#str}} loggedinasguest, core {{/str}}
-                <div class="divider border-left h-75 align-self-center mx-2"></div>
-            {{/guest}}
-            {{#url}}
-                <a href="{{url}}">{{#str}} login, core {{/str}}</a>
-            {{/url}}
-        </span>
+        {{#url}}
+            <a class="login pl-2 btn btn-primary" href="{{url}}">{{#str}} login, core {{/str}}</a>
+        {{/url}}
     {{/unauthenticateduser}}
     {{^unauthenticateduser}}
         <a href="#" id="user-menu-toggle">
