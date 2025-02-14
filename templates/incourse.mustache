@@ -25,7 +25,6 @@
     * bodyattributes - attributes for the body tag as a string of html attributes
     * sidepreblocks - HTML for the blocks
     * hasblocks - true if there are blocks on this page
-    * courseindexopen - true if the nav drawer should be open on page load
     * regionmainsettingsmenu - HTML for the region main settings menu
     * hasregionmainsettingsmenu - There is a region main settings menu on this page.
 
@@ -41,7 +40,6 @@
         "bodyattributes":"",
         "sidepreblocks": "<h2>Blocks html goes here</h2>",
         "hasblocks":true,
-        "courseindexopen": true,
         "navdraweropen": false,
         "blockdraweropen": true,
         "regionmainsettingsmenu": "",
@@ -55,28 +53,28 @@
 {{> core/local/toast/wrapper}}
 <div id="page-wrapper" class="d-print-block position-relative">
 
-{{{output.standard_top_of_body_html}}}
-{{>theme_degrade/includes/header}}
+    {{{output.standard_top_of_body_html}}}
+    {{>theme_degrade/includes/header}}
 
-{{#hasblocks}}
-    {{< theme_boost/drawer}}
-    {{$id}}theme_boost-drawers-blocks{{/id}}
-{{$drawerclasses}}drawer drawer-right{{#blockdraweropen}} show{{/blockdraweropen}}{{/drawerclasses}}
-{{$drawercontent}}
-    <section class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
-        {{{addblockbutton}}}
-        {{{sidepreblocks}}}
-    </section>
-{{/drawercontent}}
-{{$drawerpreferencename}}drawer-open-block{{/drawerpreferencename}}
-{{$forceopen}}{{#forceblockdraweropen}}1{{/forceblockdraweropen}}{{/forceopen}}
-{{$drawerstate}}show-drawer-right{{/drawerstate}}
-{{$tooltipplacement}}left{{/tooltipplacement}}
-{{$closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}
-{{/theme_boost/drawer}}
-{{/hasblocks}}
+    {{#hasblocks}}
+        {{< theme_boost/drawer}}
+            {{$id}}theme_boost-drawers-blocks{{/id}}
+            {{$drawerclasses}}drawer drawer-right{{#blockdraweropen}} show{{/blockdraweropen}}{{/drawerclasses}}
+            {{$drawercontent}}
+                <section class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
+                    {{{addblockbutton}}}
+                    {{{sidepreblocks}}}
+                </section>
+            {{/drawercontent}}
+            {{$drawerpreferencename}}drawer-open-block{{/drawerpreferencename}}
+            {{$forceopen}}{{#forceblockdraweropen}}1{{/forceblockdraweropen}}{{/forceopen}}
+            {{$drawerstate}}show-drawer-right{{/drawerstate}}
+            {{$tooltipplacement}}left{{/tooltipplacement}}
+            {{$closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}
+        {{/theme_boost/drawer}}
+    {{/hasblocks}}
     <div id="page" data-region="mainpage" data-usertour="scroller"
-         class="drawers {{#courseindexopen}}show-drawer-left{{/courseindexopen}} {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container">
+         class="drawers {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container">
         <div id="topofscroll" class="main-inner">
             <div class="drawer-toggles d-flex">
                 {{#hasblocks}}
@@ -113,12 +111,14 @@
 
                         <div class="row">
 
-                            <section class="section-courseindex sidebar-col col-lg-3">
-                                {{{courseindex}}}
-                            </section>
+                            {{#courseindex}}
+                                <section class="section-courseindex sidebar-col col-lg-3">
+                                    {{{courseindex}}}
+                                </section>
+                            {{/courseindex}}
 
                             <section id="region-main"
-                                     class="content-col col-lg-9"
+                                     class="content-col {{#courseindex}}col-lg-9{{/courseindex}} {{^courseindex}}col-lg-12{{/courseindex}}"
                                      aria-label="{{#str}}content{{/str}}">
 
                                 {{#hasregionmainsettingsmenu}}

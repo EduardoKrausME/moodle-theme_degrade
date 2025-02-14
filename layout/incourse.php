@@ -118,6 +118,20 @@ $templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_da
 require_once("{$CFG->dirroot}/theme/degrade/classes/template/footer_data.php");
 $templatedata = array_merge($templatedata, \theme_degrade\template\footer_data::get_data());
 
+if ($PAGE->pagetype == "enrol-index" && file_exists("{$CFG->dirroot}/local/kopere_pay/lib.php")) {
+    global $DB;
+
+    $koperepaydetalhe = $DB->get_record('kopere_pay_detalhe', ['course' => $COURSE->id, 'status' => 'aberto']);
+    if ($koperepaydetalhe) {
+        $enable = \local_kopere_dashboard\util\config::get_key("builder_enable_{$COURSE->id}");
+        if ($enable) {
+            redirect("/local/kopere_pay/view.php?id=13");
+        } else {
+            redirect("/local/kopere_pay/?id={$COURSE->id}");
+        }
+    }
+}
+
 
 if (!$courseupdate && strpos($_SERVER["REQUEST_URI"], "/scorm/player.php") > 1) {
     echo $OUTPUT->render_from_template("theme_degrade/incourse_scorm", $templatedata);
