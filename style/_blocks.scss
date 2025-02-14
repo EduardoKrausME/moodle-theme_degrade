@@ -2,7 +2,6 @@
 /*Blocks*/
 .block {
     border: 0;
-    border-color: rgb(var(--color_names));
     border-radius: 0;
     box-shadow: none;
     padding: 0;
@@ -25,7 +24,6 @@
     padding: 0;
 }
 .block .header {
-    background: rgb(var(--color_titles));
     border: 0;
 }
 .block .maincalendar .header {
@@ -208,7 +206,6 @@
 }
 .block-region .block .card-body {
     padding: 0 !important;
-    border: 1px solid rgb(var(--color_names));
     .card-text .block_tree_box {
         padding: 0 !important;
     }
@@ -228,9 +225,6 @@
     }
     .card-text .footer {
         margin-top: 10px;
-    }
-    .dashboard-card {
-        border: 1px solid rgb(var(--color_names)) !important;
     }
     .course-info-container {
         padding: 10px !important;

@@ -915,6 +915,43 @@
             }
         }
     }
+    
+     #header.fixed-top .header-menubar .navbar-nav .simplesearchform .btn-open,
+     #header.fixed-top  .popover-region .popover-region-toggle i.icon,
+     #header.fixed-top .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
+     #header.fixed-top .header-menubar .navbar-nav .editmode-switch-form .input-group label,
+     #header.fixed-top .usermenu .moodle-actionmenu a.dropdown-toggle,
+     #header.fixed-top .header-logo a.navbar-brand img,
+     #header.fixed-top .header-logo a.navbar-brand span,
+     #header.fixed-top .header-menubar .primary-navigation ul.navbar-nav > li > a,
+     #header .popover-region .popover-region-toggle i.icon,
+    
+     .navbar-light.fixed-top .navbar-nav .show>.nav-link,
+     .navbar-light.fixed-top .navbar-nav .active>.nav-link,
+     .navbar-light.fixed-top .navbar-nav .nav-link.show,
+     .navbar-light.fixed-top .navbar-nav .nav-link.active,
+     .header-menubar .navbar-nav .editmode-switch-form .input-group label,
+     .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle{
+        color: var(--topscroll_text) !important;
+    }
+     .header-menubar #usernavigation .kraus-layout-dark svg path{
+        fill: var(--topscroll_text) !important;
+    }
+    [data-bs-theme=light] .header-menubar .primary-navigation ul.navbar-nav li a,
+    [data-bs-theme=light] .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
+    [data-bs-theme=light] .header-menubar .navbar-nav .editmode-switch-form .input-group label,
+    [data-bs-theme=light] .usermenu .moodle-actionmenu a.dropdown-toggle,
+    [data-bs-theme=light] .navbar-light .navbar-nav .show>.nav-link,
+    [data-bs-theme=light] .navbar-light .navbar-nav .active>.nav-link,
+    [data-bs-theme=light] .navbar-light .navbar-nav .nav-link.show,
+    [data-bs-theme=light] .navbar-light .navbar-nav .nav-link.active,
+    [data-bs-theme=light] .header-logo a.navbar-brand img,
+    [data-bs-theme=light] #header .popover-region .popover-region-toggle i.icon{
+        color: var(--text_color) !important;
+    }
+    [data-bs-theme=light] .header-menubar #usernavigation .kraus-layout-dark svg path{
+        fill: var(--text_color);
+    }
 }
 @media (prefers-color-scheme: dark) {
     [data-bs-theme=auto] {

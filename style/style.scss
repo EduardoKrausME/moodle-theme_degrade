@@ -21,6 +21,9 @@
 body {
     height: auto;
     min-height: 100%;
+    &, * {
+        font-family: var(--fontfamily_text);
+    }
 }
 .aabtn.focus,
 .btn-link.focus,
@@ -100,35 +103,28 @@ body {
 .btn-link:active {
     color: rgb(var(--color_primary));
 }
-h1 {
-    font-weight: normal;
-    font-size: 42px;
+h2, h2, h3, h4, h5, h6 {
     color: rgb(var(--color_primary));
+    font-weight: normal;
+    font-family: var(--fontfamily_title);
+}
+h1 {
+    font-size: 42px;
 }
 h2 {
-    font-weight: normal;
     font-size: 34px;
-    color: rgb(var(--color_primary));
 }
 h3 {
-    font-weight: normal;
     font-size: 26px;
-    color: rgb(var(--color_primary));
 }
 h4 {
-    font-weight: normal;
     font-size: 23px;
-    color: rgb(var(--color_primary));
 }
 h5 {
-    font-weight: normal;
     font-size: 21px;
-    color: rgb(var(--color_primary));
 }
 h6 {
-    font-weight: normal;
     font-size: 18px;
-    color: rgb(var(--color_primary));
 }
 a {
     color: rgb(var(--color_primary));
@@ -629,6 +625,14 @@ body:not(.pagelayout-frontpage) #region-main {
 }
 .icons-collapse-expand .expanded-icon {
     margin: 0 auto;
+}
+.btn.btn-icon.icons-collapse-expand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(var(--color_primary));
+    background-color: rgba(var(--color_primary), .18);
+   
 }
 .form-item {
     margin-bottom: 15px;
@@ -1659,8 +1663,8 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
                     padding: 21px;
                     height: auto;
                     &:hover {
-                        background-color: rgba(var(--color_secondary), .8);
-                        color: #fff;
+                        background-color: rgba(var(--color_primary), .7);
+                        color: #fff !important;
                     }
                     &.active {
                         border-color: rgb(var(--color_primary));
@@ -1668,7 +1672,7 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
                         color: rgb(var(--color_primary));
                         &:hover {
                             background-color: rgba(var(--color_primary), .8);
-                            color: #fff;
+                            color: #fff !important;
                         }
                     }
                 }
@@ -2852,7 +2856,7 @@ button.btn-footer-popover:active {
 }
 #page-header {
     @import "crumbs";
-    
+   
     .menubar .dropdown .dropdown-menu .dropdown-item {
         padding: 0;
         a {
@@ -2915,7 +2919,7 @@ button.btn-footer-popover:active {
             flex-grow: inherit;
         }
     }
-    
+   
     .page-header-headings {
         display: flex;
         align-items: center;
@@ -2972,7 +2976,7 @@ button.btn-footer-popover:active {
                 }
             }
         }
-        
+       
     }
     .messagearea {
         float: none;
@@ -3030,7 +3034,7 @@ button.btn-footer-popover:active {
             color: rgb(var(--color_primary));
         }
     }
-    
+   
 }
 .courseindex {
     .courseindex-section .courseindex-sectioncontent .courseindex-item.pageitem {
@@ -3254,8 +3258,8 @@ a#next-activity-link {
 }
 @media (min-width: 576px) {
     .modal-dialog {
-       // max-width: 800px;
-       // margin: 1.75rem auto;
+        // max-width: 800px;
+        // margin: 1.75rem auto;
     }
 }
 .notloggedin {

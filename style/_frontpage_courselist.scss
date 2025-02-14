@@ -35,6 +35,10 @@
         margin-top: 15px;
         margin-bottom: 50px;
     }
+    .btn-primary {
+        background: var(--background_color);
+        color: var(--text_color) !important;
+    }
 }
 //.course-box {
 //    @media (min-width: 500px) {
