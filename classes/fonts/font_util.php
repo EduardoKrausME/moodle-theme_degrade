@@ -82,6 +82,7 @@ class font_util {
             "family=Noto+Sans:ital,wght@0,100..900;1,100..900",
             "family=Bree+Serif",
             "family=Oswald:wght@200..700",
+            "family=Mulish:ital,wght@0,200..1000;1,200..1000",
         ];
 
         $configfonts = get_config('theme_degrade', "sitefonts");
