@@ -79,6 +79,7 @@ $setting = new admin_setting_configselect('theme_degrade/home_type',
     get_string('content_type_home', 'theme_degrade'),
     $description, 0, $choices);
 $page->add($setting);
+global $PAGE;
 $PAGE->requires->js_call_amd('theme_degrade/settings', 'autosubmit', [$setting->get_id()]);
 
 if (get_config('theme_degrade', 'home_type') != 0) {
