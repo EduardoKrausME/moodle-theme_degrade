@@ -466,6 +466,9 @@ function theme_degrade_coursemodule_standard_elements(&$formwrapper, $mform) {
     if ($formwrapper->get_current()->modulename == "label") {
         return;
     }
+    if ($formwrapper->get_current()->modulename == "learningmap") {
+        return;
+    }
 
     if ($CFG->theme == "degrade") {
         $mform->addElement("header", "theme_degrade_icons",
