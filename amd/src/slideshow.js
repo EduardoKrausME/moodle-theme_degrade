@@ -1,9 +1,9 @@
 define(["jquery"], function($) {
     var slideshow_degrade = {
 
-        slideIndex : 1,
+        slideIndex: 1,
 
-        show       : function() {
+        show: function() {
             slideshow_degrade.showSlides(slideshow_degrade.slideIndex);
 
             setInterval(function() {
@@ -22,10 +22,10 @@ define(["jquery"], function($) {
                 slideshow_degrade.showSlides(slideshow_degrade.slideIndex);
             });
         },
-        plusSlides : function(n) {
+        plusSlides: function(n) {
             slideshow_degrade.showSlides(slideshow_degrade.slideIndex += n);
         },
-        showSlides : function(slideshow_num) {
+        showSlides: function(slideshow_num) {
             var slides_length = $(".slideshow-item").hide().length;
             if (slideshow_num > slides_length) {
                 slideshow_degrade.slideIndex = 1

@@ -1,7 +1,7 @@
 define(["jquery", "theme_degrade/minicolors"], function($, minicolors) {
     var theme_degrade = {
 
-        top_scroll : function() {
+        top_scroll: function() {
             var top_scroll = $("#id_s_theme_degrade_top_scroll");
             top_scroll.change(top_scroll_changue);
             top_scroll.click(top_scroll_changue);
@@ -23,11 +23,11 @@ define(["jquery", "theme_degrade/minicolors"], function($, minicolors) {
             }
         },
 
-        minicolors : function(elementid) {
+        minicolors: function(elementid) {
             $("#" + elementid).minicolors();
         },
 
-        login : function() {
+        login: function() {
             var login_theme = $("#id_s_theme_degrade_login_theme");
 
             login_theme.change(login_changue);
@@ -62,7 +62,7 @@ define(["jquery", "theme_degrade/minicolors"], function($, minicolors) {
             }
         },
 
-        about : function() {
+        about: function() {
             var about_enable = $("#id_s_theme_degrade_frontpage_about_enable");
             about_enable.change(about_changue);
             about_enable.click(about_changue);
@@ -84,7 +84,7 @@ define(["jquery", "theme_degrade/minicolors"], function($, minicolors) {
             }
         },
 
-        autosubmit : function(element_id) {
+        autosubmit: function(element_id) {
             $("#" + element_id).change(function() {
                 $("#adminsettings").submit();
             });

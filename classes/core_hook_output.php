@@ -310,7 +310,8 @@ class core_hook_output {
         if (get_config("theme_degrade", "enable_accessibility")) {
             $PAGE->requires->js_call_amd("theme_degrade/acctoolbar", "init");
         }
-        $vlibras = get_config("theme_degrade", "enable_accessibility") && $CFG->lang == "pt_br";
+
+        $vlibras = get_config("theme_degrade", "enable_vlibras") && $CFG->lang == "pt_br";
         if ($vlibras) {
             echo $OUTPUT->render_from_template("theme_degrade/settings/vlibras", []);
         }

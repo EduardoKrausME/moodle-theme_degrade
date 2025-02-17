@@ -40,10 +40,10 @@ if (is_siteadmin()) {
     require_once(__DIR__ . "/settings/topo.php");
     require_once(__DIR__ . "/settings/home.php");
     require_once(__DIR__ . "/settings/slideshow.php");
-    require_once(__DIR__ . "/settings/mycourses.php");
     if (get_config('theme_degrade', 'home_type') == 0) {
         require_once(__DIR__ . "/settings/about.php");
     }
+    require_once(__DIR__ . "/settings/mycourses.php");
     require_once(__DIR__ . "/settings/footer.php");
     require_once(__DIR__ . "/settings/login.php");
 }
