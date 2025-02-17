@@ -863,8 +863,10 @@ div.dropdown-item:focus-within {
 .header-menubar .usermenu {
     .avatars {
         img {
-            width: 35px;
-            height: 35px;
+            min-width: 35px;
+            min-height: 35px;
+            max-width: 35px;
+            max-height: 35px;
             margin-right: 11px;
         }
     }
