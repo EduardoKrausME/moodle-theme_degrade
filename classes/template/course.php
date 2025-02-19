@@ -50,8 +50,10 @@ class course {
         global $USER, $OUTPUT, $DB, $CFG, $PAGE;
 
         // If the course index is explicitly set and if it should be hidden.
-        if ($PAGE->get_show_course_index() === false) {
-            return false;
+        if (method_exists($PAGE, "get_show_course_index")) {
+            if ($PAGE->get_show_course_index() === false) {
+                return false;
+            }
         }
 
         // Only add course index on non-site course pages.
