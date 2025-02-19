@@ -87,6 +87,12 @@ $string['countlesson'] = '{$a} lesson';
 $string['countlessons'] = '{$a} lessons';
 $string['customcss'] = 'Custom CSS';
 $string['customcss_desc'] = 'Any CSS rules you add to this text area will be reflected on all pages, making it easy to customize this theme.';
+$string['customcss_desc'] = 'Any CSS rules you add to this text area will be reflected on all pages, making it easy to customize this theme.';
+$string['customfield_category_name'] = 'Theme Customization';
+$string['customfield_field_image'] = 'Custom Image';
+$string['customfield_field_image_desc'] = 'Select an image to customize the field. The image will be displayed in the layout and will override the global course settings.';
+$string['customfield_field_name_desc'] = '<p>This field allows you to choose whether to display an image at the top of the course page. When enabled, an image of your choice will be shown prominently, enhancing the visual appeal of the course and providing a more customized experience for users.</p>';
+$string['customfield_field_name'] = 'Show Image at Top of Course';
 $string['customfield_picture_missing'] = '<div class="alert alert-warning">You need to install the <a href="https://moodle.org/plugins/customfield_picture" target="_blank">customfield_picture</a> plugin in order to customize the background image.</div>';
 $string['custommenuitems'] = 'Custom Top Menu Items';
 $string['custommenuitems_desc'] = 'You can create a custom menu alongside the top menus. The root menu should start flush with the edge, and submenus should be preceded by a hyphen (-). The number of hyphens determines the item depth. Thus, items with a single hyphen appear in a submenu below the previous top-level item, and items with two hyphens appear in a submenu below the preceding submenu.
