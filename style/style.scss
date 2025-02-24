@@ -355,26 +355,28 @@ input[type="button"]:active {
     outline: 0;
 }
 input[type="submit"] {
-    color: #fff;
     line-height: 40px;
     padding: 0 18px;
-    border: 0;
     margin-left: 5px;
-    border-radius: 0;
-    background: rgb(var(--color_secondary));
-    box-shadow: none;
     text-transform: uppercase;
-    text-shadow: none;
-}
-input[type="submit"]:hover,
-input[type="submit"]:focus,
-input[type="submit"]:active,
-input[type="submit"]:focus:active,
-input[type="submit"]:active:focus {
-    color: #fff;
-    background: rgb(var(--color_primary));
-    box-shadow: none;
-    outline: 0;
+    &:not(.btn) {
+        color: #fff;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        text-shadow: none;
+        background: rgb(var(--color_primary));
+        &:hover,
+        &:focus,
+        &:active,
+        &:focus:active,
+        &:active:focus {
+            color: #fff;
+            background: rgb(var(--color_secondary));
+            box-shadow: none;
+            outline: 0;
+        }
+    }
 }
 input[type="reset"] {
     color: rgb(var(--color_white_171));
@@ -404,9 +406,9 @@ input[type="reset"][disabled] {
     background: rgba(var(--color_primary), .2);;
     box-shadow: none;
     outline: 0;
-}
-input[type="submit"][disabled]:hover {
-    color: #fff;
+    &:hover {
+        color: #fff;
+    }
 }
 [role="treeitem"][aria-expanded="true"].focus > *:first-child,
 [role="treeitem"][aria-expanded="true"]:focus > *:first-child {
@@ -632,7 +634,6 @@ body:not(.pagelayout-frontpage) #region-main {
     justify-content: center;
     color: rgb(var(--color_primary));
     background-color: rgba(var(--color_primary), .18);
-   
 }
 .form-item {
     margin-bottom: 15px;
@@ -784,10 +785,6 @@ input[type="text"] {
 }
 .mform fieldset.collapsible legend a.fheader {
     margin-left: 0;
-}
-.jsenabled .userselector .collapsibleregion {
-    width: 100%;
-    margin-bottom: 15px;
 }
 .userselector .form-inline .collapsibleregioninner .form-check {
     justify-content: normal;
@@ -966,12 +963,12 @@ input[type="text"] {
     color: #fff;
     background: rgb(var(--color_secondary));
     text-shadow: none;
-}
-.path-admin .buttons input[type="submit"]:hover,
-.path-admin .buttons input[type="submit"]:focus,
-.path-admin .buttons input[type="submit"]:active {
-    color: #fff;
-    background: rgb(var(--color_primary));
+    &:hover,
+    &:focus,
+    &:active {
+        color: #fff;
+        background: rgb(var(--color_primary));
+    }
 }
 .path-admin .buttons input.active[type="submit"],
 .path-admin .buttons input.disabled[type="submit"],
@@ -1844,9 +1841,6 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
     #page-mod-quiz-mod #id_reviewoptionshdr .fitem {
         width: auto;
     }
-    .jsenabled .collapsibleregion {
-        height: auto;
-    }
     .mform .fpassword .unmask {
         margin: 0;
         display: block;
@@ -1888,9 +1882,6 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
     }
 }
 /*Header*/
-.jsenabled .form-group a.visibleifjs {
-    vertical-align: text-bottom;
-}
 @import "header-menubar";
 
 .pagelayout-maintenance {
@@ -1901,15 +1892,6 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
             }
         }
     }
-}
-.jsenabled .header-main .moodle-actionmenu[data-enhance] .toggle-display.textmenu .caret {
-    border-top-color: #fff;
-}
-.jsenabled .header-main .moodle-actionmenu[data-enhance] .toggle-display.textmenu .caret:hover {
-    border-top-color: #fff;
-}
-.jsenabled .header-main .moodle-actionmenu[data-enhance] .toggle-display.textmenu .caret:active {
-    border-top-color: #fff;
 }
 /*Header message app*/
 .message-app .list-group .list-group-item.list-group-item-action:hover {
@@ -2856,7 +2838,7 @@ button.btn-footer-popover:active {
 }
 #page-header {
     @import "crumbs";
-   
+    
     .menubar .dropdown .dropdown-menu .dropdown-item {
         padding: 0;
         a {
@@ -2919,7 +2901,7 @@ button.btn-footer-popover:active {
             flex-grow: inherit;
         }
     }
-   
+    
     .page-header-headings {
         display: flex;
         align-items: center;
@@ -2976,7 +2958,7 @@ button.btn-footer-popover:active {
                 }
             }
         }
-       
+        
     }
     .messagearea {
         float: none;
@@ -3034,7 +3016,7 @@ button.btn-footer-popover:active {
             color: rgb(var(--color_primary));
         }
     }
-   
+    
 }
 .courseindex {
     .courseindex-section .courseindex-sectioncontent .courseindex-item.pageitem {

@@ -8242,24 +8242,22 @@ input[type=button]:active {
     outline: 0;
 }
 input[type=submit] {
-    color: #fff;
     line-height: 40px;
     padding: 0 18px;
-    border: 0;
     margin-left: 5px;
-    border-radius: 0;
-    background: rgb(var(--color_secondary));
-    box-shadow: none;
     text-transform: uppercase;
-    text-shadow: none;
 }
-input[type=submit]:hover,
-input[type=submit]:focus,
-input[type=submit]:active,
-input[type=submit]:focus:active,
-input[type=submit]:active:focus {
+input[type=submit]:not(.btn) {
     color: #fff;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    text-shadow: none;
     background: rgb(var(--color_primary));
+}
+input[type=submit]:not(.btn):hover, input[type=submit]:not(.btn):focus, input[type=submit]:not(.btn):active, input[type=submit]:not(.btn):focus:active, input[type=submit]:not(.btn):active:focus {
+    color: #fff;
+    background: rgb(var(--color_secondary));
     box-shadow: none;
     outline: 0;
 }
@@ -8292,7 +8290,10 @@ input[type=reset][disabled] {
     box-shadow: none;
     outline: 0;
 }
-input[type=submit][disabled]:hover {
+button[disabled]:hover,
+input[type=button][disabled]:hover,
+input[type=submit][disabled]:hover,
+input[type=reset][disabled]:hover {
     color: #fff;
 }
 [role=treeitem][aria-expanded=true].focus > *:first-child,
@@ -8626,10 +8627,6 @@ input[type=text] {
 .mform fieldset.collapsible legend a.fheader {
     margin-left: 0;
 }
-.jsenabled .userselector .collapsibleregion {
-    width: 100%;
-    margin-bottom: 15px;
-}
 .userselector .form-inline .collapsibleregioninner .form-check {
     justify-content: normal;
 }
@@ -8808,9 +8805,7 @@ input[type=text] {
     background: rgb(var(--color_secondary));
     text-shadow: none;
 }
-.path-admin .buttons input[type=submit]:hover,
-.path-admin .buttons input[type=submit]:focus,
-.path-admin .buttons input[type=submit]:active {
+.path-admin .buttons input[type=submit]:hover, .path-admin .buttons input[type=submit]:focus, .path-admin .buttons input[type=submit]:active {
     color: #fff;
     background: rgb(var(--color_primary));
 }
@@ -9661,9 +9656,6 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
     #page-mod-quiz-mod #id_reviewoptionshdr .fitem {
         width: auto;
     }
-    .jsenabled .collapsibleregion {
-        height: auto;
-    }
     .mform .fpassword .unmask {
         margin: 0;
         display: block;
@@ -9705,9 +9697,6 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
     }
 }
 /*Header*/
-.jsenabled .form-group a.visibleifjs {
-    vertical-align: text-bottom;
-}
 .header-menubar {
     width: 100%;
     height: 100%;
@@ -10699,15 +10688,6 @@ div.dropdown-item:focus-within {
 }
 .pagelayout-maintenance .header-main .navbar-light, .pagelayout-maintenance .header-main .navbar-light * {
     color: #fff;
-}
-.jsenabled .header-main .moodle-actionmenu[data-enhance] .toggle-display.textmenu .caret {
-    border-top-color: #fff;
-}
-.jsenabled .header-main .moodle-actionmenu[data-enhance] .toggle-display.textmenu .caret:hover {
-    border-top-color: #fff;
-}
-.jsenabled .header-main .moodle-actionmenu[data-enhance] .toggle-display.textmenu .caret:active {
-    border-top-color: #fff;
 }
 /*Header message app*/
 .message-app .list-group .list-group-item.list-group-item-action:hover {
