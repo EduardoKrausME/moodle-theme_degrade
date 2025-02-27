@@ -13612,7 +13612,6 @@ a#message-user-button {
     transition: all 0.2s ease-out;
 }
 #header.fixed-top, #header.ever-fixed-top {
-    background: var(--topscroll_background) !important;
     padding: 0;
     top: 0;
     position: fixed;
