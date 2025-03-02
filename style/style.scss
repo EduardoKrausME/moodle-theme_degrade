@@ -3192,22 +3192,29 @@ a#message-user-button {
     border-radius: 7px;
     border: 1px dashed #74a0bb;
 }
-a#prev-activity-link,
-a#next-activity-link {
-    color: #fff;
-    border: none;
-    //white-space: nowrap !important;
-    &:hover {
-        text-decoration: none;
-        color: #eee;
+.float-left, .float-start {
+    width: 100%;
+    a#prev-activity-link,
+    a#next-activity-link {
+        color: #fff;
+        border: none;
+        white-space: nowrap !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+        display: inline-block;
+        &:hover {
+            text-decoration: none;
+            color: #eee;
+        }
     }
-}
-a#prev-activity-link {
-    background-color: rgb(var(--color_secondary));
-    color: #fff;
-}
-a#next-activity-link {
-    background-color: rgb(var(--color_primary));
+    a#prev-activity-link {
+        background-color: rgb(var(--color_secondary));
+        color: #fff;
+    }
+    a#next-activity-link {
+        background-color: rgb(var(--color_primary));
+    }
 }
 #page-contentbank {
     .cb-toolbar-container {
