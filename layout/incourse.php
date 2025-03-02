@@ -132,7 +132,6 @@ if ($PAGE->pagetype == "enrol-index" && file_exists("{$CFG->dirroot}/local/koper
     }
 }
 
-
 if (!$courseupdate && strpos($_SERVER["REQUEST_URI"], "/scorm/player.php") > 1) {
     echo $OUTPUT->render_from_template("theme_degrade/incourse_scorm", $templatedata);
 } else {

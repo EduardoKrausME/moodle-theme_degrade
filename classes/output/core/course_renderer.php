@@ -52,6 +52,7 @@ class course_renderer extends \core_course_renderer {
      * @throws \coding_exception
      * @throws \dml_exception
      * @throws \moodle_exception
+     * @throws \core\exception\moodle_exception
      */
     public function frontpage_available_courses() {
         global $CFG, $DB;
@@ -132,8 +133,6 @@ class course_renderer extends \core_course_renderer {
      * @throws \moodle_exception
      */
     public function frontpage_my_courses() {
-        global $CFG;
-
         if (!isloggedin() || isguestuser()) {
             return '';
         }
@@ -188,8 +187,6 @@ class course_renderer extends \core_course_renderer {
      * @throws \moodle_exception
      */
     protected function coursecat_coursebox(coursecat_helper $chelper, $course, $additionalclasses = '') {
-        global $CFG;
-
         if (!isset($this->strings->summary)) {
             $this->strings->summary = get_string('summary');
         }
@@ -228,8 +225,6 @@ class course_renderer extends \core_course_renderer {
      * @throws \moodle_exception
      */
     protected function coursecat_coursebox_content(coursecat_helper $chelper, $course) {
-        global $CFG;
-
         if ($chelper->get_show_courses() < self::COURSECAT_SHOW_COURSES_EXPANDED) {
             return '';
         }
@@ -256,6 +251,7 @@ class course_renderer extends \core_course_renderer {
      * @return string
      * @throws \coding_exception
      * @throws \moodle_exception
+     * @throws \core\exception\moodle_exception
      */
     public function search_courses($searchcriteria) {
         global $CFG;
@@ -318,6 +314,7 @@ class course_renderer extends \core_course_renderer {
      * @return bool|string
      * @throws \coding_exception
      * @throws \moodle_exception
+     * @throws \core\exception\moodle_exception
      */
     public function course_category($category) {
         global $CFG;
