@@ -67,6 +67,7 @@ $string['background_profile_image_desc'] = 'Background image displayed on the us
 $string['background_text_color'] = 'Text Color';
 $string['background_text_color_desc'] = 'Top and Footer Text color!';
 $string['cachedef_css_cache'] = 'CSS cache';
+$string['cachedef_darkmode_cache'] = 'DarkMode Cache';
 $string['cachedef_logo_cache'] = 'Logo Cache';
 $string['cachedef_layout_cache'] = 'Layout Cache';
 $string['choosereadme'] = 'Degrade is a theme crafted with care to bring cheerful colors to Moodle.';
