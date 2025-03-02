@@ -189,13 +189,16 @@
         border-color: rgb(var(--color_primary)) !important;
     }
     .btn {
-        color: #d2d2d2;
+        color: var(--bs-gray-200, #e9ecef);
         &.btn-icon:hover,
         &.btn-icon:focus {
             background-color: rgba(var(--bs-gray-200-rgb, 233, 236, 239), .4);
         }
         &.add-content {
             background-color: var(--bs-gray-1000, #1e1e25);
+        }
+        &:hover {
+            color: var(--bs-gray-600, #6c757d);
         }
     }
     .btn.add-section {
@@ -388,6 +391,10 @@
         color: var(--bs-gray-500, #adb5bd);
         background: var(--bs-gray-1000, #1e1e25) url('[[pix:theme|dark/custom-select]]') right 10px center / 8px 10px no-repeat;
         border-color: var(--bs-gray-900, #2e3134);
+        &:disabled {
+            color: var(--bs-gray-1000, #1e1e25);
+            background-color: var(--bs-gray-500, #adb5bd);
+        }
     }
     
     .form-control,
@@ -527,11 +534,9 @@
         align-items: center;
         justify-content: center;
         i {
-            font-size: 14px;
             margin-left: 3px;
         }
         + h3 {
-            font-size: 17px;
             a {
                 color: #acbdd9;
             }
@@ -611,7 +616,7 @@
         .modal-content,
         .moodle-dialogue-wrap,
         &.shadow {
-            background-color: var(--bs-nav-drawer, #191a1e);
+            background-color: var(--bs-gray-800, #191a1e);
             border-color: var(--bs-gray-900, #2e3134);
             .modal-header,
             .moodle-dialogue-hd {
@@ -620,10 +625,14 @@
                     color: var(--bs-gray-400, #ced4da);
                 }
                 .btn-close {
-                    background-color: var(--bs-gray-1000, #1e1e25);
+                    background-color: transparent;
                     color: var(--bs-gray-500, #adb5bd);
                     &:before {
+                        display: block;
+                        content: " ";
                         background-image: url('[[pix:theme|dark/close-button]]');
+                        width: 24px;
+                        height: 24px;
                     }
                     span {
                         display: none;
@@ -916,40 +925,39 @@
         }
     }
     
-     #header.fixed-top .header-menubar .navbar-nav .simplesearchform .btn-open,
-     #header.fixed-top  .popover-region .popover-region-toggle i.icon,
-     #header.fixed-top .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
-     #header.fixed-top .header-menubar .navbar-nav .editmode-switch-form .input-group label,
-     #header.fixed-top .usermenu .moodle-actionmenu a.dropdown-toggle,
-     #header.fixed-top .header-logo a.navbar-brand img,
-     #header.fixed-top .header-logo a.navbar-brand span,
-     #header.fixed-top .header-menubar .primary-navigation ul.navbar-nav > li > a,
-     #header .popover-region .popover-region-toggle i.icon,
-    
-     .navbar-light.fixed-top .navbar-nav .show>.nav-link,
-     .navbar-light.fixed-top .navbar-nav .active>.nav-link,
-     .navbar-light.fixed-top .navbar-nav .nav-link.show,
-     .navbar-light.fixed-top .navbar-nav .nav-link.active,
-     .header-menubar .navbar-nav .editmode-switch-form .input-group label,
-     .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle{
+    #header.fixed-top .header-menubar .navbar-nav .simplesearchform .btn-open,
+    #header.fixed-top .popover-region .popover-region-toggle i.icon,
+    #header.fixed-top .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
+    #header.fixed-top .header-menubar .navbar-nav .editmode-switch-form .input-group label,
+    #header.fixed-top .usermenu .moodle-actionmenu a.dropdown-toggle,
+    #header.fixed-top .header-logo a.navbar-brand img,
+    #header.fixed-top .header-logo a.navbar-brand span,
+    #header.fixed-top .header-menubar .primary-navigation ul.navbar-nav > li > a,
+    #header .popover-region .popover-region-toggle i.icon,
+    .navbar-light.fixed-top .navbar-nav .show > .nav-link,
+    .navbar-light.fixed-top .navbar-nav .active > .nav-link,
+    .navbar-light.fixed-top .navbar-nav .nav-link.show,
+    .navbar-light.fixed-top .navbar-nav .nav-link.active,
+    .header-menubar .navbar-nav .editmode-switch-form .input-group label,
+    .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle {
         color: var(--topscroll_text) !important;
     }
-     .header-menubar #usernavigation .kraus-layout-dark svg path{
+    .header-menubar #usernavigation .kraus-layout-dark svg path {
         fill: var(--topscroll_text) !important;
     }
     [data-bs-theme=light] .header-menubar .primary-navigation ul.navbar-nav li a,
     [data-bs-theme=light] .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
     [data-bs-theme=light] .header-menubar .navbar-nav .editmode-switch-form .input-group label,
     [data-bs-theme=light] .usermenu .moodle-actionmenu a.dropdown-toggle,
-    [data-bs-theme=light] .navbar-light .navbar-nav .show>.nav-link,
-    [data-bs-theme=light] .navbar-light .navbar-nav .active>.nav-link,
+    [data-bs-theme=light] .navbar-light .navbar-nav .show > .nav-link,
+    [data-bs-theme=light] .navbar-light .navbar-nav .active > .nav-link,
     [data-bs-theme=light] .navbar-light .navbar-nav .nav-link.show,
     [data-bs-theme=light] .navbar-light .navbar-nav .nav-link.active,
     [data-bs-theme=light] .header-logo a.navbar-brand img,
-    [data-bs-theme=light] #header .popover-region .popover-region-toggle i.icon{
+    [data-bs-theme=light] #header .popover-region .popover-region-toggle i.icon {
         color: var(--text_color) !important;
     }
-    [data-bs-theme=light] .header-menubar #usernavigation .kraus-layout-dark svg path{
+    [data-bs-theme=light] .header-menubar #usernavigation .kraus-layout-dark svg path {
         fill: var(--text_color);
     }
 }
