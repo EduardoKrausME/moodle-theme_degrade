@@ -13955,21 +13955,31 @@ a#message-user-button {
     border-radius: 7px;
     border: 1px dashed #74a0bb;
 }
-a#prev-activity-link,
-a#next-activity-link {
+.float-left, .float-start {
+    width: 100%;
+}
+.float-left a#prev-activity-link,
+.float-left a#next-activity-link, .float-start a#prev-activity-link,
+.float-start a#next-activity-link {
     color: #fff;
     border: none;
+    white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    display: inline-block;
 }
-a#prev-activity-link:hover,
-a#next-activity-link:hover {
+.float-left a#prev-activity-link:hover,
+.float-left a#next-activity-link:hover, .float-start a#prev-activity-link:hover,
+.float-start a#next-activity-link:hover {
     text-decoration: none;
     color: #eee;
 }
-a#prev-activity-link {
+.float-left a#prev-activity-link, .float-start a#prev-activity-link {
     background-color: rgb(var(--color_secondary));
     color: #fff;
 }
-a#next-activity-link {
+.float-left a#next-activity-link, .float-start a#next-activity-link {
     background-color: rgb(var(--color_primary));
 }
 #page-contentbank .cb-toolbar-container .dropdown-scrollable {
@@ -14326,13 +14336,16 @@ a#next-activity-link {
         border-color: rgb(var(--color_primary)) !important;
     }
     [data-bs-theme=auto] .btn {
-        color: #d2d2d2;
+        color: var(--bs-gray-200, #e9ecef);
     }
     [data-bs-theme=auto] .btn.btn-icon:hover, [data-bs-theme=auto] .btn.btn-icon:focus {
         background-color: rgba(var(--bs-gray-200-rgb, 233, 236, 239), 0.4);
     }
     [data-bs-theme=auto] .btn.add-content {
         background-color: var(--bs-gray-1000, #1e1e25);
+    }
+    [data-bs-theme=auto] .btn:hover {
+        color: var(--bs-gray-600, #6c757d);
     }
     [data-bs-theme=auto] .btn.add-section {
         border: 2px dashed rgba(var(--bs-write-rgb, 255, 255, 255), 0.53);
@@ -14533,6 +14546,11 @@ a#next-activity-link {
         background: var(--bs-gray-1000, #1e1e25) url("[[pix:theme|dark/custom-select]]") right 10px center/8px 10px no-repeat;
         border-color: var(--bs-gray-900, #2e3134);
     }
+    [data-bs-theme=auto] .custom-select:disabled,
+    [data-bs-theme=auto] select.quickgrade:disabled {
+        color: var(--bs-gray-1000, #1e1e25);
+        background-color: var(--bs-gray-500, #adb5bd);
+    }
     [data-bs-theme=auto] .form-control,
     [data-bs-theme=auto] select,
     [data-bs-theme=auto] textarea,
@@ -14711,11 +14729,7 @@ a#next-activity-link {
         justify-content: center;
     }
     [data-bs-theme=auto] .btn.btn-icon.icons-collapse-expand i {
-        font-size: 14px;
         margin-left: 3px;
-    }
-    [data-bs-theme=auto] .btn.btn-icon.icons-collapse-expand + h3 {
-        font-size: 17px;
     }
     [data-bs-theme=auto] .btn.btn-icon.icons-collapse-expand + h3 a {
         color: #acbdd9;
@@ -14790,7 +14804,7 @@ a#next-activity-link {
     [data-bs-theme=auto] .popover-process-monitor .modal-content,
     [data-bs-theme=auto] .popover-process-monitor .moodle-dialogue-wrap,
     [data-bs-theme=auto] .popover-process-monitor.shadow {
-        background-color: var(--bs-nav-drawer, #191a1e);
+        background-color: var(--bs-gray-800, #191a1e);
         border-color: var(--bs-gray-900, #2e3134);
     }
     [data-bs-theme=auto] .modal .modal-content .modal-header,
@@ -14848,7 +14862,7 @@ a#next-activity-link {
     [data-bs-theme=auto] .popover-process-monitor .moodle-dialogue-wrap .moodle-dialogue-hd .btn-close,
     [data-bs-theme=auto] .popover-process-monitor.shadow .modal-header .btn-close,
     [data-bs-theme=auto] .popover-process-monitor.shadow .moodle-dialogue-hd .btn-close {
-        background-color: var(--bs-gray-1000, #1e1e25);
+        background-color: transparent;
         color: var(--bs-gray-500, #adb5bd);
     }
     [data-bs-theme=auto] .modal .modal-content .modal-header .btn-close:before,
@@ -14868,7 +14882,11 @@ a#next-activity-link {
     [data-bs-theme=auto] .popover-process-monitor .moodle-dialogue-wrap .moodle-dialogue-hd .btn-close:before,
     [data-bs-theme=auto] .popover-process-monitor.shadow .modal-header .btn-close:before,
     [data-bs-theme=auto] .popover-process-monitor.shadow .moodle-dialogue-hd .btn-close:before {
+        display: block;
+        content: " ";
         background-image: url("[[pix:theme|dark/close-button]]");
+        width: 24px;
+        height: 24px;
     }
     [data-bs-theme=auto] .modal .modal-content .modal-header .btn-close span,
     [data-bs-theme=auto] .modal .modal-content .moodle-dialogue-hd .btn-close span,
@@ -15332,13 +15350,16 @@ a#next-activity-link {
     border-color: rgb(var(--color_primary)) !important;
 }
 [data-bs-theme=dark] .btn {
-    color: #d2d2d2;
+    color: var(--bs-gray-200, #e9ecef);
 }
 [data-bs-theme=dark] .btn.btn-icon:hover, [data-bs-theme=dark] .btn.btn-icon:focus {
     background-color: rgba(var(--bs-gray-200-rgb, 233, 236, 239), 0.4);
 }
 [data-bs-theme=dark] .btn.add-content {
     background-color: var(--bs-gray-1000, #1e1e25);
+}
+[data-bs-theme=dark] .btn:hover {
+    color: var(--bs-gray-600, #6c757d);
 }
 [data-bs-theme=dark] .btn.add-section {
     border: 2px dashed rgba(var(--bs-write-rgb, 255, 255, 255), 0.53);
@@ -15539,6 +15560,11 @@ a#next-activity-link {
     background: var(--bs-gray-1000, #1e1e25) url("[[pix:theme|dark/custom-select]]") right 10px center/8px 10px no-repeat;
     border-color: var(--bs-gray-900, #2e3134);
 }
+[data-bs-theme=dark] .custom-select:disabled,
+[data-bs-theme=dark] select.quickgrade:disabled {
+    color: var(--bs-gray-1000, #1e1e25);
+    background-color: var(--bs-gray-500, #adb5bd);
+}
 [data-bs-theme=dark] .form-control,
 [data-bs-theme=dark] select,
 [data-bs-theme=dark] textarea,
@@ -15717,11 +15743,7 @@ a#next-activity-link {
     justify-content: center;
 }
 [data-bs-theme=dark] .btn.btn-icon.icons-collapse-expand i {
-    font-size: 14px;
     margin-left: 3px;
-}
-[data-bs-theme=dark] .btn.btn-icon.icons-collapse-expand + h3 {
-    font-size: 17px;
 }
 [data-bs-theme=dark] .btn.btn-icon.icons-collapse-expand + h3 a {
     color: #acbdd9;
@@ -15796,7 +15818,7 @@ a#next-activity-link {
 [data-bs-theme=dark] .popover-process-monitor .modal-content,
 [data-bs-theme=dark] .popover-process-monitor .moodle-dialogue-wrap,
 [data-bs-theme=dark] .popover-process-monitor.shadow {
-    background-color: var(--bs-nav-drawer, #191a1e);
+    background-color: var(--bs-gray-800, #191a1e);
     border-color: var(--bs-gray-900, #2e3134);
 }
 [data-bs-theme=dark] .modal .modal-content .modal-header,
@@ -15854,7 +15876,7 @@ a#next-activity-link {
 [data-bs-theme=dark] .popover-process-monitor .moodle-dialogue-wrap .moodle-dialogue-hd .btn-close,
 [data-bs-theme=dark] .popover-process-monitor.shadow .modal-header .btn-close,
 [data-bs-theme=dark] .popover-process-monitor.shadow .moodle-dialogue-hd .btn-close {
-    background-color: var(--bs-gray-1000, #1e1e25);
+    background-color: transparent;
     color: var(--bs-gray-500, #adb5bd);
 }
 [data-bs-theme=dark] .modal .modal-content .modal-header .btn-close:before,
@@ -15874,7 +15896,11 @@ a#next-activity-link {
 [data-bs-theme=dark] .popover-process-monitor .moodle-dialogue-wrap .moodle-dialogue-hd .btn-close:before,
 [data-bs-theme=dark] .popover-process-monitor.shadow .modal-header .btn-close:before,
 [data-bs-theme=dark] .popover-process-monitor.shadow .moodle-dialogue-hd .btn-close:before {
+    display: block;
+    content: " ";
     background-image: url("[[pix:theme|dark/close-button]]");
+    width: 24px;
+    height: 24px;
 }
 [data-bs-theme=dark] .modal .modal-content .modal-header .btn-close span,
 [data-bs-theme=dark] .modal .modal-content .moodle-dialogue-hd .btn-close span,
