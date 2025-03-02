@@ -37,4 +37,8 @@ $definitions = [
         "mode" => cache_store::MODE_APPLICATION,
         "ttl" => 1 * 24 * 60 * 60, // 1d.
     ],
+    "darkmode_cache" => [
+        "mode" => cache_store::MODE_APPLICATION,
+        "ttl" => 1 * 24 * 60 * 60, // 1d.
+    ],
 ];

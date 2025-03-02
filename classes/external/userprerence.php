@@ -51,9 +51,10 @@ class userprerence extends \external_api {
      * @param string $darkmode
      *
      * @return array
+     * @throws \coding_exception
      */
     public static function layout($darkmode) {
-        global $CFG;
+        global $CFG, $USER;
 
         // Check if the user is a guest (not logged in).
         if (isguestuser()) {
@@ -67,6 +68,9 @@ class userprerence extends \external_api {
         }
 
         set_user_preference("darkmode", $darkmode);
+        $cache = \cache::make("theme_degrade", "darkmode_cache");
+        $cachekey = "html_attributes-{$USER->id}";
+        $cache->set($cachekey, null);
 
         return ["status" => true];
     }
