@@ -20,18 +20,18 @@
  * This is built using the boost template to allow for new theme's using
  * Moodle's new Boost theme engine
  *
- * @package   theme_degrade
+ * @package   theme_boost_magnific
  * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version = 2025030200;
-$plugin->release = "8.3.6";
+$plugin->version = 2025030300;
+$plugin->release = "8.3.7";
 $plugin->maturity = MATURITY_STABLE;
 $plugin->requires = 2022041900;
-$plugin->component = "theme_degrade";
+$plugin->component = "theme_boost_magnific";
 $plugin->dependencies = [
     "theme_boost" => 2022041900,
 ];
