@@ -461,8 +461,6 @@ function theme_degrade_get_hexa($hexa, $opacity) {
  * @throws coding_exception
  */
 function theme_degrade_coursemodule_standard_elements(&$formwrapper, $mform) {
-    global $CFG;
-
     if ($formwrapper->get_current()->modulename == "label") {
         return;
     }
@@ -470,6 +468,7 @@ function theme_degrade_coursemodule_standard_elements(&$formwrapper, $mform) {
         return;
     }
 
+    global $CFG, $PAGE;
     if ($CFG->theme == "degrade") {
         $mform->addElement("header", "theme_degrade_icons",
             get_string("settings_icons_change_icons", "theme_degrade"));
@@ -494,8 +493,16 @@ function theme_degrade_coursemodule_standard_elements(&$formwrapper, $mform) {
             "maxfiles" => 1,
         ];
         $mform->addElement("filemanager", "theme_degrade_customicon",
-            get_string("settings_icons_select_icon", "theme_degrade"),
+            get_string("settings_icons_upload_icon", "theme_degrade"),
             null, $filemanageroptions);
+
+        $mform->addElement("text", "theme_degrade_customcolor",
+            get_string("settings_icons_color_icon", "theme_degrade"), []);
+        $mform->setType("theme_degrade_customcolor", PARAM_TEXT);
+        $PAGE->requires->js_call_amd('theme_degrade/settings', 'minicolors', ["id_theme_degrade_customcolor"]);
+
+        $mform->addElement("static", "theme_degrade_custom", "",
+            get_string("settings_icons_color_icon", "theme_degrade"));
     }
 }
 
@@ -524,6 +531,13 @@ function theme_degrade_coursemodule_edit_post_actions($data, $course) {
 
         $name = "theme_degrade_customicon_{$data->coursemodule}";
         set_config($name, $filesave, "theme_degrade");
+
+        \cache::make("theme_degrade", "css_cache")->purge();
+    }
+
+    if (isset($data->theme_degrade_customcolor)) {
+        $name = "theme_degrade_customcolor_{$data->coursemodule}";
+        set_config($name, $data->theme_degrade_customcolor, "theme_degrade");
 
         \cache::make("theme_degrade", "css_cache")->purge();
     }

@@ -303,6 +303,21 @@ class core_hook_output {
                     }\n";
             }
 
+            $sql = "
+                SELECT *
+                  FROM {config_plugins}
+                 WHERE plugin  = 'theme_degrade'
+                   AND name LIKE 'theme_degrade_customcolor_%'";
+            $customcolors = $DB->get_records_sql($sql);
+            foreach ($customcolors as $customcolor) {
+                $moduleid = str_replace("theme_degrade_customcolor_", "", $customcolor->name);
+                $css .= "
+                    #module-{$moduleid} .courseicon {
+                        background       : {$customcolor->value} !important;
+                        background-color : {$customcolor->value} !important;
+                    }\n";
+            }
+
             $css = preg_replace('/\s+/s', ' ', $css);
             echo "<style>{$css}</style>";
         }
