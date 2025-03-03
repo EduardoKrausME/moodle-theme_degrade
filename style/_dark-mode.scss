@@ -88,8 +88,8 @@
         mix-blend-mode: initial;
     }
     
-    body,
-    #page-wrapper,
+    body:not(.loginbackgroundimage),
+    body:not(.loginbackgroundimage) #page-wrapper,
     &:not([data-basename=academi]) #page,
     #page.drawers .main-inner,
     #region-main {
@@ -519,12 +519,6 @@
     #page-header .crumbs li span {
         background: var(--bs-gray-900, #2e3134);
         color: var(--bs-write, #fff);
-        &:before {
-            border-left: 15px solid var(--bs-gray-1100, #0e0e11);
-        }
-        &:after {
-            border-left: 15px solid #2f2f32;
-        }
     }
     .btn.btn-icon.icons-collapse-expand {
         border: 1px solid #2c2e3a;
@@ -645,7 +639,7 @@
         }
     }
     .drawer {
-        background: var(--bs-nav-drawer, #191a1e);
+        background: var(--bs-gray-800, #393e4f);
     }
     
     // Course content

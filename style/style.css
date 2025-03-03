@@ -14234,8 +14234,8 @@ a#message-user-button {
     [data-bs-theme=auto] .activity-item.hiddenactivity .badge {
         mix-blend-mode: initial;
     }
-    [data-bs-theme=auto] body,
-    [data-bs-theme=auto] #page-wrapper, [data-bs-theme=auto]:not([data-basename=academi]) #page,
+    [data-bs-theme=auto] body:not(.loginbackgroundimage),
+    [data-bs-theme=auto] body:not(.loginbackgroundimage) #page-wrapper, [data-bs-theme=auto]:not([data-basename=academi]) #page,
     [data-bs-theme=auto] #page.drawers .main-inner,
     [data-bs-theme=auto] #region-main {
         color: var(--bs-text-color, #cbd0d4) !important;
@@ -14712,14 +14712,6 @@ a#message-user-button {
         background: var(--bs-gray-900, #2e3134);
         color: var(--bs-write, #fff);
     }
-    [data-bs-theme=auto] #page-header .crumbs li a:before,
-    [data-bs-theme=auto] #page-header .crumbs li span:before {
-        border-left: 15px solid var(--bs-gray-1100, #0e0e11);
-    }
-    [data-bs-theme=auto] #page-header .crumbs li a:after,
-    [data-bs-theme=auto] #page-header .crumbs li span:after {
-        border-left: 15px solid #2f2f32;
-    }
     [data-bs-theme=auto] .btn.btn-icon.icons-collapse-expand {
         border: 1px solid #2c2e3a;
         background-color: transparent;
@@ -14927,7 +14919,7 @@ a#message-user-button {
         color: var(--bs-write, #fff);
     }
     [data-bs-theme=auto] .drawer {
-        background: var(--bs-nav-drawer, #191a1e);
+        background: var(--bs-gray-800, #393e4f);
     }
     [data-bs-theme=auto] .course-content ul li.section.main {
         border-bottom-color: transparent !important;
@@ -15248,8 +15240,8 @@ a#message-user-button {
 [data-bs-theme=dark] .activity-item.hiddenactivity .badge {
     mix-blend-mode: initial;
 }
-[data-bs-theme=dark] body,
-[data-bs-theme=dark] #page-wrapper, [data-bs-theme=dark]:not([data-basename=academi]) #page,
+[data-bs-theme=dark] body:not(.loginbackgroundimage),
+[data-bs-theme=dark] body:not(.loginbackgroundimage) #page-wrapper, [data-bs-theme=dark]:not([data-basename=academi]) #page,
 [data-bs-theme=dark] #page.drawers .main-inner,
 [data-bs-theme=dark] #region-main {
     color: var(--bs-text-color, #cbd0d4) !important;
@@ -15726,14 +15718,6 @@ a#message-user-button {
     background: var(--bs-gray-900, #2e3134);
     color: var(--bs-write, #fff);
 }
-[data-bs-theme=dark] #page-header .crumbs li a:before,
-[data-bs-theme=dark] #page-header .crumbs li span:before {
-    border-left: 15px solid var(--bs-gray-1100, #0e0e11);
-}
-[data-bs-theme=dark] #page-header .crumbs li a:after,
-[data-bs-theme=dark] #page-header .crumbs li span:after {
-    border-left: 15px solid #2f2f32;
-}
 [data-bs-theme=dark] .btn.btn-icon.icons-collapse-expand {
     border: 1px solid #2c2e3a;
     background-color: transparent;
@@ -15941,7 +15925,7 @@ a#message-user-button {
     color: var(--bs-write, #fff);
 }
 [data-bs-theme=dark] .drawer {
-    background: var(--bs-nav-drawer, #191a1e);
+    background: var(--bs-gray-800, #393e4f);
 }
 [data-bs-theme=dark] .course-content ul li.section.main {
     border-bottom-color: transparent !important;
