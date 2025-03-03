@@ -502,7 +502,7 @@ function theme_degrade_coursemodule_standard_elements(&$formwrapper, $mform) {
         $PAGE->requires->js_call_amd('theme_degrade/settings', 'minicolors', ["id_theme_degrade_customcolor"]);
 
         $mform->addElement("static", "theme_degrade_custom", "",
-            get_string("settings_icons_color_icon", "theme_degrade"));
+            get_string("settings_icons_color_icon_desc", "theme_degrade"));
     }
 }
 
