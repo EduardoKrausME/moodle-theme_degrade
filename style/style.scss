@@ -2674,58 +2674,7 @@ body.limitedwidth.pagelayout-frontpage #page.drawers .main-inner #page-content {
 .coursebox > .info > h3.coursename {
     margin: 3px 0;
 }
-#course-category-listings .item-actions .menubar .action-menu-trigger .dropdown a.dropdown-toggle {
-    padding: 0;
-}
-#course-category-listings .listitem[data-selected='1'] {
-    border-left-color: rgb(var(--color_primary));
-}
-#course-category-listings #category-listing .course-count {
-    margin-right: 0;
-    min-width: 0;
-    i.icon {
-        margin-left: 5px;
-    }
-}
-#course-category-listings .course-listing .listing-pagination a {
-    color: #fff;
-    background: rgb(var(--color_secondary));
-}
-#course-category-listings .course-listing .listing-pagination a:hover {
-    background: rgb(var(--color_primary));
-    text-decoration: none;
-}
-#course-category-listings .course-listing .listing-pagination a:focus {
-    background: rgb(var(--color_primary));
-    text-decoration: none;
-}
-#course-category-listings .course-listing .listing-pagination a.active-page {
-    background: rgb(var(--color_primary));
-    text-decoration: none;
-}
-#course-category-listings .item-actions {
-    margin-top: 0;
-    margin-bottom: 5px;
-    margin-right: 0;
-    display: flex;
-    align-items: center;
-    a i {
-        font-size: 24px;
-    }
-}
-.pagelayout-incourse #page .action-menu .menubar .dropdown .dropdown-menu .dropdown-item {
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-.pagelayout-incourse #page .action-menu .menubar .dropdown .dropdown-menu .dropdown-item:hover {
-    background: rgb(var(--color_primary));
-}
-.pagelayout-incourse #page .action-menu .menubar .dropdown .dropdown-menu .dropdown-item:hover a {
-    background: rgb(var(--color_primary));
-}
-.pagelayout-incourse #page .action-menu .menubar .dropdown .dropdown-menu .dropdown-item .currentlink {
-    color: #fff;
-}
+@import "course-category-listings";
 @media (min-width: 992px) {
     .course_category_tree .category > .info > .categoryname {
         padding-left: 27px;

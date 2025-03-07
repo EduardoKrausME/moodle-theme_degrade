@@ -10548,6 +10548,11 @@ div.dropdown-item:focus-within {
     max-height: 35px;
     margin-right: 11px;
 }
+.header-menubar .usermenu .avatars .userinitials {
+    width: 30px;
+    height: 30px;
+    font-size: 19px;
+}
 @media (max-width: 992px) {
     .usermenu-modal-userlinks {
         max-width: 95%;
@@ -11470,11 +11475,53 @@ div.dropdown-item:focus-within {
 .coursebox > .info > h3.coursename {
     margin: 3px 0;
 }
+#course-category-listings .item-actions {
+    display: flex;
+    align-items: center;
+}
 #course-category-listings .item-actions .menubar .action-menu-trigger .dropdown a.dropdown-toggle {
     padding: 0;
 }
 #course-category-listings .listitem[data-selected="1"] {
     border-left-color: rgb(var(--color_primary));
+}
+#course-category-listings .listitem .d-flex.flex-wrap,
+#course-category-listings .listitem .clearfix {
+    display: flex;
+    flex-wrap: nowrap !important;
+}
+#course-category-listings .listitem .d-flex.flex-wrap .float-start,
+#course-category-listings .listitem .d-flex.flex-wrap .float-end,
+#course-category-listings .listitem .clearfix .float-start,
+#course-category-listings .listitem .clearfix .float-end {
+    float: none !important;
+}
+#course-category-listings .listitem .d-flex.flex-wrap .float-start,
+#course-category-listings .listitem .clearfix .float-start {
+    width: auto;
+}
+#course-category-listings .listitem .d-flex.flex-wrap .categoryname,
+#course-category-listings .listitem .clearfix .categoryname {
+    width: 100%;
+}
+#course-category-listings .listitem .d-flex.flex-wrap .course-count,
+#course-category-listings .listitem .clearfix .course-count {
+    display: flex !important;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+#course-category-listings .listitem .moodle-actionmenu a i, #course-category-listings .listitem .moodle-actionmenu span,
+#course-category-listings .listitem .course-count a i,
+#course-category-listings .listitem .course-count span,
+#course-category-listings .listitem .course-item-actions a i,
+#course-category-listings .listitem .course-item-actions span {
+    font-size: 20px;
+}
+#course-category-listings .listitem .moodle-actionmenu .icon,
+#course-category-listings .listitem .course-count .icon,
+#course-category-listings .listitem .course-item-actions .icon {
+    margin-left: 0;
+    margin-right: 4px;
 }
 #course-category-listings #category-listing .course-count {
     margin-right: 0;
@@ -11498,29 +11545,6 @@ div.dropdown-item:focus-within {
 #course-category-listings .course-listing .listing-pagination a.active-page {
     background: rgb(var(--color_primary));
     text-decoration: none;
-}
-#course-category-listings .item-actions {
-    margin-top: 0;
-    margin-bottom: 5px;
-    margin-right: 0;
-    display: flex;
-    align-items: center;
-}
-#course-category-listings .item-actions a i {
-    font-size: 24px;
-}
-.pagelayout-incourse #page .action-menu .menubar .dropdown .dropdown-menu .dropdown-item {
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-.pagelayout-incourse #page .action-menu .menubar .dropdown .dropdown-menu .dropdown-item:hover {
-    background: rgb(var(--color_primary));
-}
-.pagelayout-incourse #page .action-menu .menubar .dropdown .dropdown-menu .dropdown-item:hover a {
-    background: rgb(var(--color_primary));
-}
-.pagelayout-incourse #page .action-menu .menubar .dropdown .dropdown-menu .dropdown-item .currentlink {
-    color: #fff;
 }
 @media (min-width: 992px) {
     .course_category_tree .category > .info > .categoryname {
