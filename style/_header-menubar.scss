@@ -10,7 +10,7 @@
     .navbar-nav {
         flex-wrap: nowrap;
     }
-
+    
     .navbar-nav .langmenu .dropdown .dropdown-menu {
         left: auto;
         right: 0;
@@ -869,6 +869,11 @@ div.dropdown-item:focus-within {
             max-height: 35px;
             margin-right: 11px;
         }
+        .userinitials {
+            width: 30px;
+            height: 30px;
+            font-size: 19px;
+        }
     }
 }
 //
@@ -993,19 +998,18 @@ div.dropdown-item:focus-within {
         }
     }
 }
-
 .header-menubar .primary-navigation ul.navbar-nav li a,
 .header-menubar .navbar-nav .usermenu .dropdown a#user-menu-toggle,
 .header-menubar .navbar-nav .editmode-switch-form .input-group label,
 .usermenu .moodle-actionmenu a.dropdown-toggle,
-.navbar-light .navbar-nav .show>.nav-link,
-.navbar-light .navbar-nav .active>.nav-link,
+.navbar-light .navbar-nav .show > .nav-link,
+.navbar-light .navbar-nav .active > .nav-link,
 .navbar-light .navbar-nav .nav-link.show,
 .navbar-light .navbar-nav .nav-link.active,
 .header-logo a.navbar-brand img {
-    font-family : var(--fontfamily_menus);
+    font-family: var(--fontfamily_menus);
 }
-.header-menubar .primary-navigation ul.navbar-nav li a{
+.header-menubar .primary-navigation ul.navbar-nav li a {
     color: var(--text_color) !important;
 }
 #header,
@@ -1016,5 +1020,5 @@ div.dropdown-item:focus-within {
     color: var(--text_color) !important;
 }
 .header-logo a.navbar-brand span {
-    font-family:var(--fontfamily_sitename) Arial, Helvetica, sans-serif;
+    font-family: var(--fontfamily_sitename) Arial, Helvetica, sans-serif;
 }
