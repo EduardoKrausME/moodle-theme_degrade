@@ -256,19 +256,20 @@ class course {
                      WHERE shortname = 'background_course_image'
                  )
                AND instanceid = :courseid";
-        $data = $DB->get_record_sql($sql, ["courseid" => $course->id]);
-
-        $sql = "
-            SELECT contextid, itemid, filename
-              FROM {files}
-             WHERE component = 'customfield_picture'
-               AND filearea  = 'file'
-               AND itemid    = :itemid
-               AND filesize  > 10";
-        $file = $DB->get_record_sql($sql, ["itemid" => $data->id]);
-        if ($file) {
-            return moodle_url::make_pluginfile_url($file->contextid, "customfield_picture", "file",
-                $file->itemid, "/", $file->filename)->out(true);
+        $customfielddata = $DB->get_record_sql($sql, ["courseid" => $course->id]);
+        if ($customfielddata) {
+            $sql = "
+                SELECT contextid, itemid, filename
+                  FROM {files}
+                 WHERE component = 'customfield_picture'
+                   AND filearea  = 'file'
+                   AND itemid    = :itemid
+                   AND filesize  > 10";
+            $file = $DB->get_record_sql($sql, ["itemid" => $customfielddata->id]);
+            if ($file) {
+                return moodle_url::make_pluginfile_url($file->contextid, "customfield_picture", "file",
+                    $file->itemid, "/", $file->filename)->out(true);
+            }
         }
 
         if ($backgroundurl) {
