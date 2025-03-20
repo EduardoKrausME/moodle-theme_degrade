@@ -50,6 +50,8 @@ class htmldata {
      * @param $html
      *
      * @return mixed|null|string|string[]
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function vvveb__change_courses($html) {
         global $CFG;
@@ -59,6 +61,13 @@ class htmldata {
         self::vvveb__change_catalogo($html);
         self::vvveb__change_category($html);
 
+        $callbacks = get_plugins_with_function("theme_htmldata_vvveb_change_courses");
+        foreach ($callbacks as $plugintype => $plugins) {
+            foreach ($plugins as $plugin => $callback) {
+                $callback($html, self::$replaces);
+            }
+        }
+
         $html = preg_replace('/<.*?vvveb-remove.*?>/', '', $html);
         foreach (self::$replaces as $replace) {
             foreach ($replace["from"] as $from) {
@@ -67,8 +76,8 @@ class htmldata {
         }
 
         $html = "
-            <link href=\"{$CFG->wwwroot}/theme/degrade/_editor/libs/aos/aos.css\" rel=\"stylesheet\">
-            <link href=\"{$CFG->wwwroot}/theme/degrade/_editor/libs/aos/aos.js\" rel=\"stylesheet\">
+            <link href='{$CFG->wwwroot}/theme/degrade/_editor/libs/aos/aos.css' rel='stylesheet'>
+            <link href='{$CFG->wwwroot}/theme/degrade/_editor/libs/aos/aos.js' rel='stylesheet'>
             " . trim($html);
         return $html;
     }
@@ -79,6 +88,8 @@ class htmldata {
      * @param $html
      *
      * @return mixed
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     private static function vvveb__change_my_courses($html) {
 
@@ -142,6 +153,8 @@ class htmldata {
      * @param $html
      *
      * @return mixed
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     private static function vvveb__change_popular_courses($html) {
 
@@ -228,6 +241,8 @@ class htmldata {
      * @param $html
      *
      * @return mixed
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     private static function vvveb__change_catalogo($html) {
         if (strpos($html, "vvveb_home_automatically_catalogo") === false) {
@@ -313,6 +328,9 @@ class htmldata {
      * Function vvveb__change_category
      *
      * @param $html
+     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     private static function vvveb__change_category($html) {
         if (strpos($html, "vvveb_home_automatically_category") === false) {
@@ -406,8 +424,9 @@ class htmldata {
      * @param $course
      *
      * @return string
+     * @throws \dml_exception
      */
-    private static function text_course($course) {
+    public static function text_course($course) {
         $text = get_config("local_kopere_dashboard", "builder_topo_{$course->id}");
 
         if (!isset($text[50])) {
