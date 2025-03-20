@@ -133,7 +133,7 @@ if ($PAGE->pagetype == "enrol-index" && file_exists("{$CFG->dirroot}/local/koper
 }
 
 if (!$courseupdate && strpos($_SERVER["REQUEST_URI"], "/scorm/player.php") > 1) {
-    echo $OUTPUT->render_from_template("theme_degrade/incourse_scorm", $templatedata);
+    echo $OUTPUT->render_from_template("theme_degrade/drawers_scorm", $templatedata);
 } else {
     if ($COURSE->format == "topics" || $COURSE->format == "weeks") {
         echo $OUTPUT->render_from_template("theme_degrade/incourse", $templatedata);
