@@ -179,6 +179,7 @@ body.format-weeks {
     #region-main {
         background-color: transparent !important;
         .image-top-course {
+            display:none;
             overflow: hidden;
             border-radius: 5px 5px 0 0;
             transition: 0.4s;
@@ -187,6 +188,11 @@ body.format-weeks {
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
+        }
+    }
+    &.page-course-view-topics{
+        .image-top-course {
+            display: block !important;
         }
     }
     .section-courseindex {

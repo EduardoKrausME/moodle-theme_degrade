@@ -18405,6 +18405,7 @@ body.format-weeks #region-main {
 }
 body.format-topics #region-main .image-top-course,
 body.format-weeks #region-main .image-top-course {
+    display: none;
     overflow: hidden;
     border-radius: 5px 5px 0 0;
     transition: 0.4s;
@@ -18413,6 +18414,10 @@ body.format-weeks #region-main .image-top-course {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+}
+body.format-topics.page-course-view-topics .image-top-course,
+body.format-weeks.page-course-view-topics .image-top-course {
+    display: block !important;
 }
 body.format-topics .section-courseindex h4,
 body.format-weeks .section-courseindex h4 {
