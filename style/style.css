@@ -13979,9 +13979,6 @@ a#message-user-button {
     border-radius: 7px;
     border: 1px dashed #74a0bb;
 }
-.float-left, .float-start {
-    width: 100%;
-}
 .float-left a#prev-activity-link,
 .float-left a#next-activity-link, .float-start a#prev-activity-link,
 .float-start a#next-activity-link {
