@@ -172,40 +172,31 @@ class frontapage_data {
      * @throws \dml_exception
      */
     public static function home_html() {
-        $cache = \cache::make("theme_degrade", "layout_cache");
-        $cachekey = "home_html-" . current_language();
-        if ($cache->has($cachekey)) {
-            $data = $cache->get($cachekey);
-        }
-        if (!isset($data["home_html"])) {
-            $hometype = get_config("theme_degrade", "home_type");
-            $chave = optional_param("chave", false, PARAM_TEXT);
+        $hometype = get_config("theme_degrade", "home_type");
+        $chave = optional_param("chave", false, PARAM_TEXT);
 
-            if ($hometype == 1 || $chave == "home") {
-                if ($chave == "home") {
-                    $htmldata = optional_param("htmldata", false, PARAM_RAW);
-                } else {
-                    $lang = current_language();
-                    $htmldata = get_config("theme_degrade", "home_htmleditor_{$lang}");
-                    if (!isset($htmldata[3])) {
-                        $htmldata = get_config("theme_degrade", "home_htmleditor_all");
-                    }
-                }
-
-                $htmldata = htmldata::vvveb__change_courses($htmldata);
-
-                $htmldata .= font_util::print_only_unique();
-                $data = [
-                    "home_html" => true,
-                    "home_htmleditor" => $htmldata,
-                ];
+        if ($hometype == 1 || $chave == "home") {
+            if ($chave == "home") {
+                $htmldata = optional_param("htmldata", false, PARAM_RAW);
             } else {
-                $data = [
-                    "home_html" => false,
-                ];
+                $lang = current_language();
+                $htmldata = get_config("theme_degrade", "home_htmleditor_{$lang}");
+                if (!isset($htmldata[3])) {
+                    $htmldata = get_config("theme_degrade", "home_htmleditor_all");
+                }
             }
 
-            $cache->set($cachekey, $data);
+            $htmldata = htmldata::vvveb__change_courses($htmldata);
+
+            $htmldata .= font_util::print_only_unique();
+            $data = [
+                "home_html" => true,
+                "home_htmleditor" => $htmldata,
+            ];
+        } else {
+            $data = [
+                "home_html" => false,
+            ];
         }
 
         return $data;
