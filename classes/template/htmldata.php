@@ -264,7 +264,7 @@ class htmldata {
             $sql = "SELECT * FROM {kopere_pay_detalhe} WHERE status = 'aberto' AND portfolio = 'visivel'";
             $koperepaydetalhes = $DB->get_records_sql($sql);
 
-            $datasave = [];
+            $mustachecourses = [];
             /** @var \local_kopere_pay\vo\kopere_pay_detalhe $koperepaydetalhe */
             foreach ($koperepaydetalhes as $koperepaydetalhe) {
 
@@ -307,10 +307,10 @@ class htmldata {
                     $course->courseimage = $OUTPUT->image_url("course-default", "theme")->out();
                 }
 
-                $datasave[] = $course;
+                $mustachecourses[] = $course;
             }
 
-            $courseshtml = $OUTPUT->render_from_template("theme_degrade/vvveb/course", ["courses" => $datasave]);
+            $courseshtml = $OUTPUT->render_from_template("theme_degrade/vvveb/course", ["courses" => $mustachecourses]);
 
             preg_match_all('/<div.*?vvveb_home_automatically_catalogo.*?>(.*?)<\/div>/s', $html, $htmls);
 
