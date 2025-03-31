@@ -146,6 +146,11 @@
             color: var(--bs-nav-drawer, #e8eaed);
         }
     }
+    .block .block-cards span.categoryname,
+    .block .block-cards .btn-link,
+    .block .block-controls .dropdown-toggle {
+        color: var(--bs-gray-500, #adb5bd);
+    }
     .border {
         border-color: rgba(var(--bs-gray-300-rgb, 222, 226, 230), .3) !important;
     }
@@ -405,6 +410,15 @@
         background-color: var(--bs-gray-1000, #1e1e25);
         border: 1px solid var(--bs-gray-900, #2e3134);
     }
+    .form-control:disabled, .form-control[readonly] {
+        background-color: var(--bs-gray-1000, #1e1e25);
+        opacity: .7;
+    }
+    .form-control:focus {
+        color: var(--bs-gray-400, #ced4da) !important;
+        background-color: var(--bs-gray-800, #393e4f);
+        border-color: none;
+    }
     .btn-primary,
     .addtagcoll a,
     .path-admin-tag .addstandardtags a,
@@ -641,6 +655,11 @@
     .drawer {
         background: var(--bs-gray-800, #393e4f);
     }
+    .modal-dialog.modchooser {
+        .modal-footer {
+            display: none;
+        }
+    }
     
     // Course content
     .course-content {
@@ -767,6 +786,32 @@
         }
     }
     
+    // mod_quiz
+    .jschooser .choosercontainer #chooseform .instruction,
+    .jschooser .choosercontainer #chooseform .typesummary,
+    #page-mod-quiz-edit ul.slots li.section .content,
+    .chooserdialogue .moodle-dialogue-wrap .moodle-dialogue-bd {
+        background-color: var(--bs-gray-800, #393e4f);
+        background: var(--bs-gray-800, #393e4f);
+        legend {
+            color: var(--bs-gray-300, #dee2e6);
+        }
+    }
+    .choosercontainer #chooseform .selected {
+        background-color: var(--bs-gray-600, #6c757d);
+    }
+    .path-mod-quiz #mod_quiz_navblock .qnbutton,
+    .que .info {
+        background-color: var(--bs-gray-800, #393e4f);
+    }
+    .que .info,
+    .path-mod-quiz .qnbutton.thispage .thispageholder {
+        border-color: var(--bs-gray-700, #495057);
+    }
+    .que .questionflagimage {
+        filter: invert(1);
+    }
+    
     // alert
     .alert {
         &.alert-info * {
@@ -860,6 +905,15 @@
                 border-color: transparent;
             }
         }
+        .activity-dates {
+            color: var(--bs-gray-300, #dee2e6);
+        }
+        .activity-availability {
+            background-color: var(--bs-gray-1000, #1e1e25);
+        }
+    }
+    .availability-field img {
+        filter: invert(1);
     }
     
     // yui3
@@ -881,6 +935,9 @@
     }
     
     // Icons
+    img.icon {
+        filter: invert(1);
+    }
     .subcategories .coursebox > .info > .coursename a,
     #frontpage-category-names .coursebox > .info > .coursename a,
     #frontpage-category-combo .coursebox > .info > .coursename a {
@@ -958,9 +1015,9 @@
 @media (prefers-color-scheme: dark) {
     [data-bs-theme=auto] {
         body, html {
-            color-scheme: dark;
+            // color-scheme: dark;
         }
-        @include darkmodecode;
+        // @include darkmodecode;
     }
 }
 [data-bs-theme=dark] {
