@@ -251,7 +251,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
      */
     public function get_text($menunode) {
         $text = $menunode->get_text();
-        if (strpos($text, ",")) {
+
+        if (preg_match('/^(\w+),(\w+)$/', $text, $output)) {
             $texts = explode(",", $text);
 
             return get_string($texts[0], $texts[1]);
@@ -357,7 +358,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 //        global $COURSE;
 //
 //        if (isset($COURSE->id)) {
-            return $this->render_from_template('core/navbar', $this->page->navbar);
+        return $this->render_from_template('core/navbar', $this->page->navbar);
 //        } else {
 //            $newnav = new \theme_boost\boostnavbar($this->page);
 //            return $this->render_from_template('core/navbar', $newnav);
