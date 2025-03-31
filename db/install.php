@@ -46,6 +46,7 @@ function xmldb_theme_degrade_install() {
     set_config("frontpage_avaliablecourses_text", "", "theme_degrade");
     set_config("frontpage_avaliablecourses_instructor", 1, "theme_degrade");
 
+    set_config("top_scroll", 0, "theme_degrade");
     set_config("top_scroll_background_color", "#5C5D5F", "theme_degrade");
     set_config("top_scroll_text_color", "#FFFFFF", "theme_degrade");
 
@@ -102,6 +103,12 @@ function xmldb_theme_degrade_install() {
         set_config("frontpage_about_text_{$i}", "", "theme_degrade");
     }
 
+    set_config("enable_accessibility", 1, "theme_degrade");
+    set_config("enable_vlibras", 0, "theme_degrade");
+
+    set_config("background_course_image", 0, "theme_degrade");
+    set_config("customfield_picture_missing", "", "theme_degrade");
+
     set_config("frontpage_about_enable", 0, "theme_degrade");
     set_config("frontpage_about_logo", "", "theme_degrade");
     set_config("frontpage_about_title", get_string("frontpage_about_title_default", "theme_degrade"));
@@ -144,7 +151,7 @@ function xmldb_theme_degrade_install() {
     set_config("contact_phone", "", "theme_degrade");
     set_config("contact_email", "", "theme_degrade");
 
-    set_config("login_theme", "theme_image_login", "theme_degrade");
+    set_config("login_theme", "login_theme_login", "theme_degrade");
     set_config("login_backgroundfoto", "", "theme_degrade");
     set_config("login_backgroundcolor", "", "theme_degrade");
 
