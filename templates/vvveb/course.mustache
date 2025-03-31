@@ -55,7 +55,9 @@
                         {{/offprice}}
                     </div>
                 {{/cursopreco}}
-                <a href="{{{link}}}" class="btn btn-primary">{{{access}}}</a>
+                {{#access}}
+                    <a href="{{{link}}}" class="btn btn-primary">{{{access}}}</a>
+                {{/access}}
             </div>
         </div>
     </div>
