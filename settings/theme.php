@@ -41,7 +41,7 @@ $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 // Cores do topo.
-if ($CFG->theme != "boost_training" && $CFG->theme != "degrade") {
+if ($CFG->theme != "eadtraining" && $CFG->theme != "degrade") {
 
     $setting = new admin_setting_configcheckbox('theme_degrade/top_scroll',
         get_string('top_scroll', 'theme_degrade'),
