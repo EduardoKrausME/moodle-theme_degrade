@@ -302,11 +302,11 @@
         color: #fff;
     }
 }
-@media (prefers-color-scheme: dark) {
-    [data-bs-theme=auto] {
-        @include darkmodelogin;
-    }
-}
+//@media (prefers-color-scheme: dark) {
+//    [data-bs-theme=auto] {
+//        @include darkmodelogin;
+//    }
+//}
 [data-bs-theme=dark] {
     @include darkmodelogin;
 }
