@@ -21,14 +21,14 @@
  * Moodle's new Boost theme engine
  *
  * @package   theme_degrade
- * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version = 2025033102;
-$plugin->release = "8.3.12";
+$plugin->version = 2025082800;
+$plugin->release = "8.3.13";
 $plugin->maturity = MATURITY_STABLE;
 $plugin->requires = 2022041900;
 $plugin->component = "theme_degrade";
