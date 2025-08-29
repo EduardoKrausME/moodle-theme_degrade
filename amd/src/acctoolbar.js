@@ -361,7 +361,7 @@ degrade_AccessTool.prototype.imagesAddTitles = function() {
         else {
             var title = document.createElement('span');
             title.className = 'mic-toolbox-images-titles';
-            title.textContent = 'image without text';
+            title.textContent = M.util.get_string("acctoolbar_image_without_alt", "theme_degrade");
             img.parentNode.insertBefore(title, img);
         }
     }
