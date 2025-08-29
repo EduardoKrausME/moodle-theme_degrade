@@ -20,7 +20,7 @@
  * Moodle's new Boost theme engine
  *
  * @package   theme_degrade
- * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,7 +34,7 @@ use theme_degrade\core_hook_output;
 function theme_degrade_page_init(moodle_page $page) {
     global $CFG;
 
-    $CFG->enableuserfeedback = false;
+    $CFG->enableuserfeedback = " ";
 }
 
 /**
@@ -178,16 +178,33 @@ function theme_degrade_get_html_for_settings(renderer_base $output, moodle_page 
 function theme_degrade_get_logo($local = null) {
     global $SITE;
 
-    $logocolor = get_config("theme_degrade", "logo_color");
-    $logowrite = get_config("theme_degrade", "logo_write");
-    if (empty($logocolor)) {
-        return "<span>{$SITE->shortname}</span>";
+    $callbacks = get_plugins_with_function("theme_degrade_get_logo");
+    foreach ($callbacks as $plugintype => $plugins) {
+        foreach ($plugins as $plugin => $callback) {
+            $urllogo = $callback();
+
+            if ($urllogo) {
+                $logo = "<img class='logo-color' src='{$urllogo->out(false)}' alt='{$SITE->fullname}'>";
+                $logo .= "<img class='logo-write' src='{$urllogo->out(false)}' alt='{$SITE->fullname}'>";
+
+                return $logo;
+            }
+        }
     }
 
     $cache = \cache::make("theme_degrade", "logo_cache");
     $cachekey = "theme_degrade_get_logo";
     if ($cache->has($cachekey)) {
         return $cache->get($cachekey);
+    }
+
+    $logocolor = get_config("theme_degrade", "logo_color");
+    $logowrite = get_config("theme_degrade", "logo_write");
+    if (empty($logocolor)) {
+        $logo= "<span>{$SITE->shortname}</span>";
+
+        $cache->set($cachekey, $logo);
+        return $logo;
     }
 
     $urllogocolor = moodle_url::make_pluginfile_url(context_system::instance()->id, "theme_degrade", "logo_color", "",
@@ -653,7 +670,7 @@ function theme_degrade_process_css($css, $theme) {
 
     // Color on roll page.
     $topscroll = "";
-    if ($CFG->theme != "boost_training" && $CFG->theme != "degrade") {
+    if ($CFG->theme != "training" && $CFG->theme != "degrade") {
         $topscrollbackground = theme_degrade_get_setting("top_scroll_background_color");
         $topscrolltext = theme_degrade_get_setting("top_scroll_text_color");
 

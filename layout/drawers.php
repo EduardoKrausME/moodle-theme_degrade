@@ -18,7 +18,7 @@
  * A drawer based layout for the boost theme.
  *
  * @package   theme_degrade
- * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -111,14 +111,6 @@ $templatedata = [
     'addblockbutton' => $addblockbutton,
 ];
 
-if (isset($_SESSION['return_course_id']) && isset($_SESSION['refcourse_course_id'])) {
-    if ($_SESSION['refcourse_course_id'] == $COURSE->id) {
-        $templatedata['return_course_id'] = $_SESSION['return_course_id'];
-        $templatedata['return_course_name'] = $_SESSION['return_course_name'];
-        $templatedata['refcourse_course_id'] = $_SESSION['refcourse_course_id'];
-    }
-}
-
 require_once("{$CFG->dirroot}/theme/degrade/classes/template/frontapage_data.php");
 $templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_data::topo());
 
@@ -127,6 +119,7 @@ $templatedata = array_merge($templatedata, \theme_degrade\template\footer_data::
 
 $contextcourse = context_course::instance($COURSE->id);
 $courseupdate = has_capability('moodle/course:update', $contextcourse);
+
 if ( optional_param("embed-frame-top", 0, PARAM_INT)) {
     echo $OUTPUT->render_from_template('theme_degrade/drawers_embed', $templatedata);
 } else {

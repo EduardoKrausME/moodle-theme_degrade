@@ -18,7 +18,7 @@
  * Class core_hook_output
  *
  * @package   theme_degrade
- * @copyright 2024 Eduardo Kraus {@link http://eduardokraus.com}
+ * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -52,7 +52,7 @@ class core_hook_output {
 
         $darkmode = "auto";
         if (isset($_COOKIE["darkmode"])) {
-            $darkmode = $_COOKIE["darkmode"];
+            $darkmode = $darkmode = clean_param($_COOKIE["darkmode"], PARAM_TEXT);;
         }
 
         if (!isguestuser()) {
@@ -323,6 +323,7 @@ class core_hook_output {
         }
 
         if (get_config("theme_degrade", "enable_accessibility")) {
+            $PAGE->requires->strings_for_js(["acctoolbar_image_without_alt"], "theme_degrade");
             $PAGE->requires->js_call_amd("theme_degrade/acctoolbar", "init");
         }
 
