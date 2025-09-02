@@ -52,19 +52,10 @@
 
 {{{ output.doctype }}}
 <div {{{bodyattributes}}}>
-
-    <div id="page" data-region="mainpage" data-usertour="scroller"
-         class="drawers {{#courseindexopen}}show-drawer-left{{/courseindexopen}} {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container">
-        <div id="topofscroll" class="main-inner">
-            <div id="page-content" class="pb-3 d-print-block">
-                <div id="region-main-box">
-                    <section id="region-main" class="position-relative" aria-label="{{#str}}content{{/str}}">
-                        {{{output.main_content}}}
-                    </section>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{{output.main_content}}}
     {{{output.standard_after_main_region_html}}}
 </div>
-<html><body></body></html>
+
+<html>
+<body></body>
+</html>

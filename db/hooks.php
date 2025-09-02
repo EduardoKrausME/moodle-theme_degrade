@@ -18,19 +18,22 @@
  * Hooks
  *
  * @package   theme_degrade
- * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+use core\hook\output\before_footer_html_generation;
+use core\hook\output\before_html_attributes;
 
 defined('MOODLE_INTERNAL') || die;
 
 $callbacks = [
     [
-        "hook" => \core\hook\output\before_html_attributes::class,
-        "callback" => "\\theme_degrade\\core_hook_output::before_html_attributes",
+        "hook" => before_html_attributes::class,
+        "callback" => '\theme_degrade\core_hook_output::before_html_attributes',
     ],
     [
-        "hook" => \core\hook\output\before_footer_html_generation::class,
-        "callback" => "\\theme_degrade\\core_hook_output::before_footer_html_generation",
+        "hook" => before_footer_html_generation::class,
+        "callback" => 'theme_degrade\core_hook_output::before_footer_html_generation',
     ],
 ];

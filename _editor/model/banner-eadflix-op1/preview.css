@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&family=Oswald:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;700&family=Raleway:wght@400;700&family=Roboto:wght@400;700&display=swap");
+.owl-course-banner .course-banner-item {
+  padding: 0;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-left: -1px;
+  max-width: 100%;
+  display: block;
+}
+.owl-course-banner .course-banner-item .course-bg-banner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+.owl-course-banner .course-banner-item .course-bg-banner .course-bg-images,
+.owl-course-banner .course-banner-item .course-bg-banner .video-bg-player {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.owl-course-banner .course-banner-item .course-bg-banner .course-bg-images {
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+}
+.owl-course-banner .course-banner-item .course-bg-banner .video-bg-player {
+  position: relative;
+  padding-top: 36%;
+}
+@media (max-width: 767px) {
+  .owl-course-banner .course-banner-item .course-bg-banner .video-bg-player {
+    padding-top: 45%;
+  }
+}
+@media (max-width: 650px) {
+  .owl-course-banner .course-banner-item .course-bg-banner .video-bg-player {
+    padding-top: 50%;
+  }
+}
+@media (max-width: 550px) {
+  .owl-course-banner .course-banner-item .course-bg-banner .video-bg-player {
+    padding-top: 79%;
+  }
+}
+.owl-course-banner .course-banner-item .course-bg-banner .video-bg-player video,
+.owl-course-banner .course-banner-item .course-bg-banner .video-bg-player iframe {
+  border: none;
+  line-height: 1;
+  margin: 0;
+  max-width: 100%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  object-position: center;
+  animation: fadeIn 0.7s both;
+  animation-delay: 0.3s;
+}
+.owl-course-banner .course-banner-item .course-bg-banner .course-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, #00031c 0%, rgba(0, 3, 28, 0.7) 15.62%, rgba(0, 3, 28, 0) 31.32%), linear-gradient(90deg, #00031c 6.03%, rgba(0, 3, 28, 0) 78.64%);
+}
+.owl-course-banner .course-banner-item .course-banner-content {
+  height: 100%;
+  padding: 0 70px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 660px;
+  transition: 0.7s all;
+  transform: translatey(15px);
+}
+.owl-course-banner .course-banner-item .course-banner-content .course-title {
+  margin: 110px 0 53px;
+}
+.owl-course-banner .course-banner-item .course-banner-content .course-title a {
+  font-size: 45px;
+  line-height: 45px;
+  color: #ffffff;
+  text-decoration: none;
+}
+@media (max-width: 900px) {
+  .owl-course-banner .course-banner-item .course-banner-content .course-title {
+    margin: 40px 0 34px;
+  }
+  .owl-course-banner .course-banner-item .course-banner-content .course-title a {
+    font-size: 38px;
+  }
+}
+@media (max-width: 600px) {
+  .owl-course-banner .course-banner-item .course-banner-content .course-title {
+    margin: 20px 0 12px;
+  }
+  .owl-course-banner .course-banner-item .course-banner-content .course-title a {
+    font-size: 32px;
+  }
+}
+.owl-course-banner .course-banner-item .course-banner-content .course-text-description {
+  margin: 0 0 26px 0;
+  line-height: 24px;
+  font-weight: 400;
+  font-style: normal;
+  color: #ebebeb;
+  font-size: 16px;
+}
+.owl-course-banner .course-banner-item .course-banner-content .btn.btn-access {
+  background: linear-gradient(248.28deg, #9b5ffa 9.54%, rgba(142, 97, 255, 0) 32.8%), radial-gradient(81.71% 279.87% at -16.57% -92%, #5f99fb 28.69%, rgba(205, 219, 248, 0) 69.54%), #6f54f1;
+  color: #ffffff;
+  border: 0;
+  padding: 15px 31px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  position: relative;
+  display: inline-block;
+  transition: 0.2s ease;
+  border-radius: 10px;
+  text-align: center;
+}
+.owl-course-banner .course-banner-item .active .course-inner {
+  opacity: 1;
+  transition-delay: 0.3s;
+  transform: translatey(0);
+}
+
+.auto-container {
+  position: static;
+  max-width: 1320px;
+  padding: 0 15px;
+  margin: 0 auto;
+}

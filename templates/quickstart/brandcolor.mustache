@@ -1,0 +1,81 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_degrade/quickstart/brandcolor
+
+    Example context (json):
+    {
+        "brandcolor": "#f0f",
+        "htmlselect":  "<div options...",
+    }
+}}
+
+<div class="quickstart-collapse" id="brandcolor">
+    <a href="#brandcolor" style="background: linear-gradient(135deg, #232526 0%, #414345 100%);">
+        <span class="material-icons">palette</span>
+        <span>{{#str}}brandcolor, theme_degrade{{/str}}</span>
+    </a>
+
+    <div class="content">
+        <div class="inner-content">
+            <div class="settings-content">
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <input type="text" class="form-control" id="id_s_theme_boost_brandcolor"
+                               name="brandcolor" value="{{{brandcolor}}}">
+                        <div class="form-text text-muted">
+                            {{#str}}brandcolor_desc, theme_degrade{{/str}}
+                            {{{htmlselect}}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5>{{#str}}brandcolor_background_menu, theme_degrade{{/str}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="radio-wrapper">
+                            <label class="radio-img">
+                                <input class="form-check-input" type="radio" name="brandcolor_background_menu" value="0"
+                                       {{^brandcolor_background_menu}}checked{{/brandcolor_background_menu}} style="display: none;">
+                                <div class="marked-area">
+                                    {{#pix}}quickstart/course-sumary-none, theme_degrade{{/pix}}
+                                </div>
+                            </label>
+                            <label class="radio-img">
+                                <input class="form-check-input" type="radio" name="brandcolor_background_menu" value="1"
+                                       {{#brandcolor_background_menu}}checked{{/brandcolor_background_menu}} style="display: none;">
+                                <div class="marked-area">
+                                    {{#pix}}quickstart/brandcolor_background_menu, theme_degrade{{/pix}}
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="form-text ms-2 text-muted">
+                            {{#str}}brandcolor_background_menu_desc, theme_degrade{{/str}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            {{> theme_degrade/quickstart/btn-next-back }}
+        </div>
+    </div>
+</div>

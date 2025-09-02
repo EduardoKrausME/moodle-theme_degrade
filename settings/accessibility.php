@@ -18,7 +18,7 @@
  * Theme Settings File
  *
  * @package   theme_degrade
- * @copyright 2024 Eduardo Kraus https://eduardokraus.com/
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,8 +27,18 @@ defined('MOODLE_INTERNAL') || die;
 $page = new admin_settingpage("theme_degrade_accessibility",
     get_string("settings_accessibility_heading", "theme_degrade"));
 
+$url = "{$CFG->wwwroot}/theme/degrade/quickstart/#accessibility";
+$setting = new admin_setting_heading("theme_degrade_quickstart_accessibility", "",
+    get_string("quickstart_settings_link", "theme_degrade", $url));
+$page->add($setting);
+
 $page->add(new admin_setting_configcheckbox("theme_degrade/enable_accessibility",
     get_string("settings_accessibility", "theme_degrade"),
     get_string("settings_accessibility_desc", "theme_degrade"), 1));
 
+if ($CFG->lang == "pt_br") {
+    $page->add(new admin_setting_configcheckbox("theme_degrade/enable_vlibras",
+        "Habilitar VLibras",
+        "", 0));
+}
 $settings->add($page);

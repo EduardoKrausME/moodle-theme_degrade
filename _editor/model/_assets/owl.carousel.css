@@ -1,0 +1,269 @@
+/*
+ * 	Default theme - Owl Carousel CSS File
+ */
+/*
+ *  Owl Carousel - Core
+ */
+.owl-carousel {
+  display: none;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+  /* position relative and z-index fix webkit rendering fonts issue */
+  position: relative;
+  z-index: 1;
+}
+.owl-carousel .owl-stage {
+  position: relative;
+  -ms-touch-action: pan-Y;
+  touch-action: manipulation;
+  -moz-backface-visibility: hidden;
+  /* fix firefox animation glitch */
+}
+.owl-carousel .owl-stage:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+.owl-carousel .owl-stage-outer {
+  position: relative;
+  overflow: hidden;
+  /* fix for flashing background */
+  -webkit-transform: translate3d(0px, 0px, 0px);
+  transform: translate3d(0px, 0px, 0px);
+}
+.owl-carousel .owl-wrapper,
+.owl-carousel .owl-item {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+}
+.owl-carousel .owl-item {
+  position: relative;
+  min-height: 1px;
+  float: left;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+.owl-carousel .owl-item img {
+  display: block;
+  width: 100%;
+}
+.owl-carousel .owl-nav.disabled,
+.owl-carousel .owl-dots.disabled {
+  display: none;
+}
+.owl-carousel .owl-nav .owl-prev,
+.owl-carousel .owl-nav .owl-next,
+.owl-carousel .owl-dot {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.owl-carousel .owl-nav button.owl-prev,
+.owl-carousel .owl-nav button.owl-next,
+.owl-carousel button.owl-dot {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0 !important;
+  font: inherit;
+}
+.owl-carousel.owl-loaded {
+  display: block;
+}
+.owl-carousel.owl-loading {
+  opacity: 0;
+  display: block;
+}
+.owl-carousel.owl-hidden {
+  opacity: 0;
+}
+.owl-carousel.owl-refresh .owl-item {
+  visibility: hidden;
+}
+.owl-carousel.owl-drag .owl-item {
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.owl-carousel.owl-grab {
+  cursor: move;
+  cursor: grab;
+}
+.owl-carousel.owl-rtl {
+  direction: rtl;
+}
+.owl-carousel.owl-rtl .owl-item {
+  float: right;
+}
+
+/* No Js */
+.no-js .owl-carousel {
+  display: block;
+}
+
+/*
+ *  Owl Carousel - Animate Plugin
+ */
+.owl-carousel .animated {
+  animation-duration: 1000ms;
+  animation-fill-mode: both;
+}
+.owl-carousel .owl-animated-in {
+  z-index: 0;
+}
+.owl-carousel .owl-animated-out {
+  z-index: 1;
+}
+.owl-carousel .fadeOut {
+  animation-name: fadeOut;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/*
+ * 	Owl Carousel - Auto Height Plugin
+ */
+.owl-height {
+  transition: height 500ms ease-in-out;
+}
+
+/*
+ * 	Owl Carousel - Lazy Load Plugin
+ */
+.owl-carousel .owl-item {
+  /**
+      This is introduced due to a bug in IE11 where lazy loading combined with autoheight plugin causes a wrong
+      calculation of the height of the owl-item that breaks page layouts
+   */
+}
+.owl-carousel .owl-item .owl-lazy {
+  opacity: 0;
+  transition: opacity 400ms ease;
+}
+.owl-carousel .owl-item .owl-lazy[src^=""], .owl-carousel .owl-item .owl-lazy:not([src]) {
+  max-height: 0;
+}
+.owl-carousel .owl-item img.owl-lazy {
+  transform-style: preserve-3d;
+}
+
+.owl-theme .owl-nav {
+  margin-top: 10px;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.owl-theme .owl-nav [class*=owl-] {
+  color: #ffffff;
+  font-size: 14px;
+  margin: 5px;
+  padding: 4px 7px;
+  background: #d6d6d6;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.owl-theme .owl-nav [class*=owl-]:hover {
+  background: #869791;
+  color: #ffffff;
+  text-decoration: none;
+}
+.owl-theme .owl-nav .disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.owl-theme .owl-nav.disabled + .owl-dots {
+  margin-top: 10px;
+}
+.owl-theme .owl-dots {
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.owl-theme .owl-dots .owl-dot {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+.owl-theme .owl-dots .owl-dot span {
+  width: 10px;
+  height: 10px;
+  margin: 5px 7px;
+  background: #d6d6d6;
+  display: block;
+  -webkit-backface-visibility: visible;
+  transition: opacity 200ms ease;
+}
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+  background: #869791;
+}
+
+.owl-course-banner.owl-carousel .owl-nav > button,
+.owl-courses-content.owl-carousel .owl-nav > button {
+  position: absolute;
+  width: 28px;
+  height: 96px;
+  top: 50%;
+  margin-top: -48px;
+  background: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  text-align: center;
+  line-height: 0;
+  border-radius: 5px;
+  transition: 0.3s all;
+  cursor: pointer;
+  z-index: 1;
+}
+.owl-course-banner.owl-carousel .owl-nav > button.owl-prev span, .owl-course-banner.owl-carousel .owl-nav > button.owl-next span,
+.owl-courses-content.owl-carousel .owl-nav > button.owl-prev span,
+.owl-courses-content.owl-carousel .owl-nav > button.owl-next span {
+  font-size: 0;
+}
+.owl-course-banner.owl-carousel .owl-nav > button.owl-prev span:before, .owl-course-banner.owl-carousel .owl-nav > button.owl-next span:before,
+.owl-courses-content.owl-carousel .owl-nav > button.owl-prev span:before,
+.owl-courses-content.owl-carousel .owl-nav > button.owl-next span:before {
+  content: "";
+  width: 30px;
+  height: 30px;
+  display: block;
+  background-size: cover;
+  margin: 30px 0;
+}
+.owl-course-banner.owl-carousel .owl-nav > button.owl-prev,
+.owl-courses-content.owl-carousel .owl-nav > button.owl-prev {
+  left: 10px;
+}
+.owl-course-banner.owl-carousel .owl-nav > button.owl-prev span:before,
+.owl-courses-content.owl-carousel .owl-nav > button.owl-prev span:before {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 330.002 330.002' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fff' d='m233.25 306.001-105.75-140.996 105.75-141.004c4.971-6.628 3.627-16.03-3-21-6.627-4.971-16.03-3.626-21 3l-112.5 150.004c-4 5.333-4 12.667 0 18l112.5 149.996c2.947 3.93 7.451 6.001 12.012 6.001 3.131 0 6.29-.978 8.988-3.001 6.628-4.971 7.971-14.373 3-21z'/%3E%3C/svg%3E");
+}
+.owl-course-banner.owl-carousel .owl-nav > button.owl-next,
+.owl-courses-content.owl-carousel .owl-nav > button.owl-next {
+  right: 10px;
+}
+.owl-course-banner.owl-carousel .owl-nav > button.owl-next span:before,
+.owl-courses-content.owl-carousel .owl-nav > button.owl-next span:before {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 330.002 330.002' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fff' d='m233.252 155.997-112.5-149.996c-4.972-6.628-14.372-7.97-21-3-6.628 4.971-7.971 14.373-3 21l105.75 140.997-105.75 141.003c-4.971 6.627-3.627 16.03 3 21 2.698 2.024 5.856 3.001 8.988 3.001 4.561 0 9.065-2.072 12.012-6.001l112.5-150.004c4-5.333 4-12.667 0-18z'/%3E%3C/svg%3E");
+}
+.owl-course-banner.owl-carousel .owl-nav > button:hover,
+.owl-courses-content.owl-carousel .owl-nav > button:hover {
+  background: #7c7c7c;
+}

@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template core/user_menu
+    @template theme_degrade/core/user_menu
 
     Action link template.
 
@@ -55,7 +55,7 @@
 <div class="usermenu">
     {{#unauthenticateduser}}
         {{#url}}
-            <a class="login pl-2 btn btn-primary" href="{{url}}">{{#str}} login, core {{/str}}</a>
+            <a class="login pl-2 btn btn-primary" href="{{{url}}}">{{#str}} login, core {{/str}}</a>
         {{/url}}
     {{/unauthenticateduser}}
     {{^unauthenticateduser}}
@@ -64,75 +64,64 @@
                 {{> core/user_menu_metadata }}
             </span>
         </a>
-
     {{/unauthenticateduser}}
 </div>
 {{#js}}
-    require(["jquery", "core/modal_factory"], function($, ModalFactory) {
-        var modal;
-        ModalFactory.create({
-            type: ModalFactory.types.DEFAULT,
-            title: "{{{userfullname}}}",
-            body: `{{#avatardata}}
-                       <span class="avatar d-none {{classes}}">
-                           {{{content}}}
-                       </span>
-                   {{/avatardata}}
-                   <div class="usermenu-modal-tabs">
-                       <div class="tabs-menu-link">
-                           {{> core/user_action_menu_items }}
-                       </div>
-                       <div class="usermenu-modal-tabs-content"></div>
-                   </div>`,
-        }).then(function(_modal) {
-            window.wmodal= modal = _modal;
+    require(["jquery", "core/modal", "core/notification"], function ($, Modal, Notification) {
 
-            if (!modal.root) {
-                modal.root = modal._root;
-            }
-
-            modal.root.find(".modal-dialog").addClass("modal-xl usermenu-modal-userlinks");
-
-            modal.root.find(".modal-header").append(`
-                    <div class="user-action d-flex">
-                        <div class="languages dropdown">
-                            <a href="#" class="dropdown-toggle nav-link">{{#str}}language{{/str}}</a>
-                            <div class="submenus" style="z-index:2">
-                                {{#submenus}}
-                                    {{>core/user_action_menu_submenu_items}}
-                                {{/submenus}}
-                            </div>
-                        </div>
-                    </div>`);
-            modal.root.find(".modal-header button").appendTo(modal.root.find(".modal-header .user-action"));
-
-            usermodal_init();
+        $("#user-menu-toggle").click(function (event) {
+            event.preventDefault();
+            Modal.create({
+                title: "{{{userfullname}}}",
+                body: `
+                {{#avatardata}}
+                    <span class="avatar d-none {{{classes}}}">
+                        {{{content}}}
+                    </span>
+                {{/avatardata}}
+                <div class="usermenu-modal-tabs">
+                    <div class="tabs-menu-link">
+                        {{> core/user_action_menu_items }}
+                    </div>
+                    <div class="usermenu-modal-tabs-content"></div>
+                </div>`,
+                large: true,
+                show: true,
+                removeOnClose: true,
+            }).then(function (modal) {
+                if (!modal.root) {
+                    modal.root = modal._root;
+                }
+                usermodal_init(modal);
+            }).catch(Notification.exception);
         });
 
-        $("#user-menu-toggle").click(function(event) {
-            event.preventDefault();
-            modal.show();
+        function usermodal_init(modal) {
+            modal.root.find(".modal-dialog").addClass("usermenu-modal-userlinks modal-xl");
+            modal.root.find(".modal-header").append(`
+                <div class="user-action d-flex">
+                    <div class="languages dropdown">
+                        <a href="#" class="dropdown-toggle nav-link">{{#str}}language{{/str}}</a>
+                        <div class="submenus" style="z-index:2">
+                            {{#submenus}}{{>core/user_action_menu_submenu_items}}{{/submenus}}
+                        </div>
+                    </div>
+                </div>`);
+            modal.root.find(".usermenu-modal-tabs .tabs-menu-link a:first-child").addClass("active");
+            modal.root.find(".usermenu-modal-tabs .tabs-menu-link a").click(function () {
+                event.preventDefault();
+                setIframeUrl($(this), modal);
+            });
 
             if ($(window).width() <= 575) {
                 /* se menor não faz nada */
             } else {
-                var $menu = modal.root.find(".usermenu-modal-tabs .tabs-menu-link a:first-child");
-                console.log($menu);
-                setIframeUrl($menu);
+                let $menu = modal.root.find(".usermenu-modal-tabs .tabs-menu-link a:first-child");
+                setIframeUrl($menu, modal);
             }
-        });
-
-        function usermodal_init() {
-            modal.root.find(".usermenu-modal-tabs .tabs-menu-link a:first-child").addClass("active");
-            modal.root.find(".usermenu-modal-tabs .tabs-menu-link a").click(function() {
-                event.preventDefault();
-
-                var $menu = $(this);
-                setIframeUrl($menu);
-            });
         }
 
-        function setIframeUrl($menu) {
+        function setIframeUrl($menu, modal) {
             modal.root.find(".usermenu-modal-tabs .tabs-menu-link a").removeClass("active");
             $menu.addClass("active");
 
@@ -150,36 +139,30 @@
             } else if (href == "#") {
                 alert("ops...");
             } else {
-                if (href.includes('?')) {
-                    href += '&embed-frame-top=1';
+                if (href.includes("?")) {
+                    href += "&embed-frame-top=1";
                 } else {
-                    href += '?embed-frame-top=1';
+                    href += "?embed-frame-top=1";
                 }
 
                 if (href.includes("user/profile.php")) {
                     modal.root.find(".modal-header").addClass("show-avatar");
-
                     modal.root.find(".usermenu-modal-tabs-content").html(`
                         <div class="user m-2">
                             {{#avatardata}}
-                                <span class="avatar d-none {{classes}}">
+                                <span class="avatar d-none {{{classes}}}">
                                     {{{content}}}
                                 </span>
                             {{/avatardata}}
                             <h2>{{{userfullname}}}</h2>
                         </div>
                         <div class="usermenu-modal-tabs-content-internal"></div>`);
-
-                    modal.root.find(".usermenu-modal-tabs-content-internal")
-                            .load(href);
+                    modal.root.find(".usermenu-modal-tabs-content-internal").load(href);
                 } else {
                     modal.root.find(".modal-header").removeClass("show-avatar");
-
-                    modal.root.find(".usermenu-modal-tabs-content")
-                            .load(href);
+                    modal.root.find(".usermenu-modal-tabs-content").load(href);
                 }
             }
         }
     });
-
 {{/js}}

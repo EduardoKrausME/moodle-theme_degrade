@@ -1,0 +1,150 @@
+.section-item .content .section {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    li {
+        width: 100% !important;
+    }
+}
+body.format-weeks,
+body.format-topics {
+    &:not(.editing) {
+        .theme-block {
+            position: relative;
+            margin-top: 10px;
+            margin-left: 11px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            padding: 0 0 50px;
+            & {
+                width: calc(25% - 14px) !important;
+                @media (max-width: 1300px) {
+                    width: calc(25% - 14px);
+                }
+                @media (max-width: 992px) {
+                    width: calc(33.333% - 14px);
+                }
+                @media (max-width: 700px) {
+                    width: calc(50% - 14px);
+                }
+                @media (max-width: 575px) {
+                    width: calc(100% - 14px);
+                }
+                @media (max-width: 360px) {
+                    width: calc(100% - 14px);
+                }
+            }
+            &:hover {
+                transform: scale(1.02);
+                z-index: 21;
+            }
+            .activity-completion {
+                position: absolute;
+                top: 7px;
+                left: 2px;
+                align-self: auto !important;
+                .btn-subtle-body {
+                    --bs-btn-bg: #f1f1f1;
+                    --bs-btn-active-bg: #e1e1e1;
+                }
+                .dropdown-menu {
+                    transform: translate(110px, 33px) !important;
+                    min-width: 210px;
+                }
+            }
+            .activity-item {
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                border: none;
+                padding: 54% 7px 7px; // 54% => 16 x 9
+                border-radius: 8px 8px 0 0;
+                cursor: pointer;
+                .activity-groupmode-info {
+                    align-self: auto !important;
+                    width: auto;
+                    border: none;
+                    margin-left: 0 !important;
+                    order: 5;
+                    .groupmode-icon-info {
+                        width: min-content;
+                        display: none;
+                    }
+                    .groupmode-information {
+                        width: 20px;
+                    }
+                }
+                .activity-availability {
+                    background: transparent;
+                    padding: 4px 7px;
+                    margin-top: 0;
+                    .showmore-container.collapsed {
+                        min-width: 30px;
+                        display: block;
+                    }
+                    .showmore-container:not(.collapsed) {
+                        z-index: 99;
+                        position: absolute;
+                        top: 45px;
+                        left: 42px;
+                        background-color: #e9ecef;
+                        min-width: 170px;
+                        margin-left: -50px;
+                        padding: 0.25rem 1rem;
+                        border-radius: 16px;
+                    }
+                    .collapsed-content {
+                        font-size: 0;
+                        &:before {
+                            font-family: var(--fa-style-family, "Font Awesome 6 Free");
+                            font-weight: var(--fa-style, 900);
+                            content: "\f023";
+                            font-size: 0.8203125rem;
+                        }
+                    }
+                    .text-truncate {
+                        display: none;
+                    }
+                }
+                .activity-altcontent.activity-description {
+                    display: none;
+                }
+            }
+            .activity-grid {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                left: 9px;
+                height: 49px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .activityiconcontainer {
+                    display: none;
+                }
+                .activity-name-area {
+                    width: 100%;
+                    .activityname {
+                        .ms-1 {
+                            display: none;
+                        }
+                    }
+                }
+                .instancename {
+                    color: #4e4e4e;
+                    font-size: 14px;
+                    font-weight: 600;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2; /* Limita a 2 linhas */
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .rounded-pill {
+                    display: none;
+                }
+            }
+        }
+    }
+}

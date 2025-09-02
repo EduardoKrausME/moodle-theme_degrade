@@ -18,7 +18,7 @@
  * Upgrade file
  *
  * @package   theme_degrade
- * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,159 +26,294 @@
  * function xmldb_supervideo_upgrade
  *
  * @param int $oldversion
- *
  * @return bool
  * @throws Exception
  */
 function xmldb_theme_degrade_upgrade($oldversion) {
-    global $CFG, $DB;
+    global $DB, $USER, $CFG;
 
-    if ($oldversion < 2024031007) {
-        require_once(__DIR__ . "/install.php");
+    $color = get_config("theme_degrade", "background_color");
+    set_config("startcolor", $color, "theme_degrade");
+    set_config("brandcolor", $color, "theme_degrade");
 
-        upgrade_plugin_savepoint(true, 2024031007, "theme", "degrade");
-    }
-
-    if ($oldversion < 2024042301) {
-        set_config("footer_type", 0, "theme_degrade");
-        set_config("home_type", 0, "theme_degrade");
-
-        upgrade_plugin_savepoint(true, 2024042301, "theme", "degrade");
-    }
-
-    if ($oldversion < 2024042400) {
-        $htmldata = get_config("theme_degrade", "home_htmldata");
-        $cssdata = get_config("theme_degrade", "home_cssdata");
-        $html = "{$htmldata}\n<style>{$cssdata}</style>";
-        set_config("home_htmleditor_all", $html, "theme_degrade");
-
-        $htmldata = get_config("theme_degrade", "footer_htmldata");
-        $cssdata = get_config("theme_degrade", "footer_cssdata");
-        $html = "{$htmldata}\n<style>{$cssdata}</style>";
-        set_config("footer_htmleditor_all", $html, "theme_degrade");
-
-        upgrade_plugin_savepoint(true, 2024042400, "theme", "degrade");
-    }
-
-    if ($oldversion < 2024050700) {
-        $fonts = "<style>\n@import url('https://fonts.googleapis.com/css2?" .
-            "&family=Briem+Hand:wght@100..900&display=swap');\n</style>";
-        set_config("sitefonts", $fonts, "theme_degrade");
-
-        set_config("fontfamily_title", "Montserrat", "theme_degrade");
-        set_config("fontfamily_menus", "Roboto", "theme_degrade");
-        set_config("fontfamily_sitename", "Oswald", "theme_degrade");
-
-        upgrade_plugin_savepoint(true, 2024050700, "theme", "degrade");
-    }
-
-    if ($oldversion < 2024062001) {
-        set_config("mycourses_numblocos", 4, "theme_degrade");
-        for ($i = 1; $i <= 4; $i++) {
-            $blocks = [
-                [
-                    'url' => "{$CFG->wwwroot}/message/index.php",
-                    'title' => get_string('messages', 'message'),
-                    'icon' => 'message',
-                    'color' => "#2441e7",
-                ], [
-                    'url' => "{$CFG->wwwroot}/user/profile.php",
-                    'title' => get_string('profile'),
-                    'icon' => 'profile',
-                    'color' => "#FF1053",
-                ], [
-                    'url' => "{$CFG->wwwroot}/user/preferences.php",
-                    'title' => get_string('preferences'),
-                    'icon' => 'preferences',
-                    'color' => "#00A78E",
-                ], [
-                    'url' => "{$CFG->wwwroot}/grade/report/overview/index.php",
-                    'title' => get_string('grades', 'grades'),
-                    'icon' => 'grade',
-                    'color' => "#ECD06F",
-                ],
+    // Home Editor.
+    if (get_config('theme_degrade', 'home_type') != 0) {
+        $homehtmleditor = get_config("theme_degrade", "home_htmleditor_{$CFG->lang}");
+        if (!isset($homehtmleditor[40])) {
+            $page = (object) [
+                "local" => "home",
+                "type" => "html",
+                "title" => "Home",
+                "html" => $homehtmleditor,
+                "info" => "{}",
+                "template" => "",
+                "lang" => $USER->lang,
+                "sort" => time(),
             ];
-            $block = $blocks[$i - 1];
-
-            $fs = get_file_storage();
-            $filerecord = new stdClass();
-            $filerecord->component = 'theme_degrade';
-            $filerecord->contextid = context_system::instance()->id;
-            $filerecord->userid = get_admin()->id;
-            $filerecord->filearea = "mycourses_icon_{$i}";
-            $filerecord->filepath = '/';
-            $filerecord->itemid = 0;
-            $filerecord->filename = "{$block['icon']}.svg";
-            $file = $fs->create_file_from_pathname($filerecord,
-                "{$CFG->dirroot}/theme/degrade/pix/blocks/{$block['icon']}.svg");
-
-            set_config("mycourses_icon_{$i}", $file->get_id(), "theme_degrade");
-            set_config("mycourses_title_{$i}", $block['title'], "theme_degrade");
-            set_config("mycourses_url_{$i}", $block['url'], "theme_degrade");
-            set_config("mycourses_color_{$i}", $block['color'], "theme_degrade");
+            $DB->insert_record("theme_degrade_pages", $page);
         }
 
-        upgrade_plugin_savepoint(true, 2024062001, "theme", "degrade");
-    }
+        $listoftranslations = get_string_manager()->get_list_of_translations();
+        foreach ($listoftranslations as $langkey => $langname) {
+            if ($CFG->lang == $langkey) {
+                continue;
+            }
 
-    if ($oldversion < 2024070900) {
-
-        for ($i = 1; $i <= 4; $i++) {
-            $url = get_config("theme_degrade", "mycourses_url_{$i}");
-            $url = str_replace("{{{config.wwwroot}}}", $CFG->wwwroot, $url);
-            set_config("mycourses_url_{$i}", $url, "theme_degrade");
+            $homehtmleditor = get_config("theme_degrade", "home_htmleditor_{$langkey}");
+            if (!isset($homehtmleditor[40])) {
+                $page = (object) [
+                    "local" => "home",
+                    "type" => "html",
+                    "title" => "Home {$langkey}",
+                    "html" => $homehtmleditor,
+                    "info" => "{}",
+                    "template" => "",
+                    "lang" => $langkey,
+                    "sort" => time(),
+                ];
+                $DB->insert_record("theme_degrade_pages", $page);
+            }
         }
+    } else {
+        if (get_config("theme_degrade", "frontpage_about_enable")) {
+            $frontpage_about_logo = get_config("theme_degrade", "frontpage_about_logo");
+            $frontpage_about_title = get_config("theme_degrade", "frontpage_about_title");
+            $frontpage_about_description = get_config("theme_degrade", "frontpage_about_description");
 
-        upgrade_plugin_savepoint(true, 2024070900, "theme", "degrade");
-    }
+            if (!empty($frontpage_about_logo)) {
+                $frontpage_about_logo = '<img class="frontpage_about_logo" src="' . $frontpage_about_logo . '" alt="Logo">';
+            }
+            $about = '
+                <style>
+                    .frontpage_about_area {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 40px;
+                        margin: 40px auto;
+                        max-width: 1200px;
+                        padding: 20px;
+                    }
+                    .frontpage_about_logoarea {
+                        text-align: center;
+                    }
+                    .frontpage_about_logoarea img.frontpage_about_logo {
+                        max-height: 120px;
+                        margin-bottom: 15px;
+                    }
+                    .frontpage_about_logoarea h3 {
+                        font-size: 28px;
+                        font-weight: 600;
+                        margin-bottom: 10px;
+                        color: var(--primary, #2c3e50);
+                    }
+                    .frontpage_about_description {
+                        font-size: 16px;
+                        color: #555;
+                        margin: 0 auto 20px;
+                        max-width: 700px;
+                        line-height: 1.6;
+                    }
+                    .frontpage_about_counterbox {
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        gap: 30px;
+                    }
+                    .frontpage_about_box {
+                        background: #fff;
+                        border-radius: 12px;
+                        padding: 20px 30px;
+                        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+                        text-align: center;
+                        width: 220px;
+                        position: relative;
+                        transition: transform 0.3s ease, box-shadow 0.3s ease;
+                    }
+                    .frontpage_about_box:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+                    }
+                    .frontpage_about_box .separator {
+                        width: 40px;
+                        height: 3px;
+                        background: var(--primary, #0073e6);
+                        display: block;
+                        margin: 0 auto 15px;
+                        border-radius: 2px;
+                    }
+                    .frontpage_about_box .number {
+                        font-size: 32px;
+                        font-weight: 700;
+                        color: var(--primary, #0073e6);
+                        margin-bottom: 10px;
+                    }
+                    .frontpage_about_box .title {
+                        font-size: 16px;
+                        font-weight: 500;
+                        color: #333;
+                    }
+                </style>
+                <div class="frontpage_about_area">
+                    <div class="frontpage_about_logoarea text-center">
+                        ' . $frontpage_about_logo . '
+                        <h3>' . $frontpage_about_title . '</h3>
+                        <div class="frontpage_about_description">' . $frontpage_about_description . '</div>
+                    </div>
+                    <div class="frontpage_about_counterbox text-center">';
 
-    if ($oldversion < 2024071000) {
-        if ($CFG->theme == "degrade") {
-            $cores = [
-                'default1' => "#f55ff2",
-                'default2' => "#fd81b5",
-                'green1' => "#00c3b0",
-                'green2' => "#30e8bf",
-                'green3' => "#00bf8f",
-                'blue1' => "#007bc3",
-                'blue2' => "#000428",
-                'blue3' => "#314755",
-                'blue4' => "#7303c0",
-                'blue5' => "#00f0ff",
-                'blue6' => "#83a4d4",
-                'blue7' => "#1a2a6c",
-                'red1' => "#c10f41",
-                'red2' => "#b21f1f",
-                'red3' => "#ceac7a",
-                'red4' => "#e65c00",
-                'red5' => "#d12924",
-                'red6' => "#ff512f",
-                'red7' => "#fc354c",
-                'red8' => "#86377b",
-                'black1' => "#070000",
+            for ($i = 1; $i <= 4; $i++) {
+                $frontpage_about_text = get_config("theme_degrade", "frontpage_about_text_{$i}");
+                $frontpage_about_number = get_config("theme_degrade", "frontpage_about_number_{$i}");
+
+                if ($frontpage_about_number && isset($frontpage_about_text[3])) {
+                    $about .= '
+                        <div class="frontpage_about_box">
+                            <span class="separator"></span>
+                            <div class="number">
+                                <span class="number_counter text-primary">' . $frontpage_about_number . '</span>
+                            </div>
+                            <div class="title_counter">
+                                <h4 class="title">' . $frontpage_about_text . '</h4>
+                            </div>
+                        </div>';
+                }
+            }
+
+            $about .= "</div></div>";
+
+            $page = (object) [
+                "local" => "home",
+                "type" => "html",
+                "title" => "About",
+                "html" => $about,
+                "info" => "{}",
+                "template" => "",
+                "lang" => $USER->lang,
+                "sort" => time(),
             ];
-
-            $cor = get_config("theme_degrade", "background_color");
-            $newcolor = $cores[$cor];
-            set_config("background_color", $newcolor, "theme_degrade");
+            $DB->insert_record("theme_degrade_pages", $page);
         }
-
-        upgrade_plugin_savepoint(true, 2024071000, "theme", "degrade");
     }
 
-    if ($oldversion < 2025020600) {
-        set_config("pagefonts", null, "theme_degrade");
+    if($customcss = get_config("theme_degrade", "customcss")) {
+        set_config("scss", $customcss, "theme_degrade");
+    }
 
-        $fonts = "<style>\n@import url('https://fonts.googleapis.com/css2?" .
-            "&family=Briem+Hand:wght@100..900&display=swap');\n</style>";
-        set_config("sitefonts", $fonts, "theme_degrade");
+    // Footer.
+    if (get_config("theme_degrade", "footer_type") == 0) {
+        // Footer description.
+        $footerdescription = get_config("theme_degrade", "footer_description");
+        if (isset($footerdescription[3])) {
+            set_config("footer_html_1", $footerdescription, "theme_degrade");
+        }
 
-        require_once(__DIR__ . "/version-background_course_image.php");
-        require_once(__DIR__ . "/version-2025020600.php");
+        // Links Util.
+        $footerlinkstitle = get_config("theme_degrade", "footer_links_title");
+        $footerlinks = get_config("theme_degrade", "footer_links");
+        if (!empty($footerlinkstitle) && !empty($footerlinks)) {
+            set_config("footer_title_2", $footerlinkstitle, "theme_degrade");
 
-        upgrade_plugin_savepoint(true, 2025020600, "theme", "degrade");
+            $html = theme_degrade_generate_links($footerlinks);
+            set_config("footer_html_2", $html, "theme_degrade");
+        }
+
+        // Social.
+        $footersocialtitle = get_config("theme_degrade", "footer_social_title");
+        $facebook = get_config("theme_degrade", "social_facebook");
+        $youtube = get_config("theme_degrade", "social_youtube");
+        $linkedin = get_config("theme_degrade", "social_linkedin");
+        $twitter = get_config("theme_degrade", "social_twitter");
+        $instagram = get_config("theme_degrade", "social_instagram");
+        if (!empty($footersocialtitle) && ($facebook || $youtube || $linkedin || $twitter || $instagram)) {
+            set_config("footer_title_3", $footersocialtitle, "theme_degrade");
+
+            $html = "<div>";
+            $html .= "<divclass='footer-icons'>";
+            if ($facebook) {
+                $html .= html_writer::link($facebook, html_writer::tag("i", "", ["class" => "fa fa-facebook"]),
+                    ["target" => "_blank"]);
+            }
+            if ($youtube) {
+                $html .= html_writer::link($youtube, html_writer::tag("i", "",
+                    ["class" => "fa fa-youtube"]), ["target" => "_blank"]
+                );
+            }
+            if ($linkedin) {
+                $html .= html_writer::link($linkedin, html_writer::tag("i", "",
+                    ["class" => "fa fa-linkedin"]),
+                    ["target" => "_blank"]);
+            }
+            if ($twitter) {
+                $html .= html_writer::link($twitter, html_writer::tag("i", "",
+                    ["class" => "fa fa-twitter"]), ["target" => "_blank"]
+                );
+            }
+            if ($instagram) {
+                $html .= html_writer::link($instagram, html_writer::tag("i", "",
+                    ["class" => "fa fa-instagram"]),
+                    ["target" => "_blank"]);
+            }
+            $html .= "<div><div>";
+            set_config("footer_html_3", $html, "theme_degrade");
+        }
+
+        // Contact.
+        $contacttitle = get_config("theme_degrade", "contact_footer_title");
+        $address = get_config("theme_degrade", "contact_address");
+        $phone = get_config("theme_degrade", "contact_phone");
+        $email = get_config("theme_degrade", "contact_email");
+        if ($contacttitle && ($address || $phone || $email)) {
+            set_config("footer_title_4", $contacttitle, "theme_degrade");
+
+            $html = '<div class="footer-contact">';
+            if ($address) {
+                $html .= '<p class="contact-address">' . format_text($address, FORMAT_HTML) . '</p>';
+            }
+            if ($phone) {
+                $html .= '<p class="contact-phone"><a href="tel:' . preg_replace('/\D+/', '', $phone) . '">' . s($phone) .
+                    '</a></p>';
+            }
+            if ($email) {
+                $html .= '<p class="contact-email"><a href="mailto:' . s($email) . '">' . s($email) . '</a></p>';
+            }
+            $html .= '</div>';
+
+            set_config("footer_html_4", $html, 'theme_degrade');
+        }
     }
 
     return true;
 }
 
+/**
+ * Convert Footer Links
+ *
+ * @param string $menustr Footer block link name.
+ * @return string The Footer links are return.
+ * @throws Exception
+ */
+function theme_degrade_generate_links($menustr = "") {
+    $htmlstr = "";
+    $menusettings = explode("\n", $menustr);
+    foreach ($menusettings as $menukey => $menuval) {
+        $expset = explode("|", $menuval);
+        if (!empty($expset) && isset($expset[0]) && isset($expset[1])) {
+            [$ltxt, $lurl] = $expset;
+            $ltxt = trim($ltxt);
+            $lurl = trim($lurl);
+            if (empty($ltxt)) {
+                continue;
+            }
+            if (empty($lurl)) {
+                $lurl = "javascript:void(0);";
+            }
+
+            $pos = strpos($lurl, "http");
+            if ($pos === false) {
+                $lurl = new moodle_url($lurl);
+            }
+            $htmlstr .= '<li><a href="' . $lurl . '">' . $ltxt . '</a></li>' . "\n";
+        }
+    }
+    return $htmlstr;
+}

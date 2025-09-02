@@ -15,35 +15,38 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * settings.php
- *
- * This is built using the boost template to allow for new theme's using
- * Moodle's new Boost theme engine
+ * Settings file
  *
  * @package   theme_degrade
- * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
 
-if (is_siteadmin()) {
-    $settings = new theme_boost_admin_settingspage_tabs('themesettingdegrade',
-        get_string('pluginname', 'theme_degrade'));
+require_once("{$CFG->dirroot}/theme/degrade/lib.php");
 
-    $ADMIN->add('themes', new admin_category('theme_degrade', get_string('pluginname', 'theme_degrade')));
+if ($hassiteconfig) {
+    $pluginname = get_string("pluginname", "theme_degrade");
+    $title = "{$pluginname} - " . get_string("advancedsettings");
+    $url = new moodle_url("/admin/settings.php?section=themesettingdegrade");
+    $ADMIN->add("themes", new admin_externalpage("theme_degrade_link1", $title, $url));
 
-    require_once(__DIR__ . "/settings/theme.php");
-    require_once(__DIR__ . "/settings/css.php");
-    require_once(__DIR__ . "/settings/accessibility.php");
-    require_once(__DIR__ . "/settings/course.php");
-    require_once(__DIR__ . "/settings/topo.php");
-    require_once(__DIR__ . "/settings/home.php");
-    require_once(__DIR__ . "/settings/slideshow.php");
-    if (get_config('theme_degrade', 'home_type') == 0) {
-        require_once(__DIR__ . "/settings/about.php");
-    }
-    require_once(__DIR__ . "/settings/mycourses.php");
-    require_once(__DIR__ . "/settings/footer.php");
-    require_once(__DIR__ . "/settings/login.php");
+    $title = "{$pluginname} - " . get_string("quickstart_title", "theme_degrade");
+    $url = new moodle_url("/theme/degrade/quickstart/");
+    $ADMIN->add("themes", new admin_externalpage("theme_degrade_link2", $title, $url));
+}
+
+if ($ADMIN->fulltree) {
+    $settings = new theme_boost_admin_settingspage_tabs(
+        "themesettingdegrade",
+        get_string("configtitle", "theme_degrade")
+    );
+
+    require_once("settings/general.php");
+    require_once("settings/advanced.php");
+    require_once("settings/userprofile.php");
+    require_once("settings/accessibility.php");
+    require_once("settings/course.php");
+    require_once("settings/footer.php");
 }

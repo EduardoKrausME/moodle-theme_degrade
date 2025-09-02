@@ -17,7 +17,7 @@
 {{!
     @template theme_degrade/maintenance
 
-    Boost maintenance layout template.
+    Theme maintenance layout template.
 
     Context variables required for this template:
     * output - The core renderer for the page
@@ -32,44 +32,44 @@
          }
     }
 }}
-{{{output.doctype}}}
-<html {{{output.htmlattributes}}}>
+{{{ output.doctype }}}
+<html {{{ output.htmlattributes }}}>
 <head>
-    <title>{{{output.page_title}}}</title>
-    <link rel="shortcut icon" href="{{{output.favicon}}}"/>
-    {{{output.standard_head_html}}}
+    <title>{{{ output.page_title }}}</title>
+    <link rel="shortcut icon" href="{{{ output.favicon }}}"/>
+    {{{ output.standard_head_html }}}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body data-templates="maintenance" {{{output.body_attributes}}}>
+<body {{{ output.body_attributes }}}>
 {{> core/local/toast/wrapper}}
-<div id="page-wrapper position-relative">
 
-    {{{output.standard_top_of_body_html}}}
-    <div class="header-main ">
-        <div class="container">
-            <nav class="navbar navbar-light bg-faded ">
-                <a href="{{{config.wwwroot}}}/?redirect=0" class="navbar-brand">
-                    <span class="site-name hidden-sm-down">{{{sitename}}}</span>
-                </a>
-            </nav>
-        </div>
-    </div>
+<div id="page-wrapper">
+
+    {{{ output.standard_top_of_body_html }}}
 
     <div id="page" class="container pb-3">
-        <div class="row ">
-            <div class="col-12 py-3">
-                {{{output.page_heading}}}
+
+        <div class="row">
+            <div class="col-12 py-3 page-header-headings">
+                {{{ output.page_heading }}}
             </div>
         </div>
 
         <div id="page-content" class="row">
             <section id="region-main" class="col-12" aria-label="{{#str}}content{{/str}}">
-                {{{output.main_content}}}
+                {{{ output.main_content }}}
             </section>
         </div>
+
     </div>
 </div>
 
 </body>
 </html>
+{{#js}}
+    M.util.js_pending("theme_boost/loader");
+    require(["theme_boost/loader"], function() {
+        M.util.js_complete("theme_boost/loader");
+    });
+{{/js}}

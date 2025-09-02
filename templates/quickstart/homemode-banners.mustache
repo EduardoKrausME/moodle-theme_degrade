@@ -1,0 +1,54 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_degrade/quickstart/homemode-banners
+
+    Example context (json): {}
+}}
+
+<label for="homemode_banners-{{$model}}{{/model}}">
+    <input type="checkbox" id="homemode_banners-{{$model}}{{/model}}"
+           name="homemode_banners[]" value="{{$model}}{{/model}}"
+           {{$checked}}{{/checked}}
+           style="display: none;">
+    <div class="marked-area">
+        <img src="{{{config.wwwroot}}}/theme/degrade/_editor/model/{{$model}}{{/model}}/print.png"
+             alt="{{$label}}{{/label}}">
+        <div class="label-caption">{{$label}}{{/label}}</div>
+    </div>
+</label>
+
+<script>
+    (function () {
+        const checkbox = document.getElementById("homemode_banners-{{$model}}{{/model}}");
+        // If initially marked.
+        if (checkbox.checked) {
+            // Prevent change on click on associated label.
+            const label = document.querySelector(`label[for="homemode_banners-{{$model}}{{/model}}"]`);
+            label.classList.add("not-editing"); // Add the class.
+            checkbox.classList.add("not-editing"); // Add the class.
+
+            label.addEventListener("click", function (event) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+
+                home_show_alert(`{{#str}}quickstart_alert_notdelete, theme_degrade, {{{config.wwwroot}}} {{/str}}`);
+                checkbox.checked = true;
+            });
+        }
+    })();
+</script>

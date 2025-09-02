@@ -1,0 +1,26 @@
+{
+  "title": "lang::editor_model_faq",
+  "type": "html-form",
+  "form": {
+    "title": "lang::editor_model_form_title",
+    "label": "lang::editor_model_form_label",
+    "info": "lang::editor_model_form_info",
+    "blocks": {
+      "title": {
+        "type": "text",
+        "label": "lang::editor_model_faq_title"
+      },
+      "description": {
+        "type": "textarea",
+        "label": "lang::editor_model_faq_text"
+      }
+    },
+    "scripts": [
+      "jquery",
+      "editor.js"
+    ],
+    "styles": [
+      "bootstrap"
+    ]
+  }
+}

@@ -15,34 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The embedded layout.
+ * An embedded layout for the boost theme.
  *
  * @package   theme_degrade
- * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright based on work by 2016 Damyon Wiese
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// phpcs:ignore
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
 
+$fakeblockshtml = $OUTPUT->blocks("side-pre", [], "aside", true);
+$hasfakeblocks = strpos($fakeblockshtml, 'data-block="_fake"') !== false;
+$renderer = $PAGE->get_renderer("core");
 
-echo "{$OUTPUT->doctype()}
-<html {$OUTPUT->htmlattributes()}>
-<head>
-    <title>{$OUTPUT->page_title()}</title>
-    <link rel=\"shortcut icon\" href=\"{$OUTPUT->favicon()}\"/>
-    {$OUTPUT->standard_head_html()}
-    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
-</head>
+$templatecontext = [
+    "output" => $OUTPUT,
+    "headercontent" => $PAGE->activityheader->export_for_template($renderer),
+    "hasfakeblocks" => $hasfakeblocks,
+    "fakeblocks" => $fakeblockshtml,
+];
 
-<body
-<body data-layout=\"embedded\" {$OUTPUT->body_attributes([theme_degrade_get_body_class()])}>
-{$OUTPUT->standard_top_of_body_html()}
-<div id=\"page\">
-    <div id=\"page-content\" class=\"clearfix\">
-        {$OUTPUT->main_content()}
-    </div>
-</div>
-{$OUTPUT->standard_end_of_body_html()}
-</body>
-</html>";
+echo $OUTPUT->render_from_template("theme_degrade/embedded", $templatecontext);

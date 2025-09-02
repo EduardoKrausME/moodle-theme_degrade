@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template core/full_header
+    @template theme_degrade/core/full_header
 
     This template renders the header.
 
@@ -29,42 +29,173 @@
         "welcomemessage": "welcomemessage"
     }
 }}
-<header id="page-header" class="header-maxwidth d-print-none">
-    <div class="w-100">
-
-        <div class="container d-flex align-items-center">
-            {{^welcomemessage}}
-                {{#contextheader}}
-                    <div class="me-auto">
-                        {{{contextheader}}}
-                    </div>
-                {{/contextheader}}
-            {{/welcomemessage}}
-            {{> core/welcome }}
+{{#hasnavbarcourse}}
+    <header id="page-header" class="header-maxwidth d-print-none hasnavbarcourse">
+        <div class="position-absolute hasnavbarcourse-gradient-image w-100 h-100"
+             style="background-image: url('{{{overviewfiles}}}');">
+            <div class="overlay-gradient-image"></div>
+        </div>
+        <div class="w-100 header-wrapper" style="z-index:1;">
             <div class="header-actions-container ms-auto" data-region="header-actions-container">
                 {{#headeractions}}
                     <div class="header-action ms-2">{{{.}}}</div>
                 {{/headeractions}}
+                {{#headeractions_banner_course_edit}}
+                    <div class="header-action ms-2">
+                        <a id="headeractions-banner-{{{headeractions_banner_courseid}}}"
+                           class="btn btn-primary text-nowrap"
+                           href="{{{headeractions_banner_course_edithref}}}">
+                            {{#str}}course_summary_banner_edit, theme_degrade{{/str}}
+                        </a>
+                    </div>
+                {{/headeractions_banner_course_edit}}
             </div>
-        </div>
-
-        <div class="d-flex flex-wrap">
-            {{#hasnavbar}}
-                <div id="page-navbar">
-                    <div class="container">
+            <div class="d-flex flex-wrap">
+                {{#hasnavbar}}
+                    <div id="page-navbar">
                         {{{navbar}}}
                     </div>
+                {{/hasnavbar}}
+            </div>
+            <div class="course-intro-category-name">{{{categoryname}}}</div>
+            <div class="page-context-header">
+                <div class="page-header-headings">
+                    {{{contextheader}}}
                 </div>
-            {{/hasnavbar}}
-            <div class="container">
-                <div class="ms-auto d-flex">
-                    {{{pageheadingbutton}}}
-                </div>
-                <div id="course-header">
-                    {{{courseheader}}}
+            </div>
+            <dl class="course-intro-details">
+                {{#details}}
+                    <dd class="course-intro-{{{id}}}">
+                        <i class="fa {{{icon}}}"></i>
+                        <div class="info">
+                            {{#number}}
+                                <h6 class="number">{{{number}}}</h6>
+                            {{/number}}
+                            {{#link}}
+                                <a class="text" href="{{{link}}}">{{{text}}}</a>
+                            {{/link}}
+                            {{^link}}
+                                <span class="text">{{{text}}}</span>
+                            {{/link}}
+                        </div>
+                    </dd>
+                {{/details}}
+            </dl>
+        </div>
+    </header>
+{{/hasnavbarcourse}}
+
+{{#hasbannercourse}}
+    <div id="page-header-size" class="hasbannercourse-size"></div>
+    <header id="page-header"
+            class="header-maxwidth d-print-none hasbannercourse">
+        <div class="position-absolute hasnavbarcourse-gradient-image w-100 h-100"
+             style="background-image: url('{{{banner_course_file_url}}}');">
+            <div class="overlay-gradient-image"></div>
+        </div>
+        <div class="w-100 header-wrapper container" style="z-index:1;">
+            <div class="header-actions-container ms-auto" data-region="header-actions-container">
+                {{#headeractions}}
+                    <div class="header-action ms-2">{{{.}}}</div>
+                {{/headeractions}}
+                {{#headeractions_banner_course_edit}}
+                    <div class="header-action ms-2">
+                        <a id="headeractions-banner-{{{headeractions_banner_courseid}}}"
+                           class="btn btn-primary text-nowrap"
+                           href="{{{headeractions_banner_course_edithref}}}">
+                            {{#str}}course_summary_banner_edit, theme_degrade{{/str}}
+                        </a>
+                    </div>
+                {{/headeractions_banner_course_edit}}
+            </div>
+            <div class="d-flex flex-wrap">
+                {{#hasnavbar}}
+                    <div id="page-navbar">
+                        {{{navbar}}}
+                    </div>
+                {{/hasnavbar}}
+            </div>
+            <div class="course-intro-category-name">{{{categoryname}}}</div>
+            <div class="page-context-header">
+                <div class="page-header-headings">
+                    {{{contextheader}}}
                 </div>
             </div>
         </div>
+    </header>
+{{/hasbannercourse}}
 
-    </div>
-</header>
+{{^hasnavbarcourse}}
+    {{^hasbannercourse}}
+        <header id="page-header" class="header-maxwidth d-print-none">
+            <div class="w-100">
+                <div class="d-flex flex-wrap">
+                    {{#hasnavbar}}
+                        <div id="page-navbar">
+                            {{{navbar}}}
+                        </div>
+                    {{/hasnavbar}}
+                    <div class="ms-auto d-flex">
+                        {{{pageheadingbutton}}}
+                    </div>
+                    <div id="course-header">
+                        {{{courseheader}}}
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    {{^welcomemessage}}
+                        {{#contextheader}}
+                            <div class="me-auto">
+                                {{{contextheader}}}
+                            </div>
+                        {{/contextheader}}
+                    {{/welcomemessage}}
+                    {{> core/welcome }}
+                    <div class="header-actions-container ms-auto" data-region="header-actions-container">
+                        {{#headeractions}}
+                            <div class="header-action ms-2">{{{.}}}</div>
+                        {{/headeractions}}
+                        {{#headeractions_banner_course_edit}}
+                            <div class="header-action ms-2">
+                                <a id="headeractions-banner-{{{headeractions_banner_courseid}}}"
+                                   class="btn btn-primary text-nowrap"
+                                   href="{{{headeractions_banner_course_edithref}}}">
+                                    {{#str}}course_summary_banner_edit, theme_degrade{{/str}}
+                                </a>
+                            </div>
+                        {{/headeractions_banner_course_edit}}
+                    </div>
+                </div>
+            </div>
+        </header>
+    {{/hasbannercourse}}
+{{/hasnavbarcourse}}
+
+{{#js}}
+    require(["jquery", "core/modal", "core/notification"], function ($, Modal, Notification) {
+        $(`#headeractions-banner-{{{headeractions_banner_courseid}}}`).click(function (){
+            event.preventDefault();
+
+            let $link = $(this);
+
+            Modal.create({
+                title: $link.text(),
+                body: `<div id="headeractions-banner-modal" style="margin:-27px;"></div>`,
+                large: true,
+                show: true,
+                removeOnClose: true,
+            }).then(function (modal) {
+                if (!modal.root) {
+                    modal.root = modal._root;
+                }
+                modal.root.find(".modal-dialog").addClass("modal-xl");
+
+                let href = `${$link.attr("href")}&modal=1`;
+                $.get(href, function(data) {
+                    $("#headeractions-banner-modal").html(data);
+                });
+
+            }).catch(Notification.exception);
+        })
+    });
+{{/js}}

@@ -1,0 +1,60 @@
+.page-editor-preview {
+    position: relative;
+    &:before {
+        content: "Preview";
+        position: absolute;
+        top: -15px;
+        left: 2px;
+        font-size: 19px;
+        font-weight: 800;
+    }
+}
+.homemode-pages {
+    display: flex;
+    flex-direction: column;
+    .editmode-page-item {
+        padding: 10px;
+        border: 1px dashed #dee2e6;
+        border-radius: 1rem;
+        margin: 10px;
+        span.up i,
+        span.down i {
+            cursor: pointer;
+            padding: 5px;
+            font-size: 28px;
+        }
+        &:first-child .btn-move-up,
+        &:last-child .btn-move-down {
+            display: none;
+        }
+    }
+}
+.item-model {
+    margin: 0;
+    padding: 0;
+    .item-model-border {
+        border: 1px solid #adadad52;
+        padding: 3px;
+        margin: 0 3px 10px;
+        border-radius: 9px;
+    }
+}
+
+#page.drawers {
+    .main-inner {
+        &.homemode_editor [role="main"] {
+            & {
+                padding: 0 !important;
+                margin: 0 !important;
+                background: transparent !important;
+            }
+            #user-notifications,
+            #maincontent,
+            > .course-content,
+            > br,
+            > .buttons {
+                display: none;
+            }
+        }
+    }
+}

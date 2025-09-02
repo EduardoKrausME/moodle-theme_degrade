@@ -15,13 +15,15 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_degrade/editswitch
+
+    @template theme_degrade/core/editswitch
 
     This template renders the top navbar.
 
     Example context (json):
     {
         "url": "http://localhost/",
+        "sesskey": "sesskey",
         "edit": 1,
         "adminedit": true,
         "checked": "",
@@ -29,32 +31,28 @@
         "legacyseturl": "/editmode.php"
     }
 }}
-<div class="divider border-left h-75 align-self-center ml-1 mr-3"></div>
+<div class="divider border-start align-self-center ms-1 me-3"></div>
 <form action="{{{legacyseturl}}}" method="post" class="d-flex align-items-center editmode-switch-form">
     <div class="input-group">
-        <label class="mr-2 mb-0" for="{{uniqid}}-editingswitch">
-            {{#str}} editmode {{/str}}
-        </label>
-        <div class="custom-control custom-switch">
-            <input type="checkbox"
-                   name="setmode"
-                   {{#checked}}checked{{/checked}}
-                   class="custom-control-input"
-                   id="{{uniqid}}-editingswitch"
+        <div class="custom-control form-switch">
+            <input type="checkbox" {{#checked}} checked {{/checked}}
+                   id="{{{uniqid}}}-editingswitch" name="setmode"
+                   class="form-check-input"
                    data-context="{{{pagecontextid}}}"
-                   data-pageurl="{{{pageurl}}}">
+                   data-pageurl="{{{pageurl}}}"
+                   title="{{#str}} editmode {{/str}}"
+                   disabled>
             <span class="custom-control-label">&nbsp;</span>
         </div>
     </div>
-    <input type="hidden" name="sesskey" value="{{globals.config.sesskey}}">
+    <input type="hidden" name="sesskey" value="{{{sesskey}}}">
     <input type="hidden" name="pageurl" value="{{{pageurl}}}">
     <input type="hidden" name="context" value="{{{pagecontextid}}}">
-    <noscript>
-        <input type="submit" value="{{#str}}setmode, core{{/str}}">
-    </noscript>
 </form>
+
 {{#js}}
-    require(['core/edit_switch'], function(editSwitch) {
-        editSwitch.init('{{uniqid}}-editingswitch');
+    require(["core/edit_switch"], function(editSwitch) {
+        editSwitch.init("{{{uniqid}}}-editingswitch");
+        document.getElementById("{{{uniqid}}}-editingswitch").removeAttribute("disabled");
     });
 {{/js}}

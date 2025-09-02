@@ -1,0 +1,94 @@
+#form-itens {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #f9f9fb;
+    padding: 20px 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    h2 {
+        font-size: 26px;
+        margin-bottom: 10px;
+        color: #2c3e50;
+    }
+    h3 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 13px;
+        color: #34495e;
+    }
+    h6 {
+        font-size: 15px;
+        font-weight: 400;
+        color: #555555;
+        margin-bottom: 30px;
+    }
+    .itens {
+        display: flex;
+        gap: 15px;
+        flex-direction: column;
+        max-height: 650px;
+        overflow-y: auto;
+        #multi-blocks-container {
+            display: none;
+        }
+        .ui-state-highlight {
+            min-height: 100px;
+        }
+        .form-group {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #e0e6ed;
+            border-radius: 12px;
+            transition: box-shadow 0.3s ease;
+            width: 100%;
+            &:hover {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            }
+            label {
+                font-weight: 600;
+                display: block;
+                margin-bottom: 10px;
+                color: #34495e;
+                .block-delete {
+                    float: right;
+                    color: #e91e63;
+                    font-size: 22px;
+                    cursor: pointer;
+                }
+            }
+            select {
+                width: 100%;
+                padding: 10px 14px;
+                font-size: 14px;
+                border: 1px solid #cccccc;
+                border-radius: 8px;
+                background-color: #fefefe;
+                transition: border-color 0.2s ease-in-out;
+                &:focus {
+                    border-color: #3498db;
+                    outline: none;
+                    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+                }
+            }
+        }
+    }
+    &.form-itens-form {
+        max-height: initial;
+        overflow-y: initial;
+    }
+    #botoes-editor-action {
+        .btn-primary {
+            float: right;
+        }
+        &.form-itens-form {
+            display: flex;
+            justify-content: space-between;
+            .btn-primary {
+                float: none;
+            }
+            .btn-secondary {
+                margin-left: auto;
+            }
+        }
+    }
+}

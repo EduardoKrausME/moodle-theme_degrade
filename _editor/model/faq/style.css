@@ -1,0 +1,25 @@
+.faq-editor {
+  max-width: 800px;
+  margin: 50px auto 30px;
+}
+.faq-editor h3 {
+  border-bottom: 1px solid var(--bs-border-color);
+  cursor: pointer;
+}
+.faq-editor .faq-answer {
+  transition: all 0.2s;
+}
+.faq-editor .faq-answer p {
+  white-space: break-spaces;
+}
+.faq-editor .faq-hidden {
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+.faq-editor svg {
+  transition: all 0.3s;
+}
+.faq-editor svg.rotate-180 {
+  transform: rotate(180deg);
+}

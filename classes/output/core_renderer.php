@@ -14,390 +14,285 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * core_renderer.php
- *
- * @package   theme_degrade
- * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace theme_degrade\output;
 
-use custom_menu;
-use custom_menu_item;
+use context_system;
+use core_course\external\course_summary_exporter;
+use core_message\api;
+use core_message\helper;
+use Exception;
 use html_writer;
 use moodle_url;
-use single_button;
+use user_picture;
 
 /**
- * Class core_renderer
+ * Renderers to align Moodle's HTML with that expected by Bootstrap
  *
- * @package theme_degrade\output
+ * @package   theme_degrade
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright based on work by 2012 Bas Brands, www.basbrands.nl
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class core_renderer extends \theme_boost\output\core_renderer {
+class core_renderer extends \core_renderer {
 
     /**
-     * custom_menu_drawer
+     * Returns HTML to display a "Turn editing on/off" button in a form.
      *
-     * @return string
-     *
-     * @throws \coding_exception
+     * @param moodle_url $url The URL + params to send through when clicking the button
+     * @param string $method
+     * @return string HTML the button
+     * @throws Exception
      */
-    public function custom_menu_drawer() {
-        global $CFG;
-
-        if (!empty($CFG->custommenuitems)) {
-            $custommenuitems = $CFG->custommenuitems;
-        } else {
-            return '';
+    public function edit_button(moodle_url $url, string $method = "post") {
+        if ($this->page->theme->haseditswitch) {
+            return;
         }
-
-        $custommenu = new custom_menu($custommenuitems, current_language());
-        return $this->render_custom_menu($custommenu, '', '', 'custom-menu-drawer');
+        $url->param("sesskey", sesskey());
+        if ($this->page->user_is_editing()) {
+            $url->param("edit", "off");
+            $editstring = get_string("turneditingoff");
+        } else {
+            $url->param("edit", "on");
+            $editstring = get_string("turneditingon");
+        }
+        $button = new \single_button($url, $editstring, $method, \single_button::BUTTON_PRIMARY);
+        return $this->render_single_button($button);
     }
 
     /**
-     * render_custom_menu
-     *
-     * @param custom_menu $menu
-     * @param string $wrappre
-     * @param string $wrappost
-     * @param string $menuid
-     *
-     * @return string
-     *
-     * @throws \coding_exception
-     */
-    public function render_custom_menu(custom_menu $menu, $wrappre = '', $wrappost = '', $menuid = '') {
-        if (!$menu->has_children()) {
-            return '';
-        }
-
-        $content = '';
-        foreach ($menu->get_children() as $item) {
-            if (stristr($menuid, 'drawer')) {
-                $content .= $this->render_custom_menu_item_drawer($item, 0, $menuid, false);
-            } else {
-                $content .= $this->render_custom_menu_item($item, 0, $menuid);
-            }
-        }
-        $content = $wrappre . $content . $wrappost;
-        return $content;
-    }
-
-    /**
-     * render_custom_menu_item
-     *
-     * @param custom_menu_item $menunode
-     * @param int $level = 0
-     * @param string $menuid
-     *
-     * @return string
-     *
-     * @throws \coding_exception
-     */
-    protected function render_custom_menu_item(custom_menu_item $menunode, $level = 0, $menuid = '') {
-        static $submenucount = 0;
-
-        // If the node has a url, then use it, even if it has children as the URL could be that of an overview page.
-        if ($menunode->get_url() !== null) {
-            $url = $menunode->get_url();
-        } else {
-            $url = '#';
-        }
-        if ($menunode->has_children()) {
-            $content = "
-                <li class='nav-item dropdown my-auto'>
-                    <a href='{$url}'
-                       class='dropdown-item dropdown-toggle nav-link'
-                       role='button'
-                       id='{$menuid}{$submenucount}'
-                       aria-haspopup='true'
-                       aria-expanded='false'
-                       aria-controls='dropdown{$menuid}{$submenucount}'
-                       data-target='{$url}'
-                       data-toggle='dropdown'
-                       title='{$menunode->get_title()}'>
-                        {$this->get_text($menunode)}
-                    </a>
-                    <ul role='menu'
-                        class='dropdown-menu'
-                        id='dropdown{$menuid}{$submenucount}'
-                        aria-labelledby='{$menuid}{$submenucount}'>";
-
-            foreach ($menunode->get_children() as $menunode) {
-                $content .= $this->render_custom_menu_item($menunode, 1, "{$menuid}{$submenucount}");
-            }
-            $content .= '</ul></li>';
-        } else {
-            if (preg_match("/^#+$/", $this->get_text($menunode))) {
-                // This is a divider.
-                $content = html_writer::start_tag('li', ['class' => 'dropdown-divider']);
-            } else {
-                if ($level == 0) {
-                    $content = '<li class="nav-item">';
-                    $linkclass = 'nav-link';
-                } else {
-                    $content = '<li>';
-                    $linkclass = 'dropdown-item';
-                }
-
-                /* This is a bit of a cludge, but allows us to pass url, of type moodle_url with a param of
-                 * "helptarget", which when equal to "_blank", will create a link with target="_blank" to allow the link to open
-                 * in a new window.  This param is removed once checked.
-                 */
-                $attributes = [
-                    'title' => $menunode->get_title(),
-                    'class' => $linkclass,
-                ];
-                if (is_object($url) && (get_class($url) == 'moodle_url')) {
-                    $helptarget = $url->get_param('helptarget');
-                    if ($helptarget != null) {
-                        $url->remove_params('helptarget');
-                        $attributes['target'] = $helptarget;
-                    }
-                }
-                $content .= html_writer::link($url, $this->get_text($menunode), $attributes);
-
-                $content .= "</li>";
-            }
-        }
-        return $content;
-    }
-
-    /**
-     * render_custom_menu_item_drawer
-     *
-     * @param custom_menu_item $menunode
-     * @param int $level = 0
-     * @param string $menuid
-     * @param bool $indent
-     *
-     * @return string
-     *
-     * @throws \coding_exception
-     */
-    protected function render_custom_menu_item_drawer(custom_menu_item $menunode, $level = 0, $menuid = '', $indent = false) {
-        static $submenucount = 0;
-
-        if ($menunode->has_children()) {
-            $submenucount++;
-            $content = "
-                <li class='m-l-0'>
-                    <a href='#{$menuid}{$submenucount}'
-                       class='list-group-item dropdown-toggle'
-                       aria-haspopup='true'
-                       data-target='#'
-                       data-toggle'collapse'
-                       title='{$menunode->get_title()}'>
-                        {$this->get_text($menunode)}
-                    </a>
-                    <ul class='collapse' id='{$menuid}{$submenucount}'>";
-            $indent = true;
-            foreach ($menunode->get_children() as $menunode) {
-                $content .= $this->render_custom_menu_item_drawer($menunode, 1, "{$menuid}{$submenucount}", $indent);
-            }
-            $content .= '</ul></li>';
-        } else {
-            // The node doesn't have children so produce a final menuitem.
-            if ($menunode->get_url() !== null) {
-                $url = $menunode->get_url();
-            } else {
-                $url = '#';
-            }
-
-            if ($indent) {
-                $dataindent = 1;
-                $marginclass = 'm-l-1';
-            } else {
-                $dataindent = 0;
-                $marginclass = 'm-l-0';
-            }
-
-            $content = "
-                <li class='{$marginclass}'>
-                    <a href='{$url}'
-                       class='list-group-item list-group-item-action'
-                       data-key=''
-                       data-isexpandable='0'
-                       data-indent='{$dataindent}'
-                       data-showdivider='0'
-                       data-type='1'
-                       data-nodetype='1'
-                       data-collapse='0'
-                       data-forceopen='1'
-                       data-isactive='1'
-                       data-hidden='0'
-                       data-preceedwithhr='0'
-                       data-parent-key='{$menuid}'>
-                        <div class='{$marginclass}'>
-                            {$this->get_text($menunode)}
-                        </div>
-                    </a>
-                </li>";
-        }
-        return $content;
-    }
-
-    /**
-     * Get text translate
-     *
-     * @param custom_menu_item $menunode
-     *
-     * @return string
-     *
-     * @throws \coding_exception
-     */
-    public function get_text($menunode) {
-        $text = $menunode->get_text();
-
-        if (preg_match('/^(\w+),(\w+)$/', $text, $output)) {
-            $texts = explode(",", $text);
-
-            return get_string($texts[0], $texts[1]);
-        }
-
-        return $text;
-    }
-
-    /**
-     * Print a message along with button choices for Continue/Cancel
-     *
-     * If a string or moodle_url is given instead of a single_button, method defaults to post.
-     *
-     * @param string $message                           The question to ask the user
-     * @param single_button|moodle_url|string $continue The single_button component representing the Continue answer.
-     *                                                  Can also be a moodle_url or string URL
-     * @param single_button|moodle_url|string $cancel   The single_button component representing the Cancel answer. Can
-     *                                                  also be a moodle_url or string URL
-     * @param array $displayoptions                     optional extra display options
-     *
-     * @return string HTML fragment
-     * @throws \coding_exception
-     * @throws \core\exception\moodle_exception
-     */
-    public function confirm($message, $continue, $cancel, array $displayoptions = []) {
-
-        // Check existing displayoptions.
-        $displayoptions['confirmtitle'] = $displayoptions['confirmtitle'] ?? get_string('confirm');
-        $displayoptions['continuestr'] = $displayoptions['continuestr'] ?? get_string('continue');
-        $displayoptions['cancelstr'] = $displayoptions['cancelstr'] ?? get_string('cancel');
-
-        if ($continue instanceof single_button) {
-            // Continue button should be primary if set to secondary type as it is the fefault.
-            if ($continue->type === 'secondary') {
-                $continue->type = 'primary';
-            }
-        } else if (is_string($continue)) {
-            $continue = new single_button(
-                new moodle_url($continue),
-                $displayoptions['continuestr'],
-                'post',
-                $displayoptions['type'] ?? 'primary'
-            );
-        } else if ($continue instanceof moodle_url) {
-            $continue = new single_button(
-                $continue,
-                $displayoptions['continuestr'],
-                'post',
-                $displayoptions['type'] ?? 'primary'
-            );
-        } else {
-            throw new coding_exception(
-                'The continue param to $OUTPUT->confirm() must be either a URL (string/moodle_url) or a single_button instance.');
-        }
-        if ($continue->type == 'primary') {
-            $continue->type = 'danger';
-        }
-
-        if ($cancel instanceof single_button) { // phpcs:disable
-            // Ok.
-        } else if (is_string($cancel)) {
-            $cancel = new single_button(new moodle_url($cancel), $displayoptions['cancelstr'], 'get');
-        } else if ($cancel instanceof moodle_url) {
-            $cancel = new single_button($cancel, $displayoptions['cancelstr'], 'get');
-        } else {
-            throw new coding_exception(
-                'The cancel param to $OUTPUT->confirm() must be either a URL (string/moodle_url) or a single_button instance.');
-        }
-
-        $attributes = [
-            'role' => 'alertdialog',
-            'aria-labelledby' => 'modal-header',
-            'aria-describedby' => 'modal-body',
-            'aria-modal' => 'true',
-        ];
-
-        $output = $this->box_start('generalbox modal modal-dialog modal-in-page show', 'notice', $attributes);
-        $output .= $this->box_start('modal-content', 'modal-content');
-        $output .= $this->box_start('modal-header px-3', 'modal-header');
-        $output .= html_writer::tag('h4', $displayoptions['confirmtitle']);
-        $output .= $this->box_end();
-        $attributes = [
-            'role' => 'alert',
-            'data-aria-autofocus' => 'true',
-        ];
-        $output .= $this->box_start('modal-body', 'modal-body', $attributes);
-        $output .= html_writer::tag('p', $message);
-        $output .= $this->box_end();
-        $output .= $this->box_start('modal-footer', 'modal-footer');
-        $output .= html_writer::tag('div', $this->render($cancel) . $this->render($continue), ['class' => 'buttons']);
-        $output .= $this->box_end();
-        $output .= $this->box_end();
-        $output .= $this->box_end();
-        return $output;
-    }
-
-    /**
-     * Renders the "breadcrumb" for all pages.
+     * Renders the "breadcrumb" for all pages in boost.
      *
      * @return string the HTML for the navbar.
+     * @throws Exception
      */
     public function navbar(): string {
-//        global $COURSE;
-//
-//        if (isset($COURSE->id)) {
-        return $this->render_from_template('core/navbar', $this->page->navbar);
-//        } else {
-//            $newnav = new \theme_boost\boostnavbar($this->page);
-//            return $this->render_from_template('core/navbar', $newnav);
-//        }
+        $newnav = new navbar($this->page);
+        return $this->render_from_template("core/navbar", $newnav);
+    }
+
+    /**
+     * Renders the context header for the page.
+     *
+     * @param array $headerinfo Heading information.
+     * @param int $headinglevel What 'h' level to make the heading.
+     *
+     * @return string A rendered context header.
+     *
+     * @throws Exception
+     */
+    public function context_header($headerinfo = null, $headinglevel = 1): string {
+        global $DB, $USER, $CFG;
+        require_once("{$CFG->dirroot}/user/lib.php");
+        $context = $this->page->context;
+        $imagedata = null;
+        $userbuttons = null;
+
+        // Make sure to use the heading if it has been set.
+        if (isset($headerinfo["heading"])) {
+            $heading = $headerinfo["heading"];
+        } else {
+            $heading = $this->page->heading;
+        }
+
+        // The user context currently has images and buttons. Other contexts may follow.
+        if ((isset($headerinfo["user"]) || $context->contextlevel == CONTEXT_USER) && $this->page->pagetype !== "my-index") {
+            if (isset($headerinfo["user"])) {
+                $user = $headerinfo["user"];
+            } else {
+                // Look up the user information if it is not supplied.
+                $user = $DB->get_record("user", ["id" => $context->instanceid]);
+            }
+
+            // If the user context is set, then use that for capability checks.
+            if (isset($headerinfo["usercontext"])) {
+                $context = $headerinfo["usercontext"];
+            }
+
+            // Only provide user information if the user is the current user, or a user which the current user can view.
+            // When checking user_can_view_profile(), either:
+            // If the page context is course, check the course context (from the page object) or;
+            // If page context is NOT course, then check across all courses.
+            $course = ($this->page->context->contextlevel == CONTEXT_COURSE) ? $this->page->course : null;
+
+            if (user_can_view_profile($user, $course)) {
+                // Use the user's full name if the heading isn't set.
+                if (empty($heading)) {
+                    $heading = fullname($user);
+                }
+
+                $imagedata = $this->user_picture($user, ["size" => 100]);
+
+                // Check to see if we should be displaying a message button.
+                if (!empty($CFG->messaging) && has_capability("moodle/site:sendmessage", $context)) {
+                    $userbuttons = [
+                        "messages" => [
+                            "buttontype" => "message",
+                            "title" => get_string("message", "message"),
+                            "url" => new moodle_url("/message/index.php", ["id" => $user->id]),
+                            "image" => "t/message",
+                            "linkattributes" => helper::messageuser_link_params($user->id),
+                            "page" => $this->page,
+                        ],
+                    ];
+
+                    if ($USER->id != $user->id) {
+                        $iscontact = api::is_contact($USER->id, $user->id);
+                        $isrequested = api::get_contact_requests_between_users($USER->id, $user->id);
+                        $contacturlaction = "";
+                        $linkattributes = helper::togglecontact_link_params(
+                            $user,
+                            $iscontact,
+                            true,
+                            !empty($isrequested),
+                        );
+                        // If the user is not a contact.
+                        if (!$iscontact) {
+                            if ($isrequested) {
+                                // We just need the first request.
+                                $requests = array_shift($isrequested);
+                                if ($requests->userid == $USER->id) {
+                                    // If the user has requested to be a contact.
+                                    $contacttitle = "contactrequestsent";
+                                } else {
+                                    // If the user has been requested to be a contact.
+                                    $contacttitle = "waitingforcontactaccept";
+                                }
+                                $linkattributes = array_merge($linkattributes, [
+                                    "class" => "disabled",
+                                    "tabindex" => "-1",
+                                ]);
+                            } else {
+                                // If the user is not a contact and has not requested to be a contact.
+                                $contacttitle = "addtoyourcontacts";
+                                $contacturlaction = "addcontact";
+                            }
+                            $contactimage = "t/addcontact";
+                        } else {
+                            // If the user is a contact.
+                            $contacttitle = "removefromyourcontacts";
+                            $contacturlaction = "removecontact";
+                            $contactimage = "t/removecontact";
+                        }
+                        $userbuttons["togglecontact"] = [
+                            "buttontype" => "togglecontact",
+                            "title" => get_string($contacttitle, "message"),
+                            "url" => new moodle_url("/message/index.php", [
+                                "user1" => $USER->id,
+                                "user2" => $user->id,
+                                $contacturlaction => $user->id,
+                                "sesskey" => sesskey(),
+                            ]),
+                            "image" => $contactimage,
+                            "linkattributes" => $linkattributes,
+                            "page" => $this->page,
+                        ];
+                    }
+
+                    $this->page->requires->string_for_js("changesmadereallygoaway", "moodle");
+                }
+            } else {
+                $heading = null;
+            }
+        }
+
+        $prefix = null;
+        if ($context->contextlevel == CONTEXT_MODULE) {
+            if ($this->page->course->format === "singleactivity") {
+                $heading = format_string($this->page->course->fullname, true, ["context" => $context]);
+            } else {
+                $heading = $this->page->cm->get_formatted_name();
+                $iconurl = $this->page->cm->get_icon_url();
+                $iconclass = $iconurl->get_param("filtericon") ? "" : "nofilter";
+                $iconattrs = [
+                    "class" => "icon activityicon $iconclass",
+                    "aria-hidden" => "true",
+                ];
+                $imagedata = html_writer::img($iconurl->out(false), "", $iconattrs);
+                $purposeclass = plugin_supports("mod", $this->page->activityname, FEATURE_MOD_PURPOSE);
+                $purposeclass .= " activityiconcontainer icon-size-6";
+                $purposeclass .= " modicon_" . $this->page->activityname;
+                $isbranded = component_callback("mod_" . $this->page->activityname, "is_branded", [], false);
+                $imagedata = html_writer::tag("div", $imagedata, ["class" => $purposeclass . ($isbranded ? " isbranded" : "")]);
+                if (!empty($USER->editing)) {
+                    $prefix = get_string("modulename", $this->page->activityname);
+                }
+            }
+        }
+
+        $contextheader = new \context_header($heading, $headinglevel, $imagedata, $userbuttons, $prefix);
+        return $this->render($contextheader);
+    }
+
+    /**
+     * See if this is the first view of the current cm in the session if it has fake blocks.
+     *
+     * (We track up to 100 cms so as not to overflow the session.)
+     * This is done for drawer regions containing fake blocks so we can show blocks automatically.
+     *
+     * @return boolean true if the page has fakeblocks and this is the first visit.
+     */
+    public function firstview_fakeblocks(): bool {
+        global $SESSION;
+
+        $firstview = false;
+        if ($this->page->cm) {
+            if (!$this->page->blocks->region_has_fakeblocks("side-pre")) {
+                return false;
+            }
+            if (!property_exists($SESSION, "firstview_fakeblocks")) {
+                $SESSION->firstview_fakeblocks = [];
+            }
+            if (array_key_exists($this->page->cm->id, $SESSION->firstview_fakeblocks)) {
+                $firstview = false;
+            } else {
+                $SESSION->firstview_fakeblocks[$this->page->cm->id] = true;
+                $firstview = true;
+                if (count($SESSION->firstview_fakeblocks) > 100) {
+                    array_shift($SESSION->firstview_fakeblocks);
+                }
+            }
+        }
+        return $firstview;
     }
 
     /**
      * Wrapper for header elements.
      *
      * @return string HTML to display the main header.
+     * @throws Exception
      */
     public function full_header() {
+        global $DB, $CFG;
+
         $pagetype = $this->page->pagetype;
         $homepage = get_home_page();
+
         $homepagetype = null;
         // Add a special case since /my/courses is a part of the /my subsystem.
         if ($homepage == HOMEPAGE_MY || $homepage == HOMEPAGE_MYCOURSES) {
-            $homepagetype = 'my-index';
-        } else if ($homepage == HOMEPAGE_SITE) {
-            $homepagetype = 'site-index';
+            $homepagetype = "my-index";
+        } else {
+            if ($homepage == HOMEPAGE_SITE) {
+                $homepagetype = "site-index";
+            }
         }
-        if (
-            $this->page->include_region_main_settings_in_header_actions() &&
-            !$this->page->blocks->is_block_present('settings')
-        ) {
+        if ($this->page->include_region_main_settings_in_header_actions() && !$this->page->blocks->is_block_present("settings")) {
             // Only include the region main settings if the page has requested it and it doesn't already have
             // the settings block on it. The region main settings are included in the settings block and
             // duplicating the content causes behat failures.
-            $this->page->add_header_action(html_writer::div(
-                $this->region_main_settings_menu(),
-                'd-print-none',
-                ['id' => 'region-main-settings-menu']
-            ));
+            $this->page->add_header_action(
+                html_writer::div(
+                    $this->region_main_settings_menu(),
+                    "d-print-none",
+                    ["id" => "region-main-settings-menu"]
+                )
+            );
         }
 
         $header = new \stdClass();
         $header->settingsmenu = $this->context_header_settings_menu();
         $header->contextheader = $this->context_header();
-        $header->hasnavbar = empty($this->page->layout_options['nonavbar']);
+        $header->hasnavbar = empty($this->page->layout_options["nonavbar"]);
         $header->navbar = $this->navbar();
         $header->pageheadingbutton = $this->page_heading_button();
         $header->courseheader = $this->course_header();
@@ -405,7 +300,287 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if (!empty($pagetype) && !empty($homepagetype) && $pagetype == $homepagetype) {
             $header->welcomemessage = \core_user::welcome_message();
         }
-        return $this->render_from_template('core/full_header', $header);
+
+        $courseid = $this->page->course->id;
+
+        $header->hasnavbarcourse = false;
+        $header->hasbannercourse = false;
+        $hasuri = strpos($_SERVER["REQUEST_URI"], "course/view.php") || strpos($_SERVER["REQUEST_URI"], "course/section.php");
+        if ($hasuri) {
+            $showcoursesummary = get_config("theme_degrade", "course_summary_banner");
+            $showcoursesummarycourse = get_config("theme_degrade", "course_summary_banner_{$courseid}");
+            if ($showcoursesummarycourse !== false) {
+                $showcoursesummary = $showcoursesummarycourse;
+            }
+
+            if ($showcoursesummary) {
+                if ($showcoursesummary == 1) {
+                    $header->hasnavbarcourse = true;
+                    $header->categoryname = $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
+                    $header->overviewfiles = $this->get_course_image();
+
+                    if (has_capability("moodle/category:manage", $this->page->context)) {
+                        $cache = \cache::make("theme_degrade", "course_cache");
+                        $cachekey = "header_details_{$this->page->course->id}";
+                        if ($cache->has($cachekey)) {
+                            $header->details = json_decode($cache->get($cachekey));
+                        } else {
+                            $header->details = $this->get_details();
+                            $cache->set($cachekey, json_encode($header->details));
+                        }
+                    }
+                }
+                if ($showcoursesummary == 2) {
+                    $bannerfileurl = $this->get_course_image();
+                    if ($bannerfileurl) {
+                        $header->categoryname =
+                            $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
+                        $header->hasbannercourse = true;
+                        $header->banner_course_file_url = $bannerfileurl;
+                    }
+                }
+            }
+
+            $header->hasnosumary = !$header->hasbannercourse && !$header->hasnavbarcourse;
+
+            if (has_capability("moodle/site:config", $this->page->context)) {
+                $url = "{$CFG->wwwroot}/theme/degrade/quickstart/course-banner.php?courseid={$courseid}";
+                $header->headeractions_banner_course_edithref = $url;
+                $header->headeractions_banner_courseid = $courseid;
+                $header->headeractions_banner_course_edit = true;
+            }
+        }
+
+        return $this->render_from_template("theme_degrade/core/full_header", $header);
+    }
+
+    /**
+     * get_details
+     * @return array
+     * @throws Exception
+     */
+    private function get_details() {
+        global $DB;
+
+        $decsep = get_string("decsep", "langconfig");
+        $thousandssep = get_string("thousandssep", "langconfig");
+        $details = [];
+
+        // Students.
+        $sql = "
+            SELECT COUNT(DISTINCT userid)
+              FROM {role_assignments}
+             WHERE roleid    = 5
+               AND contextid = :contextid";
+        $total = $DB->get_field_sql($sql, ["contextid" => $this->page->context->id]);
+        $details[] = [
+            "id" => "users",
+            "icon" => "fa-users fa-fw",
+            "link" => false,
+            "number" => number_format($total, 0, $decsep, $thousandssep),
+            "text" => get_string("details-users", "theme_degrade"),
+        ];
+
+        // Teachers.
+        $sql = "
+            SELECT u.id, u.picture, u.firstname, u.lastname, u.firstnamephonetic, u.lastnamephonetic,
+                   u.middlename, u.alternatename, u.imagealt, u.email
+              FROM {role_assignments} ra
+              JOIN {user}              u ON u.id = ra.userid
+             WHERE ra.roleid    IN(3,4)
+               AND ra.contextid = :contextid";
+        $teachers = $DB->get_records_sql($sql, ["contextid" => $this->page->context->id]);
+        if (count($teachers)) {
+            $teachershtml = "";
+            foreach ($teachers as $teacher) {
+                // URL da imagem de perfil.
+                $userpicture = new user_picture($teacher);
+                $userpicture->size = 1; // 1 = small, 0 = large.
+                $imgurl = $userpicture->get_url($this->page)->out(false);
+
+                $name = fullname($teacher);
+                $teachershtml .= "<div><img class='teacher-icon' src='{$imgurl}' alt='{$name}'></div>";
+            }
+            $details[] = [
+                "id" => "teachers",
+                "icon" => "fa fa-graduation-cap fa-fw",
+                "link" => false,
+                "number" => "<div class='d-flex'>{$teachershtml}</div>",
+                "text" => get_string("details-teachers", "theme_degrade"),
+            ];
+        }
+
+        // Completo e em progresso.
+        $sql = "
+            SELECT DISTINCT ra.userid, cc.timecompleted
+              FROM {role_assignments}   ra
+         LEFT JOIN {course_completions} cc ON cc.userid = ra.userid
+                                          AND cc.course = :courseid
+             WHERE ra.contextid = :contextid";
+        $users = $DB->get_records_sql($sql, [
+            "contextid" => $this->page->context->id,
+            "courseid" => $this->page->course->id,
+        ]);
+
+        // Separa por status.
+        $completaram = 0;
+        $emprogresso = 0;
+
+        foreach ($users as $user) {
+            if (!empty($user->timecompleted)) {
+                $completaram++;
+            } else {
+                $emprogresso++;
+            }
+        }
+
+        $details[] = [
+            "id" => "emprogresso",
+            "icon" => "fa fa-spinner fa-fw",
+            "link" => false,
+            "number" => number_format($emprogresso, 0, $decsep, $thousandssep),
+            "text" => get_string("details-emprogresso", "theme_degrade"),
+        ];
+        $details[] = [
+            "id" => "completaram",
+            "icon" => "fa fa-user-slash fa-fw",
+            "link" => false,
+            "number" => number_format($completaram, 0, $decsep, $thousandssep),
+            "text" => get_string("details-completaram", "theme_degrade"),
+        ];
+
+        // Usuários que nunca acessaram.
+        $sql = "
+            SELECT COUNT(DISTINCT ra.userid) AS total
+              FROM {role_assignments} ra
+         LEFT JOIN {user_lastaccess}  la ON la.userid = ra.userid
+             WHERE ra.contextid = :contextid
+               AND la.timeaccess IS NULL";
+        $total = $DB->get_field_sql($sql, ["contextid" => $this->page->context->id]);
+        $details[] = [
+            "id" => "not-access",
+            "icon" => "fa fa-user-slash fa-fw",
+            "link" => false,
+            "number" => number_format($total, 0, $decsep, $thousandssep),
+            "text" => get_string("details-not-access", "theme_degrade"),
+        ];
+
+        return $details;
+    }
+
+    /**
+     * get_course_image
+     *
+     * @return false|string
+     * @throws Exception
+     */
+    public function get_course_image() {
+        $course = ($this->page->context->contextlevel == CONTEXT_COURSE) ? $this->page->course : null;
+        if (!$course) {
+            return false;
+        }
+        $bannerfileurl = theme_degrade_setting_file_url("banner_course_file_{$course->id}");
+        if ($bannerfileurl) {
+            return $bannerfileurl->out();
+        }
+        $bannerfileurl = theme_degrade_setting_file_url("banner_course_file");
+
+        if ($bannerfileurl) {
+            return $bannerfileurl->out();
+        }
+
+        if ($course) {
+            return course_summary_exporter::get_course_image($course);
+        }
+
+        return false;
+    }
+
+    /**
+     * Whether we should display the logo in the navbar.
+     *
+     * We will when there are no main logos, and we have compact logo.
+     *
+     * @return bool
+     * @throws Exception
+     */
+    public function should_display_navbar_logo() {
+        $logo = $this->get_compact_logo_url();
+        return !empty($logo);
+    }
+
+    /**
+     * Return the site's compact logo URL, if any.
+     *
+     * @param int $maxwidth The maximum width, or null when the maximum width does not matter.
+     * @param int $maxheight The maximum height, or null when the maximum height does not matter.
+     *
+     * @return moodle_url|false
+     *
+     * @throws Exception
+     */
+    public function get_compact_logo_url($maxwidth = 300, $maxheight = 300) {
+        static $return = null;
+        if ($return !== null) {
+            return $return;
+        }
+
+        $callbacks = get_plugins_with_function("theme_degrade_get_logo");
+        foreach ($callbacks as $plugintype => $plugins) {
+            foreach ($plugins as $plugin => $callback) {
+                $urllogo = $callback();
+
+                if ($urllogo) {
+                    return $return = $urllogo->out(false);
+                }
+            }
+        }
+
+        $logo = get_config("core_admin", "logocompact");
+        if (empty($logo)) {
+            return $return = false;
+        }
+
+        // Hide the requested size in the file path.
+        $filepath = ((int)$maxwidth . "x" . (int)$maxheight) . "/";
+
+        // Use $CFG->themerev to prevent browser caching when the file changes.
+        return $return = moodle_url::make_pluginfile_url(
+            context_system::instance()->id,
+            "core_admin",
+            "logocompact",
+            $filepath,
+            theme_get_revision(),
+            $logo
+        );
+    }
+
+    /**
+     * Get the course pattern image URL.
+     *
+     * @param int $courseid course id
+     * @return string URL of the course pattern image in SVG format
+     * @throws Exception
+     */
+    public function get_default_image_for_courseid($courseid): string {
+        global $CFG;
+        return "{$CFG->wwwroot}/theme/degrade/course-image-default.php?id={$courseid}";
+    }
+
+    /**
+     * Brandcolor background menu class
+     * @return string
+     * @throws Exception
+     */
+    public function brandcolor_background_menu_class() {
+        $class = [];
+        if(get_config("theme_degrade", "brandcolor_background_menu")){
+            $class[] =  "brandcolor-background";
+        }
+        if (get_config("theme_degrade", "top_scroll_fix")) {
+            $class[] = "top-scroll-fix";
+        }
+
+        return implode(" ", $class);
     }
 }
-

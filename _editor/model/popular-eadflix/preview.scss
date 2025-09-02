@@ -1,0 +1,14 @@
+@import "../popular-default/popular";
+@import "../_assets/style-preview";
+.popular-section {
+    background: #00031c;
+    color: #ffffff;
+    a, h6 a {
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 18px;
+        margin-bottom: 10px;
+        margin-top: 0;
+        font-weight: 700;
+    }
+}

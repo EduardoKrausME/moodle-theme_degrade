@@ -1,0 +1,65 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_degrade/quickstart/user-profile
+
+    Example context (json):
+    {
+        "return":  "logos",
+        "next":  "accessibility",
+        "background_profile_image_url":  "https://...",
+        "background_profile_image_extensions":  "PNG, JPG"
+    }
+}}
+
+<div class="quickstart-collapse" id="user-profile">
+    <a href="#user-profile" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <span class="material-icons">person</span>
+        <span>{{#str}}userprofilesettings,theme_degrade{{/str}}</span>
+    </a>
+    <div class="content">
+        <div class="inner-content">
+            <div class="settings-content">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5>{{#str}}background_profile_image, theme_degrade{{/str}}</h5></div>
+                    <div class="card-body">
+                        {{#background_profile_image_url}}
+                            <div class="mb-3 text-center">
+                                <img src="{{{background_profile_image_url}}}" alt="Logo atual" style="max-width:300px;max-height:100px;">
+                            </div>
+                        {{/background_profile_image_url}}
+                        <div class="mb-3">
+                            <input class="form-control" type="file" name="background_profile_image"
+                                   accept=".png,.jpg,.jpeg">
+                            <div class="form-text text-muted">
+                                {{#str}}background_profile_image_desc, theme_degrade{{/str}} <br><br>
+                                {{#str}}imageacceptedtypes, theme_degrade, {{{background_profile_image_extensions}}}{{/str}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            {{> theme_degrade/quickstart/btn-next-back }}
+        </div>
+    </div>
+</div>

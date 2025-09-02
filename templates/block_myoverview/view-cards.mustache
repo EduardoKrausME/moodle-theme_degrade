@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template block_myoverview/view-cards
+    @template theme_degrade/block_myoverview/view-cards
 
     This template renders the cards view for the myoverview block.
 
@@ -36,21 +36,35 @@
     }
 }}
 
-<div class="row">
-    {{#courses}}
-        <div class="course-box col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="frontpage-course-box">
-                <div class="course-item">
-                    <div class="course-item-img">
-                        <a href="{{viewurl}}" style="background-image: url('{{courseimage}}')">&nbsp;</a>
-                    </div>
-                    <div class="course-content">
-                        <h3 class="title instructor-text">
-                            <a href="{{viewurl}}">{{{fullname}}}</a>
-                        </h3>
-                    </div>
-                </div>
+{{< core_course/coursecards }}
+    {{$progress}}
+        {{#hasprogress}}
+            <div class="card-footer card-footer-progress border-0 w-100">
+                {{> theme_degrade/block_myoverview/progress-bar}}
             </div>
-        </div>
-    {{/courses}}
-</div>
+        {{/hasprogress}}
+    {{/progress}}
+    {{$coursename}}
+        <span class="multiline" title="{{{fullname}}}">
+            <span class="sr-only">{{{fullname}}}</span>
+            <span class="coursename">
+                {{#shortentext}}55, {{{fullname}}} {{/shortentext}}
+            </span>
+        </span>
+    {{/coursename}}
+    {{$coursecategory}}
+        {{#showcoursecategory}}
+            <span class="sr-only">
+                {{#str}}aria:coursecategory, core_course{{/str}}
+            </span>
+            <span class="categoryname text-truncate">
+                {{{coursecategory}}}
+            </span>
+        {{/showcoursecategory}}
+    {{/coursecategory}}
+    {{$divider}}
+        {{#showcoursecategory}}
+            <div class="px-1">|</div>
+        {{/showcoursecategory}}
+    {{/divider}}
+{{/ core_course/coursecards }}

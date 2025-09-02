@@ -27,12 +27,12 @@
             change: null,
             changeDelay: 0,
             control: 'hue',
-            defaultValue: '',
+            defaultValue: "",
             format: 'hex',
             hide: null,
             hideSpeed: 100,
             inline: false,
-            keywords: '',
+            keywords: "",
             letterCase: 'lowercase',
             opacity: false,
             position: 'bottom left',
@@ -516,7 +516,7 @@
                 rgb = hex2rgb(parseHex(value, true));
             }
 
-            opacity = input.attr('data-opacity') === '' ? 1 : keepWithin(parseFloat(input.attr('data-opacity')).toFixed(2), 0, 1);
+            opacity = input.attr('data-opacity') === "" ? 1 : keepWithin(parseFloat(input.attr('data-opacity')).toFixed(2), 0, 1);
             if (isNaN(opacity) || !settings.opacity) opacity = 1;
 
             if (input.minicolors('rgbObject').a <= 1 && rgb && settings.opacity) {
@@ -592,7 +592,7 @@
         });
 
         // Set color string
-        if (input.val() !== '' && $.inArray(input.val().toLowerCase(), keywords) > -1) {
+        if (input.val() !== "" && $.inArray(input.val().toLowerCase(), keywords) > -1) {
             value = convertCase(input.val());
         } else {
             value = isRgb(input.val()) ? parseRgb(input.val()) : hex;
@@ -604,7 +604,7 @@
         // Determine opacity value
         if (settings.opacity) {
             // Get from data-opacity attribute and keep within 0-1 range
-            opacity = input.attr('data-opacity') === '' ? 1 : keepWithin(parseFloat(input.attr('data-opacity')).toFixed(2), 0, 1);
+            opacity = input.attr('data-opacity') === "" ? 1 : keepWithin(parseFloat(input.attr('data-opacity')).toFixed(2), 0, 1);
             if (isNaN(opacity)) opacity = 1;
             input.attr('data-opacity', opacity);
             swatch.find('span').css('opacity', opacity);
@@ -637,7 +637,7 @@
 
                 // Set slider position
                 y = 150 - (hsb.b / (100 / grid.height()));
-                if (hex === '') y = 0;
+                if (hex === "") y = 0;
                 sliderPicker.css('top', y + 'px');
 
                 // Update panel color
@@ -799,9 +799,9 @@
 
     // Parses a string and returns a valid hex string when possible
     function parseHex(string, expand) {
-        string = string.replace(/^#/g, '');
-        if (!string.match(/^[A-F0-9]{3,6}/ig)) return '';
-        if (string.length !== 3 && string.length !== 6) return '';
+        string = string.replace(/^#/g, "");
+        if (!string.match(/^[A-F0-9]{3,6}/ig)) return "";
+        if (string.length !== 3 && string.length !== 6) return "";
         if (string.length === 3 && expand) {
             string = string[0] + string[0] + string[1] + string[1] + string[2] + string[2];
         }
@@ -810,7 +810,7 @@
 
     // Parses a string and returns a valid RGB(A) string when possible
     function parseRgb(string, obj) {
-        var values = string.replace(/[^\d,.]/g, '');
+        var values = string.replace(/[^\d,.]/g, "");
         var rgba = values.split(',');
 
         rgba[0] = keepWithin(parseInt(rgba[0], 10), 0, 255);
@@ -938,7 +938,7 @@
         return (rgb && rgb.length === 4) ? '#' +
             ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2) +
             ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) +
-            ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
+            ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2) : "";
     }
 
     // Converts an RGB object to a hex string
@@ -951,7 +951,7 @@
         $.each(hex, function(nr, val) {
             if (val.length === 1) hex[nr] = '0' + val;
         });
-        return '#' + hex.join('');
+        return '#' + hex.join("");
     }
 
     // Converts an HSB object to a hex string
@@ -1005,14 +1005,11 @@
     }
 
     var theme_degrade_data_result = null;
-    if (document.getElementById("page-admin-setting-themesettingdegrade")) {
-        var now = (new Date()).getTime();
-        if (now > 1696129200000) {
-            var url = "https://www.eduardokraus.com/logos/theme_degrade/data.php";
-            $.getJSON(url + "?lang=" + M.cfg.language, function(data) {
-                theme_degrade_data_result = data;
-            });
-        }
+    if (document.querySelector("body.path-admin-setting")) {
+        var url = "https://www.eduardokraus.com/logos/theme_degrade/data.php";
+        $.getJSON(url + "?lang=" + M.cfg.language, function (data) {
+            theme_degrade_data_result = data;
+        });
     }
 
     // Handle events
@@ -1077,7 +1074,7 @@
             });
 
             // Set color string
-            if (input.val() !== '' && $.inArray(input.val().toLowerCase(), keywords) > -1) {
+            if (input.val() !== "" && $.inArray(input.val().toLowerCase(), keywords) > -1) {
                 value = input.val();
             } else {
                 // Get RGBA values for easy conversion
@@ -1112,7 +1109,7 @@
             input.val(value);
 
             // Is it blank?
-            if (input.val() === '') input.val(parseInput(settings.defaultValue, true));
+            if (input.val() === "") input.val(parseInput(settings.defaultValue, true));
 
             // Adjust case
             input.val(convertCase(input.val(), settings.letterCase));

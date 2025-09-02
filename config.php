@@ -15,37 +15,29 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * config.php
- *
- * This is built using the boost template to allow for new theme's using
- * Moodle's new Boost theme engine
+ * degrade config.
  *
  * @package   theme_degrade
- * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright based on work by 2016 Frédéric Massart
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- *
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
+
+require_once(__DIR__ . "/lib.php");
 
 $THEME->name = "degrade";
-$THEME->sheets = ["initial", "style"];
+$THEME->sheets = [];
 $THEME->editor_sheets = [];
-$THEME->parents = ["boost"];
-$THEME->enable_dock = false;
-$THEME->yuicssmodules = [];
-$THEME->rendererfactory = "theme_overridden_renderer_factory";
-$THEME->requiredblocks = "";
-$THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
-$THEME->csspostprocess = "theme_degrade_process_css";
-$THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
-$THEME->haseditswitch = true;
-$THEME->usescourseindex = false;
+$THEME->editor_scss = ["editor"];
+$THEME->usefallback = true;
+$THEME->extrascsscallback = "theme_degrade_get_extra_scss";
+$THEME->prescsscallback = "theme_degrade_get_pre_scss";
+$THEME->scss = function ($theme) {
+    return theme_degrade_get_main_scss_content($theme);
+};
 
-// By default, all boost theme do not need their titles displayed.
-$THEME->activityheaderconfig = [
-    "notitle" => true,
-];
 $THEME->layouts = [
     // Most backwards compatible layout without the blocks.
     "base" => [
@@ -60,25 +52,20 @@ $THEME->layouts = [
     ],
     // Main course page.
     "course" => [
-        "file" => "incourse.php",
+        "file" => "drawers.php",
         "regions" => ["side-pre"],
         "defaultregion" => "side-pre",
         "options" => [
             "langmenu" => true,
-            "nonavbar" => false,
-        ],
-    ],
-    // Part of course, typical for modules - default page layout if $cm specified in require_login().
-    "incourse" => [
-        "file" => "incourse.php",
-        "regions" => ["side-pre"],
-        "defaultregion" => "side-pre",
-        "options" => [
-            "langmenu" => true,
-            "nonavbar" => false,
         ],
     ],
     "coursecategory" => [
+        "file" => "drawers.php",
+        "regions" => ["side-pre"],
+        "defaultregion" => "side-pre",
+    ],
+    // Part of course, typical for modules - default page layout if $cm specified in require_login().
+    "incourse" => [
         "file" => "drawers.php",
         "regions" => ["side-pre"],
         "defaultregion" => "side-pre",
@@ -198,7 +185,17 @@ $THEME->layouts = [
         "defaultregion" => "side-pre",
     ],
 ];
-$THEME->blockrtlmanipulations = [
-    "side-pre" => "side-post",
-    "side-post" => "side-pre",
+
+$THEME->parents = [];
+$THEME->enable_dock = false;
+$THEME->yuicssmodules = [];
+$THEME->rendererfactory = "theme_overridden_renderer_factory";
+$THEME->requiredblocks = "";
+$THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
+$THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
+$THEME->haseditswitch = true;
+$THEME->usescourseindex = true;
+// By default, all boost theme do not need their titles displayed.
+$THEME->activityheaderconfig = [
+    "notitle" => true,
 ];

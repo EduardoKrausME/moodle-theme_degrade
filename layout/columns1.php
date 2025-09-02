@@ -15,19 +15,28 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The one column layout.
+ * A one column layout for the boost theme.
  *
  * @package   theme_degrade
- * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright based on work by 2016 Damyon Wiese
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
-$bodyattributes = $OUTPUT->body_attributes([theme_degrade_get_body_class()]);
-$data = [
-    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
-    'output' => $OUTPUT,
-    'bodyattributes' => $bodyattributes,
+defined('MOODLE_INTERNAL') || die();
+
+$bodyattributes = $OUTPUT->body_attributes([]);
+$templatecontext = [
+    "sitename" => format_string($SITE->shortname, true, ["context" => context_course::instance(SITEID), "escape" => false]),
+    "output" => $OUTPUT,
+    "bodyattributes" => $bodyattributes,
 ];
 
-echo $OUTPUT->render_from_template('theme_degrade/columns1', $data);
+if (empty($PAGE->layout_options["noactivityheader"])) {
+    $header = $PAGE->activityheader;
+    $renderer = $PAGE->get_renderer("core");
+    $templatecontext["headercontent"] = $header->export_for_template($renderer);
+}
+
+echo $OUTPUT->render_from_template("theme_degrade/columns1", $templatecontext);
+

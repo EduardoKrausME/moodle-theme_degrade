@@ -1,0 +1,28 @@
+@import "../banner-eadflix-op1/banner";
+.block-home-banner-eadflix-op1 {
+    order: -1;
+}
+[data-themename=eadflix] .block-home-banner-eadflix-op1:not(.editmode-page-item) {
+    margin-top: 0;
+    margin-left: 0;
+}
+[data-themename=degrade] .block-home-banner-eadflix-op1:not(.editmode-page-item) {
+    @media (min-width: 1071px) {
+        width: calc(100% + 68px + 68px);
+        margin-top: -48px;
+        margin-left: -68px;
+        margin-right: -68px;
+    }
+    @media (max-width: 1070px) {
+        width: calc(100% + 56px + 56px);
+        margin-top: -48px;
+        margin-left: -56px;
+        margin-right: -56px;
+    }
+    @media (max-width: 767px) {
+        width: calc(100% + 8px + 8px);
+        margin-top: -48px;
+        margin-left: -8px;
+        margin-right: -8px;
+    }
+}

@@ -1,0 +1,84 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_degrade/frontpage_editor
+
+    Example context (json):
+    {
+      "homemode_pages": [
+        {
+          "id": "1",
+          "template": "text",
+          "html": "<p>Welcome..</p>",
+          "editing": true,
+        }
+      ],
+      "editing": true,
+      "homemode_page_warningnopages": false
+    }
+}}
+<div class="homemode-pages">
+    {{#homemode_pages}}
+        <div class="block block-home-{{{template}}} {{#editing}} editmode-page-item {{/editing}}" data-pageid="{{{id}}}">
+            {{{html}}}
+
+            {{#editing}}
+                <div class="d-flex align-items-center">
+                    <a class="btn btn-lg btn-success me-3"
+                       href="{{{config.wwwroot}}}/theme/degrade/_editor/editor.php?dataid={{{id}}}"
+                        >{{#str}}edit_block, theme_degrade{{/str}}</a>
+                    <a class="btn btn-lg btn-danger me-3"
+                       href="{{{config.wwwroot}}}/theme/degrade/_editor/editor.php?dataid={{{id}}}&delete=1"
+                        >{{#str}}delete{{/str}}</a>
+
+                    <div class="d-flex align-items-center ms-5 gap-1">
+                        <div class="btn btn-link btn-move-up p-1"
+                             title="{{#str}}moveup{{/str}}">
+                            <i class="fa fa-up-long"></i>
+                        </div>
+                        <div class=" btn btn-link btn-move-down p-1"
+                             title="{{#str}}movedown{{/str}}">
+                            <i class="fa fa-down-long"></i>
+                        </div>
+                    </div>
+                </div>
+            {{/editing}}
+        </div>
+    {{/homemode_pages}}
+</div>
+
+{{#editing}}
+    <div class="course-content w-100 mt-3 d-block">
+        <div class="divider bulk-hidden d-flex justify-content-center align-items-center always-visible my-3">
+            <hr>
+            <div class="divider-content px-3">
+                <div class="dropdown">
+                    <span id="frontpage_add_block"
+                          class="btn add-content d-flex justify-content-center align-items-center p-1 icon-no-margin">
+                        {{#str}}frontpage_add_block, theme_degrade{{/str}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-none" id="frontpage_add_block_modal"
+         data-title="{{#str}}frontpage_add_block_title, theme_degrade{{/str}}">
+    </div>
+{{/editing}}
+{{#homemode_page_warningnopages}}
+    <div class="alert alert-warning">{{#str}}frontpage_enable_editing, theme_degrade{{/str}}</div>
+{{/homemode_page_warningnopages}}

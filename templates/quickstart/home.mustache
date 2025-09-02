@@ -1,0 +1,321 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_degrade/quickstart/home
+
+    Example context (json):
+    {
+        "homemode":  "0",
+        "templates":  [],
+        "next":  "courses"
+    }
+}}
+
+<div class="quickstart-collapse" id="home">
+    <a href="#home" style="background: linear-gradient(90deg, #43c6ac 0%, #f8ffae 100%);">
+        <span class="material-icons">home</span>
+        <span>{{#str}} homesettings, theme_degrade {{/str}}</span>
+    </a>
+    <div class="content">
+        <div class="inner-content">
+            <div id="settings-content-home" class="settings-content card">
+                <div class="card-header"><h5>{{#str}}quickstart_home_selectstyle,theme_degrade{{/str}}</h5></div>
+
+                <div class="card-body">
+                    <div class="radio-wrapper">
+                        <label class="radio-img" data-target="tradicional">
+                            <input type="radio" name="homemode" value="0"
+                                   {{^homemode}}checked{{/homemode}} style="display:none;">
+                            <div class="marked-area">
+                                <h5>{{#str}}quickstart_home_traditional,theme_degrade{{/str}}</h5>
+                                {{#pix}}quickstart/home-tradicional, theme_degrade{{/pix}}
+                            </div>
+                        </label>
+
+                        <label class="radio-img" data-target="editor">
+                            <input type="radio" name="homemode" value="1"
+                                   {{#homemode}}checked{{/homemode}} style="display:none;">
+                            <div class="marked-area">
+                                <h5>{{#str}}quickstart_home_pagebuilder,theme_degrade{{/str}}</h5>
+                                {{#pix}}quickstart/home-editor, theme_degrade{{/pix}}
+                            </div>
+                        </label>
+                    </div>
+
+                    <div id="tradicional" class="content-box card mt-4 {{^homemode}}show{{/homemode}}">
+                        <div class="card-header"><h5>{{#str}}
+                            quickstart_home_traditional,theme_degrade{{/str}}:</h5></div>
+                        <div class="card-body">
+                            <p>{{#str}}quickstart_home_traditional_desc,theme_degrade{{/str}}</p>
+
+                            <a href="{{{config.wwwroot}}}/admin/settings.php?section=frontpagesettings"
+                               class="btn btn-info"
+                               target="_blank">
+                                ✏️ {{#str}} frontpagesettings, admin{{/str}}
+                            </a>
+                        </div>
+                    </div>
+
+                    <div id="editor" class="content-box card mt-4 {{#homemode}}show{{/homemode}}">
+                        <div class="card-header"><h4>{{#str}}
+                            quickstart_home_pagebuilder,theme_degrade{{/str}}:</h4></div>
+                        <div class="card-body">
+                            <h5>{{#str}}quickstart_home_selectsections,theme_degrade{{/str}}</h5>
+                            <p>{{#str}}quickstart_home_pagebuilder_desc,theme_degrade{{/str}}</p>
+                            <div class="alert alert-warning" id="home-warning"
+                                 style="position:absolute;opacity:0;height:0;font-size:0;overflow:hidden;transition:all .3s;"></div>
+                            <div class="container check-img">
+                                <div>
+
+                                    {{< theme_degrade/quickstart/homemode-banners}}
+                                        {{$model}}banner-eadflix-op1{{/model}}
+                                        {{$checked}}
+                                            {{#templates.banner-eadflix-op1}}checked{{/templates.banner-eadflix-op1}}
+                                        {{/checked}}
+                                        {{$label}}{{#str}}
+                                            editor_model_banner_video, theme_degrade {{/str}}{{/label}}
+                                    {{/ theme_degrade/quickstart/homemode-banners}}
+
+                                    {{< theme_degrade/quickstart/homemode-banners}}
+                                        {{$model}}banner-eadflix-op2{{/model}}
+                                        {{$checked}}
+                                            {{#templates.banner-eadflix-op2}}checked{{/templates.banner-eadflix-op2}}
+                                        {{/checked}}
+                                        {{$label}}{{#str}}
+                                            editor_model_banner_no_video, theme_degrade {{/str}}{{/label}}
+                                    {{/ theme_degrade/quickstart/homemode-banners}}
+                                </div>
+
+                                <div>
+                                    {{< theme_degrade/quickstart/homemode-banners}}
+                                        {{$model}}faq{{/model}}
+                                        {{$checked}}
+                                            {{#templates.faq}}checked{{/templates.faq}}
+                                        {{/checked}}
+                                        {{$label}}{{#str}} editor_model_faq, theme_degrade {{/str}}{{/label}}
+                                    {{/ theme_degrade/quickstart/homemode-banners}}
+                                </div>
+
+                                <div>
+                                    {{< theme_degrade/quickstart/homemode-banners}}
+                                        {{$model}}popular-default{{/model}}
+                                        {{$checked}}
+                                            {{#templates.popular-default}}checked{{/templates.popular-default}}
+                                        {{/checked}}
+                                        {{$label}}{{#str}}
+                                            editor_model_top_courses, theme_degrade {{/str}}{{/label}}
+                                    {{/ theme_degrade/quickstart/homemode-banners}}
+
+                                    {{< theme_degrade/quickstart/homemode-banners}}
+                                        {{$model}}popular-eadflix{{/model}}
+                                        {{$checked}}
+                                            {{#templates.popular-eadflix}}checked{{/templates.popular-eadflix}}
+                                        {{/checked}}
+                                        {{$label}}{{#str}}
+                                            editor_model_top_courses_eadflix, theme_degrade {{/str}}{{/label}}
+                                    {{/ theme_degrade/quickstart/homemode-banners}}
+
+                                    {{< theme_degrade/quickstart/homemode-banners}}
+                                        {{$model}}popular-number-eadflix{{/model}}
+                                        {{$checked}}
+                                            {{#templates.popular-number-eadflix}}
+                                                checked{{/templates.popular-number-eadflix}}
+                                        {{/checked}}
+                                        {{$label}}{{#str}}editor_model_top_courses_number_eadflix,
+                                            theme_degrade {{/str}}{{/label}}
+                                    {{/ theme_degrade/quickstart/homemode-banners}}
+                                </div>
+
+                                <div>
+                                    {{< theme_degrade/quickstart/homemode-banners}}
+                                        {{$model}}pricing-3{{/model}}
+                                        {{$checked}}
+                                            {{#templates.pricing-3}}checked{{/templates.pricing-3}}
+                                        {{/checked}}
+                                        {{$label}}{{#str}}
+                                            editor_model_prices_3, theme_degrade {{/str}}{{/label}}
+                                    {{/ theme_degrade/quickstart/homemode-banners}}
+
+                                    {{< theme_degrade/quickstart/homemode-banners}}
+                                        {{$model}}pricing-4{{/model}}
+                                        {{$checked}}
+                                            {{#templates.pricing-4}}checked{{/templates.pricing-4}}
+                                        {{/checked}}
+                                        {{$label}}{{#str}}
+                                            editor_model_prices_3, theme_degrade {{/str}}{{/label}}
+                                    {{/ theme_degrade/quickstart/homemode-banners}}
+                                </div>
+
+                                <div>
+                                    {{< theme_degrade/quickstart/homemode-banners}}
+                                        {{$model}}featured-3{{/model}}
+                                        {{$checked}}
+                                            {{#templates.featured-3}}checked{{/templates.featured-3}}
+                                        {{/checked}}
+                                        {{$label}}{{#str}}
+                                            editor_model_features_3, theme_degrade {{/str}}{{/label}}
+                                    {{/ theme_degrade/quickstart/homemode-banners}}
+                                    {{< theme_degrade/quickstart/homemode-banners}}
+                                        {{$model}}featured-4{{/model}}
+                                        {{$checked}}
+                                            {{#templates.featured-4}}checked{{/templates.featured-4}}
+                                        {{/checked}}
+                                        {{$label}}{{#str}}
+                                            editor_model_features_4, theme_degrade {{/str}}{{/label}}
+                                    {{/ theme_degrade/quickstart/homemode-banners}}
+                                    {{< theme_degrade/quickstart/homemode-banners}}
+                                        {{$model}}featured-6{{/model}}
+                                        {{$checked}}
+                                            {{#templates.featured-6}}checked{{/templates.featured-6}}
+                                        {{/checked}}
+                                        {{$label}}{{#str}}
+                                            editor_model_features_6, theme_degrade {{/str}}{{/label}}
+                                    {{/ theme_degrade/quickstart/homemode-banners}}
+                                    {{< theme_degrade/quickstart/homemode-banners}}
+                                        {{$model}}featured-8{{/model}}
+                                        {{$checked}}
+                                            {{#templates.featured-8}}checked{{/templates.featured-8}}
+                                        {{/checked}}
+                                        {{$label}}{{#str}}
+                                            editor_model_features_8, theme_degrade {{/str}}{{/label}}
+                                    {{/ theme_degrade/quickstart/homemode-banners}}
+                                </div>
+
+                                <div>
+                                    {{< theme_degrade/quickstart/homemode-banners}}
+                                        {{$model}}differentials-3{{/model}}
+                                        {{$checked}}
+                                            {{#templates.differentials-3}}checked{{/templates.differentials-3}}
+                                        {{/checked}}
+                                        {{$label}}{{#str}}
+                                            editor_model_differentials_3, theme_degrade {{/str}}{{/label}}
+                                    {{/ theme_degrade/quickstart/homemode-banners}}
+                                    {{< theme_degrade/quickstart/homemode-banners}}
+                                        {{$model}}differentials-4{{/model}}
+                                        {{$checked}}
+                                            {{#templates.differentials-4}}checked{{/templates.differentials-4}}
+                                        {{/checked}}
+                                        {{$label}}{{#str}}
+                                            editor_model_differentials_4, theme_degrade {{/str}}{{/label}}
+                                    {{/ theme_degrade/quickstart/homemode-banners}}
+                                    {{< theme_degrade/quickstart/homemode-banners}}
+                                        {{$model}}differentials-6{{/model}}
+                                        {{$checked}}
+                                            {{#templates.differentials-6}}checked{{/templates.differentials-6}}
+                                        {{/checked}}
+                                        {{$label}}{{#str}}
+                                            editor_model_differentials_6, theme_degrade {{/str}}{{/label}}
+                                    {{/ theme_degrade/quickstart/homemode-banners}}
+                                    {{< theme_degrade/quickstart/homemode-banners}}
+                                        {{$model}}differentials-8{{/model}}
+                                        {{$checked}}
+                                            {{#templates.differentials-8}}checked{{/templates.differentials-8}}
+                                        {{/checked}}
+                                        {{$label}}{{#str}}
+                                            editor_model_differentials_8, theme_degrade {{/str}}{{/label}}
+                                    {{/ theme_degrade/quickstart/homemode-banners}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{> theme_degrade/quickstart/btn-next-back }}
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // Radios
+        const labels = document.querySelectorAll("#settings-content-home .radio-img");
+        const contents = document.querySelectorAll("#settings-content-home .content-box");
+
+        labels.forEach(label => {
+            label.addEventListener("click", () => {
+                // Remove previous selection.
+                labels.forEach(l => l.classList.remove("selected"));
+                contents.forEach(c => c.classList.remove("show"));
+
+                // Mark the radio and highlight the image.
+                label.classList.add("selected");
+                label.querySelector(`input[type="radio"]`).checked = true;
+
+                // Show related content.
+                const targetId = label.getAttribute("data-target");
+                document.getElementById(targetId).classList.add("show");
+            });
+        });
+
+        // Uniques.
+        const groupPrefixes = ["banner", "popular", "pricing", "featured", "differentials"];
+        document.querySelectorAll(`[name="homemode_banners[]"]`).forEach(input => {
+            input.addEventListener("change", function () {
+                if (this.checked) {
+                    const group = groupPrefixes.find(prefix => this.value.startsWith(prefix));
+                    if (group) {
+                        if (group === "banner") { // Specific rules for "banner".
+                            // Check if there is already another banner selected with the "not-editing" class.
+                            const conflict = Array.from(document.querySelectorAll(`[name="homemode_banners[]"]`))
+                                    .find(other =>
+                                            other !== this &&
+                                            other.value.startsWith("banner-") &&
+                                            other.classList.contains("not-editing")
+                                    );
+                            if (conflict) {
+                                home_show_alert(`{{#str}}quickstart_alert_notadd, theme_degrade, {{{config.wwwroot}}} {{/str}}`);
+                                this.checked = false; // undo the current check.
+                                return;
+                            }
+                        }
+
+                        // Uncheck the other checkboxes in the same group.
+                        document.querySelectorAll(`[name="homemode_banners[]"]`).forEach(inputinput => {
+                            if (inputinput !== this && inputinput.value.startsWith(group) && !inputinput.classList.contains("not-editing")) {
+                                inputinput.checked = false;
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    });
+
+    let homeWarningTimeout = -1;
+
+    function home_show_alert(message) {
+        const warningDiv = document.getElementById("home-warning");
+
+        // Add text and animate the display.
+        warningDiv.innerHTML = message;
+        warningDiv.style.position = "relative";
+        warningDiv.style.opacity = "1";
+        warningDiv.style.fontSize = "1rem";
+        warningDiv.style.height = "initial";
+
+        clearTimeout(homeWarningTimeout);
+        // After 2 seconds, hide with animation.
+        homeWarningTimeout = setTimeout(() => {
+            warningDiv.style.opacity = "0";
+            warningDiv.style.height = "0";
+            warningDiv.style.fontSize = "0";
+            warningDiv.style.position = "absolute";
+        }, 5000);
+    }
+</script>

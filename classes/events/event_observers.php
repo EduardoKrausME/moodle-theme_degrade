@@ -18,13 +18,16 @@
  * Event observers
  *
  * @package   theme_degrade
- * @copyright 2024 Eduardo Kraus https://eduardokraus.com/
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace theme_degrade\events;
 
+use cache;
+use core\event\base;
 use core\event\course_module_deleted;
+use Exception;
 
 /**
  * Class event_observers
@@ -36,21 +39,19 @@ class event_observers {
     /**
      * Function process_event
      *
-     * @param \core\event\base $event
-     *
-     * @throws \dml_exception
-     * @throws \coding_exception
+     * @param base $event
+     * @throws Exception
      */
-    public static function process_event(\core\event\base $event) {
+    public static function process_event(base $event) {
         $eventname = str_replace("\\\\", "\\", $event->eventname);
         switch ($eventname) {
-            case "\\core\\event\\course_deleted":
-            case "\\core\\event\\course_updated":
-            case "\\core\\event\\course_created":
-            case "\\core\\event\\config_log_created":
-                \cache::make("theme_degrade", "layout_cache")->purge();
-                \cache::make("theme_degrade", "css_cache")->purge();
-                \cache::make("theme_degrade", "logo_cache")->purge();
+            case '\core\event\course_deleted':
+            case '\core\event\course_updated':
+            case '\core\event\course_created':
+            case '\core\event\config_log_created':
+                cache::make("theme_degrade", "course_cache")->purge();
+                cache::make("theme_degrade", "css_cache")->purge();
+                cache::make("theme_degrade", "frontpage_cache")->purge();
                 break;
         }
     }
@@ -60,10 +61,14 @@ class event_observers {
      *
      * @param course_module_deleted $event
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public static function course_module_deleted(course_module_deleted $event) {
         global $DB;
+
+        if (!isset($event->other['coursemodule'])) {
+            return;
+        }
 
         $coursemodule = $event->other['coursemodule'];
         $sql = "
@@ -77,11 +82,21 @@ class event_observers {
 
         $fs = get_file_storage();
         foreach ($files as $file) {
-            $f = $fs->get_file(
-                $file->contextid, $file->component,
-                $file->filearea, $file->itemid,
-                $file->filepath, $file->filename);
+            $f = $fs->get_file($file->contextid, $file->component, $file->filearea, $file->itemid, $file->filepath,
+                $file->filename);
             $f->delete();
         }
+    }
+
+    /**
+     * Function enrolment
+     *
+     * @param base $event
+     * @return void
+     */
+    public static function enrolment(base $event) {
+        $cache = cache::make("theme_degrade", "frontpage_cache");
+        $cachekey = "homemode_pages_{$event->relateduserid}";
+        $cache->delete($cachekey);
     }
 }

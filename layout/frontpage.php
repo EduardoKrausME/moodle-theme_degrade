@@ -15,59 +15,35 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * frontpage.php
+ * A frontpage based layout for the boost theme.
  *
  * @package   theme_degrade
- * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->libdir . '/behat/lib.php');
-require_once($CFG->dirroot . '/course/lib.php');
-require_once(__DIR__ . '/../lib.php');
+global $CFG, $PAGE, $OUTPUT, $USER, $DB;
+
+require_once("{$CFG->libdir}/behat/lib.php");
+require_once("{$CFG->dirroot}/course/lib.php");
 
 // Add block button in editing mode.
 $addblockbutton = $OUTPUT->addblockbutton();
 
-$USER->ajax_updatable_user_prefs['drawer-open-nav'] = PARAM_ALPHA;
-$USER->ajax_updatable_user_prefs['drawer-open-index'] = PARAM_BOOL;
-$USER->ajax_updatable_user_prefs['drawer-open-block'] = PARAM_BOOL;
+$extraclasses = ["uses-drawers"];
 
-if (isloggedin()) {
-    $courseindexopen = (get_user_preferences('drawer-open-index', true) == true);
-    $blockdraweropen = (get_user_preferences('drawer-open-block') == true);
-} else {
-    $courseindexopen = false;
-    $blockdraweropen = false;
-}
-
-if (defined('BEHAT_SITE_RUNNING')) {
-    $blockdraweropen = true;
-}
-
-$extraclasses = ['uses-drawers', theme_degrade_get_body_class()];
-if ($courseindexopen) {
-    $extraclasses[] = 'drawer-open-index';
-}
-$blockshtml = $OUTPUT->blocks('side-pre');
-$hasblocks = (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
-if (!$hasblocks) {
-    $blockdraweropen = false;
-}
-$courseindex = core_course_drawer();
-if (!$courseindex) {
-    $courseindexopen = false;
-}
+$blockshtml = $OUTPUT->blocks("side-pre");
 
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 $forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
 
 $secondarynavigation = false;
-$overflow = '';
+$overflow = "";
 if ($PAGE->has_secondary_navigation()) {
     $tablistnav = $PAGE->has_tablist_secondary_navigation();
-    $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
+    $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, "nav-tabs", true, $tablistnav);
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
     $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
     if (!is_null($overflowdata)) {
@@ -75,48 +51,74 @@ if ($PAGE->has_secondary_navigation()) {
     }
 }
 
-$primary = new \theme_degrade\navigation\primary($PAGE);
-$renderer = $PAGE->get_renderer('core');
+$primary = new core\navigation\output\primary($PAGE);
+$renderer = $PAGE->get_renderer("core");
 $primarymenu = $primary->export_for_template($renderer);
 $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions() && !$PAGE->has_secondary_navigation();
-// If the settings menu will be included in the header then don't add it here.
+// If the settings menu will be included in the header then don"t add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 
 $header = $PAGE->activityheader;
 $headercontent = $header->export_for_template($renderer);
-$templatedata = [
-    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
-    'output' => $OUTPUT,
-    'sidepreblocks' => $blockshtml,
-    'hasblocks' => $hasblocks,
-    'bodyattributes' => $bodyattributes,
-    'courseindexopen' => $courseindexopen,
-    'blockdraweropen' => $blockdraweropen,
-    'courseindex' => $courseindex,
-    'primarymoremenu' => $primarymenu['moremenu'],
-    'secondarymoremenu' => $secondarynavigation ?: false,
-    'mobileprimarynav' => $primarymenu['mobileprimarynav'],
-    'usermenu' => $primarymenu['user'],
-    'langmenu' => $primarymenu['lang'],
-    'forceblockdraweropen' => $forceblockdraweropen,
-    'regionmainsettingsmenu' => $regionmainsettingsmenu,
-    'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
-    'overflow' => $overflow,
-    'headercontent' => $headercontent,
-    'addblockbutton' => $addblockbutton,
+
+$templatecontext = [
+    "sitename" => format_string($SITE->shortname, true, ["context" => context_course::instance(SITEID), "escape" => false]),
+    "output" => $OUTPUT,
+    "sidepreblocks" => $blockshtml,
+    "bodyattributes" => $bodyattributes,
+    "primarymoremenu" => $primarymenu["moremenu"],
+    "secondarymoremenu" => $secondarynavigation ?: false,
+    "mobileprimarynav" => $primarymenu["moremenu"]["nodearray"],
+    "usermenu" => $primarymenu["user"],
+    "langmenu" => $primarymenu["lang"],
+    "forceblockdraweropen" => $forceblockdraweropen,
+    "regionmainsettingsmenu" => $regionmainsettingsmenu,
+    "hasregionmainsettingsmenu" => !empty($regionmainsettingsmenu),
+    "overflow" => $overflow,
+    "headercontent" => $headercontent,
+    "addblockbutton" => $addblockbutton,
 ];
 
-$templatedata = array_merge($templatedata, \theme_degrade\template\footer_data::get_data());
-$templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_data::topo());
-$templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_data::slideshow());
-$templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_data::about());
+$config = get_config("theme_degrade");
 
-if (get_config("theme_degrade", "home_type") == 1) {
-    // Caso seja HTML, não precisa gerar os blocos.
-    $CFG->frontpage = "";
-    $CFG->frontpageloggedin = "";
+$brandcolor = get_config("theme_boost", "brandcolor");
+$templatecontext["footercount"] = 0;
+$templatecontext["footercontents"] = [];
+$templatecontext["footer_background_color"] =
+    theme_degrade_default_color("footer_background_color", $brandcolor);
+$templatecontext["footer_background_text_color"] =
+    theme_degrade_get_footer_color($templatecontext["footer_background_color"], "#333", false);
+for ($i = 1; $i <= 4; $i++) {
+    $footertitle = $config->{"footer_title_{$i}"};
+    $footerhtml = $config->{"footer_html_{$i}"};
 
-    $templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_data::home_html());
+    if (isset($footerhtml[5])) {
+        $templatecontext["footercount"]++;
+        $templatecontext["footercontents"][] = [
+            "footertitle" => $footertitle,
+            "footerhtml" => $footerhtml,
+        ];
+    }
+}
+$templatecontext["footer_show_copywriter"] = $config->footer_show_copywriter;
+
+$editing = $PAGE->user_is_editing();
+if (isset($config->homemode) && $config->homemode) {
+    $templatecontext["homemode_status"] = 1;
+
+    $PAGE->requires->jquery();
+    $PAGE->requires->jquery_plugin("ui");
+    $PAGE->requires->jquery_plugin("ui-css");
+
+    if ($editing) {
+        $PAGE->requires->js_call_amd("theme_degrade/frontpage", "editingswitch", []);
+        $PAGE->requires->js_call_amd("theme_degrade/frontpage", "block_order", []);
+    }
+}
+if ($editing) {
+    $templatecontext["editing"] = true;
+    $url = "{$CFG->wwwroot}/theme/degrade/_editor/actions.php?action=homemode&local=editing&sesskey=" . sesskey();
+    $templatecontext["homemode_form_action"] = $url;
 }
 
-echo $OUTPUT->render_from_template('theme_degrade/frontpage', $templatedata);
+echo $OUTPUT->render_from_template("theme_degrade/frontpage", $templatecontext);

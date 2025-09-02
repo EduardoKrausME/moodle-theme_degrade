@@ -1,0 +1,294 @@
+/*
+ * 	Default theme - Owl Carousel CSS File
+ */
+$owl-color-base: #869791 !default;
+$owl-color-white: #ffffff !default;
+$owl-color-gray: #d6d6d6 !default;
+//nav
+$owl-nav-color: $owl-color-white !default;
+$owl-nav-color-hover: $owl-color-white !default;
+$owl-nav-font-size: 14px !default;
+$owl-nav-rounded: 3px !default;
+$owl-nav-margin: 5px !default;
+$owl-nav-padding: 4px 7px !default;
+$owl-nav-background: $owl-color-gray !default;
+$owl-nav-background-hover: $owl-color-base !default;
+$owl-nav-disabled-opacity: 0.5 !default;
+//dots
+$owl-dot-width: 10px !default;
+$owl-dot-height: 10px !default;
+$owl-dot-rounded: 30px !default;
+$owl-dot-margin: 5px 7px !default;
+$owl-dot-background: $owl-color-gray !default;
+$owl-dot-background-active: $owl-color-base !default;
+/*
+ *  Owl Carousel - Core
+ */
+.owl-carousel {
+    display: none;
+    width: 100%;
+    -webkit-tap-highlight-color: transparent;
+    /* position relative and z-index fix webkit rendering fonts issue */
+    position: relative;
+    z-index: 1;
+    .owl-stage {
+        position: relative;
+        -ms-touch-action: pan-Y;
+        touch-action: manipulation;
+        -moz-backface-visibility: hidden; /* fix firefox animation glitch */
+    }
+    .owl-stage:after {
+        content: ".";
+        display: block;
+        clear: both;
+        visibility: hidden;
+        line-height: 0;
+        height: 0;
+    }
+    .owl-stage-outer {
+        position: relative;
+        overflow: hidden;
+        /* fix for flashing background */
+        -webkit-transform: translate3d(0px, 0px, 0px);
+        transform: translate3d(0px, 0px, 0px);
+    }
+    .owl-wrapper,
+    .owl-item {
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        -webkit-transform: translate3d(0, 0, 0);
+        -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+    }
+    .owl-item {
+        position: relative;
+        min-height: 1px;
+        float: left;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+    }
+    .owl-item img {
+        display: block;
+        width: 100%;
+    }
+    .owl-nav.disabled,
+    .owl-dots.disabled {
+        display: none;
+    }
+    .owl-nav .owl-prev,
+    .owl-nav .owl-next,
+    .owl-dot {
+        cursor: pointer;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    .owl-nav button.owl-prev,
+    .owl-nav button.owl-next,
+    button.owl-dot {
+        background: none;
+        color: inherit;
+        border: none;
+        padding: 0 !important;
+        font: inherit;
+    }
+    &.owl-loaded {
+        display: block;
+    }
+    &.owl-loading {
+        opacity: 0;
+        display: block;
+    }
+    &.owl-hidden {
+        opacity: 0;
+    }
+    &.owl-refresh .owl-item {
+        visibility: hidden;
+    }
+    &.owl-drag .owl-item {
+        touch-action: pan-y;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    &.owl-grab {
+        cursor: move;
+        cursor: grab;
+    }
+    &.owl-rtl {
+        direction: rtl;
+    }
+    &.owl-rtl .owl-item {
+        float: right;
+    }
+}
+/* No Js */
+.no-js .owl-carousel {
+    display: block;
+}
+/*
+ *  Owl Carousel - Animate Plugin
+ */
+.owl-carousel {
+    .animated {
+        animation-duration: 1000ms;
+        animation-fill-mode: both;
+    }
+    .owl-animated-in {
+        z-index: 0;
+    }
+    .owl-animated-out {
+        z-index: 1;
+    }
+    .fadeOut {
+        animation-name: fadeOut;
+    }
+}
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+/*
+ * 	Owl Carousel - Auto Height Plugin
+ */
+.owl-height {
+    transition: height 500ms ease-in-out;
+}
+/*
+ * 	Owl Carousel - Lazy Load Plugin
+ */
+.owl-carousel {
+    .owl-item {
+        .owl-lazy {
+            opacity: 0;
+            transition: opacity 400ms ease;
+        }
+        /**
+            This is introduced due to a bug in IE11 where lazy loading combined with autoheight plugin causes a wrong
+            calculation of the height of the owl-item that breaks page layouts
+         */
+        .owl-lazy[src^=""], .owl-lazy:not([src]) {
+            max-height: 0;
+        }
+        img.owl-lazy {
+            transform-style: preserve-3d;
+        }
+    }
+}
+.owl-theme {
+    // Styling Next and Prev buttons
+    .owl-nav {
+        margin-top: 10px;
+        text-align: center;
+        -webkit-tap-highlight-color: transparent;
+        [class*='owl-'] {
+            color: $owl-nav-color;
+            font-size: $owl-nav-font-size;
+            margin: $owl-nav-margin;
+            padding: $owl-nav-padding;
+            background: $owl-nav-background;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 3px;
+            &:hover {
+                background: $owl-nav-background-hover;
+                color: $owl-nav-color-hover;
+                text-decoration: none;
+            }
+        }
+        .disabled {
+            opacity: $owl-nav-disabled-opacity;
+            cursor: default;
+        }
+    }
+    // Styling dots
+    .owl-nav.disabled + .owl-dots {
+        margin-top: 10px;
+    }
+    .owl-dots {
+        text-align: center;
+        -webkit-tap-highlight-color: transparent;
+        .owl-dot {
+            display: inline-block;
+            zoom: 1;
+            *display: inline;
+            span {
+                width: $owl-dot-width;
+                height: $owl-dot-height;
+                margin: $owl-dot-margin;
+                background: $owl-dot-background;
+                display: block;
+                -webkit-backface-visibility: visible;
+                transition: opacity 200ms ease;
+            }
+            &.active,
+            &:hover {
+                span {
+                    background: $owl-dot-background-active;
+                }
+            }
+        }
+    }
+}
+
+.owl-course-banner,
+.owl-courses-content {
+    &.owl-carousel .owl-nav > button {
+        position: absolute;
+        width: 28px;
+        height: 96px;
+        top: 50%;
+        margin-top: -48px;
+        background: rgba(0, 0, 0, .2);
+        color: #ffffff;
+        text-align: center;
+        line-height: 0;
+        border-radius: 5px;
+        transition: .3s all;
+        cursor: pointer;
+        z-index: 1;
+        &.owl-prev,
+        &.owl-next {
+            span {
+                font-size: 0;
+                &:before {
+                    content: "";
+                    width: 30px;
+                    height: 30px;
+                    display: block;
+                    background-size: cover;
+                    margin: 30px 0;
+                }
+            }
+        }
+        &.owl-prev {
+            left: 10px;
+            span {
+                &:before {
+                    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 330.002 330.002' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fff' d='m233.25 306.001-105.75-140.996 105.75-141.004c4.971-6.628 3.627-16.03-3-21-6.627-4.971-16.03-3.626-21 3l-112.5 150.004c-4 5.333-4 12.667 0 18l112.5 149.996c2.947 3.93 7.451 6.001 12.012 6.001 3.131 0 6.29-.978 8.988-3.001 6.628-4.971 7.971-14.373 3-21z'/%3E%3C/svg%3E");
+                }
+            }
+        }
+        &.owl-next {
+            right: 10px;
+            span {
+                &:before {
+                    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 330.002 330.002' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fff' d='m233.252 155.997-112.5-149.996c-4.972-6.628-14.372-7.97-21-3-6.628 4.971-7.971 14.373-3 21l105.75 140.997-105.75 141.003c-4.971 6.627-3.627 16.03 3 21 2.698 2.024 5.856 3.001 8.988 3.001 4.561 0 9.065-2.072 12.012-6.001l112.5-150.004c4-5.333 4-12.667 0-18z'/%3E%3C/svg%3E");
+                }
+            }
+        }
+        &:hover {
+            background: #7c7c7c;
+        }
+    }
+}

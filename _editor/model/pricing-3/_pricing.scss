@@ -1,0 +1,209 @@
+@import "../_assets/style-preview";
+.pricing-section {
+    padding-bottom: 40px;
+    padding-top: 50px;
+    h2 {
+        position: relative;
+        display: block;
+        font-size: 48px;
+        line-height: 60px;
+        text-transform: capitalize;
+    }
+    .pricing-block {
+        &:hover {
+            box-shadow: rgba(0, 0, 0, 0.05) 0 4px 45px 0;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            li {
+                position: relative;
+                display: block;
+                font-size: 17px;
+                line-height: 31px;
+                color: #2b2b2b;
+                padding-left: 28px;
+                margin-bottom: 7px;
+                &:before {
+                    position: absolute;
+                    content: "→";
+                    color: #d1782b;
+                    font-size: 22px;
+                    left: 0;
+                    top: 1px;
+                }
+            }
+        }
+        .pricing-table {
+            position: relative;
+            display: block;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 60px 50px;
+            margin-bottom: 30px;
+            .table-header {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+                padding-bottom: 35px;
+                border-bottom: 1px solid #d9d9d9;
+                margin-bottom: 35px;
+                .gjs-icon {
+                    display: flex;
+                    margin: 0 auto 15px;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                    width: 83px;
+                    height: 83px;
+                    line-height: 63px;
+                    background: rgba(155, 108, 255, .2);
+                    border-radius: 50%;
+                    text-align: center;
+                    font-size: 40px;
+                    svg {
+                        color: #9b6cff;
+                        width: 57px;
+                        height: 57px;
+                    }
+                }
+                h3 {
+                    display: block;
+                    font-size: 22px;
+                    line-height: 31px;
+                }
+            }
+            .table-content {
+                h2 {
+                    display: block;
+                    font-size: 56px;
+                    line-height: 75px;
+                    margin-bottom: 17px;
+                    span {
+                        display: inline-block;
+                        font-size: 20px;
+                        font-weight: 500;
+                        margin-left: -9px;
+                    }
+                }
+                .btn {
+                    position: relative;
+                    display: inline-block;
+                    overflow: hidden;
+                    vertical-align: middle;
+                    font-size: 18px;
+                    line-height: 30px;
+                    font-weight: 700;
+                    color: #ffffff !important;
+                    text-align: center;
+                    border-radius: 12px;
+                    padding: 15px 36px;
+                    text-transform: capitalize;
+                    transition: all 0.5s ease-in-out 0.0s;
+                    margin-bottom: 40px;
+                    border: none;
+                }
+                p {
+                    margin-bottom: 23px;
+                    min-height: 53px;
+                }
+            }
+        }
+        &:nth-child(1) {
+            .table-content .btn {
+                background: #6c5ce7;
+            }
+            .table-header .gjs-icon {
+                background: rgba(108, 92, 231, .2);
+                svg {
+                    color: #6c5ce7;
+                }
+            }
+        }
+        &:nth-child(2) {
+            .table-content .btn {
+                background: #00c4dc;
+            }
+            .table-header .gjs-icon {
+                background: rgba(0, 196, 220, .2);
+                svg {
+                    color: #00c4dc;
+                }
+            }
+        }
+        &:nth-child(3) {
+            .table-content .btn {
+                background: #fc8a29;
+            }
+            .table-header .gjs-icon {
+                background: rgba(252, 138, 41, .2);
+                svg {
+                    color: #fc8a29;
+                }
+            }
+        }
+        &:nth-child(4) {
+            .table-content .btn {
+                background: #3ad44f;
+            }
+            .table-header .gjs-icon {
+                background: rgba(58, 212, 79, .2);
+                svg {
+                    color: #3ad44f;
+                }
+            }
+        }
+        &:nth-child(5) {
+            .table-content .btn {
+                background: #ff5252;
+            }
+            .table-header .gjs-icon {
+                background: rgba(255, 82, 82, .2);
+                svg {
+                    color: #ff5252;
+                }
+            }
+        }
+        &:nth-child(6) {
+            .table-content .btn {
+                background: #fdcb00;
+            }
+            .table-header .gjs-icon {
+                background: rgba(253, 203, 0, .2);
+                svg {
+                    color: #fdcb00;
+                }
+            }
+        }
+        &:nth-child(7) {
+            .table-content .btn {
+                background: #00b894;
+            }
+            .table-header .gjs-icon {
+                background: rgba(0, 184, 148, .2);
+                svg {
+                    color: #00b894;
+                }
+            }
+        }
+        &:nth-child(8) {
+            .table-content .btn {
+                background: #0984e3;
+            }
+            .table-header .gjs-icon {
+                background: rgba(9, 132, 227, .2);
+                svg {
+                    color: #0984e3;
+                }
+            }
+        }
+    }
+    .col-lg-3 .pricing-block .pricing-table .table-content h2 {
+        font-size: 57px;
+        span {
+            margin-left: -9px;
+        }
+    }
+}

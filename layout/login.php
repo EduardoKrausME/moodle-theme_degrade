@@ -18,18 +18,20 @@
  * A login page layout for the boost theme.
  *
  * @package   theme_degrade
- * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright based on work by 2016 Damyon Wiese
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
 
-$bodyattributes = $OUTPUT->body_attributes([theme_degrade_get_body_class()]);
-$templatedata = [
-    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
-    'output' => $OUTPUT,
-    'bodyattributes' => $bodyattributes,
+$bodyattributes = $OUTPUT->body_attributes();
+
+$templatecontext = [
+    "sitename" => format_string($SITE->shortname, true, ["context" => context_course::instance(SITEID), "escape" => false]),
+    "output" => $OUTPUT,
+    "bodyattributes" => $bodyattributes,
 ];
-$templatedata = array_merge($templatedata, \theme_degrade\template\frontapage_data::topo());
-$templatedata = array_merge($templatedata, \theme_degrade\template\login_data::get_data());
-echo $OUTPUT->render_from_template('theme_degrade/login', $templatedata);
+
+echo $OUTPUT->render_from_template("theme_degrade/login", $templatecontext);
+

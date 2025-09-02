@@ -1,0 +1,52 @@
+@import "../_assets/style-preview";
+.popular-section {
+    padding-bottom: 40px;
+    padding-top: 50px;
+    position: relative;
+    display: block;
+    h2 {
+        position: relative;
+        display: block;
+        font-size: 48px;
+        line-height: 60px;
+        text-transform: capitalize;
+    }
+    .owl-courses-content {
+        .top-courses-item {
+            .top-courses-inner {
+                position: relative;
+                img {
+                    max-width: 190px;
+                    transform-style: preserve-3d;
+                    border: none;
+                    border-radius: 0;
+                    box-shadow: none;
+                    height: auto;
+                    transition: .3s all;
+                }
+                .content-back {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    left: 0;
+                    top: 0;
+                    background: #191c32;
+                    border-radius: 5px;
+                    transition: .5s all;
+                    transform: translateX(100%);
+                    text-align: center;
+                    padding: 20px;
+                    .course-title a,
+                    .video-description {
+                        color: #ffffff;
+                    }
+                }
+                &:hover {
+                    .content-back {
+                        transform: none;
+                    }
+                }
+            }
+        }
+    }
+}

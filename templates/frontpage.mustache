@@ -15,16 +15,15 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_degrade/drawers
+    @template theme_degrade/frontpage
 
-    Boost drawer template.
+    Theme frontpage template.
+
     Context variables required for this template:
     * sitename - The name of the site
     * output - The core renderer for the page
     * bodyattributes - attributes for the body tag as a string of html attributes
     * sidepreblocks - HTML for the blocks
-    * hasblocks - true if there are blocks on this page
-    * courseindexopen - true if the nav drawer should be open on page load
     * regionmainsettingsmenu - HTML for the region main settings menu
     * hasregionmainsettingsmenu - There is a region main settings menu on this page.
 
@@ -39,8 +38,6 @@
          },
         "bodyattributes":"",
         "sidepreblocks": "<h2>Blocks html goes here</h2>",
-        "hasblocks":true,
-        "courseindexopen": true,
         "navdraweropen": false,
         "blockdraweropen": true,
         "regionmainsettingsmenu": "",
@@ -48,164 +45,43 @@
         "addblockbutton": ""
     }
 }}
-{{> theme_boost/head}}
+{{> theme_degrade/head }}
 
-<body data-templates="frontpage" {{{bodyattributes}}}>
+<body {{{bodyattributes}}}>
 {{> core/local/toast/wrapper}}
-<div id="page-wrapper" class="d-print-block position-relative">
+<div id="page-wrapper" class="d-print-block">
 
-{{{output.standard_top_of_body_html}}}
+    {{{ output.standard_top_of_body_html }}}
 
-{{> theme_degrade/includes/header}}
-{{#courseindex}}
-    {{< theme_boost/drawer}}
-    {{$id}}theme_boost-drawers-courseindex{{/id}}
-{{$drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
-{{$drawerheading}}
-{{#str}}courseindex, core_courseformat{{/str}}
-{{/drawerheading}}
-{{$drawercontent}}
-{{{courseindex}}}
-{{/drawercontent}}
-{{$drawerpreferencename}}drawer-open-index{{/drawerpreferencename}}
-{{$drawerstate}}show-drawer-left{{/drawerstate}}
-{{/theme_boost/drawer}}
-{{/courseindex}}
-
-{{#hasblocks}}
-    {{< theme_boost/drawer}}
-    {{$id}}theme_boost-drawers-blocks{{/id}}
-{{$drawerclasses}}drawer drawer-right{{#blockdraweropen}} show{{/blockdraweropen}}{{/drawerclasses}}
-{{$drawercontent}}
-    <section class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
-        {{{addblockbutton}}}
-        {{{sidepreblocks}}}
-    </section>
-{{/drawercontent}}
-{{$drawerpreferencename}}drawer-open-block{{/drawerpreferencename}}
-{{$forceopen}}{{#forceblockdraweropen}}1{{/forceblockdraweropen}}{{/forceopen}}
-{{$drawerstate}}show-drawer-right{{/drawerstate}}
-{{$tooltipplacement}}left{{/tooltipplacement}}
-{{$drawercloseonresize}}1{{/drawercloseonresize}}
-{{$closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}
-{{/theme_boost/drawer}}
-{{/hasblocks}}
+    {{> theme_degrade/navbar }}
 
     <div id="page" data-region="mainpage" data-usertour="scroller"
-         class="drawers
-             {{#courseindexopen}}show-drawer-left{{/courseindexopen}}
-             {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}}
-             {{#home_html}}{{^slideshow_numslides}}home-html{{/slideshow_numslides}}{{/home_html}}
-             drag-container">
-
-        {{#slideshow_numslides}}
-            <div id="slideshow">
-                <div class="slideshow-container">
-                    {{#slideshow_slides}}
-                        {{#slideshow_url}}
-                            <a href="{{{slideshow_url}}}"
-                               class="slideshow-item slideshow-item-{{{slideshow_num}}} slideshow-fade">
-                                <div class="slideshow-numbertext">{{{slideshow_num}}} / {{{slideshow_numslides}}}</div>
-                                <img src="{{{slideshow_image}}}" style="width:100%">
-                                {{#slideshow_text}}
-                                    <div class="slideshow-text">{{{slideshow_text}}}</div>
-                                {{/slideshow_text}}
-                            </a>
-                        {{/slideshow_url}}
-                        {{^slideshow_url}}
-                            <span class="slideshow-item slideshow-item-{{{slideshow_num}}} slideshow-fade">
-                                <div class="slideshow-numbertext">{{{slideshow_num}}} / {{{slideshow_numslides}}}</div>
-                                <img src="{{{slideshow_image}}}" style="width:100%">
-                                {{#slideshow_text}}
-                                    <div class="slideshow-text">{{{slideshow_text}}}</div>
-                                {{/slideshow_text}}
-                            </span>
-                        {{/slideshow_url}}
-                    {{/slideshow_slides}}
-                    <a class="slideshow-prev">❮</a>
-                    <a class="slideshow-next">❯</a>
-                </div>
-                <div class="slideshow-dot-area">
-                    {{#slideshow_slides}}
-                        <span class="slideshow-dot slideshow-dot-{{{slideshow_num}}}"
-                              data-slidenun="{{{slideshow_num}}}"></span>
-                    {{/slideshow_slides}}
-
-                    {{#slideshow_edit_settings}}
-                        {{{slideshow_edit_settings}}}
-                    {{/slideshow_edit_settings}}
-                </div>
-            </div>
-        {{/slideshow_numslides}}
-
-        {{#home_html}}
-            {{{output.full_header}}}
-            {{{home_htmleditor}}}
-
-            {{{output.main_content}}}
-        {{/home_html}}
-        {{^home_html}}
-            {{#frontpage_about_enable}}
-                <div class="frontpage_about_area">
-                    <div class="frontpage_about_logoarea text-center">
-                        {{#frontpage_about_logo}}
-                            <img class="frontpage_about_logo" src="{{{frontpage_about_logo}}}">
-                        {{/frontpage_about_logo}}
-                        <h3>{{{frontpage_about_title}}}</h3>
-                        <div class="frontpage_about_description">{{{frontpage_about_description}}}</div>
-                        {{#frontpage_about_edit_settings}}
-                            {{{frontpage_about_edit_settings}}}
-                        {{/frontpage_about_edit_settings}}
-                    </div>
-                    <div class="frontpage_about_counterbox text-center">
-                        {{#about_numbers}}
-                            <div class="frontpage_about_box">
-                                <span class="separator"></span>
-                                <div class="number">
-                                    <span class="number_counter text-primary">{{{frontpage_about_number}}}</span>
-                                </div>
-                                <div class="title_counter">
-                                    <h4 class="title">{{frontpage_about_text}}</h4>
-                                </div>
+         class="drawers {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container">
+        <div id="topofscroll" class="main-inner {{#homemode_status}}homemode_editor{{/homemode_status}}">
+            {{#editing}}
+                <div class="editmode-page-item editmode-block-form" style="display:none">
+                    <div class="me-4">{{#str}}frontpage_change_editor, theme_degrade{{/str}}</div>
+                    <form action="{{{homemode_form_action}}}"
+                          method="post" class="d-flex align-items-center editmode-switch-form"
+                          id="homemode-editingswitch-form">
+                        <div class="input-group">
+                            <div class="custom-control form-switch">
+                                <input type="checkbox" {{#homemode_status}} checked {{/homemode_status}}
+                                       id="homemode-editingswitch"
+                                       name="homemode"
+                                       value="1"
+                                       class="form-check-input">
+                                <span class="custom-control-label">&nbsp;</span>
                             </div>
-                        {{/about_numbers}}
-                    </div>
+                        </div>
+                        <input type="hidden" name="sesskey" value="{{{config.sesskey}}}">
+                        <input type="submit" class="d-none">
+                    </form>
                 </div>
-            {{/frontpage_about_enable}}
+            {{/editing}}
 
-            <div id="topofscroll" class="main-inner">
-                <div class="drawer-toggles d-flex">
-                    {{#courseindex}}
-                        <div class="drawer-toggler drawer-left-toggle open-nav d-print-none">
-                            <button class="btn icon-no-margin"
-                                    data-toggler="drawers"
-                                    data-action="toggle"
-                                    data-target="theme_boost-drawers-courseindex"
-                                    data-toggle="tooltip"
-                                    data-placement="right"
-                                    title="{{#str}}opendrawerindex, core{{/str}}">
-                                <span class="sr-only">{{#str}}opendrawerindex, core{{/str}}</span>
-                                {{#pix}} t/index_drawer, moodle {{/pix}}
-                            </button>
-                        </div>
-                    {{/courseindex}}
-                    {{#hasblocks}}
-                        <div class="drawer-toggler drawer-right-toggle ml-auto d-print-none">
-                            <button class="btn icon-no-margin"
-                                    data-toggler="drawers"
-                                    data-action="toggle"
-                                    data-target="theme_boost-drawers-blocks"
-                                    data-toggle="tooltip"
-                                    data-placement="right"
-                                    title="{{#str}}opendrawerblocks, core{{/str}}">
-                                <span class="sr-only">{{#str}}opendrawerblocks, core{{/str}}</span>
-                                <span class="dir-rtl-hide">{{#pix}}t/blocks_drawer, core{{/pix}}</span>
-                                <span class="dir-ltr-hide">{{#pix}}t/blocks_drawer_rtl, core{{/pix}}</span>
-                            </button>
-                        </div>
-                    {{/hasblocks}}
-                </div>
-                {{{output.full_header}}}
+            {{^homemode_status}}
+                {{{ output.full_header }}}
                 {{#secondarymoremenu}}
                     <div class="secondary-navigation d-print-none">
                         {{> core/moremenu}}
@@ -218,14 +94,16 @@
                                 <div> {{{regionmainsettingsmenu}}} </div>
                             </div>
                         {{/hasregionmainsettingsmenu}}
-                        <section id="region-main" aria-label="{{#str}}content{{/str}}">
+                        <section id="region-main"
+                                 {{#hasnavbarcourse}}class="hasnavbarcourse"{{/hasnavbarcourse}}
+                                 aria-label="{{#str}}content{{/str}}">
 
                             {{#hasregionmainsettingsmenu}}
                                 <div class="region_main_settings_menu_proxy"></div>
                             {{/hasregionmainsettingsmenu}}
-                            {{{output.course_content_header}}}
+                            {{{ output.course_content_header }}}
                             {{#headercontent}}
-                                {{> core/activity_header}}
+                                {{> core/activity_header }}
                             {{/headercontent}}
                             {{#overflow}}
                                 <div class="container-fluid tertiary-navigation">
@@ -234,28 +112,38 @@
                                     </div>
                                 </div>
                             {{/overflow}}
-                            {{{output.main_content}}}
-                            {{{output.activity_navigation}}}
-                            {{{output.course_content_footer}}}
+
+                            {{#course_summary}}
+                                <div class="course-section">
+                                    <div class="section-item">
+                                        {{{course_summary}}}
+                                    </div>
+                                </div>
+                            {{/course_summary}}
+
+                            {{{ output.main_content }}}
+                            {{{ output.activity_navigation }}}
+                            {{{ output.course_content_footer }}}
 
                         </section>
                     </div>
                 </div>
-            </div>
-        {{/home_html}}
-        {{> theme_degrade/includes/footer}}
+            {{/homemode_status}}
+            {{#homemode_status}}
+                {{{ output.main_content }}}
+            {{/homemode_status}}
+        </div>
     </div>
-{{{output.standard_after_main_region_html}}}
+    {{> theme_degrade/footer }}
+    {{{ output.standard_after_main_region_html }}}
 </div>
 
 </body>
 </html>
 {{#js}}
-    require(['jquery', 'theme_boost/loader', 'theme_boost/drawer'], function($, Loader, Drawer) {
+    M.util.js_pending("theme_boost/loader");
+    require(["theme_boost/loader", "theme_boost/drawer"], function (Loader, Drawer) {
         Drawer.init();
-        M.util.js_complete('theme_boost/loader');
-    });
-    require(['theme_degrade/slideshow'], function(slideshow) {
-        slideshow.show();
+        M.util.js_complete("theme_boost/loader");
     });
 {{/js}}

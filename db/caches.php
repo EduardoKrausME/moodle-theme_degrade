@@ -18,7 +18,7 @@
  * Cache file.
  *
  * @package   theme_degrade
- * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,16 +29,12 @@ $definitions = [
         "mode" => cache_store::MODE_APPLICATION,
         "ttl" => 1 * 24 * 60 * 60, // 1d.
     ],
-    "logo_cache" => [
+    "course_cache" => [
         "mode" => cache_store::MODE_APPLICATION,
-        "ttl" => 1 * 24 * 60 * 60, // 1d.
+        "ttl" => 6 * 60 * 60, // 6h.
     ],
-    "layout_cache" => [
+    "frontpage_cache" => [
         "mode" => cache_store::MODE_APPLICATION,
-        "ttl" => 1 * 24 * 60 * 60, // 1d.
-    ],
-    "darkmode_cache" => [
-        "mode" => cache_store::MODE_APPLICATION,
-        "ttl" => 1 * 24 * 60 * 60, // 1d.
+        "ttl" => 24 * 60 * 60, // 6h.
     ],
 ];

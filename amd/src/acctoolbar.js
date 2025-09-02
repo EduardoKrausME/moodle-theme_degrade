@@ -1,15 +1,15 @@
 /**
  * https://github.com/mickidum/acc_toolbar
  */
-define(["core/templates"], function(Templates) {
+define(["core/templates"], function (Templates) {
     return {
-        init: function() {
+        init: function () {
             Templates.render('theme_degrade/settings/acctoolbar', {})
-                .then(function(html, js) {
+                .then(function (html, js) {
                     window.micAccessTool = new degrade_AccessTool(html);
                 })
-                .fail(function(ex) {
-
+                .fail(function (ex) {
+                    console.error(ex);
                 });
         },
     };
@@ -64,7 +64,7 @@ function degrade_AccessTool(html) {
     this.initialApp();
 }
 
-degrade_AccessTool.prototype.initialApp = function() {
+degrade_AccessTool.prototype.initialApp = function () {
 
     window.degrade_toolboxAppstate = JSON.parse(localStorage.getItem('degrade_ACCESSTOOL')) || {
         bodyClassList: {},
@@ -121,8 +121,8 @@ degrade_AccessTool.prototype.initialApp = function() {
     }
 };
 
-degrade_AccessTool.prototype.initialApp_iframe = function(iframe) {
-    setInterval(function() {
+degrade_AccessTool.prototype.initialApp_iframe = function (iframe) {
+    setInterval(function () {
         var appstate = JSON.parse(localStorage.getItem('degrade_ACCESSTOOL')) || {
             bodyClassList: false
         };
@@ -137,7 +137,7 @@ degrade_AccessTool.prototype.initialApp_iframe = function(iframe) {
     }, 2000);
 };
 
-degrade_AccessTool.prototype.buildToolBox = function(html) {
+degrade_AccessTool.prototype.buildToolBox = function (html) {
     if (document.querySelector("body.pagelayout-embedded")) {
         return false;
     }
@@ -145,13 +145,14 @@ degrade_AccessTool.prototype.buildToolBox = function(html) {
     var i = document.createElement("div");
     i.id = "mic-init-access-tool";
     i.innerHTML = html;
+    i.style.display = "none";
     document.body.insertBefore(i, document.body.firstChild);
 
     return true;
 };
 
 // CONTRAST FUNCTION
-degrade_AccessTool.prototype.contrastChange = function(event) {
+degrade_AccessTool.prototype.contrastChange = function (event) {
     event.preventDefault();
 
     if (document.body.classList.contains(this.id)) {
@@ -159,8 +160,7 @@ degrade_AccessTool.prototype.contrastChange = function(event) {
         document.body.classList.remove(this.id);
 
         delete window.degrade_toolboxAppstate.bodyClassList[this.id];
-    }
-    else {
+    } else {
         var buttons = document.querySelectorAll('.mic-contrast-block button');
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].classList.remove('vi-enabled');
@@ -177,15 +177,14 @@ degrade_AccessTool.prototype.contrastChange = function(event) {
 };
 
 // CURSOR CHANGE
-degrade_AccessTool.prototype.cursorChange = function(event) {
+degrade_AccessTool.prototype.cursorChange = function (event) {
     event.preventDefault();
 
     if (document.body.classList.contains(this.id)) {
         this.classList.remove('vi-enabled');
         document.body.classList.remove(this.id);
         delete window.degrade_toolboxAppstate.bodyClassList[this.id];
-    }
-    else {
+    } else {
         var buttons = document.querySelectorAll('#mic-toolbox-cursor-big-black,#mic-toolbox-cursor-big-white');
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].classList.remove('vi-enabled');
@@ -201,7 +200,7 @@ degrade_AccessTool.prototype.cursorChange = function(event) {
     degrade_AccessTool.prototype.updateState();
 };
 
-degrade_AccessTool.prototype.onceButtonChange = function(event) {
+degrade_AccessTool.prototype.onceButtonChange = function (event) {
     event.preventDefault();
 
     if (this.id === 'mic-toolbox-disable-buttons-keyboard') {
@@ -218,8 +217,7 @@ degrade_AccessTool.prototype.onceButtonChange = function(event) {
         document.body.classList.remove(this.id);
 
         delete window.degrade_toolboxAppstate.bodyClassList[this.id];
-    }
-    else {
+    } else {
         this.classList.add('vi-enabled');
         document.body.classList.add(this.id);
 
@@ -228,21 +226,20 @@ degrade_AccessTool.prototype.onceButtonChange = function(event) {
     degrade_AccessTool.prototype.updateState();
 };
 
-degrade_AccessTool.prototype.keyboardRootEnable = function() {
+degrade_AccessTool.prototype.keyboardRootEnable = function () {
     if (window.degrade_toolboxAppstate.keyboardRoot) {
         var headers = document.querySelectorAll('h1,h2,h3,h4,h5,h6,p,a,button,input,select,textarea');
         for (var i = 0; i < headers.length; i++) {
             var item = headers[i];
             item.tabIndex = i + 1
         }
-    }
-    else {
+    } else {
         window.location.reload();
     }
 };
 
 // FONTS CHANGE
-degrade_AccessTool.prototype.fontsChange = function(event) {
+degrade_AccessTool.prototype.fontsChange = function (event) {
     event.preventDefault();
 
     // var mainBody = Number(document.body.style.fontSize.split('px')[0]);
@@ -281,11 +278,10 @@ degrade_AccessTool.prototype.fontsChange = function(event) {
     window.degrade_toolboxAppstate.fontSize = counter;
     degrade_AccessTool.prototype.getFontsChanges(counter);
     degrade_AccessTool.prototype.updateState();
-
 };
 
 // INITIAL FONT SIZE
-degrade_AccessTool.prototype.initFontsChange = function() {
+degrade_AccessTool.prototype.initFontsChange = function () {
     var items = document.querySelectorAll('body,h1,h2,h3,h4,h5,h6,p,a,button,input,textarea,li,td,th,strong,span,blockquote,div');
     var initFontSize = window.degrade_toolboxAppstate.fontSize;
     for (var i = 0; i < items.length; i++) {
@@ -305,7 +301,7 @@ degrade_AccessTool.prototype.initFontsChange = function() {
     }
 };
 
-degrade_AccessTool.prototype.initFontsChangeFirst = function() {
+degrade_AccessTool.prototype.initFontsChangeFirst = function () {
     var items = document.querySelectorAll('body,h1,h2,h3,h4,h5,h6,p,a,button,input,textarea,li,td,th,strong,span,blockquote,div');
     for (var i = 0; i < items.length; i++) {
         var item = items[i];
@@ -315,21 +311,20 @@ degrade_AccessTool.prototype.initFontsChangeFirst = function() {
     }
 };
 
-degrade_AccessTool.prototype.getFontsChanges = function(initFontSize) {
+degrade_AccessTool.prototype.getFontsChanges = function (initFontSize) {
     if (initFontSize > 1) {
         document.getElementById('mic-toolbox-fonts-up').classList.add('vi-font-enabled');
         var initPerc = (Number(initFontSize) * 100 - 100).toFixed();
         var perc = '+' + initPerc + '%';
         document.getElementById('mic-toolbox-fonts-up-enabled').textContent = perc;
-    }
-    else {
+    } else {
         document.getElementById('mic-toolbox-fonts-up').classList.remove('vi-font-enabled');
-        document.getElementById('mic-toolbox-fonts-up-enabled').textContent = '';
+        document.getElementById('mic-toolbox-fonts-up-enabled').textContent = "";
     }
 };
 
 // IMAGES CHANGE
-degrade_AccessTool.prototype.imagesChange = function() {
+degrade_AccessTool.prototype.imagesChange = function () {
 
     if (document.body.classList.contains('mic-toolbox-content-images')) {
 
@@ -339,15 +334,13 @@ degrade_AccessTool.prototype.imagesChange = function() {
             parent.removeChild(titles[i]);
         }
         window.degrade_toolboxAppstate.imagesTitle = false;
-    }
-
-    else {
+    } else {
         this.imagesAddTitles();
         window.degrade_toolboxAppstate.imagesTitle = true;
     }
 };
 
-degrade_AccessTool.prototype.imagesAddTitles = function() {
+degrade_AccessTool.prototype.imagesAddTitles = function () {
 
     var images = document.images;
     for (var i = 0; i < images.length; i++) {
@@ -357,28 +350,25 @@ degrade_AccessTool.prototype.imagesAddTitles = function() {
             title.className = 'mic-toolbox-images-titles';
             title.textContent = img.alt;
             img.parentNode.insertBefore(title, img);
-        }
-        else {
+        } else {
             var title = document.createElement('span');
             title.className = 'mic-toolbox-images-titles';
             title.textContent = M.util.get_string("acctoolbar_image_without_alt", "theme_degrade");
             img.parentNode.insertBefore(title, img);
         }
     }
-
 };
 
-degrade_AccessTool.prototype.updateState = function() {
+degrade_AccessTool.prototype.updateState = function () {
     var jsonSting = JSON.stringify(window.degrade_toolboxAppstate);
-    if (typeof(Storage) !== "undefined") {
+    if (typeof (Storage) !== "undefined") {
         localStorage.setItem('degrade_ACCESSTOOL', jsonSting);
     } else {
         console.log('No Storage Found');
     }
 };
 
-
-degrade_AccessTool.prototype.openBox = function(event) {
+degrade_AccessTool.prototype.openBox = function (event) {
     this.toolBox.classList.add('opened-mic-access-tool');
     if (!window.degrade_toolboxAppstate.initFontSize || window.degrade_toolboxAppstate.fontSize <= 1) {
         this.initFontsChangeFirst();
@@ -387,11 +377,11 @@ degrade_AccessTool.prototype.openBox = function(event) {
     this.toolBoxCloseButton.focus();
 };
 
-degrade_AccessTool.prototype.closeBox = function(event) {
+degrade_AccessTool.prototype.closeBox = function (event) {
     this.toolBox.classList.remove('opened-mic-access-tool');
 };
 
-degrade_AccessTool.prototype.openCloseBoxKeyboard = function(event) {
+degrade_AccessTool.prototype.openCloseBoxKeyboard = function (event) {
     if (event.keyCode == 27) {
         this.closeBox();
     }
@@ -400,7 +390,7 @@ degrade_AccessTool.prototype.openCloseBoxKeyboard = function(event) {
     }
 };
 
-degrade_AccessTool.prototype.resetApp = function(event) {
+degrade_AccessTool.prototype.resetApp = function (event) {
     localStorage.removeItem('degrade_ACCESSTOOL');
     window.location.reload();
 };

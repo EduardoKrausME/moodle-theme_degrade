@@ -1,0 +1,154 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_degrade/quickstart/courses
+
+    Example context (json):
+    {
+        "return":  "courses",
+        "next":  "user-profile",
+        "logocompact_url":  "http://...",
+        "logocompact_extensions":  "PNG, SVG, JPG",
+        "favicon_url":  "http://...",
+        "favicon_extensions":  "PNG, SVG, JPG"
+    }
+}}
+
+<div class="{{^no_accordion}}quickstart-collapse{{/no_accordion}}" id="courses">
+    {{^no_accordion}}
+        <a href="#courses" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);">
+            <span class="material-icons">menu_book</span>
+            <span>{{#str}}coursesettings,theme_degrade{{/str}}</span>
+        </a>
+    {{/no_accordion}}
+    <div class="{{^no_accordion}}content{{/no_accordion}}">
+        <div class="inner-content">
+            <div class="settings-content">
+
+                <div class="card mb-4">
+                    <div class="card-header"><h5>{{#str}}course_summary_banner, theme_degrade{{/str}}</h5></div>
+                    <div class="card-body">
+                        <p>{{#str}}course_summary_banner_desc, theme_degrade{{/str}}</p>
+                        <div class="radio-wrapper">
+                            <label class="radio-img">
+                                <input class="form-check-input input-course_summary_banner" type="radio" name="course_summary_banner"
+                                       value="0"
+                                       {{#course_summary_banner_0}}checked{{/course_summary_banner_0}} style="display: none;">
+                                <div class="marked-area">
+                                    <h5>{{#str}}course_summary_banner_none, theme_degrade{{/str}}</h5>
+                                    {{#pix}}quickstart/course-sumary-none, theme_degrade{{/pix}}
+                                </div>
+                            </label>
+
+                            <label class="radio-img">
+                                <input class="form-check-input input-course_summary_banner" type="radio" name="course_summary_banner"
+                                       value="2"
+                                       {{#course_summary_banner_2}}checked{{/course_summary_banner_2}} style="display: none;">
+                                <div class="marked-area">
+                                    <h5>{{#str}}course_summary_banner_title, theme_degrade{{/str}}</h5>
+                                    {{#pix}}quickstart/course-sumary-banner, theme_degrade{{/pix}}
+                                </div>
+                            </label>
+
+                            <label class="radio-img">
+                                <input class="form-check-input input-course_summary_banner" type="radio" name="course_summary_banner"
+                                       value="1"
+                                       {{#course_summary_banner_1}}checked{{/course_summary_banner_1}} style="display: none;">
+                                <div class="marked-area">
+                                    <h5>{{#str}}course_summary_banner_simple, theme_degrade{{/str}}</h5>
+                                    {{#pix}}quickstart/course-sumary-simple, theme_degrade{{/pix}}
+                                </div>
+                            </label>
+                        </div>
+
+                        <div id="course_summary_banner_12"
+                             class="p-3" {{^course_summary_banner_2}}style="display:none" {{/course_summary_banner_2}}>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>{{#str}}quickstart_course_upload_or_choose, theme_degrade{{/str}}</h5>
+                                </div>
+                                <div class="card-body">
+                                    {{#banner_course_file_url}}
+                                        <div class="mb-3 text-center">
+                                            <img src="{{{banner_course_file_url}}}" alt="Logo"
+                                                 style="max-width:300px;max-height:100px;">
+                                        </div>
+                                    {{/banner_course_file_url}}
+                                    <div class="mb-3">
+                                        <input class="form-control" type="file" name="banner_course_file"
+                                               accept=".png,.jpg,.jpeg">
+                                        <div class="form-text text-muted">
+                                            {{#str}}imageacceptedtypes,
+                                                theme_degrade, {{{banner_course_file_extensions}}}{{/str}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        (function () {
+                            let inputs = document.querySelectorAll(".input-course_summary_banner");
+                            let summary12 = document.getElementById("course_summary_banner_12");
+
+                            inputs.forEach(function (input) {
+                                input.addEventListener("change", updateSummaries);
+                            });
+
+                            function updateSummaries() {
+                                let isChecked1 = false;
+                                let isChecked2 = false;
+
+                                inputs.forEach(function (input) {
+                                    if (input.checked) {
+                                        if (input.value === "1") isChecked1 = true;
+                                        if (input.value === "2") isChecked2 = true;
+                                    }
+                                });
+                                checkedAnimation(summary12, isChecked1 || isChecked2)
+                            }
+
+                            updateSummaries();
+
+                            function checkedAnimation(element, show) {
+                                element.style.display = "block";
+                                element.style.transition = "all .3s ease";
+                                element.style.overflow = "hidden";
+                                element.style.opacity = show ? 1 : 0;
+                                let height = element.scrollHeight + "px";
+                                element.style.height = show ? height : 0;
+                                if (show) {
+                                    setTimeout(function () {
+                                        element.style.height = "auto";
+                                    }, 300);
+                                }
+                            }
+                        })();
+                    </script>
+                </div>
+            </div>
+
+            {{^no_accordion}}
+                {{> theme_degrade/quickstart/btn-next-back }}
+            {{/no_accordion}}
+            {{#no_accordion}}
+                <input class="btn btn-primary ms-3" type="submit" value="{{#str}}savechanges, admin{{/str}}">
+            {{/no_accordion}}
+        </div>
+    </div>
+</div>

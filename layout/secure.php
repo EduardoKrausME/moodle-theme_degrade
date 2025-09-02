@@ -15,104 +15,33 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The secure layout.
+ * A secure layout for the boost theme.
  *
  * @package   theme_degrade
- * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright based on work by 2016 Damyon Wiese
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// phpcs:ignore
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
 
-// Get the HTML for the settings bits.
-$html = theme_degrade_get_html_for_settings($OUTPUT, $PAGE);
+$blockshtml = $OUTPUT->blocks("side-pre");
+$hasblocks = strpos($blockshtml, "data-block=") !== false;
+$bodyattributes = $OUTPUT->body_attributes();
 
-echo "{$OUTPUT->doctype()}
-<html {$OUTPUT->htmlattributes()}>
-<head>
-    <title>{$OUTPUT->page_title()}</title>
-    <link rel=\"shortcut icon\" href=\"{$OUTPUT->favicon()}\"/>
-    {$OUTPUT->standard_head_html()}
-    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
-</head>
+$templatecontext = [
+    "sitename" => format_string($SITE->shortname, true, ["context" => context_course::instance(SITEID), "escape" => false]),
+    "output" => $OUTPUT,
+    "bodyattributes" => $bodyattributes,
+    "sidepreblocks" => $blockshtml,
+    "hasblocks" => $hasblocks,
+];
 
-<body data-layout=\"secure\" {$OUTPUT->body_attributes([theme_degrade_get_body_class()])}>
-
-{$OUTPUT->standard_top_of_body_html()}";
-
-require_once($CFG->libdir . '/behat/lib.php');
-$extraclasses = [theme_degrade_get_body_class()];
-$bodyattributes = $OUTPUT->body_attributes($extraclasses);
-$blockshtml = $OUTPUT->blocks('side-pre');
-$hasblocks = strpos($blockshtml, 'data-block=') !== false;
-$regionmainsettingsmenu = $OUTPUT->region_main_settings_menu();
-$logo = theme_degrade_get_logo("header");
-
-$custom = $OUTPUT->custom_menu();
-
-if ($custom == '') {
-    $class = "navbar-toggler navbar-toggler-right d-lg-none nocontent-navbar";
-} else {
-    $class = "navbar-toggler navbar-toggler-right d-lg-none";
+if (empty($PAGE->layout_options["noactivityheader"])) {
+    $header = $PAGE->activityheader;
+    $renderer = $PAGE->get_renderer("core");
+    $templatecontext["headercontent"] = $header->export_for_template($renderer);
 }
 
-$templatedata = [
-    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
-    'output' => $OUTPUT,
-    'sidepreblocks' => $blockshtml,
-    'hasblocks' => $hasblocks,
-    'bodyattributes' => $bodyattributes,
-    'regionmainsettingsmenu' => $regionmainsettingsmenu,
-    'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
-    'logo' => $logo,
-    "customclass" => $class,
-];
+echo $OUTPUT->render_from_template("theme_degrade/secure", $templatecontext);
 
-echo $OUTPUT->render_from_template('theme_degrade/includes/header', $templatedata);
-
-echo "
-<div id=\"page\">
-    <header id=\"page-header\" class=\"clearfix\">
-        {$html->heading}
-    </header>
-
-    <div id=\"page\" class=\"container\">
-        <div id=\"page-content\" class=\"row\">
-            <div id=\"region-bs-main-and-pre\" class=\"col-md-9\">
-                <div class=\"row\">
-                    <section id=\"region-main\" class=\"col-md-8 pull-right\">
-                        {$OUTPUT->main_content()}
-                    </section>
-                    {$OUTPUT->blocks('side-pre', 'col-md-4 desktop-first-column')}
-                </div>
-            </div>
-            {$OUTPUT->blocks('side-post', 'col-md-3')}
-        </div>
-    </div>
-</div>";
-
-$USER->ajax_updatable_user_prefs['drawer-open-nav'] = PARAM_ALPHA;
-$extraclasses = [theme_degrade_get_body_class()];
-$bodyattributes = $OUTPUT->body_attributes($extraclasses);
-$blockshtml = $OUTPUT->blocks('side-pre');
-$hasblocks = strpos($blockshtml, 'data-block=') !== false;
-$regionmainsettingsmenu = $OUTPUT->region_main_settings_menu();
-
-$templatedata = [
-    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
-    'output' => $OUTPUT,
-    'sidepreblocks' => $blockshtml,
-    'hasblocks' => $hasblocks,
-    'bodyattributes' => $bodyattributes,
-    'regionmainsettingsmenu' => $regionmainsettingsmenu,
-    'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
-];
-
-$templatedata = array_merge($templatedata, \theme_degrade\template\footer_data::get_data());
-$footerlayout = $OUTPUT->render_from_template('theme_degrade/includes/footer', $templatedata);
-
-echo $OUTPUT->standard_end_of_body_html();
-
-echo "</body>
-</html>";
