@@ -195,7 +195,7 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         }
     }
 
-    if($customcss = get_config("theme_degrade", "customcss")) {
+    if ($customcss = get_config("theme_degrade", "customcss")) {
         set_config("scss", $customcss, "theme_degrade");
     }
 
