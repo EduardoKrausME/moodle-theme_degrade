@@ -574,8 +574,8 @@ class core_renderer extends \core_renderer {
      */
     public function brandcolor_background_menu_class() {
         $class = [];
-        if(get_config("theme_degrade", "brandcolor_background_menu")){
-            $class[] =  "brandcolor-background";
+        if (get_config("theme_degrade", "brandcolor_background_menu")) {
+            $class[] = "brandcolor-background";
         }
         if (get_config("theme_degrade", "top_scroll_fix")) {
             $class[] = "top-scroll-fix";
