@@ -76,12 +76,12 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         }
     } else {
         if (get_config("theme_degrade", "frontpage_about_enable")) {
-            $frontpage_about_logo = get_config("theme_degrade", "frontpage_about_logo");
-            $frontpage_about_title = get_config("theme_degrade", "frontpage_about_title");
-            $frontpage_about_description = get_config("theme_degrade", "frontpage_about_description");
+            $frontpageaboutlogo = get_config("theme_degrade", "frontpage_about_logo");
+            $frontpageabouttitle = get_config("theme_degrade", "frontpage_about_title");
+            $frontpageaboutdescription = get_config("theme_degrade", "frontpage_about_description");
 
-            if (!empty($frontpage_about_logo)) {
-                $frontpage_about_logo = '<img class="frontpage_about_logo" src="' . $frontpage_about_logo . '" alt="Logo">';
+            if (!empty($frontpageaboutlogo)) {
+                $frontpageaboutlogo = '<img class="frontpage_about_logo" src="' . $frontpageaboutlogo . '" alt="Logo">';
             }
             $about = '
                 <style>
@@ -155,25 +155,25 @@ function xmldb_theme_degrade_upgrade($oldversion) {
                 </style>
                 <div class="frontpage_about_area">
                     <div class="frontpage_about_logoarea text-center">
-                        ' . $frontpage_about_logo . '
-                        <h3>' . $frontpage_about_title . '</h3>
-                        <div class="frontpage_about_description">' . $frontpage_about_description . '</div>
+                        ' . $frontpageaboutlogo . '
+                        <h3>' . $frontpageabouttitle . '</h3>
+                        <div class="frontpage_about_description">' . $frontpageaboutdescription . '</div>
                     </div>
                     <div class="frontpage_about_counterbox text-center">';
 
             for ($i = 1; $i <= 4; $i++) {
-                $frontpage_about_text = get_config("theme_degrade", "frontpage_about_text_{$i}");
-                $frontpage_about_number = get_config("theme_degrade", "frontpage_about_number_{$i}");
+                $frontpageabouttext = get_config("theme_degrade", "frontpage_about_text_{$i}");
+                $frontpageaboutnumber = get_config("theme_degrade", "frontpage_about_number_{$i}");
 
-                if ($frontpage_about_number && isset($frontpage_about_text[3])) {
+                if ($frontpageaboutnumber && isset($frontpageabouttext[3])) {
                     $about .= '
                         <div class="frontpage_about_box">
                             <span class="separator"></span>
                             <div class="number">
-                                <span class="number_counter text-primary">' . $frontpage_about_number . '</span>
+                                <span class="number_counter text-primary">' . $frontpageaboutnumber . '</span>
                             </div>
                             <div class="title_counter">
-                                <h4 class="title">' . $frontpage_about_text . '</h4>
+                                <h4 class="title">' . $frontpageabouttext . '</h4>
                             </div>
                         </div>';
                 }
