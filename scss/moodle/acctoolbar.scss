@@ -101,16 +101,17 @@
     }
 
     .mic-access-tool-box {
-        color: #333;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        color: #2E3B2D;
+        background: #FFFFFF;
+        font-family: "Inter", "Roboto", sans-serif;
         border-radius: 10px;
         overflow-y: auto;
         -webkit-box-shadow: 1px 0 4px 0 #777;
-        box-shadow: 1px 0 4px 0 #777;
         position: fixed;
         width: 370px;
         top: 10px;
         left: 10px;
-        background-color: $primary;
         z-index: 9999999999999;
         visibility: hidden;
         opacity: 0;
@@ -129,62 +130,81 @@
     }
 
     .mic-access-tool-box .mic-access-tool-box-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         position: relative;
         text-align: left;
-        line-height: 1.2;
-        font-size: 14px !important;
+        font-size: 28px !important;
+        line-height: 1 !important;
         font-weight: 700;
         padding: 10px;
-        color: #fff;
+        color: #2E3B2D;
 
         button {
-            position: absolute;
-            display: inline-block;
-            cursor: pointer;
             color: #fff;
-            font-weight: 700;
-            font-size: 22px !important;
-            right: 0;
-            top: 0;
-            padding: 8px 5px 8px;
-            background: #fff0;
+            background: #2E3B2D;
             border: none;
-            margin-top: 1px;
-            margin-right: 4px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            border-radius: 53%;
+            min-width: 31px;
+            width: 31px;
+            height: 31px;
 
-            * {
-                font-size: 13px !important;
-            }
-
-            &:focus,
             &:hover {
-                color: #ececec;
+                transform: scale(1.2);
             }
         }
     }
 
     .mic-access-tool-box .mic-buttons-block {
+        padding: 8px;
         position: relative;
-        padding: 7px 10px;
-        border-bottom: 1px solid #777;
         font-size: 12px !important;
-        background: #e6e6e6;
+        background: #FEFAF8;
         margin: 4px;
         border-radius: 4px;
 
         h3 {
-            font-size: 20px !important;
-            text-align: center;
+            font-size: 24px !important;
+            font-weight: bold;
+            color: #374151;
         }
 
         button {
-            position: relative;
-            width: 100%;
-            padding: 7px 11px;
+            flex: 1;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 6px;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            margin: 5px 3px;
+            padding: 8px 14px;
+
+            img {
+                width: 20px;
+                height: 20px;
+            }
+
+            &:hover {
+                background: #eef2ff;
+                border-color: #6366f1;
+                color: #111827;
+            }
+
+            &:active {
+                background: #e0e7ff;
+            }
 
             #mic-toolbox-fonts-up-enabled {
                 position: absolute;
@@ -214,11 +234,15 @@
                 }
             }
         }
+        &.mic-buttons-block-horizontal {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
 
         .d-flex {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: stretch;
             width: 100%;
 
             button {
@@ -258,6 +282,11 @@
             align-items: center;
             justify-content: space-evenly;
             padding: 8px;
+            background: #ef4444 !important;
+
+            span {
+                color: #ffffff;
+            }
         }
 
         &:last-child {
