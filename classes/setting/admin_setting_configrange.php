@@ -67,7 +67,7 @@ class admin_setting_configrange extends admin_setting {
 
     /**
      * write_setting
-     * 
+     *
      * @param $data
      * @return string|true
      * @throws Exception
@@ -76,7 +76,7 @@ class admin_setting_configrange extends admin_setting {
         if ($data === "") {
             $data = 0;
         }
-        // $data is a string
+        // Data is a string.
         $validated = $this->validate($data);
         if ($validated !== true) {
             return $validated;
