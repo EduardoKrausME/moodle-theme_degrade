@@ -151,14 +151,29 @@ function theme_degrade_get_main_scss_content($theme) {
  * @throws Exception
  */
 function theme_degrade_get_pre_scss($theme) {
+    global $CFG;
+
     $scss = "";
     $brandcolor = get_config("theme_boost", "brandcolor");
     if ($brandcolor) {
         $scss .= "\$primary: {$brandcolor};\n";
     }
 
-    if ($topscrollbackgroundcolor = get_config("theme_degrade", "top_scroll_background_color")) {
-        $scss .= "\$top_scroll_background_color: {$topscrollbackgroundcolor};\n";
+    if ($CFG->theme == "degrade") {
+        $angle = theme_degrade_default_color("angle", 30);
+        $gradient1 = theme_degrade_default_color("brandcolor_gradient_1", "#f54266");
+        $gradient2 = theme_degrade_default_color("brandcolor_gradient_2", "#3858f9");
+        $scss .= "
+            .navbar.fixed-top.brandcolor-background {
+                background: linear-gradient({$angle}deg, {$gradient1}, {$gradient2}) !important;
+            }
+            .navbar.fixed-top.brandcolor-background .navbar-content-background {
+                background-color: transparent !important;
+            }\n";
+    } else {
+        if ($topscrollbackgroundcolor = get_config("theme_degrade", "top_scroll_background_color")) {
+            $scss .= "\$top_scroll_background_color: {$topscrollbackgroundcolor};\n";
+        }
     }
 
     $callbacks = get_plugins_with_function("theme_degrade_get_pre_scss");
