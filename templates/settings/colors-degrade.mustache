@@ -1,0 +1,185 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_degrade/settings/colors-degrade
+
+    Example context (json):
+    {
+        "defaultcolor": "#f0ff0f",
+        "angle": 30,
+        "gradient_1": "#f0ff0f",
+        "gradient_2": "#f0ff0f"
+    }
+}}
+
+<div class="mb-3">
+    <div id="{{{uniqid}}}" class="degrade-theme-select-itens">
+        {{#colors}}
+            <div class="degrade-theme-select-item">
+                <div class="preview"
+                     style="background: linear-gradient({{{angle}}}deg, {{{gradient_1}}}, {{{gradient_2}}});"
+                     data-defaultcolor="{{{primary}}}"
+                     data-angle="{{{angle}}}"
+                     data-gradient1="{{{gradient_1}}}"
+                     data-gradient2="{{{gradient_2}}}">
+                    <span>{{{name}}}</span>
+                </div>
+            </div>
+        {{/colors}}
+    </div>
+</div>
+
+<div class="degrade-colors-preview colors-body" id="colors-body-{{{uniqid}}}">
+    <section class="card">
+        <header class="card__header card__header-dark">{{#str}}pluginname, theme_degrade{{/str}} Preview</header>
+        <div class="card__body">
+            <!-- Left -->
+            <div class="left">
+                <!-- 3 selectable rows -->
+                <div class="row">
+                    <div class="dash"></div>
+                    <span class="dot"></span>
+                    <div class="pill" role="button" aria-pressed="false">
+                        <span class="line"></span>
+                    </div>
+                    <div class="chev">▾</div>
+                </div>
+                <div class="row">
+                    <div class="dash"></div>
+                    <span class="dot"></span>
+                    <div class="pill"><span class="line"></span></div>
+                    <div class="chev">▾</div>
+                </div>
+                <!-- section -->
+                <div class="line-lg"></div>
+                <div class="line-lg"></div>
+                <div class="line-sm"></div>
+                <!-- CTA -->
+                <button class="cta" type="button"
+                        style="background: var(--cta-background)">
+                    <span class="slot"></span>
+                </button>
+            </div>
+            <!-- Right -->
+            <aside class="panel">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </aside>
+        </div>
+    </section>
+</div>
+
+<style>
+    #admin-top_scroll_background_color,
+    #admin-brandcolor_background_menu {
+        display: none !important;
+    }
+</style>
+
+{{#js}}
+    /*<script>*/
+    require(["jquery"], function ($) {
+        $("#{{{uniqid}}} .preview").click(function () {
+            let defaultcolor = $(this).attr("data-defaultcolor");
+            $(`input[id^="id_"][id$="_brandcolor"]`).val(defaultcolor).minicolors("settings", {value: defaultcolor});
+
+            let angle = $(this).attr("data-angle");
+            $(`input[id^="id_"][id$="_angle"]`).val(angle);
+
+            let gradient1 = $(this).attr("data-gradient1");
+            $(`input[id^="id_"][id$="_brandcolor_gradient_1"]`).val(gradient1).minicolors("settings", {value: gradient1});
+            let gradient2 = $(this).attr("data-gradient2");
+            $(`input[id^="id_"][id$="_brandcolor_gradient_2"]`).val(gradient2).minicolors("settings", {value: gradient2});
+
+            updateMainColor(defaultcolor, angle, gradient1, gradient2);
+        });
+
+        $(
+                `input[id^="id_"][id$="_brandcolor"],` +
+                `input[id^="id_"][id$="_angle"],` +
+                `input[id^="id_"][id$="_brandcolor_gradient_1"],` +
+                `input[id^="id_"][id$="_brandcolor_gradient_2"]`).change(function () {
+            let defaultcolor = $(`input[id^="id_"][id$="_brandcolor"]`).val();
+            let angle = $(`input[id^="id_"][id$="_angle"]`).val();
+            let gradient1 = $(`input[id^="id_"][id$="_brandcolor_gradient_1"]`).val();
+            let gradient2 = $(`input[id^="id_"][id$="_brandcolor_gradient_2"]`).val();
+
+            updateMainColor(defaultcolor, angle, gradient1, gradient2);
+        });
+        updateMainColor("{{{defaultcolor}}}", "{{{angle}}}", "{{{gradient_1}}}", "{{{gradient_2}}}");
+
+        // Troca a cor principal e recalcula as demais
+        function updateMainColor(defaultcolor, angle, gradient_1, gradient_2) {
+            const root = document.querySelector("#colors-body-{{{uniqid}}}");
+            if (!root) {
+                return;
+            }
+
+            root.style.setProperty("--preview-primary", `linear-gradient(${angle}deg, ${gradient_1}, ${gradient_2})`);
+            root.style.setProperty("--cta-background", defaultcolor);
+            root.style.setProperty("--preview-bg", lighten(defaultcolor, 90));
+            root.style.setProperty("--preview-app-bg", lighten(defaultcolor, 80));
+            root.style.setProperty("--preview-primary-shadow", darken(defaultcolor, 25) + "3F");
+            root.style.setProperty("--preview-text", darken(defaultcolor, 60));
+        }
+
+        // Funções auxiliares para manipulação de cores
+        function hexToRgb(hex) {
+            hex = hex.replace(/^#/, "");
+            if (hex.length === 3) {
+                hex = hex.split("").map(c => c + c).join("");
+            }
+            const num = parseInt(hex, 16);
+            return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
+        }
+
+        function rgbToHex(r, g, b) {
+            return "#" + [r, g, b]
+                    .map(x => x.toString(16).padStart(2, "0"))
+                    .join("");
+        }
+
+        function darken(hex, percent) {
+            const [r, g, b] = hexToRgb(hex);
+            return rgbToHex(
+                    Math.max(0, Math.floor(r * (1 - percent / 100))),
+                    Math.max(0, Math.floor(g * (1 - percent / 100))),
+                    Math.max(0, Math.floor(b * (1 - percent / 100)))
+            );
+        }
+
+        function lighten(hex, percent) {
+            const [r, g, b] = hexToRgb(hex);
+            return rgbToHex(
+                    Math.min(255, Math.floor(r + (255 - r) * percent / 100)),
+                    Math.min(255, Math.floor(g + (255 - g) * percent / 100)),
+                    Math.min(255, Math.floor(b + (255 - b) * percent / 100))
+            );
+        }
+
+        function luminance(bgColor) {
+            // Remove o # e converte para números
+            const r = parseInt(bgColor.substr(1, 2), 16);
+            const g = parseInt(bgColor.substr(3, 2), 16);
+            const b = parseInt(bgColor.substr(5, 2), 16);
+
+            // Calcula a luminância percebida (fórmula de acessibilidade W3C).
+            return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+        }
+    });
+{{/js}}
