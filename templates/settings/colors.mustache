@@ -87,19 +87,19 @@
         $("#{{{uniqid}}} .preview").click(function() {
             let color = $(this).attr("data-color");
             {{#startcolor}}
-                $(`[id^="id_"][id$="_startcolor"]`)
+                $(`input[id^="id_"][id$="_startcolor"]`)
                         .val(color)
                         .minicolors("settings", {value: color});
                 updateMainColor(color);
             {{/startcolor}}
             {{#brandcolor}}
-                $(`[id^="id_"][id$="_brandcolor"]`)
+                $(`input[id^="id_"][id$="_brandcolor"]`)
                         .val(color)
                         .minicolors("settings", {value: color});
                 updateMainColor(color);
             {{/brandcolor}}
             {{#footercolor}}
-                $(`[id^="id_"][id$="_footer_background_color"]`)
+                $(`input[id^="id_"][id$="_footer_background_color"]`)
                         .val(color)
                         .minicolors("settings", {value: color});
                 updateMainColor(null, color);
@@ -107,24 +107,24 @@
         });
 
         {{#startcolor}}
-            $(`[id^="id_"][id$="_startcolor"]`).change(function (){
+            $(`input[id^="id_"][id$="_startcolor"]`).change(function (){
                 updateMainColor($(this).val());
            });
         {{/startcolor}}
         {{#brandcolor}}
-            $(`[id^="id_"][id$="_brandcolor"]`).change(function (){
+            $(`input[id^="id_"][id$="_brandcolor"]`).change(function (){
                 updateMainColor($(this).val());
             });
         {{/brandcolor}}
         {{#footercolor}}
-            $(`[id^="id_"][id$="footer_background_color"]`).change(function () {
+            $(`input[id^="id_"][id$="footer_background_color"]`).change(function () {
                 updateMainColor(null, $(this).val());
             });
         {{/footercolor}}
 
         updateMainColor("{{{defaultcolor}}}", "{{{defaultcolorfooter}}}");
 
-        $('[id^="id_s_"][id$="brandcolor_background_menu"]').change(function () {
+        $('input[id^="id_s_"][id$="brandcolor_background_menu"]').change(function () {
             updateMainColor();
         });
 
@@ -135,7 +135,7 @@
                 return;
             }
 
-            if ($('[id^="id_s_"][id$="brandcolor_background_menu"]').is(':checked')) {
+            if ($('input[id^="id_s_"][id$="brandcolor_background_menu"]').is(':checked')) {
                 $(".degrade-colors-preview .card__header").addClass("card__header-dark");
             } else {
                 $(".degrade-colors-preview .card__header").removeClass("card__header-dark");
