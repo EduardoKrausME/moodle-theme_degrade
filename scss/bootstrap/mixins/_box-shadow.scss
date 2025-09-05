@@ -1,7 +1,7 @@
 @mixin box-shadow($shadow...) {
     @if $enable-shadows {
         $result: ();
-        
+
         @if (length($shadow) == 1) {
             // We can pass `@include box-shadow(none);`
             $result: $shadow;

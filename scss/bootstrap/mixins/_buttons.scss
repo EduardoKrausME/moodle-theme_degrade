@@ -7,13 +7,13 @@
     @include gradient-bg($background);
     border-color: $border;
     @include box-shadow($btn-box-shadow);
-    
+
     @include hover() {
         color: color-yiq($hover-background);
         @include gradient-bg($hover-background);
         border-color: $hover-border;
     }
-    
+
     &:focus,
     &.focus {
         color: color-yiq($hover-background);
@@ -26,7 +26,7 @@
             box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
         }
     }
-    
+
     // Disabled comes first so active can properly restyle
     &.disabled,
     &:disabled {
@@ -38,7 +38,7 @@
             background-image: none;
         }
     }
-    
+
     &:not(:disabled):not(.disabled):active,
     &:not(:disabled):not(.disabled).active,
     .show > &.dropdown-toggle {
@@ -48,7 +48,7 @@
             background-image: none; // Remove the gradient for the pressed/active state
         }
         border-color: $active-border;
-        
+
         &:focus {
             @if $enable-shadows and $btn-active-box-shadow != none {
                 @include box-shadow($btn-active-box-shadow, 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5));
@@ -62,31 +62,31 @@
 @mixin button-outline-variant($color, $color-hover: color-yiq($color), $active-background: $color, $active-border: $color) {
     color: $color;
     border-color: $color;
-    
+
     @include hover() {
         color: $color-hover;
         background-color: $active-background;
         border-color: $active-border;
     }
-    
+
     &:focus,
     &.focus {
         box-shadow: 0 0 0 $btn-focus-width rgba($color, .5);
     }
-    
+
     &.disabled,
     &:disabled {
         color: $color;
         background-color: transparent;
     }
-    
+
     &:not(:disabled):not(.disabled):active,
     &:not(:disabled):not(.disabled).active,
     .show > &.dropdown-toggle {
         color: color-yiq($active-background);
         background-color: $active-background;
         border-color: $active-border;
-        
+
         &:focus {
             @if $enable-shadows and $btn-active-box-shadow != none {
                 @include box-shadow($btn-active-box-shadow, 0 0 0 $btn-focus-width rgba($color, .5));

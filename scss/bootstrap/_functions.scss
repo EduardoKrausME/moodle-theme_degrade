@@ -39,11 +39,11 @@
 // @return {String} - Updated string
 @function str-replace($string, $search, $replace: "") {
     $index: str-index($string, $search);
-    
+
     @if $index {
         @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
     }
-    
+
     @return $string;
 }
 // See https://codepen.io/kevinweber/pen/dXWoRw
@@ -60,7 +60,7 @@
             }
         }
     }
-    
+
     @return $string;
 }
 // Color contrast
@@ -68,9 +68,9 @@
     $r: red($color);
     $g: green($color);
     $b: blue($color);
-    
+
     $yiq: (($r * 299) + ($g * 587) + ($b * 114)) * .001;
-    
+
     @if ($yiq >= 128) {
         @return $dark;
     } @else {
@@ -92,7 +92,7 @@
     $color: theme-color($color-name);
     $color-base: if($level > 0, $black, $white);
     $level: abs($level);
-    
+
     @return mix($color-base, $color, $level * $theme-color-interval);
 }
 // Return valid calc
@@ -100,38 +100,38 @@
     @if $value1 == null {
         @return $value2;
     }
-    
+
     @if $value2 == null {
         @return $value1;
     }
-    
+
     @if type-of($value1) == number and type-of($value2) == number and comparable($value1, $value2) {
         @return $value1 + $value2;
     }
-    
+
     @return if($return-calc == true, calc(#{$value1} + #{$value2}), $value1 + unquote(" + ") + $value2);
 }
 @function subtract($value1, $value2, $return-calc: true) {
     @if $value1 == null and $value2 == null {
         @return null;
     }
-    
+
     @if $value1 == null {
         @return -$value2;
     }
-    
+
     @if $value2 == null {
         @return $value1;
     }
-    
+
     @if type-of($value1) == number and type-of($value2) == number and comparable($value1, $value2) {
         @return $value1 - $value2;
     }
-    
+
     @if type-of($value2) != number {
         $value2: unquote("(") + $value2 + unquote(")");
     }
-    
+
     @return if($return-calc == true, calc(#{$value1} - #{$value2}), $value1 + unquote(" - ") + $value2);
 }
 @function divide($dividend, $divisor, $precision: 10) {

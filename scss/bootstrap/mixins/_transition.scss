@@ -3,7 +3,7 @@
     @if length($transition) == 0 {
         $transition: $transition-base;
     }
-    
+
     @if length($transition) > 1 {
         @each $value in $transition {
             @if $value == null or $value == none {
@@ -11,12 +11,12 @@
             }
         }
     }
-    
+
     @if $enable-transitions {
         @if nth($transition, 1) != null {
             transition: $transition;
         }
-        
+
         @if nth($transition, 1) != null and nth($transition, 1) != none {
             @media (prefers-reduced-motion: reduce) {
                 transition: none;

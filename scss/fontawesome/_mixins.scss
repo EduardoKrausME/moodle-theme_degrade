@@ -43,7 +43,7 @@
 @mixin fa-icon-solid($fa-var) {
     @extend %fa-icon;
     @extend .fa-solid;
-    
+
     &::before {
         content: unquote("\"#{ $fa-var }\"");
     }
@@ -51,7 +51,7 @@
 @mixin fa-icon-regular($fa-var) {
     @extend %fa-icon;
     @extend .fa-regular;
-    
+
     &::before {
         content: unquote("\"#{ $fa-var }\"");
     }
@@ -59,7 +59,7 @@
 @mixin fa-icon-brands($fa-var) {
     @extend %fa-icon;
     @extend .fa-brands;
-    
+
     &::before {
         content: unquote("\"#{ $fa-var }\"");
     }

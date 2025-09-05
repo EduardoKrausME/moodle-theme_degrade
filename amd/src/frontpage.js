@@ -56,11 +56,11 @@ define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notifi
                         const block = $(`
                             <div class="item-model ${width} text-center" role="button">
                                 <div class="item-model-border">
-                                    <img src="${item.image}" 
-                                         alt="${item.title}" 
+                                    <img src="${item.image}"
+                                         alt="${item.title}"
                                          class="img-fluid mb-2" style="width:100%;border:1px solid #ccc;border-radius:8px;">
                                     <h5 style="font-size: 1rem;">${item.title}</h5>
-                                    <a href="${item.preview}" 
+                                    <a href="${item.preview}"
                                        target="_blank">${M.util.get_string('preview', "theme_degrade")}</a>
                                 </div>
                             </div>`);
