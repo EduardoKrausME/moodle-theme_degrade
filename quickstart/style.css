@@ -1,0 +1,242 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Roboto&display=swap");
+.quickstart-content {
+  font-size: 14px;
+  line-height: 1.6;
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 425px), (max-width: 320px) {
+  .quickstart-content {
+    line-height: 1.3;
+  }
+}
+.quickstart-content .quickstart-collapse > a,
+.quickstart-content h2, .quickstart-content h3, .quickstart-content h4 {
+  font-family: "Poppins", sans-serif;
+}
+.quickstart-content .quickstart-collapse > a {
+  font-weight: 500;
+  padding: 0.9rem 1.8rem;
+  color: #ffffff;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  margin: 0;
+  border-left: 12px groove rgba(207, 207, 207, 0.12);
+  font-size: 1.4em;
+  text-decoration: none;
+}
+.quickstart-content .quickstart-collapse > a .material-icons {
+  font-size: 33px;
+}
+.quickstart-content .quickstart-collapse > a::after {
+  content: "";
+  border-top: 7px solid #ffffff;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  margin-left: auto;
+}
+.quickstart-content .quickstart-collapse + .quickstart-collapse a {
+  border-top: 1px solid rgba(255, 255, 255, 0.7);
+}
+.quickstart-content .quickstart-collapse:target .content {
+  max-height: max-content;
+}
+.quickstart-content .quickstart-collapse:target a.accessibility {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.quickstart-content .quickstart-collapse:target a::before {
+  transform: rotate(-90deg);
+}
+.quickstart-content .content {
+  max-height: 0;
+  transition: 0.3s linear 0s;
+  overflow: hidden;
+}
+.quickstart-content .inner-content {
+  padding: 1.8rem;
+  background: rgba(0, 0, 0, 0.04);
+}
+@media (max-width: 425px) {
+  .quickstart-content .inner-content {
+    padding: 1.2rem;
+  }
+  .quickstart-content .inner-content h3 {
+    margin-bottom: 0.3rem;
+  }
+}
+@media (max-width: 320px) {
+  .quickstart-content .inner-content {
+    padding: 0.8rem;
+  }
+  .quickstart-content .inner-content h3 {
+    margin-bottom: 0.3rem;
+  }
+}
+.quickstart-content .inner-content .form-text {
+  font-size: 1.1em;
+}
+.quickstart-content .marked-area {
+  background: #ffffff;
+  border: 4px solid #dfdfdf;
+  display: inline-block;
+  margin: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border 0.3s;
+  text-align: center;
+  max-width: 300px;
+}
+.quickstart-content .marked-area img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: fit-content;
+  border-radius: 0 0 5px 5px;
+  border-top: 1px solid #e7e7e7;
+}
+.quickstart-content input:checked + .marked-area {
+  border: 4px solid var(--bs-primary);
+  background: #f0f0f0;
+}
+.quickstart-content .not-editing input:checked + .marked-area {
+  background: #c9d2ff;
+}
+.quickstart-content .check-img label,
+.quickstart-content .check-img div.label {
+  width: 24%;
+}
+.quickstart-content .check-img label img,
+.quickstart-content .check-img div.label img {
+  width: 100%;
+  border-radius: 8px;
+}
+.quickstart-content .radio-wrapper {
+  display: flex;
+  gap: 20px;
+}
+.quickstart-content .content-box {
+  display: none;
+}
+.quickstart-content .content-box.show {
+  display: block;
+}
+.quickstart-content .form-check-input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.4em;
+  height: 1.4em;
+  border: 2px solid #6c757d;
+  border-radius: 0.35em;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  margin-top: 0.3em;
+  margin-right: 0.5em;
+}
+.quickstart-content .form-check-input:checked {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+.quickstart-content .form-check-input:checked::after {
+  content: "";
+  position: absolute;
+  top: 0.2em;
+  left: 0.45em;
+  width: 0.35em;
+  height: 0.7em;
+  border: solid #ffffff;
+  border-width: 0 0.2em 0.2em 0;
+  transform: rotate(45deg);
+}
+.quickstart-content .form-check-input:hover {
+  border-color: var(--bs-primary);
+}
+.quickstart-content .form-check-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary), 0.25);
+}
+.quickstart-content .nav-pills .nav-link {
+  border-radius: 6px 6px 0 0;
+  padding-bottom: 9px;
+  margin-bottom: -3px;
+}
+
+[data-themename=eadflix] .quickstart-content .quickstart-collapse > a {
+  font-weight: 500;
+  padding: 0.9rem 1.8rem;
+  color: #ffffff;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  margin: 0;
+  border-left: 12px groove rgba(207, 207, 207, 0.12);
+  font-size: 1.4em;
+  text-decoration: none;
+}
+[data-themename=eadflix] .quickstart-content .quickstart-collapse > a .material-icons {
+  font-size: 33px;
+}
+[data-themename=eadflix] .quickstart-content .quickstart-collapse > a::after {
+  content: "";
+  border-top: 7px solid #ffffff;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  margin-left: auto;
+}
+[data-themename=eadflix] .quickstart-content .quickstart-collapse + .quickstart-collapse a {
+  border-top: 1px solid rgba(255, 255, 255, 0.7);
+}
+[data-themename=eadflix] .quickstart-content .quickstart-collapse:target .content {
+  max-height: max-content;
+}
+[data-themename=eadflix] .quickstart-content .quickstart-collapse:target a.accessibility {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+[data-themename=eadflix] .quickstart-content .quickstart-collapse:target a::before {
+  transform: rotate(-90deg);
+}
+[data-themename=eadflix] .quickstart-content .inner-content {
+  background: rgba(0, 0, 0, 0.04);
+}
+[data-themename=eadflix] .quickstart-content .marked-area {
+  background: rgba(255, 255, 255, 0.21);
+  border: 4px solid #dfdfdf;
+}
+[data-themename=eadflix] .quickstart-content .marked-area img {
+  border-top: 1px solid #e7e7e7;
+}
+[data-themename=eadflix] .quickstart-content input:checked + .marked-area {
+  border: 4px solid var(--bs-primary);
+  background: rgba(255, 255, 255, 0.16);
+}
+[data-themename=eadflix] .quickstart-content .not-editing input:checked + .marked-area {
+  background: rgba(201, 210, 255, 0.21);
+}
+[data-themename=eadflix] .quickstart-content .form-check-input {
+  border: 2px solid #6c757d;
+  background-color: #ffffff;
+}
+[data-themename=eadflix] .quickstart-content .form-check-input:checked {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+[data-themename=eadflix] .quickstart-content .form-check-input:checked::after {
+  border: solid #ffffff;
+}
+[data-themename=eadflix] .quickstart-content .form-check-input:hover {
+  border-color: var(--bs-primary);
+}
+[data-themename=eadflix] .quickstart-content .form-check-input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary), 0.25);
+}
