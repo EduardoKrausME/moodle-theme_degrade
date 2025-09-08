@@ -1,0 +1,27 @@
+{
+  "title": "lang::features",
+  "type": "html-form",
+  "category": "featured",
+  "form": {
+    "title": "lang::form_title",
+    "label": "lang::form_label",
+    "info": "lang::form_info",
+    "blocks": {
+      "title": {
+        "type": "text",
+        "label": "lang::featured2_title"
+      },
+      "description": {
+        "type": "textarea",
+        "label": "lang::featured2_text"
+      }
+    },
+    "scripts": [
+      "jquery",
+      "editor.js"
+    ],
+    "styles": [
+      "bootstrap"
+    ]
+  }
+}

@@ -1,0 +1,212 @@
+$(document).ready(function () {
+
+    $("#change-lang").change(function (){
+        let dataid = $("#editor-dataid").val();
+        let local = $("#editor-local").val()
+        let sesskey = $("#editor-sesskey").val();
+        let selectedValue = $(this).val();
+        $.ajax({
+            url: `actions.php?action=langedit&local=${local}&dataid=${dataid}&lang=${selectedValue}&sesskey=${sesskey}`,
+            method: "POST",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                var $message = $(`<div class="alert alert-success m-0 p-2">${response.status}</div>`);
+                $("#change-lang").after($message);
+                setTimeout(function () {
+                    $message.remove();
+                }, 5000);
+            },
+            error: function (error) {
+                console.log(error);
+                var $error = $(`<div class="badge badge-danger m-0 p-2">Request error: ${error}</div>`);
+                $("#change-lang").after($error);
+                setTimeout(function () {
+                    $error.remove();
+                }, 5000);
+            }
+        });
+    });
+
+    $("#btn-editor-preview").click(function () {
+        // Save the current form action URL.
+        let oldAction = $("#form-save-editor").attr("action");
+        // Change the form action to the preview URL (M.cfg.wwwroot).
+        $("#form-save-editor").attr("action", $("#editor-wwwroot").val());
+        // Set the form target to open in a new window "editor".
+        $("#form-save-editor").attr("target", "editor");
+        // Submit form.
+        $("#form-save-editor").submit();
+
+        // After 1 second, revert the form action and target back to original values.
+        setTimeout(function () {
+            $("#form-save-editor").attr("action", oldAction);
+            $("#form-save-editor").attr("target", "_top");
+        }, 1000);
+    });
+
+    let infojson = $("#form-itens-json").val();
+    infojson = atob(infojson);
+    const parsed = JSON.parse(infojson);
+    const $formItens = $("#form-itens .itens");
+
+    if (parsed.type === "html-form" || parsed.type === "form") {
+        if (parsed.form.label) {
+            const $label = $("<h6>")
+                .addClass("text-center")
+                .html(parsed.form.label);
+            $formItens.parent().prepend($label);
+        }
+        if (parsed.form.title) {
+            const $title = $("<h2>")
+                .addClass("text-center")
+                .html(parsed.form.title);
+            $formItens.parent().prepend($title);
+        }
+        if (parsed.form.info) {
+            const $message = $("<div>")
+                .addClass("container alert alert-warning mt-4")
+                .html(parsed.form.info);
+            $formItens.parent().parent().append($message);
+        }
+
+        if (parsed.form.blocks) {
+            renderBlocksForm();
+
+            // Sortable.
+            $formItens.sortable({
+                placeholder: "ui-state-highlight"
+            });
+            $formItens.disableSelection();
+
+        } else if (parsed.form.block) {
+            const $block = $("<div>").addClass("form-group");
+            $formItens.append($block);
+            renderFields($block, parsed.form.block, false);
+        }
+    }
+
+    function renderBlocksForm() {
+        const $container = $("<div>").attr("id", "multi-blocks-container");
+        $formItens.append($container);
+
+        $("#btn-add-block")
+            .show()
+            .on("click", function () {
+                const $block = $("<div>").addClass("form-group");
+                $formItens.append($block);
+                renderFields($block, parsed.form.blocks, true);
+                $formItens.animate({
+                    scrollTop: $formItens[0].scrollHeight
+                }, 500);
+            });
+
+        let num = 0;
+        if (parsed.savedata) {
+            $.each(parsed.savedata, function (id, savedata) {
+                const $block = $("<div>").addClass("form-group");
+                $formItens.append($block);
+                renderFields($block, parsed.form.blocks, true, savedata);
+
+                num++;
+            });
+        }
+
+        if (num == 0) {
+            // Renderizar pelo menos um bloco inicial
+            const $block = $("<div>").addClass("form-group");
+            $formItens.append($block);
+            renderFields($block, parsed.form.blocks, true);
+        }
+    }
+
+    function renderFields($block, fieldsDef, multiple, savedata) {
+        if (parsed.numElement == undefined) {
+            parsed.numElement = 0;
+        } else {
+            parsed.numElement++;
+        }
+
+        $.each(fieldsDef, function (fieldId, fieldConfig) {
+            const $label = $("<label>")
+                .text(fieldConfig.label)
+                .attr("for", fieldId);
+
+            let $input;
+            let inputname = multiple ? `save[${parsed.numElement}][${fieldId}]` : `save[${fieldId}]`;
+
+            switch (fieldConfig.type) {
+                case "text":
+                    $input = $("<input>")
+                        .addClass("form-control")
+                        .attr("type", "text")
+                        .attr("name", inputname);
+                    break;
+
+                case "textarea":
+                    $input = $("<textarea>")
+                        .addClass("form-control")
+                        .attr("name", inputname);
+                    break;
+
+                case "select":
+                    $input = $("<select>")
+                        .addClass("form-control")
+                        .attr("name", inputname);
+                    loadSelectOptions($input, fieldConfig.data, function () {
+                        if (savedata && savedata[fieldId] != undefined) {
+                            $input.val(savedata[fieldId]);
+                        }
+                    });
+                    break;
+            }
+
+            if (savedata && savedata[fieldId] != undefined) {
+                $input.val(savedata[fieldId]);
+            }
+
+            if (fieldConfig.placeholder) {
+                $input.tag("placeholder", fieldConfig.placeholder);
+            }
+
+            $block.append($label, $input);
+        });
+
+        if (multiple) {
+            $block.addClass("form-group-multiple")
+            const $delete = $("<span>")
+                .addClass("block-delete")
+                .text("✕");
+            $block.find("label:first-child").append($delete);
+            $delete.click(function () {
+                if (confirm()) {
+                    $block.remove();
+                }
+            });
+        }
+    }
+
+    function loadSelectOptions($selectElement, dataKey, callback) {
+        let lang = $("#editor-lang").val();
+        let local = $("#editor-local").val();
+        let dataid = $("#editor-dataid").val();
+        let sesskey = $("#editor-sesskey").val();
+        $.getJSON(`actions.php?action=loaddata&dataid=${dataid}&lang=${lang}&local=${local}&sesskey=${sesskey}&datakey=${dataKey}`)
+            .done(function (options) {
+                $selectElement.empty();
+                $selectElement.append($("<option>").text("..."));
+                $.each(options, function (i, opt) {
+                    $selectElement.append($("<option>").val(opt.id).text(opt.name));
+                });
+
+                if (typeof callback === "function") {
+                    callback();
+                }
+            })
+            .fail(function () {
+                $selectElement.append(
+                    $("<option>").text("Error loading data").prop("disabled", true)
+                );
+            });
+    }
+});

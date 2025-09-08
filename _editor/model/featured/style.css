@@ -1,0 +1,71 @@
+.block_themeeditor.featured-style {
+  padding: 80px 20px 10px;
+}
+.block_themeeditor.featured-style .row {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.block_themeeditor.featured-style .feature-block {
+  flex: 1 1 300px;
+  max-width: 360px;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+.block_themeeditor.featured-style .feature-block .inner-box {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.block_themeeditor.featured-style .feature-block .inner-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+.block_themeeditor.featured-style .feature-block .inner-box .gjs-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--bs-primary), color-mix(in srgb, var(--bs-primary) 80%, black));
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 36px;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+}
+.block_themeeditor.featured-style .feature-block .inner-box .gjs-icon svg {
+  width: 40px;
+  height: 40px;
+  fill: currentColor;
+}
+.block_themeeditor.featured-style .feature-block h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 20px 0 10px;
+  color: #111827;
+}
+.block_themeeditor.featured-style .feature-block p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4b5563;
+  margin-bottom: 20px;
+}
+.block_themeeditor.featured-style .feature-block .link a {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, var(--bs-primary), color-mix(in srgb, var(--bs-primary) 80%, black));
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.block_themeeditor.featured-style .feature-block .link a:hover {
+  background: linear-gradient(135deg, var(--bs-primary), color-mix(in srgb, var(--bs-primary) 80%, black));
+  box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
+}

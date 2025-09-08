@@ -1,8 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&family=Oswald:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;700&family=Raleway:wght@400;700&family=Roboto:wght@400;700&display=swap");
-.auto-container {
-  position: static;
-  max-width: 1320px;
-  padding: 0 15px;
+.sec-title {
+  margin-bottom: 60px;
+  text-align: center;
+}
+.sec-title h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #222222;
+  margin-bottom: 15px;
+  position: relative;
+  display: inline-block;
+}
+.sec-title h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--bs-primary);
+  border-radius: 2px;
+  margin: 10px auto 0;
+}
+.sec-title .subtitle {
+  font-size: 1.1rem;
+  color: #666666;
+  max-width: 600px;
   margin: 0 auto;
 }
 
@@ -11,13 +32,6 @@
   padding-top: 50px;
   position: relative;
   display: block;
-}
-.popular-section h2 {
-  position: relative;
-  display: block;
-  font-size: 48px;
-  line-height: 60px;
-  text-transform: capitalize;
 }
 .popular-section .owl-courses-content .top-courses-item .top-courses-inner {
   position: relative;
@@ -50,12 +64,4 @@
 }
 .popular-section .owl-courses-content .top-courses-item .top-courses-inner:hover .content-back {
   transform: none;
-}
-
-.course-title {
-  display: none;
-}
-
-.content-back .course-title {
-  display: block;
 }

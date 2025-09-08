@@ -1,14 +1,15 @@
 {
-  "title": "lang::editor_model_top_courses_number_eadflix",
+  "title": "lang::top_courses_number_eadflix",
+  "category": "carousel",
   "type": "html-form",
   "form": {
-    "title": "lang::editor_model_form_title",
-    "label": "lang::editor_model_form_label",
-    "info": "lang::editor_model_form_info",
+    "title": "lang::form_title",
+    "label": "lang::form_label",
+    "info": "lang::form_info",
     "blocks": {
       "courseid": {
         "type": "select",
-        "label": "lang::editor_model_select_course",
+        "label": "lang::select_course",
         "data": "courses",
         "required": true
       }

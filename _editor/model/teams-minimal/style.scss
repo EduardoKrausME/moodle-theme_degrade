@@ -1,0 +1,43 @@
+
+.block_themeeditor.teams-section-minimal {
+    padding: 80px 20px 10px;
+    .team-block {
+        margin-bottom: 30px;
+        .inner-box {
+            background: transparent;
+            padding: 15px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            &:hover {
+                transform: translateY(-6px);
+            }
+        }
+        .image-box {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            overflow: hidden;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                filter: grayscale(100%);
+                transition: filter 0.4s ease;
+            }
+            &:hover img {
+                filter: grayscale(0%);
+            }
+        }
+        .name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #222222;
+            margin-bottom: 4px;
+        }
+        .role {
+            font-size: 0.95rem;
+            color: #888888;
+        }
+    }
+}

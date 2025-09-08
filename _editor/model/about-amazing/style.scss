@@ -1,0 +1,47 @@
+
+.about-amazing {
+    padding: 80px 20px 10px;
+    .content-box {
+        h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #222222;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1rem;
+            color: #555555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .about-list {
+            list-style: none;
+            padding: 0;
+            li {
+                margin-bottom: 10px;
+                font-size: 1rem;
+                color: #333333;
+            }
+        }
+    }
+    .image-box {
+        text-align: center;
+        img {
+            max-width: 100%;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+            &:hover {
+                transform: scale(1.03);
+            }
+        }
+    }
+    @media (max-width: 991px) {
+        .row {
+            flex-direction: column-reverse;
+            text-align: center;
+        }
+        .content-box {
+            margin-top: 30px;
+        }
+    }
+}

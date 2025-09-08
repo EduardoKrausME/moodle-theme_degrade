@@ -1,0 +1,85 @@
+.block_themeeditor.feature2-steps {
+  padding: 80px 20px 10px;
+}
+.block_themeeditor.feature2-steps .steps-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.block_themeeditor.feature2-steps .steps-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 140px;
+  width: 3px;
+  background: linear-gradient(180deg, var(--bs-primary), color-mix(in srgb, var(--bs-primary) 80%, black));
+  border-radius: 3px;
+}
+.block_themeeditor.feature2-steps .step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+  position: relative;
+  width: 100%;
+}
+.block_themeeditor.feature2-steps .step-item .step-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--bs-primary), color-mix(in srgb, var(--bs-primary) 80%, black));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
+  z-index: 2;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+}
+.block_themeeditor.feature2-steps .step-item .step-content {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 25px 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 440px;
+  position: relative;
+}
+.block_themeeditor.feature2-steps .step-item .step-content:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+.block_themeeditor.feature2-steps .step-item .step-content h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #111827;
+}
+.block_themeeditor.feature2-steps .step-item .step-content p {
+  font-size: 15px;
+  color: #4b5563;
+  line-height: 1.6;
+}
+.block_themeeditor.feature2-steps .step-item:nth-child(odd) {
+  justify-content: flex-start;
+}
+.block_themeeditor.feature2-steps .step-item:nth-child(odd) .step-content {
+  margin-left: calc(50% + 50px);
+  text-align: left;
+}
+.block_themeeditor.feature2-steps .step-item:nth-child(even) {
+  justify-content: flex-end;
+}
+.block_themeeditor.feature2-steps .step-item:nth-child(even) .step-content {
+  margin-right: calc(50% + 50px);
+  text-align: left;
+}

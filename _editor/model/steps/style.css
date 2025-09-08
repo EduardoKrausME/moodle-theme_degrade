@@ -1,0 +1,49 @@
+.block_themeeditor.steps-section {
+  padding: 80px 20px 10px;
+}
+.block_themeeditor.steps-section .steps-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+.block_themeeditor.steps-section .step-block {
+  flex: 1 1 220px;
+  max-width: 260px;
+}
+.block_themeeditor.steps-section .step-block .inner-box {
+  background: #ffffff;
+  padding: 30px 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+.block_themeeditor.steps-section .step-block .inner-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+.block_themeeditor.steps-section .step-block .step-number {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  background: var(--bs-primary);
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(var(--bs-primary-rgb), 0.3);
+}
+.block_themeeditor.steps-section .step-block h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #222222;
+}
+.block_themeeditor.steps-section .step-block p {
+  font-size: 0.95rem;
+  color: #666666;
+}

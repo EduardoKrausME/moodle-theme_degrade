@@ -1,23 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&family=Oswald:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;700&family=Raleway:wght@400;700&family=Roboto:wght@400;700&display=swap");
-.auto-container {
-  position: static;
-  max-width: 1320px;
-  padding: 0 15px;
-  margin: 0 auto;
-}
-
 .popular-section {
   padding-bottom: 40px;
   padding-top: 50px;
   position: relative;
   display: block;
-}
-.popular-section h2 {
-  position: relative;
-  display: block;
-  font-size: 48px;
-  line-height: 60px;
-  text-transform: capitalize;
 }
 .popular-section .owl-courses-content .top-courses-item .top-courses-inner {
   position: relative;
@@ -82,6 +67,9 @@
   top: 50%;
   margin-top: -80px;
   transition: 0.3s all;
+}
+.popular-section .owl-courses-content .top-courses-item .top-courses-inner.top-courses-number .eadflix-nunber.eadflix-nunber-dozen {
+  left: -38px;
 }
 .popular-section .owl-courses-content .top-courses-item .top-courses-inner.top-courses-number a {
   display: inline-block;

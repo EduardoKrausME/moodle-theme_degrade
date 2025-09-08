@@ -1,0 +1,102 @@
+
+.pricing-modern {
+    padding: 90px 20px;
+    .section-header {
+        max-width: 600px;
+        margin: 0 auto 60px;
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #222222;
+            margin-bottom: 15px;
+            position: relative;
+            &::after {
+                content: "";
+                display: block;
+                width: 80px;
+                height: 4px;
+                background: var(--bs-primary);
+                margin: 15px auto 0;
+                border-radius: 3px;
+            }
+        }
+        p {
+            font-size: 1rem;
+            color: #555555;
+        }
+    }
+    .pricing-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
+    .pricing-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 40px 30px;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        &:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        .card-header {
+            margin-bottom: 20px;
+            h3 {
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: #333333;
+            }
+            p {
+                font-size: 0.95rem;
+                color: #666666;
+                margin: 0;
+            }
+        }
+        .card-price {
+            margin: 25px 0;
+            h2 {
+                font-size: 2rem;
+                font-weight: 800;
+                color: var(--bs-primary);
+                span {
+                    font-size: 1rem;
+                    font-weight: 400;
+                    color: #666666;
+                }
+            }
+        }
+        .card-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px;
+            li {
+                font-size: 0.95rem;
+                color: #444444;
+                padding: 8px 0;
+                border-bottom: 1px solid #f0f0f0;
+            }
+        }
+    }
+    .featured {
+        border: 2px solid var(--bs-primary);
+        transform: scale(1.05);
+        z-index: 2;
+        .card-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #ffc107;
+            color: #222222;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+    }
+}
+
+

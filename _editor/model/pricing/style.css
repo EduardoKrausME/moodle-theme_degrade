@@ -1,0 +1,99 @@
+@charset "UTF-8";
+.pricing-section {
+  padding: 80px 20px 10px;
+}
+.pricing-section .pricing-block {
+  margin-bottom: 40px;
+}
+.pricing-section .pricing-block .pricing-table {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px 30px;
+  margin: 11px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.pricing-section .pricing-block .pricing-table:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+.pricing-section .pricing-block .pricing-table .table-header {
+  margin-bottom: 25px;
+}
+.pricing-section .pricing-block .pricing-table .table-header .gjs-icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 15px;
+  background: linear-gradient(135deg, var(--bs-primary), rgba(0, 123, 255, 0.66));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pricing-section .pricing-block .pricing-table .table-header .gjs-icon svg {
+  width: 32px;
+  height: 32px;
+  color: #ffffff;
+}
+.pricing-section .pricing-block .pricing-table .table-header h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333333;
+  margin: 0;
+}
+.pricing-section .pricing-block .pricing-table .table-content h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--bs-primary);
+  margin-bottom: 10px;
+}
+.pricing-section .pricing-block .pricing-table .table-content h3 span {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666666;
+}
+.pricing-section .pricing-block .pricing-table .table-content p {
+  font-size: 0.95rem;
+  color: #555555;
+  margin-bottom: 20px;
+}
+.pricing-section .pricing-block .pricing-table .table-content .btn {
+  border-radius: 30px;
+  font-weight: 600;
+  padding: 12px 20px;
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+}
+.pricing-section .pricing-block .pricing-table .table-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+.pricing-section .pricing-block .pricing-table .table-content ul li {
+  font-size: 0.95rem;
+  padding: 8px 0;
+  color: #444444;
+  position: relative;
+  padding-left: 25px;
+}
+.pricing-section .pricing-block .pricing-table .table-content ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--bs-primary);
+  font-size: 1rem;
+  font-weight: bold;
+}
+.pricing-section .pricing-block:nth-child(2) .pricing-table {
+  border: 2px solid var(--bs-primary);
+  transform: scale(1.05);
+  z-index: 2;
+}
+.pricing-section .pricing-block:nth-child(2) .pricing-table:hover {
+  transform: scale(1.08) translateY(-10px);
+}

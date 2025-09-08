@@ -1,0 +1,54 @@
+.block_themeeditor.teams-section-alt {
+  padding: 80px 20px 10px;
+}
+.block_themeeditor.teams-section-alt .sec-title {
+  margin-bottom: 50px;
+}
+.block_themeeditor.teams-section-alt .team-block {
+  margin-bottom: 30px;
+}
+.block_themeeditor.teams-section-alt .team-block .inner-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 25px 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin: 11px;
+}
+.block_themeeditor.teams-section-alt .team-block .inner-box:hover {
+  transform: translateY(-8px);
+  background: var(--bs-primary);
+  color: #ffffff;
+}
+.block_themeeditor.teams-section-alt .team-block .inner-box:hover .name, .block_themeeditor.teams-section-alt .team-block .inner-box:hover .role {
+  color: #ffffff;
+}
+.block_themeeditor.teams-section-alt .team-block .inner-box:hover .image-box {
+  border-color: #ffffff;
+}
+.block_themeeditor.teams-section-alt .team-block .image-box {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 4px solid var(--bs-primary);
+  transition: border-color 0.3s ease;
+}
+.block_themeeditor.teams-section-alt .team-block .image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.block_themeeditor.teams-section-alt .team-block .name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #222222;
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
+}
+.block_themeeditor.teams-section-alt .team-block .role {
+  font-size: 1rem;
+  color: #666666;
+  transition: color 0.3s ease;
+}

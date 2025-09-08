@@ -1,0 +1,73 @@
+
+.block_themeeditor.differentials-section {
+    padding: 80px 20px 10px;
+    .service-block {
+        margin-bottom: 40px;
+        padding: 10px;
+        .inner-box {
+            background: #ffffff;
+            padding: 40px 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+            &:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            }
+            .title-icon {
+                width: 90px;
+                height: 90px;
+                margin: 0 auto 25px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, var(--bs-primary), color-mix(in srgb, var(--bs-primary) 80%, black));
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 5px 15px rgba(var(--bs-primary-rgb), .25);
+                svg {
+                    width: 40px;
+                    height: 40px;
+                    color: #ffffff;
+                }
+            }
+            h3 {
+                font-size: 1.3rem;
+                font-weight: 600;
+                margin-bottom: 15px;
+                color: #222222;
+            }
+            p {
+                font-size: 1rem;
+                line-height: 1.6;
+                color: #555555;
+                margin-bottom: 20px;
+            }
+            .link-box {
+                a {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-weight: 600;
+                    font-size: 0.95rem;
+                    color: var(--bs-primary);
+                    text-decoration: none;
+                    transition: all 0.2s ease;
+                    svg {
+                        width: 18px;
+                        height: 18px;
+                        transition: transform 0.3s ease;
+                    }
+                    &:hover svg {
+                        transform: translateX(3px);
+                    }
+                }
+            }
+        }
+    }
+    @media (max-width: 992px) {
+        .service-block .inner-box {
+            padding: 30px 20px;
+        }
+    }
+}

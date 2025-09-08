@@ -50,6 +50,7 @@ function editor_create_page($template, $lang, $local) {
         $info = json_decode(load_info_json($infofile));
         $htmlfile = __DIR__ . "/model/{$template}/editor.html";
         $html = file_get_contents($htmlfile);
+        $html = replace_lang_by_string($html);
 
         $html = str_replace("src=\"../", "src=\"{$CFG->wwwroot}/theme/degrade/_editor/model/{$template}/../", $html);
         $html = str_replace("url(\"../", "url(\"{$CFG->wwwroot}/theme/degrade/_editor/model/{$template}/../", $html);
@@ -57,7 +58,7 @@ function editor_create_page($template, $lang, $local) {
         throw new Exception("File template not found");
     }
 
-    $page = (object)[
+    $page = (object) [
         "local" => $local,
         "type" => $info->type,
         "title" => $info->title,
@@ -80,11 +81,16 @@ function editor_create_page($template, $lang, $local) {
  * @throws Exception
  */
 function compile_pages($pages) {
-    $return = (object)["pages" => [], "css" => [], "js" => []];
+    $return = (object) ["pages" => [], "css" => [], "js" => []];
+
+    $return->css["_assets/style.css"] = "/theme/degrade/_editor/model/_assets/style.css";
 
     $previewdataid = optional_param("dataid", false, PARAM_INT);
 
     foreach ($pages as $page) {
+        $file = "/theme/degrade/_editor/model/{$page->template}/style.css";
+        $return->css["{$page->template}/style.css"] = $file;
+
         if ($page->id == $previewdataid) {
             $html = required_param("html", PARAM_RAW);
             $css = required_param("css", PARAM_RAW);
@@ -98,7 +104,6 @@ function compile_pages($pages) {
             $info->savedata = array_values($savedata);
             $page->info = json_encode($info);
         }
-
         if (isset($page->info[5])) {
             $info = json_decode($page->info);
 
@@ -126,9 +131,9 @@ function compile_pages($pages) {
                 foreach ($info->form->scripts as $script) {
                     if ($script == "jquery") {
                         $return->js["jquery"] = "jquery";
-                    } elseif ($script == "jqueryui") {
+                    } else if ($script == "jqueryui") {
                         $return->js["jqueryui"] = "jqueryui";
-                    } elseif (strpos($script, "http") === 0) {
+                    } else if (strpos($script, "http") === 0) {
                         $js = "require(['jquery'],function($){ $.getScript('{$script}')})";
                         $return->js[$script] = $js;
                     } else {
@@ -140,8 +145,6 @@ function compile_pages($pages) {
                 }
             }
             if (isset($info->form->styles)) {
-                $file = "/theme/degrade/_editor/model/{$page->template}/style.css";
-                $return->css["{$page->template}/style.css"] = $file;
                 foreach ($info->form->styles as $style) {
                     if ($style != "bootstrap") {
                         if (file_exists(__DIR__ . "/model/{$page->template}/{$style}")) {
@@ -152,11 +155,11 @@ function compile_pages($pages) {
                 }
             }
         }
-        $return->js = array_values($return->js);
-        $return->css = array_values($return->css);
-
         $return->pages[] = $page;
     }
+
+    $return->js = array_values($return->js);
+    $return->css = array_values($return->css);
 
     return $return;
 }
@@ -174,7 +177,7 @@ function theme_degrade_clear_params_array($in, $type) {
         foreach ($in as $key => $value) {
             $out[$key] = theme_degrade_clear_params_array($value, $type);
         }
-    } elseif (is_string($in)) {
+    } else if (is_string($in)) {
         try {
             return clean_param($in, $type);
         } catch (\coding_exception $e) {
@@ -197,27 +200,77 @@ function theme_degrade_clear_params_array($in, $type) {
 function load_info_json($filepath) {
     $json = file_get_contents($filepath);
     $data = json_decode($json, true);
-    replace_lang_strings($data);
+    replace_lang_by_array($data);
 
     return json_encode($data, JSON_PRETTY_PRINT);
 }
 
 /**
- * replace_lang_strings
+ * replace lang by array
  *
- * @param $data
+ * @param array $data
  * @return void
  * @throws Exception
  */
-function replace_lang_strings(&$data) {
-    foreach ($data as $key => &$value) {
+function replace_lang_by_array(&$data) {
+    $stringlang = get_strings_langs();
+
+    foreach ($data as &$value) {
         if (is_array($value)) {
-            replace_lang_strings($value); // Recursive call.
-        } elseif (is_string($value) && str_starts_with($value, 'lang::')) {
+            replace_lang_by_array($value); // Recursive call.
+        } else if (is_string($value) && str_starts_with($value, 'lang::')) {
             $langkey = substr($value, 6); // Remove 'lang::'.
-            $value = get_string($langkey, 'theme_degrade');
+            if (isset($stringlang[$langkey])) {
+                $value = $stringlang[$langkey];
+            } else {
+                $value = "[{$langkey}]";
+            }
         }
     }
+}
+
+/**
+ * replace lang by string
+ *
+ * @param string $data
+ * @throws Exception
+ */
+function replace_lang_by_string($data) {
+    $stringlang = get_strings_langs();
+
+    preg_match_all('/lang::(\w+)/', $data, $output_data);
+    foreach ($output_data[1] as $langkey) {
+        if (isset($stringlang[$langkey])) {
+            $value = $stringlang[$langkey];
+        } else {
+            $value = "[{$langkey}]";
+        }
+        $data = str_replace("lang::{$langkey}", $value, $data);
+    }
+
+    return $data;
+}
+
+/**
+ * get strings langs
+ *
+ * @return array
+ */
+function get_strings_langs() {
+    static $stringlang = [];
+    if (!$stringlang) {
+        if (isset($_GET["current_language"])) {
+            $lang = $_GET["current_language"];
+        } else {
+            $lang = current_language();
+        }
+        require_once(__DIR__ . "/model/_assets/lang/en.php");
+        if (file_exists(__DIR__ . "/model/_assets/lang/{$lang}.php")) {
+            require_once(__DIR__ . "/model/_assets/lang/{$lang}.php");
+        }
+    }
+
+    return $stringlang;
 }
 
 /**
@@ -247,9 +300,35 @@ function get_editor_course_link($course) {
         }
     }
 
-    return (object)[
-        "link" => $link,
-        "title" => $title,
-        "access" => $access,
+    return (object) [
+        "link" => $link, "title" => $title, "access" => $access,
     ];
+}
+
+/**
+ * List templates
+ *
+ * @return array
+ * @throws Exception
+ */
+function list_templates() {
+    global $CFG;
+
+    $lang = current_language();
+    $files = glob(__DIR__ . "/model/*/info.json");
+
+    $items = [];
+    foreach ($files as $file) {
+        $dir = pathinfo(pathinfo($file, PATHINFO_DIRNAME), PATHINFO_BASENAME);
+        $data = json_decode(load_info_json($file));
+        if ($data) {
+            $items[] = [
+                "id" => $dir, "title" => $data->title, "category" => $data->category,
+                "image" => "{$CFG->wwwroot}/theme/degrade/_editor/model/{$dir}/print.png",
+                "preview" => "{$CFG->wwwroot}/theme/degrade/_editor/model/preview.php?path={$dir}&current_language={$lang}",
+            ];
+        }
+    }
+
+    return $items;
 }

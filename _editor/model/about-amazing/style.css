@@ -1,0 +1,44 @@
+.about-amazing {
+  padding: 80px 20px 10px;
+}
+.about-amazing .content-box h3 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #222222;
+  margin-bottom: 20px;
+}
+.about-amazing .content-box p {
+  font-size: 1rem;
+  color: #555555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.about-amazing .content-box .about-list {
+  list-style: none;
+  padding: 0;
+}
+.about-amazing .content-box .about-list li {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #333333;
+}
+.about-amazing .image-box {
+  text-align: center;
+}
+.about-amazing .image-box img {
+  max-width: 100%;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+.about-amazing .image-box img:hover {
+  transform: scale(1.03);
+}
+@media (max-width: 991px) {
+  .about-amazing .row {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .about-amazing .content-box {
+    margin-top: 30px;
+  }
+}

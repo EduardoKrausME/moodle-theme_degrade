@@ -1,0 +1,80 @@
+.block_themeeditor.testimonials-section {
+  padding: 80px 20px 10px;
+}
+.block_themeeditor.testimonials-section .sec-title {
+  margin-bottom: 60px;
+}
+.block_themeeditor.testimonials-section .sec-title h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 15px;
+  position: relative;
+  display: inline-block;
+}
+.block_themeeditor.testimonials-section .sec-title h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--bs-primary);
+  border-radius: 2px;
+  margin: 10px auto 0;
+}
+.block_themeeditor.testimonials-section .sec-title .subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.block_themeeditor.testimonials-section .testimonials-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+.block_themeeditor.testimonials-section .testimonial-block {
+  flex: 1 1 300px;
+  max-width: 350px;
+}
+.block_themeeditor.testimonials-section .testimonial-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 25px 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+.block_themeeditor.testimonials-section .testimonial-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+.block_themeeditor.testimonials-section .testimonial-card .testimonial-text {
+  font-size: 1rem;
+  color: #444;
+  font-style: italic;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+.block_themeeditor.testimonials-section .testimonial-card .testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.block_themeeditor.testimonials-section .testimonial-card .testimonial-author img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.block_themeeditor.testimonials-section .testimonial-card .testimonial-author .author-info h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #222;
+}
+.block_themeeditor.testimonials-section .testimonial-card .testimonial-author .author-info span {
+  font-size: 0.9rem;
+  color: #777;
+}

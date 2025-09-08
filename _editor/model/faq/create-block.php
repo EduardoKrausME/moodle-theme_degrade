@@ -12,21 +12,15 @@ function faq_createblocks($page) {
 
     $blocks = "";
     if (isset($page->info->savedata)) {
-        foreach ($page->info->savedata as $data) {
-
+        foreach ($page->info->savedata as $key => $data) {
                 $blocks .= "
-                    <div class=\"faq-editor-item border-b border-gray-200 pb-3\"
-                        id=\"faq-editor-item-1\">
-                        <h3 class=\"w-100 text-left d-flex justify-content-between align-items-center\">
-                          <span>{$data->title}</span>
-                            <svg fill=\"none\" stroke=\"currentColor\" height=\"24\" width=\"24\" viewBox=\"0 0 24 24\">
-                                <path stroke-linecap=\"round\"
-                                      stroke-linejoin=\"round\"
-                                      stroke-width=\"2\"
-                                      d=\"M19 9l-7 7-7-7\"></path>
-                            </svg>
-                        </h3>
-                        <div class=\"mt-2 faq-answer faq-hidden\">
+                    <div class=\"faq-item\">
+                        <input type=\"radio\" id=\"faq-{$key}\" name=\"faq\" class=\"faq-toggle\">
+                        <label for=\"faq-{$key}\" class=\"faq-question\">
+                            <span>{$data->title}</span>
+                            <span class=\"arrow\"></span>
+                        </label>
+                        <div class=\"faq-answer\">
                             <p>{$data->description}</p>
                         </div>
                     </div>\n";

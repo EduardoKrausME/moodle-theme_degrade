@@ -1,0 +1,302 @@
+(function (h, y) {
+    typeof exports == "object" && typeof module < "u" ? module.exports = y() : typeof define == "function" && define.amd ? define(y) : (h = typeof globalThis < "u" ? globalThis : h || self, h.GrapesJsPlugins_iconifyComponent = y())
+})(this, function () {
+    "use strict";
+    const h = "app.grapesjs.com", y = "app-stage.grapesjs.com",
+        x = [h, y, "localhost", "127.0.0.1", ".local-credentialless.webcontainer.io", ".local.webcontainer.io", "-sandpack.codesandbox.io"],
+        G = "license:check:start", j = "license:check:end", H = () => typeof window < "u",
+        B = ({isDev: e, isStage: o}) => `${e ? "" : `https://${o ? y : h}`}/api`, C = () => {
+            const e = H() && window.location.hostname;
+            return !!e && (x.includes(e) || x.some(o => e.endsWith(o)))
+        };
+
+    async function m({path: e, baseApiUrl: o, method: t = "GET", headers: n = {}, params: a, body: d}) {
+        const r = `${o || B({isDev: !1, isStage: !1})}${e}`,
+            s = {method: t, headers: {"Content-Type": "application/json", ...n}};
+        d && (s.body = JSON.stringify(d));
+        const c = a ? new URLSearchParams(a).toString() : "", i = c ? `?${c}` : "", g = await fetch(`${r}${i}`, s);
+        if (!g.ok) throw new Error(`HTTP error! status: ${g.status}`);
+        return g.json()
+    }
+
+    var b = (e => (e.free = "free", e.startup = "startup", e.business = "business", e.enterprise = "enterprise", e))(b || {}),
+        O = (e => (e.Info = "info", e.Error = "error", e.Success = "success", e.Warning = "warning", e))(O || {}),
+        f = (e => (e.toastAdd = "studio:toastAdd", e.dialogOpen = "studio:dialogOpen", e.dialogClose = "studio:dialogClose", e.sidebarLeftSet = "studio:sidebarLeft:set", e.sidebarLeftGet = "studio:sidebarLeft:get", e.sidebarLeftToggle = "studio:sidebarLeft:toggle", e.sidebarRightSet = "studio:sidebarRight:set", e.sidebarRightGet = "studio:sidebarRight:get", e.sidebarRightToggle = "studio:sidebarRight:toggle", e.sidebarTopSet = "studio:sidebarTop:set", e.sidebarTopGet = "studio:sidebarTop:get", e.sidebarTopToggle = "studio:sidebarTop:toggle", e.sidebarBottomSet = "studio:sidebarBottom:set", e.sidebarBottomGet = "studio:sidebarBottom:get", e.sidebarBottomToggle = "studio:sidebarBottom:toggle", e.symbolAdd = "studio:symbolAdd", e.symbolDetach = "studio:symbolDetach", e.symbolOverride = "studio:symbolOverride", e.symbolPropagateStyles = "studio:propagateStyles", e.getPagesConfig = "studio:getPagesConfig", e.setPagesConfig = "studio:setPagesConfig", e.getPageSettings = "studio:getPageSettings", e.setPageSettings = "studio:setPageSettings", e.projectFiles = "studio:projectFiles", e.canvasReload = "studio:canvasReload", e.getBlocksPanel = "studio:getBlocksPanel", e.setBlocksPanel = "studio:setBlocksPanel", e.getStateContextMenu = "studio:getStateContextMenu", e.setStateContextMenu = "studio:setStateContextMenu", e.contextMenuComponent = "studio:contextMenuComponent", e.layoutAdd = "studio:layoutAdd", e.layoutRemove = "studio:layoutRemove", e.layoutToggle = "studio:layoutToggle", e.layoutUpdate = "studio:layoutUpdate", e.layoutGet = "studio:layoutGet", e.layoutConfigGet = "studio:layoutConfigGet", e.layoutConfigSet = "studio:layoutConfigSet", e.getStateTheme = "studio:getStateTheme", e.setStateTheme = "studio:setStateTheme", e.assetProviderGet = "studio:assetProviderGet", e.assetProviderAdd = "studio:assetProviderAdd", e.assetProviderRemove = "studio:assetProviderRemove", e.fontGet = "studio:fontGet", e.fontAdd = "studio:fontAdd", e.fontRemove = "studio:fontRemove", e.fontManagerOpen = "studio:fontManagerOpen", e.menuFontLoad = "studio:menuFontLoad", e.toggleStateDataSource = "studio:toggleStateDataSource", e.getStateDataSource = "studio:getStateDataSource", e.dataSourceSetGlobalData = "studio:dataSourceSetGlobalData", e.dataSourceSetImporter = "studio:dataSourceSetImporter", e.dataSourceSetExporter = "studio:dataSourceSetExporter", e.setDragAbsolute = "studio:setDragAbsolute", e))(f || {});
+    const R = {[b.free]: 0, [b.startup]: 10, [b.business]: 20, [b.enterprise]: 30};
+
+    function F(e) {
+        const o = e;
+        return o.init = t => n => e(n, t), o
+    }
+
+    const W = e => F(e);
+
+    async function S({editor: e, plan: o, pluginName: t, licenseKey: n, cleanup: a}) {
+        let d = "", u = !1;
+        const r = C(), s = i => {
+            console.warn("Cleanup plugin:", t, "Reason:", i), a()
+        }, c = (i = {}) => {
+            var L;
+            const {error: g, sdkLicense: v} = i, l = (L = i.plan) == null ? void 0 : L.category;
+            if (!(v || i.license) || g) s(g || "Invalid license"); else if (l) {
+                const T = R[o], w = R[l];
+                T > w && s({pluginRequiredPlan: o, licensePlan: l})
+            }
+        };
+        e.on(G, i => {
+            d = i == null ? void 0 : i.baseApiUrl, u = !0
+        }), e.on(j, i => {
+            c(i)
+        })
+    }
+
+    async function K(e) {
+        const {licenseKey: o, pluginName: t, baseApiUrl: n} = e;
+        try {
+            return (await m({
+                baseApiUrl: n,
+                path: `/sdk/${o || "na"}`,
+                method: "POST",
+                params: {d: window.location.hostname, pn: t}
+            })).result || {}
+        } catch (a) {
+            return console.error("Error during SDK license check:", a), !1
+        }
+    }
+
+    const V = (e, o) => {
+            var t;
+            return !!((t = e == null ? void 0 : e.hasAttribute) != null && t.call(e, o))
+        }, Y = "iconifyComponent", z = b.startup, q = {ratioDefault: !0, tc: !1, cl: !1, cr: !1, bc: !1}, E = `<svg viewBox="0 0 24 24">
+  <path d="M19 0H9C7.9 0 7 .9 7 2V18C7 19.1 7.9 20 9 20H19C20.1 20 21 19.1 21 18V2C21 .9 20.1 0 19 0M19 18H9V2H19V18M3 4V22C3 23.1 3.9 24 5 24H17V22H5V4H3M14 5L11 10L14 15L17 10L14 5Z" />
+</svg>`, _ = "layout-icon-picker",
+        J = "icons-layout-",
+        $ = "icons-list-layout",
+        D = "gs-iconify-picker",
+        A = "__iconify_collection",
+        X = "https://api.iconify.design", P = new Map;
+    let I;
+    const Z = ({collectionId: e}) => `https://cdn.jsdelivr.net/npm/@iconify-json/${e}@latest/icons.json`;
+
+    async function M({collectionId: e, editor: o}) {
+        try {
+            if (P.has(e)) return P.get(e);
+            const t = await fetch(Z({collectionId: e}));
+            if (!t.ok) throw new Error(`Failed to fetch collection: ${t.statusText}`);
+            const n = await t.json();
+            return P.set(e, n), n
+        } catch (t) {
+            console.error("Error fetching collection", t), o.runCommand(f.toastAdd, ce());
+            return
+        }
+    }
+
+    async function Q({collectionIds: e, editor: o}) {
+        try {
+            if (I) return I;
+            const t = e ? `?prefixes=${e.join(",")}` : "", n = await fetch(
+                `${X}/collections${t}`);
+            if (!n.ok) throw new Error(`Failed to fetch collections: ${n.statusText}`);
+            return I = await n.json(), I
+        } catch (t) {
+            console.error("Error fetching collections", t), o.runCommand(f.toastAdd, U());
+            return
+        }
+    }
+
+    function N() {
+        return {
+            type: "button", label: "Open Icon Picker", name: "onActive", changeProp: !0, command(e) {
+                var o;
+                (o = e.getSelected()) == null || o.trigger("active")
+            }
+        }
+    }
+
+    async function ee({collectionIds: e, editor: o, component: t}) {
+        const n = await Q({collectionIds: e, editor: o});
+        if (!n) return;
+        const a = ({icon: s, collectionId: c, iconId: i}) => {
+                t.components(s), t.set({collectionId: c, iconId: i})
+            },
+            d = Object.entries(n)
+                .map(([s, c]) => ({id: s, ...c}))
+                .sort((s, c) => s.name.localeCompare(c.name)),
+            u = t.get("collectionId") ?? d[0].id;
+        o.runCommand(f.layoutToggle, {
+            id: _,
+            placer: {type: "dialog", size: "l", title: "Select Icon"},
+            header: !1,
+            layout: {
+                type: "column",
+                style: {height: 500, gap: 10},
+                children: [ne({collectionsList: d, collectionId: u, editor: o, handleClick: a}), {
+                    id: $,
+                    type: "column",
+                    grow: !0
+                }]
+            }
+        });
+        const r = await M({collectionId: u, editor: o});
+        r && k({editor: o, collection: r, handleClick: a, collectionId: u})
+    }
+
+    function te({editor: e, collection: o}) {
+        e.em.set(A, o)
+    }
+
+    function oe(e) {
+        return e.em.get(A)
+    }
+
+    function k(e) {
+        const {editor: o} = e,
+            t = {id: J, layout: se(e), header: !1, style: {height: "100%"}, placer: {type: "static", layoutId: $}};
+        o.runCommand(f.layoutRemove, {id: t.id, force: !0}), setTimeout(() => o.runCommand(f.layoutAdd, t), 10)
+    }
+
+    function ne(e) {
+        const {collectionsList: o, collectionId: t, editor: n, handleClick: a} = e,
+            d = o.map(({id: u, name: r, total: s}) => ({
+                id: u,
+                label: `${r} (${s})`
+            })).sort((u, r) => u.label.localeCompare(r.label));
+        return {
+            type: "column",
+            style: {gap: 10},
+            className: `${D}__header`,
+            children: [{
+                type: "selectField",
+                value: t,
+                options: d,
+                emptyState: "Select an icon collection",
+                onChange: async ({setState: u, value: r}) => {
+                    const s = await M({collectionId: r, editor: n});
+                    s && (u({value: r}), te({editor: n, collection: s}), k({
+                        editor: n,
+                        collection: s,
+                        handleClick: a,
+                        collectionId: r
+                    }))
+                }
+            }, {
+                type: "inputField",
+                value: "",
+                placeholder: "Search icons inside collection...",
+                editorEvents: {[`change:${A}`]: ({setState: u}) => u({value: ""})},
+                onInput: ({setState: u, value: r, editor: s}) => {
+                    const c = oe(s);
+                    if (!c) return;
+                    const i = Object.fromEntries(Object.entries(c.icons).filter(([g]) => g.includes(r)));
+                    u({value: r}), k({
+                        editor: s,
+                        collection: c,
+                        handleClick: a,
+                        collectionId: r,
+                        collectionFiltered: {...c, icons: i}
+                    })
+                }
+            }]
+        }
+    }
+
+    function se({collection: e, collectionFiltered: o, handleClick: t}) {
+        const {height: n = 24, width: a = 24, icons: d, prefix: u} = o || e,
+            r = Object.entries(d).map(([s, {body: c}]) => ({name: s, body: c}), {});
+        return {
+            type: "column",
+            className: `${D}__content`,
+            style: {height: "100%"},
+            children: {
+                type: "virtualList", items: r, itemLayout: ({item: s}) => [{
+                    type: "custom", render: c => {
+                        const {editor: i, addEl: g, removeEl: v} = c,
+                            l = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                        l.setAttribute("xmlns", "http://www.w3.org/2000/svg"), l.innerHTML = s.body, l.setAttribute("viewBox", `0 0 ${a} ${n}`);
+                        const {cssWidth: p, cssHeight: L} = ie(a, n);
+                        l.style.cssText = `width: ${p}px; height: ${L}px; cursor: pointer;`, l.addEventListener("mouseover", () => {
+                            l.style.border = "2px solid currentColor", l.style.borderRadius = "4px", l.style.padding = "4px"
+                        }), l.addEventListener("mouseout", () => {
+                            l.style.border = "none"
+                        });
+                        const T = () => {
+                            const w = l.cloneNode(!0);
+                            w.removeAttribute("style");
+                            const re = w.outerHTML;
+                            t({
+                                icon: re,
+                                collectionId: u,
+                                iconId: s.name
+                            }), i == null || i.runCommand(f.layoutRemove, {id: _})
+                        };
+                        return l.addEventListener("click", T), g(l), () => {
+                            l.removeEventListener("click", T), v(l)
+                        }
+                    }
+                }]
+            }
+        }
+    }
+
+    function ie(e, o) {
+        const t = e / o;
+        let n = 48, a = 48;
+        return t > 1 ? a = 48 / t : t < 1 && (n = 48 * t), {cssWidth: n, cssHeight: a}
+    }
+
+    function U() {
+        return {
+            id: "toast-error-getCollections",
+            header: "Error",
+            content: "Error fetching collections",
+            variant: O.Error
+        }
+    }
+
+    function ce() {
+        return {...U(), id: "toast-error-getCollection", content: "Error fetching collection"}
+    }
+
+    return W(function (e, o = {}) {
+        var l;
+        const {Components: t, Blocks: n} = e, {
+            collections: a,
+            extendIconComponent: d = !0,
+            licenseKey: u,
+            block: r = {}
+        } = o, s = "icon", c = "iconify", i = "Iconify", g = "data-type-iconify", v = {
+            events: () => ({dblclick: "onActive"}), onActive() {
+                ee({collectionIds: a, editor: e, component: this.model})
+            }
+        };
+        if (t.addType(c, {
+            block: r && {label: i, media: E, content: {type: c}, category: "Extra", activate: !0, ...r},
+            isComponent: p => V(p, g),
+            model: {
+                defaults: {
+                    name: i,
+                    icon: E,
+                    droppable: !1,
+                    attributes: {[g]: !0},
+                    resizable: q,
+                    components: E,
+                    style: {width: "50px", height: "50px"},
+                    traits: [N()]
+                }, init() {
+                    this.listenTo(this.components(), "change add", this.disableLayers), this.disableLayers()
+                }, disableLayers() {
+                    this.components().forEach(p => p.set({layerable: !1, locked: !0}))
+                }
+            },
+            view: v
+        }), d) {
+            const p = (l = t.getType(s)) == null ? void 0 : l.model, [L, T, ...w] = p.getDefaults().traits;
+            t.addType(s, {model: {defaults: {traits: [L, T, N(), ...w]}}, view: v})
+        }
+        S({
+            editor: e, licenseKey: u, plan: z, pluginName: Y, cleanup: () => {
+                n.remove(c), t.removeType(c)
+            }
+        })
+    })
+});

@@ -1,0 +1,46 @@
+.row {
+  position: relative;
+  padding: 30px;
+  background: rgba(174, 174, 174, 0.15);
+}
+.row::before {
+  content: "lang::row_before";
+}
+.row [class^=col-] {
+  position: relative;
+  background: rgba(126, 123, 123, 0.3);
+  padding: 20px;
+  border: 2px solid #ff00ff;
+  transform: scale(0.96);
+}
+.row [class^=col-]::before {
+  content: "lang::row_col_before";
+}
+.row::before,
+.row [class^=col-]::before {
+  position: absolute;
+  top: -10px;
+  left: 5px;
+  background: #ff00ff;
+  display: block;
+  font-size: 12px;
+  color: #555555;
+  font-style: italic;
+}
+
+.change-to-blocks-never-edit {
+  position: relative;
+  padding: 30px;
+  background: rgba(174, 174, 174, 0.15);
+}
+.change-to-blocks-never-edit::before {
+  content: "lang::row_before";
+  position: absolute;
+  top: -10px;
+  left: 5px;
+  background: #ff00ff;
+  display: block;
+  font-size: 12px;
+  color: #555555;
+  font-style: italic;
+}

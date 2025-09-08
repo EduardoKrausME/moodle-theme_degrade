@@ -1,0 +1,103 @@
+
+.pricing-section {
+    padding: 80px 20px 10px;
+    .pricing-block {
+        margin-bottom: 40px;
+        .pricing-table {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin: 11px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            &:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            }
+            .table-header {
+                margin-bottom: 25px;
+                .gjs-icon {
+                    width: 70px;
+                    height: 70px;
+                    margin: 0 auto 15px;
+                    background: linear-gradient(135deg, var(--bs-primary), rgba(0, 123, 255, 0.66));
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    svg {
+                        width: 32px;
+                        height: 32px;
+                        color: #ffffff;
+                    }
+                }
+                h3 {
+                    font-size: 1.4rem;
+                    font-weight: 700;
+                    color: #333333;
+                    margin: 0;
+                }
+            }
+            .table-content {
+                h3 {
+                    font-size: 2rem;
+                    font-weight: 800;
+                    color: var(--bs-primary);
+                    margin-bottom: 10px;
+                    span {
+                        font-size: 1rem;
+                        font-weight: 400;
+                        color: #666666;
+                    }
+                }
+                p {
+                    font-size: 0.95rem;
+                    color: #555555;
+                    margin-bottom: 20px;
+                }
+                .btn {
+                    border-radius: 30px;
+                    font-weight: 600;
+                    padding: 12px 20px;
+                    margin-bottom: 25px;
+                    transition: all 0.3s ease;
+                }
+                ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    text-align: left;
+                    li {
+                        font-size: 0.95rem;
+                        padding: 8px 0;
+                        color: #444444;
+                        position: relative;
+                        padding-left: 25px;
+                        &::before {
+                            content: "✔";
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            color: var(--bs-primary);
+                            font-size: 1rem;
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+        }
+        // Destaque especial no plano do meio
+        &:nth-child(2) .pricing-table {
+            border: 2px solid var(--bs-primary);
+            transform: scale(1.05);
+            z-index: 2;
+            &:hover {
+                transform: scale(1.08) translateY(-10px);
+            }
+        }
+    }
+}
+

@@ -92,13 +92,18 @@ $local = $page->local;
 
 $pageinfo = json_decode($page->info);
 
-$cssfiles = "@import url(\"model/{$page->template}/style.css\"); \n";
+$cssfiles = "@import url('model/{$page->template}/style.css');\n";
+$cssfiles .= "@import url('css/bootstrap.css');\n";
+if (file_exists(__DIR__ . "/model/{$page->template}/editor-plugin.js")) {
+    $csscontent = file_get_contents(__DIR__ . "/model/_assets/editor.css");
+    $cssfiles .= replace_lang_by_string($csscontent);
+}
 if(isset($pageinfo->form->styles)) {
     foreach ($pageinfo->form->styles as $styles) {
         if ($styles == "bootstrap") {
             continue;
         }
-        $cssfiles .= "@import url(\"model/{$page->template}/{$styles}\"); \n";
+        $cssfiles .= "@import url('model/{$page->template}/{$styles}'); \n";
     }
 }
 
@@ -186,9 +191,8 @@ if ($page->type == "form") { // Only form.
 <script>
     window.GrapesJsCSS = `<?php echo $cssfiles; ?>`
 
-    GrapesJsStudioSDK.createStudioEditor({
+    GrapesJs.createEditor({
         root: "#studio-editor",
-        licenseKey: "DEMO_LOCALHOST_KEY",
         theme: "dark",
         fonts: {
             enableFontManager: true,
@@ -356,12 +360,19 @@ if ($page->type == "form") { // Only form.
             autosaveIntervalMs: 500,
         },
         plugins: [
-            StudioSdkPlugins_prosemirror.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/rte/prosemirror */ }),
-            StudioSdkPlugins_layoutSidebarButtons.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/layout/sidebar-buttons */ }),
-            StudioSdkPlugins_tableComponent.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/components/table */}),
-            StudioSdkPlugins_iconifyComponent.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/components/iconify */}),
-            StudioSdkPlugins_flexComponent.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/components/flex */}),
-            StudioSdkPlugins_canvasEmptyState.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/canvas/emptyState */}),
+            GrapesJsPlugins_prosemirror.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/rte/prosemirror */ }),
+            GrapesJsPlugins_layoutSidebarButtons.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/layout/sidebar-buttons */ }),
+            GrapesJsPlugins_tableComponent.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/components/table */}),
+            GrapesJsPlugins_iconifyComponent.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/components/iconify */}),
+            GrapesJsPlugins_flexComponent.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/components/flex */}),
+            GrapesJsPlugins_canvasEmptyState.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/canvas/emptyState */}),
+
+            <?php
+            if (file_exists(__DIR__ . "/model/{$page->template}/editor-plugin.js")) {
+                $pluginjs = file_get_contents(__DIR__ . "/model/{$page->template}/editor-plugin.js");
+                echo replace_lang_by_string($pluginjs);
+            }
+            ?>
         ],
     });
 </script>

@@ -1,19 +1,20 @@
 {
-  "title": "lang::editor_model_banner_no_video",
+  "title": "lang::banner_no_video",
+  "category": "banner",
   "type": "form",
   "form": {
-    "title": "lang::editor_model_form_title",
-    "label": "lang::editor_model_form_label2",
+    "title": "lang::form_title",
+    "label": "lang::form_label2",
     "blocks": {
       "courseid": {
         "type": "select",
-        "label": "lang::editor_model_select_course",
+        "label": "lang::select_course",
         "data": "courses",
         "required": true
       },
       "description": {
         "type": "textarea",
-        "label": "lang::editor_model_course_description"
+        "label": "lang::course_description"
       }
     },
     "scripts": [

@@ -1,0 +1,66 @@
+
+.faq-modern {
+    padding: 90px 20px;
+    .container {
+        max-width: 700px;
+        margin: 3rem auto;
+        padding: 0 1rem;
+    }
+    .faq-item {
+        border-bottom: 1px solid #e2e8f0;
+        padding: 1rem 0;
+        position: relative;
+        input[type="radio"] {
+            display: none;
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0f172a;
+            cursor: pointer;
+            padding-right: 1.5rem;
+            transition: color 0.3s ease;
+            position: relative;
+            &::after {
+                content: "+";
+                position: absolute;
+                right: 0;
+                font-size: 1.3rem;
+                color: #64748b;
+                transition: transform 0.3s ease, color 0.3s ease;
+            }
+            &:hover {
+                color: var(--bs-primary);
+                &::after {
+                    color: var(--bs-primary);
+                }
+            }
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.4s ease;
+            font-size: 0.95rem;
+            color: #475569;
+            line-height: 1.6;
+        }
+        /* Quando o radio está marcado */
+        input[type="radio"]:checked + .faq-question {
+            color: var(--bs-primary);
+            &::after {
+                content: "−";
+                transform: rotate(180deg);
+                color: var(--bs-primary);
+            }
+        }
+        input[type="radio"]:checked ~ .faq-answer {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+    }
+}
