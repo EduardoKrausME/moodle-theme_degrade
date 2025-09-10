@@ -181,7 +181,7 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         }
 
         if ($customcss = get_config("theme_degrade", "customcss")) {
-            set_config("scss", $customcss, "theme_degrade");
+            set_config("scsspos", $customcss, "theme_degrade");
         }
 
         // Footer.
@@ -287,6 +287,12 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         }
 
         upgrade_plugin_savepoint(true, 2025091000, "theme", "degrade");
+    }
+
+    if ($oldversion < 2025091001) {
+        $scss = get_config("scss", "theme_degrade");
+        set_config("scsspos", $scss, "theme_degrade");
+        unset_config("scsspos", "theme_degrade");
     }
 
     return true;
