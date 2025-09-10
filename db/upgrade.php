@@ -294,7 +294,7 @@ function xmldb_theme_degrade_upgrade($oldversion) {
 
 /**
  * Create theme_degrade_pages
- * 
+ *
  * @return void
  * @throws Exception
  */
