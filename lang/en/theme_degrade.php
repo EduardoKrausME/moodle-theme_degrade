@@ -82,6 +82,7 @@ $string['course_summary_banner_none'] = 'No header';
 $string['course_summary_banner_simple'] = 'Simple header with information';
 $string['course_summary_banner_title'] = 'Header with banner';
 $string['course_summary_desc'] = 'If enabled, the course summary will be displayed before the main course content on the course page.';
+$string['courseindexoptions'] = 'Course index options';
 $string['coursesettings'] = 'Course';
 $string['delete_block_confirm'] = 'Are you sure you want to delete the block?';
 $string['delete_block_success'] = 'Block successfully deleted';
