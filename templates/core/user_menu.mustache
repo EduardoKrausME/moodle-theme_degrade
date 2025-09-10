@@ -67,13 +67,11 @@
     {{/unauthenticateduser}}
 </div>
 {{#js}}
-    require(["jquery", "core/modal", "core/notification"], function ($, Modal, Notification) {
+    require(["jquery", "core/notification"], function ($, Notification) {
 
         $("#user-menu-toggle").click(function (event) {
             event.preventDefault();
-            Modal.create({
-                title: "{{{userfullname}}}",
-                body: `
+            let body = `
                 {{#avatardata}}
                     <span class="avatar d-none {{{classes}}}">
                         {{{content}}}
@@ -84,16 +82,40 @@
                         {{> core/user_action_menu_items }}
                     </div>
                     <div class="usermenu-modal-tabs-content"></div>
-                </div>`,
-                large: true,
-                show: true,
-                removeOnClose: true,
-            }).then(function (modal) {
-                if (!modal.root) {
-                    modal.root = modal._root;
+                </div>`;
+            require(['core/modal'], function (ModalModule) {
+                const Modal = ModalModule && (ModalModule.default || ModalModule);
+                if (Modal && typeof Modal.create === 'function') {
+                    Modal.create({
+                        title: "{{{userfullname}}}",
+                        body: body,
+                        large: true,
+                        show: true,
+                        removeOnClose: true,
+                    }).then(function (modal) {
+                        if (!modal.root) {
+                            modal.root = modal._root;
+                        }
+                        usermodal_init(modal);
+                    }).catch(Notification.exception);
+                } else {
+                    require(["core/modal_factory"], function (ModalFactory) {
+                        ModalFactory.create({
+                            type: ModalFactory.types.DEFAULT,
+                            title: "{{{userfullname}}}",
+                            body: body,
+                            footer: "",
+                            removeOnClose: true,
+                        }).done(function (modal) {
+                            if (!modal.root) {
+                                modal.root = modal._root;
+                            }
+                            modal.show();
+                            usermodal_init(modal);
+                        });
+                    });
                 }
-                usermodal_init(modal);
-            }).catch(Notification.exception);
+            });
         });
 
         function usermodal_init(modal) {

@@ -172,30 +172,35 @@
 {{/hasnavbarcourse}}
 
 {{#js}}
-    require(["jquery", "core/modal", "core/notification"], function ($, Modal, Notification) {
-        $(`#headeractions-banner-{{{headeractions_banner_courseid}}}`).click(function (){
+    require(["jquery", "core/notification"], function ($, Notification) {
+        $(`#headeractions-banner-{{{headeractions_banner_courseid}}}`).click(function () {
             event.preventDefault();
 
             let $link = $(this);
+            require(['core/modal'], function (ModalModule) {
+                const Modal = ModalModule && (ModalModule.default || ModalModule);
+                if (Modal && typeof Modal.create === 'function') {
+                    Modal.create({
+                        title: $link.text(),
+                        body: `<div id="headeractions-banner-modal" style="margin:-27px;"></div>`,
+                        large: true,
+                        show: true,
+                        removeOnClose: true,
+                    }).then(function (modal) {
+                        if (!modal.root) {
+                            modal.root = modal._root;
+                        }
+                        modal.root.find(".modal-dialog").addClass("modal-xl");
 
-            Modal.create({
-                title: $link.text(),
-                body: `<div id="headeractions-banner-modal" style="margin:-27px;"></div>`,
-                large: true,
-                show: true,
-                removeOnClose: true,
-            }).then(function (modal) {
-                if (!modal.root) {
-                    modal.root = modal._root;
+                        let href = `${$link.attr("href")}&modal=1`;
+                        $.get(href, function (data) {
+                            $("#headeractions-banner-modal").html(data);
+                        });
+                    }).catch(Notification.exception);
+                } else {
+                    location.href = $link.attr("href");
                 }
-                modal.root.find(".modal-dialog").addClass("modal-xl");
-
-                let href = `${$link.attr("href")}&modal=1`;
-                $.get(href, function(data) {
-                    $("#headeractions-banner-modal").html(data);
-                });
-
-            }).catch(Notification.exception);
-        })
+            });
+        });
     });
 {{/js}}
