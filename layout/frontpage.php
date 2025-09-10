@@ -33,6 +33,9 @@ require_once("{$CFG->dirroot}/course/lib.php");
 $addblockbutton = $OUTPUT->addblockbutton();
 
 $extraclasses = ["uses-drawers"];
+if (get_config("theme_degrade", "homemode")) {
+    $extraclasses[] = "homemode-editor";
+}
 
 $blockshtml = $OUTPUT->blocks("side-pre");
 

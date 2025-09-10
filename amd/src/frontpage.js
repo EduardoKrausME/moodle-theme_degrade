@@ -1,29 +1,58 @@
-define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notification) {
+define(["jquery", "core/notification"], function ($, Notification) {
     var frontpage = {
-        add_block: function (lang) {
-            $("#editing-add-new-block").show();
-            $("#frontpage_add_block").click(function () {
-                Modal.create({
-                    title: $("#frontpage_add_block_modal").attr("data-title"),
-                    body: '<div id="list-models" class="d-flex flex-column"></div>',
-                    large: true,
-                    show: true,
-                    removeOnClose: true,
-                }).then(function (modal) {
-                    if (!modal.root) {
-                        modal.root = modal._root;
-                    }
-                    modal.modal.addClass('modal-dialog-centered modal-xl');
-                    modal.modal.append(`<style>#row-banner{order:-2;}#row-carousel{order:-1;}</style>`);
+        lang: null,
 
-                    frontpage.add_block_modal_init(lang);
-                }).catch(Notification.exception);
+        add_block: function (lang) {
+            frontpage.lang = lang;
+            $("#editing-add-new-block").show();
+            $("#frontpage_add_block").click(frontpage.frontpage_add_block__click);
+        },
+
+        frontpage_add_block__click: function () {
+            require(['core/modal'], function (ModalModule) {
+                const Modal = ModalModule && (ModalModule.default || ModalModule);
+                if (Modal && typeof Modal.create === 'function') {
+                    Modal.create({
+                        title: $("#frontpage_add_block_modal").attr("data-title"),
+                        body: '<div id="list-models" class="d-flex flex-column"></div>',
+                        large: true,
+                        show: true,
+                        removeOnClose: true,
+                    }).then(function (modal) {
+                        if (!modal.root) {
+                            modal.root = modal._root;
+                        }
+                        modal.modal.addClass("modal-dialog-centered modal-xl");
+                        modal.modal.append(`<style>#row-banner{order:-2;}#row-carousel{order:-1;}</style>`);
+
+                        frontpage.add_block_modal_init();
+                    }).catch(Notification.exception);
+                } else {
+                    require(["core/modal_factory"], function (ModalFactory) {
+                        ModalFactory.create({
+                            type: ModalFactory.types.DEFAULT,
+                            title: $("#frontpage_add_block_modal").attr("data-title"),
+                            body: '<div id="lista-modelos" class="d-flex flex-wrap row"></div>',
+                            footer: "",
+                            removeOnClose: true,
+                        }).done(function (modal) {
+                            if (!modal.root) {
+                                modal.root = modal._root;
+                            }
+                            modal.show();
+                            modal.modal.addClass("modal-dialog-centered modal-xl");
+                            modal.modal.append(`<style>#row-banner{order:-2;}#row-carousel{order:-1;}</style>`);
+
+                            frontpage.add_block_modal_init();
+                        });
+                    });
+                }
             });
         },
 
-        add_block_modal_init: function (lang) {
+        add_block_modal_init: function () {
             async function loadFiles() {
-                const response = await fetch(`${M.cfg.wwwroot}/theme/degrade/_editor/model/?lang=${lang}`);
+                const response = await fetch(`${M.cfg.wwwroot}/theme/degrade/_editor/model/?lang=${frontpage.lang}`);
 
                 if (!response.ok) {
                     throw new Error("Error loading files: " + response.status);
@@ -69,11 +98,11 @@ define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notifi
                                          class="img-fluid mb-2" style="width:100%;border-radius:8px;max-width:350px;">
                                     <div>
                                         <a class="btn btn-primary mb-2"
-                                           href="${M.cfg.wwwroot}/theme/degrade/_editor/editor.php?lang=${lang}&local=home&dataid=create&template=${item.id}"
+                                           href="${M.cfg.wwwroot}/theme/degrade/_editor/editor.php?lang=${frontpage.lang}&local=home&dataid=create&template=${item.id}"
                                            >Adicionar e editar este bloco</a>
                                         <a class="btn btn-secondary mb-2"
                                            href="${item.preview}"
-                                           target="_blank">${M.util.get_string('preview', "theme_degrade")}</a>
+                                           target="_blank">${M.util.get_string("preview", "theme_degrade")}</a>
                                     </div>
                                 </div>
                             </div>`);
@@ -101,15 +130,15 @@ define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notifi
         block_order: function () {
             // Butons move page.
             $(".homemode-pages .btn-move-up").click(function () {
-                let $item = $(this).closest('.editmode-page-item');
-                let $prev = $item.prev('.editmode-page-item');
+                let $item = $(this).closest(".editmode-page-item");
+                let $prev = $item.prev(".editmode-page-item");
                 if ($prev.length) {
                     frontpage.block_order_move_item($item, $prev, true);
                 }
             });
             $(".homemode-pages .btn-move-down").click(function () {
-                let $item = $(this).closest('.editmode-page-item');
-                let $next = $item.next('.editmode-page-item');
+                let $item = $(this).closest(".editmode-page-item");
+                let $next = $item.next(".editmode-page-item");
                 if ($next.length) {
                     frontpage.block_order_move_item($item, $next, false);
                 }
@@ -134,22 +163,22 @@ define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notifi
         block_order_save_order: function () {
             let order = [];
 
-            $('.editmode-page-item').each(function () {
-                order.push($(this).data('pageid'));
+            $(".editmode-page-item").each(function () {
+                order.push($(this).data("pageid"));
             });
 
             $.ajax({
                 url: `${M.cfg.wwwroot}/theme/degrade/_editor/actions.php?action=page-order&local=home`,
-                type: 'POST',
+                type: "POST",
                 data: {
                     order: order,
                     sesskey: M.cfg.sesskey,
                 },
                 success: function (response) {
-                    console.log('Success', response);
+                    console.log("Success", response);
                 },
                 error: function (error) {
-                    console.error('error', error);
+                    console.error("Error", error);
                 }
             });
         }
