@@ -42,9 +42,9 @@ function theme_degrade_css_tree_post_processor($tree, $theme) {
  */
 function theme_degrade_get_extra_scss($theme) {
     $content = "";
-    $imageurl = $theme->setting_file_url("backgroundimage", "backgroundimage");
 
     // Sets the background image, and its settings.
+    $imageurl = $theme->setting_file_url("backgroundimage", "backgroundimage");
     if (!empty($imageurl)) {
         $content .= "
             @media (min-width: 768px) {
@@ -63,8 +63,7 @@ function theme_degrade_get_extra_scss($theme) {
             }";
     }
 
-    // Always return the background image with the scss when we have it.
-    return !empty($theme->settings->scss) ? "{$theme->settings->scss}  \n  {$content}" : $content;
+    return "{$content}\n{$theme->settings->scsspos}";
 }
 
 /**
