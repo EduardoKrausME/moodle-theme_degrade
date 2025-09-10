@@ -218,7 +218,7 @@ function replace_lang_by_array(&$data) {
     foreach ($data as &$value) {
         if (is_array($value)) {
             replace_lang_by_array($value); // Recursive call.
-        } else if (is_string($value) && str_starts_with($value, 'lang::')) {
+        } else if (is_string($value) && strpos($value, 'lang::') === 0) {
             $langkey = substr($value, 6); // Remove 'lang::'.
             if (isset($stringlang[$langkey])) {
                 $value = $stringlang[$langkey];

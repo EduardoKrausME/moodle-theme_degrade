@@ -543,19 +543,3 @@ function theme_degrade_get_footer_color($bgcolor, $darkcolor, $lightcolor) {
 
     return $luminance > 0.6 ? $darkcolor : $lightcolor;
 }
-
-
-if (!function_exists('str_starts_with')) {
-    /**
-     * The function returns {@see true} if the passed $haystack starts from the
-     * $needle string or {@see false} otherwise.
-     *
-     * @param string $haystack
-     * @param string $needle
-     * @return bool
-     * @since 8.0
-     */
-    function str_starts_with(string $haystack, string $needle): bool {
-        return $needle !== '' && strncmp($haystack, $needle, strlen($needle)) === 0;
-    }
-}

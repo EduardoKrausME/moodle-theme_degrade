@@ -85,7 +85,7 @@ class navbar implements \renderable {
                 $this->remove($item->key, \breadcrumb_navigation_node::TYPE_CATEGORY);
             }
             // Remove the course breadcrumb node.
-            if (!str_starts_with($this->page->pagetype, 'course-view-section-')) {
+            if (strpos($this->page->pagetype, 'course-view-section-') !== 0) {
                 $this->remove($this->page->course->id, \breadcrumb_navigation_node::TYPE_COURSE);
             }
             // Remove the navbar nodes that already exist in the secondary navigation menu.
