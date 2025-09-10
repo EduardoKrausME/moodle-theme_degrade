@@ -67,7 +67,9 @@ class admin_renderer extends \core_admin_renderer {
 
         $output .= $this->header();
         $output .= $this->output->heading(get_string('notifications', 'admin'));
-        $output .= $this->upgrade_news_message();
+        if (method_exists($this, "upgrade_news_message")) {
+            $output .= $this->upgrade_news_message();
+        }
         $output .= $this->maturity_info($maturity);
         if (empty($CFG->disableupdatenotifications)) {
             $output .= $this->available_updates($availableupdates, $availableupdatesfetch);
