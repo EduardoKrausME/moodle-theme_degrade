@@ -51,19 +51,23 @@
                 {{#url}} href="{{{url}}}" {{/url}}{{^url}} href="#{{{anchor}}}" data-anchor="true" {{/url}}
                     data-for="cm_name"
                     tabindex="-1">
-                <div class="activity-icon">
-                    <img src="/theme/image.php?theme=degrade&component={{{module}}}&image=monologo&filtericon=1"
-                         alt="{{{modname}}} ícone" title="{{{modname}}}">
-                </div>
+                {{#module}}
+                    <div class="activity-icon">
+                        <img src="/theme/image.php?theme=degrade&component={{{module}}}&image=monologo&filtericon=1"
+                             alt="{{{modname}}} ícone" title="{{{modname}}}">
+                    </div>
+                {{/module}}
                 {{{name}}}
             </a>
         {{/uservisible}}
         {{^uservisible}}
             <a class="courseindex-link text-truncate" href="#{{{anchor}}}" data-for="cm_name" tabindex="-1" data-anchor="true">
-                <div class="activity-icon">
-                    <img src="/theme/image.php?theme=degrade&component={{{module}}}&image=monologo&filtericon=1"
-                         alt="{{{modname}}} ícone" title="{{{modname}}}">
-                </div>
+                {{#module}}
+                    <div class="activity-icon">
+                        <img src="/theme/image.php?theme=degrade&component={{{module}}}&image=monologo&filtericon=1"
+                             alt="{{{modname}}} ícone" title="{{{modname}}}">
+                    </div>
+                {{/module}}
                 {{{name}}}
             </a>
         {{/uservisible}}
