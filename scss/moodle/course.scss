@@ -265,6 +265,7 @@ $divider-hover-color: $primary !default;
 .activity-item {
     padding: $activity-item-padding;
     @include border-radius($activity-border-radius);
+    background: #f2f2f2;
 
     &.activityinline {
         padding: $activity-item-padding 0;
@@ -562,6 +563,32 @@ $divider-hover-color: $primary !default;
 
     .no-overflow {
         width: 100%;
+    }
+}
+
+.activity-instance {
+    width: 100%;
+    .activitytitle {
+        display: flex;
+        width: 100%;
+    }
+    .afterlink {
+        white-space: nowrap;
+        margin-right: 6px;
+    }
+}
+.activity-add,
+.block-add {
+    border-radius: 0.5rem;
+    color: #1e5aa8;
+    background-color: #f6f8fc;
+    border-color: #4274b6;
+    border-width: 1px;
+    width: 100%;
+    clear: both;
+    margin-top: 0.25rem;
+    .pluscontainer {
+        border: 1px solid #4274b6;
     }
 }
 
