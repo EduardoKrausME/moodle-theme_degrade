@@ -22,8 +22,6 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use theme_degrade\editor\editor_tiny;
-
 require_once("../../../config.php");
 global $CFG, $PAGE, $OUTPUT, $DB, $USER;
 require_admin();
@@ -159,9 +157,11 @@ $PAGE->requires->js("/theme/degrade/quickstart/script.js");
 $PAGE->requires->jquery();
 $PAGE->requires->jquery_plugin("ui");
 
-require("{$CFG->libdir}/editor/tiny/lib.php");
-$editor = new editor_tiny();
-$editor->head_setup();
+if (file_exists("{$CFG->libdir}/editor/tiny/lib.php")) {
+    require("{$CFG->libdir}/editor/tiny/lib.php");
+    $editor = new \theme_degrade\editor\editor_tiny();
+    $editor->head_setup();
+}
 
 echo $OUTPUT->header();
 
@@ -266,43 +266,31 @@ for ($i = 1; $i <= 4; $i++) {
         $numblocks++;
     }
 }
-$footermustache = [
-    "footer_background_color" => get_config("theme_degrade", "footer_background_color"),
-    "htmlselect" => $OUTPUT->render_from_template("theme_degrade/settings/colors", [
-        "footercolor" => true,
-        "colors" => $themecolors,
-        "defaultcolor" => theme_degrade_default_color("brandcolor", "#1a2a6c"),
-    ]),
-    "blocks" => [
-        [
-            "num" => 1,
-            "active" => true,
-            "footer_title" => get_config("theme_degrade", "footer_title_1"),
-            "footer_html" => get_config("theme_degrade", "footer_html_1"),
-        ],
-        [
-            "num" => 2,
-            "footer_title" => get_config("theme_degrade", "footer_title_2"),
-            "footer_html" => get_config("theme_degrade", "footer_html_2"),
-        ],
-        [
-            "num" => 3,
-            "footer_title" => get_config("theme_degrade", "footer_title_3"),
-            "footer_html" => get_config("theme_degrade", "footer_html_3"),
-        ],
-        [
-            "num" => 4,
-            "footer_title" => get_config("theme_degrade", "footer_title_4"),
-            "footer_html" => get_config("theme_degrade", "footer_html_4"),
-        ],
-    ],
-    "num_blocks" => $numblocks,
-    "tyni_editor_config" => $editor->tyni_editor_config(),
-    "return" => "accessibility",
-];
-echo $OUTPUT->render_from_template("theme_degrade/quickstart/footer", $footermustache);
-$PAGE->requires->js_call_amd("theme_degrade/settings", "minicolors", ["id_footer_background_color"]);
-
+if (file_exists("{$CFG->libdir}/editor/tiny/lib.php")) {
+    $footermustache = [
+        "footer_background_color" => get_config("theme_degrade", "footer_background_color"),
+        "htmlselect" => $OUTPUT->render_from_template("theme_degrade/settings/colors", [
+            "footercolor" => true, "colors" => $themecolors,
+            "defaultcolor" => theme_degrade_default_color("brandcolor", "#1a2a6c"),
+        ]), "blocks" => [
+            [
+                "num" => 1, "active" => true, "footer_title" => get_config("theme_degrade", "footer_title_1"),
+                "footer_html" => get_config("theme_degrade", "footer_html_1"),
+            ], [
+                "num" => 2, "footer_title" => get_config("theme_degrade", "footer_title_2"),
+                "footer_html" => get_config("theme_degrade", "footer_html_2"),
+            ], [
+                "num" => 3, "footer_title" => get_config("theme_degrade", "footer_title_3"),
+                "footer_html" => get_config("theme_degrade", "footer_html_3"),
+            ], [
+                "num" => 4, "footer_title" => get_config("theme_degrade", "footer_title_4"),
+                "footer_html" => get_config("theme_degrade", "footer_html_4"),
+            ],
+        ], "num_blocks" => $numblocks, "tyni_editor_config" => $editor->tyni_editor_config(), "return" => "accessibility",
+    ];
+    echo $OUTPUT->render_from_template("theme_degrade/quickstart/footer", $footermustache);
+    $PAGE->requires->js_call_amd("theme_degrade/settings", "minicolors", ["id_footer_background_color"]);
+}
 echo "</form>";
 
 echo $OUTPUT->footer();
