@@ -6,7 +6,7 @@
  * @param $page
  * @return string
  */
-function faq_createblocks($page) {
+function faq_modern_createblocks($page) {
 
     $page->info = json_decode($page->info);
 
