@@ -14,8 +14,8 @@
     font-style: normal;
     font-weight: 400;
     font-display: $fa-font-display;
-    src: url('[[font:core|fa-brands-400.woff2]]') format('woff2'),
-    url('[[font:core|fa-brands-400.ttf]]') format('truetype');
+    src: url('[[font:theme|fa-brands-400.woff2]]') format('woff2'),
+    url('[[font:theme|fa-brands-400.ttf]]') format('truetype');
 }
 .fab,
 .#{$fa-css-prefix}-brands {
