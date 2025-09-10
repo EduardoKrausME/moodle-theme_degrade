@@ -102,7 +102,7 @@
   border-top: 1px solid #e7e7e7;
 }
 .quickstart-content input:checked + .marked-area {
-  border: 4px solid var(--bs-primary);
+  border: 4px solid var(--bs-primary, #0d6efd);
   background: #f0f0f0;
 }
 .quickstart-content .not-editing input:checked + .marked-area {
@@ -142,8 +142,8 @@
   margin-right: 0.5em;
 }
 .quickstart-content .form-check-input:checked {
-  background-color: var(--bs-primary);
-  border-color: var(--bs-primary);
+  background-color: var(--bs-primary, #0d6efd);
+  border-color: var(--bs-primary, #0d6efd);
 }
 .quickstart-content .form-check-input:checked::after {
   content: "";
@@ -157,11 +157,11 @@
   transform: rotate(45deg);
 }
 .quickstart-content .form-check-input:hover {
-  border-color: var(--bs-primary);
+  border-color: var(--bs-primary, #0d6efd);
 }
 .quickstart-content .form-check-input:focus {
   outline: none;
-  box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary), 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary, #0d6efd), 0.25);
 }
 .quickstart-content .nav-pills .nav-link {
   border-radius: 6px 6px 0 0;
@@ -227,7 +227,7 @@
   border-top: 1px solid #e7e7e7;
 }
 [data-themename=eadflix] .quickstart-content input:checked + .marked-area {
-  border: 4px solid var(--bs-primary);
+  border: 4px solid var(--bs-primary, #0d6efd);
   background: rgba(255, 255, 255, 0.16);
 }
 [data-themename=eadflix] .quickstart-content .not-editing input:checked + .marked-area {
@@ -238,15 +238,15 @@
   background-color: #ffffff;
 }
 [data-themename=eadflix] .quickstart-content .form-check-input:checked {
-  background-color: var(--bs-primary);
-  border-color: var(--bs-primary);
+  background-color: var(--bs-primary, #0d6efd);
+  border-color: var(--bs-primary, #0d6efd);
 }
 [data-themename=eadflix] .quickstart-content .form-check-input:checked::after {
   border: solid #ffffff;
 }
 [data-themename=eadflix] .quickstart-content .form-check-input:hover {
-  border-color: var(--bs-primary);
+  border-color: var(--bs-primary, #0d6efd);
 }
 [data-themename=eadflix] .quickstart-content .form-check-input:focus {
-  box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary), 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary, #0d6efd), 0.25);
 }
