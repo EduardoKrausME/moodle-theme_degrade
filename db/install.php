@@ -61,7 +61,7 @@ function xmldb_theme_degrade_install() {
     set_config("loginbackgroundimage", "", "theme_degrade");
 
     set_config("scsspre", "", "theme_degrade");
-    set_config("scss", "", "theme_degrade");
+    set_config("scsspos", "", "theme_degrade");
 
     set_config("course_summary", 0, "theme_degrade");
     set_config("course_summary_banner", 0, "theme_degrade");
