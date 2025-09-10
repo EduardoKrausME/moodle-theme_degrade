@@ -3,7 +3,7 @@
     <library>
         <location>_editor</location>
         <name>GrapsJS</name>
-        <version>1.0.27</version>
+        <version>0.9.44</version>
         <license>BSD 3-Clause</license>
     </library>
     <library>

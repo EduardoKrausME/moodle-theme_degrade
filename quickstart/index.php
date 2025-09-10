@@ -17,12 +17,12 @@
 /**
  * view file
  *
- * @package   theme_eadtraining
+ * @package   theme_degrade
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use theme_eadtraining\editor\editor_tiny;
+use theme_degrade\editor\editor_tiny;
 
 require_once("../../../config.php");
 global $CFG, $PAGE, $OUTPUT, $DB, $USER;
@@ -61,13 +61,13 @@ if (optional_param("POST", false, PARAM_INT)) {
     foreach ($configkeys as $name => $type) {
         $value = optional_param($name, false, $type);
         if ($value !== false) {
-            set_config($name, $value, "theme_eadtraining");
+            set_config($name, $value, "theme_degrade");
         }
     }
 
     // Save banners home.
     require_once("../_editor/editor-lib.php");
-    $pages = $DB->get_records("theme_eadtraining_pages", ["local" => "home"]);
+    $pages = $DB->get_records("theme_degrade_pages", ["local" => "home"]);
     $homemodebanners = optional_param_array("homemode_banners", [], PARAM_TEXT);
     foreach ($homemodebanners as $template) {
         $located = false;
@@ -90,9 +90,9 @@ if (optional_param("POST", false, PARAM_INT)) {
     $filefields = [
         "logocompact" => "core",
         "favicon" => "core",
-        "banner_course_url" => "theme_eadtraining",
-        "banner_course_file" => "theme_eadtraining",
-        "background_profile_image" => "theme_eadtraining",
+        "banner_course_url" => "theme_degrade",
+        "banner_course_file" => "theme_degrade",
+        "background_profile_image" => "theme_degrade",
     ];
 
     $fs = get_file_storage();
@@ -141,21 +141,21 @@ if (optional_param("POST", false, PARAM_INT)) {
         $USER->editing = true;
     }
 
-    \cache::make("theme_eadtraining", "course_cache")->purge();
-    \cache::make("theme_eadtraining", "css_cache")->purge();
-    \cache::make("theme_eadtraining", "frontpage_cache")->purge();
+    \cache::make("theme_degrade", "course_cache")->purge();
+    \cache::make("theme_degrade", "css_cache")->purge();
+    \cache::make("theme_degrade", "frontpage_cache")->purge();
 
-    redirect(new moodle_url("/"), get_string("quickstart_banner-saved", "theme_eadtraining"));
+    redirect(new moodle_url("/"), get_string("quickstart_banner-saved", "theme_degrade"));
 }
 
 $PAGE->set_context(context_system::instance());
-$PAGE->set_url("/theme/eadtraining/quickstart/index.php#home");
-$PAGE->set_title(get_string("quickstart_title", "theme_eadtraining"));
-$PAGE->set_heading(get_string("quickstart_title", "theme_eadtraining"));
+$PAGE->set_url("/theme/degrade/quickstart/index.php#home");
+$PAGE->set_title(get_string("quickstart_title", "theme_degrade"));
+$PAGE->set_heading(get_string("quickstart_title", "theme_degrade"));
 
-$PAGE->requires->css("/theme/eadtraining/quickstart/style.css");
-$PAGE->requires->css("/theme/eadtraining/scss/colors.css");
-$PAGE->requires->js("/theme/eadtraining/quickstart/script.js");
+$PAGE->requires->css("/theme/degrade/quickstart/style.css");
+$PAGE->requires->css("/theme/degrade/scss/colors.css");
+$PAGE->requires->js("/theme/degrade/quickstart/script.js");
 $PAGE->requires->jquery();
 $PAGE->requires->jquery_plugin("ui");
 
@@ -169,11 +169,11 @@ echo '<form class="quickstart-content" method="post" enctype="multipart/form-dat
 echo '<input type="hidden" name="POST" value="1" />';
 echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
-$savetheme = optional_param("savetheme", "eadtraining", PARAM_TEXT);
+$savetheme = optional_param("savetheme", "degrade", PARAM_TEXT);
 
-if ($savetheme == "eadtraining") {
-    require_once("{$CFG->dirroot}/theme/eadtraining/lib.php");
-    $themecolors = theme_eadtraining_colors();
+if ($savetheme == "degrade") {
+    require_once("{$CFG->dirroot}/theme/degrade/lib.php");
+    $themecolors = theme_degrade_colors();
 } else if ($savetheme == "eadflix") {
     require_once("{$CFG->dirroot}/theme/eadflix/lib.php");
     $themecolors = theme_eadflix_colors();
@@ -183,7 +183,7 @@ if ($savetheme == "eadtraining") {
 
 // Home.
 require_once(__DIR__ . "/../_editor/editor-lib.php");
-$pages = $DB->get_records("theme_eadtraining_pages", ["local" => "home"]);
+$pages = $DB->get_records("theme_degrade_pages", ["local" => "home"]);
 $templates = [];
 foreach ($pages as $page) {
     if (isset($page->template[3])) {
@@ -191,25 +191,25 @@ foreach ($pages as $page) {
     }
 }
 $homemustache = [
-    "homemode" => get_config("theme_eadtraining", "homemode"),
+    "homemode" => get_config("theme_degrade", "homemode"),
     "templates" => $templates,
     "next" => "courses",
-    "all_templates" => list_templates(),
+    "all_templates" => list_templates_category(),
 ];
-echo $OUTPUT->render_from_template("theme_eadtraining/quickstart/home", $homemustache);
+echo $OUTPUT->render_from_template("theme_degrade/quickstart/home", $homemustache);
 
 // Course.
-$bannerfile = theme_eadtraining_setting_file_url("banner_course_file");
+$bannerfile = theme_degrade_setting_file_url("banner_course_file");
 $coursesmustache = [
-    "course_summary_banner_0" => get_config("theme_eadtraining", "course_summary_banner") == 0,
-    "course_summary_banner_1" => get_config("theme_eadtraining", "course_summary_banner") == 1,
-    "course_summary_banner_2" => get_config("theme_eadtraining", "course_summary_banner") == 2,
+    "course_summary_banner_0" => get_config("theme_degrade", "course_summary_banner") == 0,
+    "course_summary_banner_1" => get_config("theme_degrade", "course_summary_banner") == 1,
+    "course_summary_banner_2" => get_config("theme_degrade", "course_summary_banner") == 2,
     "banner_course_file_url" => $bannerfile ? $bannerfile->out() : false,
     "banner_course_file_extensions" => "PNG, JPG",
     "return" => "home",
     "next" => "logos",
 ];
-echo $OUTPUT->render_from_template("theme_eadtraining/quickstart/courses", $coursesmustache);
+echo $OUTPUT->render_from_template("theme_degrade/quickstart/courses", $coursesmustache);
 
 // Logos.
 $logosmustache = [
@@ -220,88 +220,88 @@ $logosmustache = [
     "return" => "courses",
     "next" => "brandcolor",
 ];
-echo $OUTPUT->render_from_template("theme_eadtraining/quickstart/logos", $logosmustache);
+echo $OUTPUT->render_from_template("theme_degrade/quickstart/logos", $logosmustache);
 
 // Brandcolor.
 $brandcolormustache = [
     "brandcolor" => get_config("theme_boost", "brandcolor"),
-    "brandcolor_background_menu" => get_config("theme_eadtraining", "brandcolor_background_menu"),
-    "htmlselect" => $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
+    "brandcolor_background_menu" => get_config("theme_degrade", "brandcolor_background_menu"),
+    "htmlselect" => $OUTPUT->render_from_template("theme_degrade/settings/colors", [
         "brandcolor" => true,
         "colors" => $themecolors,
-        "defaultcolor" => theme_eadtraining_default_color("brandcolor", "#1a2a6c", "theme_boost"),
+        "defaultcolor" => theme_degrade_default_color("brandcolor", "#1a2a6c", "theme_boost"),
     ]),
     "return" => "logos",
     "next" => "user-profile",
 ];
-echo $OUTPUT->render_from_template("theme_eadtraining/quickstart/brandcolor", $brandcolormustache);
-$PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", ["id_s_theme_boost_brandcolor"]);
+echo $OUTPUT->render_from_template("theme_degrade/quickstart/brandcolor", $brandcolormustache);
+$PAGE->requires->js_call_amd("theme_degrade/settings", "minicolors", ["id_s_theme_boost_brandcolor"]);
 
 // User profile.
-$backgroundprofileimage = theme_eadtraining_setting_file_url("background_profile_image");
+$backgroundprofileimage = theme_degrade_setting_file_url("background_profile_image");
 $usermustache = [
     "background_profile_image_url" => $backgroundprofileimage ? $backgroundprofileimage->out() : false,
     "background_profile_image_extensions" => "PNG, JPG",
     "return" => "logos",
     "next" => "accessibility",
 ];
-echo $OUTPUT->render_from_template("theme_eadtraining/quickstart/user-profile", $usermustache);
+echo $OUTPUT->render_from_template("theme_degrade/quickstart/user-profile", $usermustache);
 
 // Accessibility.
 $accessibilitymustache = [
-    "enable_accessibility" => get_config("theme_eadtraining", "enable_accessibility"),
+    "enable_accessibility" => get_config("theme_degrade", "enable_accessibility"),
     "lang_has_ptbr" => $CFG->lang == "pt_br",
-    "enable_vlibras" => get_config("theme_eadtraining", "enable_vlibras"),
+    "enable_vlibras" => get_config("theme_degrade", "enable_vlibras"),
     "return" => "user-profile",
     "next" => "footer",
 ];
-echo $OUTPUT->render_from_template("theme_eadtraining/quickstart/accessibility", $accessibilitymustache);
+echo $OUTPUT->render_from_template("theme_degrade/quickstart/accessibility", $accessibilitymustache);
 
 // Footer.
 $numblocks = 0;
 for ($i = 1; $i <= 4; $i++) {
-    $footertitle = get_config("theme_eadtraining", "footer_title_{$i}");
-    $footerhtml = get_config("theme_eadtraining", "footer_html_{$i}");
+    $footertitle = get_config("theme_degrade", "footer_title_{$i}");
+    $footerhtml = get_config("theme_degrade", "footer_html_{$i}");
     if (isset($footertitle[2]) && isset($footerhtml[5])) {
         $numblocks++;
     }
 }
 $footermustache = [
-    "footer_background_color" => get_config("theme_eadtraining", "footer_background_color"),
-    "htmlselect" => $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
+    "footer_background_color" => get_config("theme_degrade", "footer_background_color"),
+    "htmlselect" => $OUTPUT->render_from_template("theme_degrade/settings/colors", [
         "footercolor" => true,
         "colors" => $themecolors,
-        "defaultcolor" => theme_eadtraining_default_color("brandcolor", "#1a2a6c"),
+        "defaultcolor" => theme_degrade_default_color("brandcolor", "#1a2a6c"),
     ]),
     "blocks" => [
         [
             "num" => 1,
             "active" => true,
-            "footer_title" => get_config("theme_eadtraining", "footer_title_1"),
-            "footer_html" => get_config("theme_eadtraining", "footer_html_1"),
+            "footer_title" => get_config("theme_degrade", "footer_title_1"),
+            "footer_html" => get_config("theme_degrade", "footer_html_1"),
         ],
         [
             "num" => 2,
-            "footer_title" => get_config("theme_eadtraining", "footer_title_2"),
-            "footer_html" => get_config("theme_eadtraining", "footer_html_2"),
+            "footer_title" => get_config("theme_degrade", "footer_title_2"),
+            "footer_html" => get_config("theme_degrade", "footer_html_2"),
         ],
         [
             "num" => 3,
-            "footer_title" => get_config("theme_eadtraining", "footer_title_3"),
-            "footer_html" => get_config("theme_eadtraining", "footer_html_3"),
+            "footer_title" => get_config("theme_degrade", "footer_title_3"),
+            "footer_html" => get_config("theme_degrade", "footer_html_3"),
         ],
         [
             "num" => 4,
-            "footer_title" => get_config("theme_eadtraining", "footer_title_4"),
-            "footer_html" => get_config("theme_eadtraining", "footer_html_4"),
+            "footer_title" => get_config("theme_degrade", "footer_title_4"),
+            "footer_html" => get_config("theme_degrade", "footer_html_4"),
         ],
     ],
     "num_blocks" => $numblocks,
     "tyni_editor_config" => $editor->tyni_editor_config(),
     "return" => "accessibility",
 ];
-echo $OUTPUT->render_from_template("theme_eadtraining/quickstart/footer", $footermustache);
-$PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", ["id_footer_background_color"]);
+echo $OUTPUT->render_from_template("theme_degrade/quickstart/footer", $footermustache);
+$PAGE->requires->js_call_amd("theme_degrade/settings", "minicolors", ["id_footer_background_color"]);
 
 echo "</form>";
 

@@ -332,3 +332,21 @@ function list_templates() {
 
     return $items;
 }
+
+/**
+ * List templates category
+ *
+ * @return array
+ * @throws Exception
+ */
+function list_templates_category() {
+    $categorys = [];
+    foreach (list_templates() as $item) {
+        $categorys[$item["category"]]["category"] = $item["category"];
+        $categorys[$item["category"]]["itens"][] = $item;
+    }
+
+    $categorys = array_values($categorys);
+
+    return $categorys;
+}

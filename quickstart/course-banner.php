@@ -17,7 +17,7 @@
 /**
  * view file
  *
- * @package   theme_eadtraining
+ * @package   theme_degrade
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -47,15 +47,15 @@ if (optional_param("POST", false, PARAM_INT)) {
     foreach ($configkeys as $name => $type) {
         $value = optional_param($name, false, $type);
         if ($value !== false) {
-            set_config("{$name}_{$courseid}", $value, "theme_eadtraining");
+            set_config("{$name}_{$courseid}", $value, "theme_degrade");
         }
     }
 
     // Upload files.
     require_once("{$CFG->libdir}/filelib.php");
     $filefields = [
-        "banner_course_url" => "theme_eadtraining",
-        "banner_course_file" => "theme_eadtraining",
+        "banner_course_url" => "theme_degrade",
+        "banner_course_file" => "theme_degrade",
     ];
 
     $fs = get_file_storage();
@@ -103,29 +103,29 @@ if (optional_param("POST", false, PARAM_INT)) {
         }
     }
 
-    \cache::make("theme_eadtraining", "course_cache")->purge();
-    \cache::make("theme_eadtraining", "css_cache")->purge();
-    \cache::make("theme_eadtraining", "frontpage_cache")->purge();
+    \cache::make("theme_degrade", "course_cache")->purge();
+    \cache::make("theme_degrade", "css_cache")->purge();
+    \cache::make("theme_degrade", "frontpage_cache")->purge();
 
-    redirect(new moodle_url("/course/view.php?id={$courseid}"), get_string("quickstart_banner-saved", "theme_eadtraining"));
+    redirect(new moodle_url("/course/view.php?id={$courseid}"), get_string("quickstart_banner-saved", "theme_degrade"));
 }
 
 $PAGE->set_context(context_system::instance());
-$PAGE->set_url("/theme/eadtraining/quickstart/index.php#home");
-$PAGE->set_title(get_string("quickstart_title", "theme_eadtraining"));
-$PAGE->set_heading(get_string("quickstart_title", "theme_eadtraining"));
+$PAGE->set_url("/theme/degrade/quickstart/index.php#home");
+$PAGE->set_title(get_string("quickstart_title", "theme_degrade"));
+$PAGE->set_heading(get_string("quickstart_title", "theme_degrade"));
 
-$PAGE->requires->css("/theme/eadtraining/quickstart/style.css");
+$PAGE->requires->css("/theme/degrade/quickstart/style.css");
 if ($modal) {
-    echo "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/eadtraining/quickstart/style.css\"/>";
+    echo "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/degrade/quickstart/style.css\"/>";
 } else {
     echo $OUTPUT->header();
 }
 
 // Course.
-$bannerfileurl = theme_eadtraining_setting_file_url("banner_course_file_{$courseid}");
+$bannerfileurl = theme_degrade_setting_file_url("banner_course_file_{$courseid}");
 if (!$bannerfileurl) {
-    $bannerfileurl = theme_eadtraining_setting_file_url("banner_course_file");
+    $bannerfileurl = theme_degrade_setting_file_url("banner_course_file");
 }
 $bannerfileurl = $bannerfileurl ? $bannerfileurl->out() : false;
 if (!$bannerfileurl) {
@@ -137,15 +137,15 @@ if (!$bannerfileurl) {
     }
 }
 
-$action = "{$CFG->wwwroot}/theme/eadtraining/quickstart/course-banner.php?courseid={$courseid}";
+$action = "{$CFG->wwwroot}/theme/degrade/quickstart/course-banner.php?courseid={$courseid}";
 echo '<form action="' . $action . '" style="display:block;"
             enctype="multipart/form-data" method="post"
             class="quickstart-content">';
 echo '<input type="hidden" name="POST" value="1" />';
 echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
-$coursesummary = get_config("theme_eadtraining", "course_summary_banner");
-$coursesummarycourse = get_config("theme_eadtraining", "course_summary_banner_{$courseid}");
+$coursesummary = get_config("theme_degrade", "course_summary_banner");
+$coursesummarycourse = get_config("theme_degrade", "course_summary_banner_{$courseid}");
 if ( $coursesummarycourse !== false) {
     $coursesummary = $coursesummarycourse;
 }
@@ -158,7 +158,7 @@ $coursesmustache = [
     "banner_course_file_url" => $bannerfileurl,
     "banner_course_file_extensions" => "PNG, JPG",
 ];
-echo $OUTPUT->render_from_template("theme_eadtraining/quickstart/courses", $coursesmustache);
+echo $OUTPUT->render_from_template("theme_degrade/quickstart/courses", $coursesmustache);
 
 echo "</form>";
 

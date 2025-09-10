@@ -79,155 +79,17 @@
                             <div class="alert alert-warning" id="home-warning"
                                  style="position:absolute;opacity:0;height:0;font-size:0;overflow:hidden;transition:all .3s;"></div>
                             <div class="container check-img">
-                                <div>
-
-                                    {{< theme_degrade/quickstart/homemode-banners}}
-                                        {{$model}}banner-eadflix-op1{{/model}}
-                                        {{$checked}}
-                                            {{#templates.banner-eadflix-op1}}checked{{/templates.banner-eadflix-op1}}
-                                        {{/checked}}
-                                        {{$label}}{{#str}}
-                                            editor_model_banner_video, theme_degrade {{/str}}{{/label}}
-                                    {{/ theme_degrade/quickstart/homemode-banners}}
-
-                                    {{< theme_degrade/quickstart/homemode-banners}}
-                                        {{$model}}banner-eadflix-op2{{/model}}
-                                        {{$checked}}
-                                            {{#templates.banner-eadflix-op2}}checked{{/templates.banner-eadflix-op2}}
-                                        {{/checked}}
-                                        {{$label}}{{#str}}
-                                            editor_model_banner_no_video, theme_degrade {{/str}}{{/label}}
-                                    {{/ theme_degrade/quickstart/homemode-banners}}
-                                </div>
-
-                                <div>
-                                    {{< theme_degrade/quickstart/homemode-banners}}
-                                        {{$model}}faq{{/model}}
-                                        {{$checked}}
-                                            {{#templates.faq}}checked{{/templates.faq}}
-                                        {{/checked}}
-                                        {{$label}}{{#str}} editor_model_faq, theme_degrade {{/str}}{{/label}}
-                                    {{/ theme_degrade/quickstart/homemode-banners}}
-                                </div>
-
-                                <div>
-                                    {{< theme_degrade/quickstart/homemode-banners}}
-                                        {{$model}}popular-default{{/model}}
-                                        {{$checked}}
-                                            {{#templates.popular-default}}checked{{/templates.popular-default}}
-                                        {{/checked}}
-                                        {{$label}}{{#str}}
-                                            editor_model_top_courses, theme_degrade {{/str}}{{/label}}
-                                    {{/ theme_degrade/quickstart/homemode-banners}}
-
-                                    {{< theme_degrade/quickstart/homemode-banners}}
-                                        {{$model}}popular-eadflix{{/model}}
-                                        {{$checked}}
-                                            {{#templates.popular-eadflix}}checked{{/templates.popular-eadflix}}
-                                        {{/checked}}
-                                        {{$label}}{{#str}}
-                                            editor_model_top_courses_eadflix, theme_degrade {{/str}}{{/label}}
-                                    {{/ theme_degrade/quickstart/homemode-banners}}
-
-                                    {{< theme_degrade/quickstart/homemode-banners}}
-                                        {{$model}}popular-number-eadflix{{/model}}
-                                        {{$checked}}
-                                            {{#templates.popular-number-eadflix}}
-                                                checked{{/templates.popular-number-eadflix}}
-                                        {{/checked}}
-                                        {{$label}}{{#str}}editor_model_top_courses_number_eadflix,
-                                            theme_degrade {{/str}}{{/label}}
-                                    {{/ theme_degrade/quickstart/homemode-banners}}
-                                </div>
-
-                                <div>
-                                    {{< theme_degrade/quickstart/homemode-banners}}
-                                        {{$model}}pricing-3{{/model}}
-                                        {{$checked}}
-                                            {{#templates.pricing-3}}checked{{/templates.pricing-3}}
-                                        {{/checked}}
-                                        {{$label}}{{#str}}
-                                            editor_model_prices_3, theme_degrade {{/str}}{{/label}}
-                                    {{/ theme_degrade/quickstart/homemode-banners}}
-
-                                    {{< theme_degrade/quickstart/homemode-banners}}
-                                        {{$model}}pricing-4{{/model}}
-                                        {{$checked}}
-                                            {{#templates.pricing-4}}checked{{/templates.pricing-4}}
-                                        {{/checked}}
-                                        {{$label}}{{#str}}
-                                            editor_model_prices_3, theme_degrade {{/str}}{{/label}}
-                                    {{/ theme_degrade/quickstart/homemode-banners}}
-                                </div>
-
-                                <div>
-                                    {{< theme_degrade/quickstart/homemode-banners}}
-                                        {{$model}}featured-3{{/model}}
-                                        {{$checked}}
-                                            {{#templates.featured-3}}checked{{/templates.featured-3}}
-                                        {{/checked}}
-                                        {{$label}}{{#str}}
-                                            editor_model_features_3, theme_degrade {{/str}}{{/label}}
-                                    {{/ theme_degrade/quickstart/homemode-banners}}
-                                    {{< theme_degrade/quickstart/homemode-banners}}
-                                        {{$model}}featured-4{{/model}}
-                                        {{$checked}}
-                                            {{#templates.featured-4}}checked{{/templates.featured-4}}
-                                        {{/checked}}
-                                        {{$label}}{{#str}}
-                                            editor_model_features_4, theme_degrade {{/str}}{{/label}}
-                                    {{/ theme_degrade/quickstart/homemode-banners}}
-                                    {{< theme_degrade/quickstart/homemode-banners}}
-                                        {{$model}}featured-6{{/model}}
-                                        {{$checked}}
-                                            {{#templates.featured-6}}checked{{/templates.featured-6}}
-                                        {{/checked}}
-                                        {{$label}}{{#str}}
-                                            editor_model_features_6, theme_degrade {{/str}}{{/label}}
-                                    {{/ theme_degrade/quickstart/homemode-banners}}
-                                    {{< theme_degrade/quickstart/homemode-banners}}
-                                        {{$model}}featured-8{{/model}}
-                                        {{$checked}}
-                                            {{#templates.featured-8}}checked{{/templates.featured-8}}
-                                        {{/checked}}
-                                        {{$label}}{{#str}}
-                                            editor_model_features_8, theme_degrade {{/str}}{{/label}}
-                                    {{/ theme_degrade/quickstart/homemode-banners}}
-                                </div>
-
-                                <div>
-                                    {{< theme_degrade/quickstart/homemode-banners}}
-                                        {{$model}}differentials-3{{/model}}
-                                        {{$checked}}
-                                            {{#templates.differentials-3}}checked{{/templates.differentials-3}}
-                                        {{/checked}}
-                                        {{$label}}{{#str}}
-                                            editor_model_differentials_3, theme_degrade {{/str}}{{/label}}
-                                    {{/ theme_degrade/quickstart/homemode-banners}}
-                                    {{< theme_degrade/quickstart/homemode-banners}}
-                                        {{$model}}differentials-4{{/model}}
-                                        {{$checked}}
-                                            {{#templates.differentials-4}}checked{{/templates.differentials-4}}
-                                        {{/checked}}
-                                        {{$label}}{{#str}}
-                                            editor_model_differentials_4, theme_degrade {{/str}}{{/label}}
-                                    {{/ theme_degrade/quickstart/homemode-banners}}
-                                    {{< theme_degrade/quickstart/homemode-banners}}
-                                        {{$model}}differentials-6{{/model}}
-                                        {{$checked}}
-                                            {{#templates.differentials-6}}checked{{/templates.differentials-6}}
-                                        {{/checked}}
-                                        {{$label}}{{#str}}
-                                            editor_model_differentials_6, theme_degrade {{/str}}{{/label}}
-                                    {{/ theme_degrade/quickstart/homemode-banners}}
-                                    {{< theme_degrade/quickstart/homemode-banners}}
-                                        {{$model}}differentials-8{{/model}}
-                                        {{$checked}}
-                                            {{#templates.differentials-8}}checked{{/templates.differentials-8}}
-                                        {{/checked}}
-                                        {{$label}}{{#str}}
-                                            editor_model_differentials_8, theme_degrade {{/str}}{{/label}}
-                                    {{/ theme_degrade/quickstart/homemode-banners}}
+                                <div class="all-templates">
+                                    {{#all_templates}}
+                                        <div class="category-{{{category}}}">
+                                            {{#itens}}
+                                                {{< theme_degrade/quickstart/homemode-banners}}
+                                                    {{$model}}{{{id}}}{{/model}}
+                                                    {{$label}}{{{title}}}{{/label}}
+                                                {{/ theme_degrade/quickstart/homemode-banners}}
+                                            {{/itens}}
+                                        </div>
+                                    {{/all_templates}}
                                 </div>
                             </div>
                         </div>

@@ -32,58 +32,49 @@
 function xmldb_theme_degrade_upgrade($oldversion) {
     global $DB, $USER, $CFG;
 
-    $color = get_config("theme_degrade", "background_color");
-    set_config("startcolor", $color, "theme_degrade");
-    set_config("brandcolor", $color, "theme_degrade");
+    if ($oldversion < 2025090300) {
+        create_theme_degrade_pages();
 
-    // Home Editor.
-    if (get_config('theme_degrade', 'home_type') != 0) {
-        $homehtmleditor = get_config("theme_degrade", "home_htmleditor_{$CFG->lang}");
-        if (!isset($homehtmleditor[40])) {
-            $page = (object) [
-                "local" => "home",
-                "type" => "html",
-                "title" => "Home",
-                "html" => $homehtmleditor,
-                "info" => "{}",
-                "template" => "",
-                "lang" => $USER->lang,
-                "sort" => time(),
-            ];
-            $DB->insert_record("theme_degrade_pages", $page);
-        }
+        $color = get_config("theme_degrade", "background_color");
+        set_config("startcolor", $color, "theme_degrade");
+        set_config("brandcolor", $color, "theme_degrade");
 
-        $listoftranslations = get_string_manager()->get_list_of_translations();
-        foreach ($listoftranslations as $langkey => $langname) {
-            if ($CFG->lang == $langkey) {
-                continue;
-            }
-
-            $homehtmleditor = get_config("theme_degrade", "home_htmleditor_{$langkey}");
+        // Home Editor.
+        if (get_config('theme_degrade', 'home_type') != 0) {
+            $homehtmleditor = get_config("theme_degrade", "home_htmleditor_{$CFG->lang}");
             if (!isset($homehtmleditor[40])) {
                 $page = (object) [
-                    "local" => "home",
-                    "type" => "html",
-                    "title" => "Home {$langkey}",
-                    "html" => $homehtmleditor,
-                    "info" => "{}",
-                    "template" => "",
-                    "lang" => $langkey,
-                    "sort" => time(),
+                    "local" => "home", "type" => "html", "title" => "Home", "html" => $homehtmleditor, "info" => "{}",
+                    "template" => "", "lang" => $USER->lang, "sort" => time(),
                 ];
                 $DB->insert_record("theme_degrade_pages", $page);
             }
-        }
-    } else {
-        if (get_config("theme_degrade", "frontpage_about_enable")) {
-            $frontpageaboutlogo = get_config("theme_degrade", "frontpage_about_logo");
-            $frontpageabouttitle = get_config("theme_degrade", "frontpage_about_title");
-            $frontpageaboutdescription = get_config("theme_degrade", "frontpage_about_description");
 
-            if (!empty($frontpageaboutlogo)) {
-                $frontpageaboutlogo = '<img class="frontpage_about_logo" src="' . $frontpageaboutlogo . '" alt="Logo">';
+            $listoftranslations = get_string_manager()->get_list_of_translations();
+            foreach ($listoftranslations as $langkey => $langname) {
+                if ($CFG->lang == $langkey) {
+                    continue;
+                }
+
+                $homehtmleditor = get_config("theme_degrade", "home_htmleditor_{$langkey}");
+                if (!isset($homehtmleditor[40])) {
+                    $page = (object) [
+                        "local" => "home", "type" => "html", "title" => "Home {$langkey}", "html" => $homehtmleditor,
+                        "info" => "{}", "template" => "", "lang" => $langkey, "sort" => time(),
+                    ];
+                    $DB->insert_record("theme_degrade_pages", $page);
+                }
             }
-            $about = '
+        } else {
+            if (get_config("theme_degrade", "frontpage_about_enable")) {
+                $frontpageaboutlogo = get_config("theme_degrade", "frontpage_about_logo");
+                $frontpageabouttitle = get_config("theme_degrade", "frontpage_about_title");
+                $frontpageaboutdescription = get_config("theme_degrade", "frontpage_about_description");
+
+                if (!empty($frontpageaboutlogo)) {
+                    $frontpageaboutlogo = '<img class="frontpage_about_logo" src="' . $frontpageaboutlogo . '" alt="Logo">';
+                }
+                $about = '
                 <style>
                     .frontpage_about_area {
                         display: flex;
@@ -161,12 +152,12 @@ function xmldb_theme_degrade_upgrade($oldversion) {
                     </div>
                     <div class="frontpage_about_counterbox text-center">';
 
-            for ($i = 1; $i <= 4; $i++) {
-                $frontpageabouttext = get_config("theme_degrade", "frontpage_about_text_{$i}");
-                $frontpageaboutnumber = get_config("theme_degrade", "frontpage_about_number_{$i}");
+                for ($i = 1; $i <= 4; $i++) {
+                    $frontpageabouttext = get_config("theme_degrade", "frontpage_about_text_{$i}");
+                    $frontpageaboutnumber = get_config("theme_degrade", "frontpage_about_number_{$i}");
 
-                if ($frontpageaboutnumber && isset($frontpageabouttext[3])) {
-                    $about .= '
+                    if ($frontpageaboutnumber && isset($frontpageabouttext[3])) {
+                        $about .= '
                         <div class="frontpage_about_box">
                             <span class="separator"></span>
                             <div class="number">
@@ -176,113 +167,162 @@ function xmldb_theme_degrade_upgrade($oldversion) {
                                 <h4 class="title">' . $frontpageabouttext . '</h4>
                             </div>
                         </div>';
+                    }
                 }
+
+                $about .= "</div></div>";
+
+                $page = (object) [
+                    "local" => "home", "type" => "html", "title" => "About", "html" => $about, "info" => "{}", "template" => "",
+                    "lang" => $USER->lang, "sort" => time(),
+                ];
+                $DB->insert_record("theme_degrade_pages", $page);
+            }
+        }
+
+        if ($customcss = get_config("theme_degrade", "customcss")) {
+            set_config("scss", $customcss, "theme_degrade");
+        }
+
+        // Footer.
+        if (get_config("theme_degrade", "footer_type") == 0) {
+            // Footer description.
+            $footerdescription = get_config("theme_degrade", "footer_description");
+            if (isset($footerdescription[3])) {
+                set_config("footer_html_1", $footerdescription, "theme_degrade");
             }
 
-            $about .= "</div></div>";
+            // Links Util.
+            $footerlinkstitle = get_config("theme_degrade", "footer_links_title");
+            $footerlinks = get_config("theme_degrade", "footer_links");
+            if (!empty($footerlinkstitle) && !empty($footerlinks)) {
+                set_config("footer_title_2", $footerlinkstitle, "theme_degrade");
 
-            $page = (object) [
-                "local" => "home",
-                "type" => "html",
-                "title" => "About",
-                "html" => $about,
-                "info" => "{}",
-                "template" => "",
-                "lang" => $USER->lang,
-                "sort" => time(),
-            ];
-            $DB->insert_record("theme_degrade_pages", $page);
+                $html = theme_degrade_generate_links($footerlinks);
+                set_config("footer_html_2", $html, "theme_degrade");
+            }
+
+            // Social.
+            $footersocialtitle = get_config("theme_degrade", "footer_social_title");
+            $facebook = get_config("theme_degrade", "social_facebook");
+            $youtube = get_config("theme_degrade", "social_youtube");
+            $linkedin = get_config("theme_degrade", "social_linkedin");
+            $twitter = get_config("theme_degrade", "social_twitter");
+            $instagram = get_config("theme_degrade", "social_instagram");
+            if (!empty($footersocialtitle) && ($facebook || $youtube || $linkedin || $twitter || $instagram)) {
+                set_config("footer_title_3", $footersocialtitle, "theme_degrade");
+
+                $html = "<div>";
+                $html .= "<divclass='footer-icons'>";
+                if ($facebook) {
+                    $html .= html_writer::link($facebook, html_writer::tag("i", "", ["class" => "fa fa-facebook"]),
+                        ["target" => "_blank"]);
+                }
+                if ($youtube) {
+                    $html .= html_writer::link(
+                        $youtube, html_writer::tag(
+                        "i", "", ["class" => "fa fa-youtube"]
+                    ), ["target" => "_blank"]
+                    );
+                }
+                if ($linkedin) {
+                    $html .= html_writer::link(
+                        $linkedin, html_writer::tag(
+                        "i", "", ["class" => "fa fa-linkedin"]
+                    ), ["target" => "_blank"]
+                    );
+                }
+                if ($twitter) {
+                    $html .= html_writer::link(
+                        $twitter, html_writer::tag(
+                        "i", "", ["class" => "fa fa-twitter"]
+                    ), ["target" => "_blank"]
+                    );
+                }
+                if ($instagram) {
+                    $html .= html_writer::link(
+                        $instagram, html_writer::tag(
+                        "i", "", ["class" => "fa fa-instagram"]
+                    ), ["target" => "_blank"]
+                    );
+                }
+                $html .= "<div><div>";
+                set_config("footer_html_3", $html, "theme_degrade");
+            }
+
+            // Contact.
+            $contacttitle = get_config("theme_degrade", "contact_footer_title");
+            $address = get_config("theme_degrade", "contact_address");
+            $phone = get_config("theme_degrade", "contact_phone");
+            $email = get_config("theme_degrade", "contact_email");
+            if ($contacttitle && ($address || $phone || $email)) {
+                set_config("footer_title_4", $contacttitle, "theme_degrade");
+
+                $html = '<div class="footer-contact">';
+                if ($address) {
+                    $html .= '<p class="contact-address">' . format_text($address, FORMAT_HTML) . '</p>';
+                }
+                if ($phone) {
+                    $html .= '<p class="contact-phone"><a href="tel:' . preg_replace('/\D+/', '', $phone) . '">' . s($phone) .
+                        '</a></p>';
+                }
+                if ($email) {
+                    $html .= '<p class="contact-email"><a href="mailto:' . s($email) . '">' . s($email) . '</a></p>';
+                }
+                $html .= '</div>';
+
+                set_config("footer_html_4", $html, 'theme_degrade');
+            }
         }
+
+        upgrade_plugin_savepoint(true, 2025090300, "theme", "degrade");
     }
 
-    if ($customcss = get_config("theme_degrade", "customcss")) {
-        set_config("scss", $customcss, "theme_degrade");
-    }
+    if ($oldversion < 2025091000) {
+        create_theme_degrade_pages();
 
-    // Footer.
-    if (get_config("theme_degrade", "footer_type") == 0) {
-        // Footer description.
-        $footerdescription = get_config("theme_degrade", "footer_description");
-        if (isset($footerdescription[3])) {
-            set_config("footer_html_1", $footerdescription, "theme_degrade");
+        $itens = ["differentials", "featured", "pricing"];
+        foreach ($itens as $item) {
+            $DB->execute("UPDATE {theme_degrade_pages} SET template = '{$item}' WHERE template LIKE '{$item}-%'");
         }
 
-        // Links Util.
-        $footerlinkstitle = get_config("theme_degrade", "footer_links_title");
-        $footerlinks = get_config("theme_degrade", "footer_links");
-        if (!empty($footerlinkstitle) && !empty($footerlinks)) {
-            set_config("footer_title_2", $footerlinkstitle, "theme_degrade");
-
-            $html = theme_degrade_generate_links($footerlinks);
-            set_config("footer_html_2", $html, "theme_degrade");
-        }
-
-        // Social.
-        $footersocialtitle = get_config("theme_degrade", "footer_social_title");
-        $facebook = get_config("theme_degrade", "social_facebook");
-        $youtube = get_config("theme_degrade", "social_youtube");
-        $linkedin = get_config("theme_degrade", "social_linkedin");
-        $twitter = get_config("theme_degrade", "social_twitter");
-        $instagram = get_config("theme_degrade", "social_instagram");
-        if (!empty($footersocialtitle) && ($facebook || $youtube || $linkedin || $twitter || $instagram)) {
-            set_config("footer_title_3", $footersocialtitle, "theme_degrade");
-
-            $html = "<div>";
-            $html .= "<divclass='footer-icons'>";
-            if ($facebook) {
-                $html .= html_writer::link($facebook, html_writer::tag("i", "", ["class" => "fa fa-facebook"]),
-                    ["target" => "_blank"]);
-            }
-            if ($youtube) {
-                $html .= html_writer::link($youtube, html_writer::tag("i", "",
-                    ["class" => "fa fa-youtube"]), ["target" => "_blank"]
-                );
-            }
-            if ($linkedin) {
-                $html .= html_writer::link($linkedin, html_writer::tag("i", "",
-                    ["class" => "fa fa-linkedin"]),
-                    ["target" => "_blank"]);
-            }
-            if ($twitter) {
-                $html .= html_writer::link($twitter, html_writer::tag("i", "",
-                    ["class" => "fa fa-twitter"]), ["target" => "_blank"]
-                );
-            }
-            if ($instagram) {
-                $html .= html_writer::link($instagram, html_writer::tag("i", "",
-                    ["class" => "fa fa-instagram"]),
-                    ["target" => "_blank"]);
-            }
-            $html .= "<div><div>";
-            set_config("footer_html_3", $html, "theme_degrade");
-        }
-
-        // Contact.
-        $contacttitle = get_config("theme_degrade", "contact_footer_title");
-        $address = get_config("theme_degrade", "contact_address");
-        $phone = get_config("theme_degrade", "contact_phone");
-        $email = get_config("theme_degrade", "contact_email");
-        if ($contacttitle && ($address || $phone || $email)) {
-            set_config("footer_title_4", $contacttitle, "theme_degrade");
-
-            $html = '<div class="footer-contact">';
-            if ($address) {
-                $html .= '<p class="contact-address">' . format_text($address, FORMAT_HTML) . '</p>';
-            }
-            if ($phone) {
-                $html .= '<p class="contact-phone"><a href="tel:' . preg_replace('/\D+/', '', $phone) . '">' . s($phone) .
-                    '</a></p>';
-            }
-            if ($email) {
-                $html .= '<p class="contact-email"><a href="mailto:' . s($email) . '">' . s($email) . '</a></p>';
-            }
-            $html .= '</div>';
-
-            set_config("footer_html_4", $html, 'theme_degrade');
-        }
+        upgrade_plugin_savepoint(true, 2025091000, "theme", "degrade");
     }
 
     return true;
+}
+
+/**
+ * Create theme_degrade_pages
+ * 
+ * @return void
+ * @throws Exception
+ */
+function create_theme_degrade_pages() {
+    global $DB;
+
+    // Define a estrutura da tabela.
+    $table = new xmldb_table('theme_degrade_pages');
+
+    // Campos.
+    $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+    $table->add_field('local', XMLDB_TYPE_CHAR, '30', null, XMLDB_NOTNULL, null, null);
+    $table->add_field('type', XMLDB_TYPE_CHAR, '30', null, XMLDB_NOTNULL, null, null);
+    $table->add_field('title', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+    $table->add_field('html', XMLDB_TYPE_TEXT, null, null, null, null, null);
+    $table->add_field('info', XMLDB_TYPE_TEXT, null, null, null, null, null);
+    $table->add_field('template', XMLDB_TYPE_CHAR, '30', null, XMLDB_NOTNULL, null, null);
+    $table->add_field('lang', XMLDB_TYPE_CHAR, '6', null, null, null, null);
+    $table->add_field('sort', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+
+    // Chave primária.
+    $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+
+    // Cria a tabela, se não existir.
+    $dbman = $DB->get_manager();
+    if (!$dbman->table_exists($table)) {
+        $dbman->create_table($table);
+    }
 }
 
 /**

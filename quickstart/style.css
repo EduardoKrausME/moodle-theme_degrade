@@ -168,6 +168,16 @@
   padding-bottom: 9px;
   margin-bottom: -3px;
 }
+.quickstart-content .all-templates {
+  display: flex;
+  flex-direction: column;
+}
+.quickstart-content .all-templates .category-banner {
+  order: -2;
+}
+.quickstart-content .all-templates .category-carousel {
+  order: -1;
+}
 
 [data-themename=eadflix] .quickstart-content .quickstart-collapse > a {
   font-weight: 500;

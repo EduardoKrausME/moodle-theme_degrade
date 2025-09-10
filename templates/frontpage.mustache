@@ -59,12 +59,13 @@
          class="drawers {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container">
         <div id="topofscroll" class="main-inner {{#homemode_status}}homemode_editor{{/homemode_status}}">
             {{#editing}}
-                <div class="editmode-page-item editmode-block-form" style="display:none">
-                    <div class="me-4">{{#str}}frontpage_change_editor, theme_degrade{{/str}}</div>
+                <div class="editmode-page-item editmode-block-form alert alert-info" style="display:none">
                     <form action="{{{homemode_form_action}}}"
-                          method="post" class="d-flex align-items-center editmode-switch-form"
+                          method="post" class="d-flex align-items-center editmode-switch-form w-100"
                           id="homemode-editingswitch-form">
-                        <div class="input-group">
+                        <div class="d-flex align-items-center">
+                            <div class="me-4 text-nowrap">{{#str}}frontpage_change_editor, theme_degrade{{/str}}</div>
+                            <div class="input-group">
                             <div class="custom-control form-switch">
                                 <input type="checkbox" {{#homemode_status}} checked {{/homemode_status}}
                                        id="homemode-editingswitch"
@@ -74,8 +75,16 @@
                                 <span class="custom-control-label">&nbsp;</span>
                             </div>
                         </div>
+                        </div>
                         <input type="hidden" name="sesskey" value="{{{config.sesskey}}}">
                         <input type="submit" class="d-none">
+
+                        <a class="btn btn-lg btn-primary text-nowrap ms-5" href="{{{homemode_quickstart_action}}}">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M14.5 3.5c2.7 0 5.7 1.2 5.7 1.2s-1.2 3-3.9 5.7l-6 6-3.1-3.1 6-6C11.6 4.7 14.5 3.5 14.5 3.5zM8.3 16.7l-2.5 5 5-2.5 6.6-6.6-2.5-2.5-6.6 6.6zM7 14.6l2.4 2.4" fill="currentColor"></path>
+                            </svg>
+                            {{#str}}quickstart_title, theme_degrade{{/str}}
+                        </a>
                     </form>
                 </div>
             {{/editing}}

@@ -172,6 +172,16 @@
         padding-bottom: 9px;
         margin-bottom: -3px;
     }
+    .all-templates {
+        display: flex;
+        flex-direction: column;
+        .category-banner {
+            order: -2;
+        }
+        .category-carousel {
+            order: -1;
+        }
+    }
 }
 
 [data-themename="eadflix"]{

@@ -1,10 +1,11 @@
 define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notification) {
     var frontpage = {
         add_block: function (lang) {
+            $("#editing-add-new-block").show();
             $("#frontpage_add_block").click(function () {
                 Modal.create({
                     title: $("#frontpage_add_block_modal").attr("data-title"),
-                    body: '<div id="list-models" class="d-flex flex-wrap row"></div>',
+                    body: '<div id="list-models" class="d-flex flex-column"></div>',
                     large: true,
                     show: true,
                     removeOnClose: true,
@@ -12,7 +13,8 @@ define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notifi
                     if (!modal.root) {
                         modal.root = modal._root;
                     }
-                    modal.modal.addClass('modal-dialog-centered');
+                    modal.modal.addClass('modal-dialog-centered modal-xl');
+                    modal.modal.append(`<style>#row-banner{order:-2;}#row-carousel{order:-1;}</style>`);
 
                     frontpage.add_block_modal_init(lang);
                 }).catch(Notification.exception);
@@ -34,43 +36,51 @@ define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notifi
                 // Group by type (part before the '-').
                 const groups = {};
                 data.forEach(function (item) {
-                    const type = item.id.includes('-') ? item.id.split('-')[0] : item.id;
-                    if (!groups[type]) groups[type] = [];
-                    groups[type].push(item);
+                    const category = item.category;
+                    if (!groups[category]) {
+                        groups[category] = [];
+                        $list.append(`<div id="row-${category}" class="row"></div>`);
+                    }
+                    groups[category].push(item);
                 });
+
+                console.log(groups);
 
                 // For each group, render its items.
                 Object.values(groups).forEach(function (grupo) {
                     let width = "";
-                    if (grupo.length === 4 || grupo.length === 8) {
-                        width = "col-md-3"; // 4 items.
-                    } else if (grupo.length === 3 || grupo.length === 6) {
+                    if (grupo.length === 3 || grupo.length === 6) {
                         width = "col-md-4"; // 3 items.
                     } else if (grupo.length === 2) {
                         width = "col-md-6"; // 2 items.
                     } else if (grupo.length === 1) {
-                        width = "col-md-12"; // 1 items.
+                        width = "col-md-6 mx-auto"; // 1 items.
+                    } else {
+                        width = "col-md-3"; // 4 items.
                     }
 
                     grupo.forEach(function (item) {
                         const block = $(`
                             <div class="item-model ${width} text-center" role="button">
                                 <div class="item-model-border">
+                                    <h4>${item.title}</h4>
                                     <img src="${item.image}"
                                          alt="${item.title}"
-                                         class="img-fluid mb-2" style="width:100%;border:1px solid #ccc;border-radius:8px;">
-                                    <h5 style="font-size: 1rem;">${item.title}</h5>
-                                    <a href="${item.preview}"
-                                       target="_blank">${M.util.get_string('preview', "theme_degrade")}</a>
+                                         class="img-fluid mb-2" style="width:100%;border-radius:8px;max-width:350px;">
+                                    <div>
+                                        <a class="btn btn-primary mb-2"
+                                           href="${M.cfg.wwwroot}/theme/degrade/_editor/editor.php?lang=${lang}&local=home&dataid=create&template=${item.id}"
+                                           >Adicionar e editar este bloco</a>
+                                        <a class="btn btn-secondary mb-2"
+                                           href="${item.preview}"
+                                           target="_blank">${M.util.get_string('preview', "theme_degrade")}</a>
+                                    </div>
                                 </div>
                             </div>`);
-                        $list.append(block);
+                        $(`#row-${item.category}`).append(block);
                         block.find("a").click(function () {
                             event.stopImmediatePropagation();
                         })
-                        block.click(function () {
-                            location.href = `${M.cfg.wwwroot}/theme/degrade/_editor/editor.php?lang=${lang}&local=home&dataid=create&template=${item.id}`;
-                        });
                     });
                 });
             }
