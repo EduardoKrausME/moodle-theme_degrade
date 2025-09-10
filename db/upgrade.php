@@ -293,6 +293,8 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         $scss = get_config("scss", "theme_degrade");
         set_config("scsspos", $scss, "theme_degrade");
         unset_config("scsspos", "theme_degrade");
+
+        upgrade_plugin_savepoint(true, 2025091001, "theme", "degrade");
     }
 
     return true;
