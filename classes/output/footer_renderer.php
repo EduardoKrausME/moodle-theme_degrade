@@ -19,6 +19,8 @@ namespace theme_degrade\output;
 use Exception;
 
 /**
+ * phpcs:disable moodle.PHP.ForbiddenGlobalUse.BadGlobal
+ *
  * Renderers footer
  *
  * @package   theme_degrade
@@ -26,7 +28,7 @@ use Exception;
  * @copyright based on work by 2012 Bas Brands, www.basbrands.nl
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class footer_renderer { // phpcs:disable moodle.PHP.ForbiddenGlobalUse.BadGlobal
+class footer_renderer {
     /**
      * Mustache data
      *
