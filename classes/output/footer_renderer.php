@@ -26,7 +26,7 @@ use Exception;
  * @copyright based on work by 2012 Bas Brands, www.basbrands.nl
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class footer_renderer {
+class footer_renderer { // phpcs:disable moodle.PHP.ForbiddenGlobalUse.BadGlobal
     /**
      * Mustache data
      *
