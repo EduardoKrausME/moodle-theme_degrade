@@ -1,4 +1,4 @@
-$(document).ready(function () {
+require(['jquery'], function ($) {
     let $owls = $('.owl-courses-content');
     $owls.each(function () {
         let owl = $(this).owlCarousel({
