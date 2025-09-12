@@ -69,9 +69,6 @@ class course_renderer extends \core_course_renderer {
         // Home with block editor.
         if (get_config("theme_degrade", "homemode")) {
             require_once("{$CFG->dirroot}/theme/degrade/_editor/editor-lib.php");
-            $this->page->requires->jquery();
-            $this->page->requires->jquery_plugin("ui");
-            $this->page->requires->jquery_plugin("ui-css");
 
             $editing = $this->page->user_is_editing();
             $lang = $USER->lang ?? $CFG->lang;

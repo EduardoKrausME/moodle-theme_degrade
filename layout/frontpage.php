@@ -103,4 +103,8 @@ if ($editing) {
     $PAGE->requires->js_call_amd("theme_degrade/frontpage", "editingswitch", []);
 }
 
+$this->page->requires->jquery();
+$this->page->requires->jquery_plugin("ui");
+$this->page->requires->jquery_plugin("ui-css");
+
 echo $OUTPUT->render_from_template("theme_degrade/frontpage", $templatecontext);
