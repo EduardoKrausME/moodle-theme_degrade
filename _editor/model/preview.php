@@ -20,7 +20,7 @@ if (file_exists(__DIR__ . "/{$path}/preview.html")) {
             </head>
             <body style=\"background: linear-gradient(135deg, #f9fafb, #f0f4f8);\">";
     $html = file_get_contents(__DIR__ . "/{$path}/editor.html");
-    echo replace_lang_by_string($html);
+    echo theme_degrade_replace_lang_by_string($html);
     echo "</body></html>";
 } else {
     echo "{$path} not found";

@@ -77,7 +77,7 @@ if (optional_param("POST", false, PARAM_INT)) {
 
         if (!$located) {
             try {
-                editor_create_page($template, $USER->lang, "home");
+                theme_degrade_editor_create_page($template, $USER->lang, "home");
             } catch (Exception $e) { // phpcs:disable
             }
         }
@@ -192,7 +192,7 @@ $homemustache = [
     "homemode" => get_config("theme_degrade", "homemode"),
     "templates" => $templates,
     "next" => "courses",
-    "all_templates" => list_templates_category(),
+    "all_templates" => theme_degrade_list_templates_category(),
 ];
 echo $OUTPUT->render_from_template("theme_degrade/quickstart/home", $homemustache);
 

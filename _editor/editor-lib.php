@@ -28,13 +28,13 @@
  * @param $action
  * @return string
  */
-function actionurl($action) {
+function theme_degrade_actionurl($action) {
     global $local, $lang;
     return "actions.php?action={$action}&local={$local}&lang={$lang}&sesskey=" . sesskey();
 }
 
 /**
- * editor_create_page function
+ * editor create page function
  *
  * @param $template
  * @param $lang
@@ -42,15 +42,15 @@ function actionurl($action) {
  * @return object
  * @throws Exception
  */
-function editor_create_page($template, $lang, $local) {
+function theme_degrade_editor_create_page($template, $lang, $local) {
     global $CFG, $DB;
 
     $infofile = __DIR__ . "/model/{$template}/info.json";
     if (file_exists($infofile)) {
-        $info = json_decode(load_info_json($infofile));
+        $info = json_decode(theme_degrade_load_info_json($infofile));
         $htmlfile = __DIR__ . "/model/{$template}/editor.html";
         $html = file_get_contents($htmlfile);
-        $html = replace_lang_by_string($html);
+        $html = theme_degrade_replace_lang_by_string($html);
 
         $html = str_replace("src=\"../", "src=\"{$CFG->wwwroot}/theme/degrade/_editor/model/{$template}/../", $html);
         $html = str_replace("url(\"../", "url(\"{$CFG->wwwroot}/theme/degrade/_editor/model/{$template}/../", $html);
@@ -59,14 +59,8 @@ function editor_create_page($template, $lang, $local) {
     }
 
     $page = (object) [
-        "local" => $local,
-        "type" => $info->type,
-        "title" => $info->title,
-        "html" => $html,
-        "info" => json_encode($info),
-        "template" => $template,
-        "lang" => $lang,
-        "sort" => time(),
+        "local" => $local, "type" => $info->type, "title" => $info->title, "html" => $html, "info" => json_encode($info),
+        "template" => $template, "lang" => $lang, "sort" => time(),
     ];
     $page->id = $DB->insert_record("theme_degrade_pages", $page);
 
@@ -74,88 +68,114 @@ function editor_create_page($template, $lang, $local) {
 }
 
 /**
- * compile_pages
+ * Compile pages
  *
- * @param $pages
+ * @param array $pages
+ * @param string $lang
+ * @param bool $editing
  * @return object
  * @throws Exception
  */
-function compile_pages($pages) {
+function theme_degrade_compile_pages($pages, $lang, $editing) {
+    global $USER;
+
     $return = (object) ["pages" => [], "css" => [], "js" => []];
-
     $return->css["_assets/style.css"] = "/theme/degrade/_editor/model/_assets/style.css";
-
     $previewdataid = optional_param("dataid", false, PARAM_INT);
 
     foreach ($pages as $page) {
-        $file = "/theme/degrade/_editor/model/{$page->template}/style.css";
-        $return->css["{$page->template}/style.css"] = $file;
+        $info = json_decode($page->info);
 
-        if ($page->id == $previewdataid) {
-            $html = required_param("html", PARAM_RAW);
-            $css = required_param("css", PARAM_RAW);
-            if (isset($html[3])) {
-                $html = preg_replace('/<\/?body.*?>/', '', $html);
-                $page->html = "<div class='alert alert-warning page-editor-preview'>{$html}<style>{$css}</style></div>";
-            }
-
-            $savedata = theme_degrade_clear_params_array($_POST["save"], PARAM_RAW);
-            $info = json_decode($page->info);
-            $info->savedata = array_values($savedata);
-            $page->info = json_encode($info);
+        if (isset($info->cachekey)) {
+            $cachekey = $info->cachekey;
+            $cachekey = str_replace("{USER}", $USER->id, $cachekey);
+        } else {
+            $cachekey = "homemode_pages";
         }
-        if (isset($page->info[5])) {
-            $info = json_decode($page->info);
+        $cachekey = "{$cachekey}_{$page->id}_{$lang}_v2";
 
-            if ($info->type == "html-form" || $info->type == "form") {
-                $file = __DIR__ . "/model/{$page->template}/create-block.php";
-                if (file_exists($file)) {
-                    require_once($file);
+        $cache = cache::make("theme_degrade", "frontpage_cache");
 
-                    $createblocks = str_replace("-", "_", "{$page->template}_createblocks");
-                    $block = $createblocks($page);
+        if (!$editing && $cache->has($cachekey) && !$previewdataid) {
+            $localreturn = $cache->get($cachekey);
+        } else {
+            $localreturn = (object) ["pages" => [], "css" => [], "js" => []];
 
-                    if (strpos($page->html, "[[change-to-blocks]]") !== false) {
-                        $page->html = str_replace("[[change-to-blocks]]", $block, $page->html);
-                    } else {
-                        $page->html = $page->html . $block;
-                    }
-                } else {
-                    echo "{$file} not found<br>";
+            $file = "/theme/degrade/_editor/model/{$page->template}/style.css";
+            $localreturn->css["{$page->template}/style.css"] = $file;
+
+            if ($page->id == $previewdataid) {
+                $html = required_param("html", PARAM_RAW);
+                $css = required_param("css", PARAM_RAW);
+                if (isset($html[3])) {
+                    $html = preg_replace('/<\/?body.*?>/', '', $html);
+                    $page->html = "<div class='alert alert-warning page-editor-preview'>{$html}<style>{$css}</style></div>";
                 }
-            }
 
-            // The file name is added to CSS and JS to ensure no duplication.
-            // Faster in PHP and less code than isset().
-            if (isset($info->form->scripts)) {
-                foreach ($info->form->scripts as $script) {
-                    if ($script == "jquery") {
-                        $return->js["jquery"] = "jquery";
-                    } else if ($script == "jqueryui") {
-                        $return->js["jqueryui"] = "jqueryui";
-                    } else if (strpos($script, "http") === 0) {
-                        $js = "require(['jquery'],function($){ $.getScript('{$script}')})";
-                        $return->js[$script] = $js;
+                $savedata = theme_degrade_clear_params_array($_POST["save"], PARAM_RAW);
+                $info = json_decode($page->info);
+                $info->savedata = array_values($savedata);
+                $page->info = json_encode($info);
+            }
+            if (isset($page->info[5])) {
+                $info = json_decode($page->info);
+
+                if ($info->type == "html-form" || $info->type == "form") {
+                    $file = __DIR__ . "/model/{$page->template}/create-block.php";
+                    if (file_exists($file)) {
+                        require_once($file);
+
+                        $createblocks = str_replace("-", "_", "{$page->template}_createblocks");
+                        $block = $createblocks($page);
+
+                        if (strpos($page->html, "[[change-to-blocks]]") !== false) {
+                            $page->html = str_replace("[[change-to-blocks]]", $block, $page->html);
+                        } else {
+                            $page->html = $page->html . $block;
+                        }
                     } else {
-                        if (file_exists(__DIR__ . "/model/{$page->template}/{$script}")) {
-                            $file = "/theme/degrade/_editor/model/{$page->template}/{$script}";
-                            $return->js["{$page->template}/{$script}"] = $file;
+                        echo "{$file} not found<br>";
+                    }
+                }
+
+                // The file name is added to CSS and JS to ensure no duplication.
+                // Faster in PHP and less code than isset().
+                if (isset($info->form->scripts)) {
+                    foreach ($info->form->scripts as $script) {
+                        if ($script == "jquery") {
+                            $localreturn->js["jquery"] = "jquery";
+                        } else if ($script == "jqueryui") {
+                            $localreturn->js["jqueryui"] = "jqueryui";
+                        } else if (strpos($script, "http") === 0) {
+                            $js = "require(['jquery'],function($){ $.getScript('{$script}')})";
+                            $localreturn->js[$script] = $js;
+                        } else {
+                            if (file_exists(__DIR__ . "/model/{$page->template}/{$script}")) {
+                                $file = "/theme/degrade/_editor/model/{$page->template}/{$script}";
+                                $localreturn->js["{$page->template}/{$script}"] = $file;
+                            }
+                        }
+                    }
+                }
+                if (isset($info->form->styles)) {
+                    foreach ($info->form->styles as $style) {
+                        if ($style != "bootstrap") {
+                            if (file_exists(__DIR__ . "/model/{$page->template}/{$style}")) {
+                                $file = "/theme/degrade/_editor/model/{$page->template}/{$style}";
+                                $localreturn->css["{$page->template}/{$style}"] = $file;
+                            };
                         }
                     }
                 }
             }
-            if (isset($info->form->styles)) {
-                foreach ($info->form->styles as $style) {
-                    if ($style != "bootstrap") {
-                        if (file_exists(__DIR__ . "/model/{$page->template}/{$style}")) {
-                            $file = "/theme/degrade/_editor/model/{$page->template}/{$style}";
-                            $return->css["{$page->template}/{$style}"] = $file;
-                        };
-                    }
-                }
-            }
+            $localreturn->page = $page;
+
+            $cache->set($cachekey, $localreturn);
         }
-        $return->pages[] = $page;
+
+        $return->pages[] = $localreturn->page;
+        $return->js = array_merge($return->js, $localreturn->js);
+        $return->css = array_merge($return->css, $localreturn->css);
     }
 
     $return->js = array_values($return->js);
@@ -197,10 +217,10 @@ function theme_degrade_clear_params_array($in, $type) {
  * @return string
  * @throws Exception
  */
-function load_info_json($filepath) {
+function theme_degrade_load_info_json($filepath) {
     $json = file_get_contents($filepath);
     $data = json_decode($json, true);
-    replace_lang_by_array($data);
+    theme_degrade_replace_lang_by_array($data);
 
     return json_encode($data, JSON_PRETTY_PRINT);
 }
@@ -212,12 +232,12 @@ function load_info_json($filepath) {
  * @return void
  * @throws Exception
  */
-function replace_lang_by_array(&$data) {
-    $stringlang = get_strings_langs();
+function theme_degrade_replace_lang_by_array(&$data) {
+    $stringlang = theme_degrade_get_strings_langs();
 
     foreach ($data as &$value) {
         if (is_array($value)) {
-            replace_lang_by_array($value); // Recursive call.
+            theme_degrade_replace_lang_by_array($value); // Recursive call.
         } else if (is_string($value) && strpos($value, 'lang::') === 0) {
             $langkey = substr($value, 6); // Remove 'lang::'.
             if (isset($stringlang[$langkey])) {
@@ -235,8 +255,8 @@ function replace_lang_by_array(&$data) {
  * @param string $data
  * @throws Exception
  */
-function replace_lang_by_string($data) {
-    $stringlang = get_strings_langs();
+function theme_degrade_replace_lang_by_string($data) {
+    $stringlang = theme_degrade_get_strings_langs();
 
     preg_match_all('/lang::(\w+)/', $data, $output_data);
     foreach ($output_data[1] as $langkey) {
@@ -256,7 +276,7 @@ function replace_lang_by_string($data) {
  *
  * @return array
  */
-function get_strings_langs() {
+function theme_degrade_get_strings_langs() {
     static $stringlang = [];
     if (!$stringlang) {
         if (isset($_GET["current_language"])) {
@@ -278,7 +298,7 @@ function get_strings_langs() {
  * @return object
  * @throws Exception
  */
-function get_editor_course_link($course) {
+function theme_degrade_get_editor_course_link($course) {
     global $CFG, $USER;
 
     $title = $course->fullname;
@@ -311,7 +331,7 @@ function get_editor_course_link($course) {
  * @return array
  * @throws Exception
  */
-function list_templates() {
+function theme_degrade_list_templates() {
     global $CFG;
 
     $lang = current_language();
@@ -320,7 +340,7 @@ function list_templates() {
     $items = [];
     foreach ($files as $file) {
         $dir = pathinfo(pathinfo($file, PATHINFO_DIRNAME), PATHINFO_BASENAME);
-        $data = json_decode(load_info_json($file));
+        $data = json_decode(theme_degrade_load_info_json($file));
         if ($data) {
             $items[] = [
                 "id" => $dir, "title" => $data->title, "category" => $data->category,
@@ -339,9 +359,9 @@ function list_templates() {
  * @return array
  * @throws Exception
  */
-function list_templates_category() {
+function theme_degrade_list_templates_category() {
     $categorys = [];
-    foreach (list_templates() as $item) {
+    foreach (theme_degrade_list_templates() as $item) {
         $categorys[$item["category"]]["category"] = $item["category"];
         $categorys[$item["category"]]["itens"][] = $item;
     }

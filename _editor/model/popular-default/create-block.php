@@ -24,7 +24,7 @@ function popular_default_createblocks($page) {
                 $summary = util::format_text($course->summary, $course->summaryformat, $context, "course", "summary", 0);
                 $summary = strip_tags($summary[0]);
 
-                $courseinfo = get_editor_course_link($course);
+                $courseinfo = theme_degrade_get_editor_course_link($course);
                 $blocks .= "
                     <div class=\"top-courses-item overflow-hidden\">
                         <div class=\"top-courses-inner\">

@@ -24,7 +24,7 @@ function popular_number_eadflix_createblocks($page) {
                     $courseimage = $OUTPUT->get_default_image_for_courseid($course->id);
                 }
 
-                $courseinfo = get_editor_course_link($course);
+                $courseinfo = theme_degrade_get_editor_course_link($course);
                 $num++;
 
                 $extraclass = $num >= 10 ? " eadflix-nunber-dozen" : "";
