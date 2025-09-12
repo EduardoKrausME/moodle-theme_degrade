@@ -71,6 +71,7 @@ $string['brandcolor_gradient_2_desc'] = 'Set the primary and secondary gradient 
 $string['cachedef_course_cache'] = 'Course data cache';
 $string['cachedef_course_module_cache'] = 'Course modules cache';
 $string['cachedef_css_cache'] = 'CSS stylesheets cache';
+$string['cachedef_data_cache'] = 'Data cache';
 $string['cachedef_frontpage_cache'] = 'Frontpage cache';
 $string['choosereadme'] = 'Degrade is a modern highly-customisable theme. This theme is intended to be used directly, or as a parent theme when creating new themes utilising Bootstrap 4.';
 $string['configtitle'] = 'Degrade';
@@ -135,7 +136,6 @@ $string['privacy:metadata:preference:draweropenindex'] = 'The user\'s preference
 $string['privacy:metadata:preference:draweropennav'] = 'The user\'s preference for hiding or showing the drawer menu navigation.';
 $string['quickstart_alert_notadd'] = 'It is not possible to change the homepage banner after it has been added. To modify it, you need to go to the <a href="{$a}/">homepage</a> and delete the existing banner.';
 $string['quickstart_alert_notdelete'] = 'It is not possible to remove blocks added here. To delete them, go to the <a href="{$a}/">homepage</a> and remove the blocks you no longer want.';
-$string['quickstart_banner-footer_block_count'] = 'Number of footer blocks';
 $string['quickstart_banner-recreation-room'] = 'Recreation room';
 $string['quickstart_banner-saved'] = 'The settings have been saved successfully.';
 $string['quickstart_course_choose_below'] = 'Or choose a banner below';

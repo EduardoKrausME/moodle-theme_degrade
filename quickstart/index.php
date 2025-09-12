@@ -139,9 +139,7 @@ if (optional_param("POST", false, PARAM_INT)) {
         $USER->editing = true;
     }
 
-    \cache::make("theme_degrade", "course_cache")->purge();
-    \cache::make("theme_degrade", "css_cache")->purge();
-    \cache::make("theme_degrade", "frontpage_cache")->purge();
+    theme_reset_all_caches();
 
     redirect(new moodle_url("/"), get_string("quickstart_banner-saved", "theme_degrade"));
 }
@@ -258,35 +256,35 @@ $accessibilitymustache = [
 echo $OUTPUT->render_from_template("theme_degrade/quickstart/accessibility", $accessibilitymustache);
 
 // Footer.
-$numblocks = 0;
-for ($i = 1; $i <= 4; $i++) {
-    $footertitle = get_config("theme_degrade", "footer_title_{$i}");
-    $footerhtml = get_config("theme_degrade", "footer_html_{$i}");
-    if (isset($footertitle[2]) && isset($footerhtml[5])) {
-        $numblocks++;
-    }
-}
 if (file_exists("{$CFG->libdir}/editor/tiny/lib.php")) {
     $footermustache = [
         "footer_background_color" => get_config("theme_degrade", "footer_background_color"),
         "htmlselect" => $OUTPUT->render_from_template("theme_degrade/settings/colors", [
             "footercolor" => true, "colors" => $themecolors,
             "defaultcolor" => theme_degrade_default_color("brandcolor", "#1a2a6c"),
-        ]), "blocks" => [
+        ]),
+        "blocks" => [
             [
-                "num" => 1, "active" => true, "footer_title" => get_config("theme_degrade", "footer_title_1"),
+                "num" => 1,
+                "active" => true,
+                "footer_title" => get_config("theme_degrade", "footer_title_1"),
                 "footer_html" => get_config("theme_degrade", "footer_html_1"),
             ], [
-                "num" => 2, "footer_title" => get_config("theme_degrade", "footer_title_2"),
+                "num" => 2,
+                "footer_title" => get_config("theme_degrade", "footer_title_2"),
                 "footer_html" => get_config("theme_degrade", "footer_html_2"),
             ], [
-                "num" => 3, "footer_title" => get_config("theme_degrade", "footer_title_3"),
+                "num" => 3,
+                "footer_title" => get_config("theme_degrade", "footer_title_3"),
                 "footer_html" => get_config("theme_degrade", "footer_html_3"),
             ], [
-                "num" => 4, "footer_title" => get_config("theme_degrade", "footer_title_4"),
+                "num" => 4,
+                "footer_title" => get_config("theme_degrade", "footer_title_4"),
                 "footer_html" => get_config("theme_degrade", "footer_html_4"),
             ],
-        ], "num_blocks" => $numblocks, "tyni_editor_config" => $editor->tyni_editor_config(), "return" => "accessibility",
+        ],
+        "tyni_editor_config" => $editor->tyni_editor_config(),
+        "return" => "accessibility",
     ];
     echo $OUTPUT->render_from_template("theme_degrade/quickstart/footer", $footermustache);
     $PAGE->requires->js_call_amd("theme_degrade/settings", "minicolors", ["id_footer_background_color"]);

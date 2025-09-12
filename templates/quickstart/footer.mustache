@@ -73,21 +73,6 @@
                 <h5>{{#str}}footer_heading_description_title, theme_degrade{{/str}}</h5>
                 <p>{{#str}}footer_heading_description_desc, theme_degrade{{/str}}</p>
 
-                <!-- Seletor de blocos -->
-                <div class="mb-3">
-                    <label for="footer_block_count" class="form-label fw-bold">
-                        <h5>{{#str}}quickstart_banner-footer_block_count, theme_degrade{{/str}}</h5>
-                    </label>
-                    <select id="footer_block_count" class="form-select" name="footer_block_count"
-                            data-num-selected="{{{num_blocks}}}">
-                        <option value="0">{{#str}}none{{/str}}</option>
-                        <option value="1">1 {{#str}}block{{/str}}</option>
-                        <option value="2">2 {{#str}}blocks{{/str}}</option>
-                        <option value="3">3 {{#str}}blocks{{/str}}</option>
-                        <option value="4">4 {{#str}}blocks{{/str}}</option>
-                    </select>
-                </div>
-
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs nav-pills" id="footerTab" role="tablist">
                     {{#blocks}}
@@ -127,28 +112,6 @@
                         </div>
                     {{/blocks}}
                 </div>
-
-                <!-- JavaScript to control visibility -->
-                <script>
-                    document.addEventListener("DOMContentLoaded", function () {
-                        const select = document.getElementById("footer_block_count");
-                        select.value = select.getAttribute("data-num-selected");
-
-                        const blockElements = document.querySelectorAll("[data-block]");
-
-                        function updateVisibility() {
-                            const count = parseInt(select.value, 10);
-                            blockElements.forEach(el => {
-                                const num = parseInt(el.getAttribute("data-block"), 10);
-                                el.style.display = num <= count ? "" : "none";
-                            });
-                        }
-
-                        select.addEventListener("change", updateVisibility);
-                        updateVisibility();
-                    });
-                </script>
-
             </div>
 
             {{> theme_degrade/quickstart/btn-next-back }}

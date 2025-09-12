@@ -31,10 +31,14 @@ $definitions = [
     ],
     "course_cache" => [
         "mode" => cache_store::MODE_APPLICATION,
-        "ttl" => 6 * 60 * 60, // 6h.
+        "ttl" => 1 * 24 * 60 * 60, // 1d.
     ],
     "frontpage_cache" => [
         "mode" => cache_store::MODE_APPLICATION,
-        "ttl" => 24 * 60 * 60, // 6h.
+        "ttl" => 1 * 24 * 60 * 60, // 1d.
+    ],
+    "data_cache" => [
+        "mode" => cache_store::MODE_APPLICATION,
+        "ttl" => 5 * 24 * 60 * 60, // 5d.
     ],
 ];

@@ -23,6 +23,10 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use core\navigation\output\more_menu;
+use core\navigation\output\primary;
+use theme_degrade\output\footer_renderer;
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once("{$CFG->libdir}/behat/lib.php");
@@ -39,7 +43,7 @@ $secondarynavigation = false;
 $overflow = "";
 if ($PAGE->has_secondary_navigation()) {
     $tablistnav = $PAGE->has_tablist_secondary_navigation();
-    $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, "nav-tabs", true, $tablistnav);
+    $moremenu = new more_menu($PAGE->secondarynav, "nav-tabs", true, $tablistnav);
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
     $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
     if (!is_null($overflowdata)) {
@@ -47,7 +51,7 @@ if ($PAGE->has_secondary_navigation()) {
     }
 }
 
-$primary = new core\navigation\output\primary($PAGE);
+$primary = new primary($PAGE);
 $renderer = $PAGE->get_renderer("core");
 $primarymenu = $primary->export_for_template($renderer);
 $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions() && !$PAGE->has_secondary_navigation();
@@ -74,5 +78,7 @@ $templatecontext = [
     "overflow" => $overflow,
     "addblockbutton" => $addblockbutton,
 ];
+
+$templatecontext = array_merge($templatecontext, footer_renderer::mustache_data());
 
 echo $OUTPUT->render_from_template("theme_degrade/columns2", $templatecontext);

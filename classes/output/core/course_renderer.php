@@ -116,6 +116,13 @@ class course_renderer extends \core_course_renderer {
                 $this->page->requires->js_call_amd("theme_degrade/frontpage", "add_block", [$lang]);
             }
 
+            $this->page->requires->jquery();
+            $this->page->requires->jquery_plugin("ui");
+            $this->page->requires->jquery_plugin("ui-css");
+            if ($editing) {
+                $this->page->requires->js_call_amd("theme_degrade/frontpage", "block_order", []);
+            }
+
             return $csslink . $this->output->render_from_template("theme_degrade/frontpage_editor", $templatecontext);
         }
 

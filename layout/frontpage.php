@@ -22,6 +22,10 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use core\navigation\output\more_menu;
+use core\navigation\output\primary;
+use theme_degrade\output\footer_renderer;
+
 defined('MOODLE_INTERNAL') || die;
 
 global $CFG, $PAGE, $OUTPUT, $USER, $DB;
@@ -46,7 +50,7 @@ $secondarynavigation = false;
 $overflow = "";
 if ($PAGE->has_secondary_navigation()) {
     $tablistnav = $PAGE->has_tablist_secondary_navigation();
-    $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, "nav-tabs", true, $tablistnav);
+    $moremenu = new more_menu($PAGE->secondarynav, "nav-tabs", true, $tablistnav);
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
     $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
     if (!is_null($overflowdata)) {
@@ -54,7 +58,7 @@ if ($PAGE->has_secondary_navigation()) {
     }
 }
 
-$primary = new core\navigation\output\primary($PAGE);
+$primary = new primary($PAGE);
 $renderer = $PAGE->get_renderer("core");
 $primarymenu = $primary->export_for_template($renderer);
 $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions() && !$PAGE->has_secondary_navigation();
@@ -82,40 +86,11 @@ $templatecontext = [
     "addblockbutton" => $addblockbutton,
 ];
 
-$config = get_config("theme_degrade");
-
-$brandcolor = get_config("theme_boost", "brandcolor");
-$templatecontext["footercount"] = 0;
-$templatecontext["footercontents"] = [];
-$templatecontext["footer_background_color"] =
-    theme_degrade_default_color("footer_background_color", $brandcolor);
-$templatecontext["footer_background_text_color"] =
-    theme_degrade_get_footer_color($templatecontext["footer_background_color"], "#333", false);
-for ($i = 1; $i <= 4; $i++) {
-    $footertitle = @$config->{"footer_title_{$i}"};
-    $footerhtml = @$config->{"footer_html_{$i}"};
-
-    if (isset($footerhtml[5])) {
-        $templatecontext["footercount"]++;
-        $templatecontext["footercontents"][] = [
-            "footertitle" => $footertitle,
-            "footerhtml" => $footerhtml,
-        ];
-    }
-}
-$templatecontext["footer_show_copywriter"] = $config->footer_show_copywriter;
+$templatecontext = array_merge($templatecontext, footer_renderer::mustache_data());
 
 $editing = $PAGE->user_is_editing();
 if (isset($config->homemode) && $config->homemode) {
     $templatecontext["homemode_status"] = 1;
-
-    $PAGE->requires->jquery();
-    $PAGE->requires->jquery_plugin("ui");
-    $PAGE->requires->jquery_plugin("ui-css");
-
-    if ($editing) {
-        $PAGE->requires->js_call_amd("theme_degrade/frontpage", "block_order", []);
-    }
 }
 if ($editing) {
     $templatecontext["editing"] = true;
