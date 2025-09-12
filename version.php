@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * degrade version.
+ * eadtraining version.
  *
- * @package   theme_degrade
+ * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @copyright based on work by 2016 Frédéric Massart
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,11 +25,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2025091200;
+$plugin->version = 2025091201;
 $plugin->requires = 2022010100;
-$plugin->release = "9.1.4";
+$plugin->release = "9.1.5";
 $plugin->maturity = MATURITY_STABLE;
-$plugin->component = 'theme_degrade';
+$plugin->component = 'theme_eadtraining';
 $plugin->dependencies = [
     "customfield_picture" => 2024100800,
     "theme_boost" => 2022010100,
