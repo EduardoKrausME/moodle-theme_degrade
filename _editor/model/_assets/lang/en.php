@@ -35,3 +35,5 @@ $stringlang['team_amazing'] = 'Our Amazing Team';
 $stringlang['teams_minimal'] = 'Our Team';
 $stringlang['about_us'] = 'About Us';
 $stringlang['testimonials'] = 'What Our Students Say';
+
+$stringlang['blank'] = 'Blank layout';

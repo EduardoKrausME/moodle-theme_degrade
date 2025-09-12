@@ -176,9 +176,12 @@
         display: flex;
         flex-direction: column;
         .category-banner {
-            order: -2;
+            order: -3;
         }
         .category-carousel {
+            order: -2;
+        }
+        .category-empty {
             order: -1;
         }
     }

@@ -173,9 +173,12 @@
   flex-direction: column;
 }
 .quickstart-content .all-templates .category-banner {
-  order: -2;
+  order: -3;
 }
 .quickstart-content .all-templates .category-carousel {
+  order: -2;
+}
+.quickstart-content .all-templates .category-empty {
   order: -1;
 }
 
