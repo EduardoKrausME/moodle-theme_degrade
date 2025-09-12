@@ -35,3 +35,11 @@ $stringlang['team_amazing'] = 'Harika Ekibimiz';
 $stringlang['teams_minimal'] = 'Ekibimiz';
 $stringlang['about_us'] = 'Hakkımızda';
 $stringlang['testimonials'] = 'Öğrencilerimiz Ne Diyor';
+
+$stringlang['blank'] = 'Boş düzen';
+$stringlang['my_courses_3'] = 'Derslerim - 3 sütun';
+$stringlang['my_courses_4'] = 'Derslerim - 4 sütun';
+$stringlang['my_courses_minimalist_3'] = 'Derslerim minimalist - 3 sütun';
+$stringlang['my_courses_minimalist_4'] = 'Derslerim minimalist - 4 sütun';
+$stringlang['my_courses'] = 'Derslerim';
+$stringlang['my_courses_minimalist'] = 'Derslerim minimalist';

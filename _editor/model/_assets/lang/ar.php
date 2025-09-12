@@ -35,3 +35,11 @@ $stringlang['team_amazing'] = 'فريقنا المذهل';
 $stringlang['teams_minimal'] = 'فريقنا';
 $stringlang['about_us'] = 'معلومات عنا';
 $stringlang['testimonials'] = 'ماذا يقول طلابنا';
+
+$stringlang['blank'] = 'تخطيط فارغ';
+$stringlang['my_courses_3'] = 'دوراتي - 3 أعمدة';
+$stringlang['my_courses_4'] = 'دوراتي - 4 أعمدة';
+$stringlang['my_courses_minimalist_3'] = 'دوراتي (تصميم مبسط) - 3 أعمدة';
+$stringlang['my_courses_minimalist_4'] = 'دوراتي (تصميم مبسط) - 4 أعمدة';
+$stringlang['my_courses'] = 'دوراتي';
+$stringlang['my_courses_minimalist'] = 'دوراتي (تصميم مبسط)';

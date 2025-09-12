@@ -35,3 +35,11 @@ $stringlang['team_amazing'] = 'Η καταπληκτική μας ομάδα';
 $stringlang['teams_minimal'] = 'Η ομάδα μας';
 $stringlang['about_us'] = 'Σχετικά με εμάς';
 $stringlang['testimonials'] = 'Τι λένε οι μαθητές μας';
+
+$stringlang['blank'] = 'Diseño en blanco';
+$stringlang['my_courses_3'] = 'Mis cursos - 3 columnas';
+$stringlang['my_courses_4'] = 'Mis cursos - 4 columnas';
+$stringlang['my_courses_minimalist_3'] = 'Mis cursos minimalista - 3 columnas';
+$stringlang['my_courses_minimalist_4'] = 'Mis cursos minimalista - 4 columnas';
+$stringlang['my_courses'] = 'Mis cursos';
+$stringlang['my_courses_minimalist'] = 'Mis cursos minimalista';

@@ -1,0 +1,53 @@
+.block_themeeditor.my-courses-minimalist-4 {
+    padding: 70px 20px 40px;
+    .curso-card {
+        margin: 11px;
+        position: relative;
+        height: 240px;
+        border-radius: 14px;
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        transition: all 0.35s ease;
+        cursor: pointer;
+        &:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+        }
+        .curso-overlay {
+            position: relative;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 40%, rgba(0, 0, 0, 0.05) 100%);
+            .curso-title a {
+                color: #ffffff;
+                font-size: 1.3rem;
+                font-weight: 600;
+                margin: 0;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            .progress {
+                height: 6px;
+                border-radius: 4px;
+                background: rgba(255, 255, 255, 0.25);
+                overflow: hidden;
+                .progress-bar {
+                    border-radius: 4px;
+                }
+            }
+            .percent {
+                position: absolute;
+                right: 20px;
+                bottom: 20px;
+                font-size: 0.9rem;
+                color: #ffffff;
+                font-weight: 500;
+                background: rgba(0, 0, 0, 0.5);
+                padding: 2px 8px;
+                border-radius: 6px;
+            }
+        }
+    }
+}

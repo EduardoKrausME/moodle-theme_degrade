@@ -35,3 +35,11 @@ $stringlang['team_amazing'] = 'Tim Hebat Kami';
 $stringlang['teams_minimal'] = 'Tim Kami';
 $stringlang['about_us'] = 'Tentang Kami';
 $stringlang['testimonials'] = 'Apa Kata Siswa Kami';
+
+$stringlang['blank'] = 'Tata letak kosong';
+$stringlang['my_courses_3'] = 'Kursus saya - 3 kolom';
+$stringlang['my_courses_4'] = 'Kursus saya - 4 kolom';
+$stringlang['my_courses_minimalist_3'] = 'Kursus saya minimalis - 3 kolom';
+$stringlang['my_courses_minimalist_4'] = 'Kursus saya minimalis - 4 kolom';
+$stringlang['my_courses'] = 'Kursus saya';
+$stringlang['my_courses_minimalist'] = 'Kursus saya minimalis';

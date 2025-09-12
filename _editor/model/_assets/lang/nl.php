@@ -35,3 +35,11 @@ $stringlang['team_amazing'] = 'Ons geweldige team';
 $stringlang['teams_minimal'] = 'Ons team';
 $stringlang['about_us'] = 'Over ons';
 $stringlang['testimonials'] = 'Wat onze studenten zeggen';
+
+$stringlang['blank'] = 'Lege lay-out';
+$stringlang['my_courses_3'] = 'Mijn cursussen - 3 kolommen';
+$stringlang['my_courses_4'] = 'Mijn cursussen - 4 kolommen';
+$stringlang['my_courses_minimalist_3'] = 'Mijn cursussen minimalistisch - 3 kolommen';
+$stringlang['my_courses_minimalist_4'] = 'Mijn cursussen minimalistisch - 4 kolommen';
+$stringlang['my_courses'] = 'Mijn cursussen';
+$stringlang['my_courses_minimalist'] = 'Mijn cursussen minimalistisch';

@@ -1,0 +1,45 @@
+.block_themeeditor.my-courses-3 {
+  padding: 70px 20px 40px;
+}
+.block_themeeditor.my-courses-3 .course-card {
+  position: relative;
+  transition: transform 0.3s ease;
+}
+.block_themeeditor.my-courses-3 .course-card:hover {
+  transform: translateY(-6px);
+}
+.block_themeeditor.my-courses-3 .course-card .course-inner {
+  margin: 11px;
+  display: flex;
+  align-items: flex-end;
+  height: 220px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+.block_themeeditor.my-courses-3 .course-card .course-overlay {
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  padding: 20px;
+  width: 100%;
+}
+.block_themeeditor.my-courses-3 .course-card .course-overlay h3 a {
+  color: #ffffff;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.block_themeeditor.my-courses-3 .course-card .course-overlay .progress-bar {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 5px;
+  height: 8px;
+  overflow: hidden;
+}
+.block_themeeditor.my-courses-3 .course-card .course-overlay .progress-bar .progress {
+  background: var(--bs-primary);
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.4s ease;
+}

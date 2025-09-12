@@ -35,3 +35,11 @@ $stringlang['team_amazing'] = '我们的优秀团队';
 $stringlang['teams_minimal'] = '我们的团队';
 $stringlang['about_us'] = '关于我们';
 $stringlang['testimonials'] = '学生评价';
+
+$stringlang['blank'] = '空白布局';
+$stringlang['my_courses_3'] = '我的课程 - 3列';
+$stringlang['my_courses_4'] = '我的课程 - 4列';
+$stringlang['my_courses_minimalist_3'] = '我的课程极简 - 3列';
+$stringlang['my_courses_minimalist_4'] = '我的课程极简 - 4列';
+$stringlang['my_courses'] = '我的课程';
+$stringlang['my_courses_minimalist'] = '我的课程极简';

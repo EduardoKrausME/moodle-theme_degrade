@@ -35,3 +35,11 @@ $stringlang['team_amazing'] = 'Naš sjajan tim';
 $stringlang['teams_minimal'] = 'Naš tim';
 $stringlang['about_us'] = 'O nama';
 $stringlang['testimonials'] = 'Šta naši studenti kažu';
+
+$stringlang['blank'] = 'Tuščias išdėstymas';
+$stringlang['my_courses_3'] = 'Mano kursai - 3 stulpeliai';
+$stringlang['my_courses_4'] = 'Mano kursai - 4 stulpeliai';
+$stringlang['my_courses_minimalist_3'] = 'Mano kursai minimalistiniai - 3 stulpeliai';
+$stringlang['my_courses_minimalist_4'] = 'Mano kursai minimalistiniai - 4 stulpeliai';
+$stringlang['my_courses'] = 'Mano kursai';
+$stringlang['my_courses_minimalist'] = 'Mano kursai minimalistiniai';

@@ -1,0 +1,9 @@
+{
+  "title": "lang::my_courses_3",
+  "type": "html-form",
+  "category": "my-courses",
+  "cachekey": "my_courses_3_{USER}",
+  "form": {
+    "info": "lang::form_info"
+  }
+}

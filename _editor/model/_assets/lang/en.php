@@ -37,3 +37,9 @@ $stringlang['about_us'] = 'About Us';
 $stringlang['testimonials'] = 'What Our Students Say';
 
 $stringlang['blank'] = 'Blank layout';
+$stringlang['my_courses_3'] = 'My courses - 3 columns';
+$stringlang['my_courses_4'] = 'My courses - 4 columns';
+$stringlang['my_courses_minimalist_3'] = 'My courses minimalist - 3 columns';
+$stringlang['my_courses_minimalist_4'] = 'My courses minimalist - 4 columns';
+$stringlang['my_courses'] = 'My courses';
+$stringlang['my_courses_minimalist'] = 'My Courses minimalist';
