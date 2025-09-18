@@ -209,9 +209,6 @@
 
 .fp-iconview .fp-filename-field .fp-filename {
     background: $filemanager-filename-bg;
-    padding-top: 5px;
-    padding-bottom: 12px;
-    min-width: 112px;
 }
 
 // Table view (File Picker only)
@@ -563,37 +560,14 @@ a.ygtvspacer:hover {
     display: none;
 }
 
-.jsenabled .filemanager-loading {
-    display: block;
-    margin-top: 100px;
-}
-
-.filemanager.fm-loading .filemanager-toolbar,
-.filemanager.fm-loading .fp-pathbar,
-.filemanager.fm-loading .filemanager-container,
-.filemanager.fm-loaded .filemanager-loading,
-.filemanager.fm-maxfiles .fp-btn-add,
-.filemanager.fm-maxfiles .dndupload-message,
-.filemanager.fm-noitems .fp-btn-download,
-.filemanager.fm-noitems .fp-btn-delete,
-.filemanager .fm-empty-container,
-.filemanager.fm-noitems .filemanager-container .fp-content {
-    display: none;
-}
-
 .filemanager .fp-img-downloading {
     display: none;
     padding-top: 7px;
 }
 
-.filemanager .filemanager-updating {
-    display: none;
-    text-align: center;
-}
-
 .filemanager.fm-updating .filemanager-updating {
     display: block;
-    margin-top: 37px;
+    margin-top: 0;
 }
 
 .filemanager.fm-updating .fm-content-wrapper,
@@ -623,7 +597,7 @@ a.ygtvspacer:hover {
 
 .filepicker-filelist,
 .filemanager-container {
-    min-height: 140px;
+    min-height: 105px;
     border: 1px solid $input-border-color;
     @include border-radius();
 }
@@ -861,14 +835,6 @@ a.ygtvspacer:hover {
     display: block;
 }
 
-.dndupload-arrow {
-    width: 100%;
-    height: 80px;
-    position: absolute;
-    top: 5px;
-    color: $gray-500;
-}
-
 .fitem.disabled .filepicker-container,
 .fitem.disabled .fm-empty-container {
     display: none;
@@ -909,15 +875,6 @@ a.ygtvspacer:hover {
 }
 
 .filemanager.fp-select.loading form {
-    display: none;
-}
-
-.filemanager.fp-select.fp-folder .fp-license,
-.filemanager.fp-select.fp-folder .fp-author,
-.filemanager.fp-select.fp-file .fp-file-unzip,
-.filemanager.fp-select.fp-folder .fp-file-unzip,
-.filemanager.fp-select.fp-file .fp-file-zip,
-.filemanager.fp-select.fp-zip .fp-file-zip {
     display: none;
 }
 
@@ -1011,4 +968,270 @@ a.ygtvspacer:hover {
 .fp-fileinfo .fp-value {
     display: inline-block;
     padding-left: 5px;
+}
+
+/* ================================
+   Filemanager Modernizado
+   ================================ */
+.filemanager {
+    position: relative;
+    border-radius: 12px;
+    color: #2d3748;
+    transition: all 0.3s ease;
+
+    /* ==========================
+       Cabeçalho de Restrições
+       ========================== */
+    .fp-restrictions {
+        font-size: 0.875rem;
+        padding: 10px 15px;
+        color: #4a5568;
+        position: absolute;
+        bottom: -30px;
+        right: 0;
+
+        span {
+            margin-left: 10px;
+        }
+
+        i {
+            color: #3182ce;
+            transition: transform 0.3s ease;
+        }
+
+        a:hover i {
+            transform: rotate(15deg);
+        }
+    }
+
+    /* ==========================
+       Navbar / Toolbar
+       ========================== */
+    .fp-navbar {
+        background: #fff;
+        padding: 0;
+        border-radius: 12px 12px 0 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .filemanager-toolbar {
+            display: flex;
+            gap: 8px;
+
+            a.btn {
+                background: #edf2f7;
+                border: none;
+                border-radius: 8px;
+                padding: 6px 10px;
+                transition: all 0.2s ease;
+
+                i {
+                    font-size: 1rem;
+                    color: #2b6cb0;
+                }
+
+                &:hover {
+                    background: #e2e8f0;
+                    transform: translateY(-2px);
+                }
+
+                &:active {
+                    transform: scale(0.95);
+                }
+            }
+        }
+
+        .fp-viewbar {
+            display: flex;
+            gap: 6px;
+
+            a.btn {
+                background: #edf2f7;
+                border-radius: 8px;
+                padding: 6px 10px;
+
+                i {
+                    color: #4a5568;
+                }
+
+                &.checked {
+                    background: #2b6cb0;
+                    color: #fff;
+
+                    i {
+                        color: #fff;
+                    }
+                }
+
+                &:hover {
+                    background: #cbd5e0;
+                }
+            }
+        }
+    }
+
+    /* ==========================
+       Breadcrumbs / Pathbar
+       ========================== */
+    .fp-pathbar {
+        font-size: 0.9rem;
+        background: #f7fafc;
+        padding: 8px 15px;
+        border-radius: 0 9px 0 0;
+
+        a {
+            color: #2b6cb0;
+            font-weight: 500;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    /* ==========================
+       Container Principal
+       ========================== */
+    .filemanager-container {
+        background: #fff;
+        border-radius: 0 0 12px 12px;
+        position: relative;
+        padding-bottom: 9px;
+
+        .fm-empty-container {
+            border: 2px dashed #cbd5e0;
+            border-radius: 12px;
+            background: #f9fafc;
+            text-align: center;
+            padding: 4px 0;
+            color: #718096;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: #edf2f7;
+                border-color: #a0aec0;
+            }
+
+            .dndupload-arrow {
+                color: #8f959e;
+                i {
+                    font-size: 2.5rem;
+                }
+            }
+        }
+
+        .dndupload-target {
+            border: 2px dashed #63b3ed;
+            background: rgba(99, 179, 237, 0.1);
+            border-radius: 12px;
+            padding: 50px 20px;
+            text-align: center;
+            color: #2b6cb0;
+            font-weight: 500;
+            font-size: 1rem;
+            display: none;
+
+            i {
+                font-size: 3rem;
+                margin-top: 15px;
+            }
+        }
+
+        &.dndupload-over .dndupload-target {
+            display: block;
+            background: rgba(66, 153, 225, 0.2);
+            border-color: #2b6cb0;
+        }
+    }
+
+    /* ==========================
+       Estado de carregamento
+       ========================== */
+    .filemanager-loading,
+    .filemanager-updating {
+        text-align: center;
+        padding: 40px;
+        color: #2b6cb0;
+        display: block;
+        background: #f9fafc;
+        border: 1px solid var(--bs-gray-500);
+
+        i {
+            font-size: 1.5rem;
+        }
+    }
+
+    /* ==========================
+       Listagem de Arquivos
+       ========================== */
+    .fp-iconview .fp-file {
+        display: inline-block;
+        text-align: center;
+        transition: all 0.2s ease;
+
+        .fp-thumbnail {
+            width: 100%;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+
+            img {
+                max-width: 100% !important;
+                max-height: 100% !important;
+                width: 100%;
+                height: 100%;
+                border-radius: 4px;
+            }
+        }
+
+        .fp-filename-field {
+            font-size: 0.8rem;
+            color: #2d3748;
+            word-break: break-word;
+        }
+    }
+
+    /* ==========================
+       Barra de Progresso Upload
+       ========================== */
+    .dndupload-progressbars {
+        margin-top: 20px;
+
+        .progress {
+            height: 8px;
+            border-radius: 4px;
+            background: #edf2f7;
+
+            .progress-bar {
+                background: linear-gradient(90deg, #2b6cb0, #63b3ed);
+                transition: width 0.3s ease;
+            }
+        }
+    }
+}
+
+.filemanager.fm-loading .filemanager-toolbar,
+.filemanager.fm-loading .fp-pathbar,
+.filemanager.fm-loading .filemanager-container,
+.filemanager.fm-loaded .filemanager-loading,
+.filemanager.fm-maxfiles .fp-btn-add,
+.filemanager.fm-maxfiles .dndupload-message,
+.filemanager.fm-noitems .fp-btn-download,
+.filemanager.fm-noitems .fp-btn-delete,
+.filemanager .fm-empty-container,
+.filemanager.fm-noitems .filemanager-container .fp-content {
+    display: none;
+}
+
+.filemanager .filemanager-updating {
+    display: none;
+    text-align: center;
 }
