@@ -501,20 +501,20 @@ function theme_degrade_change_color() {
 
 
 /**
- * theme_degrade_default_color
+ * get_config default
  *
  * @param string $configname
- * @param string $defaultcolor
+ * @param string $default
  * @return string
  * @throws Exception
  */
-function theme_degrade_default_color($configname, $defaultcolor, $plugin = "theme_degrade") {
-    $color = get_config($plugin, $configname);
-
-    if (isset($color[4])) {
-        return $color;
+function theme_degrade_default($configname, $default, $plugin = "theme_degrade") {
+    $value = get_config($plugin, $configname);
+    if ($value === false) {
+        return $default;
     }
-    return $defaultcolor;
+
+    return $value;
 }
 
 /**

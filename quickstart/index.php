@@ -227,7 +227,7 @@ $brandcolormustache = [
     "htmlselect" => $OUTPUT->render_from_template("theme_degrade/settings/colors", [
         "brandcolor" => true,
         "colors" => $themecolors,
-        "defaultcolor" => theme_degrade_default_color("brandcolor", "#1a2a6c", "theme_boost"),
+        "defaultcolor" => theme_degrade_default("brandcolor", "#1a2a6c", "theme_boost"),
     ]),
     "return" => "logos",
     "next" => "user-profile",
@@ -261,7 +261,7 @@ if (file_exists("{$CFG->libdir}/editor/tiny/lib.php")) {
         "footer_background_color" => get_config("theme_degrade", "footer_background_color"),
         "htmlselect" => $OUTPUT->render_from_template("theme_degrade/settings/colors", [
             "footercolor" => true, "colors" => $themecolors,
-            "defaultcolor" => theme_degrade_default_color("brandcolor", "#1a2a6c"),
+            "defaultcolor" => theme_degrade_default("brandcolor", "#1a2a6c"),
         ]),
         "blocks" => [
             [
