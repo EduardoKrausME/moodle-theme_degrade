@@ -2138,6 +2138,9 @@ textarea.form-control-lg {
     select {
         border: none;
         outline: none;
+        appearance: none;
+        padding: 0;
+        margin: 0;
     }
 }
 :not(.form-select) > select {
