@@ -17,7 +17,6 @@
 namespace theme_degrade\output\core;
 
 use Exception;
-use moodle_url;
 
 /**
  * Standard HTML output renderer for core_admin subsystem.
