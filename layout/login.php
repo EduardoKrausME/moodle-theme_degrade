@@ -23,14 +23,26 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use core\output\language_menu;
+
 defined('MOODLE_INTERNAL') || die();
 
 $bodyattributes = $OUTPUT->body_attributes();
+
+$loginthemename = get_config("theme_degrade", "logintheme");
+$loginbackgroundimageurl = theme_degrade_setting_file_url("loginbackgroundimage");
+if (!$loginbackgroundimageurl) {
+    $loginbackgroundimageurl = $OUTPUT->image_url("login/{$loginthemename}", "theme_degrade")->out(false);
+}
 
 $templatecontext = [
     "sitename" => format_string($SITE->shortname, true, ["context" => context_course::instance(SITEID), "escape" => false]),
     "output" => $OUTPUT,
     "bodyattributes" => $bodyattributes,
+    "login_theme" => $loginthemename,
+    "footer_show_copywriter" => get_config("theme_boost_magnific", "footer_show_copywriter"),
+    "languagemenu" => (new language_menu($PAGE))->export_for_action_menu($OUTPUT),
+    "loginbackgroundimageurl" => $loginbackgroundimageurl,
 ];
 
 echo $OUTPUT->render_from_template("theme_degrade/login", $templatecontext);

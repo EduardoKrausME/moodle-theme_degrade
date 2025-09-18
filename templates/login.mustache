@@ -34,22 +34,58 @@
 <body {{{bodyattributes}}}>
 {{> core/local/toast/wrapper}}
 
-<div id="page-wrapper">
+<div id="page-wrapper" class="page-wrapper-login {{{login_theme}}}"
+     style="--login-bg: url('{{{loginbackgroundimageurl}}}');">
 
     {{{ output.standard_top_of_body_html }}}
 
-    <div id="page" class="container-fluid pt-5 mt-0">
-        <div id="page-content" class="row">
-            <div id="region-main-box" class="col-12">
-                <section id="region-main" class="col-12 h-100" aria-label="{{#str}}content{{/str}}">
-                    <div class="login-wrapper">
-                        <div class="login-container">
-                            {{{ output.main_content }}}
-                        </div>
-                    </div>
-                </section>
-            </div>
+    <section class="login-wrapper">
+        <div class="login-container">
+            {{{ output.main_content }}}
         </div>
+    </section>
+    <div class="loginfooter">
+            <div class="language-menu">
+                {{#languagemenu}}
+                    <button class="language-menu__button" id="languageMenuBtn">
+                        {{languagemenu.primary.title}}
+                        <span class="arrow"></span>
+                    </button>
+                    <ul class="language-menu__list" id="languageMenuList">
+                        {{#languagemenu.secondary.items}}
+                            <li class="language-menu__item">
+                                <a href="{{actionmenulink.url}}">
+                                    {{actionmenulink.text}}
+                                </a>
+                            </li>
+                        {{/languagemenu.secondary.items}}
+                    </ul>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const btn = document.getElementById("languageMenuBtn");
+                            const list = document.getElementById("languageMenuList");
+                            const container = btn.closest(".language-menu");
+
+                            btn.addEventListener("click", function (e) {
+                                e.stopPropagation();
+                                list.classList.toggle("show");
+                                container.classList.toggle("open");
+                            });
+
+                            document.addEventListener("click", function () {
+                                list.classList.remove("show");
+                                container.classList.remove("open");
+                            });
+                        });
+                    </script>
+                {{/languagemenu}}
+            </div>
+            <p>
+                {{#footer_show_copywriter}}
+                    {{#str}}footer_copywriter,theme_degrade{{/str}}
+                    <a href="https://eduardokraus.com" target="_blank">Eduardo Kraus</a>
+                {{/footer_show_copywriter}}
+            </p>
     </div>
 </div>
 

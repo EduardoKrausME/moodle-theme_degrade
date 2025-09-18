@@ -131,11 +131,4 @@ $setting = new admin_setting_configstoredfile($name,
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 
-// Login Background image setting.
-$setting = new admin_setting_configstoredfile("theme_degrade/loginbackgroundimage",
-    get_string("loginbackgroundimage", "theme_degrade"),
-    get_string("loginbackgroundimage_desc", "theme_degrade"), "loginbackgroundimage");
-$setting->set_updatedcallback("theme_reset_all_caches");
-$page->add($setting);
-
 $settings->add($page);

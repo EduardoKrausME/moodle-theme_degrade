@@ -1,95 +1,975 @@
-$loginbackground-gradient-from: $gray-100 !default;
-$loginbackground-gradient-to: $gray-300 !default;
-$logincontainer-bg: $white !default;
-$logincontainer-padding: 3rem !default;
-$logincontainer-shadow: $box-shadow !default;
-$logindivider-margin-top: 1.5rem !default;
-$logindivider-margin-bottom: 1.5rem !default;
-$logindivider-border: $border-color !default;
-$login-identity-provider-btn-border: $border-color !default;
-
-.pagelayout-login #region-main {
-    border: 0;
-    background-color: inherit;
-}
-
-.pagelayout-login #page {
-    // background: $loginbackground-gradient-from;
-    // @include gradient-x($loginbackground-gradient-from, $loginbackground-gradient-to, 0%, 100%);
-    padding: 0 !important;
-    margin-top: 0 !important;
-    width: auto;
-
-    div[role="main"] {
-        height: 100%;
-    }
-}
-
-.login-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* ===========================
+   BASE 1 — Estrutura geral
+   =========================== */
+.page-wrapper-login {
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    overflow: none;
     height: 100%;
-}
+    margin: 0;
+    justify-content: center;
 
-.login-container {
-    background-color: $logincontainer-bg;
-    padding: $logincontainer-padding;
-    box-shadow: $logincontainer-shadow;
-    margin-bottom: 2rem;
-    @include border-radius();
-
-    .login-languagemenu {
+    .login-wrapper {
+        width: 100%;
         display: flex;
-        justify-content: flex-start;
-
-        .dropdown-menu {
-            max-height: 300px;
-            overflow-y: auto;
-        }
-    }
-
-    .login-logo {
-        display: flex;
+        align-items: center;
         justify-content: center;
-        margin-bottom: 1rem;
+        margin-bottom: 50px;
     }
 
-    .login-divider {
-        margin-top: $logindivider-margin-top;
-        margin-bottom: $logindivider-margin-bottom;
-        border-top: $border-width solid $logindivider-border;
-    }
+    .login-container {
+        padding: 40px;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 500px;
+        max-height: calc(100vh - 80px);
+        overflow: auto;
 
-    h1.login-heading {
-        font-size: $h2-font-size;
-    }
-
-    h2.login-heading {
-        font-size: $h4-font-size;
-    }
-
-    .login-identityproviders {
-        .login-identityprovider-btn {
-            border: $border-width solid $login-identity-provider-btn-border;
+        .login-heading {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 25px;
         }
     }
 
-    .divider {
-        width: $border-width;
-        background-color: $gray-300;
-        height: $font-size-base * 2;
+    form {
+        text-align: left;
+
+        .form-control,
+        .custom-select {
+            width: 100%;
+            padding: 12px 44px 12px 12px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .toggle-sensitive-btn {
+            border: none;
+        }
+
+        .btn {
+            width: 100%;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .password-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            .toggle-password {
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 36px;
+                height: 36px;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: color 0.15s ease, background 0.15s ease, transform 0.12s ease;
+                padding: 0;
+                line-height: 0;
+
+                appearance: none;
+                border: none;
+                background: transparent;
+
+                &:hover {
+                    transform: translateY(-50%) scale(1.03);
+                }
+
+                &:focus {
+                    outline: none;
+                }
+
+                i {
+                    font-size: 18px;
+                    pointer-events: none;
+                }
+            }
+        }
     }
 
-    .action-menu-trigger {
+    .login-form-forgotpassword,
+    .login-form-remember {
+        font-size: 0.9rem;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+
         a {
-            margin: 0.5rem 0;
+            text-decoration: none;
+        }
+    }
+
+    .alert.alert-danger {
+        font-size: 0.9rem;
+        padding: 12px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+    }
+
+    /* ===========================
+       BASE 2 — Rodapé (sem cores)
+       =========================== */
+    .loginfooter {
+        position: fixed;
+        bottom: 0; left: 0;
+        width: 100%;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.85rem;
+        border-top: 1px solid transparent; /* cor no tema */
+        border-radius: 8px 8px 0 0;
+
+        .language-menu {
+            position: relative;
+            display: inline-block;
+            font-family: sans-serif;
+
+            &__button {
+                background: transparent;
+                border: none;
+                padding: 0;
+                cursor: pointer;
+                border-radius: 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .arrow {
+                    border-width: 0 2px 2px 0;
+                    border-style: solid; /* cor no tema */
+                    display: inline-block;
+                    padding: 4px;
+                    transform: rotate(-135deg); /* seta para cima */
+                    transition: transform 0.2s;
+                    margin-left: 15px;
+                    margin-top: 7px;
+                }
+            }
+
+            &__list {
+                list-style: none;
+                margin: 0 0 15px;
+                padding: 0;
+                position: absolute;
+                bottom: 100%; /* abre para cima */
+                left: 0;
+                display: none;
+                border: 1px solid transparent; /* cor no tema */
+                border-radius: 4px;
+                box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+
+                &.show {
+                    display: block;
+                }
+            }
+
+            &__item {
+                a {
+                    display: block;
+                    padding: 8px 12px;
+                    text-decoration: none;
+                    white-space: nowrap;
+                    transition: all 0.2s;
+                }
+            }
+
+            &.open {
+                .arrow {
+                    transform: rotate(45deg); /* seta muda ao abrir */
+                }
+            }
+        }
+
+        p, a, button {
+            font-size: 0.85rem;
+            text-decoration: none;
+            margin: 0;
         }
     }
 }
 
-@include media-breakpoint-up(md) {
+/* ===========================
+   TEMA — Dark Elegante (cores)
+   =========================== */
+.page-wrapper-login.dark-elegante {
+    background-color: #1c1f23;
+    color: #fff;
+
     .login-container {
-        width: 500px !important; /* stylelint-disable-line declaration-no-important */
+        background: #2b2f33;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+
+    .login-heading { color: #dcdcdc; }
+
+    form {
+        .form-control,
+        .custom-select {
+            background-color: #181a1d;
+            border: 1px solid #444;
+            color: #eee;
+
+            &:focus {
+                border-color: #888;
+                box-shadow: 0 0 0 2px rgba(180,180,180,0.3);
+            }
+
+            &::placeholder { color: #999; }
+        }
+        .custom-select {
+            --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23eeeeee' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e")
+        }
+
+        .toggle-sensitive-btn {
+            background: #444;
+            color: #ddd;
+
+            &:hover {
+                background: #555;
+                color: #fff;
+            }
+        }
+
+        .btn-primary {
+            background: #888;
+
+            &:hover {
+                background: #aaa;
+                color: #111;
+            }
+        }
+
+        .password-wrapper {
+            .toggle-password {
+                color: #bdbdbd;
+
+                &:hover {
+                    color: #ffffff;
+                }
+
+                &:focus {
+                    box-shadow: 0 0 0 3px rgba(124, 108, 255, 0.12);
+                }
+
+                &.active {
+                    color: #ffffff;
+                    text-shadow: 0 0 6px rgba(124, 108, 255, 0.14);
+                }
+            }
+        }
+    }
+
+    .login-form-forgotpassword,
+    .login-form-remember {
+        a {
+            color: #bbb;
+
+            &:hover {
+                color: #fff;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .alert.alert-danger {
+        background: rgba(180, 50, 50, 0.9);
+        border: none;
+        color: #fff;
+    }
+
+    .loginfooter {
+        background: #2b2f33;
+        border-top-color: rgba(255, 255, 255, .05);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, .6);
+
+        p, a, button {
+            color: #bbbbbb;
+
+            &:hover {
+                color: #ffffff;
+                text-decoration: underline;
+            }
+        }
+
+        .language-menu {
+            &__list {
+                background: #2b2f33;
+                border-color: rgba(255, 255, 255, .05);
+            }
+
+            &__item a:hover {
+                background: rgba(204, 203, 203, 0.21);
+                font-weight: 700;
+            }
+        }
+
+        .arrow { border-color: #bbbbbb; }
+    }
+}
+
+/* ===========================
+   TEMA — Aurora (nature)
+   =========================== */
+.page-wrapper-login.aurora {
+    /* base do fundo (fallback se a imagem não carregar) */
+    background: linear-gradient(160deg, #07131c 0%, #0b2a1b 45%, #10243a 100%);
+    color: #ecf7ff;
+    overflow: auto; /* garante scroll se o conteúdo for maior que a viewport */
+
+    /* --- camada 1: foto de natureza (fixa) --- */
+    &::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: var(--login-bg);
+        background-position: center bottom;
+        background-size: cover;
+        background-repeat: no-repeat;
+        opacity: .28;                     /* ajuste a gosto com a sua imagem */
+        filter: saturate(.95) contrast(1) brightness(.9);
+        z-index: -2;
+    }
+
+    /* --- camada 2: auroras em gradientes radiais, com leve movimento --- */
+    &::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+                radial-gradient(40% 35% at 20% 30%, rgba(46, 204, 113, .25), transparent 60%),
+                radial-gradient(45% 40% at 70% 18%, rgba(78, 200, 226, .22), transparent 62%),
+                radial-gradient(55% 45% at 60% 78%, rgba(122, 108, 245, .16), transparent 70%);
+        background-repeat: no-repeat;
+        background-size: 120% 120%, 140% 140%, 160% 160%;
+        mix-blend-mode: screen;
+        opacity: .9;
+        z-index: -1;
+        animation: auroraMove 24s ease-in-out infinite alternate;
+    }
+
+    @keyframes auroraMove {
+        0%   { background-position: 18% 28%, 72% 16%, 60% 78%; }
+        100% { background-position: 24% 34%, 66% 22%, 55% 84%; }
+    }
+
+    /* --- card (vidro fosco) --- */
+    .login-container {
+        background: rgba(10, 20, 28, .50);
+        border: 1px solid rgba(255, 255, 255, .18);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, .35);
+        backdrop-filter: blur(12px) saturate(120%);
+        -webkit-backdrop-filter: blur(12px) saturate(120%);
+    }
+
+    .login-heading { color: #e4fbff; }
+
+    /* --- campos e botões --- */
+    form {
+        .form-control,
+        .custom-select {
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid rgba(255, 255, 255, .28);
+            color: #eaf6ff;
+
+            &::placeholder { color: #cfe6f2; }
+
+            &:focus {
+                border-color: #7cebc5;
+                box-shadow: 0 0 0 2px rgba(124, 235, 197, .35);
+                background: rgba(255, 255, 255, .12);
+            }
+        }
+
+        .toggle-sensitive-btn {
+            background: rgba(255, 255, 255, .14);
+            color: #0b1221;
+
+            &:hover {
+                background: rgba(255, 255, 255, .22);
+            }
+        }
+
+        .btn-primary {
+            background-image: linear-gradient(135deg, #36d1a9 0%, #4ec8e2 55%, #7a6cf5 110%);
+            color: #0b1221;
+            border: none;
+            box-shadow: 0 6px 18px rgba(78, 200, 226, .35);
+
+            &:hover {
+                filter: brightness(1.06) saturate(1.05);
+                transform: translateY(-1px);
+            }
+
+            &:active {
+                transform: translateY(0);
+                box-shadow: 0 3px 10px rgba(78, 200, 226, .35);
+            }
+        }
+
+        .btn.btn-secondary {
+            background: rgba(255,255,255,.16);
+            color: #e9fbff;
+            border: 1px solid rgba(255,255,255,.28);
+
+            &:hover {
+                background: rgba(255,255,255,.22);
+            }
+        }
+
+        .password-wrapper .toggle-password {
+            color: #c6f3ff;
+
+            &:hover { color: #ffffff; }
+
+            &:focus {
+                box-shadow: 0 0 0 3px rgba(78, 200, 226, .22);
+            }
+
+            &.active {
+                color: #ffffff;
+                text-shadow: 0 0 6px rgba(78, 200, 226, .18);
+            }
+        }
+    }
+
+    /* --- links auxiliares --- */
+    .login-form-forgotpassword,
+    .login-form-remember {
+        a {
+            color: #b6ecdb;
+
+            &:hover {
+                color: #e0fff5;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    /* --- alertas --- */
+    .alert.alert-danger {
+        background: rgba(235, 87, 87, .90);
+        border: none;
+        color: #fff;
+    }
+
+    /* --- rodapé (vidro + contraste) --- */
+    .loginfooter {
+        background: rgba(10, 20, 28, .45);
+        border-top-color: rgba(255, 255, 255, .14);
+        backdrop-filter: blur(8px) saturate(120%);
+        -webkit-backdrop-filter: blur(8px) saturate(120%);
+        box-shadow: 0 -8px 20px rgba(0, 0, 0, .35);
+
+        p, a, button {
+            color: #d7f9ff;
+
+            &:hover {
+                color: #ffffff;
+                text-decoration: underline;
+            }
+        }
+
+        .language-menu {
+            &__list {
+                background: rgba(10, 20, 28, .70);
+                border-color: rgba(255, 255, 255, .14);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+
+            &__item a:hover {
+                background: rgba(78, 200, 226, .18);
+                font-weight: 700;
+            }
+        }
+
+        .arrow { border-color: #d7f9ff; }
+    }
+}
+
+/* ===========================
+   TEMA — Selva Canopy (nature)
+   =========================== */
+.page-wrapper-login.selva-canopy {
+    /* Fallback do fundo */
+    background: linear-gradient(180deg, #05130c 0%, #0c271c 60%, #06150e 100%);
+    color: #e8fff1;
+    overflow: auto;
+
+    /* Camada 1: foto da copa da selva (ajuste o path) */
+    &::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: var(--login-bg);
+        background-position: center bottom;
+        background-size: cover;
+        background-repeat: no-repeat;
+        opacity: .34;
+        filter: saturate(1.05) contrast(.95) brightness(.9);
+        z-index: -2;
+    }
+
+    /* Camada 2: luz filtrada pelas folhas (rays) */
+    &::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+                linear-gradient(120deg, rgba(255,255,255,.10), transparent 60%),
+                radial-gradient(80% 60% at 18% 6%, rgba(30,193,121,.22), transparent 62%),
+                radial-gradient(65% 55% at 86% 12%, rgba(59,183,210,.14), transparent 68%),
+                radial-gradient(70% 60% at 60% 85%, rgba(122,108,245,.10), transparent 70%);
+        background-repeat: no-repeat;
+        background-size: 140% 140%, 120% 120%, 140% 140%, 160% 160%;
+        mix-blend-mode: screen;
+        opacity: .9;
+        z-index: -1;
+        animation: canopyRays 28s ease-in-out infinite alternate;
+    }
+
+    @keyframes canopyRays {
+        0%   { background-position: 0% 0%, 18% 4%, 86% 10%, 60% 86%; }
+        100% { background-position: 8% 8%, 24% 10%, 80% 16%, 56% 92%; }
+    }
+
+    /* ---------- Card (vidro fosco) ---------- */
+    .login-container {
+        background: rgba(6, 23, 15, .55);
+        border: 1px solid rgba(201, 255, 216, .18);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, .38);
+        backdrop-filter: blur(12px) saturate(120%);
+        -webkit-backdrop-filter: blur(12px) saturate(120%);
+    }
+
+    .login-heading { color: #eafdf4; }
+
+    /* ---------- Campos & botões ---------- */
+    form {
+        .form-control,
+        .custom-select {
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid rgba(201, 255, 216, .28);
+            color: #eafdf4;
+
+            &::placeholder { color: #cfeee1; }
+
+            &:focus {
+                border-color: #63e4a8;
+                box-shadow: 0 0 0 2px rgba(99, 228, 168, .35);
+                background: rgba(255, 255, 255, .12);
+            }
+        }
+
+        .toggle-sensitive-btn {
+            background: rgba(255, 255, 255, .14);
+            color: #0f2019;
+
+            &:hover { background: rgba(255, 255, 255, .22); }
+        }
+
+        .btn-primary {
+            background-image: linear-gradient(135deg, #1ec179 0%, #16a085 50%, #2ecc71 100%);
+            color: #06150e;
+            border: none;
+            box-shadow: 0 6px 18px rgba(23, 153, 114, .35);
+
+            &:hover {
+                filter: brightness(1.06) saturate(1.04);
+                transform: translateY(-1px);
+            }
+            &:active {
+                transform: translateY(0);
+                box-shadow: 0 3px 10px rgba(23, 153, 114, .35);
+            }
+        }
+
+        .btn.btn-secondary {
+            background: rgba(255,255,255,.16);
+            color: #ebfff6;
+            border: 1px solid rgba(201,255,216,.28);
+
+            &:hover { background: rgba(255,255,255,.22); }
+        }
+
+        .password-wrapper .toggle-password {
+            color: #c9ffe5;
+
+            &:hover { color: #ffffff; }
+
+            &:focus {
+                box-shadow: 0 0 0 3px rgba(35, 196, 139, .22);
+            }
+
+            &.active {
+                color: #ffffff;
+                text-shadow: 0 0 6px rgba(35, 196, 139, .18);
+            }
+        }
+    }
+
+    /* ---------- Links auxiliares ---------- */
+    .login-form-forgotpassword,
+    .login-form-remember {
+        a {
+            color: #b6ecd4;
+
+            &:hover {
+                color: #e2fff3;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    /* ---------- Alertas ---------- */
+    .alert.alert-danger {
+        background: rgba(235, 87, 87, .92);
+        border: none;
+        color: #fff;
+    }
+
+    /* ---------- Rodapé (glass + contraste) ---------- */
+    .loginfooter {
+        background: rgba(6, 23, 15, .45);
+        border-top-color: rgba(201, 255, 216, .20);
+        backdrop-filter: blur(8px) saturate(120%);
+        -webkit-backdrop-filter: blur(8px) saturate(120%);
+        box-shadow: 0 -8px 20px rgba(0, 0, 0, .35);
+
+        p, a, button {
+            color: #d9fff0;
+
+            &:hover {
+                color: #ffffff;
+                text-decoration: underline;
+            }
+        }
+
+        .language-menu {
+            &__list {
+                background: rgba(6, 23, 15, .70);
+                border-color: rgba(201, 255, 216, .20);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+
+            &__item a:hover {
+                background: rgba(46, 204, 113, .18);
+                font-weight: 700;
+            }
+        }
+
+        .arrow { border-color: #d9fff0; }
+    }
+
+    /* --------- Acessibilidade/Performance --------- */
+    @media (prefers-reduced-motion: reduce) {
+        &::after { animation: none; }
+    }
+    @media (max-width: 576px) {
+        &::before { opacity: .28; } /* reduz carga visual no mobile */
+        .login-container { padding: 28px; }
+    }
+}
+
+/* ===========================
+   TEMA — Clean (minimal)
+   =========================== */
+.page-wrapper-login.clean-minimal {
+    /* fundo neutro, claro e suave */
+    background:
+            radial-gradient(1200px 600px at 10% -10%, rgba(0,0,0,.02), transparent 60%),
+            radial-gradient(1000px 500px at 90% 110%, rgba(0,0,0,.025), transparent 60%),
+            #f6f8fb;
+    color: #1b1f23;
+
+    .login-container {
+        background: #ffffff;
+        border: 1px solid rgba(17, 24, 39, 0.06);
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
+        padding: 40px;
+    }
+
+    .login-heading {
+        color: #0f172a;
+        font-weight: 600;
+        letter-spacing: .2px;
+        margin-bottom: 24px;
+    }
+
+    form {
+        .form-control,
+        .custom-select {
+            background: #ffffff;
+            border: 1px solid #d1d9e6;
+            color: #111827;
+            border-radius: 10px;
+            padding: 12px 44px 12px 12px;
+
+            &::placeholder { color: #9aa7b6; }
+
+            &:focus {
+                border-color: #6aa6ff;
+                box-shadow: 0 0 0 3px rgba(106, 166, 255, .25);
+                outline: none;
+            }
+        }
+
+        .toggle-sensitive-btn {
+            background: #eef2f7;
+            color: #0f172a;
+            border: 1px solid #d1d9e6;
+
+            &:hover { background: #e6ecf4; }
+        }
+
+        .btn-primary {
+            border-radius: 10px;
+            padding: 12px;
+            font-weight: 600;
+            letter-spacing: .2px;
+            box-shadow: 0 6px 18px rgba(37, 99, 235, .25);
+
+            &:hover { filter: brightness(1.05); transform: translateY(-1px); }
+            &:active { transform: translateY(0); box-shadow: 0 4px 12px rgba(37, 99, 235, .22); }
+        }
+
+        .btn.btn-secondary {
+            background: #f3f6fb;
+            color: #0f172a;
+            border: 1px solid #d1d9e6;
+            border-radius: 10px;
+
+            &:hover { background: #eef2f7; }
+        }
+
+        .password-wrapper .toggle-password {
+            color: #64748b;
+            border: none;
+            background: transparent;
+
+            &:hover { color: #0f172a; }
+            &:focus { box-shadow: 0 0 0 3px rgba(106, 166, 255, .22); border-radius: 6px; }
+            &.active { color: #0f172a; }
+        }
+    }
+
+    .login-form-forgotpassword,
+    .login-form-remember {
+        a {
+            color: #475569;
+
+            &:hover {
+                color: #0f172a;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .alert.alert-danger {
+        background: #fee2e2;
+        border: 1px solid #fecaca;
+        color: #7f1d1d;
+        border-radius: 8px;
+    }
+
+    .loginfooter {
+        background: rgba(255, 255, 255, .9);
+        border-top-color: rgba(17, 24, 39, .06);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        box-shadow: 0 -4px 16px rgba(2, 6, 23, .04);
+
+        p, a, button {
+            color: #475569;
+
+            &:hover { color: #0f172a; text-decoration: underline; }
+        }
+
+        .language-menu {
+            &__list {
+                background: #ffffff;
+                border-color: rgba(17, 24, 39, .08);
+                box-shadow: 0 8px 22px rgba(2, 6, 23, .08);
+            }
+            &__item a:hover {
+                background: #f3f6fb;
+                font-weight: 600;
+            }
+        }
+
+        .arrow { border-color: #475569; }
+    }
+
+    /* ajustes responsivos e acessibilidade */
+    @media (max-width: 576px) {
+        .login-container { padding: 28px; border-radius: 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        * { transition: none !important; }
+    }
+}
+
+/* ===========================
+   TEMA — Clean Outline
+   =========================== */
+.page-wrapper-login.clean-outline {
+    background:
+            radial-gradient(1200px 600px at 0% -20%, rgba(0,0,0,.02), transparent 60%),
+            radial-gradient(900px 500px at 100% 120%, rgba(0,0,0,.025), transparent 60%),
+            #f7f9fc;
+    color: #0f172a;
+
+    .login-container {
+        background: #fff;
+        border: 1px solid rgba(2, 6, 23, .06);
+        border-radius: 14px;
+        box-shadow: 0 12px 28px rgba(2, 6, 23, .06);
+        padding: 40px;
+    }
+
+    .login-heading {
+        color: #0b1221;
+        font-weight: 600;
+        letter-spacing: .1px;
+        margin-bottom: 22px;
+    }
+
+    form {
+        .form-control,
+        .custom-select {
+            background: #fff;
+            border: 1px solid #cfd7e3;   /* outline discreto */
+            color: #0f172a;
+            border-radius: 12px;
+            padding: 12px 44px 12px 12px;
+
+            &::placeholder { color: #93a0b2; }
+
+            &:focus {
+                border-color: #0f172a;
+                box-shadow: 0 0 0 3px rgba(15, 23, 42, .18); /* foco acessível */
+                outline: none;
+            }
+        }
+
+        .custom-select {
+            --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%230f172a' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+        }
+
+        .toggle-sensitive-btn {
+            background: #f3f6fb;
+            border: 1px solid #cfd7e3;
+            color: #0f172a;
+
+            &:hover { background: #eef2f7; }
+        }
+
+        .btn-primary {
+            background: #0f172a;          /* botão sólido, contraste alto */
+            color: #fff;
+            border: 1px solid #0f172a;
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: 600;
+            letter-spacing: .2px;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, .18);
+
+            &:hover { filter: brightness(1.04); transform: translateY(-1px); }
+            &:active { transform: translateY(0); box-shadow: 0 4px 12px rgba(15, 23, 42, .16); }
+        }
+
+        .btn.btn-secondary {
+            background: transparent;       /* ghost button */
+            color: #0f172a;
+            border: 1px solid #cfd7e3;
+            border-radius: 12px;
+
+            &:hover { border-color: #0f172a; background: #f8fafc; }
+        }
+
+        .password-wrapper .toggle-password {
+            color: #64748b;
+            background: transparent;
+            border-radius: 8px;
+
+            &:hover { color: #0f172a; }
+            &:focus { box-shadow: 0 0 0 3px rgba(15, 23, 42, .18); }
+            &.active { color: #0f172a; }
+        }
+    }
+
+    .login-form-forgotpassword,
+    .login-form-remember {
+        a {
+            color: #475569;
+            &:hover { color: #0f172a; text-decoration: underline; }
+        }
+    }
+
+    .alert.alert-danger {
+        background: #fee2e2;
+        border: 1px solid #fecaca;
+        color: #7f1d1d;
+        border-radius: 10px;
+    }
+
+    .loginfooter {
+        background: rgba(255,255,255,.92);
+        border-top-color: rgba(2, 6, 23, .06);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        box-shadow: 0 -6px 16px rgba(2, 6, 23, .04);
+
+        p, a, button {
+            color: #475569;
+            &:hover { color: #0f172a; text-decoration: underline; }
+        }
+
+        .language-menu {
+            &__list {
+                background: #ffffff;
+                border-color: rgba(2, 6, 23, .08);
+                box-shadow: 0 10px 22px rgba(2, 6, 23, .08);
+            }
+            &__item a:hover {
+                background: #f3f6fb;
+                font-weight: 600;
+            }
+        }
+
+        .arrow { border-color: #475569; }
+    }
+
+    @media (max-width: 576px) { .login-container { padding: 28px; } }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+}
+
+/* ===========================
+   TEMA — Forgot password
+   =========================== */
+#page-login-forgot_password,
+#page-login-signup {
+    .login-container {
+        max-width: 650px !important;
     }
 }
