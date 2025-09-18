@@ -9,6 +9,19 @@
     margin: 0;
     justify-content: center;
 
+    &::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: var(--login-bg);
+        background-position: center bottom;
+        background-size: cover;
+        background-repeat: no-repeat;
+        opacity: .28;
+        filter: saturate(.95) contrast(1) brightness(.9);
+        z-index: -2;
+    }
+
     .login-wrapper {
         width: 100%;
         display: flex;
@@ -334,20 +347,6 @@
     color: #ecf7ff;
     overflow: auto; /* garante scroll se o conteúdo for maior que a viewport */
 
-    /* --- camada 1: foto de natureza (fixa) --- */
-    &::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background-image: var(--login-bg);
-        background-position: center bottom;
-        background-size: cover;
-        background-repeat: no-repeat;
-        opacity: .28;                     /* ajuste a gosto com a sua imagem */
-        filter: saturate(.95) contrast(1) brightness(.9);
-        z-index: -2;
-    }
-
     /* --- camada 2: auroras em gradientes radiais, com leve movimento --- */
     &::after {
         content: "";
@@ -516,16 +515,8 @@
 
     /* Camada 1: foto da copa da selva (ajuste o path) */
     &::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background-image: var(--login-bg);
-        background-position: center bottom;
-        background-size: cover;
-        background-repeat: no-repeat;
         opacity: .34;
         filter: saturate(1.05) contrast(.95) brightness(.9);
-        z-index: -2;
     }
 
     /* Camada 2: luz filtrada pelas folhas (rays) */
