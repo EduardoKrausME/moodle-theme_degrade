@@ -29,10 +29,10 @@ defined('MOODLE_INTERNAL') || die;
 $htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/degrade/scss/colors.css\" />";
 $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_degrade/settings/colors-degrade", [
         "colors" => theme_degrade_settings_colors(),
-        "defaultcolor" => theme_degrade_default_color("brandcolor", "#f55ff2", "theme_boost"),
-        "angle" => theme_degrade_default_color("angle", 30),
-        "gradient_1" => theme_degrade_default_color("brandcolor_gradient_1", "#f54266"),
-        "gradient_2" => theme_degrade_default_color("brandcolor_gradient_2", "#3858f9"),
+        "defaultcolor" => theme_degrade_default("brandcolor", "#f55ff2", "theme_boost"),
+        "angle" => theme_degrade_default("angle", 30),
+        "gradient_1" => theme_degrade_default("brandcolor_gradient_1", "#f54266"),
+        "gradient_2" => theme_degrade_default("brandcolor_gradient_2", "#3858f9"),
     ]);
 
 // We use an empty default value because the default colour should come from the preset.
