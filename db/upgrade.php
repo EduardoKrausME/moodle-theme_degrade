@@ -289,12 +289,11 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2025091000, "theme", "degrade");
     }
 
-    if ($oldversion < 2025091001) {
-        $scss = get_config("scss", "theme_degrade");
+    if ($oldversion < 2025100400) {
+        $scss = get_config("theme_degrade", "scss");
         set_config("scsspos", $scss, "theme_degrade");
-        unset_config("scsspos", "theme_degrade");
 
-        upgrade_plugin_savepoint(true, 2025091001, "theme", "degrade");
+        upgrade_plugin_savepoint(true, 2025100400, "theme", "degrade");
     }
 
     return true;
