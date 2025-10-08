@@ -510,6 +510,18 @@ class core_renderer extends \core_renderer {
     }
 
     /**
+     * Return the site's logo URL, if any.
+     *
+     * @param int $maxwidth The maximum width, or null when the maximum width does not matter.
+     * @param int $maxheight The maximum height, or null when the maximum height does not matter.
+     * @return moodle_url|false
+     * @throws Exception
+     */
+    public function get_logo_url($maxwidth = null, $maxheight = 200) {
+        return $this->get_compact_logo_url($maxwidth, $maxheight);
+    }
+
+    /**
      * Return the site's compact logo URL, if any.
      *
      * @param int $maxwidth The maximum width, or null when the maximum width does not matter.
