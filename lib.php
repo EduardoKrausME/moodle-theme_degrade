@@ -159,9 +159,9 @@ function theme_degrade_get_pre_scss($theme) {
     }
 
     if ($CFG->theme == "degrade") {
-        $angle = theme_degrade_default_color("angle", 30);
-        $gradient1 = theme_degrade_default_color("brandcolor_gradient_1", "#f54266");
-        $gradient2 = theme_degrade_default_color("brandcolor_gradient_2", "#3858f9");
+        $angle = theme_degrade_default("angle", 30);
+        $gradient1 = theme_degrade_default("brandcolor_gradient_1", "#f54266");
+        $gradient2 = theme_degrade_default("brandcolor_gradient_2", "#3858f9");
         $scss .= "
             .navbar.fixed-top.brandcolor-background {
                 background: linear-gradient({$angle}deg, {$gradient1}, {$gradient2}) !important;
