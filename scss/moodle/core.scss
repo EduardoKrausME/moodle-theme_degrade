@@ -2652,6 +2652,7 @@ $picker-emojis-per-row: 7 !default;
         }
 
         // Darken the close button text colour inside notification alerts for better contrast.
+        .close,
         .btn-close {
             //color: darken(shift-color($value, $alert-color-scale), 20%);
             color: shift-color($value, $alert-color-scale);
