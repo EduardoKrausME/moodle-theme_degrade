@@ -287,7 +287,7 @@ address {
 }
 ol,
 ul {
-    padding-left: 0;
+    // padding-left: 0;
 }
 ol,
 ul,
@@ -4547,13 +4547,14 @@ textarea.form-control-lg {
 }
 .alert-dismissible {
     padding-right: 3rem;
-}
-.alert-dismissible .btn-close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 2;
-    padding: 1.25rem 1rem;
+    .close,
+    .btn-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+        padding: 1.25rem 1rem;
+    }
 }
 .alert-primary {
     --bs-alert-color: var(--bs-primary-text-emphasis);
@@ -4988,6 +4989,7 @@ textarea.form-control-lg {
     --bs-list-group-active-bg: var(--bs-dark-text-emphasis);
     --bs-list-group-active-border-color: var(--bs-dark-text-emphasis);
 }
+button.close,
 .btn-close {
     --bs-btn-close-color: #000000;
     --bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e");
