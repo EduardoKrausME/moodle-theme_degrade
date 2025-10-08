@@ -702,3 +702,21 @@ body.path-question-type .mform fieldset.hidden {
     border-color: $link-color;
     color: $link-color;
 }
+
+#page-mod-quiz-attempt {
+    #responseform {
+        .formulation.clearfix {
+            .qtext .clearfix::after {
+                display: none !important;
+            }
+        }
+    }
+    .que {
+        .info {
+            width: 11em;
+        }
+        .content {
+            margin: 0 0 0 11.5em;
+        }
+    }
+}
