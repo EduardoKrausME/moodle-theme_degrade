@@ -42,6 +42,89 @@
     <section class="login-wrapper">
         <div class="login-container">
             {{{ output.main_content }}}
+            <script>
+                (function () {
+                    const block = document.querySelector(".login-form-password");
+                    if (!block) {
+                        return;
+                    }
+
+                    // 1) Label -> {{#str}} password {{/str}}
+                    const label = block.querySelector('label[for="password"]');
+                    if (label) {
+                        label.textContent = "{{#str}} password {{/str}}";
+                    }
+
+                    // 2) Input password
+                    const input = block.querySelector("#password");
+                    if (!input) {
+                        return;
+                    }
+
+                    // Placeholder -> {{#cleanstr}}password{{/cleanstr}}
+                    input.setAttribute("placeholder", "{{#cleanstr}}password{{/cleanstr}}");
+
+                    // 3) Criar (ou reaproveitar) a wrapper .password-wrapper
+                    let wrapper = block.querySelector(".password-wrapper");
+                    if (!wrapper) {
+                        wrapper = document.createElement("div");
+                        wrapper.className = "password-wrapper";
+                        // Inserir a wrapper exatamente onde estava o input
+                        input.parentNode.insertBefore(wrapper, input);
+                    }
+
+                    // Garantir que o input esteja dentro da wrapper
+                    if (input.parentElement !== wrapper) {
+                        wrapper.appendChild(input);
+                    }
+
+                    // 4) Criar o botão #togglePassword (se não existir)
+                    let toggle = block.querySelector("#togglePassword");
+                    if (!toggle) {
+                        toggle = document.createElement("button");
+                        toggle.type = "button";
+                        toggle.id = "togglePassword";
+                        toggle.className = "toggle-password";
+                        toggle.title = "{{#str}} passwordunmaskrevealhint, form {{/str}}";
+                        toggle.setAttribute("aria-pressed", "false");
+
+                        const icon = document.createElement("i");
+                        icon.className = "fa fa-eye";
+                        icon.setAttribute("aria-hidden", "true");
+                        toggle.appendChild(icon);
+
+                        wrapper.appendChild(toggle);
+                    }
+
+                    // 5) Toggle show/hide (evita dupla ligação)
+                    if (!toggle.dataset.bound) {
+                        toggle.addEventListener("click", function () {
+                            const isPassword = input.getAttribute("type") === "password";
+                            input.setAttribute("type", isPassword ? "text" : "password");
+                            toggle.setAttribute("aria-pressed", (!isPassword).toString());
+                            toggle.classList.toggle("active", !isPassword);
+
+                            const icon = toggle.querySelector("i");
+                            if (isPassword) {
+                                if (icon.classList.replace) {
+                                    icon.classList.replace("fa-eye", "fa-eye-slash");
+                                } else {
+                                    icon.classList.remove("fa-eye");
+                                    icon.classList.add("fa-eye-slash");
+                                }
+                            } else {
+                                if (icon.classList.replace) {
+                                    icon.classList.replace("fa-eye-slash", "fa-eye");
+                                } else {
+                                    icon.classList.remove("fa-eye-slash");
+                                    icon.classList.add("fa-eye");
+                                }
+                            }
+                        });
+                        toggle.dataset.bound = "1";
+                    }
+                })();
+            </script>
         </div>
     </section>
     <div class="loginfooter">
