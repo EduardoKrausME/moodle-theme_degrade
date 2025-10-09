@@ -302,7 +302,7 @@ class course_renderer extends \core_course_renderer {
 
         $cardhomemustache = [
             "courseid" => $course->id,
-            "fullname" => $course->fullname,
+            "fullname" => format_string($course->fullname),
             "viewurl" => new moodle_url("/course/view.php", ["id" => $course->id]),
             "courseimage" => $courseimage,
             "category" => $this->course_category_name($chelper, $course),
