@@ -94,6 +94,7 @@ $string['details-not-access'] = 'Never accessed';
 $string['details-teachers'] = 'Teachers';
 $string['details-users'] = 'Students';
 $string['edit_block'] = 'Edit block';
+$string['error_invalidscss'] = 'Invalid SCSS: {$a}';
 $string['favicon'] = 'Favicon';
 $string['favicon_desc'] = 'The favicon is displayed next to the page title in the browser tab. A Moodle favicon is displayed if a custom favicon is not provided.';
 $string['footer_background_color'] = 'Footer background color';
