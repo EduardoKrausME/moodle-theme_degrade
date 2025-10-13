@@ -121,7 +121,8 @@ if (optional_param("embed-frame-top", 0, PARAM_INT)) {
             if ($templatecontext["course_summary_banner"]) {
                 $options = ["context" => $this->page->context];
                 $summary = file_rewrite_pluginfile_urls(
-                    $this->page->course->summary, "pluginfile.php", $this->page->context->id, "course", "summary", null);
+                    $this->page->course->summary, "pluginfile.php", $this->page->context->id, "course", "summary", null
+                );
                 $summary = format_text($summary, $this->page->course->summaryformat, $options);
                 $templatecontext["course_summary_banner"] = $summary;
             }
@@ -135,6 +136,12 @@ if (optional_param("embed-frame-top", 0, PARAM_INT)) {
     $templatecontext = array_merge($templatecontext, footer_renderer::mustache_data());
 
     $templatecontext["editing"] = $PAGE->user_is_editing();
+
+    if (str_contains($_SERVER['REQUEST_URI'], 'mod/scorm/view.php')) {
+        $templatecontext["mod_scorm_view"] = true;
+    } else if (str_contains($_SERVER['REQUEST_URI'], 'mod/scorm/player.php')) {
+        $templatecontext["mod_scorm_player"] = true;
+    }
 
     echo $OUTPUT->render_from_template("theme_degrade/drawers", $templatecontext);
 }
