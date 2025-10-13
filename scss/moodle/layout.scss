@@ -49,7 +49,7 @@ body {
         width: 100%;
         // @include border-radius();
         // background-color: $white;
-        padding: 1.5rem 0.5rem;
+        // padding: 1.5rem 0.5rem;
         margin: 0.5rem auto 3rem;
         flex: 1 0 auto;
     }
@@ -200,18 +200,18 @@ body {
 
 @include media-breakpoint-up(sm) {
     #page.drawers .main-inner {
-        margin-top: 1.5rem;
+        margin-top: 3rem;
     }
 }
 
 @include media-breakpoint-up(md) {
     // Add some padding for the drawer toggle buttons
     #page.drawers {
-        padding-left: 3rem;
-        padding-right: 3rem;
+        // padding-left: 3rem;
+        // padding-right: 3rem;
 
         .main-inner {
-            padding: 1.5rem 0.5rem;
+            // padding: 1.5rem 0.5rem;
         }
 
         div[role="main"] {
