@@ -183,17 +183,19 @@ $right-drawer-width: 320px;
         @include box-shadow($box-shadow-drawer-left);
         &.show {
             left: 0;
-            visibility: visible;
-            background: mix(white, $primary, 95%);
         }
-        .drawertoggle {
-            // margin-right: auto;
-            margin-left: 5px;
-            color: #ffffff;
-            background-color: #172b4d;
-            border-color: #172b4d;
-            box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
-        }
+    }
+    &.show {
+        visibility: visible;
+        background: mix(white, $primary, 95%);
+    }
+    .drawertoggle {
+        // margin-right: auto;
+        margin-left: 5px;
+        color: #ffffff;
+        background-color: #172b4d;
+        border-color: #172b4d;
+        box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
     }
     &.drawer-bottom {
         bottom: -110%;

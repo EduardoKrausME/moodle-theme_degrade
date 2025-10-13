@@ -61,9 +61,6 @@
 {{#courseindex}}
     {{< theme_degrade/drawer }}
         {{$id}}theme_degrade-drawers-courseindex{{/id}}
-        {{$drawerheadercontent}}
-        {{> theme_degrade/courseindexdrawercontrols}}
-        {{/drawerheadercontent}}
         {{$drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
         {{$drawercontent}}
             {{{courseindex}}}
@@ -211,4 +208,78 @@
         Drawer.init();
         M.util.js_complete("theme_boost/loader");
     });
+
+    {{#mod_scorm_view}}
+        (function () {
+            // Automatically submit the form when accessing the SCORM so the user isn’t prompted to log in.
+            const form = document.getElementById("scormviewform");
+            if (form) {
+                form.method = "GET"; // changes the method to GET.
+                form.submit();       // submits the form.
+            }
+        })();
+    {{/mod_scorm_view}}
+    {{#mod_scorm_player}}
+        (function () {
+            // 1) Add the "disabled" class and the "disabled-by" attribute to the TOC.
+            const scormtoc = document.getElementById("scorm_toc");
+            if (scormtoc) {
+                scormtoc.classList.add("disabled");
+                scormtoc.setAttribute("disabled-by", "user");
+            }
+
+            // 2) Update the toggle button — set the title to "Show" and the text to ">".
+            const scormtoctogglebtn = document.getElementById("scorm_toc_toggle_btn");
+            if (scormtoctogglebtn) {
+                scormtoctogglebtn.title = "{{#str}}show{{/str}}";
+                scormtoctogglebtn.textContent = ">";
+            }
+
+            // 3) Expand the content area — change the class from "yui3-u-3-4" to "yui3-u-1".
+            const scormcontent = document.getElementById("scorm_content");
+            if (scormcontent) {
+                scormcontent.classList.remove("yui3-u-3-4");
+                if (!scormcontent.classList.contains("yui3-u-1")) {
+                    scormcontent.classList.add("yui3-u-1");
+                }
+            }
+
+            // Selects the side drawer
+            const drawer = document.querySelector(".drawer.drawer-left:not(.drawer-primary-mobile)");
+            if (drawer) {
+                drawer.classList.remove("show");
+                drawer.removeAttribute("aria-hidden", "true");
+            }
+
+            const drawerheadercontent = document.querySelector(".drawerheadercontent");
+            if (drawerheadercontent) {
+                drawerheadercontent.classList.add("hidden");
+            }
+
+            // Selects the element with id="page"
+            const page = document.getElementById("page");
+            if (page) {
+                page.classList.remove("show-drawer-left");
+            }
+        })();
+    {{/mod_scorm_player}}
+    (function () {
+        const drawers = document.querySelectorAll(".drawer:not(.drawer-primary-mobile)");
+        const START_TOP = 90; // px
+        let drawer__lastTop = -1;
+        document.addEventListener("scroll", document_scroll_drawers);
+        document_scroll_drawers();
+
+        function document_scroll_drawers() {
+            const y = window.scrollY || document.documentElement.scrollTop;
+            const newTop = Math.max(START_TOP - y, 0); // clamp 90 → 0
+            if (drawer__lastTop !== newTop) {
+                drawer__lastTop = newTop;
+                drawers.forEach((drawer) => {
+                    drawer.style.top = `${newTop}px`;
+                    drawer.style.height = `calc(100vh - ${newTop}px)`;
+                });
+            }
+        }
+    })();
 {{/js}}
