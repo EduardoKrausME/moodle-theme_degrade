@@ -81,9 +81,10 @@ $setting = new admin_setting_heading('theme_degrade_footerblock_copywriter',
     get_string('footer_copywriter', 'theme_degrade'), '');
 $page->add($setting);
 
-$setting = new admin_setting_configcheckbox('theme_degrade/footer_show_copywriter',
-    get_string('footer_show_copywriter', 'theme_degrade'),
-    get_string('footer_show_copywriter_desc', 'theme_degrade'), 1);
+$setting = new admin_setting_configcheckbox(
+    'theme_degrade/footer_show_copywriter', get_string('footer_show_copywriter', 'theme_degrade'),
+    get_string('footer_show_copywriter_desc', 'theme_degrade'), 1
+);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 

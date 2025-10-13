@@ -40,13 +40,22 @@ $options = [
 $setting = new admin_setting_configselect("theme_degrade/logintheme",
     get_string("logintheme", "theme_degrade"),
     get_string("logintheme_desc", "theme_degrade"),
-    0, $options);
+    "aurora", $options);
 $page->add($setting);
 
 // Login Background image setting.
 $setting = new admin_setting_configstoredfile("theme_degrade/loginbackgroundimage",
     get_string("loginbackgroundimage", "theme_degrade"),
     get_string("loginbackgroundimage_desc", "theme_degrade"), "loginbackgroundimage");
+$setting->set_updatedcallback("theme_reset_all_caches");
+$page->add($setting);
+
+// Small logo file setting.
+$setting = new admin_setting_configstoredfile("theme_degrade/loginlogo",
+    get_string("loginlogo", "theme_degrade"),
+    get_string("loginlogo_desc", "theme_degrade"),
+    "loginlogo", 0,
+    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".svg", ".png"]]);
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 
