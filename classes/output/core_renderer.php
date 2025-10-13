@@ -17,6 +17,8 @@
 namespace theme_degrade\output;
 
 use context_system;
+use core\context\course as context_course;
+use core_auth\output\login;
 use core_course\external\course_summary_exporter;
 use core_message\api;
 use core_message\helper;
@@ -594,5 +596,69 @@ class core_renderer extends \core_renderer {
         }
 
         return implode(" ", $class);
+    }
+
+    /**
+     * Renders the login form.
+     *
+     * @param login $form The renderable.
+     * @return string
+     * @throws Exception
+     */
+    public function render_login(login $form) {
+        global $SITE;
+
+        $context = context_course::instance(SITEID);
+        $showloginform = get_config("core", "showloginform");
+
+        $mustachecontext = $form->export_for_template($this);
+        $mustachecontext->showloginform = $showloginform === false || $showloginform;
+        $mustachecontext->errorformatted = $this->error_text($mustachecontext->error);
+        $mustachecontext->sitename = format_string($SITE->fullname, true, ["context" => $context, "escape" => false]);
+
+        $url = $this->get_login_logo_url();
+        if(!$url) {
+            $url = $this->get_logo_url();
+        }
+        if ($url) {
+            $mustachecontext->logourl = $url->out(false);
+        }
+
+        return $this->render_from_template("theme_degrade/core/theme_login_form", $mustachecontext);
+    }
+
+    /**
+     * Return the site's compact logo URL, if any.
+     *
+     * @param int $maxwidth The maximum width, or null when the maximum width does not matter.
+     * @param int $maxheight The maximum height, or null when the maximum height does not matter.
+     *
+     * @return moodle_url|false
+     *
+     * @throws Exception
+     */
+    private function get_login_logo_url($maxwidth = 250, $maxheight = 130) {
+        static $return = null;
+        if ($return !== null) {
+            return $return;
+        }
+
+        $logologin = get_config("theme_degrade", "logologin");
+        if (empty($logologin)) {
+            return false;
+        }
+
+        // Hide the requested size in the file path.
+        $filepath = ((int)$maxwidth . "x" . (int)$maxheight) . "/";
+
+        // Use $CFG->themerev to prevent browser caching when the file changes.
+        return $return = moodle_url::make_pluginfile_url(
+            context_system::instance()->id,
+            "theme_degrade",
+            "logologin",
+            $filepath,
+            theme_get_revision(),
+            $logologin
+        );
     }
 }

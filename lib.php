@@ -54,15 +54,6 @@ function theme_degrade_get_extra_scss($theme) {
              }";
     }
 
-    // Sets the login background image.
-    $loginbackgroundimageurl = $theme->setting_file_url("loginbackgroundimage", "loginbackgroundimage");
-    if (!empty($loginbackgroundimageurl)) {
-        $content .= "
-            body.pagelayout-login #page-wrapper {
-                background-image: url('$loginbackgroundimageurl'); background-size: cover;
-            }";
-    }
-
     return "{$content}\n{$theme->settings->scsspos}";
 }
 
