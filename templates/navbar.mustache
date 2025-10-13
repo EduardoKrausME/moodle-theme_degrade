@@ -110,7 +110,9 @@
 <script>
 (function () {
     let lastHeight = -1;
-    document.addEventListener("scroll", function () {
+    document.addEventListener("scroll", document_scroll_navbar);
+    document_scroll_navbar();
+    function document_scroll_navbar() {
         let scrollY = window.scrollY;
         let limitedScroll = Math.min(scrollY, 180);
         let newHeight = 91 - (limitedScroll / 6);
@@ -126,6 +128,6 @@
             const navbarcontentbackground = document.querySelector(".navbar.fixed-top .navbar-content-background");
             navbarcontentbackground.style.opacity = 1 - (newHeight - 61) / (91 - 61);
         }
-    });
-})();
+    }
+});
 </script>
