@@ -23,6 +23,9 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use theme_degrade\admin\setting_scss;
+use theme_degrade\autoprefixer;
+
 /**
  * Post process the CSS tree.
  *
@@ -30,7 +33,7 @@
  * @param theme_config $theme The theme config object.
  */
 function theme_degrade_css_tree_post_processor($tree, $theme) {
-    $prefixer = new theme_degrade\autoprefixer($tree);
+    $prefixer = new autoprefixer($tree);
     $prefixer->prefix();
 }
 
@@ -54,7 +57,15 @@ function theme_degrade_get_extra_scss($theme) {
              }";
     }
 
-    return "{$content}\n{$theme->settings->scsspos}";
+    $scsspos = "";
+    if (isset($theme->settings->scsspos[5])) {
+        $settingscss = new setting_scss("test", "test", "", "");
+        if ($settingscss->validate($theme->settings->scsspos) === true) {
+            $scsspos = $theme->settings->scsspos;
+        }
+    }
+
+    return "{$content}\n{$scsspos}";
 }
 
 /**
@@ -176,8 +187,11 @@ function theme_degrade_get_pre_scss($theme) {
     }
 
     // Prepend pre-scss.
-    if (!empty($theme->settings->scsspre)) {
-        $scss .= $theme->settings->scsspre;
+    if (isset($theme->settings->scsspre[5])) {
+        $settingscss = new setting_scss("test", "test", "", "");
+        if ($settingscss->validate($theme->settings->scsspre) === true) {
+            $scss .= $theme->settings->scsspre;
+        }
     }
 
     return $scss;

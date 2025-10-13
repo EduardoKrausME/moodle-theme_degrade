@@ -30,6 +30,8 @@ use ScssPhp\ScssPhp\Compiler;
 use ScssPhp\ScssPhp\Exception\SassException;
 use Throwable;
 
+require_once("{$CFG->dirroot}/lib/adminlib.php");
+
 /**
  * Settings class that validates a SCSS snippet entered in a textarea.
  *
@@ -47,7 +49,6 @@ class setting_scss extends admin_setting_configtextarea {
      * @param mixed $data Raw textarea input.
      * @return bool|string True when valid, or a localized error string when invalid.
      * @throws Exception
-     * @throws SassException
      */
     public function validate($data) {
         // Syntactic validation: compile the snippet in isolation.
@@ -58,12 +59,16 @@ class setting_scss extends admin_setting_configtextarea {
             $compiler->setImportPaths([__DIR__ . "/../../scss"]);
 
             $compiler->compileString((string)$data);
+
+            return true;
         } catch (Throwable $e) {
             // The scssphp exceptions usually include "line X, column Y" in the message.
             $msg = $e->getMessage();
             return get_string("error_invalidscss", "theme_degrade", $msg);
+        } catch (SassException $e) {
+            // The scssphp exceptions usually include "line X, column Y" in the message.
+            $msg = $e->getMessage();
+            return get_string("error_invalidscss", "theme_degrade", $msg);
         }
-
-        return true;
     }
 }
