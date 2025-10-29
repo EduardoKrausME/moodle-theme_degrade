@@ -1,0 +1,61 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  MOODLE_MOD_DIR: moodle/public/mod
+  PLUGIN_DIR: eadtraining
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Get Info
+        run: |
+          echo "version=$(grep -Eo '[0-9]+(\.[0-9]+)+' CHANGELOG.md | head -n 1)" >> $GITHUB_OUTPUT
+        id: info
+      - name: Generate Changelog
+        run: |
+          awk '/## [0-9]/{p++} p; /## [0-9]/{if (p > 1) exit}' CHANGELOG.md | awk 'NR>2 {print last} {last=$0}' > RELEASE.md
+      - name: Prepare Plugin
+        run: |
+          cd ${{ github.workspace }}
+          mkdir -p "./$PLUGIN_DIR"
+          rsync -av --exclude='eadtraining' ./ "./$PLUGIN_DIR"
+          cd "./$PLUGIN_DIR"
+          rm -rf ./.github/
+          rm -rf ./.git/
+      - name: Checkout Moodle
+        uses: actions/checkout@v4
+        with:
+          repository: moodle/moodle
+          path: ./moodle
+      - name: Copy Plugin
+        run: |
+          cp -r "$PLUGIN_DIR" "./$MOODLE_MOD_DIR/$PLUGIN_DIR"
+      - name: Build Plugin
+        run: |
+          cd ./moodle
+          npm install
+          grunt
+      - name: Zip Artifact
+        run: |
+          cd "$MOODLE_MOD_DIR/"
+          mv "$PLUGIN_DIR" moodle-theme_eadtraining-${{ steps.info.outputs.version }}
+          zip -r moodle-theme_eadtraining-${{ steps.info.outputs.version }}.zip moodle-theme_eadtraining-${{ steps.info.outputs.version }}/
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        id: create_release
+        with:
+          artifacts: "${{ env.MOODLE_MOD_DIR }}/moodle-theme_eadtraining-${{ steps.info.outputs.version }}.zip"
+          bodyFile: RELEASE.md
+          tag: v${{ steps.info.outputs.version }}
