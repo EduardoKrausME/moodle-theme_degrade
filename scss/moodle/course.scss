@@ -565,6 +565,17 @@ $divider-hover-color: $primary !default;
     }
 }
 
+.activity.modtype_label {
+    .activity.activityinline,
+    .activity-item.activityinline {
+        padding: $activity-item-padding;
+
+        .no-overflow p:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
 .activity-item {
     background: #f2f2f2;
 }
