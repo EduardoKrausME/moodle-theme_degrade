@@ -4516,6 +4516,252 @@ textarea.form-control-lg {
 .badge:empty {
     display: none;
 }
+.badge-primary {
+    /* stylelint-disable declaration-no-important */
+    /* stylelint-enable */
+    color: #fff;
+    background-color: #0f6cbf;
+}
+body.behat-site .badge-primary,
+.badge-primary body.behat-site.badge-primary, body.themedesignermode .badge-primary,
+.badge-primary body.themedesignermode.badge-primary {
+    outline: 3px dotted #ca3120 !important;
+    background-color: #fceeed !important;
+}
+body.behat-site .badge-primary::before,
+.badge-primary body.behat-site.badge-primary::before, body.themedesignermode .badge-primary::before,
+.badge-primary body.themedesignermode.badge-primary::before {
+    content: "Deprecated style in use (.badge-primary)" !important;
+    color: #ca3120 !important;
+    font-size: smaller !important;
+}
+a.badge-primary:hover, a.badge-primary:focus {
+    color: #fff;
+    background-color: #0b5190;
+}
+a.badge-primary:focus, a.badge-primary.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(15, 108, 191, 0.5);
+}
+
+.badge-secondary {
+    /* stylelint-disable declaration-no-important */
+    /* stylelint-enable */
+    color: #1d2125;
+    background-color: #ced4da;
+}
+body.behat-site .badge-secondary,
+.badge-secondary body.behat-site.badge-secondary, body.themedesignermode .badge-secondary,
+.badge-secondary body.themedesignermode.badge-secondary {
+    outline: 3px dotted #ca3120 !important;
+    background-color: #fceeed !important;
+}
+body.behat-site .badge-secondary::before,
+.badge-secondary body.behat-site.badge-secondary::before, body.themedesignermode .badge-secondary::before,
+.badge-secondary body.themedesignermode.badge-secondary::before {
+    content: "Deprecated style in use (.badge-secondary)" !important;
+    color: #ca3120 !important;
+    font-size: smaller !important;
+}
+a.badge-secondary:hover, a.badge-secondary:focus {
+    color: #1d2125;
+    background-color: #b1bbc4;
+}
+a.badge-secondary:focus, a.badge-secondary.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(206, 212, 218, 0.5);
+}
+
+.badge-success {
+    /* stylelint-disable declaration-no-important */
+    /* stylelint-enable */
+    color: #fff;
+    background-color: #357a32;
+}
+body.behat-site .badge-success,
+.badge-success body.behat-site.badge-success, body.themedesignermode .badge-success,
+.badge-success body.themedesignermode.badge-success {
+    outline: 3px dotted #ca3120 !important;
+    background-color: #fceeed !important;
+}
+body.behat-site .badge-success::before,
+.badge-success body.behat-site.badge-success::before, body.themedesignermode .badge-success::before,
+.badge-success body.themedesignermode.badge-success::before {
+    content: "Deprecated style in use (.badge-success)" !important;
+    color: #ca3120 !important;
+    font-size: smaller !important;
+}
+a.badge-success:hover, a.badge-success:focus {
+    color: #fff;
+    background-color: #255623;
+}
+a.badge-success:focus, a.badge-success.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(53, 122, 50, 0.5);
+}
+
+.badge-info {
+    /* stylelint-disable declaration-no-important */
+    /* stylelint-enable */
+    color: #fff;
+    background-color: #008196;
+}
+body.behat-site .badge-info,
+.badge-info body.behat-site.badge-info, body.themedesignermode .badge-info,
+.badge-info body.themedesignermode.badge-info {
+    outline: 3px dotted #ca3120 !important;
+    background-color: #fceeed !important;
+}
+body.behat-site .badge-info::before,
+.badge-info body.behat-site.badge-info::before, body.themedesignermode .badge-info::before,
+.badge-info body.themedesignermode.badge-info::before {
+    content: "Deprecated style in use (.badge-info)" !important;
+    color: #ca3120 !important;
+    font-size: smaller !important;
+}
+a.badge-info:hover, a.badge-info:focus {
+    color: #fff;
+    background-color: #005563;
+}
+a.badge-info:focus, a.badge-info.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(0, 129, 150, 0.5);
+}
+
+.badge-warning {
+    /* stylelint-disable declaration-no-important */
+    /* stylelint-enable */
+    color: #1d2125;
+    background-color: #f0ad4e;
+}
+body.behat-site .badge-warning,
+.badge-warning body.behat-site.badge-warning, body.themedesignermode .badge-warning,
+.badge-warning body.themedesignermode.badge-warning {
+    outline: 3px dotted #ca3120 !important;
+    background-color: #fceeed !important;
+}
+body.behat-site .badge-warning::before,
+.badge-warning body.behat-site.badge-warning::before, body.themedesignermode .badge-warning::before,
+.badge-warning body.themedesignermode.badge-warning::before {
+    content: "Deprecated style in use (.badge-warning)" !important;
+    color: #ca3120 !important;
+    font-size: smaller !important;
+}
+a.badge-warning:hover, a.badge-warning:focus {
+    color: #1d2125;
+    background-color: #ec971f;
+}
+a.badge-warning:focus, a.badge-warning.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(240, 173, 78, 0.5);
+}
+
+.badge-danger {
+    /* stylelint-disable declaration-no-important */
+    /* stylelint-enable */
+    color: #fff;
+    background-color: #ca3120;
+}
+body.behat-site .badge-danger,
+.badge-danger body.behat-site.badge-danger, body.themedesignermode .badge-danger,
+.badge-danger body.themedesignermode.badge-danger {
+    outline: 3px dotted #ca3120 !important;
+    background-color: #fceeed !important;
+}
+body.behat-site .badge-danger::before,
+.badge-danger body.behat-site.badge-danger::before, body.themedesignermode .badge-danger::before,
+.badge-danger body.themedesignermode.badge-danger::before {
+    content: "Deprecated style in use (.badge-danger)" !important;
+    color: #ca3120 !important;
+    font-size: smaller !important;
+}
+a.badge-danger:hover, a.badge-danger:focus {
+    color: #fff;
+    background-color: #9e2619;
+}
+a.badge-danger:focus, a.badge-danger.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(202, 49, 32, 0.5);
+}
+
+.badge-light {
+    /* stylelint-disable declaration-no-important */
+    /* stylelint-enable */
+    color: #1d2125;
+    background-color: #f8f9fa;
+}
+body.behat-site .badge-light,
+.badge-light body.behat-site.badge-light, body.themedesignermode .badge-light,
+.badge-light body.themedesignermode.badge-light {
+    outline: 3px dotted #ca3120 !important;
+    background-color: #fceeed !important;
+}
+body.behat-site .badge-light::before,
+.badge-light body.behat-site.badge-light::before, body.themedesignermode .badge-light::before,
+.badge-light body.themedesignermode.badge-light::before {
+    content: "Deprecated style in use (.badge-light)" !important;
+    color: #ca3120 !important;
+    font-size: smaller !important;
+}
+a.badge-light:hover, a.badge-light:focus {
+    color: #1d2125;
+    background-color: #dae0e5;
+}
+a.badge-light:focus, a.badge-light.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(248, 249, 250, 0.5);
+}
+
+.badge-dark {
+    /* stylelint-disable declaration-no-important */
+    /* stylelint-enable */
+    color: #fff;
+    background-color: #1d2125;
+}
+body.behat-site .badge-dark,
+.badge-dark body.behat-site.badge-dark, body.themedesignermode .badge-dark,
+.badge-dark body.themedesignermode.badge-dark {
+    outline: 3px dotted #ca3120 !important;
+    background-color: #fceeed !important;
+}
+body.behat-site .badge-dark::before,
+.badge-dark body.behat-site.badge-dark::before, body.themedesignermode .badge-dark::before,
+.badge-dark body.themedesignermode.badge-dark::before {
+    content: "Deprecated style in use (.badge-dark)" !important;
+    color: #ca3120 !important;
+    font-size: smaller !important;
+}
+a.badge-dark:hover, a.badge-dark:focus {
+    color: #fff;
+    background-color: #070808;
+}
+a.badge-dark:focus, a.badge-dark.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(29, 33, 37, 0.5);
+}
+
+.badge-pill {
+    /* stylelint-disable declaration-no-important */
+    /* stylelint-enable */
+    padding-right: 0.6em;
+    padding-left: 0.6em;
+    border-radius: 10rem;
+}
+body.behat-site .badge-pill,
+.badge-pill body.behat-site.badge-pill, body.themedesignermode .badge-pill,
+.badge-pill body.themedesignermode.badge-pill {
+    outline: 3px dotted #ca3120 !important;
+    background-color: #fceeed !important;
+}
+body.behat-site .badge-pill::before,
+.badge-pill body.behat-site.badge-pill::before, body.themedesignermode .badge-pill::before,
+.badge-pill body.themedesignermode.badge-pill::before {
+    content: "Deprecated style in use (.badge-pill)" !important;
+    color: #ca3120 !important;
+    font-size: smaller !important;
+}
+
+
 .btn .badge {
     position: relative;
     top: -1px;
