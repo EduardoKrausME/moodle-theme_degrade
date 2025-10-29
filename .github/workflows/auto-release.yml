@@ -1,4 +1,4 @@
-name: Auto release por mensagem de commit
+name: Auto-release via commit message
 
 on:
   push:

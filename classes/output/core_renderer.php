@@ -617,7 +617,7 @@ class core_renderer extends \core_renderer {
         $mustachecontext->sitename = format_string($SITE->fullname, true, ["context" => $context, "escape" => false]);
 
         $url = $this->get_login_logo_url();
-        if(!$url) {
+        if (!$url) {
             $url = $this->get_logo_url();
         }
         if ($url) {

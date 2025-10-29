@@ -329,7 +329,7 @@ class course_renderer extends \core_course_renderer {
             if ($isimage) {
                 return moodle_url::make_file_url("$CFG->wwwroot/pluginfile.php",
                     "/" . $file->get_contextid() . "/" . $file->get_component() . "/" .
-                    $file->get_filearea() . $file->get_filepath() . $file->get_filename(), !$isimage);;
+                    $file->get_filearea() . $file->get_filepath() . $file->get_filename(), !$isimage);
             }
         }
         return "";
@@ -430,7 +430,7 @@ class course_renderer extends \core_course_renderer {
 
         $coursecount = 0;
         foreach ($courses as $course) {
-            $coursecount ++;
+            $coursecount++;
             $classes = ($coursecount % 2) ? 'odd' : 'even';
             if ($coursecount == 1) {
                 $classes .= ' first';

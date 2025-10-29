@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * phpcs:disable moodle.Files.MoodleInternal.MoodleInternalGlobalState
  * Settings class that validates a SCSS snippet entered in a textarea.
  *
  * @package   theme_degrade
