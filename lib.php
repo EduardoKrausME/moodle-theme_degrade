@@ -60,8 +60,22 @@ function theme_degrade_get_extra_scss($theme) {
     $scsspos = "";
     if (isset($theme->settings->scsspos[5])) {
         $settingscss = new setting_scss("test", "test", "", "");
-        if ($settingscss->validate($theme->settings->scsspos) === true) {
+        $result = $settingscss->validate($theme->settings->scsspos);
+        if ($result === true) {
             $scsspos = $theme->settings->scsspos;
+        } else {
+            $scsspos = "
+                #page::before {
+                    content: 'theme_degrade::scsspos Error: {$result}';
+                    color: #c00;
+                    display: block;
+                    padding: 8px 12px;
+                    white-space: pre-wrap;
+                    background: #FFEB3B;
+                    margin: 14px;
+                    border-radius: 10px;
+                    font-weight: bold;
+                } ";
         }
     }
 
@@ -189,8 +203,22 @@ function theme_degrade_get_pre_scss($theme) {
     // Prepend pre-scss.
     if (isset($theme->settings->scsspre[5])) {
         $settingscss = new setting_scss("test", "test", "", "");
-        if ($settingscss->validate($theme->settings->scsspre) === true) {
+        $result = $settingscss->validate($theme->settings->scsspre);
+        if ($result === true) {
             $scss .= $theme->settings->scsspre;
+        } else {
+            $scss .= "
+                #page::before {
+                    content: 'theme_degrade::scsspre Error: {$result}';
+                    color: #c00;
+                    display: block;
+                    padding: 8px 12px;
+                    white-space: pre-wrap;
+                    background: #FFEB3B;
+                    margin: 14px;
+                    border-radius: 10px;
+                    font-weight: bold;
+                } ";
         }
     }
 
