@@ -19,7 +19,6 @@ namespace theme_degrade\output;
 use context_system;
 use core\context\course as context_course;
 use core\di;
-use core\exception\moodle_exception;
 use core\hook\manager as hook_manager;
 use core_auth\output\login;
 use core_course\external\course_summary_exporter;
