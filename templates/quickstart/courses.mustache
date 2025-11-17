@@ -38,7 +38,6 @@
     <div class="{{^no_accordion}}content{{/no_accordion}}">
         <div class="inner-content">
             <div class="settings-content">
-
                 <div class="card mb-4">
                     <div class="card-header"><h5>{{#str}}course_summary_banner, theme_degrade{{/str}}</h5></div>
                     <div class="card-body">
@@ -141,6 +140,22 @@
                         })();
                     </script>
                 </div>
+
+                {{#show_change_colors}}
+                    <div class="card mb-4">
+                        <div class="card-header"><h5>{{#str}}course_colors_title,theme_degrade{{/str}}</h5></div>
+                        <div class="card-body">
+                            <input type="text" class="form-control"
+                                   id="override_course_color"
+                                   name="override_course_color"
+                                   value="{{{override_course_color}}}">
+                            <div class="form-text text-muted">
+                                {{#str}}course_colors_desc,theme_degrade{{/str}}
+                                {{{colorselect}}}
+                            </div>
+                        </div>
+                    </div>
+                {{/show_change_colors}}
             </div>
 
             {{^no_accordion}}

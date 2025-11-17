@@ -22,7 +22,8 @@
         "background": "#f0ff0f",
         "startcolor": true,
         "brandcolor": false,
-        "footercolor": false
+        "footercolor": false,
+        "coursecolor": false
     }
 }}
 
@@ -91,25 +92,47 @@
                         .val(color)
                         .minicolors("settings", {value: color});
                 updateMainColor(color);
+
+                $(`input[id^="id_"][id$="_startcolor"]`).change(function () {
+                    updateMainColor($(this).val());
+                });
             {{/startcolor}}
+
             {{#brandcolor}}
                 $(`input[id^="id_"][id$="_brandcolor"]`)
                         .val(color)
                         .minicolors("settings", {value: color});
                 updateMainColor(color);
+
+                $(`input[id^="id_"][id$="_brandcolor"]`).change(function (){
+                    updateMainColor($(this).val());
+                });
             {{/brandcolor}}
+
             {{#footercolor}}
                 $(`input[id^="id_"][id$="_footer_background_color"]`)
                         .val(color)
                         .minicolors("settings", {value: color});
                 updateMainColor(null, color);
+
+                $(`input[id^="id_"][id$="footer_background_color"]`).change(function () {
+                    updateMainColor(null, $(this).val());
+                });
             {{/footercolor}}
+
+            {{#coursecolor}}
+                console.trace("course color 1");
+                $(`input#override_course_color`)
+                        .val(color)
+                        .minicolors("settings", {value: color});
+                updateMainColor(color);
+            {{/coursecolor}}
         });
 
         {{#startcolor}}
-            $(`input[id^="id_"][id$="_startcolor"]`).change(function (){
+            $(`input[id^="id_"][id$="_startcolor"]`).change(function () {
                 updateMainColor($(this).val());
-           });
+            });
         {{/startcolor}}
         {{#brandcolor}}
             $(`input[id^="id_"][id$="_brandcolor"]`).change(function (){
@@ -121,6 +144,11 @@
                 updateMainColor(null, $(this).val());
             });
         {{/footercolor}}
+        {{#coursecolor}}
+            $(`input#override_course_color`).change(function (){
+                updateMainColor($(this).val());
+            });
+        {{/coursecolor}}
 
         updateMainColor("{{{defaultcolor}}}", "{{{defaultcolorfooter}}}");
 
@@ -135,13 +163,13 @@
                 return;
             }
 
-            if ($('input[id^="id_s_"][id$="brandcolor_background_menu"]').is(':checked')) {
+            if ($('input[id^="id_s_"][id$="brandcolor_background_menu"]').is(':checked') || "{{{brandcolor_background_menu}}}") {
                 $(".degrade-colors-preview .card__header").addClass("card__header-dark");
             } else {
                 $(".degrade-colors-preview .card__header").removeClass("card__header-dark");
             }
 
-            // Cores derivadas
+            // Cores derivadas.
             if (newColor) {
                 root.style.setProperty("--preview-primary", newColor);
                 root.style.setProperty("--preview-bg", lighten(newColor, 90));

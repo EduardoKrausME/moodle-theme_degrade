@@ -168,11 +168,19 @@ function theme_degrade_get_main_scss_content($theme) {
 function theme_degrade_get_pre_scss($theme) {
     global $CFG;
 
-    $scss = "";
+    $primarycolorscss = "";
     $brandcolor = get_config("theme_boost", "brandcolor");
-    if ($brandcolor) {
-        $scss .= "\$primary: {$brandcolor};\n";
+    if (isset($brandcolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $brandcolor)) {
+        $primarycolorscss = "\$primary: {$brandcolor};\n";
     }
+    $courseid = optional_param("courseid", 0, PARAM_INT);
+    if ($courseid) {
+        $coursecolor = get_config("theme_degrade", "override_course_color_{$courseid}");
+        if (isset($coursecolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $coursecolor)) {
+            $primarycolorscss = "\$primary: {$coursecolor};\n";
+        }
+    }
+    $scss = $primarycolorscss;
 
     if ($CFG->theme == "degrade") {
         $angle = theme_degrade_default("angle", 30);
