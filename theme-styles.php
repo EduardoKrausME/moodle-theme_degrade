@@ -17,8 +17,9 @@
 /**
  * This file is responsible for serving the one huge CSS of each theme.
  *
- * @package   core
- * @copyright 2009 Petr Skoda (skodak)  {@link http://skodak.org}
+ * @package   theme_degrade
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2009 Petr Skoda (skodak) {@link http://skodak.org}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -74,9 +75,9 @@ if (!in_array($type, ['all', 'all-rtl'])) {
     css_send_css_not_found();
 }
 
-if (file_exists("{$CFG->dirroot}/theme/eadtraining/config.php")) {
+if (file_exists("{$CFG->dirroot}/theme/degrade/config.php")) { // phpcs:disable Generic.CodeAnalysis.EmptyStatement.DetectedIf
     // The theme exists in standard location - ok.
-} else if (!empty($CFG->themedir) and file_exists("{$CFG->themedir}/eadtraining/config.php")) {
+} elseif (!empty($CFG->themedir) && file_exists("{$CFG->themedir}/degrade/config.php")) { // phpcs:disable Generic.CodeAnalysis.EmptyStatement.DetectedIf
     // Alternative theme location contains this theme - ok.
 } else {
     header('HTTP/1.0 404 not found');
@@ -95,7 +96,7 @@ if (file_exists($candidatesheet)) {
     css_send_cached_css($candidatesheet, $etag);
 }
 
-$theme = theme_config::load("eadtraining");
+$theme = theme_config::load("degrade");
 $theme->force_svg_use($usesvg);
 $theme->set_rtl_mode(substr($type, -4) === '-rtl');
 
@@ -103,7 +104,7 @@ make_localcache_directory('theme', false);
 
 // Attempt to fetch the lock.
 $lockfactory = \core\lock\lock_config::get_lock_factory('core_theme_get_css_content');
-$lock = $lockfactory->get_lock("eadtraining", rand(90, 120));
+$lock = $lockfactory->get_lock("degrade", rand(90, 120));
 
 if ($lock) {
     // Either the lock was successful, or the lock was unsuccessful but the content *must* be sent.
@@ -135,7 +136,7 @@ function theme_styles_get_filename($rev, $type, $themesubrev = 0, $usesvg = true
     $filename .= ($themesubrev > 0) ? "_{$themesubrev}" : '';
     $filename .= $usesvg ? '' : '-nosvg';
 
-    $cssbasedir = "{$CFG->localcachedir}/theme/{$rev}/eadtraining/css";
+    $cssbasedir = "{$CFG->localcachedir}/theme/{$rev}/degrade/css";
     if (!file_exists($cssbasedir)) {
         mkdir($cssbasedir, 0777, true);
     }

@@ -19,6 +19,7 @@ namespace theme_degrade\output;
 use context_system;
 use core\context\course as context_course;
 use core\di;
+use core\exception\moodle_exception;
 use core\hook\manager as hook_manager;
 use core_auth\output\login;
 use core_course\external\course_summary_exporter;
@@ -664,8 +665,16 @@ class core_renderer extends \core_renderer {
         );
     }
 
+    /**
+     * The standard tags (meta tags, links to stylesheets and JavaScript, etc.)
+     * that should be included in the <head> tag. Designed to be called in theme
+     * layout.php files.
+     *
+     * @return string HTML fragment.
+     * @throws Exception
+     */
     public function standard_head_html() {
-        global $CFG, $SESSION, $SITE;
+        global $CFG, $SITE;
 
         // Before we output any content, we need to ensure that certain
         // page components are set up.
@@ -691,11 +700,11 @@ class core_renderer extends \core_renderer {
 
         $hook->add_html('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' . "\n");
         $hook->add_html('<meta name="keywords" content="moodle, ' . $this->page->title . '" />' . "\n");
-        // This is only set by the {@see redirect()} method
+        // This is only set by the {@see redirect()} method.
         $hook->add_html($this->metarefreshtag);
 
         // Check if a periodic refresh delay has been set and make sure we arn't
-        // already meta refreshing
+        // already meta refreshing.
         if ($this->metarefreshtag == '' && $this->page->periodicrefreshdelay !== null) {
             $hook->add_html(
                 \core\output\html_writer::empty_tag('meta', [
@@ -707,27 +716,27 @@ class core_renderer extends \core_renderer {
 
         $output = $hook->get_output();
 
-        // Set up help link popups for all links with the helptooltip class
+        // Set up help link popups for all links with the helptooltip class.
         $this->page->requires->js_init_call('M.util.help_popups.setup');
 
         $focus = $this->page->focuscontrol;
         if (!empty($focus)) {
             if (preg_match("#forms\['([a-zA-Z0-9]+)'\].elements\['([a-zA-Z0-9]+)'\]#", $focus, $matches)) {
                 // This is a horrifically bad way to handle focus but it is passed in
-                // through messy formslib::moodleform
+                // through messy formslib::moodleform.
                 $this->page->requires->js_function_call('old_onload_focus', [$matches[1], $matches[2]]);
             } else if (strpos($focus, '.') !== false) {
-                // Old style of focus, bad way to do it
+                // Old style of focus, bad way to do it.
                 debugging('This code is using the old style focus event, Please update this code to focus on an element id or the moodleform focus method.', DEBUG_DEVELOPER);
                 $this->page->requires->js_function_call('old_onload_focus', explode('.', $focus, 2));
             } else {
-                // Focus element with given id
+                // Focus element with given id.
                 $this->page->requires->js_function_call('focuscontrol', [$focus]);
             }
         }
 
         // Get the theme stylesheet - this has to be always first CSS, this loads also styles.css from all plugins;
-        // any other custom CSS can not be overridden via themes and is highly discouraged
+        // any other custom CSS can not be overridden via themes and is highly discouraged.
         $urls = $this->page->theme->css_urls($this->page);
         /** @var moodle_url $url */
         foreach ($urls as $url) {
@@ -758,7 +767,7 @@ class core_renderer extends \core_renderer {
             $this->page->requires->css_theme($url);
         }
 
-        // Get the theme javascript head and footer
+        // Get the theme javascript head and footer.
         if ($jsurl = $this->page->theme->javascript_url(true)) {
             $this->page->requires->js($jsurl, true);
         }

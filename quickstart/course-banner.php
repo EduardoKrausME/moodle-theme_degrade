@@ -150,7 +150,7 @@ if ( $coursesummarycourse !== false) {
     $coursesummary = $coursesummarycourse;
 }
 
-$showchangecolors=false;
+$showchangecolors = false;
 $savetheme = optional_param("savetheme", "degrade", PARAM_TEXT);
 if ($savetheme == "degrade") {
     require_once("{$CFG->dirroot}/theme/degrade/lib.php");
