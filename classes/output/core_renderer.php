@@ -726,7 +726,9 @@ class core_renderer extends \core_renderer {
                 $this->page->requires->js_function_call('old_onload_focus', [$matches[1], $matches[2]]);
             } else if (strpos($focus, '.') !== false) {
                 // Old style of focus, bad way to do it.
-                debugging('This code is using the old style focus event, Please update this code to focus on an element id or the moodleform focus method.', DEBUG_DEVELOPER);
+                $text = 'This code is using the old style focus event, ';
+                $text .= 'Please update this code to focus on an element id or the moodleform focus method.';
+                debugging($text, DEBUG_DEVELOPER);
                 $this->page->requires->js_function_call('old_onload_focus', explode('.', $focus, 2));
             } else {
                 // Focus element with given id.

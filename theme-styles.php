@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * phpcs:disable Generic.CodeAnalysis.EmptyStatement.DetectedIf
+ *
  * This file is responsible for serving the one huge CSS of each theme.
  *
  * @package   theme_degrade
@@ -75,9 +77,9 @@ if (!in_array($type, ['all', 'all-rtl'])) {
     css_send_css_not_found();
 }
 
-if (file_exists("{$CFG->dirroot}/theme/degrade/config.php")) { // phpcs:disable Generic.CodeAnalysis.EmptyStatement.DetectedIf
+if (file_exists("{$CFG->dirroot}/theme/degrade/config.php")) {
     // The theme exists in standard location - ok.
-} elseif (!empty($CFG->themedir) && file_exists("{$CFG->themedir}/degrade/config.php")) { // phpcs:disable Generic.CodeAnalysis.EmptyStatement.DetectedIf
+} else if (!empty($CFG->themedir) && file_exists("{$CFG->themedir}/degrade/config.php")) {
     // Alternative theme location contains this theme - ok.
 } else {
     header('HTTP/1.0 404 not found');
