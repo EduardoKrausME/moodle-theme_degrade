@@ -29,10 +29,12 @@
     .dropdown-subpanel-content {
         max-width: $modal-sm;
         box-shadow: 0 0 1rem rgba($black, .15);
-    }
 
-    .dropdown-subpanel-content.show {
-        @include optional-animation(0.15s animate-pop);
+        &.show {
+            @include optional-animation(0.15s animate-pop);
+            margin-left: 180px;
+            margin-top: -10px;
+        }
     }
 
     // Chevrons in sub panel items are always to end.
