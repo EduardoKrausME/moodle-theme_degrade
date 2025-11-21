@@ -260,17 +260,17 @@ body.path-question-type {
     clear: left;
     text-align: left;
     margin: 0 auto 1.8em auto;
-}
+    display: flex;
 
-.que .info {
-    float: left;
-    width: 7em;
-    padding: 0.5em;
-    margin-bottom: 1.8em;
-    background-color: $gray-100;
-    border: 1px solid darken($gray-300, 7%);
+    .info {
+        min-width: 11em;
+        padding: 0.5em;
+        // margin-bottom: 1.8em;
+        background-color: $gray-100;
+        border: 1px solid darken($gray-300, 7%);
 
-    @include border-radius(2px);
+        @include border-radius(2px);
+    }
 }
 
 .que h3.no {
@@ -301,7 +301,8 @@ body.path-question-type {
 }
 
 .que .content {
-    margin: 0 0 0 8.5em;
+    width: 100%;
+    margin: 0 0 0 13px;
 }
 
 .que .formulation,
@@ -309,7 +310,7 @@ body.path-question-type {
 .que .comment {
     position: relative;
     padding: $alert-padding-y $alert-padding-x;
-    margin-bottom: $alert-margin-bottom;
+    // margin-bottom: $alert-margin-bottom;
     border: $alert-border-width solid transparent;
     @include border-radius($alert-border-radius);
 }
@@ -678,12 +679,15 @@ body.path-question-type .mform fieldset.hidden {
 }
 
 @include media-breakpoint-down(md) {
-    .que .info {
-        float: none;
-        width: auto;
-    }
-    .que .content {
-        margin: 0;
+    .que {
+        display: flex;
+        flex-direction: column;
+        .info {
+            width: 100%;
+        }
+        .content {
+            margin: 13px 0 0;
+        }
     }
 }
 
@@ -709,14 +713,6 @@ body.path-question-type .mform fieldset.hidden {
             .qtext .clearfix::after {
                 display: none !important;
             }
-        }
-    }
-    .que {
-        .info {
-            width: 11em;
-        }
-        .content {
-            margin: 0 0 0 11.5em;
         }
     }
 }
