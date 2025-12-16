@@ -40,5 +40,30 @@ if ($CFG->lang == "pt_br") {
     $page->add(new admin_setting_configcheckbox("theme_degrade/enable_vlibras",
         "Habilitar VLibras",
         "", 0));
+
+    $page->add(new admin_setting_configselect(
+        "theme_degrade/vlibras_position",
+        "Posição do balão do VLibras",
+        "",
+        "R",
+        [
+            "L" => "Esquerda",
+            "R" => "Direita",
+        ]
+    ));
+
+    $page->add(new admin_setting_configselect(
+        "theme_degrade/vlibras_avatar",
+        "Avatar do VLibras",
+        "",
+        "icaro",
+        [
+            "icaro"  => "Ícaro",
+            "hosana" => "Hosana",
+            "guga"   => "Guga",
+            "random" => "Randômico",
+        ]
+    ));
 }
+
 $settings->add($page);

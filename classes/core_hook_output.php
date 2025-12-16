@@ -215,7 +215,10 @@ class core_hook_output {
 
         $vlibras = get_config("theme_degrade", "enable_vlibras") && $CFG->lang == "pt_br";
         if ($vlibras) {
-            echo $OUTPUT->render_from_template("theme_degrade/settings/vlibras", []);
+            echo $OUTPUT->render_from_template("theme_degrade/settings/vlibras", [
+                "position" => get_config("theme_degrade", "vlibras_position") ?: "R",
+                "avatar" => get_config("theme_degrade", "vlibras_avatar") ?: "icaro",
+            ]);
         }
     }
 }
