@@ -1,0 +1,125 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_degrade/settings/colors
+
+    Example context (json):
+    {
+        "background": "#f0ff0f",
+        "startcolor": true,
+        "brandcolor": false,
+        "footercolor": false,
+        "coursecolor": false
+    }
+}}
+
+
+
+{{#themes}}
+    <style>
+        .page-wrapper-login.{{{login_theme}}} {
+            position: relative !important;
+            zoom: .5 !important;
+            min-height: 580px;
+            margin-bottom: 50px;
+            border-radius: 29px;
+            overflow: hidden;
+            margin-top: -32px;
+        }
+        .page-wrapper-login.{{{login_theme}}}::before {
+            position: absolute !important;
+            background-image: url('{{{loginbackgroundimageurl}}}');
+            z-index: 0;
+        }
+        .page-wrapper-login.{{{login_theme}}}::after{
+            position: absolute !important;
+        }
+        .page-wrapper-login.{{{login_theme}}} .login-wrapper{
+            padding-top: 50px;
+        }
+        .page-wrapper-login.{{{login_theme}}} .login-container{
+            min-height: fit-content;
+        }
+    </style>
+    <div class="page-wrapper-login {{{login_theme}}}"
+         style="display:none;">
+        <section class="login-wrapper">
+            <div class="login-container">
+                <div class="loginform">
+                    <div class="login-logo">
+                        <img src="{{logourl}}" class="img-fluid" alt="{{sitename}}"/>
+                        <h1 class="login-heading sr-only">{{#str}}loginto, core, {{sitename}}{{/str}}</h1>
+                    </div>
+                    <form class="login-form" action="#" method="post">
+                        <div class="login-form-username mb-3">
+                            <label for="username" class="sr-only">{{#str}}username{{/str}}</label>
+                            <input type="text"
+                                   class="form-control form-control-lg"
+                                   placeholder="{{#str}}username{{/str}}"
+                                   autocomplete="username"/>
+                        </div>
+                        <div class="login-form-password mb-3">
+                            <label for="password" class="sr-only">{{#str}}password{{/str}}</label>
+                            <div class="password-wrapper">
+                                <input type="text"
+                                       class="form-control form-control-lg"
+                                       placeholder="{{#str}}password{{/str}}"
+                                       autocomplete="current-password"/>
+                                <button type="button"
+                                        class="toggle-password"
+                                        aria-pressed="false">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="login-form-submit mb-3">
+                            <button class="btn btn-primary btn-lg" type="submit">
+                                {{#str}}login{{/str}}
+                            </button>
+                        </div>
+                        <div class="login-form-forgotpassword mb-3">
+                            <a href="#">{{#str}}forgotaccount{{/str}}</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+{{/themes}}
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const field = document.querySelector('[name="s_theme_degrade_logintheme"]');
+        if (!field) {
+            return;
+        }
+        function updateView() {
+            const value = (field.value || '').trim();
+            document.querySelectorAll('.page-wrapper-login').forEach(el => {
+                el.style.display = 'none';
+            });
+            if (value) {
+                const selector = `.page-wrapper-login.${CSS.escape(value)}`;
+                document.querySelectorAll(selector).forEach(el => {
+                    el.style.display = '';
+                });
+            }
+        }
+        field.addEventListener('change', updateView);
+        updateView();
+    });
+</script>

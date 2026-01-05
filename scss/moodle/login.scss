@@ -1,5 +1,5 @@
 /* ===========================
-   BASE 1 — Estrutura geral
+   BASE 1 - Estrutura geral
    =========================== */
 .page-wrapper-login {
     position: fixed;
@@ -48,7 +48,7 @@
         }
     }
 
-    #loginlogo {
+    .login-logo {
         text-align: center;
         margin-bottom: 22px;
         img {
@@ -162,7 +162,7 @@
     }
 
     /* ===========================
-       BASE 2 — Rodapé (sem cores)
+       BASE 2 - Rodapé (sem cores)
        =========================== */
     .loginfooter {
         position: fixed;
@@ -179,8 +179,6 @@
         .language-menu {
             position: relative;
             display: inline-block;
-            font-family: sans-serif;
-
             &__button {
                 background: transparent;
                 border: none;
@@ -251,7 +249,7 @@
 }
 
 /* ===========================
-   TEMA — Dark Elegante (cores)
+   TEMA - Dark Elegante (cores)
    =========================== */
 .page-wrapper-login.dark-elegante {
     background-color: #1c1f23;
@@ -370,7 +368,7 @@
 }
 
 /* ===========================
-   TEMA — Aurora (nature)
+   TEMA - Aurora (nature)
    =========================== */
 .page-wrapper-login.aurora {
     /* base do fundo (fallback se a imagem não carregar) */
@@ -536,7 +534,7 @@
 }
 
 /* ===========================
-   TEMA — Selva Canopy (nature)
+   TEMA - Selva Canopy (nature)
    =========================== */
 .page-wrapper-login.selva-canopy {
     /* Fallback do fundo */
@@ -714,7 +712,7 @@
 }
 
 /* ===========================
-   TEMA — Clean (minimal)
+   TEMA - Clean (minimal)
    =========================== */
 .page-wrapper-login.clean-minimal {
     /* fundo neutro, claro e suave */
@@ -853,7 +851,7 @@
 }
 
 /* ===========================
-   TEMA — Clean Outline
+   TEMA - Clean Outline
    =========================== */
 .page-wrapper-login.clean-outline {
     background:
@@ -988,7 +986,316 @@
 }
 
 /* ===========================
-   TEMA — Forgot password
+   TEMA - Glassmorphism
+   =========================== */
+.page-wrapper-login.glassmorphism {
+    font-family: Lato, sans-serif;
+    &::before {
+        opacity: 1 !important;
+        filter: none !important;
+    }
+    .login-container {
+        background: rgba(255, 255, 255, 0.25); /* Fundo branco translúcido */
+        backdrop-filter: blur(15px); /* O desfoque mágico */
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.5); /* Borda sutil de vidro */
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15); /* Sombra suave */
+        border-radius: 20px;
+        padding: 50px 40px;
+        color: #2e4a35; /* Verde escuro floresta para texto */
+        /* Efeito de brilho no topo do cartão */
+        background: linear-gradient(
+                        135deg,
+                        rgba(255, 255, 255, 0.4) 0%,
+                        rgba(255, 255, 255, 0.1) 100%
+        );
+        /* Adiciona um efeito de folha flutuante decorativa (opcional, puramente CSS) */
+        &::before, &::after{
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-repeat: no-repeat;
+            z-index: -2;
+        }
+        &::before {
+            background-image: url([[pix:theme_degrade|login/glassmorphism-sheets-1]]);
+            background-position: top left;
+        }
+        &::after {
+            background-image: url([[pix:theme_degrade|login/glassmorphism-sheets-2]]);
+            background-position: bottom right;
+        }
+    }
+    .login-logo {
+        margin-bottom: 30px;
+        h1, h2, .login-heading {
+            font-family: 'Playfair Display', serif;
+            color: #1a2f1c;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        img {
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+    }
+    form {
+        .form-control {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50px;
+            height: 50px;
+            padding-left: 20px;
+            font-size: 0.95rem;
+            color: #333333;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s ease;
+            &::placeholder {
+                color: #6c757d;
+                font-weight: 300;
+            }
+            &:focus {
+                background: #ffffff;
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+                border-color: #ffffff;
+                transform: scale(1.02);
+            }
+        }
+        .password-wrapper .toggle-password {
+            color: #5d7e62;
+            right: 15px;
+            &:hover {
+                color: #2e4a35;
+                background: transparent;
+            }
+        }
+        label {
+            color: #1a2f1c;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+    }
+    .btn-primary {
+        font-family: 'Playfair Display', serif;
+        background: linear-gradient(90deg, #5d7e62 0%, #3b5e42 100%);
+        border: none;
+        border-radius: 50px;
+        height: 50px;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 15px rgba(46, 74, 53, 0.3);
+        margin-top: 10px;
+        position: relative;
+        overflow: hidden;
+        &:hover, &:focus {
+            background: linear-gradient(90deg, #4a6b4f 0%, #2e4a35 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 74, 53, 0.4);
+        }
+    }
+    .login-form-forgotpassword a {
+        color: #ffffff;
+        font-weight: 500;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        text-decoration: none;
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #ffffff;
+            transition: width 0.3s;
+        }
+        &:hover::after {
+            width: 100%;
+        }
+    }
+    .loginfooter {
+        background: transparent !important;
+        border: none;
+        p, a, button {
+            color: rgba(255, 255, 255, 0.8) !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+        }
+        .language-menu .arrow {
+            border-color: #ffffff;
+        }
+    }
+}
+
+/* ===========================
+   TEMA - Serenity Med
+   =========================== */
+.page-wrapper-login.serenity-med-blue,
+.page-wrapper-login.serenity-med-red {
+    --med-primary: #0ea5e9;
+    --med-secondary: #0284c7;
+    --med-accent: #38bdf8;
+    --med-dark: #0f172a;
+    --med-secondary-40a: rgba(2, 132, 199, 0.4);
+    --med-secondary-30a: rgba(2, 132, 199, 0.3);
+    font-family: Inter, sans-serif;
+    &::before {
+        opacity: 1 !important;
+        filter: none !important;
+        background-size: cover;
+        background-position: center;
+    }
+    &::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg, var(--med-secondary-40a), rgba(15, 23, 42, 0.6));
+        z-index: -1;
+    }
+    .login-container {
+        background: rgb(255 255 255 / .3);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-top: 4px solid var(--med-primary);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        padding: 45px 40px;
+        position: relative;
+        overflow: hidden;
+        .login-heading {
+            font-family: Montserrat, sans-serif;
+            color: var(--med-dark);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+        }
+        &::before {
+            content: '+';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 150px;
+            font-weight: 900;
+            color: var(--med-primary);
+            opacity: 0.05;
+            pointer-events: none;
+            transform: rotate(15deg);
+        }
+    }
+    .login-logo img {
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        max-height: 100px;
+    }
+    .login-wrapper {
+        margin-left: 17%;
+    }
+    form {
+        .form-control {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            height: 52px;
+            color: #334155;
+            font-weight: 500;
+            padding-left: 15px;
+            transition: all 0.2s ease;
+            &::placeholder {
+                color: #94a3b8;
+                font-weight: 400;
+            }
+            &:focus {
+                background: #ffffff;
+                border-color: var(--med-primary);
+                box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+            }
+        }
+        label {
+            color: #475569;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .password-wrapper .toggle-password {
+            color: #64748b;
+            &:hover {
+                color: var(--med-primary);
+            }
+        }
+    }
+    .btn-primary {
+        background: linear-gradient(135deg, var(--med-primary) 0%, var(--med-secondary) 100%);
+        border: none;
+        border-radius: 6px;
+        height: 54px;
+        font-family: Montserrat, sans-serif;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.95rem;
+        box-shadow: 0 4px 12px var(--med-secondary-30a);
+        margin-top: 15px;
+        position: relative;
+        overflow: hidden;
+        &:hover {
+            background: linear-gradient(135deg, var(--med-accent) 0%, var(--med-primary) 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px var(--med-secondary-40a);
+            animation: heartbeat 1.5s infinite;
+            @keyframes heartbeat {
+                0% {
+                    transform: scale(1);
+                }
+                14% {
+                    transform: scale(1.03);
+                }
+                28% {
+                    transform: scale(1);
+                }
+                42% {
+                    transform: scale(1.03);
+                }
+                70% {
+                    transform: scale(1);
+                }
+            }
+        }
+    }
+    .login-form-forgotpassword a,
+    .login-form-submit + .mt-3 a {
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+        &:hover {
+            color: var(--med-dark);
+            text-decoration: underline;
+        }
+    }
+    .loginfooter {
+        background: transparent !important;
+        border: none;
+        p, a, button {
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
+        .language-menu .arrow {
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+    }
+}
+.page-wrapper-login.serenity-med-red {
+    --med-primary: #dc2626;
+    --med-secondary: #991b1b;
+    --med-accent: #f87171;
+    --med-dark: #450a0a;
+    --med-secondary-40a: rgba(153, 27, 27, 0.04);
+    --med-secondary-30a: rgba(153, 27, 27, 0.3);
+}
+
+/* ===========================
+   TEMA - Forgot password
    =========================== */
 #page-login-forgot_password,
 #page-login-signup {
