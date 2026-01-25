@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use theme_degrade\admin\setting_scss;
+
 /**
  * function xmldb_supervideo_upgrade
  *
@@ -294,6 +296,22 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         set_config("scsspos", $scss, "theme_degrade");
 
         upgrade_plugin_savepoint(true, 2025100400, "theme", "degrade");
+    }
+
+    if ($oldversion < 2025101300) {
+        $settingscss = new setting_scss("test", "test", "", "");
+
+        $scss = get_config("theme_degrade", "scsspos");
+        if ($settingscss->validate($scss) !== true) {
+            set_config("scsspos", "", "theme_degrade");
+        }
+
+        $scss = get_config("theme_degrade", "scsspre");
+        if ($settingscss->validate($scss) !== true) {
+            set_config("scsspre", "", "theme_degrade");
+        }
+
+        upgrade_plugin_savepoint(true, 2025101300, "theme", "degrade");
     }
 
     return true;
