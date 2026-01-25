@@ -778,28 +778,33 @@ a.ygtvspacer:hover {
 .filepicker-filelist .dndupload-target,
 .filemanager-container .dndupload-target {
     background: $filemanager-dnd-upload-target-bg;
-    position: absolute;
-    top: 10px;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
+    //position: absolute;
+    //top: 10px;
+    //bottom: 10px;
+    //left: 10px;
+    //right: 10px;
     border: 2px dashed $filemanager-dnd-upload-target-border-color;
     padding-top: 85px;
     text-align: center;
     @include box-shadow(0 0 0 10px $filemanager-dnd-upload-target-shadow);
 }
 
-.filepicker-filelist.dndupload-over .dndupload-target,
-.filemanager-container.dndupload-over .dndupload-target {
-    background: $filemanager-dnd-upload-over-bg;
-    position: absolute;
-    top: 10px;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-    border: 2px dashed $filemanager-dnd-upload-over-border-color;
-    padding-top: 85px;
-    text-align: center;
+.filepicker-filelist.dndupload-over,
+.filemanager-container.dndupload-over {
+    .fm-empty-container {
+        display: none;
+    }
+    .dndupload-target {
+        background: $filemanager-dnd-upload-over-bg;
+        //position: absolute;
+        //top: 10px;
+        //bottom: 10px;
+        //left: 10px;
+        //right: 10px;
+        border: 2px dashed $filemanager-dnd-upload-over-border-color;
+        padding-top: 85px;
+        text-align: center;
+    }
 }
 
 .dndupload-message {
@@ -1099,7 +1104,7 @@ a.ygtvspacer:hover {
         background: #fff;
         border-radius: 0 0 12px 12px;
         position: relative;
-        padding-bottom: 9px;
+        //padding-bottom: 9px;
 
         .fm-empty-container {
             border: 2px dashed #cbd5e0;
