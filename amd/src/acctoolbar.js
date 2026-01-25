@@ -74,17 +74,6 @@ degrade_AccessTool.prototype.initialApp = function () {
         initFontSize: false
     };
 
-    const iframe = document.querySelector("iframe.h5p-initialized");
-    if (iframe) {
-        const cssLink = iframe.contentDocument.createElement("link");
-        cssLink.rel = "stylesheet";
-        cssLink.href = `${M.cfg.wwwroot}/theme/degrade/style/style-h5p.css`;
-        cssLink.type = "text/css";
-        iframe.contentDocument.head.appendChild(cssLink);
-
-        this.initialApp_iframe(iframe);
-    }
-
     // INIT ADDING CLASSES TO BODY
     if (window.degrade_toolboxAppstate.bodyClassList) {
 
