@@ -1467,10 +1467,10 @@
 
                 function jt(t) {
                     if (null == Et) {
-                        var e = k("span", "​");
+                        var e = k("span", "");
                         E(t, k("span", [e, document.createTextNode("x")])), 0 != t.firstChild.offsetHeight && (Et = e.offsetWidth <= 1 && e.offsetHeight > 2 && !(a && s < 8))
                     }
-                    var n = Et ? k("span", "​") : k("span", " ", null, "display: inline-block; width: 1px; margin-right: -1px");
+                    var n = Et ? k("span", "") : k("span", " ", null, "display: inline-block; width: 1px; margin-right: -1px");
                     return n.setAttribute("cm-text", ""), n
                 }
 
@@ -2254,7 +2254,7 @@
                     if (t.length > 1 && !/  /.test(t)) return t;
                     for (var n = e, o = "", r = 0; r < t.length; r++) {
                         var i = t.charAt(r);
-                        " " != i || !n || r != t.length - 1 && 32 != t.charCodeAt(r + 1) || (i = " "), o += i, n = " " == i
+                        " " != i || !n || r != t.length - 1 && 32 != t.charCodeAt(r + 1) || (i = " "), o += i, n = " " == i
                     }
                     return o
                 }
@@ -2951,13 +2951,13 @@
 
                 function qo(t, e, n) {
                     var o = _o(t, e, "div", null, null, !t.options.singleCursorHeightPerLine),
-                        r = n.appendChild(k("div", " ", "CodeMirror-cursor"));
+                        r = n.appendChild(k("div", " ", "CodeMirror-cursor"));
                     if (r.style.left = o.left + "px", r.style.top = o.top + "px", r.style.height = Math.max(0, o.bottom - o.top) * t.options.cursorHeight + "px", /\bcm-fat-cursor\b/.test(t.getWrapperElement().className)) {
                         var i = bo(t, e, "div", null, null);
                         i.right - i.left > 0 && (r.style.width = i.right - i.left + "px")
                     }
                     if (o.other) {
-                        var a = n.appendChild(k("div", " ", "CodeMirror-cursor CodeMirror-secondarycursor"));
+                        var a = n.appendChild(k("div", " ", "CodeMirror-cursor CodeMirror-secondarycursor"));
                         a.style.display = "", a.style.left = o.other.left + "px", a.style.top = o.other.top + "px", a.style.height = .85 * (o.other.bottom - o.other.top) + "px"
                     }
                 }
@@ -3090,7 +3090,7 @@
                     if (!mt(t, "scrollCursorIntoView")) {
                         var n = t.display, o = n.sizer.getBoundingClientRect(), r = null;
                         if (e.top + o.top < 0 ? r = !0 : e.bottom + o.top > (window.innerHeight || document.documentElement.clientHeight) && (r = !1), null != r && !h) {
-                            var i = k("div", "​", null, "position: absolute;\n                         top: " + (e.top - n.viewOffset - $n(t.display)) + "px;\n                         height: " + (e.bottom - e.top + Kn(t) + n.barHeight) + "px;\n                         left: " + e.left + "px; width: " + Math.max(2, e.right - e.left) + "px;");
+                            var i = k("div", "", null, "position: absolute;\n                         top: " + (e.top - n.viewOffset - $n(t.display)) + "px;\n                         height: " + (e.bottom - e.top + Kn(t) + n.barHeight) + "px;\n                         left: " + e.left + "px; width: " + Math.max(2, e.right - e.left) + "px;");
                             t.display.lineSpace.appendChild(i), i.scrollIntoView(r), t.display.lineSpace.removeChild(i)
                         }
                     }
@@ -6680,7 +6680,7 @@
                     if (a && s >= 9 && this.hasSelection === r || m && /[\uf700-\uf7ff]/.test(r)) return e.display.input.reset(), !1;
                     if (e.doc.sel == e.display.selForContextMenu) {
                         var i = r.charCodeAt(0);
-                        if (8203 != i || o || (o = "​"), 8666 == i) return this.reset(), this.cm.execCommand("undo")
+                        if (8203 != i || o || (o = ""), 8666 == i) return this.reset(), this.cm.execCommand("undo")
                     }
                     for (var l = 0, c = Math.min(o.length, r.length); l < c && o.charCodeAt(l) == r.charCodeAt(l);) ++l;
                     return Mr(e, (function () {
@@ -6709,8 +6709,8 @@
 
                     function g() {
                         if (null != r.selectionStart) {
-                            var t = n.somethingSelected(), i = "​" + (t ? r.value : "");
-                            r.value = "⇚", r.value = i, e.prevInput = t ? "" : "​", r.selectionStart = 1, r.selectionEnd = i.length, o.selForContextMenu = n.doc.sel
+                            var t = n.somethingSelected(), i = "" + (t ? r.value : "");
+                            r.value = "⇚", r.value = i, e.prevInput = t ? "" : "", r.selectionStart = 1, r.selectionEnd = i.length, o.selForContextMenu = n.doc.sel
                         }
                     }
 
@@ -6718,7 +6718,7 @@
                         if (e.contextMenuPending == y && (e.contextMenuPending = !1, e.wrapper.style.cssText = f, r.style.cssText = d, a && s < 9 && o.scrollbars.setScrollTop(o.scroller.scrollTop = c), null != r.selectionStart)) {
                             (!a || a && s < 9) && g();
                             var t = 0, i = function () {
-                                o.selForContextMenu == n.doc.sel && 0 == r.selectionStart && r.selectionEnd > 0 && "​" == e.prevInput ? Dr(n, Xi)(n) : t++ < 10 ? o.detectingSelectAll = setTimeout(i, 500) : (o.selForContextMenu = null, o.input.reset())
+                                o.selForContextMenu == n.doc.sel && 0 == r.selectionStart && r.selectionEnd > 0 && "" == e.prevInput ? Dr(n, Xi)(n) : t++ < 10 ? o.detectingSelectAll = setTimeout(i, 500) : (o.selForContextMenu = null, o.input.reset())
                             };
                             o.detectingSelectAll = setTimeout(i, 200)
                         }

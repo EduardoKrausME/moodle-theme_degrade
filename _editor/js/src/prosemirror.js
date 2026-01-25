@@ -6631,7 +6631,7 @@
         let e = n.querySelectorAll($ ? "span:not([class]):not([style])" : "span.Apple-converted-space");
         for (let t = 0; t < e.length; t++) {
             let r = e[t];
-            r.childNodes.length == 1 && r.textContent == " " && r.parentNode && r.parentNode.replaceChild(n.ownerDocument.createTextNode(" "), r)
+            r.childNodes.length == 1 && r.textContent == " " && r.parentNode && r.parentNode.replaceChild(n.ownerDocument.createTextNode(" "), r)
         }
     }
 
@@ -7799,7 +7799,7 @@
             }
             return
         }
-        n.state.selection.from < n.state.selection.to && p.start == p.endB && n.state.selection instanceof C && (p.start > n.state.selection.from && p.start <= n.state.selection.from + 2 && n.state.selection.from >= c.from ? p.start = n.state.selection.from : p.endA < n.state.selection.to && p.endA >= n.state.selection.to - 2 && n.state.selection.to <= c.to && (p.endB += n.state.selection.to - p.endA, p.endA = n.state.selection.to)), j && Me <= 11 && p.endB == p.start + 1 && p.endA == p.start && p.start > c.from && c.doc.textBetween(p.start - c.from - 1, p.start - c.from + 1) == "  " && (p.start--, p.endA--, p.endB--);
+        n.state.selection.from < n.state.selection.to && p.start == p.endB && n.state.selection instanceof C && (p.start > n.state.selection.from && p.start <= n.state.selection.from + 2 && n.state.selection.from >= c.from ? p.start = n.state.selection.from : p.endA < n.state.selection.to && p.endA >= n.state.selection.to - 2 && n.state.selection.to <= c.to && (p.endB += n.state.selection.to - p.endA, p.endA = n.state.selection.to)), j && Me <= 11 && p.endB == p.start + 1 && p.endA == p.start && p.start > c.from && c.doc.textBetween(p.start - c.from - 1, p.start - c.from + 1) == "  " && (p.start--, p.endA--, p.endB--);
         let m = c.doc.resolveNoCache(p.start - c.from), g = c.doc.resolveNoCache(p.endB - c.from),
             b = f.resolve(p.start), w = m.sameParent(g) && m.parent.inlineContent && b.end() >= p.endA, N;
         if ((at && n.input.lastIOSEnter > Date.now() - 225 && (!w || i.some(M => M.nodeName == "DIV" || M.nodeName == "P")) || !w && m.pos < c.doc.content.size && !m.sameParent(g) && (N = S.findFrom(c.doc.resolve(m.pos + 1), 1, !0)) && N.head == g.pos) && n.someProp("handleKeyDown", M => M(n, qe(13, "Enter")))) {
