@@ -113,10 +113,11 @@ $templatecontext = [
 if (optional_param("embed-frame-top", 0, PARAM_INT)) {
     echo $OUTPUT->render_from_template("theme_degrade/drawers_embed", $templatecontext);
 } else {
-    if (strpos($_SERVER["REQUEST_URI"], "course/view.php") || strpos($_SERVER["REQUEST_URI"], "course/section.php")) {
+    $uri = $_SERVER["REQUEST_URI"];
+    if (strpos($uri, "course/view.php") !== false || strpos($uri, "course/section.php") !== false) {
         $templatecontext["hasnavbarcourse"] = true;
 
-        if (strpos($_SERVER["REQUEST_URI"], "course/view.php")) {
+        if (strpos($uri, "course/view.php") !== false) {
             $templatecontext["course_summary_banner"] = get_config("theme_degrade", "course_summary_banner");
             if ($templatecontext["course_summary_banner"]) {
                 $options = ["context" => $PAGE->context];
