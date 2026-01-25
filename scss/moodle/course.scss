@@ -626,8 +626,8 @@ $divider-hover-color: $primary !default;
     }
 
     .divider-content {
-        opacity: 0;
-        visibility: hidden;
+        //opacity: 0;
+        //visibility: hidden;
         transition: visibility 0.1s;
         position: absolute;
         background: linear-gradient(transparent 40%, $white 40%, $white 60%, transparent 60%);
