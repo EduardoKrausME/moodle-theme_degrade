@@ -309,7 +309,8 @@ class core_renderer extends \core_renderer {
 
         $header->hasnavbarcourse = false;
         $header->hasbannercourse = false;
-        $hasuri = strpos($_SERVER["REQUEST_URI"], "course/view.php") || strpos($_SERVER["REQUEST_URI"], "course/section.php");
+        $requesturi = $_SERVER["REQUEST_URI"];
+        $hasuri = strpos($requesturi, "course/view.php") || strpos($requesturi, "course/section.php");
         if ($hasuri) {
             $showcoursesummary = get_config("theme_degrade", "course_summary_banner");
             $showcoursesummarycourse = get_config("theme_degrade", "course_summary_banner_{$courseid}");
