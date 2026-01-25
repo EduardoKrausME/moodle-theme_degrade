@@ -1151,7 +1151,7 @@
         z-index: -1;
     }
     .login-container {
-        background: rgb(255 255 255 / .3);
+        background: rgba(255, 255, 255, .3);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         border-top: 4px solid var(--med-primary);
