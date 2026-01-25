@@ -34,6 +34,6 @@ $callbacks = [
     ],
     [
         "hook" => before_footer_html_generation::class,
-        "callback" => 'theme_degrade\core_hook_output::before_footer_html_generation',
+        "callback" => '\theme_degrade\core_hook_output::before_footer_html_generation',
     ],
 ];
