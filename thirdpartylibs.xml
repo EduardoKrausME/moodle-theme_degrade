@@ -11,7 +11,7 @@
         <name>Twitter Bootstrap</name>
         <description>HTML, CSS, and JavaScript framework for developing responsive, mobile-first projects on the web.
         </description>
-        <version>4.6.2</version>
+        <version>5.3.3</version>
         <license>MIT</license>
         <repository>https://github.com/twbs/bootstrap</repository>
         <copyrights>
