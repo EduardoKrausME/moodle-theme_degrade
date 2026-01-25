@@ -107,8 +107,8 @@ define(["jquery", "core/notification"], function ($, Notification) {
                                 </div>
                             </div>`);
                         $(`#row-${item.category}`).append(block);
-                        block.find("a").click(function () {
-                            event.stopImmediatePropagation();
+                        block.find("a").click(function (e) {
+                            e.stopImmediatePropagation();
                         })
                     });
                 });
