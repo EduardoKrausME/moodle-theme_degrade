@@ -17,7 +17,7 @@
 /**
  * Settings file
  *
- * @package   theme_eadtraining
+ * @package   theme_degrade
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -32,7 +32,7 @@ header("Pragma: cache");
 
 $courseid = required_param('id', PARAM_INT);
 
-$cache = \cache::make("theme_eadtraining", "course_cache");
+$cache = \cache::make("theme_degrade", "course_cache");
 $cachekey = "get_generated_image_for_{$courseid}";
 if ($cache->has($cachekey)) {
     die($cache->get($cachekey));
@@ -62,9 +62,9 @@ function get_generated_image_for_id(int $courseid, int $height = 300, int $width
         throw new coding_exception("Invalid target dimensions.");
     }
 
-    $imagelist = glob("{$CFG->dirroot}/theme/eadtraining/pix/generated/*.png");
+    $imagelist = glob("{$CFG->dirroot}/theme/degrade/pix/generated/*.png");
     if (empty($imagelist)) {
-        throw new coding_exception("No generated images found in theme/eadtraining/pix/generated/.");
+        throw new coding_exception("No generated images found in theme/degrade/pix/generated/.");
     }
 
     // Ensure stable ordering across environments.
