@@ -154,9 +154,9 @@ function get_generated_image_for_id(int $courseid, int $height = 300, int $width
  * @return array
  */
 function courseid_to_three_uint32(int $courseid): array {
-    $raw = hash("sha256", "courseid:" . $courseid, true); // 32 bytes
-    $part = substr($raw, 0, 12); // first 12 bytes => 3 uint32
-    $u = unpack("N3", $part); // big-endian unsigned 32-bit
+    $raw = hash("sha256", "courseid:" . $courseid, true); // 32 bytes.
+    $part = substr($raw, 0, 12); // First 12 bytes => 3 uint32.
+    $u = unpack("N3", $part); // Big-endian unsigned 32-bit.
 
     // Return as zero-based array.
     return [(int) $u[1], (int) $u[2], (int) $u[3]];
