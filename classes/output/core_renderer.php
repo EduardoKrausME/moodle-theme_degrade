@@ -542,13 +542,12 @@ class core_renderer extends \core_renderer {
             return $return;
         }
 
-        $callbacks = get_plugins_with_function("theme_degrade_get_logo");
-        foreach ($callbacks as $plugintype => $plugins) {
-            foreach ($plugins as $plugin => $callback) {
-                $urllogo = $callback();
-
-                if ($urllogo) {
-                    return $return = $urllogo->out(false);
+        $plugins = get_plugins_with_function("krausthemes__get_logo");
+        foreach ($plugins as $plugintype => $names) {
+            foreach ($names as $pluginname => $functionname) {
+                $url = $functionname();
+                if ($url instanceof moodle_url) {
+                    return $url;
                 }
             }
         }
@@ -742,8 +741,26 @@ class core_renderer extends \core_renderer {
         $urls = $this->page->theme->css_urls($this->page);
         /** @var moodle_url $url */
         foreach ($urls as $url) {
-            $coursecolor = get_config("theme_degrade", "override_course_color_{$this->page->course->id}");
-            if (isset($coursecolor[3])) {
+            $coursecolor = "";
+            if (!empty($this->page->course) && !empty($this->page->course->id) && $this->page->course->id > 1) {
+                $coursecolor = (string)get_config("theme_degrade", "override_course_color_{$this->page->course->id}");
+            }
+
+            // Check profile.
+            $profileid = 0;
+            $plugins = get_plugins_with_function("theme_degrade_get_active_profile_id");
+            foreach ($plugins as $plugintype => $names) {
+                foreach ($names as $pluginname => $functionname) {
+                    $pid = (int)$functionname($this->page);
+                    if ($pid > 0) {
+                        $profileid = $pid;
+                        break 2;
+                    }
+                }
+            }
+
+            // When course color OR profile exists, use theme-styles.php and pass profileid (for cache separation).
+            if (isset($coursecolor[3]) || $profileid > 0) {
                 $newurl = $url->out(false);
                 $newurl = preg_replace_callback(
                     '/degrade\/(\d+)(?:_\d+)?\//',
@@ -764,6 +781,9 @@ class core_renderer extends \core_renderer {
             $url = new moodle_url($newurl);
             if ($courseid) {
                 $url->param("courseid", $courseid);
+            }
+            if ($profileid > 0) {
+                $url->param("profileid", $profileid);
             }
 
             $this->page->requires->css_theme($url);

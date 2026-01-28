@@ -199,7 +199,7 @@ function theme_degrade_get_pre_scss($theme) {
         }
     }
 
-    $callbacks = get_plugins_with_function("theme_degrade_get_pre_scss");
+    $callbacks = get_plugins_with_function("krausthemes__get_pre_scss");
     foreach ($callbacks as $plugins) {
         foreach ($plugins as $callback) {
             if ($newscss = $callback()) {
