@@ -3067,33 +3067,111 @@ body.dragging {
 }
 
 .select-menu {
-    li:first-child {
-        ul[role="group"] {
-            padding: 0;
+    > .btn.dropdown-toggle {
+        width: 100%;
+        min-width: 16rem;
+        max-width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: .65rem;
+
+        padding: .55rem .9rem !important;
+        background: var(--bs-body-bg);
+        color: var(--bs-body-color);
+        border: 1px solid var(--bs-border-color);
+        border-radius: .65rem;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .06);
+
+        font-weight: 600;
+        line-height: 1.2;
+        cursor: pointer;
+        user-select: none;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease, transform .05s ease;
+    }
+
+    > .btn.dropdown-toggle:hover,
+    &.show > .btn.dropdown-toggle {
+        background: var(--bs-tertiary-bg, rgba(0, 0, 0, 0.03));
+        border-color: rgba(var(--bs-primary-rgb), .35);
+    }
+
+    > .btn.dropdown-toggle:active {
+        transform: translateY(1px);
+    }
+
+    > .btn.dropdown-toggle:focus,
+    > .btn.dropdown-toggle:focus-visible {
+        outline: 0;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .06), 0 0 0 .2rem rgba(var(--bs-primary-rgb), .25);
+    }
+
+    > .btn.dropdown-toggle::after {
+        margin-left: auto;
+        opacity: .7;
+        flex: 0 0 auto;
+    }
+
+    // Dropdown
+    .dropdown-menu {
+        min-width: 100%;
+        padding: .35rem; // base do menu
+        border-radius: .75rem;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+    }
+
+    // Item base (fora/geral)
+    .dropdown-item {
+        border-radius: .55rem;
+        padding: map-get($spacers, 1) map-get($spacers, 4);
+
+        // Correção: aria-selected fica no próprio li.dropdown-item
+        &[aria-selected="true"] {
+            font-weight: 700;
+            background: var(--bs-primary);
         }
     }
 
+    // ------- Seu layout de grupos -------
+    // 1º grupo sem padding extra no topo
+    .dropdown-menu > li:first-child {
+        ul[role="group"] {
+            padding-top: 0;
+        }
+    }
+
+    // Grupos
     ul[role="group"] {
         padding: 0.3rem 0 0 0;
         margin: 0;
 
-        li:first-child {
+        // Título do grupo (primeiro li dentro do group)
+        > li:first-child {
             cursor: default;
             color: $gray-600;
             padding: 0.25rem 1.5rem;
             display: block;
+
+            font-size: .75rem;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            opacity: .75;
         }
 
-        .dropdown-item {
+        // Itens dentro do grupo: indent maior
+        > .dropdown-item {
             padding-left: 2.5rem;
         }
     }
 
-    .dropdown-item {
-        padding: map-get($spacers, 1) map-get($spacers, 4);
-
-        [aria-selected="true"] {
-            font-weight: bold;
+    @media (max-width: 576px) {
+        > .btn.dropdown-toggle {
+            min-width: 0;
         }
     }
 }
