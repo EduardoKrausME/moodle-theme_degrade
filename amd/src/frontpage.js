@@ -99,13 +99,14 @@ define(["jquery", "core/notification"], function ($, Notification) {
                                     <div>
                                         <a class="btn btn-primary mb-2"
                                            href="${M.cfg.wwwroot}/theme/degrade/_editor/editor.php?lang=${frontpage.lang}&local=home&dataid=create&template=${item.id}"
-                                           >Adicionar e editar este bloco</a>
+                                           >${M.util.get_string("add_block_edit", "theme_degrade")}</a>
                                         <a class="btn btn-secondary mb-2"
                                            href="${item.preview}"
                                            target="_blank">${M.util.get_string("preview", "theme_degrade")}</a>
                                     </div>
                                 </div>
                             </div>`);
+
                         $(`#row-${item.category}`).append(block);
                         block.find("a").click(function (e) {
                             e.stopImmediatePropagation();

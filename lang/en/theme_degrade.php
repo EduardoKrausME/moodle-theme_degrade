@@ -54,6 +54,7 @@ $string['acctoolbar_text_block_header'] = 'Text size';
 $string['acctoolbar_toolbar'] = 'Accessibility';
 $string['acctoolbar_zoom_block_header'] = 'Zoom in';
 $string['add_block'] = '+ Add new block';
+$string['add_block_edit'] = 'Add and edit this block';
 $string['advancedsettings'] = 'Advanced settings';
 $string['background_profile_image'] = 'Default course background image';
 $string['background_profile_image_desc'] = 'Sets a default background image for the header of all courses. This image will be displayed at the top of the course page and can be individually replaced in the course settings.';
