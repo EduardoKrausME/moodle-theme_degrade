@@ -230,6 +230,12 @@ $divider-hover-color: $primary !default;
     }
 }
 
+.single-section-page {
+    .course-section-header {
+        display: none !important;
+    }
+}
+
 // Old movehere link styles.
 .section li.movehere a {
     display: block;
@@ -970,12 +976,10 @@ $divider-hover-color: $primary !default;
             .breadcrumb-item {
                 &::before {
                     color: #fff;
+                    background-image: url([[pix:theme|breadcrumb-divider-fff]]);
                 }
-                a {
+                a, span {
                     color: #fff;
-                }
-                span {
-                    color: #cacaca;
                 }
             }
         }
