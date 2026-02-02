@@ -36,6 +36,14 @@
 
     .moodle-actionmenu {
         white-space: nowrap;
+        .dropdown-menu.menu.show {
+            display: flex;
+            flex-direction: column;
+            .action-delete {
+                color: #e91e63;
+                order: 99999999;
+            }
+        }
     }
 
     .listing-actions {
@@ -48,10 +56,11 @@
 
     ul.ml {
         list-style: none;
-        margin: 1rem 0;
+        margin: 16px 0;
+        padding-left: 16px;
 
         ul.ml {
-            margin: 0;
+            // margin: 0;
         }
     }
 
@@ -84,6 +93,10 @@
 
     .listitem {
         > div {
+            &.clearfix {
+                display: block !important;
+                width: 100%;
+            }
             > .float-start {
                 float: left;
             }
@@ -106,15 +119,22 @@
             .without-actions {
                 color: $course-cat-without-actions-color;
             }
-
+            .categoryname {
+                width: 100%;
+            }
             .idnumber {
                 margin-right: 2em;
+                width:100%;
+                //display: none;
             }
         }
 
         // The category or course is hidden.
         &[data-visible="0"] {
-            color: $text-muted;
+            &, * {
+                transition: all .3s ease-in-out;
+                color: $text-muted;
+            }
 
             > div {
                 > a {
@@ -154,7 +174,7 @@
 
             .coursename {
                 display: inline-block;
-                flex-basis: 10rem;
+                //flex-basis: 10rem;
             }
         }
 
@@ -178,9 +198,10 @@
 
         .course-count {
             color: $course-listing-color;
-            margin-right: 2rem;
-            min-width: 3.5em;
+            //margin-right: 2rem;
+            //min-width: 3.5em;
             display: inline-block;
+            white-space: nowrap;
         }
 
         .category-listing > ul > .listitem:first-child {
