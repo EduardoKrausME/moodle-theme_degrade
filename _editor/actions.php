@@ -138,9 +138,13 @@ if ($action == "langedit") {
             $filerecord = (object)["component" => $component, "contextid" => $context->id, "userid" => $USER->id, "filearea" => $filearea, "filepath" => '/', "itemid" => time() - 1714787612, "filename" => $_FILES['files']['name'],];
             $fs->create_file_from_pathname($filerecord, $_FILES['files']['tmp_name']);
 
-            $url = moodle_url::make_file_url(
-                "$CFG->wwwroot/pluginfile.php",
-                "/{$context->id}/theme_degrade/{$filerecord->filearea}/{$filerecord->itemid}{$filerecord->filepath}{$filerecord->filename}"
+            $url = moodle_url::make_pluginfile_url(
+                $context->id,
+                "theme_degrade",
+                $filerecord->filearea,
+                $filerecord->itemid,
+                $filerecord->filepath,
+                $filerecord->filename
             );
 
             echo json_encode([(object)["name" => $_FILES['files']['name'], "type" => "image", "src" => $url->out(false), "size" => filesize($_FILES['files']['tmp_name']),]]);
@@ -168,9 +172,12 @@ if ($action == "langedit") {
     $items = [];
     /** @var stored_file $file */
     foreach ($files as $file) {
-        $url = moodle_url::make_file_url(
-            "{$CFG->wwwroot}/pluginfile.php",
-            "/{$context->id}/theme_degrade/{$file->get_filearea()}/{$file->get_itemid()}{$file->get_filepath()}{$file->get_filename()}"
+        $url = moodle_url::make_pluginfile_url(
+            $context->id, "theme_degrade",
+            $file->get_filearea(),
+            $file->get_itemid(),
+            $file->get_filepath(),
+            $file->get_filename()
         );
         $items[] = [
             "id" => $file->get_id(),

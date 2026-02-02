@@ -91,10 +91,7 @@ function my_courses_minimalist_3_couse_image(core_course_list_element $course) {
             $filearea = $file->get_filearea();
             $filepath = $file->get_filepath();
             $filename = $file->get_filename();
-            return moodle_url::make_file_url(
-                "{$CFG->wwwroot}/pluginfile.php",
-                "/{$contextid}/{$component}/{$filearea}{$filepath}{$filename}",
-            );
+            return moodle_url::make_pluginfile_url($contextid, $component, $filearea, null, $filepath, $filename);
         }
     }
 

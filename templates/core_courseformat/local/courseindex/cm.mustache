@@ -48,7 +48,8 @@
 
         {{#uservisible}}
             <a class="courseindex-link text-truncate"
-                {{#url}} href="{{{url}}}" {{/url}}{{^url}} href="#{{{anchor}}}" data-anchor="true" {{/url}}
+                {{#url}} href="{{{url}}}" {{/url}}
+                {{^url}} href="#{{{anchor}}}" data-anchor="true" {{/url}}
                     data-for="cm_name"
                     tabindex="-1">
                 {{#module}}
@@ -61,7 +62,9 @@
             </a>
         {{/uservisible}}
         {{^uservisible}}
-            <a class="courseindex-link text-truncate" href="#{{{anchor}}}" data-for="cm_name" tabindex="-1" data-anchor="true">
+            <a class="courseindex-link text-truncate"
+               href="#{{{anchor}}}"
+               data-for="cm_name" tabindex="-1" data-anchor="true">
                 {{#module}}
                     <div class="activity-icon">
                         <img src="/theme/image.php?theme=degrade&component={{{module}}}&image=monologo&filtericon=1"
