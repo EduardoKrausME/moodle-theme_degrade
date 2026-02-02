@@ -36,20 +36,6 @@
             <div class="overlay-gradient-image"></div>
         </div>
         <div class="w-100 header-wrapper" style="z-index:1;">
-            <div class="header-actions-container ms-auto" data-region="header-actions-container">
-                {{#headeractions}}
-                    <div class="header-action ms-2">{{{.}}}</div>
-                {{/headeractions}}
-                {{#headeractions_banner_course_edit}}
-                    <div class="header-action ms-2">
-                        <a id="headeractions-banner-{{{headeractions_banner_courseid}}}"
-                           class="btn btn-primary text-nowrap"
-                           href="{{{headeractions_banner_course_edithref}}}">
-                            {{#str}}course_summary_banner_edit, theme_degrade{{/str}}
-                        </a>
-                    </div>
-                {{/headeractions_banner_course_edit}}
-            </div>
             <div class="d-flex flex-wrap">
                 {{#hasnavbar}}
                     <div id="page-navbar">
@@ -94,20 +80,6 @@
             <div class="overlay-gradient-image"></div>
         </div>
         <div class="w-100 header-wrapper container" style="z-index:1;">
-            <div class="header-actions-container ms-auto" data-region="header-actions-container">
-                {{#headeractions}}
-                    <div class="header-action ms-2">{{{.}}}</div>
-                {{/headeractions}}
-                {{#headeractions_banner_course_edit}}
-                    <div class="header-action ms-2">
-                        <a id="headeractions-banner-{{{headeractions_banner_courseid}}}"
-                           class="btn btn-primary text-nowrap"
-                           href="{{{headeractions_banner_course_edithref}}}">
-                            {{#str}}course_summary_banner_edit, theme_degrade{{/str}}
-                        </a>
-                    </div>
-                {{/headeractions_banner_course_edit}}
-            </div>
             <div class="d-flex flex-wrap">
                 {{#hasnavbar}}
                     <div id="page-navbar">
@@ -151,22 +123,27 @@
                         {{/contextheader}}
                     {{/welcomemessage}}
                     {{> core/welcome }}
-                    <div class="header-actions-container ms-auto" data-region="header-actions-container">
-                        {{#headeractions}}
-                            <div class="header-action ms-2">{{{.}}}</div>
-                        {{/headeractions}}
-                        {{#headeractions_banner_course_edit}}
-                            <div class="header-action ms-2">
-                                <a id="headeractions-banner-{{{headeractions_banner_courseid}}}"
-                                   class="btn btn-primary text-nowrap"
-                                   href="{{{headeractions_banner_course_edithref}}}">
-                                    {{#str}}course_summary_banner_edit, theme_degrade{{/str}}
-                                </a>
-                            </div>
-                        {{/headeractions_banner_course_edit}}
-                    </div>
                 </div>
             </div>
         </header>
     {{/hasbannercourse}}
 {{/hasnavbarcourse}}
+
+{{#editing}}
+    <div class="header-actions-container ms-auto d-flex mt-3"
+         style="justify-content:flex-end;"
+         data-region="header-actions-container">
+        {{#headeractions_banner_course_edit}}
+            <div class="header-action ms-2">
+                <a id="headeractions-banner-{{{headeractions_banner_courseid}}}"
+                   class="btn btn-primary text-nowrap"
+                   href="{{{headeractions_banner_course_edithref}}}">
+                    {{#str}}course_summary_banner_edit, theme_degrade{{/str}}
+                </a>
+            </div>
+        {{/headeractions_banner_course_edit}}
+        {{#headeractions}}
+            <div class="header-action ms-2">{{{.}}}</div>
+        {{/headeractions}}
+    </div>
+{{/editing}}
