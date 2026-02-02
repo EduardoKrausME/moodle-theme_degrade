@@ -212,90 +212,90 @@ if ($page->type == "form") { // Only form.
                             Roboto: {
                                 variants: {
                                     regular: {
-                                        source: 'https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxP.woff2'
+                                         source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Roboto/Roboto-normal-400.woff'
                                     },
                                     bold: {
-                                        source: 'https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc9.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Roboto/Roboto-normal-700.woff'
                                     }
                                 }
                             },
                             'Open Sans': {
                                 variants: {
                                     regular: {
-                                        source: 'https://fonts.gstatic.com/s/opensans/v34/mem8YaGs126MiZpBA-UFVZ0b.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Open-Sans/Open-Sans-italic-400.woff'
                                     },
                                     bold: {
-                                        source: 'https://fonts.gstatic.com/s/opensans/v34/mem5YaGs126MiZpBA-UN_r8-VQ.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Open-Sans/Open-Sans-italic-700.woff'
                                     }
                                 }
                             },
                             Montserrat: {
                                 variants: {
                                     regular: {
-                                        source: 'https://fonts.gstatic.com/s/montserrat/v26/JTUQjIg1_i6t8kCHKm459WxZqh7n.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Montserrat/Montserrat-normal-400.woff'
                                     },
                                     bold: {
-                                        source: 'https://fonts.gstatic.com/s/montserrat/v26/JTURjIg1_i6t8kCHKm45_dJE3g3D_vx3rCubqg.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Montserrat/Montserrat-normal-700.woff'
                                     }
                                 }
                             },
                             Poppins: {
                                 variants: {
                                     regular: {
-                                        source: 'https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJLmv1pVF9eO.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Poppins/Poppins-normal-400.woff'
                                     },
                                     bold: {
-                                        source: 'https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Poppins/Poppins-normal-700.woff'
                                     }
                                 }
                             },
                             Lato: {
                                 variants: {
                                     regular: {
-                                        source: 'https://fonts.gstatic.com/s/lato/v24/S6uyw4BMUTPHjx4wWg.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Lato/Lato-normal-400.woff'
                                     },
                                     bold: {
-                                        source: 'https://fonts.gstatic.com/s/lato/v24/S6u9w4BMUTPHh30wWw.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Lato/Lato-normal-700.woff'
                                     }
                                 }
                             },
                             'Playfair Display': {
                                 variants: {
                                     regular: {
-                                        source: 'https://fonts.gstatic.com/s/playfairdisplay/v30/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYhRD2.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Playfair-Display/Playfair-Display-italic-400.woff'
                                     },
                                     bold: {
-                                        source: 'https://fonts.gstatic.com/s/playfairdisplay/v30/nuFjD-vYSZviVYUb_rj3ij__anPXPTzQnDnt2w.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Playfair-Display/Playfair-Display-italic-700.woff'
                                     }
                                 }
                             },
                             Merriweather: {
                                 variants: {
                                     regular: {
-                                        source: 'https://fonts.gstatic.com/s/merriweather/v28/u-440qyriQwlOrhSvowK_l5-fCZK.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Merriweather/Merriweather-normal-400.woff'
                                     },
                                     bold: {
-                                        source: 'https://fonts.gstatic.com/s/merriweather/v28/u-4k0qyriQwlOrhSvowK_l5-fC7j3PZ9.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Merriweather/Merriweather-normal-700.woff'
                                     }
                                 }
                             },
                             Raleway: {
                                 variants: {
                                     regular: {
-                                        source: 'https://fonts.gstatic.com/s/raleway/v29/1Ptug8zYS_SKggPNyCMIT5lu.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Raleway/Raleway-normal-400.woff'
                                     },
                                     bold: {
-                                        source: 'https://fonts.gstatic.com/s/raleway/v29/1Ptug8zYS_SKggPNyC0IS3lu.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Raleway/Raleway-normal-700.woff'
                                     }
                                 }
                             },
                             Oswald: {
                                 variants: {
                                     regular: {
-                                        source: 'https://fonts.gstatic.com/s/oswald/v53/TK3iWkUHHAIjg752GT8G.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Oswald/Oswald-normal-400.woff'
                                     },
                                     bold: {
-                                        source: 'https://fonts.gstatic.com/s/oswald/v53/TK3hWkUHHAIjg75HCG0I.woff2'
+                                        source: '<?php echo $CFG->wwwroot ?>/theme/font.php/degrade/theme/<?php echo theme_get_revision() ?>/Oswald/Oswald-normal-700.woff'
                                     }
                                 }
                             }
