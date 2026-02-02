@@ -140,6 +140,7 @@ $string['logintheme_glassmorphism'] = 'Glassmorphism';
 $string['logintheme_selva-canopy'] = 'Forest Canopy';
 $string['logintheme_serenity-med-blue'] = 'Serenity Med Blue';
 $string['logintheme_serenity-med-red'] = 'Serenity Med Emergency/Cardiology';
+$string['notenrolledincourse'] = 'You are not enrolled in this course.';
 $string['pluginname'] = 'Degrade';
 $string['preview'] = 'Block preview';
 $string['privacy:drawerblockclosed'] = 'The current preference for the block drawer is closed.';
