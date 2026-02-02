@@ -321,7 +321,8 @@ class core_renderer extends \core_renderer {
             if ($showcoursesummary) {
                 if ($showcoursesummary == 1) {
                     $header->hasnavbarcourse = true;
-                    $header->categoryname = $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
+                     $categoryname = $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
+                    $header->categoryname = format_string($categoryname);
                     $header->overviewfiles = $this->get_course_image();
 
                     if (has_capability("moodle/category:manage", $this->page->context)) {
@@ -338,8 +339,8 @@ class core_renderer extends \core_renderer {
                 if ($showcoursesummary == 2) {
                     $bannerfileurl = $this->get_course_image();
                     if ($bannerfileurl) {
-                        $header->categoryname =
-                            $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
+                        $categoryname = $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
+                        $header->categoryname = format_string($categoryname);
                         $header->hasbannercourse = true;
                         $header->banner_course_file_url = $bannerfileurl;
                     }
