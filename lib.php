@@ -485,9 +485,7 @@ function theme_degrade_coursemodule_edit_post_actions($data, $course) {
         cache::make("theme_degrade", "css_cache")->purge();
     }
 
-    // Auto-generate icon when:
-    //  - customimage was uploaded
-    //  - customicon was NOT uploaded (draft has zero files)
+    // Auto-generate icon when: - customimage was uploaded - customicon was NOT uploaded (draft has zero files).
     if ($hascustomimage && !$hascustomicon) {
         // Get the saved background image from module context area.
         $fs = get_file_storage();
@@ -516,9 +514,9 @@ function theme_degrade_coursemodule_edit_post_actions($data, $course) {
 
                     // Configure extractor defaults (tune if you want).
                     $extractor->set_source_blob($sourcefile->get_content())
-                        ->set_corner_tolerance(20)
-                        ->set_background_tolerance(20)
-                        ->set_crop_padding(2)
+                        ->set_cornertolerance(20)
+                        ->set_backgroundtolerance(20)
+                        ->set_croppadding(2)
                         ->process()
                         ->get_result_png($tmpfile, 45);
 
@@ -531,7 +529,7 @@ function theme_degrade_coursemodule_edit_post_actions($data, $course) {
                     $itemid = $data->coursemodule;
 
                     $countfiles = $fs->get_area_files($context->id, $component, $filearea, $itemid);
-                    if (count($countfiles)===0) {
+                    if (count($countfiles) === 0) {
                         global $USER;
                         $filerecord = [
                             "contextid" => $context->id,

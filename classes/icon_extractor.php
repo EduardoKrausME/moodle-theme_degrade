@@ -49,16 +49,16 @@ class icon_extractor {
     private $sourceblob = null;
 
     /** @var int */
-    private $corner_tolerance = 8;
+    private $cornertolerance = 8;
 
     /** @var int */
-    private $background_tolerance = 12;
+    private $backgroundtolerance = 12;
 
     /** @var int */
-    private $crop_padding = 0;
+    private $croppadding = 0;
 
     /** @var bool */
-    private $force_square = true;
+    private $forcesquare = true;
 
     /**
      * Square mode:
@@ -67,13 +67,13 @@ class icon_extractor {
      *
      * @var string
      */
-    private $square_mode = "pad";
+    private $squaremode = "pad";
 
     /** @var bool */
-    private $use_diagonals = false;
+    private $usediagonals = false;
 
     /** @var int */
-    private $max_input_pixels = 12000000; // Safety guard.
+    private $maxinputpixels = 12000000; // Safety guard.
 
     /** @var resource|GdImage|null */
     private $result = null;
@@ -103,83 +103,83 @@ class icon_extractor {
     }
 
     /**
-     * Function set_corner_tolerance
+     * Function set_cornertolerance
      *
      * @param int $tolerance
      * @return $this
      */
-    public function set_corner_tolerance(int $tolerance): self {
-        $this->corner_tolerance = max(0, min(255, $tolerance));
+    public function set_cornertolerance(int $tolerance): self {
+        $this->cornertolerance = max(0, min(255, $tolerance));
         return $this;
     }
 
     /**
-     * Function set_background_tolerance
+     * Function set_backgroundtolerance
      *
      * @param int $tolerance
      * @return $this
      */
-    public function set_background_tolerance(int $tolerance): self {
-        $this->background_tolerance = max(0, min(255, $tolerance));
+    public function set_backgroundtolerance(int $tolerance): self {
+        $this->backgroundtolerance = max(0, min(255, $tolerance));
         return $this;
     }
 
     /**
-     * Function set_crop_padding
+     * Function set_croppadding
      *
      * @param int $padding
      * @return $this
      */
-    public function set_crop_padding(int $padding): self {
-        $this->crop_padding = max(0, $padding);
+    public function set_croppadding(int $padding): self {
+        $this->croppadding = max(0, $padding);
         return $this;
     }
 
     /**
-     * Function set_force_square
+     * Function set_forcesquare
      *
      * @param bool $enabled
      * @return $this
      */
-    public function set_force_square(bool $enabled): self {
-        $this->force_square = $enabled;
+    public function set_forcesquare(bool $enabled): self {
+        $this->forcesquare = $enabled;
         return $this;
     }
 
     /**
-     * Function set_square_mode
+     * Function set_squaremode
      *
      * @param string $mode
      * @return $this
      */
-    public function set_square_mode(string $mode): self {
+    public function set_squaremode(string $mode): self {
         $mode = strtolower(trim($mode));
         if (!in_array($mode, ["pad", "crop"], true)) {
-            throw new RuntimeException("Invalid square_mode. Allowed: pad, crop");
+            throw new RuntimeException("Invalid squaremode. Allowed: pad, crop");
         }
-        $this->square_mode = $mode;
+        $this->squaremode = $mode;
         return $this;
     }
 
     /**
-     * Function set_use_diagonals
+     * Function set_usediagonals
      *
      * @param bool $enabled
      * @return $this
      */
-    public function set_use_diagonals(bool $enabled): self {
-        $this->use_diagonals = $enabled;
+    public function set_usediagonals(bool $enabled): self {
+        $this->usediagonals = $enabled;
         return $this;
     }
 
     /**
-     * Function set_max_input_pixels
+     * Function set_maxinputpixels
      *
      * @param int $maxpixels
      * @return $this
      */
-    public function set_max_input_pixels(int $maxpixels): self {
-        $this->max_input_pixels = max(100000, $maxpixels);
+    public function set_maxinputpixels(int $maxpixels): self {
+        $this->maxinputpixels = max(100000, $maxpixels);
         return $this;
     }
 
@@ -195,9 +195,9 @@ class icon_extractor {
         $w = imagesx($img);
         $h = imagesy($img);
 
-        if (($w * $h) > $this->max_input_pixels) {
+        if (($w * $h) > $this->maxinputpixels) {
             imagedestroy($img);
-            throw new RuntimeException("Image too large ({$w}x{$h}). Increase max_input_pixels if needed.");
+            throw new RuntimeException("Image too large ({$w}x{$h}). Increase maxinputpixels if needed.");
         }
 
         // Ensure alpha output is possible.
@@ -220,10 +220,10 @@ class icon_extractor {
         [$minx, $miny, $maxx, $maxy] = $this->compute_content_bbox($visited, $w, $h);
 
         // Apply padding.
-        $minx = max(0, $minx - $this->crop_padding);
-        $miny = max(0, $miny - $this->crop_padding);
-        $maxx = min($w - 1, $maxx + $this->crop_padding);
-        $maxy = min($h - 1, $maxy + $this->crop_padding);
+        $minx = max(0, $minx - $this->croppadding);
+        $miny = max(0, $miny - $this->croppadding);
+        $maxx = min($w - 1, $maxx + $this->croppadding);
+        $maxy = min($h - 1, $maxy + $this->croppadding);
 
         // 4) Create cropped transparent PNG (copy only content pixels, skip visited background).
         $cropped = $this->copy_crop_transparent($img, $visited, $w, $h, $minx, $miny, $maxx, $maxy);
@@ -231,7 +231,7 @@ class icon_extractor {
         imagedestroy($img);
 
         // 5) Force square if enabled.
-        if ($this->force_square) {
+        if ($this->forcesquare) {
             $cropped = $this->make_square($cropped);
         }
 
@@ -344,7 +344,9 @@ class icon_extractor {
     }
 
     /**
-     * @return resource|GdImage
+     * Function load_source_image
+     *
+     * @return GdImage|resource
      */
     private function load_source_image() {
         if ($this->sourceblob !== null) {
@@ -470,7 +472,7 @@ class icon_extractor {
             $dr = abs($c["r"] - $bg["r"]);
             $dg = abs($c["g"] - $bg["g"]);
             $db = abs($c["b"] - $bg["b"]);
-            if (max($dr, $dg, $db) > $this->corner_tolerance) {
+            if (max($dr, $dg, $db) > $this->cornertolerance) {
                 return false;
             }
         }
@@ -505,7 +507,7 @@ class icon_extractor {
                 $dg = abs($g - $bg["g"]);
                 $db = abs($b - $bg["b"]);
 
-                if (max($dr, $dg, $db) <= $this->background_tolerance) {
+                if (max($dr, $dg, $db) <= $this->backgroundtolerance) {
                     $mask[$idx] = "\1";
                 }
 
@@ -602,7 +604,7 @@ class icon_extractor {
                 }
             }
 
-            if ($this->use_diagonals) {
+            if ($this->usediagonals) {
                 // Up-left.
                 if ($x > 0 && $idx >= $w) {
                     $n = $idx - $w - 1;
@@ -737,7 +739,7 @@ class icon_extractor {
             return $img;
         }
 
-        if ($this->square_mode === "crop") {
+        if ($this->squaremode === "crop") {
             $side = min($w, $h);
             $sx = intdiv(max(0, $w - $side), 2);
             $sy = intdiv(max(0, $h - $side), 2);
@@ -797,7 +799,7 @@ class icon_extractor {
             $c = $c & 0xFFFFFFFF;
         }
 
-        $a = ($c >> 24) & 0x7F; // 0=opaque, 127=transparent.
+        $a = ($c >> 24) & 0x7F; // 0 => opaque, 127 => transparent.
         $r = ($c >> 16) & 0xFF;
         $g = ($c >> 8) & 0xFF;
         $b = $c & 0xFF;

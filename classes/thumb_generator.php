@@ -291,7 +291,7 @@ class thumb_generator {
             return false;
         }
 
-        // If available in your Moodle, keep it strict:
+        // If available in your Moodle, keep it strict.
         if (method_exists($file, "is_valid_image")) {
             return $file->is_valid_image();
         }
@@ -398,7 +398,7 @@ class thumb_generator {
 
             imagedestroy($tmp);
         } else {
-            // contain or single dimension: just resample to target size.
+            // Contain or single dimension: just resample to target size.
             $dest = $this->new_canvas($targetw, $targeth, $outformat);
 
             if ($this->mode === "contain" && $this->width !== null && $this->height !== null) {
@@ -429,14 +429,14 @@ class thumb_generator {
             return null;
         }
 
-        // tempnam creates a file; we want extension.
+        // The tempnam creates a file; we want extension.
         $finaltmp = $tmpfile . $ext;
         @rename($tmpfile, $finaltmp);
 
         if ($outformat === "jpeg") {
             $ok = imagejpeg($dest, $finaltmp, $this->jpegquality);
         } else {
-            // png: 0 (no compression) .. 9 (max). Use 6 default-like.
+            // The png: 0 (no compression) .. 9 (max). Use 6 default-like.
             $ok = imagepng($dest, $finaltmp, 6);
         }
 
@@ -513,7 +513,7 @@ class thumb_generator {
         $fmt = $this->resolve_output_format($source);
         $ext = ($fmt === "jpeg") ? "jpg" : "png";
 
-        // Example: thumb_240x136_cover_ab12cd34....png
+        // Example: thumb_240x136_cover_ab12cd34....png.
         return "thumb_{$w}x{$h}_{$mode}_{$hash}.{$ext}";
     }
 }
