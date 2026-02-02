@@ -158,6 +158,11 @@ $blocks-plus-gutter: calc(#{$blocks-column-width} + (#{$grid-gutter-width} * 0.5
 
     .multiline {
         white-space: normal;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .btn.btn-link.btn-icon {
@@ -250,6 +255,11 @@ $blocks-plus-gutter: calc(#{$blocks-column-width} + (#{$grid-gutter-width} * 0.5
             font-size: clamp(18px, 2.2vw, 24px);
             line-height: 1.2;
             text-decoration: none;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
 
