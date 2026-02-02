@@ -321,7 +321,7 @@ class core_renderer extends \core_renderer {
             if ($showcoursesummary) {
                 if ($showcoursesummary == 1) {
                     $header->hasnavbarcourse = true;
-                     $categoryname = $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
+                    $categoryname = $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
                     $header->categoryname = format_string($categoryname);
                     $header->overviewfiles = $this->get_course_image();
 
@@ -748,10 +748,10 @@ class core_renderer extends \core_renderer {
             }
 
             // Check profile.
-            $profileid = 0;
-            $plugins = get_plugins_with_function("theme_degrade_get_active_profile_id");
-            foreach ($plugins as $plugintype => $names) {
-                foreach ($names as $pluginname => $functionname) {
+            $profileid = false;
+            $plugins = get_plugins_with_function("krausthemes__get_scss_profile");
+            foreach ($plugins as $names) {
+                foreach ($names as $functionname) {
                     $pid = (int)$functionname($this->page);
                     if ($pid > 0) {
                         $profileid = $pid;
@@ -761,7 +761,7 @@ class core_renderer extends \core_renderer {
             }
 
             // When course color OR profile exists, use theme-styles.php and pass profileid (for cache separation).
-            if (isset($coursecolor[3]) || $profileid > 0) {
+            if (isset($coursecolor[3]) || $profileid) {
                 $newurl = $url->out(false);
                 $newurl = preg_replace_callback(
                     '/degrade\/(\d+)(?:_\d+)?\//',
@@ -783,7 +783,7 @@ class core_renderer extends \core_renderer {
             if ($courseid) {
                 $url->param("courseid", $courseid);
             }
-            if ($profileid > 0) {
+            if ($profileid) {
                 $url->param("profileid", $profileid);
             }
 
