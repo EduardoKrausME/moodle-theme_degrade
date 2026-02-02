@@ -1,0 +1,86 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template @template theme_degrade/course_management/course_listitem
+
+    Example context (json):
+    {
+        "courseid": 42,
+        "dataselected": "0",
+        "datavisible": "1",
+
+        "canresort": true,
+        "moveicon": "<span class=\"dragicon\" aria-hidden=\"true\">&#9776;</span>",
+
+        "showcheckbox": true,
+        "checkboxid": "bulk-course-42",
+        "checkboxname": "courseids[]",
+        "checkboxvalue": "42",
+        "bulkactionlabel": "Select course: Introduction to Moodle",
+
+        "viewcourseurl": "/course/view.php?id=42",
+        "coursename": "Introduction to <strong>Moodle</strong> (Admin training)",
+
+        "hasidnumber": true,
+        "idnumber": "TRN-ADM-2026-001",
+
+        "actions": "<div class=\"btn-group\" role=\"group\">...</div>"
+    }
+}}
+
+<li class="listitem listitem-course list-group-item list-group-item-action"
+    data-id="{{courseid}}"
+    data-selected="{{dataselected}}"
+    data-visible="{{datavisible}}">
+
+    <div class="d-flex">
+        {{#canresort}}
+            <div class="float-start drag-handle">
+                {{{moveicon}}}
+            </div>
+        {{/canresort}}
+
+        {{#showcheckbox}}
+            <div class="float-start">
+                <div class="custom-control custom-checkbox me-1">
+                    <input id="{{checkboxid}}"
+                           type="checkbox"
+                           name="{{checkboxname}}"
+                           value="{{checkboxvalue}}"
+                           class="bulk-action-checkbox custom-control-input"
+                           data-action="select">
+                    <label class="custom-control-label" for="{{checkboxid}}">
+                        <span class="sr-only">{{bulkactionlabel}}</span>
+                    </label>
+                </div>
+            </div>
+        {{/showcheckbox}}
+
+        <div class="d-flex flex-column w-100">
+            <a href="{{viewcourseurl}}" class="text-break col ps-0 mb-2 coursename aalink">
+                {{{coursename}}}
+            </a>
+            <div class="flex-shrink-0 ms-auto">
+                {{#hasidnumber}}
+                    <span class="text-muted idnumber">{{idnumber}}</span>
+                {{/hasidnumber}}
+
+                {{{actions}}}
+            </div>
+        </div>
+    </div>
+</li>
