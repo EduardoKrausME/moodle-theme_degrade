@@ -107,6 +107,10 @@ $spacers: (
         6: ($spacer * 3)
 ) !default;
 
+// Footer
+$footer-bg: null !default;
+$footer-color: #333 !default;
+
 // Behat site specific variable values.
 $behatsite: false !default;
 $enable-transitions: not $behatsite !default;

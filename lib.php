@@ -24,15 +24,17 @@
  */
 
 use core\output\notification;
+use Sabberworm\CSS\CSSList\Document;
 use theme_degrade\admin\setting_scss;
 use theme_degrade\autoprefixer;
 use theme_degrade\icon_extractor;
+use theme_degrade\output\footer_renderer;
 use theme_degrade\thumb_generator;
 
 /**
  * Post process the CSS tree.
  *
- * @param string $tree The CSS tree.
+ * @param Document $tree The CSS tree.
  * @param theme_config $theme The theme config object.
  */
 function theme_degrade_css_tree_post_processor($tree, $theme) {
@@ -45,6 +47,7 @@ function theme_degrade_css_tree_post_processor($tree, $theme) {
  *
  * @param theme_config $theme The theme config object.
  * @return string
+ * @throws Exception
  */
 function theme_degrade_get_extra_scss($theme) {
     $content = "";
@@ -55,9 +58,9 @@ function theme_degrade_get_extra_scss($theme) {
         $content .= "
             @media (min-width: 768px) {
                 body {
-                    background-image: url('$imageurl'); background-size: cover;
-                 }
-             }";
+                    background-image: url('{$imageurl}'); background-size: cover;
+                }
+            }";
     }
 
     $scsspos = "";
@@ -182,19 +185,25 @@ function theme_degrade_get_main_scss_content($theme) {
 function theme_degrade_get_pre_scss($theme) {
     global $CFG;
 
-    $primarycolorscss = "";
+    $primarycolor = "#1a2a6c";
     $brandcolor = get_config("theme_boost", "brandcolor");
     if (isset($brandcolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $brandcolor)) {
-        $primarycolorscss = "\$primary: {$brandcolor};\n";
+        $primarycolor = $brandcolor;
     }
     $courseid = optional_param("courseid", 0, PARAM_INT);
     if ($courseid) {
         $coursecolor = get_config("theme_degrade", "override_course_color_{$courseid}");
         if (isset($coursecolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $coursecolor)) {
-            $primarycolorscss = "\$primary: {$coursecolor};\n";
+            $primarycolor = $coursecolor;
         }
     }
-    $scss = $primarycolorscss;
+
+    $footerbg = theme_degrade_default("footer_background_color", $brandcolor);
+    $footercolor = footer_renderer::get_footer_color($footerbg, "#333", false);
+    $scss = "
+        \$primary      : {$primarycolor};
+        \$footer-bg    : {$footerbg};
+        \$footer-color : {$footercolor};\n";
 
     if ($CFG->theme == "degrade") {
         $angle = theme_degrade_default("angle", 30);
@@ -209,7 +218,8 @@ function theme_degrade_get_pre_scss($theme) {
             }\n";
     } else {
         if ($topscrollbackgroundcolor = get_config("theme_degrade", "top_scroll_background_color")) {
-            $scss .= "\$top_scroll_background_color: {$topscrollbackgroundcolor};\n";
+            $scss .= "
+                \$top_scroll_background_color: {$topscrollbackgroundcolor};\n";
         }
     }
 
@@ -294,7 +304,7 @@ function theme_degrade_progress_content() {
             $completed += 0;
         } else {
             $completed += 1;
-        };
+        }
     }
 
     return [

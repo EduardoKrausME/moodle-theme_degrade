@@ -44,14 +44,9 @@ class footer_renderer {
             return json_decode($cache->get($cachekey), true);
         }
 
-        $brandcolor = get_config("theme_boost", "brandcolor");
-        $footercolor = theme_degrade_default("footer_background_color", $brandcolor);
-
         $data = [
             "footercount" => 0,
             "footercontents" => [],
-            "footer_background_color" => $footercolor,
-            "footer_background_text_color" => self::get_footer_color($footercolor, "#333", false),
             "footer_show_copywriter" => get_config("theme_degrade", "footer_show_copywriter"),
         ];
         for ($i = 1; $i <= 4; $i++) {
@@ -79,7 +74,7 @@ class footer_renderer {
      * @param string $lightcolor
      * @return float|null
      */
-    private static function get_footer_color($bgcolor, $darkcolor, $lightcolor) {
+    public static function get_footer_color($bgcolor, $darkcolor, $lightcolor) {
         // Remove o # e garante que tenha 6 caracteres.
         $bgcolor = ltrim($bgcolor, "#");
         if (strlen($bgcolor) !== 6) {
