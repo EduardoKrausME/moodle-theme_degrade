@@ -197,7 +197,7 @@ $courseindex-item-current: $primary !default;
                 color: $danger;
             }
             &:empty {
-                display: none;
+                // display: none;
             }
         }
 
