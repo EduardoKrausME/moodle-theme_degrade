@@ -96,6 +96,7 @@ $courseindex-item-current: $primary !default;
                 font-size: 18px;
                 font-weight: 700;
                 color: darken($primary, 4%);
+                white-space: normal;
                 .icon {
                     font-size: 16px;
                 }
