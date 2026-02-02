@@ -51,7 +51,7 @@ class footer_renderer {
             "footercount" => 0,
             "footercontents" => [],
             "footer_background_color" => $footercolor,
-            "footer_background_text_color" => theme_degrade_get_footer_color($footercolor, "#333", false),
+            "footer_background_text_color" => self::get_footer_color($footercolor, "#333", false),
             "footer_show_copywriter" => get_config("theme_degrade", "footer_show_copywriter"),
         ];
         for ($i = 1; $i <= 4; $i++) {
@@ -69,5 +69,31 @@ class footer_renderer {
         $cache->set($cachekey, json_encode($data));
 
         return $data;
+    }
+
+    /**
+     * get_footer_color
+     *
+     * @param string $bgcolor
+     * @param string $darkcolor
+     * @param string $lightcolor
+     * @return float|null
+     */
+    private static function get_footer_color($bgcolor, $darkcolor, $lightcolor) {
+        // Remove o # e garante que tenha 6 caracteres.
+        $bgcolor = ltrim($bgcolor, "#");
+        if (strlen($bgcolor) !== 6) {
+            return 1; // Cor inválida.
+        }
+
+        // Converte para números (base 16).
+        $r = hexdec(substr($bgcolor, 0, 2));
+        $g = hexdec(substr($bgcolor, 2, 2));
+        $b = hexdec(substr($bgcolor, 4, 2));
+
+        // Calcula a luminância percebida (fórmula de acessibilidade W3C).
+        $luminance = (0.299 * $r + 0.587 * $g + 0.114 * $b) / 255;
+
+        return $luminance > 0.6 ? $darkcolor : $lightcolor;
     }
 }
