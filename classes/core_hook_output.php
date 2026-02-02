@@ -24,8 +24,10 @@
 
 namespace theme_degrade;
 
+use cache;
 use core\hook\output\before_html_attributes;
 use Exception;
+use moodle_url;
 
 /**
  * Class core_hook_output
@@ -86,7 +88,7 @@ class core_hook_output {
 
         $images = ["blocks" => [], "icons" => [], "colors" => []];
 
-        $cache = \cache::make("theme_degrade", "css_cache");
+        $cache = cache::make("theme_degrade", "css_cache");
         $cachekey = "theme_degrade_customimages_{$COURSE->id}";
         if ($cache->has($cachekey)) {
             $images = json_decode($cache->get($cachekey), true);
@@ -100,16 +102,13 @@ class core_hook_output {
                    AND filename  LIKE '__%'";
             $customimages = $DB->get_records_sql($sql);
             foreach ($customimages as $customimage) {
-                $imageurl = \moodle_url::make_file_url(
-                    "{$CFG->wwwroot}/pluginfile.php",
-                    implode("/", [
-                        "",
-                        $customimage->contextid,
-                        "theme_degrade",
-                        "theme_degrade_customimage",
-                        $customimage->itemid,
-                        $customimage->filename,
-                    ])
+                $imageurl = moodle_url::make_pluginfile_url(
+                    $customimage->contextid,
+                    "theme_degrade",
+                    "theme_degrade_customimage",
+                    $customimage->itemid,
+                    "/",
+                    $customimage->filename
                 );
                 $images["blocks"][] = ["cmid" => $customimage->itemid, "thumb" => $imageurl->out()];
             }
@@ -123,16 +122,13 @@ class core_hook_output {
                    AND filename  LIKE '__%'";
             $customicons = $DB->get_records_sql($sql);
             foreach ($customicons as $customicon) {
-                $imageurl = \moodle_url::make_file_url(
-                    "{$CFG->wwwroot}/pluginfile.php",
-                    implode("/", [
-                        "",
-                        $customicon->contextid,
-                        "theme_degrade",
-                        "theme_degrade_customicon",
-                        $customicon->itemid,
-                        $customicon->filename,
-                    ])
+                $imageurl = moodle_url::make_pluginfile_url(
+                    $customicon->contextid,
+                    "theme_degrade",
+                    "theme_degrade_customicon",
+                    $customicon->itemid,
+                    "/",
+                    $customicon->filename
                 );
 
                 $images["icons"][] = ["cmid" => $customicon->itemid, "thumb" => $imageurl->out()];
@@ -173,7 +169,7 @@ class core_hook_output {
      * @throws Exception
      */
     private static function background_profile_image() {
-        $cache = \cache::make("theme_degrade", "css_cache");
+        $cache = cache::make("theme_degrade", "css_cache");
         $cachekey = "background_profile_image";
         if ($cache->has($cachekey)) {
             $css = $cache->get($cachekey);

@@ -16,16 +16,22 @@ define(["jquery"], function ($) {
         icons: function (cmid, thumb) {
             $(`#course-index-cm-${cmid}`).addClass("personal-icon");
             let rule = `
-                    #module-${cmid} .courseicon {
-                        background       : #fff;
-                        background-color : #fff;
-                    }
-                    #course-index-cm-${cmid} .activity-icon img,
-                    #module-${cmid} .courseicon img,
-                    .cmid-${cmid} #page-header .activityiconcontainer img {
-                        content : url('${thumb}');
-                        filter  : none;
-                    }`
+                #module-${cmid} .courseicon {
+                    background       : #fff;
+                    background-color : #fff;
+                }
+                #course-index-cm-${cmid} .activity-icon img,
+                #module-${cmid} .courseicon img,
+                .cmid-${cmid} #page-header .activityiconcontainer img {
+                    content : url('${thumb}');
+                    filter  : none;
+                }
+                .cmid-${cmid} #page-header .activityiconcontainer img {
+                        width     : 45px !important;
+                        height    : 45px !important;
+                        max-width : 45px !important;
+                        max-height: 45px !important;
+                }`;
             blocks.add_style_tag(rule);
         },
 
@@ -34,10 +40,10 @@ define(["jquery"], function ($) {
                 return;
             }
             let rule = `
-                    #module-${cmid} .courseicon {
-                        background       : ${color} !important;
-                        background-color : ${color} !important;
-                    }`;
+                #module-${cmid} .courseicon {
+                    background       : ${color} !important;
+                    background-color : ${color} !important;
+                }`;
             blocks.add_style_tag(rule);
         },
 

@@ -23,8 +23,11 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use core\output\notification;
 use theme_degrade\admin\setting_scss;
 use theme_degrade\autoprefixer;
+use theme_degrade\icon_extractor;
+use theme_degrade\thumb_generator;
 
 /**
  * Post process the CSS tree.
@@ -113,16 +116,27 @@ function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $for
         }
         send_file_not_found();
     } else if ($context->contextlevel == CONTEXT_MODULE) {
-        $fullpath = sha1("/{$context->id}/theme_degrade/{$filearea}/{$args[0]}/{$args[1]}");
         $fs = get_file_storage();
-        if ($file = $fs->get_file_by_hash($fullpath)) {
-            return send_stored_file($file, 0, 0, false, $options);
+        $fullpath = sha1("/{$context->id}/theme_degrade/{$filearea}/{$args[0]}/{$args[1]}");
+        if (!$file = $fs->get_file_by_hash($fullpath)) {
+            return false;
         }
+        if ($filearea == "theme_degrade_customimage" || $filearea == "theme_degrade_customicon") {
+            $thumb = (new thumb_generator())
+                ->set_height(($filearea == 'theme_degrade_customicon') ? 50 : 150)
+                ->set_cache_filearea("{$filearea}_thumb")
+                ->set_cache_itemid($args[0])
+                ->get_or_create($file, $context);
+            if ($thumb) {
+                return send_stored_file($thumb, 0, 0, false, $options);
+            }
+        }
+
+        // Fallback: image original.
+        return send_stored_file($file, 0, 0, false, $options);
     } else {
         send_file_not_found();
     }
-
-    return false;
 }
 
 /**
@@ -237,9 +251,10 @@ function theme_degrade_get_pre_scss($theme) {
  * Function theme_degrade_progress_content
  *
  * @return array
+ * @throws coding_exception
  */
 function theme_degrade_progress_content() {
-    global $USER, $COURSE;
+    global $USER, $COURSE, $SESSION;
 
     $completion = new completion_info($COURSE);
 
@@ -249,6 +264,10 @@ function theme_degrade_progress_content() {
     }
 
     if (!$completion->is_tracked_user($USER->id)) {
+        $SESSION->notifications[] = (object) [
+            "message" => get_string("notenrolledincourse", "theme_degrade"),
+            "type" => notification::NOTIFY_WARNING,
+        ];
         return ["isprogress" => false];
     }
 
@@ -294,18 +313,13 @@ function theme_degrade_progress_content() {
  * @throws dml_exception
  */
 function theme_degrade_setting_file_url($setting) {
-    global $CFG;
-
     $filepath = get_config("theme_degrade", $setting);
     if (!$filepath) {
         return false;
     }
     $syscontext = context_system::instance();
 
-    $url = moodle_url::make_file_url(
-        "$CFG->wwwroot/pluginfile.php",
-        "/{$syscontext->id}/theme_degrade/{$setting}/0/{$filepath}"
-    );
+    $url = moodle_url::make_pluginfile_url($syscontext->id, "theme_degrade", $setting, 0, "/", $filepath);
 
     return $url;
 }
@@ -327,9 +341,6 @@ function theme_degrade_coursemodule_standard_elements(&$formwrapper, $mform) {
     if ($formwrapper->get_current()->modulename == "label") {
         return;
     }
-    if ($formwrapper->get_current()->modulename == "learningmap") {
-        return;
-    }
 
     global $CFG, $PAGE;
     if ($CFG->theme == "degrade" || $CFG->theme == "eadflix") {
@@ -349,7 +360,6 @@ function theme_degrade_coursemodule_standard_elements(&$formwrapper, $mform) {
         // Background.
         if (isset($formwrapper->get_current()->coursemodule) && $formwrapper->get_current()->coursemodule) {
             $context = context_module::instance($formwrapper->get_current()->coursemodule);
-
             $draftitemid = file_get_submitted_draft_itemid("theme_degrade_customimage");
             file_prepare_draft_area(
                 $draftitemid,
@@ -358,10 +368,7 @@ function theme_degrade_coursemodule_standard_elements(&$formwrapper, $mform) {
                 "theme_degrade_customimage",
                 $formwrapper->get_current()->coursemodule
             );
-
-            $formwrapper->set_data([
-                "theme_degrade_customimage" => $draftitemid,
-            ]);
+            $formwrapper->set_data(["theme_degrade_customimage" => $draftitemid]);
         }
         $mform->addElement(
             "filemanager",
@@ -390,10 +397,7 @@ function theme_degrade_coursemodule_standard_elements(&$formwrapper, $mform) {
                 "theme_degrade_customicon",
                 $formwrapper->get_current()->coursemodule
             );
-
-            $formwrapper->set_data([
-                "theme_degrade_customicon" => $draftitemid,
-            ]);
+            $formwrapper->set_data(["theme_degrade_customicon" => $draftitemid]);
         }
         $filemanageroptions["accepted_types"] = [".svg", ".png"];
         $mform->addElement(
@@ -430,15 +434,23 @@ function theme_degrade_coursemodule_standard_elements(&$formwrapper, $mform) {
 /**
  * Hook the add/edit of the course module.
  *
- * @param moodleform $data Data from the form submission.
+ * @param stdClass $data Data from the form submission.
  * @param stdClass $course The course.
- * @return moodleform
+ * @return stdClass
  * @throws Exception
  */
 function theme_degrade_coursemodule_edit_post_actions($data, $course) {
     $context = context_module::instance($data->coursemodule);
 
-    if (isset($data->theme_degrade_customimage)) {
+    $hascustomimage =
+        isset($data->theme_degrade_customimage) &&
+        theme_degrade_draft_has_files($data->theme_degrade_customimage);
+    $hascustomicon =
+        isset($data->theme_degrade_customicon) &&
+        theme_degrade_draft_has_files($data->theme_degrade_customicon);
+
+    // Save Background Image (customimage).
+    if ($hascustomimage) {
         $options = ["subdirs" => true, "embed" => true];
         $filesave = file_save_draft_area_files(
             $data->theme_degrade_customimage,
@@ -455,7 +467,8 @@ function theme_degrade_coursemodule_edit_post_actions($data, $course) {
         cache::make("theme_degrade", "css_cache")->purge();
     }
 
-    if (isset($data->theme_degrade_customicon)) {
+    // Save Icon (customicon) if user uploaded one.
+    if ($hascustomicon) {
         $options = ["subdirs" => true, "embed" => true];
         $filesave = file_save_draft_area_files(
             $data->theme_degrade_customicon,
@@ -472,6 +485,80 @@ function theme_degrade_coursemodule_edit_post_actions($data, $course) {
         cache::make("theme_degrade", "css_cache")->purge();
     }
 
+    // Auto-generate icon when:
+    //  - customimage was uploaded
+    //  - customicon was NOT uploaded (draft has zero files)
+    if ($hascustomimage && !$hascustomicon) {
+        // Get the saved background image from module context area.
+        $fs = get_file_storage();
+        $areafiles = $fs->get_area_files(
+            $context->id,
+            "theme_degrade",
+            "theme_degrade_customimage",
+            $data->coursemodule,
+            "id DESC",
+            false
+        );
+
+        if (!empty($areafiles)) {
+            /** @var stored_file $sourcefile */
+            $sourcefile = reset($areafiles);
+
+            // Only raster images can be processed by GD.
+            $mimetype = $sourcefile->get_mimetype();
+            $supported = ["image/png", "image/jpeg"];
+            if (in_array($mimetype, $supported, true)) {
+                try {
+                    $extractor = new icon_extractor();
+
+                    $tmpdir = make_temp_directory("theme_degrade_icons");
+                    $tmpfile = $tmpdir . DIRECTORY_SEPARATOR . "cm{$data->coursemodule}_" . uniqid("", true) . ".png";
+
+                    // Configure extractor defaults (tune if you want).
+                    $extractor->set_source_blob($sourcefile->get_content())
+                        ->set_corner_tolerance(20)
+                        ->set_background_tolerance(20)
+                        ->set_crop_padding(2)
+                        ->process()
+                        ->get_result_png($tmpfile, 45);
+
+                    if (!file_exists($tmpfile) || filesize($tmpfile) <= 0) {
+                        @unlink($tmpfile);
+                        throw new Exception("File not generated");
+                    }
+                    $component = "theme_degrade";
+                    $filearea = "theme_degrade_customicon";
+                    $itemid = $data->coursemodule;
+
+                    $countfiles = $fs->get_area_files($context->id, $component, $filearea, $itemid);
+                    if (count($countfiles)===0) {
+                        global $USER;
+                        $filerecord = [
+                            "contextid" => $context->id,
+                            "component" => $component,
+                            "filearea" => $filearea,
+                            "itemid" => $itemid,
+                            "filepath" => "/",
+                            "filename" => "generated-icon.png",
+                            "userid" => $USER->id,
+                            "mimetype" => "image/png",
+                        ];
+                        $fs->create_file_from_pathname($filerecord, $tmpfile);
+
+                        // Keep the same config pattern used by your code.
+                        $name = "theme_degrade_customicon_{$data->coursemodule}";
+                        set_config($name, 1, "theme_degrade");
+
+                        cache::make("theme_degrade", "css_cache")->purge();
+                    }
+                } catch (Throwable $e) {
+                    // Fail silently: image was saved, but icon generation failed.
+                    debugging("Icon generation failed: {$e->getMessage()}", DEBUG_DEVELOPER);
+                }
+            }
+        }
+    }
+
     if (isset($data->theme_degrade_customcolor)) {
         $name = "theme_degrade_customcolor_{$data->coursemodule}";
         set_config($name, $data->theme_degrade_customcolor, "theme_degrade");
@@ -480,6 +567,20 @@ function theme_degrade_coursemodule_edit_post_actions($data, $course) {
     }
 
     return $data;
+}
+
+/**
+ * Helper: filemanager draft is always set, so we must check if it has files.
+ *
+ * @param $draftitemid
+ * @return bool
+ */
+function theme_degrade_draft_has_files($draftitemid): bool {
+    if (empty($draftitemid)) {
+        return false;
+    }
+    $info = file_get_draft_area_info($draftitemid);
+    return !empty($info["filecount"]) && (int) $info["filecount"] > 0;
 }
 
 /**
@@ -540,7 +641,6 @@ function theme_degrade_change_color() {
     theme_reset_all_caches();
 }
 
-
 /**
  * get_config default
  *
@@ -556,30 +656,4 @@ function theme_degrade_default($configname, $default, $plugin = "theme_degrade")
     }
 
     return $value;
-}
-
-/**
- * theme_degrade_get_footer_color
- *
- * @param string $bgcolor
- * @param string $darkcolor
- * @param string $lightcolor
- * @return float|null
- */
-function theme_degrade_get_footer_color($bgcolor, $darkcolor, $lightcolor) {
-    // Remove o # e garante que tenha 6 caracteres.
-    $bgcolor = ltrim($bgcolor, '#');
-    if (strlen($bgcolor) !== 6) {
-        return 1; // Cor inválida.
-    }
-
-    // Converte para números (base 16).
-    $r = hexdec(substr($bgcolor, 0, 2));
-    $g = hexdec(substr($bgcolor, 2, 2));
-    $b = hexdec(substr($bgcolor, 4, 2));
-
-    // Calcula a luminância percebida (fórmula de acessibilidade W3C).
-    $luminance = (0.299 * $r + 0.587 * $g + 0.114 * $b) / 255;
-
-    return $luminance > 0.6 ? $darkcolor : $lightcolor;
 }
