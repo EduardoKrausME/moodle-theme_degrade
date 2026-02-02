@@ -327,9 +327,14 @@ class course_renderer extends \core_course_renderer {
         foreach ($course->get_course_overviewfiles() as $file) {
             $isimage = $file->is_valid_image();
             if ($isimage) {
-                return moodle_url::make_file_url("$CFG->wwwroot/pluginfile.php",
-                    "/" . $file->get_contextid() . "/" . $file->get_component() . "/" .
-                    $file->get_filearea() . $file->get_filepath() . $file->get_filename(), !$isimage);
+                return moodle_url::make_pluginfile_url(
+                    $file->get_contextid(),
+                    $file->get_component(),
+                    $file->get_filearea(),
+                    null,
+                    $file->get_filepath(),
+                    $file->get_filename()
+                );
             }
         }
         return "";
