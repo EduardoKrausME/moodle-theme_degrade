@@ -50,4 +50,11 @@ $setting = new admin_setting_configselect("theme_degrade/course_summary_banner",
     0, $options);
 $page->add($setting);
 
+// SCORM auto enter setting.
+$setting = new admin_setting_configcheckbox("theme_degrade/scorm_autoenter",
+    get_string("course_scorm_autoenter", "theme_degrade"),
+    get_string("course_scorm_autoenter_desc", "theme_degrade"),
+    1);
+$page->add($setting);
+
 $settings->add($page);

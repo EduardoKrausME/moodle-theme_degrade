@@ -108,6 +108,7 @@ $templatecontext = [
     "headercontent" => $headercontent,
     "addblockbutton" => $addblockbutton,
     "course_summary" => get_config("theme_degrade", "course_summary"),
+    "scorm_autoenter" => get_config("theme_degrade", "scorm_autoenter"),
 ];
 
 if (optional_param("embed-frame-top", 0, PARAM_INT)) {

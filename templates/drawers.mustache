@@ -75,9 +75,13 @@
                     <div class="progress-label">
                         <span>{{#str}}completed{{/str}} {{{progress}}}%</span>
                     </div>
-                    <div class="progress-percentage progress-count">
-                        <span>{{{progress_completed}}} / {{{progress_count}}}</span>
-                    </div>
+                    {{#progress_completed}}
+                        {{#progress_count}}
+                            <div class="progress-percentage progress-count">
+                                <span>{{{progress_completed}}} / {{{progress_count}}}</span>
+                            </div>
+                        {{/progress_count}}
+                    {{/progress_completed}}
                 </div>
                 <div class="progress">
                     <div class="progress-bar bg-primary"
@@ -209,16 +213,18 @@
         M.util.js_complete("theme_boost/loader");
     });
 
-    {{#mod_scorm_view}}
-        (function () {
-            // Automatically submit the form when accessing the SCORM so the user isn’t prompted to log in.
-            const form = document.getElementById("scormviewform");
-            if (form) {
-                form.method = "GET"; // changes the method to GET.
-                form.submit();       // submits the form.
-            }
-        })();
-    {{/mod_scorm_view}}
+    {{#scorm_autoenter}}
+        {{#mod_scorm_view}}
+            (function () {
+                // Automatically submit the form when accessing the SCORM so the user isn’t prompted to log in.
+                const form = document.getElementById("scormviewform");
+                if (form) {
+                    form.method = "GET"; // changes the method to GET.
+                    form.submit();       // submits the form.
+                }
+            })();
+        {{/mod_scorm_view}}
+    {{/scorm_autoenter}}
     {{#mod_scorm_player}}
         (function () {
             // 1) Add the "disabled" class and the "disabled-by" attribute to the TOC.
