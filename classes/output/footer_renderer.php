@@ -78,7 +78,7 @@ class footer_renderer {
         // Remove o # e garante que tenha 6 caracteres.
         $bgcolor = ltrim($bgcolor, "#");
         if (strlen($bgcolor) !== 6) {
-            return 1; // Cor inválida.
+            return $darkcolor; // Invalid color.
         }
 
         // Converte para números (base 16).
