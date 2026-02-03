@@ -118,7 +118,6 @@ a:not([class]),
         outline: $btn-focus-width solid transparent;
         color: $gray-900;
         background-color: lighten($primary, 50%);
-        box-shadow: 0 -#{$btn-focus-width} lighten($primary, 50%), 0 $btn-focus-width $gray-800;
     }
 
     &:focus:hover {
