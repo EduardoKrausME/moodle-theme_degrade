@@ -363,6 +363,7 @@ class core_renderer extends \core_renderer {
 
     /**
      * get_details
+     *
      * @return array
      * @throws Exception
      */
@@ -560,7 +561,7 @@ class core_renderer extends \core_renderer {
         }
 
         // Hide the requested size in the file path.
-        $filepath = ((int)$maxwidth . "x" . (int)$maxheight) . "/";
+        $filepath = "{$maxwidth}x{$maxheight}/";
 
         // Use $CFG->themerev to prevent browser caching when the file changes.
         return $return = moodle_url::make_pluginfile_url(
@@ -587,6 +588,7 @@ class core_renderer extends \core_renderer {
 
     /**
      * Brandcolor background menu class
+     *
      * @return string
      * @throws Exception
      */
@@ -653,7 +655,7 @@ class core_renderer extends \core_renderer {
         }
 
         // Hide the requested size in the file path.
-        $filepath = ((int)$maxwidth . "x" . (int)$maxheight) . "/";
+        $filepath = "{$maxwidth}x{$maxheight}/";
 
         // Use $CFG->themerev to prevent browser caching when the file changes.
         return $return = moodle_url::make_pluginfile_url(
@@ -675,7 +677,7 @@ class core_renderer extends \core_renderer {
      * @throws Exception
      */
     public function standard_head_html() {
-        global $CFG, $SITE;
+        global $CFG, $SITE, $USER;
 
         // Before we output any content, we need to ensure that certain
         // page components are set up.
@@ -738,56 +740,58 @@ class core_renderer extends \core_renderer {
             }
         }
 
+        // Check profile.
+        $profileid = $coursecolor = false;
+        if (!empty($this->page->course) && !empty($this->page->course->id) && $this->page->course->id > 1) {
+            $coursecolor = get_config("theme_degrade", "override_course_color_{$this->page->course->id}");
+        }
+        if (!$coursecolor) {
+            $plugins = get_plugins_with_function("krausthemes__get_scss_profile");
+            foreach ($plugins as $plugin) {
+                foreach ($plugin as $functionname) {
+                    $pid = $functionname($USER->id);
+                    if ($pid) {
+                        $profileid = hexdec($pid);
+                        break;
+                    }
+                }
+            }
+        }
+
         // Get the theme stylesheet - this has to be always first CSS, this loads also styles.css from all plugins;
         // any other custom CSS can not be overridden via themes and is highly discouraged.
         $urls = $this->page->theme->css_urls($this->page);
         /** @var moodle_url $url */
         foreach ($urls as $url) {
-            $coursecolor = "";
-            if (!empty($this->page->course) && !empty($this->page->course->id) && $this->page->course->id > 1) {
-                $coursecolor = (string)get_config("theme_degrade", "override_course_color_{$this->page->course->id}");
-            }
-
-            // Check profile.
-            $profileid = false;
-            $plugins = get_plugins_with_function("krausthemes__get_scss_profile");
-            foreach ($plugins as $names) {
-                foreach ($names as $functionname) {
-                    $pid = (int)$functionname($this->page);
-                    if ($pid > 0) {
-                        $profileid = $pid;
-                        break 2;
-                    }
-                }
-            }
 
             // When course color OR profile exists, use theme-styles.php and pass profileid (for cache separation).
-            if (isset($coursecolor[3]) || $profileid) {
-                $newurl = $url->out(false);
-                $newurl = preg_replace_callback(
-                    '/degrade\/(\d+)(?:_\d+)?\//',
-                    function ($matches) {
-                        $novoid = ((int) $matches[1]);
+            if ($coursecolor || $profileid) {
+                if (!$CFG->themedesignermode) {
+                    $newurl = $url->out(false);
+                    $newurl = preg_replace_callback(
+                        '/degrade\/(\d+)(?:_\d+)?\//',
+                        function($matches) {
+                            global $coursecolor, $profileid;
 
-                        return "degrade/{$novoid}_{$this->page->course->id}/";
-                    },
-                    $newurl
-                );
-                $newurl = str_replace("theme/styles.php", "theme/degrade/theme-styles.php", $newurl);
-                $courseid = $this->page->course->id;
-            } else {
-                $newurl = $url->out(false);
-                $courseid = 0;
+                            $novoid = $matches[1];
+                            if ($coursecolor) {
+                                $novoid = "{$matches[1]}_{$this->page->course->id}";
+                            } else if ($profileid) {
+                                $novoid = "{$matches[1]}_{$profileid}";
+                            }
+                            return "degrade/{$novoid}/";
+                        },
+                        $newurl
+                    );
+                    $newurl = str_replace("theme/styles.php", "theme/degrade/theme-styles.php", $newurl);
+                    $url = new moodle_url($newurl);
+                }
+                if ($coursecolor) {
+                    $url->param("courseid", $this->page->course->id);
+                } else if ($profileid) {
+                    $url->param("profileid", $profileid);
+                }
             }
-
-            $url = new moodle_url($newurl);
-            if ($courseid) {
-                $url->param("courseid", $courseid);
-            }
-            if ($profileid) {
-                $url->param("profileid", $profileid);
-            }
-
             $this->page->requires->css_theme($url);
         }
 

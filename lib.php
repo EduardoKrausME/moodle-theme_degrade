@@ -190,16 +190,9 @@ function theme_degrade_get_pre_scss($theme) {
     if (isset($brandcolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $brandcolor)) {
         $primarycolor = $brandcolor;
     }
-    $courseid = optional_param("courseid", 0, PARAM_INT);
-    if ($courseid) {
-        $coursecolor = get_config("theme_degrade", "override_course_color_{$courseid}");
-        if (isset($coursecolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $coursecolor)) {
-            $primarycolor = $coursecolor;
-        }
-    }
 
     $footerbg = theme_degrade_default("footer_background_color", $brandcolor);
-    $footercolor = footer_renderer::get_footer_color($footerbg, "#333", false);
+    $footercolor = footer_renderer::get_footer_color($footerbg, "#333333", "#ffffff");
     $scss = "
         \$primary      : {$primarycolor};
         \$footer-bg    : {$footerbg};
@@ -223,11 +216,21 @@ function theme_degrade_get_pre_scss($theme) {
         }
     }
 
-    $callbacks = get_plugins_with_function("krausthemes__get_pre_scss");
-    foreach ($callbacks as $plugins) {
-        foreach ($plugins as $callback) {
-            if ($newscss = $callback()) {
-                $scss = $newscss;
+    $courseid = optional_param("courseid", false, PARAM_INT);
+    $profileid = optional_param("profileid", false, PARAM_TEXT);
+    if ($courseid) {
+        echo "/*teste teste*/";
+        $coursecolor = get_config("theme_degrade", "override_course_color_{$courseid}");
+        if (isset($coursecolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $coursecolor)) {
+            $scss = "\$primary : {$coursecolor};";
+        }
+    } else if ($profileid) {
+        $callbacks = get_plugins_with_function("krausthemes__get_pre_scss");
+        foreach ($callbacks as $plugins) {
+            foreach ($plugins as $callback) {
+                if ($newscss = $callback($profileid)) {
+                    $scss .= $newscss;
+                }
             }
         }
     }
