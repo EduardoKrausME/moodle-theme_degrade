@@ -1187,7 +1187,9 @@
         max-height: 100px;
     }
     .login-wrapper {
-        margin-left: 17%;
+        @media (min-width: 771px) {
+            margin-left: 17%;
+        }
     }
     form {
         .form-control {
