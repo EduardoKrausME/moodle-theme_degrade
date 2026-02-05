@@ -764,33 +764,33 @@ class core_renderer extends \core_renderer {
         /** @var moodle_url $url */
         foreach ($urls as $url) {
 
-                // When course color OR profile exists, use theme-styles.php and pass profileid (for cache separation).
-                if ($coursecolor || $profileid) {
-                    if (!$CFG->themedesignermode) {
-                        $newurl = $url->out(false);
-                        $newurl = preg_replace_callback(
-                            '/degrade\/(\d+)(?:_\d+)?\//',
-                            function($matches) {
-                                global $coursecolor, $profileid;
+            // When course color OR profile exists, use theme-styles.php and pass profileid (for cache separation).
+            if ($coursecolor || $profileid) {
+                if (!$CFG->themedesignermode) {
+                    $newurl = $url->out(false);
+                    $newurl = preg_replace_callback(
+                        '/degrade\/(\d+)(?:_\d+)?\//',
+                        function($matches) {
+                            global $coursecolor, $profileid;
 
-                                $novoid = $matches[1];
-                                if ($coursecolor) {
-                                    $novoid = "{$matches[1]}_{$this->page->course->id}";
-                                } else if ($profileid) {
-                                    $novoid = "{$matches[1]}_{$profileid}";
-                                }
-                                return "degrade/{$novoid}/";
-                            },
-                            $newurl
-                        );
-                        $newurl = str_replace("theme/styles.php", "theme/degrade/theme-styles.php", $newurl);
-                        $url = new moodle_url($newurl);
-                    }
-                    if ($coursecolor) {
-                        $url->param("courseid", $this->page->course->id);
-                    } else if ($profileid) {
-                        $url->param("profileid", $profileid);
-                    }
+                            $novoid = $matches[1];
+                            if ($coursecolor) {
+                                $novoid = "{$matches[1]}_{$this->page->course->id}";
+                            } else if ($profileid) {
+                                $novoid = "{$matches[1]}_{$profileid}";
+                            }
+                            return "degrade/{$novoid}/";
+                        },
+                        $newurl
+                    );
+                    $newurl = str_replace("theme/styles.php", "theme/degrade/theme-styles.php", $newurl);
+                    $url = new moodle_url($newurl);
+                }
+                if ($coursecolor) {
+                    $url->param("courseid", $this->page->course->id);
+                } else if ($profileid) {
+                    $url->param("profileid", $profileid);
+                }
             }
             $this->page->requires->css_theme($url);
         }
