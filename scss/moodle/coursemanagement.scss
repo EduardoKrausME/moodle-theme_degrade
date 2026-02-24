@@ -235,7 +235,7 @@
         }
 
         .pair-value select {
-            max-width: 100%;
+            max-width: 500px;
         }
     }
 
@@ -318,7 +318,6 @@
         #course-detail {
             width: 100%;
             margin-bottom: 1em;
-            order: -1;
         }
     }
 }
@@ -335,4 +334,8 @@
             margin: 0 0 1em;
         }
     }
+}
+
+#course-category-listings #course-detail {
+    order: -1;
 }

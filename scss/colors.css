@@ -369,7 +369,6 @@
   place-items: center;
   width: 100%;
   border-radius: 15px;
-  /* Footer */
 }
 .colors-body, .colors-body * {
   transition: all 0.3s ease-in-out;
@@ -510,6 +509,9 @@
 }
 .colors-body .panel .bar.sm {
   height: 40px;
+}
+.colors-body {
+  /* Footer */
 }
 .colors-body .card__footer {
   background: var(--preview-footer-bg);
