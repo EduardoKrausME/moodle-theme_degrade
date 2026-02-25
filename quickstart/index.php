@@ -99,7 +99,7 @@ if (optional_param("POST", false, PARAM_INT)) {
     $syscontext = context_system::instance();
     foreach ($filefields as $fieldname => $component) {
         if ($fieldname == "banner_course_url") {
-            $hasupload = optional_param($fieldname, null, PARAM_RAW);
+            $hasupload = optional_param($fieldname, null, PARAM_URL);
             if (!$hasupload) {
                 continue;
             }
