@@ -191,10 +191,17 @@ function theme_degrade_get_pre_scss($theme) {
         $primarycolor = $brandcolor;
     }
 
+    $secondarycolor = "#ced4da";
+    $secondary = get_config("theme_boost", "secondary");
+    if (isset($secondary[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $secondary)) {
+        $secondarycolor = $secondary;
+    }
+
     $footerbg = theme_degrade_default("footer_background_color", $brandcolor);
     $footercolor = footer_renderer::get_footer_color($footerbg, "#333333", "#ffffff");
     $scss = "
         \$primary      : {$primarycolor};
+        \$secondary    : {$secondarycolor};
         \$footer-bg    : {$footerbg};
         \$footer-color : {$footercolor};\n";
 
@@ -219,7 +226,6 @@ function theme_degrade_get_pre_scss($theme) {
     $courseid = optional_param("courseid", false, PARAM_INT);
     $profileid = optional_param("profileid", false, PARAM_TEXT);
     if ($courseid) {
-        echo "/*teste teste*/";
         $coursecolor = get_config("theme_degrade", "override_course_color_{$courseid}");
         if (isset($coursecolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $coursecolor)) {
             $scss = "\$primary : {$coursecolor};";

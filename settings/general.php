@@ -27,12 +27,16 @@ defined('MOODLE_INTERNAL') || die;
 global $CFG, $OUTPUT, $PAGE;
 require_once("{$CFG->dirroot}/theme/degrade/lib.php");
 
-$page = new admin_settingpage("theme_degrade_general",
-    get_string("generalsettings", "theme_degrade"));
+$page = new admin_settingpage(
+    "theme_degrade_general",
+    get_string("generalsettings", "theme_degrade")
+);
 
 $url = "{$CFG->wwwroot}/theme/degrade/quickstart/#brandcolor";
-$setting = new admin_setting_heading("theme_degrade_quickstart_brandcolor", "",
-    get_string("quickstart_settings_link", "theme_degrade", $url));
+$setting = new admin_setting_heading(
+    "theme_degrade_quickstart_brandcolor", "",
+    get_string("quickstart_settings_link", "theme_degrade", $url)
+);
 $page->add($setting);
 
 if (file_exists(__DIR__ . "/general-colors.php")) {
@@ -67,67 +71,107 @@ if (file_exists(__DIR__ . "/general-colors.php")) {
         $setting->set_updatedcallback("theme_degrade_change_color");
         $page->add($setting);
         $PAGE->requires->js_call_amd("theme_degrade/settings", "minicolors", [$setting->get_id()]);
+
+        $setting = new admin_setting_configtext(
+            "theme_boost/secondary", get_string("secondary", "theme_degrade"),
+            get_string("secondary_desc", "theme_degrade"), "#ced4da"
+        );
+        $page->add($setting);
+        $PAGE->requires->js_call_amd("theme_degrade/settings", "minicolors", [$setting->get_id()]);
     }
 }
 
-$page->add(new admin_setting_configcheckbox("theme_degrade/brandcolor_background_menu",
+$setting = new admin_setting_configcheckbox(
+    "theme_degrade/brandcolor_background_menu",
     get_string("brandcolor_background_menu", "theme_degrade"),
-    get_string("brandcolor_background_menu_desc", "theme_degrade"), 0));
+    get_string("brandcolor_background_menu_desc", "theme_degrade"), 0
+);
+$page->add($setting);
 
-// Cores do topo.
-$setting = new admin_setting_heading("theme_degrade/top_color_heading",
-    get_string("top_color_heading", "theme_degrade"), "");
+// Navbar layout.
+$navbarlayoutoptions = [
+    "classic" => get_string("navbarlayout_classic", "theme_degrade"),
+    "institutional" => get_string("navbarlayout_institutional", "theme_degrade"),
+];
+$setting = new admin_setting_configselect(
+    "theme_degrade/navbarlayout",
+    get_string("navbarlayout", "theme_degrade"),
+    get_string("navbarlayout_desc", "theme_degrade"),
+    "classic",
+    $navbarlayoutoptions
+);
+$page->add($setting);
+
+// Top colors.
+$setting = new admin_setting_heading(
+    "theme_degrade/top_color_heading",
+    get_string("top_color_heading", "theme_degrade"), ""
+);
 $page->add($setting);
 $PAGE->requires->js_call_amd("theme_degrade/settings", "form_hide");
 
-$setting = new admin_setting_configcheckbox("theme_degrade/top_scroll_fix",
+$setting = new admin_setting_configcheckbox(
+    "theme_degrade/top_scroll_fix",
     get_string("top_scroll_fix", "theme_degrade"),
     get_string("top_scroll_fix_desc", "theme_degrade"),
-    0);
+    0
+);
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 
-$setting = new admin_setting_configtext("theme_degrade/top_scroll_background_color",
+$setting = new admin_setting_configtext(
+    "theme_degrade/top_scroll_background_color",
     get_string("top_scroll_background_color", "theme_degrade"),
-    get_string("top_scroll_background_color_desc", "theme_degrade"), "");
+    get_string("top_scroll_background_color_desc", "theme_degrade"), ""
+);
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 $PAGE->requires->js_call_amd("theme_degrade/settings", "minicolors", [$setting->get_id()]);
 
 // Images.
-$setting = new admin_setting_heading("theme_degrade/favicon_heading",
-    get_string("logocompact", "admin") . " / " . get_string("favicon", "theme_degrade"), "");
+$setting = new admin_setting_heading(
+    "theme_degrade/favicon_heading",
+    get_string("logocompact", "admin") . " / " . get_string("favicon", "theme_degrade"), ""
+);
 $page->add($setting);
 
 // Small logo file setting.
-$setting = new admin_setting_configstoredfile("core_admin/logocompact",
+$setting = new admin_setting_configstoredfile(
+    "core_admin/logocompact",
     get_string("logocompact", "admin"),
     get_string("logocompact_desc", "admin"),
     "logocompact", 0,
-    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".svg", ".png"]]);
+    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".svg", ".png"]]
+);
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 
 // Favicon file setting.
-$setting = new admin_setting_configstoredfile("core_admin/favicon",
+$setting = new admin_setting_configstoredfile(
+    "core_admin/favicon",
     get_string("favicon", "theme_degrade"),
     get_string("favicon_desc", "theme_degrade"),
     "favicon", 0,
-    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".png"]]);
+    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".png"]]
+);
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 
 // Background image setting.
-$setting = new admin_setting_heading("theme_degrade/backgroundimage_heading",
-    get_string("backgroundimage", "theme_degrade"), "");
+$setting = new admin_setting_heading(
+    "theme_degrade/backgroundimage_heading",
+    get_string("backgroundimage", "theme_degrade"), ""
+);
 $page->add($setting);
 
 $name = "theme_degrade/backgroundimage";
-$setting = new admin_setting_configstoredfile($name,
+$setting = new admin_setting_configstoredfile(
+    $name,
     get_string("backgroundimage", "theme_degrade"),
     get_string("backgroundimage_desc", "theme_degrade"),
     "backgroundimage", 0,
-    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".svg", ".png"]]);
+    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".svg", ".png"]]
+);
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 

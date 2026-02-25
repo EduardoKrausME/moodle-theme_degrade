@@ -45,12 +45,14 @@ function xmldb_theme_degrade_install() {
     $fs->create_file_from_pathname($filerecord, "{$CFG->dirroot}/theme/degrade/pix/user-modal-background.jpg");
 
     set_config("brandcolor", "#f55ff2", "theme_boost");
+    set_config("secondary", "#ced4da", "theme_boost");
     set_config("angle", 30, "theme_degrade");
     set_config("brandcolor_gradient_1", "#f54266", "theme_degrade");
     set_config("brandcolor_gradient_2", "#3858f9", "theme_degrade");
 
     set_config("background_profile_image", "/user-modal-background.jpg", "theme_degrade");
     set_config("brandcolor_background_menu", 0, "theme_degrade");
+    set_config("navbarlayout", "classic", "theme_degrade");
 
     set_config("top_scroll_fix", 1, "theme_degrade");
     set_config("top_scroll_background_color", "", "theme_degrade");

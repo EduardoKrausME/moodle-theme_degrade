@@ -55,53 +55,115 @@
         ]
     }
 }}
-<nav class="navbar fixed-top navbar-light navbar-expand {{{output.brandcolor_background_menu_class}}}" aria-label="{{#str}}sitemenubar, admin{{/str}}">
+<nav class="navbar fixed-top navbar-light navbar-expand {{{output.brandcolor_background_menu_class}}}"
+     aria-label="{{#str}}sitemenubar, admin{{/str}}">
     <div class="navbar-content-background"></div>
     <div class="container-fluid">
-        <button class="navbar-toggler aabtn d-block d-md-none px-1 my-1 border-0" data-toggler="drawers"
-                data-action="toggle" data-target="theme_degrade-drawers-primary">
-            <span class="navbar-toggler-icon"></span>
-            <span class="sr-only">{{#str}}sidepanel, core{{/str}}</span>
-        </button>
+        {{#output.navbar_layout_is_institutional}}
+            <div class="d-flex flex-column align-items-stretch w-100 p-0">
+                {{! First row: logo + usernavigation }}
+                <div class="navbar-row-top d-flex align-items-center w-100 px-2 px-md-3">
+                    <button class="navbar-toggler aabtn d-block d-md-none px-1 my-1 border-0 me-2"
+                            data-toggler="drawers"
+                            data-action="toggle" data-target="theme_degrade-drawers-primary">
+                        <span class="navbar-toggler-icon"></span>
+                        <span class="sr-only">{{#str}}sidepanel, core{{/str}}</span>
+                    </button>
 
-        <a href="{{{ config.homeurl }}}" class="navbar-brand d-none d-md-flex align-items-center m-0 me-4 p-0 aabtn">
+                    <a href="{{{ config.homeurl }}}" class="navbar-brand d-flex align-items-center m-0 me-3 p-0 aabtn">
+                        {{# output.should_display_navbar_logo }}
+                            <img src="{{{output.get_compact_logo_url}}}" class="logo me-1" alt="{{{sitename}}}">
+                        {{/ output.should_display_navbar_logo }}
+                        {{^ output.should_display_navbar_logo }}
+                            {{{sitename}}}
+                        {{/ output.should_display_navbar_logo }}
+                    </a>
 
-            {{# output.should_display_navbar_logo }}
-                <img src="{{{output.get_compact_logo_url}}}" class="logo me-1" alt="{{{sitename}}}">
-            {{/ output.should_display_navbar_logo }}
-            {{^ output.should_display_navbar_logo }}
-                {{{sitename}}}
-            {{/ output.should_display_navbar_logo }}
-        </a>
-        {{#primarymoremenu}}
-            <div class="primary-navigation">
-                {{> core/moremenu}}
+                    <div id="usernavigation" class="usernavigation navbar-nav ms-auto">
+                        <div class="divider h-75 align-self-center"></div>
+
+                        {{# output.search_box }}
+                            {{{ output.search_box }}}
+                            <div class="divider border-start h-75 align-self-center mx-1"></div>
+                        {{/output.search_box}}
+
+                        {{#langmenu}}
+                            {{> theme_degrade/language_menu }}
+                            <div class="divider border-start h-75 align-self-center mx-1"></div>
+                        {{/langmenu}}
+
+                        {{{ output.navbar_plugin_output }}}
+
+                        <div class="d-flex align-items-stretch usermenu-container" data-region="usermenu">
+                            {{#usermenu}}
+                                {{> core/user_menu }}
+                            {{/usermenu}}
+                        </div>
+
+                        {{{ output.edit_switch }}}
+                    </div>
+                </div>
+
+                {{! Second row: primary navigation + page heading menu }}
+                <div class="navbar-row-bottom d-flex align-items-center w-100 px-2 px-md-3">
+                    {{#primarymoremenu}}
+                        <div class="primary-navigation flex-grow-1">
+                            {{> core/moremenu}}
+                        </div>
+                    {{/primarymoremenu}}
+
+                    <ul class="navbar-nav d-none d-md-flex my-1 px-1">
+                        {{{ output.page_heading_menu }}}
+                    </ul>
+                </div>
             </div>
-        {{/primarymoremenu}}
+        {{/output.navbar_layout_is_institutional}}
+        {{^output.navbar_layout_is_institutional}}
+            <button class="navbar-toggler aabtn d-block d-md-none px-1 my-1 border-0" data-toggler="drawers"
+                    data-action="toggle" data-target="theme_degrade-drawers-primary">
+                <span class="navbar-toggler-icon"></span>
+                <span class="sr-only">{{#str}}sidepanel, core{{/str}}</span>
+            </button>
 
-        <ul class="navbar-nav d-none d-md-flex my-1 px-1">
-            <!-- page_heading_menu -->
-            {{{ output.page_heading_menu }}}
-        </ul>
+            <a href="{{{ config.homeurl }}}"
+               class="navbar-brand d-none d-md-flex align-items-center m-0 me-4 p-0 aabtn">
 
-        <div id="usernavigation" class="usernavigation navbar-nav ms-auto">
-            <div class="divider h-75 align-self-center"></div>
-            {{# output.search_box }}
-                {{{ output.search_box }}}
-                <div class="divider border-start h-75 align-self-center mx-1"></div>
-            {{/output.search_box}}
-            {{#langmenu}}
-                {{> theme_degrade/language_menu }}
-                <div class="divider border-start h-75 align-self-center mx-1"></div>
-            {{/langmenu}}
-            {{{ output.navbar_plugin_output }}}
-            <div class="d-flex align-items-stretch usermenu-container" data-region="usermenu">
-                {{#usermenu}}
-                    {{> core/user_menu }}
-                {{/usermenu}}
+                {{# output.should_display_navbar_logo }}
+                    <img src="{{{output.get_compact_logo_url}}}" class="logo me-1" alt="{{{sitename}}}">
+                {{/ output.should_display_navbar_logo }}
+                {{^ output.should_display_navbar_logo }}
+                    {{{sitename}}}
+                {{/ output.should_display_navbar_logo }}
+            </a>
+            {{#primarymoremenu}}
+                <div class="primary-navigation">
+                    {{> core/moremenu}}
+                </div>
+            {{/primarymoremenu}}
+
+            <ul class="navbar-nav d-none d-md-flex my-1 px-1">
+                {{{ output.page_heading_menu }}}
+            </ul>
+
+            <div id="usernavigation" class="usernavigation navbar-nav ms-auto">
+                <div class="divider h-75 align-self-center"></div>
+                {{# output.search_box }}
+                    {{{ output.search_box }}}
+                    <div class="divider border-start h-75 align-self-center mx-1"></div>
+                {{/output.search_box}}
+                {{#langmenu}}
+                    {{> theme_degrade/language_menu }}
+                    <div class="divider border-start h-75 align-self-center mx-1"></div>
+                {{/langmenu}}
+                {{{ output.navbar_plugin_output }}}
+                <div class="d-flex align-items-stretch usermenu-container" data-region="usermenu">
+                    {{#usermenu}}
+                        {{> core/user_menu }}
+                    {{/usermenu}}
+                </div>
+                {{{ output.edit_switch }}}
             </div>
-            {{{ output.edit_switch }}}
-        </div>
+        {{/output.navbar_layout_is_institutional}}
     </div>
 </nav>
 
@@ -113,6 +175,28 @@
     document.addEventListener("scroll", document_scroll_navbar);
     document_scroll_navbar();
     function document_scroll_navbar() {
+        if (document.querySelector(".navbar-layout-institutional")) {
+            document_scroll_navbar_institutional();
+        } else {
+            document_scroll_navbar_classic();
+        }
+    }
+
+    function document_scroll_navbar_institutional() {
+        const scrollY = window.scrollY || window.pageYOffset;
+
+        // Troque o seletor se quiser aplicar no .navbar em vez da .navbar-row-top
+        const el = document.querySelector(".navbar.fixed-top .navbar-row-top");
+        if (!el) return;
+
+        const limit = 180;                 // até onde anima
+        const h = el.offsetHeight;         // altura do elemento a “sumir”
+        const t = Math.min(Math.max(scrollY / limit, 0), 1); // 0..1
+
+        el.style.marginTop = `${-(h * t)}px`; // 0 -> -h
+    }
+
+    function document_scroll_navbar_classic() {
         let scrollY = window.scrollY;
         let limitedScroll = Math.min(scrollY, 180);
         let newHeight = 91 - (limitedScroll / 6);
@@ -129,5 +213,5 @@
             navbarcontentbackground.style.opacity = 1 - (newHeight - 61) / (91 - 61);
         }
     }
-});
+})();
 </script>

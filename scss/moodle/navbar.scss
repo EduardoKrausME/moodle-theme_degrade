@@ -8,7 +8,6 @@ $navbar-color: #b5bcc7;
     padding-top: 0;
     padding-bottom: 0;
     align-items: stretch;
-    height: calc(var(--navbar-height) + 1px);
     box-shadow: 0 0.563rem 1.125rem rgba(92, 107, 121, .1);
     background: #ffffff;
     .navbar-brand {
@@ -165,8 +164,13 @@ $navbar-color: #b5bcc7;
         height: 100%;
         display: flex;
     }
-    &.brandcolor-background {
+    &.navbarlayout-classic {
         background-color: $primary !important;
+    }
+    &:not(.navbarlayout-classic) {
+        height: calc(var(--navbar-height) + 1px);
+    }
+    &.brandcolor-background {
         .nav-link,
         .navbar-brand,
         .langmenu .btn {
@@ -184,7 +188,7 @@ $navbar-color: #b5bcc7;
             --bs-btn-active-color: #{$primary};
             --bs-btn-disabled-color: #{$primary};
             --bs-btn-bg: rgba(255, 255, 255, .74);
-            --bs-btn-border-color:  #{$white};
+            --bs-btn-border-color: #{$white};
             --bs-btn-hover-bg: #{lighten($white, 5%)};
             --bs-btn-hover-border-color: #{lighten($white, 3%)};
             --bs-btn-focus-shadow-rgb: #{red(mix($white, white, 30%))}, #{green(mix($white, white, 30%))}, #{blue(mix($white, white, 30%))};
@@ -192,7 +196,7 @@ $navbar-color: #b5bcc7;
             --bs-btn-active-border-color: #{darken($white, 8%)};
             --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
             --bs-btn-disabled-bg: #{$white};
-            --bs-btn-disabled-border-color:  #{$white};
+            --bs-btn-disabled-border-color: #{$white};
         }
         .simplesearchform {
             background: #ecf3fa66;
@@ -223,6 +227,160 @@ $navbar-color: #b5bcc7;
             right: 0;
             bottom: 0;
             opacity: 0;
+        }
+    }
+    &.navbar-layout-institutional {
+        height: auto;
+        //min-height: 118px;
+        align-items: stretch;
+        background: #ffffff;
+        .navbar-content-background {
+            display: none;
+        }
+        .navbar-content-background {
+            display: none;
+        }
+        > .container-fluid {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .navbar-row-top {
+            min-height: 72px;
+            background: #ffffff;
+            border-bottom: 1px solid $gray-200;
+            gap: .5rem;
+            .navbar-brand {
+                margin-right: 0.75rem !important;
+                .logo {
+                    max-height: 56px;
+                    width: auto;
+                    object-fit: contain;
+                }
+            }
+            #usernavigation {
+                min-height: 72px;
+                gap: .125rem;
+                > .divider:first-child {
+                    display: none;
+                }
+                .divider {
+                    background-color: $gray-700;
+                    opacity: 1;
+                }
+                .usermenu-container {
+                    .userpicture {
+                        width: 42px;
+                        height: 42px;
+                        border-color: $gray-700;
+                    }
+                    .usermenu {
+                        display: flex;
+                        align-items: center;
+                        #user-menu-toggle {
+                            color: $gray-700;
+                        }
+                    }
+                }
+            }
+        }
+        .navbar-row-bottom {
+            min-height: 46px;
+            background: $primary;
+            box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .15);
+            .primary-navigation {
+                height: 54px;
+                display: flex;
+                align-items: stretch;
+                .moremenu {
+                    height: 100%;
+                    display: flex;
+                    align-items: stretch;
+                }
+                .nav-item {
+                    display: flex;
+                    align-items: stretch;
+                }
+                .nav-link {
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    color: #ffffff;
+                    border: 0;
+                    border-radius: 0;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                    &:hover,
+                    &:focus {
+                        color: #ffffff;
+                        background: rgba(255, 255, 255, .08);
+                    }
+                    &.active {
+                        background: $secondary;
+                        color: #ffffff;
+                        font-weight: 600;
+                    }
+                }
+                .nav-item.active > .nav-link {
+                    background: $secondary;
+                    color: #ffffff;
+                    font-weight: 600;
+                }
+            }
+            > .navbar-nav {
+                height: 46px;
+                align-items: center;
+                .nav-link,
+                a {
+                    color: #ffffff;
+                }
+                .dropdown-toggle {
+                    color: #ffffff;
+                }
+            }
+            .moodle-actionmenu .menubar,
+            .action-menu-trigger .dropdown {
+                height: 46px;
+                align-items: center;
+            }
+        }
+        &.brandcolor-background {
+            .navbar-row-bottom {
+                background: $primary;
+            }
+            .navbar-row-top {
+                .langmenu .btn,
+                .nav-link,
+                .navbar-brand {
+                    color: $gray-700;
+                }
+            }
+        }
+        .simplesearchform{
+            .btn {
+                .icon {
+                    color: $gray-700;
+                }
+            }
+        }
+        @include media-breakpoint-down(md) {
+            min-height: 61px;
+            .navbar-row-top {
+                min-height: 61px;
+                .navbar-brand .logo {
+                    max-height: 42px;
+                }
+                #usernavigation {
+                    .simplesearchform {
+                        display: none;
+                    }
+                    .divider {
+                        display: none;
+                    }
+                }
+            }
+            .navbar-row-bottom {
+                display: none !important;
+            }
         }
     }
 }
@@ -257,8 +415,8 @@ $navbar-color: #b5bcc7;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                color: #000 !important;
-                &:before{
+                color: #000000 !important;
+                &:before {
                     filter: invert(1);
                 }
             }

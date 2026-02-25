@@ -314,6 +314,13 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2025101300, "theme", "degrade");
     }
 
+    if ($oldversion < 2026022500) {
+        set_config("secondary", "#ced4da", "theme_boost");
+        set_config("navbarlayout", "classic", "theme_degrade");
+
+        upgrade_plugin_savepoint(true, 2026022500, "theme", "degrade");
+    }
+
     return true;
 }
 

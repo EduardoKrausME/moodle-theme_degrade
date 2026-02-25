@@ -24,6 +24,7 @@ use core_auth\output\login;
 use core_course\external\course_summary_exporter;
 use core_message\api;
 use core_message\helper;
+use dml_exception;
 use Exception;
 use html_writer;
 use moodle_url;
@@ -593,7 +594,9 @@ class core_renderer extends \core_renderer {
      * @throws Exception
      */
     public function brandcolor_background_menu_class() {
-        $class = [];
+        $class = [
+            "navbar-layout-" . get_config("theme_degrade", "navbarlayout"),
+        ];
         if (get_config("theme_degrade", "brandcolor_background_menu")) {
             $class[] = "brandcolor-background";
         }
@@ -602,6 +605,16 @@ class core_renderer extends \core_renderer {
         }
 
         return implode(" ", $class);
+    }
+
+    /**
+     * Whether the institutional navbar layout is enabled.
+     *
+     * @return bool
+     * @throws dml_exception
+     */
+    public function navbar_layout_is_institutional(): bool {
+        return get_config("theme_degrade", "navbarlayout") === "institutional";
     }
 
     /**
