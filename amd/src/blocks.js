@@ -5,7 +5,7 @@ define(["jquery"], function ($) {
             $module.addClass("theme-block");
             $module.find(".activity-item")
                 .css({"background-image": `url('${thumb}')`})
-                .click(function () {
+                .click(function (event) {
                     if (event.target === this) {
                         location.href = $module.find("a.aalink").attr("href");
                     }
