@@ -318,39 +318,40 @@
     direction: ltr;
 }
 
-.form-item .form-setting .form-htmlarea {
-    display: inline;
-}
-
-.form-item .form-setting .form-htmlarea .htmlarea {
-    width: 640px;
-    display: block;
-}
-
-.form-item .form-setting .form-multicheckbox ul {
-    list-style: none;
-    padding: 0;
-    margin: 7px 0 0 0;
-}
-
-.form-item .form-setting .defaultsnext {
-    display: inline-block;
-}
-
-.form-item .form-setting .locked-checkbox {
-    margin-right: 0.2em;
-    margin-left: 0.5em;
-    display: inline;
-}
-
-.form-item .form-setting .form-password .unmask,
-.form-item .form-setting .form-defaultinfo {
-    display: inline-block;
-}
-
-.form-item .form-setting .form-defaultinfo {
-    max-width: 100%;
-    word-wrap: break-word;
+ .form-item {
+    &.row {
+        margin-top: 15px;
+    }
+    .form-setting {
+        .form-htmlarea {
+            display: inline;
+        }
+        .form-htmlarea .htmlarea {
+            width: 640px;
+            display: block;
+        }
+        .form-multicheckbox ul {
+            list-style: none;
+            padding: 0;
+            margin: 7px 0 0 0;
+        }
+        .defaultsnext {
+            display: inline-block;
+        }
+        .locked-checkbox {
+            margin-right: 0.2em;
+            margin-left: 0.5em;
+            display: inline;
+        }
+        .form-password .unmask,
+        .form-defaultinfo {
+            display: inline-block;
+        }
+        .form-defaultinfo {
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+    }
 }
 
 #admin-emoticons td input {
