@@ -1240,3 +1240,33 @@ a.ygtvspacer:hover {
     display: none;
     text-align: center;
 }
+
+.form-filemanager {
+    > p {
+        font-weight: bold;
+    }
+    .list-unstyled {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: -18px;
+        li {
+            &::before {
+                content: "|";
+                font-size: 24px;
+                color: #8191a1;
+                display: none;
+                line-height: 0;
+            }
+            + li::before {
+                margin: 0 0.75rem;
+                display: inline;
+            }
+            .text-dark {
+                display: none;
+            }
+        }
+    }
+    + .form-defaultinfo.text-muted {
+        display: none;
+    }
+}
