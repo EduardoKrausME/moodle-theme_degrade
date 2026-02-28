@@ -40,7 +40,7 @@ $templatecontext = [
     "output" => $OUTPUT,
     "bodyattributes" => $bodyattributes,
     "login_theme" => $loginthemename,
-    "footer_show_copywriter" => get_config("theme_boost_magnific", "footer_show_copywriter"),
+    "footer_show_copywriter" => get_config("theme_degrade", "footer_show_copywriter"),
     "languagemenu" => (new language_menu($PAGE))->export_for_action_menu($OUTPUT),
     "loginbackgroundimageurl" => $loginbackgroundimageurl,
 ];
