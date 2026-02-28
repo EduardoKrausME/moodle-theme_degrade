@@ -44,42 +44,57 @@ function xmldb_theme_degrade_install() {
     ];
     $fs->create_file_from_pathname($filerecord, "{$CFG->dirroot}/theme/degrade/pix/user-modal-background.jpg");
 
-    set_config("brandcolor", "#f55ff2", "theme_boost");
-    set_config("secondary", "#ced4da", "theme_boost");
-    set_config("angle", 30, "theme_degrade");
-    set_config("brandcolor_gradient_1", "#f54266", "theme_degrade");
-    set_config("brandcolor_gradient_2", "#3858f9", "theme_degrade");
+    theme_degrade_set_config("brandcolor", "#f55ff2", "theme_boost");
+    theme_degrade_set_config("secondary", "#ced4da", "theme_boost");
+    theme_degrade_set_config("angle", 30);
+    theme_degrade_set_config("brandcolor_gradient_1", "#f54266");
+    theme_degrade_set_config("brandcolor_gradient_2", "#3858f9");
 
-    set_config("background_profile_image", "/user-modal-background.jpg", "theme_degrade");
-    set_config("brandcolor_background_menu", 0, "theme_degrade");
-    set_config("navbarlayout", "classic", "theme_degrade");
+    theme_degrade_set_config("background_profile_image", "/user-modal-background.jpg");
+    theme_degrade_set_config("brandcolor_background_menu", 0);
+    theme_degrade_set_config("navbarlayout", "classic");
 
-    set_config("top_scroll_fix", 1, "theme_degrade");
-    set_config("top_scroll_background_color", "", "theme_degrade");
-    set_config("top_scroll_text_color", "#FFFFFF", "theme_degrade");
-    set_config("logo_write", 0, "theme_degrade");
+    theme_degrade_set_config("top_scroll_fix", 1);
+    theme_degrade_set_config("top_scroll_background_color", "");
+    theme_degrade_set_config("top_scroll_text_color", "#FFFFFF");
+    theme_degrade_set_config("logo_write", 0);
 
-    set_config("backgroundimage", "", "theme_degrade");
-    set_config("loginbackgroundimage", "", "theme_degrade");
+    theme_degrade_set_config("backgroundimage", "");
+    theme_degrade_set_config("loginbackgroundimage", "");
 
-    set_config("scsspre", "", "theme_degrade");
-    set_config("scsspos", "", "theme_degrade");
+    theme_degrade_set_config("scsspre", "");
+    theme_degrade_set_config("scsspos", "");
 
-    set_config("course_summary", 0, "theme_degrade");
-    set_config("course_summary_banner", 0, "theme_degrade");
+    theme_degrade_set_config("course_summary", 0);
+    theme_degrade_set_config("course_summary_banner", 0);
 
-    set_config("enable_accessibility", 0, "theme_degrade");
-    set_config("enable_vlibras", 0, "theme_degrade");
+    theme_degrade_set_config("enable_accessibility", 0);
+    theme_degrade_set_config("enable_vlibras", 0);
 
-    set_config("footer_background_color", "", "theme_degrade");
-    set_config("footer_title_1", "", "theme_degrade");
-    set_config("footer_html_1", "", "theme_degrade");
-    set_config("footer_title_2", "", "theme_degrade");
-    set_config("footer_html_2", "", "theme_degrade");
-    set_config("footer_title_3", "", "theme_degrade");
-    set_config("footer_html_3", "", "theme_degrade");
-    set_config("footer_title_4", "", "theme_degrade");
-    set_config("footer_html_4", "", "theme_degrade");
+    theme_degrade_set_config("footer_background_color", "");
+    theme_degrade_set_config("footer_title_1", "");
+    theme_degrade_set_config("footer_html_1", "");
+    theme_degrade_set_config("footer_title_2", "");
+    theme_degrade_set_config("footer_html_2", "");
+    theme_degrade_set_config("footer_title_3", "");
+    theme_degrade_set_config("footer_html_3", "");
+    theme_degrade_set_config("footer_title_4", "");
+    theme_degrade_set_config("footer_html_4", "");
 
-    set_config("footer_show_copywriter", 1, "theme_degrade");
+    theme_degrade_set_config("footer_show_copywriter", 1);
+}
+
+/**
+ * Function set_config
+ *
+ * @param string $name
+ * @param int|string $value
+ * @param string $plugin
+ * @return void
+ * @throws dml_exception
+ */
+function theme_degrade_set_config($name, $value, $plugin = "theme_degrade") {
+    if (!get_config($plugin, $name)) {
+        set_config($name, $value, $plugin);
+    }
 }
