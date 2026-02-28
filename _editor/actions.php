@@ -52,12 +52,12 @@ if ($action == "langedit") {
     header("Content-Type: application/json");
     echo json_encode(["status" => "ok"]);
     die;
-} elseif ($action == "homemode") {
+} else if ($action == "homemode") {
     $homemode = optional_param("homemode", 0, PARAM_INT);
     set_config("homemode", $homemode, "theme_degrade");
 
     redirect(new moodle_url("/", ["redirect" => 0]));
-} elseif ($action == "loaddata") {
+} else if ($action == "loaddata") {
     $datakey = required_param("datakey", PARAM_TEXT);
     switch ($datakey) {
         case "courses":
@@ -72,7 +72,7 @@ if ($action == "langedit") {
             header("Content-Type: application/json");
             echo json_encode(array_values($courses));
     }
-} elseif ($action == "page-save") {
+} else if ($action == "page-save") {
     $dataid = required_param("dataid", PARAM_INT);
     $page = $DB->get_record("theme_degrade_pages", ["id" => $dataid], "*", MUST_EXIST);
 
@@ -81,18 +81,21 @@ if ($action == "langedit") {
         case "html-form":
             $html = required_param("html", PARAM_RAW);
             $css = required_param("css", PARAM_RAW);
-            if (isset($html[3]) && isset($css[3])) {
+            if (isset($html[3])) {
                 if (preg_match('/<body[^>]*>(.*?)<\/body>/is', $html, $matches)) {
                     $html = trim($matches[1]);
                 }
-                $page->html = "{$html}<style>{$css}</style>";
+                $html = preg_replace('/<style data-project-fonts.*?<\/style>/s', '', $html);
+
+                $css = preg_replace('/\*.*?body\{.*?\}/s', '', $css);
+
+                $page->html = "<style>{$css}</style>\n\n{$html}";
             }
         case "form":
             break;
         default:
             throw new Exception("Type not found");
     }
-
 
     if (isset($_POST["save"])) {
         $savedata = theme_degrade_clear_params_array($_POST["save"], PARAM_RAW);
@@ -108,13 +111,13 @@ if ($action == "langedit") {
         redirect(new moodle_url("/", ["redirect" => 0]));
     }
     die;
-} elseif ($action == "page-order") {
+} else if ($action == "page-order") {
     $orders = theme_degrade_clear_params_array($_POST["order"], PARAM_INT);
 
     $pageorder = 0;
     foreach ($orders as $pageid) {
         if ($pageid) {
-            $page = (object)[
+            $page = (object) [
                 "id" => $pageid,
                 "sort" => $pageorder++,
             ];
@@ -128,14 +131,22 @@ if ($action == "langedit") {
 
     \cache::make("theme_degrade", "frontpage_cache")->purge();
     die("OK");
-} elseif ($action == "file-upload") {
+} else if ($action == "file-upload") {
     if (isset($_FILES['files']['name'])) {
         $aloweb = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'webm', 'mp4', 'mp3', 'pdf', 'doc', 'docx'];
 
         $extension = pathinfo($_FILES['files']['name'], PATHINFO_EXTENSION);
         if (in_array($extension, $aloweb)) {
             $fs = get_file_storage();
-            $filerecord = (object)["component" => $component, "contextid" => $context->id, "userid" => $USER->id, "filearea" => $filearea, "filepath" => '/', "itemid" => time() - 1714787612, "filename" => $_FILES['files']['name'],];
+            $filerecord = (object) [
+                "component" => $component,
+                "contextid" => $context->id,
+                "userid" => $USER->id,
+                "filearea" => $filearea,
+                "filepath" => '/',
+                "itemid" => time() - 1714787612,
+                "filename" => $_FILES['files']['name'],
+            ];
             $fs->create_file_from_pathname($filerecord, $_FILES['files']['tmp_name']);
 
             $url = moodle_url::make_pluginfile_url(
@@ -147,12 +158,21 @@ if ($action == "langedit") {
                 $filerecord->filename
             );
 
-            echo json_encode([(object)["name" => $_FILES['files']['name'], "type" => "image", "src" => $url->out(false), "size" => filesize($_FILES['files']['tmp_name']),]]);
+            echo json_encode(
+                [
+                    (object) [
+                        "name" => $_FILES['files']['name'],
+                        "type" => "image",
+                        "src" => $url->out(false),
+                        "size" => filesize($_FILES['files']['tmp_name']),
+                    ],
+                ]
+            );
 
             die();
         }
     }
-} elseif ($action == "file-delete") {
+} else if ($action == "file-delete") {
     $fs = get_file_storage();
     $files = $fs->get_area_files($context->id, $component, $filearea, false, $sort = "filename", false);
 
@@ -165,7 +185,7 @@ if ($action == "langedit") {
             $file->delete();
         }
     }
-} elseif ($action == "file-list") {
+} else if ($action == "file-list") {
     $fs = get_file_storage();
     $files = $fs->get_area_files($context->id, $component, $filearea, false, $sort = "filename", false);
 
@@ -200,7 +220,8 @@ if ($action == "langedit") {
             if ($isimage) {
                 $courseimage = file_encode_url(
                     "{$CFG->wwwroot}/pluginfile.php",
-                    "/{$file->get_contextid()}/{$file->get_component()}/" . "{$file->get_filearea()}{$file->get_filepath()}{$file->get_filename()}",
+                    "/{$file->get_contextid()}/{$file->get_component()}/" .
+                    "{$file->get_filearea()}{$file->get_filepath()}{$file->get_filename()}",
                     !$isimage
                 );
 
