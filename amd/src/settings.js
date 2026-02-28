@@ -17,7 +17,7 @@ define(["jquery", "theme_degrade/minicolors"], function($, minicolors) {
             $("#id_s_theme_degrade_top_scroll_fix").change(toggle__top_scroll_fix);
 
             function toggle__navbarlayout() {
-                if ($(this).val() == "institutional") {
+                if ($("#id_s_theme_degrade_navbarlayout").val() == "institutional") {
                     $("#admin-brandcolor_background_menu").hide(200);
                 } else {
                     $("#admin-brandcolor_background_menu").show(200);
@@ -25,7 +25,6 @@ define(["jquery", "theme_degrade/minicolors"], function($, minicolors) {
             }
             toggle__navbarlayout();
             $("#id_s_theme_degrade_navbarlayout").change(toggle__navbarlayout);
-            
         }
     };
 });
