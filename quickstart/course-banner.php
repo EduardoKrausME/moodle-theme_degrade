@@ -179,7 +179,7 @@ $coursesmustache = [
         "defaultcolorfooter" => theme_degrade_default("footer_background_color", "#1a2a6c"),
         "brandcolor_background_menu" => (int) theme_degrade_default("brandcolor_background_menu", 0),
         "navbar_layout_is_institutional" => $OUTPUT->navbar_layout_is_institutional(),
-        "secondary_color" => $OUTPUT->secondary_color($courseid),
+        "secondary_color" => theme_degrade_secondary_color($courseid),
     ]),
 ];
 echo $OUTPUT->render_from_template("theme_degrade/quickstart/courses", $coursesmustache);

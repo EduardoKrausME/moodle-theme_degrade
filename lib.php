@@ -205,7 +205,7 @@ function theme_degrade_get_pre_scss($theme) {
         \$footer-bg    : {$footerbg};
         \$footer-color : {$footercolor};\n";
 
-    if ($OUTPUT->navbar_layout_is_institutional()) {
+    if (get_config("theme_boost_magnific", "navbarlayout") == "institutional") {
         $scss .= "\$navbar-height : 127px;\n";
     }
 
@@ -682,4 +682,23 @@ function theme_degrade_default($configname, $default, $plugin = "theme_degrade")
     }
 
     return $value;
+}
+
+/**
+ * Function get secondary color
+ *
+ * @param int $courseid
+ * @return string
+ * @throws dml_exception
+ */
+function theme_degrade_secondary_color($courseid = 0) {
+    $secondary = get_config("theme_boost", "secondary");
+    if ($courseid) {
+        $secondaryoverride = get_config("theme_degrade", "override_course_secondarycolor_{$courseid}");
+        if ($secondaryoverride) {
+            $secondary = $secondaryoverride;
+        }
+    }
+
+    return $secondary;
 }

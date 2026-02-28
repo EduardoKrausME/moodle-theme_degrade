@@ -516,25 +516,6 @@ class core_renderer extends \core_renderer {
     }
 
     /**
-     * Function get secondary color
-     *
-     * @param int $courseid
-     * @return string
-     * @throws dml_exception
-     */
-    public function secondary_color($courseid = 0) {
-        $secondary = get_config("theme_boost", "secondary");
-        if ($courseid) {
-            $secondaryoverride = get_config("theme_degrade", "override_course_secondarycolor_{$courseid}");
-            if ($secondaryoverride) {
-                $secondary = $secondaryoverride;
-            }
-        }
-
-        return $secondary;
-    }
-
-    /**
      * Renders the login form.
      *
      * @param login $form The renderable.
