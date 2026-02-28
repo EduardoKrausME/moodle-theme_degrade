@@ -5,7 +5,7 @@ define(["jquery", "theme_degrade/minicolors"], function($, minicolors) {
         },
 
         form_hide: function () {
-            function toggleConfig() {
+            function toggle__top_scroll_fix() {
                 let top_scroll_fix = $("#id_s_theme_degrade_top_scroll_fix").is(":checked");
                 if (top_scroll_fix) {
                     $("#admin-top_scroll_background_color").show(200);
@@ -13,9 +13,19 @@ define(["jquery", "theme_degrade/minicolors"], function($, minicolors) {
                     $("#admin-top_scroll_background_color").hide(200);
                 }
             }
+            toggle__top_scroll_fix();
+            $("#id_s_theme_degrade_top_scroll_fix").change(toggle__top_scroll_fix);
 
-            toggleConfig();
-            $("#id_s_theme_degrade_top_scroll_fix").change(toggleConfig);
+            function toggle__navbarlayout() {
+                if ($(this).val() == "institutional") {
+                    $("#admin-brandcolor_background_menu").hide(200);
+                } else {
+                    $("#admin-brandcolor_background_menu").show(200);
+                }
+            }
+            toggle__navbarlayout();
+            $("#id_s_theme_degrade_navbarlayout").change(toggle__navbarlayout);
+            
         }
     };
 });
