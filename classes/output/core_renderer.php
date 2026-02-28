@@ -261,108 +261,6 @@ class core_renderer extends \core_renderer {
     }
 
     /**
-     * Wrapper for header elements.
-     *
-     * @return string HTML to display the main header.
-     * @throws Exception
-     */
-    public function full_header() {
-        global $DB, $CFG;
-
-        $pagetype = $this->page->pagetype;
-        $homepage = get_home_page();
-
-        $homepagetype = null;
-        // Add a special case since /my/courses is a part of the /my subsystem.
-        if ($homepage == HOMEPAGE_MY || $homepage == HOMEPAGE_MYCOURSES) {
-            $homepagetype = "my-index";
-        } else {
-            if ($homepage == HOMEPAGE_SITE) {
-                $homepagetype = "site-index";
-            }
-        }
-        if ($this->page->include_region_main_settings_in_header_actions() && !$this->page->blocks->is_block_present("settings")) {
-            // Only include the region main settings if the page has requested it and it doesn't already have
-            // the settings block on it. The region main settings are included in the settings block and
-            // duplicating the content causes behat failures.
-            $this->page->add_header_action(
-                html_writer::div(
-                    $this->region_main_settings_menu(),
-                    "d-print-none",
-                    ["id" => "region-main-settings-menu"]
-                )
-            );
-        }
-
-        $header = new \stdClass();
-        $header->settingsmenu = $this->context_header_settings_menu();
-        $header->contextheader = $this->context_header();
-        $header->hasnavbar = empty($this->page->layout_options["nonavbar"]);
-        $header->navbar = $this->navbar();
-        $header->pageheadingbutton = $this->page_heading_button();
-        $header->courseheader = $this->course_header();
-        $header->headeractions = $this->page->get_header_actions();
-        if (!empty($pagetype) && !empty($homepagetype) && $pagetype == $homepagetype) {
-            $header->welcomemessage = \core_user::welcome_message();
-        }
-
-        $courseid = $this->page->course->id;
-
-        $header->hasnavbarcourse = false;
-        $header->hasbannercourse = false;
-        $requesturi = $_SERVER["REQUEST_URI"];
-        $hasuri = strpos($requesturi, "course/view.php") || strpos($requesturi, "course/section.php");
-        if ($hasuri) {
-            $showcoursesummary = get_config("theme_degrade", "course_summary_banner");
-            $showcoursesummarycourse = get_config("theme_degrade", "course_summary_banner_{$courseid}");
-            if ($showcoursesummarycourse !== false) {
-                $showcoursesummary = $showcoursesummarycourse;
-            }
-
-            if ($showcoursesummary) {
-                if ($showcoursesummary == 1) {
-                    $header->hasnavbarcourse = true;
-                    $categoryname = $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
-                    $header->categoryname = format_string($categoryname);
-                    $header->overviewfiles = $this->get_course_image();
-
-                    if (has_capability("moodle/category:manage", $this->page->context)) {
-                        $cache = \cache::make("theme_degrade", "course_cache");
-                        $cachekey = "header_details_{$this->page->course->id}";
-                        if ($cache->has($cachekey)) {
-                            $header->details = json_decode($cache->get($cachekey));
-                        } else {
-                            $header->details = $this->get_details();
-                            $cache->set($cachekey, json_encode($header->details));
-                        }
-                    }
-                }
-                if ($showcoursesummary == 2) {
-                    $bannerfileurl = $this->get_course_image();
-                    if ($bannerfileurl) {
-                        $categoryname = $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
-                        $header->categoryname = format_string($categoryname);
-                        $header->hasbannercourse = true;
-                        $header->banner_course_file_url = $bannerfileurl;
-                    }
-                }
-            }
-
-            $header->hasnosumary = !$header->hasbannercourse && !$header->hasnavbarcourse;
-
-            if ($this->page->user_is_editing() && has_capability("moodle/site:config", $this->page->context)) {
-                $url = "{$CFG->wwwroot}/theme/degrade/quickstart/course-banner.php?courseid={$courseid}";
-                $header->headeractions_banner_course_edithref = $url;
-                $header->headeractions_banner_courseid = $courseid;
-                $header->headeractions_banner_course_edit = true;
-            }
-        }
-
-        $header->editing = $this->page->user_is_editing();
-        return $this->render_from_template("theme_degrade/core/full_header", $header);
-    }
-
-    /**
      * get_details
      *
      * @return array
@@ -614,7 +512,26 @@ class core_renderer extends \core_renderer {
      * @throws dml_exception
      */
     public function navbar_layout_is_institutional(): bool {
-        return get_config("theme_degrade", "navbarlayout") === "institutional";
+        return get_config("theme_degrade", "navbarlayout") == "institutional";
+    }
+
+    /**
+     * Function get secondary color
+     *
+     * @param int $courseid
+     * @return string
+     * @throws dml_exception
+     */
+    public function secondary_color($courseid = 0) {
+        $secondary = get_config("theme_boost", "secondary");
+        if ($courseid) {
+            $secondaryoverride = get_config("theme_degrade", "override_course_secondarycolor_{$courseid}");
+            if ($secondaryoverride) {
+                $secondary = $secondaryoverride;
+            }
+        }
+
+        return $secondary;
     }
 
     /**
@@ -755,8 +672,8 @@ class core_renderer extends \core_renderer {
 
         // Check profile.
         $profileid = $coursecolor = false;
-        if (!empty($this->page->course) && !empty($this->page->course->id) && $this->page->course->id > 1) {
-            $coursecolor = get_config("theme_degrade", "override_course_color_{$this->page->course->id}");
+        if (!empty($this->page->course->id) && $this->page->course->id > 1) {
+            $coursecolor = get_config("theme_degrade", "override_course_primarycolor_{$this->page->course->id}");
         }
         if (!$coursecolor) {
             $plugins = get_plugins_with_function("krausthemes__get_scss_profile");

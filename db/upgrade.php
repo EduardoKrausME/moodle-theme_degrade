@@ -321,6 +321,24 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2026022500, "theme", "degrade");
     }
 
+    if ($oldversion < 2026022800) {
+        $records = $DB->get_records_select(
+            'config_plugins',
+            "plugin = 'theme_degrade' AND name LIKE 'override_course_color_%'"
+        );
+
+        if ($records) {
+            foreach ($records as $record) {
+                $suffix = substr($record->name, strlen("override_course_color_"));
+                $newname = "override_course_primarycolor_{$suffix}";
+
+                set_config($newname, $record->value, 'theme_degrade');
+                unset_config($record->name, 'theme_degrade');
+            }
+        }
+        upgrade_plugin_savepoint(true, 2026022800, "theme", "degrade");
+    }
+
     return true;
 }
 

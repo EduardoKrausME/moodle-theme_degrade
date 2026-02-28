@@ -44,9 +44,11 @@
                         <p>{{#str}}course_summary_banner_desc, theme_degrade{{/str}}</p>
                         <div class="radio-wrapper">
                             <label class="radio-img">
-                                <input class="form-check-input input-course_summary_banner" type="radio" name="course_summary_banner"
+                                <input class="form-check-input input-course_summary_banner" type="radio"
+                                       name="course_summary_banner"
                                        value="0"
-                                       {{#course_summary_banner_0}}checked{{/course_summary_banner_0}} style="display: none;">
+                                       {{#course_summary_banner_0}}checked{{/course_summary_banner_0}}
+                                       style="display: none;">
                                 <div class="marked-area">
                                     <h5>{{#str}}course_summary_banner_none, theme_degrade{{/str}}</h5>
                                     {{#pix}}quickstart/course-sumary-none, theme_degrade{{/pix}}
@@ -54,9 +56,11 @@
                             </label>
 
                             <label class="radio-img">
-                                <input class="form-check-input input-course_summary_banner" type="radio" name="course_summary_banner"
+                                <input class="form-check-input input-course_summary_banner" type="radio"
+                                       name="course_summary_banner"
                                        value="2"
-                                       {{#course_summary_banner_2}}checked{{/course_summary_banner_2}} style="display: none;">
+                                       {{#course_summary_banner_2}}checked{{/course_summary_banner_2}}
+                                       style="display: none;">
                                 <div class="marked-area">
                                     <h5>{{#str}}course_summary_banner_title, theme_degrade{{/str}}</h5>
                                     {{#pix}}quickstart/course-sumary-banner, theme_degrade{{/pix}}
@@ -64,9 +68,11 @@
                             </label>
 
                             <label class="radio-img">
-                                <input class="form-check-input input-course_summary_banner" type="radio" name="course_summary_banner"
+                                <input class="form-check-input input-course_summary_banner" type="radio"
+                                       name="course_summary_banner"
                                        value="1"
-                                       {{#course_summary_banner_1}}checked{{/course_summary_banner_1}} style="display: none;">
+                                       {{#course_summary_banner_1}}checked{{/course_summary_banner_1}}
+                                       style="display: none;">
                                 <div class="marked-area">
                                     <h5>{{#str}}course_summary_banner_simple, theme_degrade{{/str}}</h5>
                                     {{#pix}}quickstart/course-sumary-simple, theme_degrade{{/pix}}
@@ -146,12 +152,25 @@
                         <div class="card-header"><h5>{{#str}}course_colors_title,theme_degrade{{/str}}</h5></div>
                         <div class="card-body">
                             <input type="text" class="form-control"
-                                   id="override_course_color"
-                                   name="override_course_color"
-                                   value="{{{override_course_color}}}">
+                                   id="override_course_primarycolor"
+                                   name="override_course_primarycolor"
+                                   value="{{{override_course_primarycolor}}}">
                             <div class="form-text text-muted">
                                 {{#str}}course_colors_desc,theme_degrade{{/str}}
                                 {{{colorselect}}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header"><h5>{{#str}}secondary,theme_degrade{{/str}}</h5></div>
+                        <div class="card-body">
+                            <input type="text" class="form-control"
+                                   id="override_course_secondarycolor"
+                                   name="override_course_secondarycolor"
+                                   value="{{{override_course_secondarycolor}}}">
+                            <div class="form-text text-muted">
+                                {{#str}}secondary_desc,theme_degrade{{/str}}
                             </div>
                         </div>
                     </div>

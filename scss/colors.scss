@@ -31,7 +31,7 @@
     --preview-muted: #858585;
     --preview-muted-2: #dcdcdc;
     --preview-footer-bg: #00a7e6;
-    --preview-footer-text:#fff;
+    --preview-footer-text: #ffffff;
     // CSS
     background: var(--preview-bg);
     color: var(--preview-text);
@@ -50,15 +50,49 @@
         overflow: hidden;
         margin: 29px auto;
         &__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             color: var(--preview-primary);
             background: #ffffff;
             padding: 26px 28px;
             font-weight: 800;
             font-size: 26px;
             line-height: 1;
+            .card__header-menu {
+                font-size: 17px;
+                display: flex;
+                flex-wrap: nowrap;
+                span {
+                    padding: 11px 8px;
+                    margin: -12px 0;
+                    &.menu-active {
+                        padding: 0 8px;
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+            }
             &.card__header-dark {
                 background: var(--preview-primary);
                 color: #ffffff;
+            }
+            &.card__header__institutional {
+                display: flex;
+                justify-content: space-between;
+                flex-direction: column;
+                align-items: stretch;
+                color: var(--preview-primary);
+                background: #ffffff;
+                .card__header-menu {
+                    background: var(--preview-primary);
+                    color: #ffffff;
+                    padding: 12px;
+                    margin: 17px -29px -27px;
+                    .menu-active {
+                        background: var(--secondary_color);
+                    }
+                }
             }
         }
         &__body {

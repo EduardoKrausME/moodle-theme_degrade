@@ -34,7 +34,7 @@ use moodle_url;
  *
  * @package theme_degrade
  */
-class core_hook_output {
+class hook_callbacks {
 
     /**
      * Function before_html_attributes
@@ -62,7 +62,7 @@ class core_hook_output {
      * @throws Exception
      */
     public static function before_footer_html_generation() {
-        global $CFG, $DB, $COURSE, $SITE;
+        global $CFG, $COURSE, $SITE;
 
         static $processed = false;
         if ($processed) {
@@ -85,6 +85,74 @@ class core_hook_output {
         if ($COURSE->id == $SITE->id) {
             return;
         }
+
+        self::course_personalization();
+    }
+
+    /**
+     * Background profile image
+     *
+     * @return void
+     * @throws Exception
+     */
+    private static function background_profile_image() {
+        $cache = cache::make("theme_degrade", "css_cache");
+        $cachekey = "background_profile_image";
+        if ($cache->has($cachekey)) {
+            $css = $cache->get($cachekey);
+            echo "<style>{$css}</style>";
+        } else {
+            $backgroundprofileurl = theme_degrade_setting_file_url("background_profile_image");
+            if ($backgroundprofileurl) {
+                $profileimagecss = ":root { --background_profile: url({$backgroundprofileurl}); }";
+
+                $cache->set($cachekey, $profileimagecss);
+                $css = $profileimagecss;
+                echo "<style>{$css}</style>";
+            }
+        }
+    }
+
+    /**
+     * ACCtoolbar
+     *
+     * @return void
+     * @throws Exception
+     */
+    private static function acctoolbar() {
+        if (get_config("theme_degrade", "enable_accessibility")) {
+            global $PAGE;
+            $PAGE->requires->strings_for_js(["acctoolbar_image_without_alt"], "theme_degrade");
+            $PAGE->requires->js_call_amd("theme_degrade/acctoolbar", "init");
+        }
+    }
+
+    /**
+     * VLibras only Brasiliam
+     *
+     * @return void
+     * @throws Exception
+     */
+    private static function vlibras() {
+        global $CFG, $OUTPUT;
+
+        $vlibras = get_config("theme_degrade", "enable_vlibras") && $CFG->lang == "pt_br";
+        if ($vlibras) {
+            echo $OUTPUT->render_from_template("theme_degrade/settings/vlibras", [
+                "position" => get_config("theme_degrade", "vlibras_position") ?: "R",
+                "avatar" => get_config("theme_degrade", "vlibras_avatar") ?: "icaro",
+            ]);
+        }
+    }
+
+    /**
+     * Function course_personalization
+     *
+     * @return void
+     * @throws Exception
+     */
+    public static function course_personalization() {
+        global $COURSE, $DB, $OUTPUT, $PAGE;
 
         $images = ["blocks" => [], "icons" => [], "colors" => []];
 
@@ -150,7 +218,6 @@ class core_hook_output {
             $cache->set($cachekey, json_encode($images));
         }
 
-        global $PAGE;
         foreach ($images["blocks"] as $block) {
             $PAGE->requires->js_call_amd("theme_degrade/blocks", "create", [$block["cmid"], $block["thumb"]]);
         }
@@ -160,61 +227,70 @@ class core_hook_output {
         foreach ($images["colors"] as $color) {
             $PAGE->requires->js_call_amd("theme_degrade/blocks", "color", [$color["cmid"], $color["color"]]);
         }
-    }
 
-    /**
-     * Background profile image
-     *
-     * @return void
-     * @throws Exception
-     */
-    private static function background_profile_image() {
-        $cache = cache::make("theme_degrade", "css_cache");
-        $cachekey = "background_profile_image";
-        if ($cache->has($cachekey)) {
-            $css = $cache->get($cachekey);
-            echo "<style>{$css}</style>";
-        } else {
-            $backgroundprofileurl = theme_degrade_setting_file_url("background_profile_image");
-            if ($backgroundprofileurl) {
-                $profileimagecss = ":root { --background_profile: url({$backgroundprofileurl}); }";
+        $requesturi = $_SERVER["REQUEST_URI"];
+        $hasuri = strpos($requesturi, "course/view.php") || strpos($requesturi, "course/section.php");
+        if ($hasuri) {
+            $header = (object) [];
+            $header->hasnavbarcourse = false;
+            $header->hasbannercourse = false;
+            $header->hasnavbar = empty($PAGE->layout_options["nonavbar"]);
+            $header->navbar = $OUTPUT->navbar();
+            $header->headeractions = $PAGE->get_header_actions();
 
-                $cache->set($cachekey, $profileimagecss);
-                $css = $profileimagecss;
-                echo "<style>{$css}</style>";
+            $showcoursesummary = get_config("theme_degrade", "course_summary_banner");
+            $showcoursesummarycourse = get_config("theme_degrade", "course_summary_banner_{$COURSE->id}");
+            if ($showcoursesummarycourse !== false) {
+                $showcoursesummary = $showcoursesummarycourse;
             }
-        }
-    }
 
-    /**
-     * ACCtoolbar
-     *
-     * @return void
-     * @throws Exception
-     */
-    private static function acctoolbar() {
-        if (get_config("theme_degrade", "enable_accessibility")) {
-            global $PAGE;
-            $PAGE->requires->strings_for_js(["acctoolbar_image_without_alt"], "theme_degrade");
-            $PAGE->requires->js_call_amd("theme_degrade/acctoolbar", "init");
-        }
-    }
+            if ($showcoursesummary) {
+                if ($showcoursesummary == 1) {
+                    $header->hasnavbarcourse = true;
+                    $categoryname = $DB->get_field("course_categories", "name", ["id" => $PAGE->course->category]);
+                    $header->categoryname = format_string($categoryname);
+                    $header->overviewfiles = $OUTPUT->get_course_image();
 
-    /**
-     * VLibras only Brasiliam
-     *
-     * @return void
-     * @throws Exception
-     */
-    private static function vlibras() {
-        global $CFG, $OUTPUT;
+                    if (has_capability("moodle/category:manage", $PAGE->context)) {
+                        $cache = \cache::make("theme_degrade", "course_cache");
+                        $cachekey = "header_details_{$PAGE->course->id}";
+                        if ($cache->has($cachekey)) {
+                            $header->details = json_decode($cache->get($cachekey));
+                        } else {
+                            $header->details = $OUTPUT->get_details();
+                            $cache->set($cachekey, json_encode($header->details));
+                        }
+                    }
+                }
+                if ($showcoursesummary == 2) {
+                    $bannerfileurl = $OUTPUT->get_course_image();
+                    if ($bannerfileurl) {
+                        $categoryname = $DB->get_field("course_categories", "name", ["id" => $PAGE->course->category]);
+                        $header->categoryname = format_string($categoryname);
+                        $header->hasbannercourse = true;
+                        $header->banner_course_file_url = $bannerfileurl;
+                    }
+                }
+            }
 
-        $vlibras = get_config("theme_degrade", "enable_vlibras") && $CFG->lang == "pt_br";
-        if ($vlibras) {
-            echo $OUTPUT->render_from_template("theme_degrade/settings/vlibras", [
-                "position" => get_config("theme_degrade", "vlibras_position") ?: "R",
-                "avatar" => get_config("theme_degrade", "vlibras_avatar") ?: "icaro",
-            ]);
+            $header->hasnosumary = !$header->hasbannercourse && !$header->hasnavbarcourse;
+
+            if ($PAGE->user_is_editing() && has_capability("moodle/site:config", $PAGE->context)) {
+                $url = new moodle_url("/theme/degrade/quickstart/course-banner.php", ["courseid" => $COURSE->id]);
+                $header->headeractions_edit = true;
+                $header->headeractions_edit_href = $url;
+                $header->headeractions_banner_courseid = $COURSE->id;
+            }
+
+            if ($header->hasnavbarcourse || $header->hasbannercourse || $header->headeractions_edit) {
+                $header->contextheader = $OUTPUT->context_header();
+                $aa = $OUTPUT->render_from_template("theme_degrade/core/course_full_header", $header);
+
+                echo $aa;
+                //echo '<pre>';
+                //echo htmlentities($aa);
+                //echo '</pre>';
+            }
         }
     }
 }

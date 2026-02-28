@@ -42,7 +42,14 @@
 
 <div class="degrade-colors-preview colors-body" id="colors-body-{{{uniqid}}}">
     <section class="card">
-        <header class="card__header">{{#str}}pluginname, theme_degrade{{/str}} Preview</header>
+        <header class="card__header {{#navbar_layout_is_institutional}} card__header__institutional {{/navbar_layout_is_institutional}}">
+            {{#str}}pluginname, theme_degrade{{/str}} Preview
+            <div class="card__header-menu">
+                <span>menu</span>
+                <span class="menu-active" style="--secondary_color:{{{secondary_color}}}">menu</span>
+                <span>menu</span>
+            </div>
+        </header>
         <div class="card__body">
             <!-- Left -->
             <div class="left">
@@ -78,14 +85,17 @@
             </aside>
         </div>
         {{#footercolor}}
-            <footer class="card__footer">© 2025 {{#str}}pluginname, theme_degrade{{/str}} Preview. All rights reserved.</footer>
+            <footer class="card__footer">© 2025 {{#str}}
+                pluginname, theme_degrade{{/str}} Preview. All rights reserved.
+            </footer>
         {{/footercolor}}
     </section>
 </div>
 
 {{#js}}
-    require(["jquery"], function($) {
-        $("#{{{uniqid}}} .preview").click(function() {
+    /*<script>*/
+    require(["jquery"], function ($) {
+        $("#{{{uniqid}}} .preview").click(function () {
             let color = $(this).attr("data-color");
             {{#startcolor}}
                 $(`input[id^="id_"][id$="_startcolor"]`)
@@ -104,7 +114,7 @@
                         .minicolors("settings", {value: color});
                 updateMainColor(color);
 
-                $(`input[id^="id_"][id$="_brandcolor"]`).change(function (){
+                $(`input[id^="id_"][id$="_brandcolor"]`).change(function () {
                     updateMainColor($(this).val());
                 });
             {{/brandcolor}}
@@ -122,7 +132,7 @@
 
             {{#coursecolor}}
                 console.trace("course color 1");
-                $(`input#override_course_color`)
+                $(`input#override_course_primarycolor`)
                         .val(color)
                         .minicolors("settings", {value: color});
                 updateMainColor(color);
@@ -135,7 +145,7 @@
             });
         {{/startcolor}}
         {{#brandcolor}}
-            $(`input[id^="id_"][id$="_brandcolor"]`).change(function (){
+            $(`input[id^="id_"][id$="_brandcolor"]`).change(function () {
                 updateMainColor($(this).val());
             });
         {{/brandcolor}}
@@ -145,7 +155,7 @@
             });
         {{/footercolor}}
         {{#coursecolor}}
-            $(`input#override_course_color`).change(function (){
+            $(`input#override_course_primarycolor`).change(function () {
                 updateMainColor($(this).val());
             });
         {{/coursecolor}}
@@ -156,32 +166,46 @@
             updateMainColor();
         });
 
+        $('select[id^="id_s_"][id$="navbarlayout"]').change(function () {
+            let $navbarlayout = $(this);
+            if ($navbarlayout.val() == "institutional") {
+                $("#colors-body-{{{uniqid}}} .card__header").addClass("card__header__institutional");
+            } else {
+                $("#colors-body-{{{uniqid}}} .card__header").removeClass("card__header__institutional");
+            }
+        });
+
+        $('input[id^="id_s_"][id$="secondary"],#override_course_secondarycolor').change(function () {
+            const root = document.querySelector("#colors-body-{{{uniqid}}} .menu-active");
+            root.style.setProperty("--secondary_color", $(this).val());
+        });
+
         // Troca a cor principal e recalcula as demais
-        function updateMainColor(newColor, newFooterColor) {
+        function updateMainColor(newPrimaryColor, newFooterColor) {
             const root = document.querySelector("#colors-body-{{{uniqid}}}");
-            if(!root) {
+            if (!root) {
                 return;
             }
 
             if ($('input[id^="id_s_"][id$="brandcolor_background_menu"]').is(':checked') || "{{{brandcolor_background_menu}}}") {
-                $(".degrade-colors-preview .card__header").addClass("card__header-dark");
+                $("#colors-body-{{{uniqid}}} .card__header").addClass("card__header-dark");
             } else {
-                $(".degrade-colors-preview .card__header").removeClass("card__header-dark");
+                $("#colors-body-{{{uniqid}}} .card__header").removeClass("card__header-dark");
             }
 
             // Cores derivadas.
-            if (newColor) {
-                root.style.setProperty("--preview-primary", newColor);
-                root.style.setProperty("--preview-bg", lighten(newColor, 90));
-                root.style.setProperty("--preview-app-bg", lighten(newColor, 80));
-                root.style.setProperty("--preview-primary-shadow", darken(newColor, 25) + "3F");
-                root.style.setProperty("--preview-text", darken(newColor, 60));
+            if (newPrimaryColor && newPrimaryColor[3]) {
+                root.style.setProperty("--preview-primary", newPrimaryColor);
+                root.style.setProperty("--preview-bg", lighten(newPrimaryColor, 90));
+                root.style.setProperty("--preview-app-bg", lighten(newPrimaryColor, 80));
+                root.style.setProperty("--preview-primary-shadow", darken(newPrimaryColor, 25) + "3F");
+                root.style.setProperty("--preview-text", darken(newPrimaryColor, 60));
 
-                const textFooterColor = luminance(newColor) > 0.6 ? "#333333" : "#FFFFFF";
-                root.style.setProperty("--preview-footer-bg", newColor);
+                const textFooterColor = luminance(newPrimaryColor) > 0.6 ? "#333333" : "#FFFFFF";
+                root.style.setProperty("--preview-footer-bg", newPrimaryColor);
                 root.style.setProperty("--preview-footer-text", textFooterColor);
             }
-            if (newFooterColor && newFooterColor[5]) {
+            if (newFooterColor && newFooterColor[3]) {
                 const textNewFooterColor = luminance(newFooterColor) > 0.6 ? "#333333" : "#fff";
                 root.style.setProperty("--preview-footer-bg", newFooterColor);
                 root.style.setProperty("--preview-footer-text", textNewFooterColor);
@@ -195,7 +219,7 @@
                 hex = hex.split("").map(c => c + c).join("");
             }
             const num = parseInt(hex, 16);
-            return [ (num >> 16) & 255, (num >> 8) & 255, num & 255 ];
+            return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
         }
         function rgbToHex(r, g, b) {
             return "#" + [r, g, b]

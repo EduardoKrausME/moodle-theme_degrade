@@ -42,7 +42,8 @@ if (optional_param("POST", false, PARAM_INT)) {
     // Save configs.
     $configkeys = [
         "course_summary_banner" => PARAM_INT,
-        "override_course_color" => PARAM_RAW,
+        "override_course_primarycolor" => PARAM_RAW,
+        "override_course_secondarycolor"=> PARAM_RAW,
     ];
     foreach ($configkeys as $name => $type) {
         $value = optional_param($name, false, $type);
@@ -169,17 +170,21 @@ $coursesmustache = [
     "banner_course_file_extensions" => "PNG, JPG",
     "show_change_colors" => $showchangecolors,
     "courseid" => $courseid,
-    "override_course_color" => get_config("theme_degrade", "override_course_color_{$courseid}"),
+    "override_course_primarycolor" => get_config("theme_degrade", "override_course_primarycolor_{$courseid}"),
+    "override_course_secondarycolor" => get_config("theme_degrade", "override_course_secondarycolor_{$courseid}"),
     "colorselect" => $OUTPUT->render_from_template("theme_degrade/settings/colors", [
         "coursecolor" => true,
         "colors" => $themecolors,
-        "defaultcolor" => theme_degrade_default("override_course_color_{$courseid}", $brandcolor),
+        "defaultcolor" => theme_degrade_default("override_course_primarycolor_{$courseid}", $brandcolor),
         "defaultcolorfooter" => theme_degrade_default("footer_background_color", "#1a2a6c"),
         "brandcolor_background_menu" => (int) theme_degrade_default("brandcolor_background_menu", 0),
+        "navbar_layout_is_institutional" => $OUTPUT->navbar_layout_is_institutional(),
+        "secondary_color" => $OUTPUT->secondary_color($courseid),
     ]),
 ];
 echo $OUTPUT->render_from_template("theme_degrade/quickstart/courses", $coursesmustache);
-$PAGE->requires->js_call_amd("theme_degrade/settings", "minicolors", ["override_course_color"]);
+$PAGE->requires->js_call_amd("theme_degrade/settings", "minicolors", ["override_course_primarycolor"]);
+$PAGE->requires->js_call_amd("theme_degrade/settings", "minicolors", ["override_course_secondarycolor"]);
 
 echo "</form>";
 

@@ -183,7 +183,7 @@ function theme_degrade_get_main_scss_content($theme) {
  * @throws Exception
  */
 function theme_degrade_get_pre_scss($theme) {
-    global $CFG;
+    global $CFG, $OUTPUT;
 
     $primarycolor = "#1a2a6c";
     $brandcolor = get_config("theme_boost", "brandcolor");
@@ -205,7 +205,7 @@ function theme_degrade_get_pre_scss($theme) {
         \$footer-bg    : {$footerbg};
         \$footer-color : {$footercolor};\n";
 
-    if (get_config("theme_degrade", "navbarlayout") === "institutional") {
+    if ($OUTPUT->navbar_layout_is_institutional()) {
         $scss .= "\$navbar-height : 127px;\n";
     }
 
@@ -230,9 +230,14 @@ function theme_degrade_get_pre_scss($theme) {
     $courseid = optional_param("courseid", false, PARAM_INT);
     $profileid = optional_param("profileid", false, PARAM_TEXT);
     if ($courseid) {
-        $coursecolor = get_config("theme_degrade", "override_course_color_{$courseid}");
-        if (isset($coursecolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $coursecolor)) {
-            $scss = "\$primary : {$coursecolor};";
+        $primarycolor = get_config("theme_degrade", "override_course_primarycolor_{$courseid}");
+        if (isset($primarycolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $primarycolor)) {
+            $scss .= "\$primary : {$primarycolor};";
+        }
+
+        $secondarycolor = get_config("theme_degrade", "override_course_secondarycolor_{$courseid}");
+        if (isset($secondarycolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $secondarycolor)) {
+            $scss .= "\$secondary : {$secondarycolor};";
         }
     } else if ($profileid) {
         $callbacks = get_plugins_with_function("krausthemes__get_pre_scss");
