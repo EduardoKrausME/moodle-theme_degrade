@@ -2144,7 +2144,7 @@ textarea.form-control-lg {
     }
 }
 :not(.form-select) > select {
-    min-width: 200px;
+    // min-width: 200px;
 }
 @media (prefers-reduced-motion: reduce) {
     .form-select {

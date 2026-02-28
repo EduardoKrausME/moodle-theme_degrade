@@ -2293,10 +2293,6 @@ textarea.form-control-lg {
   margin: 0;
 }
 
-:not(.form-select) > select {
-  min-width: 200px;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .form-select {
     transition: none;
@@ -12420,3 +12416,5 @@ button.close-white,
     display: none !important;
   }
 }
+
+/*# sourceMappingURL=bootstrap.css.map */
