@@ -43,7 +43,7 @@ if (optional_param("POST", false, PARAM_INT)) {
     $configkeys = [
         "course_summary_banner" => PARAM_INT,
         "override_course_primarycolor" => PARAM_RAW,
-        "override_course_secondarycolor"=> PARAM_RAW,
+        "override_course_secondarycolor" => PARAM_RAW,
     ];
     foreach ($configkeys as $name => $type) {
         $value = optional_param($name, false, $type);

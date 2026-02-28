@@ -284,12 +284,7 @@ class hook_callbacks {
 
             if ($header->hasnavbarcourse || $header->hasbannercourse || $header->headeractions_edit) {
                 $header->contextheader = $OUTPUT->context_header();
-                $aa = $OUTPUT->render_from_template("theme_degrade/core/course_full_header", $header);
-
-                echo $aa;
-                //echo '<pre>';
-                //echo htmlentities($aa);
-                //echo '</pre>';
+                echo $OUTPUT->render_from_template("theme_degrade/core/course_full_header", $header);
             }
         }
     }
