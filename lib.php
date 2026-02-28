@@ -205,7 +205,7 @@ function theme_degrade_get_pre_scss($theme) {
         \$footer-bg    : {$footerbg};
         \$footer-color : {$footercolor};\n";
 
-    if (get_config("theme_eadtraining", "navbarlayout") === "institutional") {
+    if (get_config("theme_degrade", "navbarlayout") === "institutional") {
         $scss .= "\$navbar-height : 127px;\n";
     }
 
