@@ -24,7 +24,7 @@ $stringlang['prices'] = 'Harga';
 $stringlang['select_course'] = 'Pilih kursus';
 $stringlang['top_courses'] = 'Kursus Teratas';
 $stringlang['top_courses_eadflix'] = 'Kursus Teratas';
-$stringlang['top_courses_number_eadflix'] = 'Jumlah Kursus Teratas';
+$stringlang['top_courses_number_eadflix'] = 'Kursus unggulan dengan jumlah';
 $stringlang['youtube_video'] = '(Opsional) Video latar belakang Youtube';
 $stringlang['featured2_title'] = 'Judul Fitur';
 $stringlang['featured2_text'] = 'Teks Fitur';
@@ -37,9 +37,21 @@ $stringlang['about_us'] = 'Tentang Kami';
 $stringlang['testimonials'] = 'Apa Kata Siswa Kami';
 
 $stringlang['blank'] = 'Tata letak kosong';
+$stringlang['my_courses'] = 'Kursus saya';
 $stringlang['my_courses_3'] = 'Kursus saya - 3 kolom';
 $stringlang['my_courses_4'] = 'Kursus saya - 4 kolom';
+$stringlang['my_courses_minimalist'] = 'Kursus saya minimalis';
 $stringlang['my_courses_minimalist_3'] = 'Kursus saya minimalis - 3 kolom';
 $stringlang['my_courses_minimalist_4'] = 'Kursus saya minimalis - 4 kolom';
-$stringlang['my_courses'] = 'Kursus saya';
-$stringlang['my_courses_minimalist'] = 'Kursus saya minimalis';
+
+$stringlang['my_desc_courses'] = 'Lacak progres Anda dan terus belajar';
+$stringlang['my_courses_minimalist_columns_label'] = 'Tampilkan berapa kolom kursus?';
+$stringlang['my_courses_minimalist_columns_2'] = '2 kolom';
+$stringlang['my_courses_minimalist_columns_3'] = '3 kolom';
+$stringlang['my_courses_minimalist_columns_4'] = '4 kolom';
+$stringlang['my_courses_minimalist_columns_6'] = '6 kolom';
+$stringlang['my_label_courses'] = 'Buat daftar kursus dalam bentuk blok dan sesuaikan jumlah kolom sesuai nilai yang dipilih di bawah ini.';
+
+$stringlang['title_courses'] = 'Kursus';
+$stringlang['title_courses_minimalist'] = 'Kursus minimalis';
+$stringlang['courses_desc'] = 'Pantau kemajuan Anda dan terus belajar';

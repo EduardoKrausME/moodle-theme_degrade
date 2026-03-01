@@ -24,7 +24,7 @@ $stringlang['prices'] = 'Цене';
 $stringlang['select_course'] = 'Изабери курс';
 $stringlang['top_courses'] = 'Најбољи курсеви';
 $stringlang['top_courses_eadflix'] = 'Најбољи курсеви';
-$stringlang['top_courses_number_eadflix'] = 'Број најбољих курсева';
+$stringlang['top_courses_number_eadflix'] = 'Истакнути курсеви са бројем';
 $stringlang['youtube_video'] = '(Опционо) Youtube видео у позадини';
 $stringlang['featured2_title'] = 'Наслов карактеристике';
 $stringlang['featured2_text'] = 'Текст карактеристике';
@@ -37,9 +37,21 @@ $stringlang['about_us'] = 'О нама';
 $stringlang['testimonials'] = 'Шта наши студенти кажу';
 
 $stringlang['blank'] = 'Prazan raspored';
+$stringlang['my_courses'] = 'Moji kursevi';
 $stringlang['my_courses_3'] = 'Moji kursevi - 3 kolone';
 $stringlang['my_courses_4'] = 'Moji kursevi - 4 kolone';
+$stringlang['my_courses_minimalist'] = 'Moji kursevi minimalistički';
 $stringlang['my_courses_minimalist_3'] = 'Moji kursevi minimalistički - 3 kolone';
 $stringlang['my_courses_minimalist_4'] = 'Moji kursevi minimalistički - 4 kolone';
-$stringlang['my_courses'] = 'Moji kursevi';
-$stringlang['my_courses_minimalist'] = 'Moji kursevi minimalistički';
+
+$stringlang['my_desc_courses'] = 'Пратите свој напредак и наставите да учите';
+$stringlang['my_courses_minimalist_columns_label'] = 'Колико колона курсева приказати?';
+$stringlang['my_courses_minimalist_columns_2'] = '2 колоне';
+$stringlang['my_courses_minimalist_columns_3'] = '3 колоне';
+$stringlang['my_courses_minimalist_columns_4'] = '4 колоне';
+$stringlang['my_courses_minimalist_columns_6'] = '6 колона';
+$stringlang['my_label_courses'] = 'Kreirajte listu kurseva u blokovima i podesite broj kolona prema vrednosti izabranoj ispod.';
+
+$stringlang['title_courses'] = 'Курсеви';
+$stringlang['title_courses_minimalist'] = 'Минималистички курсеви';
+$stringlang['courses_desc'] = 'Пратите свој напредак и наставите да учите';

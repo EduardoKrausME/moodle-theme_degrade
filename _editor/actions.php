@@ -97,12 +97,13 @@ if ($action == "langedit") {
             throw new Exception("Type not found");
     }
 
+    $info = json_decode($page->info);
     if (isset($_POST["save"])) {
-        $savedata = theme_degrade_clear_params_array($_POST["save"], PARAM_RAW);
-        $info = json_decode($page->info);
-        $info->savedata = array_values($savedata);
-        $page->info = json_encode($info);
+        $info->savedata = FormSaveValidator::validate($info);
+    } else {
+        $info->savedata = [];
     }
+    $page->info = json_encode($info, JSON_PRETTY_PRINT);
 
     $DB->update_record("theme_degrade_pages", $page);
 

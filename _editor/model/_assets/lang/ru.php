@@ -24,7 +24,7 @@ $stringlang['prices'] = 'Цены';
 $stringlang['select_course'] = 'Выберите курс';
 $stringlang['top_courses'] = 'Лучшие курсы';
 $stringlang['top_courses_eadflix'] = 'Лучшие курсы';
-$stringlang['top_courses_number_eadflix'] = 'Количество лучших курсов';
+$stringlang['top_courses_number_eadflix'] = 'Рекомендуемые курсы с количеством';
 $stringlang['youtube_video'] = '(Необязательно) Фоновое видео с YouTube';
 $stringlang['featured2_title'] = 'Заголовок особенности';
 $stringlang['featured2_text'] = 'Текст особенности';
@@ -37,9 +37,21 @@ $stringlang['about_us'] = 'О нас';
 $stringlang['testimonials'] = 'Что говорят наши студенты';
 
 $stringlang['blank'] = 'Пустой макет';
+$stringlang['my_courses'] = 'Мои курсы';
 $stringlang['my_courses_3'] = 'Мои курсы - 3 колонки';
 $stringlang['my_courses_4'] = 'Мои курсы - 4 колонки';
+$stringlang['my_courses_minimalist'] = 'Мои курсы минималистичный';
 $stringlang['my_courses_minimalist_3'] = 'Мои курсы минималистичный - 3 колонки';
 $stringlang['my_courses_minimalist_4'] = 'Мои курсы минималистичный - 4 колонки';
-$stringlang['my_courses'] = 'Мои курсы';
-$stringlang['my_courses_minimalist'] = 'Мои курсы минималистичный';
+
+$stringlang['my_desc_courses'] = 'Отслеживайте свой прогресс и продолжайте учиться';
+$stringlang['my_courses_minimalist_columns_label'] = 'Сколько столбцов курсов показывать?';
+$stringlang['my_courses_minimalist_columns_2'] = '2 столбца';
+$stringlang['my_courses_minimalist_columns_3'] = '3 столбца';
+$stringlang['my_courses_minimalist_columns_4'] = '4 столбца';
+$stringlang['my_courses_minimalist_columns_6'] = '6 столбцов';
+$stringlang['my_label_courses'] = 'Создайте список курсов в блоках и настройте количество столбцов в соответствии с выбранным ниже значением.';
+
+$stringlang['title_courses'] = 'Курсы';
+$stringlang['title_courses_minimalist'] = 'Минималистичные курсы';
+$stringlang['courses_desc'] = 'Следите за своим прогрессом и продолжайте учиться';

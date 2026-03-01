@@ -5,5 +5,6 @@
   "cachekey": "my_courses_minimalist_4_{USER}",
   "form": {
     "info": "lang::form_info"
-  }
+  },
+  "disable": true
 }

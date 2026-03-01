@@ -24,7 +24,7 @@ $stringlang['prices'] = 'Prijzen';
 $stringlang['select_course'] = 'Selecteer een cursus';
 $stringlang['top_courses'] = 'Topcursussen';
 $stringlang['top_courses_eadflix'] = 'Topcursussen';
-$stringlang['top_courses_number_eadflix'] = 'Aantal topcursussen';
+$stringlang['top_courses_number_eadflix'] = 'Uitgelichte cursussen met nummer';
 $stringlang['youtube_video'] = '(Optioneel) Een YouTube-achtergrondvideo';
 $stringlang['featured2_title'] = 'Kenmerktitel';
 $stringlang['featured2_text'] = 'Kenmerktekst';
@@ -37,9 +37,21 @@ $stringlang['about_us'] = 'Over ons';
 $stringlang['testimonials'] = 'Wat onze studenten zeggen';
 
 $stringlang['blank'] = 'Lege lay-out';
+$stringlang['my_courses'] = 'Mijn cursussen';
 $stringlang['my_courses_3'] = 'Mijn cursussen - 3 kolommen';
 $stringlang['my_courses_4'] = 'Mijn cursussen - 4 kolommen';
+$stringlang['my_courses_minimalist'] = 'Mijn cursussen minimalistisch';
 $stringlang['my_courses_minimalist_3'] = 'Mijn cursussen minimalistisch - 3 kolommen';
 $stringlang['my_courses_minimalist_4'] = 'Mijn cursussen minimalistisch - 4 kolommen';
-$stringlang['my_courses'] = 'Mijn cursussen';
-$stringlang['my_courses_minimalist'] = 'Mijn cursussen minimalistisch';
+
+$stringlang['my_desc_courses'] = 'Houd je voortgang bij en blijf leren';
+$stringlang['my_courses_minimalist_columns_label'] = 'Hoeveel cursuskolommen weergeven?';
+$stringlang['my_courses_minimalist_columns_2'] = '2 kolommen';
+$stringlang['my_courses_minimalist_columns_3'] = '3 kolommen';
+$stringlang['my_courses_minimalist_columns_4'] = '4 kolommen';
+$stringlang['my_courses_minimalist_columns_6'] = '6 kolommen';
+$stringlang['my_label_courses'] = 'Maak een lijst met cursussen in blokken en pas het aantal kolommen aan op basis van de hieronder gekozen waarde.';
+
+$stringlang['title_courses'] = 'Cursussen';
+$stringlang['title_courses_minimalist'] = 'Minimalistische cursussen';
+$stringlang['courses_desc'] = 'Volg je voortgang en blijf leren';

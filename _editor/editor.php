@@ -176,7 +176,7 @@ $languages = get_string_manager()->get_list_of_translations();
         <link rel="stylesheet" href="<?php echo "{$CFG->wwwroot}/lib/jquery/{$jqueryuicss}"; ?>"/>
         <script src="<?php echo "{$CFG->wwwroot}/lib/jquery/{$jquery}"; ?>"></script>
         <script src="<?php echo "{$CFG->wwwroot}/lib/jquery/{$jqueryui}"; ?>"></script>
-        <script src="js/build/form-itens.min.js"></script><?php
+        <script src="js/src/form-itens.js"></script><?php
     } else { ?>
         <input type="submit" style="display:none"><?php
     } ?>

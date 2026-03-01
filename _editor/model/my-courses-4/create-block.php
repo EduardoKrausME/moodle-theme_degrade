@@ -79,7 +79,7 @@ function my_courses_4_course_progress($course) {
 }
 
 function my_courses_4_couse_image(core_course_list_element $course) {
-    global $CFG, $OUTPUT;
+    global $OUTPUT;
 
     /** @var stored_file $file */
     foreach ($course->get_course_overviewfiles() as $file) {

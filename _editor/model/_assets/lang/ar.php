@@ -24,7 +24,7 @@ $stringlang['prices'] = 'الأسعار';
 $stringlang['select_course'] = 'اختر مقررًا';
 $stringlang['top_courses'] = 'أفضل المقررات';
 $stringlang['top_courses_eadflix'] = 'أفضل المقررات';
-$stringlang['top_courses_number_eadflix'] = 'عدد أفضل المقررات';
+$stringlang['top_courses_number_eadflix'] = 'دورات مميّزة مع العدد';
 $stringlang['youtube_video'] = '(اختياري) فيديو خلفية من يوتيوب';
 $stringlang['featured2_title'] = 'عنوان الميزة';
 $stringlang['featured2_text'] = 'نص الميزة';
@@ -37,9 +37,21 @@ $stringlang['about_us'] = 'معلومات عنا';
 $stringlang['testimonials'] = 'ماذا يقول طلابنا';
 
 $stringlang['blank'] = 'تخطيط فارغ';
+$stringlang['my_courses'] = 'دوراتي';
 $stringlang['my_courses_3'] = 'دوراتي - 3 أعمدة';
 $stringlang['my_courses_4'] = 'دوراتي - 4 أعمدة';
+$stringlang['my_courses_minimalist'] = 'دوراتي (تصميم مبسط)';
 $stringlang['my_courses_minimalist_3'] = 'دوراتي (تصميم مبسط) - 3 أعمدة';
 $stringlang['my_courses_minimalist_4'] = 'دوراتي (تصميم مبسط) - 4 أعمدة';
-$stringlang['my_courses'] = 'دوراتي';
-$stringlang['my_courses_minimalist'] = 'دوراتي (تصميم مبسط)';
+
+$stringlang['my_desc_courses'] = 'تتبّع تقدّمك واستمر في التعلّم';
+$stringlang['my_courses_minimalist_columns_label'] = 'كم عدد أعمدة الدورات التي تريد عرضها؟';
+$stringlang['my_courses_minimalist_columns_2'] = 'عمودان';
+$stringlang['my_courses_minimalist_columns_3'] = '3 أعمدة';
+$stringlang['my_courses_minimalist_columns_4'] = '4 أعمدة';
+$stringlang['my_courses_minimalist_columns_6'] = '6 أعمدة';
+$stringlang['my_label_courses'] = 'أنشئ قائمة بالدورات على شكل كتل واضبط عدد الأعمدة وفقًا للقيمة المختارة أدناه.';
+
+$stringlang['title_courses'] = 'الدورات';
+$stringlang['title_courses_minimalist'] = 'الدورات البسيطة';
+$stringlang['courses_desc'] = 'تابع تقدمك واستمر في التعلّم';

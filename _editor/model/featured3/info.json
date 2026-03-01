@@ -9,11 +9,13 @@
     "blocks": {
       "title": {
         "type": "text",
-        "label": "lang::featured2_title"
+        "label": "lang::featured2_title",
+        "valuetype": "text"
       },
       "description": {
         "type": "textarea",
-        "label": "lang::featured2_text"
+        "label": "lang::featured2_text",
+        "valuetype": "text"
       }
     },
     "scripts": [
@@ -23,5 +25,6 @@
     "styles": [
       "bootstrap"
     ]
-  }
+  },
+  "disable": true
 }

@@ -10,11 +10,13 @@
         "type": "select",
         "label": "lang::select_course",
         "data": "courses",
+        "valuetype": "int",
         "required": true
       },
       "description": {
         "type": "textarea",
-        "label": "lang::course_description"
+        "label": "lang::course_description",
+        "valuetype": "text"
       }
     },
     "scripts": [

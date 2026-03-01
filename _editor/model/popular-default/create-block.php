@@ -3,6 +3,13 @@
 use core_course\external\course_summary_exporter;
 use core_external\util;
 
+/**
+ * Function popular_default_createblocks
+ *
+ * @param $page
+ * @return string
+ * @throws dml_exception
+ */
 function popular_default_createblocks($page) {
     global $DB, $OUTPUT, $CFG;
 

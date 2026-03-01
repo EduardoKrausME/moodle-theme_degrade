@@ -24,7 +24,7 @@ $stringlang['prices'] = 'Prices';
 $stringlang['select_course'] = 'Select a course';
 $stringlang['top_courses'] = 'Top courses';
 $stringlang['top_courses_eadflix'] = 'Top courses';
-$stringlang['top_courses_number_eadflix'] = 'Top curses Number';
+$stringlang['top_courses_number_eadflix'] = 'Top courses with number';
 $stringlang['youtube_video'] = '(Optional) A Youtube background video';
 $stringlang['featured2_title'] = 'Feature title';
 $stringlang['featured2_text'] = 'Feature text';
@@ -37,9 +37,21 @@ $stringlang['about_us'] = 'About Us';
 $stringlang['testimonials'] = 'What Our Students Say';
 
 $stringlang['blank'] = 'Blank layout';
+$stringlang['my_courses'] = 'My courses';
 $stringlang['my_courses_3'] = 'My courses - 3 columns';
 $stringlang['my_courses_4'] = 'My courses - 4 columns';
+$stringlang['my_courses_minimalist'] = 'My courses minimalist';
 $stringlang['my_courses_minimalist_3'] = 'My courses minimalist - 3 columns';
 $stringlang['my_courses_minimalist_4'] = 'My courses minimalist - 4 columns';
-$stringlang['my_courses'] = 'My courses';
-$stringlang['my_courses_minimalist'] = 'My Courses minimalist';
+
+$stringlang['my_desc_courses'] = 'Track your progress and keep learning';
+$stringlang['my_courses_minimalist_columns_label'] = 'How many course columns to show?';
+$stringlang['my_courses_minimalist_columns_2'] = '2 columns';
+$stringlang['my_courses_minimalist_columns_3'] = '3 columns';
+$stringlang['my_courses_minimalist_columns_4'] = '4 columns';
+$stringlang['my_courses_minimalist_columns_6'] = '6 columns';
+$stringlang['my_label_courses'] = 'Create a list of courses in blocks and adjust the number of columns according to the value chosen below.';
+
+$stringlang['title_courses'] = 'Courses';
+$stringlang['title_courses_minimalist'] = 'Minimalist courses';
+$stringlang['courses_desc'] = 'Track your progress and keep learning';

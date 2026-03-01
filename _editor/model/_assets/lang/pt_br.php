@@ -24,7 +24,7 @@ $stringlang['prices'] = 'Preços';
 $stringlang['select_course'] = 'Selecione um curso';
 $stringlang['top_courses'] = 'Cursos em destaque';
 $stringlang['top_courses_eadflix'] = 'Cursos em destaque';
-$stringlang['top_courses_number_eadflix'] = 'Número de cursos em destaque';
+$stringlang['top_courses_number_eadflix'] = 'Cursos em destaque com número';
 $stringlang['youtube_video'] = '(Opcional) Um vídeo de fundo do YouTube';
 $stringlang['featured2_title'] = 'Título do recurso';
 $stringlang['featured2_text'] = 'Texto do recurso';
@@ -37,9 +37,21 @@ $stringlang['about_us'] = 'Sobre nós';
 $stringlang['testimonials'] = 'O que nossos alunos dizem';
 
 $stringlang['blank'] = 'Layout em branco';
+$stringlang['my_courses'] = 'Meus cursos';
 $stringlang['my_courses_3'] = 'Meus cursos - 3 colunas';
 $stringlang['my_courses_4'] = 'Meus cursos - 4 colunas';
+$stringlang['my_courses_minimalist'] = 'Meus cursos minimalista';
 $stringlang['my_courses_minimalist_3'] = 'Meus cursos minimalista - 3 colunas';
 $stringlang['my_courses_minimalist_4'] = 'Meus cursos minimalista - 4 colunas';
-$stringlang['my_courses'] = 'Meus cursos';
-$stringlang['my_courses_minimalist'] = 'Meus cursos minimalista';
+
+$stringlang['my_desc_courses'] = 'Acompanhe seu progresso e continue aprendendo';
+$stringlang['my_courses_minimalist_columns_label'] = 'Quantas colunas de cursos mostrar?';
+$stringlang['my_courses_minimalist_columns_2'] = '2 colunas';
+$stringlang['my_courses_minimalist_columns_3'] = '3 colunas';
+$stringlang['my_courses_minimalist_columns_4'] = '4 colunas';
+$stringlang['my_courses_minimalist_columns_6'] = '6 colunas';
+$stringlang['my_label_courses'] = 'Crie uma lista de cursos em blocos e ajuste o número de colunas conforme o valor escolhido abaixo.';
+
+$stringlang['title_courses'] = 'Cursos';
+$stringlang['title_courses_minimalist'] = 'Cursos minimalista';
+$stringlang['courses_desc'] = 'Acompanhe seu progresso e continue aprendendo';

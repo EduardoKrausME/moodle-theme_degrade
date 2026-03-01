@@ -10,15 +10,18 @@
         "type": "select",
         "label": "lang::select_course",
         "data": "courses",
+        "valuetype": "int",
         "required": true
       },
       "youtubeid": {
         "type": "text",
-        "label": "lang::youtube_video"
+        "label": "lang::youtube_video",
+        "valuetype": "text"
       },
       "description": {
         "type": "textarea",
-        "label": "lang::course_description"
+        "label": "lang::course_description",
+        "valuetype": "text"
       }
     },
     "scripts": [

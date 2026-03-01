@@ -9,11 +9,13 @@
     "blocks": {
       "title": {
         "type": "text",
-        "label": "lang::faq_title"
+        "label": "lang::faq_title",
+        "valuetype": "text"
       },
       "description": {
         "type": "textarea",
-        "label": "lang::faq_text"
+        "label": "lang::faq_text",
+        "valuetype": "text"
       }
     },
     "scripts": [

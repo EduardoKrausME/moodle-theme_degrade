@@ -24,7 +24,7 @@ $stringlang['prices'] = '价格';
 $stringlang['select_course'] = '选择课程';
 $stringlang['top_courses'] = '热门课程';
 $stringlang['top_courses_eadflix'] = '热门课程';
-$stringlang['top_courses_number_eadflix'] = '热门课程数量';
+$stringlang['top_courses_number_eadflix'] = '带编号的精选课程';
 $stringlang['youtube_video'] = '（可选）Youtube 背景视频';
 $stringlang['featured2_title'] = '功能标题';
 $stringlang['featured2_text'] = '功能说明';
@@ -37,9 +37,21 @@ $stringlang['about_us'] = '关于我们';
 $stringlang['testimonials'] = '学生评价';
 
 $stringlang['blank'] = '空白布局';
+$stringlang['my_courses'] = '我的课程';
 $stringlang['my_courses_3'] = '我的课程 - 3列';
 $stringlang['my_courses_4'] = '我的课程 - 4列';
+$stringlang['my_courses_minimalist'] = '我的课程极简';
 $stringlang['my_courses_minimalist_3'] = '我的课程极简 - 3列';
 $stringlang['my_courses_minimalist_4'] = '我的课程极简 - 4列';
-$stringlang['my_courses'] = '我的课程';
-$stringlang['my_courses_minimalist'] = '我的课程极简';
+
+$stringlang['my_desc_courses'] = '跟踪你的进度并持续学习';
+$stringlang['my_courses_minimalist_columns_label'] = '显示多少列课程？';
+$stringlang['my_courses_minimalist_columns_2'] = '2 列';
+$stringlang['my_courses_minimalist_columns_3'] = '3 列';
+$stringlang['my_courses_minimalist_columns_4'] = '4 列';
+$stringlang['my_courses_minimalist_columns_6'] = '6 列';
+$stringlang['my_label_courses'] = '创建以区块形式显示的课程列表，并根据下方选择的值调整列数。';
+
+$stringlang['title_courses'] = '课程';
+$stringlang['title_courses_minimalist'] = '极简课程';
+$stringlang['courses_desc'] = '跟踪你的进度并继续学习';

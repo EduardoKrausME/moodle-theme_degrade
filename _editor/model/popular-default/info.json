@@ -11,6 +11,7 @@
         "type": "select",
         "label": "lang::select_course",
         "data": "courses",
+        "valuetype": "int",
         "required": true
       }
     },
