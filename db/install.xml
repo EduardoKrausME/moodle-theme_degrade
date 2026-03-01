@@ -7,10 +7,10 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="local" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="type" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="html" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="info" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="type" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="template" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="lang" TYPE="char" LENGTH="6" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="sort" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
