@@ -232,6 +232,7 @@ class hook_callbacks {
         $hasuri = strpos($requesturi, "course/view.php") || strpos($requesturi, "course/section.php");
         if ($hasuri) {
             $header = (object) [];
+            $header->headeractions_edit = false;
             $header->hasnavbarcourse = false;
             $header->hasbannercourse = false;
             $header->hasnavbar = empty($PAGE->layout_options["nonavbar"]);
