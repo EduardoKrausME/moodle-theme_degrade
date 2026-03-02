@@ -373,7 +373,7 @@ function theme_degrade_coursemodule_standard_elements(&$formwrapper, $mform) {
         return;
     }
 
-    global $CFG, $PAGE;
+    global $CFG, $PAGE, $COURSE;
     if ($CFG->theme == "degrade" || $CFG->theme == "eadflix") {
         // Icones.
         $mform->addElement(
@@ -388,26 +388,29 @@ function theme_degrade_coursemodule_standard_elements(&$formwrapper, $mform) {
             "maxfiles" => 1,
         ];
 
-        // Background.
-        if (isset($formwrapper->get_current()->coursemodule) && $formwrapper->get_current()->coursemodule) {
-            $context = context_module::instance($formwrapper->get_current()->coursemodule);
-            $draftitemid = file_get_submitted_draft_itemid("theme_degrade_customimage");
-            file_prepare_draft_area(
-                $draftitemid,
-                $context->id,
-                "theme_degrade",
+        $hasicons = (int) get_config("theme_degrade", "course_sections_icons_{$COURSE->id}");
+        if($hasicons) {
+            // Background.
+            if (isset($formwrapper->get_current()->coursemodule) && $formwrapper->get_current()->coursemodule) {
+                $context = context_module::instance($formwrapper->get_current()->coursemodule);
+                $draftitemid = file_get_submitted_draft_itemid("theme_degrade_customimage");
+                file_prepare_draft_area(
+                    $draftitemid,
+                    $context->id,
+                    "theme_degrade",
+                    "theme_degrade_customimage",
+                    $formwrapper->get_current()->coursemodule
+                );
+                $formwrapper->set_data(["theme_degrade_customimage" => $draftitemid]);
+            }
+            $mform->addElement(
+                "filemanager",
                 "theme_degrade_customimage",
-                $formwrapper->get_current()->coursemodule
+                get_string("settings_icons_upload_image", "theme_degrade"),
+                null,
+                $filemanageroptions
             );
-            $formwrapper->set_data(["theme_degrade_customimage" => $draftitemid]);
         }
-        $mform->addElement(
-            "filemanager",
-            "theme_degrade_customimage",
-            get_string("settings_icons_upload_image", "theme_degrade"),
-            null,
-            $filemanageroptions
-        );
 
         $mform->addElement(
             "static",

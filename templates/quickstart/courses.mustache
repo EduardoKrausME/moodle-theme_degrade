@@ -39,7 +39,9 @@
         <div class="inner-content">
             <div class="settings-content">
                 <div class="card mb-4">
-                    <div class="card-header"><h5>{{#str}}course_summary_banner, theme_degrade{{/str}}</h5></div>
+                    <div class="card-header">
+                        <h5>{{#str}}course_summary_banner, theme_degrade{{/str}}</h5>
+                    </div>
                     <div class="card-body">
                         <p>{{#str}}course_summary_banner_desc, theme_degrade{{/str}}</p>
                         <div class="radio-wrapper">
@@ -146,6 +148,40 @@
                         })();
                     </script>
                 </div>
+
+                {{#has_course_sections_icons}}
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>{{#str}}course_sections_icons_banner, theme_degrade{{/str}}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>{{#str}}course_sections_icons_banner_desc, theme_degrade{{/str}}</p>
+                            <div class="radio-wrapper">
+                                <label class="radio-img">
+                                    <input class="form-check-input input-course_sections_icons" type="radio"
+                                           name="course_sections_icons"
+                                           value="0" style="display:none"
+                                           {{^course_sections_icons}}checked{{/course_sections_icons}}>
+                                    <div class="marked-area">
+                                        <h5>{{#str}}course_sections_icons_banner_list, theme_degrade{{/str}}</h5>
+                                        {{#pix}}quickstart/course-sumary-none, theme_degrade{{/pix}}
+                                    </div>
+                                </label>
+
+                                <label class="radio-img">
+                                    <input class="form-check-input input-course_sections_icons" type="radio"
+                                           name="course_sections_icons"
+                                           value="2" style="display:none"
+                                           {{#course_sections_icons}}checked{{/course_sections_icons}}>
+                                    <div class="marked-area">
+                                        <h5>{{#str}}course_sections_icons_banner_block, theme_degrade{{/str}}</h5>
+                                        {{#pix}}quickstart/course-sumary-block, theme_degrade{{/pix}}
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                {{/has_course_sections_icons}}
 
                 {{#show_change_colors}}
                     <div class="card mb-4">

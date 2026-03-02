@@ -1,7 +1,7 @@
 define(["jquery"], function ($) {
-    var blocks = {
+    let blocks = {
         create: function (cmid, thumb) {
-            let $module = $(`body.format-weeks:not(.editing) #module-${cmid}, body.format-topics:not(.editing) #module-${cmid}`);
+            let $module = $(`body.format-weeks #module-${cmid}, body.format-topics #module-${cmid}`);
             $module.addClass("theme-block");
             $module.find(".activity-item")
                 .css({"background-image": `url('${thumb}')`})
@@ -11,6 +11,28 @@ define(["jquery"], function ($) {
                     }
                 });
             $module.append($module.find(".activity-completion"));
+        },
+
+        create_not_themeblock: function () {
+            let find1 = "body.format-weeks  .activity.activity-wrapper:not(.theme-block)";
+            let find2 = "body.format-topics .activity.activity-wrapper:not(.theme-block)";
+            let $modules = $(`${find1}, ${find2}`);
+            $modules.each(function (id, module) {
+                let $module = $(module);
+                let thumb = $module.find(".activity-icon .activityicon").attr("src");
+                $module.addClass("theme-block");
+                $module.find(".activity-item")
+                    .css({
+                        "background-image": `url('${thumb}')`,
+                        "background-size": "contain",
+                    })
+                    .click(function (event) {
+                        if (event.target === this) {
+                            location.href = $module.find("a.aalink").attr("href");
+                        }
+                    });
+                $module.append($module.find(".activity-completion"));
+            });
         },
 
         icons: function (cmid, thumb) {

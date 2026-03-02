@@ -35,6 +35,8 @@ use moodle_url;
  * @package theme_degrade
  */
 class hook_callbacks {
+    /** @var int */
+    private static $hasicons;
 
     /**
      * Function before_html_attributes
@@ -42,7 +44,14 @@ class hook_callbacks {
      * @throws Exception
      */
     public static function before_html_attributes(before_html_attributes $hook): void {
-        global $CFG;
+        global $CFG, $COURSE, $PAGE;
+
+        if ($COURSE->id) {
+            self::$hasicons = (int) get_config("theme_degrade", "course_sections_icons_{$COURSE->id}");
+            if (self::$hasicons && !$PAGE->user_is_editing()) {
+                $hook->add_attribute("data-hasicons", "yes");
+            }
+        }
 
         $theme = $CFG->theme;
         if (isset($_SESSION["SESSION"]->theme)) {
@@ -218,14 +227,28 @@ class hook_callbacks {
             $cache->set($cachekey, json_encode($images));
         }
 
-        foreach ($images["blocks"] as $block) {
-            $PAGE->requires->js_call_amd("theme_degrade/blocks", "create", [$block["cmid"], $block["thumb"]]);
+        if ($COURSE->format == "topics" || $COURSE->format == "weeks") {
+            if (!self::$hasicons) {
+                self::$hasicons = get_config("theme_degrade", "course_sections_icons_{$COURSE->id}");
+            }
+            if (!$PAGE->user_is_editing() && self::$hasicons) {
+                foreach ($images["blocks"] as $block) {
+                    $cmid = $block["cmid"];
+                    $thumb = $block["thumb"];
+                    $PAGE->requires->js_call_amd("theme_degrade/blocks", "create", [$cmid, $thumb]);
+                }
+                $PAGE->requires->js_call_amd("theme_degrade/blocks", "create_not_themeblock", []);
+            }
         }
         foreach ($images["icons"] as $icons) {
-            $PAGE->requires->js_call_amd("theme_degrade/blocks", "icons", [$icons["cmid"], $icons["thumb"]]);
+            $cmid = $icons["cmid"];
+            $thumb = $icons["thumb"];
+            $PAGE->requires->js_call_amd("theme_degrade/blocks", "icons", [$cmid, $thumb]);
         }
         foreach ($images["colors"] as $color) {
-            $PAGE->requires->js_call_amd("theme_degrade/blocks", "color", [$color["cmid"], $color["color"]]);
+            $cmid = $color["cmid"];
+            $color = $color["color"];
+            $PAGE->requires->js_call_amd("theme_degrade/blocks", "color", [$cmid, $color]);
         }
 
         $requesturi = $_SERVER["REQUEST_URI"];

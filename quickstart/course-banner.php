@@ -29,9 +29,10 @@ require_once("../lib.php");
 global $CFG, $PAGE, $OUTPUT, $DB, $USER;
 
 $courseid = required_param("courseid", PARAM_INT);
+$course = get_course($courseid);
 
 if (!isloggedin()) {
-    $PAGE->set_url(new moodle_url("/course/view.php", ["id" => $courseid]));
+    $PAGE->set_url(new moodle_url("/course/view.php", ["id" => $course->id]));
 }
 
 require_admin();
@@ -42,13 +43,14 @@ if (optional_param("POST", false, PARAM_INT)) {
     // Save configs.
     $configkeys = [
         "course_summary_banner" => PARAM_INT,
+        "course_sections_icons" => PARAM_INT,
         "override_course_primarycolor" => PARAM_RAW,
         "override_course_secondarycolor" => PARAM_RAW,
     ];
     foreach ($configkeys as $name => $type) {
         $value = optional_param($name, false, $type);
         if ($value !== false) {
-            set_config("{$name}_{$courseid}", $value, "theme_degrade");
+            set_config("{$name}_{$course->id}", $value, "theme_degrade");
         }
     }
 
@@ -80,7 +82,7 @@ if (optional_param("POST", false, PARAM_INT)) {
             $filestring = false;
         }
         if ($hasupload) {
-            $filearea = "{$fieldname}_{$courseid}";
+            $filearea = "{$fieldname}_{$course->id}";
 
             // Delete old files (if you want to keep a single file).
             $fs->delete_area_files($syscontext->id, $component, $filearea, 0);
@@ -110,7 +112,7 @@ if (optional_param("POST", false, PARAM_INT)) {
     purge_caches(["theme", "courses", "template"]);
     purge_caches();
 
-    redirect(new moodle_url("/course/view.php?id={$courseid}"), get_string("quickstart_banner-saved", "theme_degrade"));
+    redirect(new moodle_url("/course/view.php?id={$course->id}"), get_string("quickstart_banner-saved", "theme_degrade"));
 }
 
 $PAGE->set_context(context_system::instance());
@@ -124,13 +126,13 @@ $PAGE->requires->jquery();
 echo $OUTPUT->header();
 
 // Course.
-$bannerfileurl = theme_degrade_setting_file_url("banner_course_file_{$courseid}");
+$bannerfileurl = theme_degrade_setting_file_url("banner_course_file_{$course->id}");
 if (!$bannerfileurl) {
     $bannerfileurl = theme_degrade_setting_file_url("banner_course_file");
 }
 $bannerfileurl = $bannerfileurl ? $bannerfileurl->out() : false;
 if (!$bannerfileurl) {
-    $course = $DB->get_record("course", ["id" => $courseid]);
+    $course = $DB->get_record("course", ["id" => $course->id]);
     $course = new core_course_list_element($course);
     $courseimage = course_summary_exporter::get_course_image($course);
     if ($courseimage) {
@@ -138,7 +140,7 @@ if (!$bannerfileurl) {
     }
 }
 
-$action = "{$CFG->wwwroot}/theme/degrade/quickstart/course-banner.php?courseid={$courseid}";
+$action = "{$CFG->wwwroot}/theme/degrade/quickstart/course-banner.php?courseid={$course->id}";
 echo '<form action="' . $action . '" style="display:block;"
             enctype="multipart/form-data" method="post"
             class="quickstart-content">';
@@ -146,7 +148,7 @@ echo '<input type="hidden" name="POST" value="1" />';
 echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
 $coursesummary = get_config("theme_degrade", "course_summary_banner");
-$coursesummarycourse = get_config("theme_degrade", "course_summary_banner_{$courseid}");
+$coursesummarycourse = get_config("theme_degrade", "course_summary_banner_{$course->id}");
 if ( $coursesummarycourse !== false) {
     $coursesummary = $coursesummarycourse;
 }
@@ -169,17 +171,21 @@ $coursesmustache = [
     "banner_course_file_url" => $bannerfileurl,
     "banner_course_file_extensions" => "PNG, JPG",
     "show_change_colors" => $showchangecolors,
-    "courseid" => $courseid,
-    "override_course_primarycolor" => get_config("theme_degrade", "override_course_primarycolor_{$courseid}"),
-    "override_course_secondarycolor" => get_config("theme_degrade", "override_course_secondarycolor_{$courseid}"),
+    "courseid" => $course->id,
+
+    "has_course_sections_icons" => $course->format == "topics" || $course->format == "weeks",
+    "course_sections_icons" => get_config("theme_degrade", "course_sections_icons_{$course->id}"),
+
+    "override_course_primarycolor" => get_config("theme_degrade", "override_course_primarycolor_{$course->id}"),
+    "override_course_secondarycolor" => get_config("theme_degrade", "override_course_secondarycolor_{$course->id}"),
     "colorselect" => $OUTPUT->render_from_template("theme_degrade/settings/colors", [
         "coursecolor" => true,
         "colors" => $themecolors,
-        "defaultcolor" => theme_degrade_default("override_course_primarycolor_{$courseid}", $brandcolor),
+        "defaultcolor" => theme_degrade_default("override_course_primarycolor_{$course->id}", $brandcolor),
         "defaultcolorfooter" => theme_degrade_default("footer_background_color", "#1a2a6c"),
         "brandcolor_background_menu" => (int) theme_degrade_default("brandcolor_background_menu", 0),
         "navbar_layout_is_institutional" => $OUTPUT->navbar_layout_is_institutional(),
-        "secondary_color" => theme_degrade_secondary_color($courseid),
+        "secondary_color" => theme_degrade_secondary_color($course->id),
     ]),
 ];
 echo $OUTPUT->render_from_template("theme_degrade/quickstart/courses", $coursesmustache);
