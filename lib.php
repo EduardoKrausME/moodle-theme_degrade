@@ -389,7 +389,7 @@ function theme_degrade_coursemodule_standard_elements(&$formwrapper, $mform) {
         ];
 
         $hasicons = (int) get_config("theme_degrade", "course_sections_icons_{$COURSE->id}");
-        if($hasicons) {
+        if ($hasicons) {
             // Background.
             if (isset($formwrapper->get_current()->coursemodule) && $formwrapper->get_current()->coursemodule) {
                 $context = context_module::instance($formwrapper->get_current()->coursemodule);
