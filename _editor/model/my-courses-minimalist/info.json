@@ -1,0 +1,25 @@
+{
+  "title": "lang::my_courses_minimalist",
+  "type": "html-form",
+  "category": "my-courses",
+  "cachekey": "my_courses_minimalist_{USER}",
+  "form": {
+    "title": "lang::form_title",
+    "label": "lang::my_label_courses",
+    "info": "lang::form_info",
+    "block": {
+      "rows": {
+        "type": "select",
+        "label": "lang::my_courses_minimalist_columns_label",
+        "data": [
+          {"id": 2, "name": "lang::my_courses_minimalist_columns_2"},
+          {"id": 3, "name": "lang::my_courses_minimalist_columns_3"},
+          {"id": 4, "name": "lang::my_courses_minimalist_columns_4"},
+          {"id": 6, "name": "lang::my_courses_minimalist_columns_6"}
+        ],
+        "valuetype": "int",
+        "default_data": 3
+      }
+    }
+  }
+}
