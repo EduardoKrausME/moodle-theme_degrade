@@ -171,6 +171,7 @@ $navbar-color: #b5bcc7;
         height: calc(var(--navbar-height) + 1px);
     }
     &.brandcolor-background {
+        background: $primary;
         .nav-link,
         .navbar-brand,
         .langmenu .btn {
