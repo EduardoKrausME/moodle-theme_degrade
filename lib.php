@@ -596,10 +596,10 @@ function theme_degrade_coursemodule_edit_post_actions($data, $course) {
     }
 
     if (isset($data->theme_degrade_customcolor)) {
-        $name = "theme_eadtraining_customcolor_{$data->coursemodule}";
-        set_config($name, $data->theme_eadtraining_customcolor, "theme_eadtraining");
+        $name = "theme_degrade_customcolor_{$data->coursemodule}";
+        set_config($name, $data->theme_degrade_customcolor, "theme_degrade");
 
-        cache::make("theme_eadtraining", "css_cache")->purge();
+        cache::make("theme_degrade", "css_cache")->purge();
     }
 
     return $data;
@@ -611,7 +611,7 @@ function theme_degrade_coursemodule_edit_post_actions($data, $course) {
  * @param $draftitemid
  * @return bool
  */
-function theme_eadtraining_draft_has_files($draftitemid): bool {
+function theme_degrade_draft_has_files($draftitemid): bool {
     if (empty($draftitemid)) {
         return false;
     }
@@ -624,7 +624,7 @@ function theme_eadtraining_draft_has_files($draftitemid): bool {
  *
  * @return array
  */
-function theme_eadtraining_colors() {
+function theme_degrade_colors() {
     return [
         "#000428", // Azul Escuro.
         "#070000", // Preto.
@@ -661,8 +661,8 @@ function theme_eadtraining_colors() {
  *
  * @throws dml_exception
  */
-function theme_eadtraining_change_color() {
-    $config = get_config("theme_eadtraining");
+function theme_degrade_change_color() {
+    $config = get_config("theme_degrade");
     $configboost = get_config("theme_boost");
 
     if (isset($config->startcolor[5])) {
@@ -671,8 +671,8 @@ function theme_eadtraining_change_color() {
         $brandcolor = $configboost->brandcolor;
     }
 
-    set_config("startcolor", "#000", "theme_eadtraining");
-    set_config("footer_background_color", $brandcolor, "theme_eadtraining");
+    set_config("startcolor", "#000", "theme_degrade");
+    set_config("footer_background_color", $brandcolor, "theme_degrade");
 
     theme_reset_all_caches();
 }
@@ -685,7 +685,7 @@ function theme_eadtraining_change_color() {
  * @return string
  * @throws Exception
  */
-function theme_eadtraining_default($configname, $default, $plugin = "theme_eadtraining") {
+function theme_degrade_default($configname, $default, $plugin = "theme_degrade") {
     $value = get_config($plugin, $configname);
     if ($value === false) {
         return $default;
@@ -701,10 +701,10 @@ function theme_eadtraining_default($configname, $default, $plugin = "theme_eadtr
  * @return string
  * @throws dml_exception
  */
-function theme_eadtraining_secondary_color($courseid = 0) {
+function theme_degrade_secondary_color($courseid = 0) {
     $secondary = get_config("theme_boost", "secondary");
     if ($courseid) {
-        $secondaryoverride = get_config("theme_eadtraining", "override_course_secondarycolor_{$courseid}");
+        $secondaryoverride = get_config("theme_degrade", "override_course_secondarycolor_{$courseid}");
         if ($secondaryoverride) {
             $secondary = $secondaryoverride;
         }
