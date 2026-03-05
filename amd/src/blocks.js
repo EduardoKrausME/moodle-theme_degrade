@@ -19,12 +19,21 @@ define(["jquery"], function ($) {
             let $modules = $(`${find1}, ${find2}`);
             $modules.each(function (id, module) {
                 let $module = $(module);
-                let thumb = $module.find(".activity-icon .activityicon").attr("src");
                 $module.addClass("theme-block");
+
+                let thumb = $module.find(".activity-icon .activityicon").attr("src");
+                let size = "contain";
+
+                if ($module.hasClass("modtype_childcourse")) {
+                    let cmid = $module.attr("data-id");
+                    thumb = `${M.cfg.wwwroot}/mod/childcourse/thumb.php?cmid=${cmid}`
+                    size = "cover";
+                }
+
                 $module.find(".activity-item")
                     .css({
                         "background-image": `url('${thumb}')`,
-                        "background-size": "contain",
+                        "background-size": size,
                     })
                     .click(function (event) {
                         if (event.target === this) {
@@ -69,13 +78,13 @@ define(["jquery"], function ($) {
             blocks.add_style_tag(rule);
         },
 
-        add_style_tag:function (rule){
+        add_style_tag: function (rule) {
             let styleTag = $("#degrade-custom-style");
             if (styleTag.length) {
                 styleTag.append(rule);
                 return;
             }
-            styleTag = $("<style>", { id: "degrade-custom-style", type: "text/css" })
+            styleTag = $("<style>", {id: "degrade-custom-style", type: "text/css"})
                 .appendTo("head");
             styleTag.append(rule);
         }
