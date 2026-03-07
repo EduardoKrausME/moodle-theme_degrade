@@ -1,6 +1,8 @@
 define(["jquery"], function ($) {
     let blocks = {
-        create: function (cmid, thumb) {
+        create: function (cmid, thumb, sizecover) {
+            if ($("body").hasClass("editing")) return;
+
             let $module = $(`body.format-weeks #module-${cmid}, body.format-topics #module-${cmid}`);
             $module.addClass("theme-block");
             $module.find(".activity-item")
@@ -10,10 +12,15 @@ define(["jquery"], function ($) {
                         location.href = $module.find("a.aalink").attr("href");
                     }
                 });
+            if (sizecover != undefined) {
+                $module.find(".activity-item").css({"background-size": sizecover})
+            }
             $module.append($module.find(".activity-completion"));
         },
 
         create_not_themeblock: function () {
+            if ($("body").hasClass("editing")) return;
+
             let find1 = "body.format-weeks  .activity.activity-wrapper:not(.theme-block)";
             let find2 = "body.format-topics .activity.activity-wrapper:not(.theme-block)";
             let $modules = $(`${find1}, ${find2}`);
