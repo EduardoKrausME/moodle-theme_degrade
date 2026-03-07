@@ -386,12 +386,13 @@ class core_renderer extends \core_renderer {
         if (!$course) {
             return false;
         }
-        $bannerfileurl = theme_degrade_setting_file_url("banner_course_file_{$course->id}");
-        if ($bannerfileurl) {
-            return $bannerfileurl->out();
-        }
-        $bannerfileurl = theme_degrade_setting_file_url("banner_course_file");
 
+        $bannerfileurlcourse = theme_degrade_setting_file_url("banner_course_file_{$course->id}");
+        if ($bannerfileurlcourse) {
+            return $bannerfileurlcourse->out();
+        }
+
+        $bannerfileurl = theme_degrade_setting_file_url("banner_course_file");
         if ($bannerfileurl) {
             return $bannerfileurl->out();
         }
