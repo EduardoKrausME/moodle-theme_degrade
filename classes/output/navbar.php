@@ -37,6 +37,8 @@ class navbar implements \renderable {
     protected $items = [];
     /** @var moodle_page The current moodle page. */
     protected $page;
+    /** @var array Breadcrumb visibility settings. */
+    protected $breadcrumbsettings = [];
 
     /**
      * Takes a navbar object and picks the necessary parts for display.
@@ -48,7 +50,33 @@ class navbar implements \renderable {
         foreach ($this->page->navbar->get_items() as $item) {
             $this->items[] = $item;
         }
+        $this->load_breadcrumb_settings();
         $this->prepare_nodes_for_boost();
+    }
+
+    /**
+     * Loads the breadcrumb visibility settings.
+     */
+    protected function load_breadcrumb_settings(): void {
+        $this->breadcrumbsettings = [
+            "showmycoursescourses" => get_config("theme_degrade", "breadcrumb_show_mycourses_courses"),
+            "showcategories" => get_config("theme_degrade", "breadcrumb_show_categories"),
+            "showcourse" => get_config("theme_degrade", "breadcrumb_show_course"),
+            "shownavigationduplicates" => get_config("theme_degrade", "breadcrumb_show_navigation_duplicates"),
+            "showsections" => get_config("theme_degrade", "breadcrumb_show_sections"),
+            "shownolinkitems" => get_config("theme_degrade", "breadcrumb_show_no_link_items"),
+        ];
+    }
+
+    /**
+     * Returns whether a breadcrumb setting is enabled.
+     *
+     * @param string $key The setting key.
+     *
+     * @return bool
+     */
+    protected function is_breadcrumb_setting_enabled(string $key): bool {
+        return !empty($this->breadcrumbsettings[$key]);
     }
 
     /**
@@ -58,10 +86,12 @@ class navbar implements \renderable {
         global $PAGE;
 
         // Remove the navbar nodes that already exist in the primary navigation menu.
-        $this->remove_items_that_exist_in_navigation($PAGE->primarynav);
+        if (!$this->is_breadcrumb_setting_enabled("shownavigationduplicates")) {
+            $this->remove_items_that_exist_in_navigation($PAGE->primarynav);
+        }
 
         // Defines whether section items with an action should be removed by default.
-        $removesections = true;
+        $removesections = !$this->is_breadcrumb_setting_enabled("showsections");
 
         if ($this->page->context->contextlevel == CONTEXT_COURSECAT) {
             // Remove the 'Permissions' navbar node in the Check permissions page.
@@ -76,20 +106,30 @@ class navbar implements \renderable {
             }
             // Remove any duplicate navbar nodes.
             $this->remove_duplicate_items();
+
             // Remove 'My courses' and 'Courses' if we are in the course context.
-            $this->remove('mycourses');
-            $this->remove('courses');
+            if (!$this->is_breadcrumb_setting_enabled("showmycoursescourses")) {
+                $this->remove('mycourses');
+                $this->remove('courses');
+            }
             // Remove the course category breadcrumb nodes.
-            foreach ($this->items as $key => $item) {
-                // Remove if it is a course category breadcrumb node.
-                $this->remove($item->key, \breadcrumb_navigation_node::TYPE_CATEGORY);
+            if (!$this->is_breadcrumb_setting_enabled("showcategories")) {
+                foreach ($this->items as $key => $item) {
+                    // Remove if it is a course category breadcrumb node.
+                    $this->remove($item->key, \breadcrumb_navigation_node::TYPE_CATEGORY);
+                }
             }
             // Remove the course breadcrumb node.
-            if (strpos($this->page->pagetype, 'course-view-section-') !== 0) {
+            if (
+                !$this->is_breadcrumb_setting_enabled("showcourse") &&
+                strpos($this->page->pagetype, 'course-view-section-') !== 0
+            ) {
                 $this->remove($this->page->course->id, \breadcrumb_navigation_node::TYPE_COURSE);
             }
             // Remove the navbar nodes that already exist in the secondary navigation menu.
-            $this->remove_items_that_exist_in_navigation($PAGE->secondarynav);
+            if (!$this->is_breadcrumb_setting_enabled("shownavigationduplicates")) {
+                $this->remove_items_that_exist_in_navigation($PAGE->secondarynav);
+            }
 
             switch ($this->page->pagetype) {
                 case 'group-groupings':
@@ -112,12 +152,16 @@ class navbar implements \renderable {
 
         // Remove 'My courses' if we are in the module context.
         if ($this->page->context->contextlevel == CONTEXT_MODULE) {
-            $this->remove('mycourses');
-            $this->remove('courses');
+            if (!$this->is_breadcrumb_setting_enabled("showmycoursescourses")) {
+                $this->remove('mycourses');
+                $this->remove('courses');
+            }
             // Remove the course category breadcrumb nodes.
-            foreach ($this->items as $key => $item) {
-                // Remove if it is a course category breadcrumb node.
-                $this->remove($item->key, \breadcrumb_navigation_node::TYPE_CATEGORY);
+            if (!$this->is_breadcrumb_setting_enabled("showcategories")) {
+                foreach ($this->items as $key => $item) {
+                    // Remove if it is a course category breadcrumb node.
+                    $this->remove($item->key, \breadcrumb_navigation_node::TYPE_CATEGORY);
+                }
             }
             $courseformat = course_get_format($this->page->course);
             if (method_exists($courseformat, "can_sections_be_removed_from_navigation")) {
@@ -134,7 +178,9 @@ class navbar implements \renderable {
 
         if ($this->page->context->contextlevel == CONTEXT_SYSTEM) {
             // Remove the navbar nodes that already exist in the secondary navigation menu.
-            $this->remove_items_that_exist_in_navigation($PAGE->secondarynav);
+            if (!$this->is_breadcrumb_setting_enabled("shownavigationduplicates")) {
+                $this->remove_items_that_exist_in_navigation($PAGE->secondarynav);
+            }
         }
 
         // Set the designated one path for courses.
@@ -145,7 +191,10 @@ class navbar implements \renderable {
             $mycoursesnode->text = get_string('mycourses');
         }
 
-        $this->remove_no_link_items($removesections);
+        $this->remove_no_link_items(
+            $removesections,
+            !$this->is_breadcrumb_setting_enabled("shownolinkitems")
+        );
 
         // Don't display the navbar if there is only one item. Apparently this is bad UX design.
         if ($this->item_count() <= 1) {
@@ -176,7 +225,7 @@ class navbar implements \renderable {
     /**
      * Retrieve a single navbar item.
      *
-     * @param  string|int $key The identifier of the navbar item to return.
+     * @param string|int $key The identifier of the navbar item to return.
      *
      * @return \breadcrumb_navigation_node|null The navbar item.
      */
@@ -201,8 +250,8 @@ class navbar implements \renderable {
     /**
      * Remove a boostnavbaritem from the boost navbar.
      *
-     * @param  string|int $itemkey An identifier for the boostnavbaritem
-     * @param  int|null $itemtype  An additional type identifier for the boostnavbaritem (optional)
+     * @param string|int $itemkey An identifier for the boostnavbaritem
+     * @param int|null $itemtype An additional type identifier for the boostnavbaritem (optional)
      */
     protected function remove($itemkey, ?int $itemtype = null): void {
 
@@ -262,11 +311,21 @@ class navbar implements \renderable {
      * The only exception is the last item in the list which may not have a link but needs to be displayed.
      *
      * @param bool $removesections Whether section items should be also removed (only applies when they have an action)
+     * @param bool $removenolinkitems Whether items without links should be removed
      */
-    protected function remove_no_link_items(bool $removesections = true): void {
+    protected function remove_no_link_items(bool $removesections = true, bool $removenolinkitems = true): void {
         foreach ($this->items as $key => $value) {
-            if (!$value->is_last() &&
-                (!$value->has_action() || ($value->type == \navigation_node::TYPE_SECTION && $removesections))) {
+            $shouldremove = false;
+
+            if ($removenolinkitems && !$value->has_action()) {
+                $shouldremove = true;
+            }
+
+            if ($removesections && $value->type == \navigation_node::TYPE_SECTION) {
+                $shouldremove = true;
+            }
+
+            if (!$value->is_last() && $shouldremove) {
                 unset($this->items[$key]);
             }
         }
@@ -312,7 +371,7 @@ class navbar implements \renderable {
     protected function remove_duplicate_items(): void {
         $taken = [];
         // Reverse the order of the items before filtering so that the first occurrence is removed instead of the last.
-        $filtereditems = array_values(array_filter(array_reverse($this->items), function ($item) use (&$taken) {
+        $filtereditems = array_values(array_filter(array_reverse($this->items), function($item) use (&$taken) {
             [$itemtext, $itemaction] = $this->get_node_text_and_action($item);
             if ($itemaction) {
                 if (array_key_exists($itemtext, $taken) && $taken[$itemtext] === $itemaction) {

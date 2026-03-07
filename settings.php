@@ -48,6 +48,7 @@ if ($ADMIN->fulltree) {
     require_once("settings/userprofile.php");
     require_once("settings/accessibility.php");
     require_once("settings/course.php");
+    require_once("settings/breadcrumb.php");
     require_once("settings/footer.php");
     require_once("settings/login.php");
 

@@ -71,6 +71,13 @@ function xmldb_theme_degrade_install() {
     theme_degrade_set_config("enable_accessibility", 0);
     theme_degrade_set_config("enable_vlibras", 0);
 
+    theme_degrade_set_config("breadcrumb_show_mycourses_courses", 0);
+    theme_degrade_set_config("breadcrumb_show_categories", 0);
+    theme_degrade_set_config("breadcrumb_show_course", 0);
+    theme_degrade_set_config("breadcrumb_show_navigation_duplicates", 0);
+    theme_degrade_set_config("breadcrumb_show_sections", 0);
+    theme_degrade_set_config("breadcrumb_show_no_link_items", 0);
+
     theme_degrade_set_config("footer_background_color", "");
     theme_degrade_set_config("footer_title_1", "");
     theme_degrade_set_config("footer_html_1", "");

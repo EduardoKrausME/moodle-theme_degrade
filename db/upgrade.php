@@ -339,6 +339,17 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2026022800, "theme", "degrade");
     }
 
+    if ($oldversion < 2026030700) {
+        set_config("breadcrumb_show_mycourses_courses", 0, "theme_degrade");
+        set_config("breadcrumb_show_categories", 0, "theme_degrade");
+        set_config("breadcrumb_show_course", 0, "theme_degrade");
+        set_config("breadcrumb_show_navigation_duplicates", 0, "theme_degrade");
+        set_config("breadcrumb_show_sections", 0, "theme_degrade");
+        set_config("breadcrumb_show_no_link_items", 0, "theme_degrade");
+
+        upgrade_plugin_savepoint(true, 2026030700, "theme", "degrade");
+    }
+
     return true;
 }
 
