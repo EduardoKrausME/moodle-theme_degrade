@@ -228,10 +228,10 @@ class hook_callbacks {
         }
 
         if ($COURSE->format == "topics" || $COURSE->format == "weeks") {
-            if (!self::$hasicons) {
+            if (self::$hasicons === null) {
                 self::$hasicons = get_config("theme_degrade", "course_sections_icons_{$COURSE->id}");
             }
-            if (!$PAGE->user_is_editing() && self::$hasicons) {
+            if (self::$hasicons) {
                 foreach ($images["blocks"] as $block) {
                     $cmid = $block["cmid"];
                     $thumb = $block["thumb"];
