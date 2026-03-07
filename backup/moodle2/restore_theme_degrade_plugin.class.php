@@ -31,6 +31,8 @@ require_once("{$CFG->dirroot}/backup/moodle2/restore_theme_plugin.class.php");
 class restore_theme_degrade_plugin extends restore_theme_plugin {
 
     /**
+     * Defines the course-level structure data.
+     *
      * @return restore_path_element[]
      */
     protected function define_course_plugin_structure() {
@@ -43,6 +45,8 @@ class restore_theme_degrade_plugin extends restore_theme_plugin {
     }
 
     /**
+     * Process
+     *
      * @param array $data
      * @return void
      */
@@ -73,6 +77,8 @@ class restore_theme_degrade_plugin extends restore_theme_plugin {
     }
 
     /**
+     * Execute
+     *
      * @return void
      */
     protected function after_execute_course() {
