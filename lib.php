@@ -117,7 +117,6 @@ function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $for
             }
             return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
         }
-        send_file_not_found();
     } else if ($context->contextlevel == CONTEXT_MODULE) {
         $fs = get_file_storage();
         $fullpath = sha1("/{$context->id}/theme_degrade/{$filearea}/{$args[0]}/{$args[1]}");
@@ -137,9 +136,9 @@ function theme_degrade_pluginfile($course, $cm, $context, $filearea, $args, $for
 
         // Fallback: image original.
         return send_stored_file($file, 0, 0, false, $options);
-    } else {
-        send_file_not_found();
     }
+
+    send_file_not_found();
 }
 
 /**
@@ -183,7 +182,7 @@ function theme_degrade_get_main_scss_content($theme) {
  * @throws Exception
  */
 function theme_degrade_get_pre_scss($theme) {
-    global $CFG, $OUTPUT;
+    global $CFG;
 
     $primarycolor = "#1a2a6c";
     $brandcolor = get_config("theme_boost", "brandcolor");
