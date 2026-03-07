@@ -71,7 +71,7 @@ function get_generated_image_for_id(int $courseid, int $height = 300, int $width
     sort($imagelist, SORT_STRING);
 
     // Cache output (Moodle temp dir).
-    require_once($CFG->libdir . "/filelib.php");
+    require_once("{$CFG->libdir}/filelib.php");
     $tempdir = make_temp_directory("generatedcourseimages");
     $hashhex = hash("sha256", "courseid:" . $courseid);
     $tempfile = "{$tempdir}/course_{$courseid}_{$width}x{$height}_" . substr($hashhex, 0, 12) . ".png";
