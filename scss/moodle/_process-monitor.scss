@@ -12,6 +12,9 @@ $popover-process-monitor-scroll-bg: $gray-100 !default;
     top: initial;
     width: $popover-process-monitor-width;
     height: auto;
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 6px 12px;
 
     .process-list {
         max-height: $popover-process-monitor-max-height;
