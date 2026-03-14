@@ -62,6 +62,7 @@
                     border: none;
                     padding: 54% 7px 7px; // 54% => 16 x 9
                     border-radius: 8px 8px 0 0;
+                    border-bottom: 1px solid rgba(230, 230, 230, .25);
                     cursor: pointer;
                     .activity-groupmode-info {
                         align-self: auto !important;
@@ -114,10 +115,11 @@
                     }
                 }
                 .activity-grid {
+                    background: rgba(230, 230, 230, .16);
                     position: absolute;
                     bottom: 0;
                     right: 0;
-                    left: 9px;
+                    padding-left: 10px;
                     height: 49px;
                     display: flex;
                     align-items: center;
