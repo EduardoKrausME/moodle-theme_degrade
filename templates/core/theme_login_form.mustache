@@ -107,8 +107,12 @@
                 <input type="text" name="username" id="username"
                        class="form-control form-control-lg"
                        value="{{username}}"
-                       placeholder="{{^canloginbyemail}}{{#cleanstr}}username{{/cleanstr}}{{/canloginbyemail}}
-                           {{#canloginbyemail}}{{#cleanstr}}usernameemail{{/cleanstr}}{{/canloginbyemail}}"
+                    {{^canloginbyemail}}
+                       placeholder="{{#cleanstr}}username{{/cleanstr}}"
+                    {{/canloginbyemail}}
+                    {{#canloginbyemail}}
+                       placeholder="{{#cleanstr}}usernameemail{{/cleanstr}}"
+                    {{/canloginbyemail}}
                        autocomplete="username">
             </div>
             <div class="login-form-password mb-3">
