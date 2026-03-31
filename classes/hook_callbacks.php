@@ -25,6 +25,7 @@
 namespace theme_degrade;
 
 use cache;
+use core\hook\output\before_footer_html_generation;
 use core\hook\output\before_html_attributes;
 use Exception;
 use moodle_url;
@@ -70,7 +71,7 @@ class hook_callbacks {
      *
      * @throws Exception
      */
-    public static function before_footer_html_generation() {
+    public static function before_footer_html_generation(before_footer_html_generation $hook) {
         global $CFG, $COURSE, $SITE;
 
         static $processed = false;
@@ -87,9 +88,9 @@ class hook_callbacks {
             return;
         }
 
-        self::background_profile_image();
+        self::background_profile_image($hook);
         self::acctoolbar();
-        self::vlibras();
+        self::vlibras($hook);
 
         if ($COURSE->id == $SITE->id) {
             return;
@@ -104,12 +105,12 @@ class hook_callbacks {
      * @return void
      * @throws Exception
      */
-    private static function background_profile_image() {
+    private static function background_profile_image(before_footer_html_generation $hook) {
         $cache = cache::make("theme_degrade", "css_cache");
         $cachekey = "background_profile_image";
         if ($cache->has($cachekey)) {
             $css = $cache->get($cachekey);
-            echo "<style>{$css}</style>";
+            $hook->add_html("<style>{$css}</style>");
         } else {
             $backgroundprofileurl = theme_degrade_setting_file_url("background_profile_image");
             if ($backgroundprofileurl) {
@@ -117,7 +118,7 @@ class hook_callbacks {
 
                 $cache->set($cachekey, $profileimagecss);
                 $css = $profileimagecss;
-                echo "<style>{$css}</style>";
+                $hook->add_html("<style>{$css}</style>");
             }
         }
     }
@@ -142,15 +143,16 @@ class hook_callbacks {
      * @return void
      * @throws Exception
      */
-    private static function vlibras() {
+    private static function vlibras(before_footer_html_generation $hook) {
         global $CFG, $OUTPUT;
 
         $vlibras = get_config("theme_degrade", "enable_vlibras") && $CFG->lang == "pt_br";
         if ($vlibras) {
-            echo $OUTPUT->render_from_template("theme_degrade/settings/vlibras", [
+            $htmlvliras = $OUTPUT->render_from_template("theme_degrade/settings/vlibras", [
                 "position" => get_config("theme_degrade", "vlibras_position") ?: "R",
                 "avatar" => get_config("theme_degrade", "vlibras_avatar") ?: "icaro",
             ]);
+            $hook->add_html($htmlvliras);
         }
     }
 
