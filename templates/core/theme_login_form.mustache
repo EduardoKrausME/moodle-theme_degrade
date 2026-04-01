@@ -194,8 +194,8 @@
         <h2 class="login-heading">{{#str}}someallowguest{{/str}}</h2>
         <form action="{{loginurl}}" method="post" id="guestlogin">
             <input type="hidden" name="logintoken" value="{{logintoken}}">
-            <input type="hidden" name="username" value="guest" />
-            <input type="hidden" name="password" value="guest" />
+            <input type="hidden" name="username" value="guest"/>
+            <input type="hidden" name="password" value="guest"/>
             <button class="btn btn-secondary" type="submit" id="loginguestbtn">{{#str}}loginguest{{/str}}</button>
         </form>
     {{/canloginasguest}}
@@ -204,7 +204,7 @@
 {{#js}}
     {{^error}}
         {{#autofocusform}}
-            require(['core_form/events'], function(FormEvent) {
+            require(['core_form/events'], function (FormEvent) {
                 function autoFocus() {
                     const userNameField = document.getElementById('username');
                     if (userNameField.value.length == 0) {
@@ -213,6 +213,7 @@
                         document.getElementById('password').focus();
                     }
                 }
+
                 autoFocus();
                 window.addEventListener(FormEvent.eventTypes.fieldStructureChanged, autoFocus);
             });
