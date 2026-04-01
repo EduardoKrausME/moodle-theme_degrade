@@ -196,7 +196,7 @@ function theme_degrade_get_pre_scss($theme) {
         $secondarycolor = $secondary;
     }
 
-    $footerbg = theme_degrade_default("footer_background_color", $brandcolor);
+    $footerbg = theme_degrade_default("footer_background_color", $brandcolor, '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/');
     $footercolor = footer_renderer::get_footer_color($footerbg, "#333333", "#ffffff");
     $scss = "
         \$primary      : {$primarycolor};
@@ -210,9 +210,9 @@ function theme_degrade_get_pre_scss($theme) {
     }
 
     if ($CFG->theme == "degrade") {
-        $angle = theme_degrade_default("angle", 30);
-        $gradient1 = theme_degrade_default("brandcolor_gradient_1", "#f54266");
-        $gradient2 = theme_degrade_default("brandcolor_gradient_2", "#3858f9");
+        $angle = theme_degrade_default("angle", 30, '/^-?\d+$/');
+        $gradient1 = theme_degrade_default("brandcolor_gradient_1", "#f54266", '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/');
+        $gradient2 = theme_degrade_default("brandcolor_gradient_2", "#3858f9", '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/');
         $scss .= "
             .navbar.fixed-top.brandcolor-background {
                 background: linear-gradient({$angle}deg, {$gradient1}, {$gradient2}) !important;
@@ -681,12 +681,18 @@ function theme_degrade_change_color() {
  *
  * @param string $configname
  * @param string $default
+ * @param string $regexvalidate
+ * @param string $plugin
  * @return string
- * @throws Exception
+ * @throws dml_exception
  */
-function theme_degrade_default($configname, $default, $plugin = "theme_degrade") {
+function theme_degrade_default($configname, $default, $regexvalidate, $plugin = "theme_degrade") {
     $value = get_config($plugin, $configname);
     if ($value === false) {
+        return $default;
+    }
+
+    if (!preg_match($regexvalidate, $value)) {
         return $default;
     }
 

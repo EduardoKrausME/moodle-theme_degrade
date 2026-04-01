@@ -29,7 +29,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $bodyattributes = $OUTPUT->body_attributes();
 
-$loginthemename = theme_degrade_default("logintheme", "dark-elegante");
+$loginthemename = theme_degrade_default("logintheme", "dark-elegante", '/^[A-Za-z0-9-]+$/');
 $loginbackgroundimageurl = theme_degrade_setting_file_url("loginbackgroundimage");
 if (!$loginbackgroundimageurl) {
     $loginbackgroundimageurl = $OUTPUT->image_url("login/{$loginthemename}", "theme_degrade")->out(false);

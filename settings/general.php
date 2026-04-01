@@ -47,7 +47,7 @@ if (file_exists(__DIR__ . "/general-colors.php")) {
     if (!isset($config->startcolor[2])) {
         $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_degrade/settings/colors", [
                 "startcolor" => true, "colors" => theme_degrade_colors(),
-                "defaultcolor" => theme_degrade_default("startcolor", "#1a2a6c"),
+                "defaultcolor" => theme_degrade_default("startcolor", "#1a2a6c", '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/'),
                 "navbar_layout_is_institutional" => get_config("theme_degrade", "navbarlayout") == "institutional",
                 "secondary_color" => theme_degrade_secondary_color(),
             ]);
@@ -62,7 +62,7 @@ if (file_exists(__DIR__ . "/general-colors.php")) {
     } else {
         $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_degrade/settings/colors", [
                 "brandcolor" => true, "colors" => theme_degrade_colors(),
-                "defaultcolor" => theme_degrade_default("brandcolor", "#1a2a6c", "theme_boost"),
+                "defaultcolor" => theme_degrade_default("brandcolor", "#1a2a6c", '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/', "theme_boost"),
                 "navbar_layout_is_institutional" => get_config("theme_degrade", "navbarlayout") == "institutional",
                 "secondary_color" => theme_degrade_secondary_color(),
             ]);

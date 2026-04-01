@@ -228,7 +228,7 @@ $brandcolormustache = [
     "htmlselect" => $OUTPUT->render_from_template("theme_degrade/settings/colors", [
         "brandcolor" => true,
         "colors" => $themecolors,
-        "defaultcolor" => theme_degrade_default("brandcolor", "#1a2a6c", "theme_boost"),
+        "defaultcolor" => theme_degrade_default("brandcolor", "#1a2a6c", '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/', "theme_boost"),
         "navbar_layout_is_institutional" => $OUTPUT->navbar_layout_is_institutional(),
         "secondary_color" => theme_degrade_secondary_color(),
     ]),
@@ -264,7 +264,7 @@ if (file_exists("{$CFG->libdir}/editor/tiny/lib.php")) {
         "footer_background_color" => get_config("theme_degrade", "footer_background_color"),
         "htmlselect" => $OUTPUT->render_from_template("theme_degrade/settings/colors", [
             "footercolor" => true, "colors" => $themecolors,
-            "defaultcolor" => theme_degrade_default("brandcolor", "#1a2a6c"),
+            "defaultcolor" => theme_degrade_default("brandcolor", "#1a2a6c", '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/'),
             "navbar_layout_is_institutional" => $OUTPUT->navbar_layout_is_institutional(),
             "secondary_color" => theme_degrade_secondary_color(),
         ]),
