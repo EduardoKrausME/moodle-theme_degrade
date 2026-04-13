@@ -266,7 +266,7 @@ class core_renderer extends \core_renderer {
      * @return array
      * @throws Exception
      */
-    private function get_details() {
+    public function get_details() {
         global $DB;
 
         $decsep = get_string("decsep", "langconfig");
