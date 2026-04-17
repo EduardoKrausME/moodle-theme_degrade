@@ -1092,8 +1092,9 @@ $divider-hover-color: $primary !default;
         right: 0;
         border-radius: 0;
         height: var(--hasbannercourse-size);
-        @media (max-width: 991px) {
-            top: $navbar-height;
+        top: $navbar-height;
+        @media (max-width: 768px) {
+            top: 73px;
         }
         h1,
         .header-action button {
