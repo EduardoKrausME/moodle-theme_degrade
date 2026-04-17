@@ -27,6 +27,7 @@ namespace theme_degrade;
 use cache;
 use core\hook\output\before_footer_html_generation;
 use core\hook\output\before_html_attributes;
+use core\hook\output\before_http_headers;
 use Exception;
 use moodle_url;
 
@@ -162,7 +163,7 @@ class hook_callbacks {
      * @return void
      * @throws Exception
      */
-    public static function course_personalization() {
+    private static function course_personalization() {
         global $COURSE, $DB, $OUTPUT, $PAGE;
 
         $images = ["blocks" => [], "icons" => [], "colors" => []];
@@ -313,5 +314,20 @@ class hook_callbacks {
                 echo $OUTPUT->render_from_template("theme_degrade/core/course_full_header", $header);
             }
         }
+    }
+
+    /**
+     * Function after_http_headers
+     *
+     * @param \core\hook\output\after_http_headers $hooks
+     * @return void
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
+    public static function before_http_headers(before_http_headers $hooks) {
+        global $PAGE;
+
+        $navbarlayout = get_config("theme_degrade", "navbarlayout");
+        $PAGE->add_body_class("theme_degrade-layout-{$navbarlayout}");
     }
 }

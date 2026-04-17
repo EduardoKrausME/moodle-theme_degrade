@@ -24,6 +24,7 @@
 
 use core\hook\output\before_footer_html_generation;
 use core\hook\output\before_html_attributes;
+use core\hook\output\before_http_headers;
 use theme_degrade\hook_callbacks;
 
 defined('MOODLE_INTERNAL') || die;
@@ -36,5 +37,9 @@ $callbacks = [
     [
         "hook" => before_footer_html_generation::class,
         "callback" => hook_callbacks::class . "::before_footer_html_generation",
+    ],
+    [
+        "hook" => before_http_headers::class,
+        "callback" => hook_callbacks::class . "::before_http_headers",
     ],
 ];
