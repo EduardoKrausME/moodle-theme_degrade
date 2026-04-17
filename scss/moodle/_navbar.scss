@@ -379,6 +379,8 @@ $navbar-color: #b5bcc7;
                     }
                 }
             }
+        }
+        @media (max-width: 767px) {
             .navbar-row-bottom {
                 display: none !important;
             }
