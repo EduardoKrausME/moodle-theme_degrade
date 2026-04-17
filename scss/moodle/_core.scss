@@ -2665,7 +2665,7 @@ $picker-emojis-per-row: 7 !default;
 }
 
 .breadcrumb:empty {
-    padding: 0;
+    display: none;
 }
 
 @include media-breakpoint-down(md) {
