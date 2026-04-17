@@ -363,8 +363,13 @@ $navbar-color: #b5bcc7;
                 }
             }
         }
+        @media (max-width: 768px) {
+            .navbar-row-top {
+                margin-top: 0 !important;
+            }
+        }
         @include media-breakpoint-down(md) {
-            min-height: 61px;
+            min-height: 54px;
             .navbar-row-top {
                 min-height: 61px;
                 .navbar-brand .logo {
@@ -401,7 +406,7 @@ $navbar-color: #b5bcc7;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background-image: var(--background_profile, url([[pix:theme_degrade|user-modal-background]]));
+            background-image: var(--background_profile, url([[pix:theme_eadtraining|user-modal-background]]));
             background-position: center center;
             background-size: cover;
             background-repeat: no-repeat;

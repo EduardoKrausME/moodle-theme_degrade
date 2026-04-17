@@ -1092,7 +1092,9 @@ $divider-hover-color: $primary !default;
         right: 0;
         border-radius: 0;
         height: var(--hasbannercourse-size);
-        top: $navbar-height;
+        @media (min-width: 769px) and (max-width: 992px) {
+            top: $navbar-height;
+        }
         @media (max-width: 768px) {
             top: 73px;
         }
