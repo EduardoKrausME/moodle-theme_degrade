@@ -25,8 +25,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2026041701;
-$plugin->release = "9.5.23";
+$plugin->version = 2026042300;
+$plugin->release = "9.5.24";
 $plugin->requires = 2024042200;
 $plugin->maturity = MATURITY_STABLE;
 $plugin->component = "theme_degrade";
