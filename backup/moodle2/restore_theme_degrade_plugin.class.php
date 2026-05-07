@@ -41,6 +41,10 @@ class restore_theme_degrade_plugin extends restore_theme_plugin {
                 "degrade_courseopts",
                 $this->get_pathfor("/courseopts")
             ),
+            new restore_path_element(
+                "degrade_moduleopt",
+                $this->get_pathfor("/moduleopts/moduleopt")
+            ),
         ];
     }
 
@@ -83,5 +87,71 @@ class restore_theme_degrade_plugin extends restore_theme_plugin {
      */
     protected function after_execute_course() {
         $this->add_related_files("theme_degrade", "banner_course_file", null);
+
+        $this->add_related_files(
+            "theme_degrade",
+            "theme_degrade_customimage",
+            "theme_degrade_custommodule"
+        );
+
+        $this->add_related_files(
+            "theme_degrade",
+            "theme_degrade_customicon",
+            "theme_degrade_custommodule"
+        );
+
+        cache::make("theme_degrade", "css_cache")->purge();
+    }
+
+    /**
+     * Restore module visual customizations.
+     *
+     * @param array $data
+     * @return void
+     */
+    public function process_degrade_moduleopt($data) {
+        $data = (object) $data;
+
+        if (empty($data->cmid)) {
+            return;
+        }
+
+        $newcmid = $this->get_mappingid("course_module", $data->cmid);
+        if (!$newcmid) {
+            return;
+        }
+
+        if (!empty($data->customimage)) {
+            set_config(
+                "theme_degrade_customimage_{$newcmid}",
+                $data->customimage,
+                "theme_degrade"
+            );
+        }
+
+        if (!empty($data->customicon)) {
+            set_config(
+                "theme_degrade_customicon_{$newcmid}",
+                $data->customicon,
+                "theme_degrade"
+            );
+        }
+
+        if (!empty($data->customcolor)) {
+            set_config(
+                "theme_degrade_customcolor_{$newcmid}",
+                $data->customcolor,
+                "theme_degrade"
+            );
+        }
+
+        // Register old cmid -> new cmid and old module context for file restore.
+        $this->set_mapping(
+            "theme_degrade_custommodule",
+            $data->cmid,
+            $newcmid,
+            true,
+            $data->contextid
+        );
     }
 }
