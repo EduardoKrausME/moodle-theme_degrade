@@ -40,6 +40,10 @@ function courses_createblocks($page) {
                 continue;
             }
 
+            if (!$course) {
+                continue;
+            }
+
             $backgroundimage = courses_couse_image(new core_course_list_element($course));
             $progress = courses_course_progress($course);
             $blocks .= "

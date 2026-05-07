@@ -40,6 +40,10 @@ function courses_minimalist_createblocks($page) {
                 continue;
             }
 
+            if (!$course) {
+                continue;
+            }
+
             $backgroundimage = courses_minimalist_couse_image(new core_course_list_element($course));
             $progress = courses_minimalist_course_progress($course);
             $blocks .= "
