@@ -47,7 +47,7 @@
     data-selected="{{dataselected}}"
     data-visible="{{datavisible}}">
 
-    <div class="d-flex">
+    <div class="d-flex align-items-center">
         {{#canresort}}
             <div class="float-start drag-handle">
                 {{{moveicon}}}
@@ -56,7 +56,7 @@
 
         {{#showcheckbox}}
             <div class="float-start">
-                <div class="custom-control custom-checkbox me-1">
+                <div class="custom-control custom-checkbox me-1 d-flex">
                     <input id="{{checkboxid}}"
                            type="checkbox"
                            name="{{checkboxname}}"
@@ -70,7 +70,7 @@
             </div>
         {{/showcheckbox}}
 
-        <div class="d-flex flex-column w-100">
+        <div class="d-flex flex-row w-100">
             <a href="{{viewcourseurl}}" class="text-break col ps-0 mb-2 coursename aalink">
                 {{{coursename}}}
             </a>

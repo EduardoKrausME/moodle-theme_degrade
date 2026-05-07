@@ -89,6 +89,11 @@
         .menu-action-text {
             vertical-align: inherit;
         }
+        > a {
+            margin-right: 0 !important;
+            margin-left: 0 !important;
+            padding: 0 3px !important;
+        }
     }
 
     .listitem {
@@ -96,9 +101,6 @@
             &.clearfix {
                 display: block !important;
                 width: 100%;
-            }
-            > .float-start {
-                float: left;
             }
 
             > .float-end {
@@ -235,7 +237,8 @@
         }
 
         .pair-value select {
-            max-width: 500px;
+            max-width: 100% !important;
+            width: 100%;
         }
     }
 
