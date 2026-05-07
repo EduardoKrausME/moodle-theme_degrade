@@ -477,60 +477,124 @@ function theme_degrade_coursemodule_standard_elements(&$formwrapper, $mform) {
  * @throws Exception
  */
 function theme_degrade_coursemodule_edit_post_actions($data, $course) {
-    $context = context_module::instance($data->coursemodule);
+    $cmid = (int) $data->coursemodule;
+    $context = context_module::instance($cmid);
 
-    $hascustomimage =
-        isset($data->theme_degrade_customimage) &&
-        theme_degrade_draft_has_files($data->theme_degrade_customimage);
-    $hascustomicon =
-        isset($data->theme_degrade_customicon) &&
-        theme_degrade_draft_has_files($data->theme_degrade_customicon);
+    $component = "theme_degrade";
+    $imagearea = "theme_degrade_customimage";
+    $iconarea = "theme_degrade_customicon";
 
-    // Save Background Image (customimage).
-    if ($hascustomimage) {
-        $options = ["subdirs" => true, "embed" => true];
-        $filesave = file_save_draft_area_files(
-            $data->theme_degrade_customimage,
+    $purgecache = false;
+
+    $options = [
+        "subdirs" => true,
+        "embed" => true,
+        "maxfiles" => 1,
+    ];
+
+    $imagefieldsubmitted = property_exists($data, "theme_degrade_customimage");
+    $iconfieldsubmitted = property_exists($data, "theme_degrade_customicon");
+
+    $hadcustomimage = theme_degrade_filearea_has_real_files(
+        $context->id,
+        $component,
+        $imagearea,
+        $cmid
+    );
+
+    $hadcustomicon = theme_degrade_filearea_has_real_files(
+        $context->id,
+        $component,
+        $iconarea,
+        $cmid
+    );
+
+    // Save or remove background image.
+    if ($imagefieldsubmitted) {
+        file_save_draft_area_files(
+            (int) $data->theme_degrade_customimage,
             $context->id,
-            "theme_degrade",
-            "theme_degrade_customimage",
-            $data->coursemodule,
+            $component,
+            $imagearea,
+            $cmid,
             $options
         );
 
-        $name = "theme_degrade_customimage_{$data->coursemodule}";
-        set_config($name, $filesave, "theme_degrade");
+        $hascustomimage = theme_degrade_filearea_has_real_files(
+            $context->id,
+            $component,
+            $imagearea,
+            $cmid
+        );
 
-        cache::make("theme_degrade", "css_cache")->purge();
+        $name = "theme_degrade_customimage_{$cmid}";
+        if ($hascustomimage) {
+            set_config($name, 1, "theme_degrade");
+        } else {
+            unset_config($name, "theme_degrade");
+        }
+
+        $purgecache = true;
+    } else {
+        $hascustomimage = $hadcustomimage;
     }
 
-    // Save Icon (customicon) if user uploaded one.
-    if ($hascustomicon) {
-        $options = ["subdirs" => true, "embed" => true];
-        $filesave = file_save_draft_area_files(
-            $data->theme_degrade_customicon,
+    // Save or remove custom icon.
+    if ($iconfieldsubmitted) {
+        file_save_draft_area_files(
+            (int) $data->theme_degrade_customicon,
             $context->id,
-            "theme_degrade",
-            "theme_degrade_customicon",
-            $data->coursemodule,
+            $component,
+            $iconarea,
+            $cmid,
             $options
         );
 
-        $name = "theme_degrade_customicon_{$data->coursemodule}";
-        set_config($name, $filesave, "theme_degrade");
+        $hascustomicon = theme_degrade_filearea_has_real_files(
+            $context->id,
+            $component,
+            $iconarea,
+            $cmid
+        );
 
-        cache::make("theme_degrade", "css_cache")->purge();
+        $name = "theme_degrade_customicon_{$cmid}";
+        if ($hascustomicon) {
+            set_config($name, 1, "theme_degrade");
+        } else {
+            unset_config($name, "theme_degrade");
+        }
+
+        $purgecache = true;
+    } else {
+        $hascustomicon = $hadcustomicon;
     }
 
-    // Auto-generate icon when: - customimage was uploaded - customicon was NOT uploaded (draft has zero files).
-    if ($hascustomimage && !$hascustomicon) {
-        // Get the saved background image from module context area.
+    // Save or remove icon color.
+    if (property_exists($data, "theme_degrade_customcolor")) {
+        $name = "theme_degrade_customcolor_{$cmid}";
+        $color = trim((string) $data->theme_degrade_customcolor);
+
+        if ($color === "") {
+            unset_config($name, "theme_degrade");
+        } else {
+            set_config($name, $color, "theme_degrade");
+        }
+
+        $purgecache = true;
+    }
+
+    // Do not regenerate the icon when the user intentionally removed it.
+    $iconwasremoved = $iconfieldsubmitted && $hadcustomicon && !$hascustomicon;
+
+    // Auto-generate icon when there is a custom image and no custom icon.
+    if ($imagefieldsubmitted && $hascustomimage && !$hascustomicon && !$iconwasremoved) {
         $fs = get_file_storage();
+
         $areafiles = $fs->get_area_files(
             $context->id,
-            "theme_degrade",
-            "theme_degrade_customimage",
-            $data->coursemodule,
+            $component,
+            $imagearea,
+            $cmid,
             "id DESC",
             false
         );
@@ -542,14 +606,14 @@ function theme_degrade_coursemodule_edit_post_actions($data, $course) {
             // Only raster images can be processed by GD.
             $mimetype = $sourcefile->get_mimetype();
             $supported = ["image/png", "image/jpeg"];
+
             if (in_array($mimetype, $supported, true)) {
                 try {
                     $extractor = new icon_extractor();
 
                     $tmpdir = make_temp_directory("theme_degrade_icons");
-                    $tmpfile = $tmpdir . DIRECTORY_SEPARATOR . "cm{$data->coursemodule}_" . uniqid("", true) . ".png";
+                    $tmpfile = $tmpdir . DIRECTORY_SEPARATOR . "cm{$cmid}_" . uniqid("", true) . ".png";
 
-                    // Configure extractor defaults (tune if you want).
                     $extractor->set_source_blob($sourcefile->get_content())
                         ->set_cornertolerance(20)
                         ->set_backgroundtolerance(20)
@@ -561,31 +625,30 @@ function theme_degrade_coursemodule_edit_post_actions($data, $course) {
                         @unlink($tmpfile);
                         throw new Exception("File not generated");
                     }
-                    $component = "theme_degrade";
-                    $filearea = "theme_degrade_customicon";
-                    $itemid = $data->coursemodule;
 
-                    $countfiles = $fs->get_area_files($context->id, $component, $filearea, $itemid);
-                    if (count($countfiles) === 0) {
-                        global $USER;
-                        $filerecord = [
-                            "contextid" => $context->id,
-                            "component" => $component,
-                            "filearea" => $filearea,
-                            "itemid" => $itemid,
-                            "filepath" => "/",
-                            "filename" => "generated-icon.png",
-                            "userid" => $USER->id,
-                            "mimetype" => "image/png",
-                        ];
-                        $fs->create_file_from_pathname($filerecord, $tmpfile);
+                    // Make sure there is no stale generated icon.
+                    $fs->delete_area_files($context->id, $component, $iconarea, $cmid);
 
-                        // Keep the same config pattern used by your code.
-                        $name = "theme_degrade_customicon_{$data->coursemodule}";
-                        set_config($name, 1, "theme_degrade");
+                    global $USER;
 
-                        cache::make("theme_degrade", "css_cache")->purge();
-                    }
+                    $filerecord = [
+                        "contextid" => $context->id,
+                        "component" => $component,
+                        "filearea" => $iconarea,
+                        "itemid" => $cmid,
+                        "filepath" => "/",
+                        "filename" => "generated-icon.png",
+                        "userid" => $USER->id,
+                        "mimetype" => "image/png",
+                    ];
+
+                    $fs->create_file_from_pathname($filerecord, $tmpfile);
+
+                    $name = "theme_degrade_customicon_{$cmid}";
+                    set_config($name, 1, "theme_degrade");
+
+                    @unlink($tmpfile);
+                    $purgecache = true;
                 } catch (Throwable $e) {
                     // Fail silently: image was saved, but icon generation failed.
                     debugging("Icon generation failed: {$e->getMessage()}", DEBUG_DEVELOPER);
@@ -594,14 +657,36 @@ function theme_degrade_coursemodule_edit_post_actions($data, $course) {
         }
     }
 
-    if (isset($data->theme_degrade_customcolor)) {
-        $name = "theme_degrade_customcolor_{$data->coursemodule}";
-        set_config($name, $data->theme_degrade_customcolor, "theme_degrade");
-
+    if ($purgecache) {
         cache::make("theme_degrade", "css_cache")->purge();
     }
 
     return $data;
+}
+
+/**
+ * Checks whether a file area has real files.
+ *
+ * @param int $contextid Context id.
+ * @param string $component Component name.
+ * @param string $filearea File area name.
+ * @param int $itemid Item id.
+ * @return bool
+ * @throws \coding_exception
+ */
+function theme_degrade_filearea_has_real_files(int $contextid, string $component, string $filearea, int $itemid): bool {
+    $fs = get_file_storage();
+
+    $files = $fs->get_area_files(
+        $contextid,
+        $component,
+        $filearea,
+        $itemid,
+        "id ASC",
+        false
+    );
+
+    return !empty($files);
 }
 
 /**
