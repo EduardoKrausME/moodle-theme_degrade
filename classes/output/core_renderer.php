@@ -16,8 +16,8 @@
 
 namespace theme_degrade\output;
 
+use context_course;
 use context_system;
-use core\context\course as context_course;
 use core\di;
 use core\hook\manager as hook_manager;
 use core_auth\output\login;
@@ -261,114 +261,170 @@ class core_renderer extends \core_renderer {
     }
 
     /**
-     * get_details
+     * Get course details.
      *
      * @return array
-     * @throws Exception
+     * @throws \dml_exception
      */
-    public function get_details() {
-        global $DB;
+    public function get_details(): array {
+        global $DB, $CFG;
+
+        require_once($CFG->libdir . "/enrollib.php");
+
+        $context = $this->page->context;
+        $courseid = (int)$this->page->course->id;
+
+        if ($context->contextlevel !== CONTEXT_COURSE) {
+            return [];
+        }
 
         $decsep = get_string("decsep", "langconfig");
         $thousandssep = get_string("thousandssep", "langconfig");
         $details = [];
 
-        // Students.
+        /*
+         * Students base.
+         *
+         * Do not use hardcoded role ids here.
+         * This returns active enrolled users that should appear in completion reports.
+         */
+        [$studentssql, $studentsparams] = get_enrolled_sql(
+            $context,
+            "moodle/course:isincompletionreports",
+            0,
+            true
+        );
+
+        // Total students.
         $sql = "
-            SELECT COUNT(DISTINCT userid)
-              FROM {role_assignments}
-             WHERE roleid    = 5
-               AND contextid = :contextid";
-        $total = $DB->get_field_sql($sql, ["contextid" => $this->page->context->id]);
+            SELECT COUNT(DISTINCT u.id)
+              FROM {user} u
+             WHERE u.deleted = 0
+               AND u.id IN ({$studentssql})";
+        $totalstudents = (int)$DB->get_field_sql($sql, $studentsparams);
+
         $details[] = [
             "id" => "users",
             "icon" => "fa-users fa-fw",
             "link" => false,
-            "number" => number_format($total, 0, $decsep, $thousandssep),
+            "number" => number_format($totalstudents, 0, $decsep, $thousandssep),
             "text" => get_string("details-users", "theme_degrade"),
         ];
 
-        // Teachers.
-        $sql = "
-            SELECT u.id, u.picture, u.firstname, u.lastname, u.firstnamephonetic, u.lastnamephonetic,
-                   u.middlename, u.alternatename, u.imagealt, u.email
-              FROM {role_assignments} ra
-              JOIN {user}              u ON u.id = ra.userid
-             WHERE ra.roleid    IN(3,4)
-               AND ra.contextid = :contextid";
-        $teachers = $DB->get_records_sql($sql, ["contextid" => $this->page->context->id]);
-        if (count($teachers)) {
-            $teachershtml = "";
-            foreach ($teachers as $teacher) {
-                // URL da imagem de perfil.
-                $userpicture = new user_picture($teacher);
-                $userpicture->size = 1; // 1 = small, 0 = large.
-                $imgurl = $userpicture->get_url($this->page)->out(false);
+        /*
+         * Teachers.
+         *
+         * Do not use roleid IN (3, 4).
+         * This gets enrolled users with a teacher-like capability.
+         */
+        $teacherfields = "
+            u.id,
+            u.picture,
+            u.firstname,
+            u.lastname,
+            u.firstnamephonetic,
+            u.lastnamephonetic,
+            u.middlename,
+            u.alternatename,
+            u.imagealt,
+            u.email";
 
+        $teachers = get_enrolled_users(
+            $context,
+            "moodle/grade:viewall",
+            0,
+            $teacherfields,
+            "u.lastname ASC, u.firstname ASC",
+            0,
+            0,
+            true
+        );
+
+        if (!empty($teachers)) {
+            $teachershtml = "";
+
+            foreach ($teachers as $teacher) {
+                $userpicture = new user_picture($teacher);
+                $userpicture->size = 1;
+
+                $imgurl = $userpicture->get_url($this->page)->out(false);
                 $name = fullname($teacher);
-                $teachershtml .= "<div><img class='teacher-icon' src='{$imgurl}' alt='{$name}'></div>";
+
+                $teachershtml .= html_writer::div(
+                    html_writer::empty_tag("img", [
+                        "class" => "teacher-icon",
+                        "src" => $imgurl,
+                        "alt" => $name,
+                    ])
+                );
             }
+
             $details[] = [
                 "id" => "teachers",
                 "icon" => "fa fa-graduation-cap fa-fw",
                 "link" => false,
-                "number" => "<div class='d-flex'>{$teachershtml}</div>",
+                "number" => "<div class=\"d-flex\">{$teachershtml}</div>",
                 "text" => get_string("details-teachers", "theme_degrade"),
             ];
         }
 
-        // Completo e em progresso.
+        // Completed students.
+        $params = $studentsparams;
+        $params["courseidcompleted"] = $courseid;
+
         $sql = "
-            SELECT DISTINCT ra.userid, cc.timecompleted
-              FROM {role_assignments}   ra
-         LEFT JOIN {course_completions} cc ON cc.userid = ra.userid
-                                          AND cc.course = :courseid
-             WHERE ra.contextid = :contextid";
-        $users = $DB->get_records_sql($sql, [
-            "contextid" => $this->page->context->id,
-            "courseid" => $this->page->course->id,
-        ]);
+            SELECT COUNT(DISTINCT cc.userid)
+              FROM {course_completions} cc
+              JOIN {user} u ON u.id = cc.userid
+             WHERE cc.course = :courseidcompleted
+               AND cc.timecompleted IS NOT NULL
+               AND u.deleted = 0
+               AND u.id IN ({$studentssql})";
+        $completed = (int)$DB->get_field_sql($sql, $params);
 
-        // Separa por status.
-        $completaram = 0;
-        $emprogresso = 0;
-
-        foreach ($users as $user) {
-            if (!empty($user->timecompleted)) {
-                $completaram++;
-            } else {
-                $emprogresso++;
-            }
-        }
+        // Not completed yet.
+        $inprogress = max(0, $totalstudents - $completed);
 
         $details[] = [
             "id" => "emprogresso",
             "icon" => "fa fa-spinner fa-fw",
             "link" => false,
-            "number" => number_format($emprogresso, 0, $decsep, $thousandssep),
+            "number" => number_format($inprogress, 0, $decsep, $thousandssep),
             "text" => get_string("details-emprogresso", "theme_degrade"),
         ];
+
         $details[] = [
             "id" => "completaram",
-            "icon" => "fa fa-user-slash fa-fw",
+            "icon" => "fa fa-user-check fa-fw",
             "link" => false,
-            "number" => number_format($completaram, 0, $decsep, $thousandssep),
+            "number" => number_format($completed, 0, $decsep, $thousandssep),
             "text" => get_string("details-completaram", "theme_degrade"),
         ];
 
-        // Usuários que nunca acessaram.
+        /*
+         * Students that never accessed this course.
+         *
+         * The old query checked user_lastaccess only by userid, which is wrong,
+         * because the user may have accessed another course.
+         */
+        $params = $studentsparams;
+        $params["courseidaccess"] = $courseid;
+
         $sql = "
-            SELECT COUNT(DISTINCT ra.userid) AS total
-              FROM {role_assignments} ra
-         LEFT JOIN {user_lastaccess}  la ON la.userid = ra.userid
-             WHERE ra.contextid = :contextid
+            SELECT COUNT(DISTINCT u.id)
+              FROM {user} u
+         LEFT JOIN {user_lastaccess} la ON la.userid = u.id
+                                      AND la.courseid = :courseidaccess
+             WHERE u.deleted = 0
+               AND u.id IN ({$studentssql})
                AND la.timeaccess IS NULL";
-        $total = $DB->get_field_sql($sql, ["contextid" => $this->page->context->id]);
+        $neveraccessed = (int)$DB->get_field_sql($sql, $params);
+
         $details[] = [
             "id" => "not-access",
             "icon" => "fa fa-user-slash fa-fw",
             "link" => false,
-            "number" => number_format($total, 0, $decsep, $thousandssep),
+            "number" => number_format($neveraccessed, 0, $decsep, $thousandssep),
             "text" => get_string("details-not-access", "theme_degrade"),
         ];
 
@@ -681,9 +737,7 @@ class core_renderer extends \core_renderer {
                     $newurl = $url->out(false);
                     $newurl = preg_replace_callback(
                         '/degrade\/(\d+)(?:_\d+)?\//',
-                        function($matches) {
-                            global $coursecolor, $profileid;
-
+                        function($matches) use ($coursecolor, $profileid) {
                             $novoid = $matches[1];
                             if ($coursecolor) {
                                 $novoid = "{$matches[1]}_{$this->page->course->id}";
