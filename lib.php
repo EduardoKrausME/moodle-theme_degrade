@@ -191,7 +191,6 @@ function theme_degrade_get_pre_scss($theme) {
     if (isset($brandcolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $brandcolor)) {
         $primarycolor = $brandcolor;
     }
-
     $scss[] = "\$primary      : {$primarycolor};";
 
     $secondarycolor = "#ced4da";
@@ -199,7 +198,6 @@ function theme_degrade_get_pre_scss($theme) {
     if (isset($secondary[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $secondary)) {
         $secondarycolor = $secondary;
     }
-
     $scss[] = "\$secondary    : {$secondarycolor};";
 
     $footerbg = theme_degrade_default("footer_background_color", $brandcolor, '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/');
