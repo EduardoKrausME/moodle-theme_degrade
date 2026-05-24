@@ -184,11 +184,15 @@ function theme_degrade_get_main_scss_content($theme) {
 function theme_degrade_get_pre_scss($theme) {
     global $CFG;
 
+    $scss = [];
+
     $primarycolor = "#1a2a6c";
     $brandcolor = get_config("theme_boost", "brandcolor");
     if (isset($brandcolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $brandcolor)) {
         $primarycolor = $brandcolor;
     }
+
+    $scss[] = "\$primary      : {$primarycolor};";
 
     $secondarycolor = "#ced4da";
     $secondary = get_config("theme_boost", "secondary");
@@ -196,38 +200,36 @@ function theme_degrade_get_pre_scss($theme) {
         $secondarycolor = $secondary;
     }
 
+    $scss[] = "\$secondary    : {$secondarycolor};";
+
     $footerbg = theme_degrade_default("footer_background_color", $brandcolor, '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/');
-    $footercolor = footer_renderer::get_footer_color($footerbg, "#333333", "#ffffff");
-    $scss = "
-        \$primary      : {$primarycolor};
-        \$secondary    : {$secondarycolor};
-        \$footer-bg    : {$footerbg};
-        \$footer-color : {$footercolor};\n";
+    if ($footerbg) {
+        $footercolor = footer_renderer::get_footer_color($footerbg, "#333333", "#ffffff");
+        $scss[] = "\$footer-bg    : {$footerbg};";
+        $scss[] = "\$footer-color : {$footercolor};\n";
+    }
 
     if (get_config("theme_degrade", "navbarlayout") == "institutional") {
-        $scss .= "
-            \$navbar-height : 127px;\n";
+        $scss[] = "\$navbar-height : 127px;";
     }
 
     if ($CFG->theme == "degrade") {
         $angle = theme_degrade_default("angle", 30, '/^-?\d+$/');
         $gradient1 = theme_degrade_default("brandcolor_gradient_1", "#f54266", '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/');
         $gradient2 = theme_degrade_default("brandcolor_gradient_2", "#3858f9", '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/');
-        $scss .= "
+        $scss[] = "
             .navbar.fixed-top.brandcolor-background {
                 background: linear-gradient({$angle}deg, {$gradient1}, {$gradient2}) !important;
             }
             .navbar.fixed-top.brandcolor-background .navbar-content-background {
                 background-color: transparent !important;
-            }\n";
+            }";
     } else {
         $topscrollbackgroundcolor = get_config("theme_degrade", "top_scroll_background_color");
         if (preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $topscrollbackgroundcolor)) {
-            $scss .= "
-                \$top_scroll_background_color: {$topscrollbackgroundcolor};\n";
+            $scss[] = "\$top_scroll_background_color: {$topscrollbackgroundcolor};";
         } else {
-            $scss .= "
-                \$top_scroll_background_color: \$primary;\n";
+            $scss[] = "\$top_scroll_background_color: \$primary;";
         }
     }
 
@@ -236,21 +238,19 @@ function theme_degrade_get_pre_scss($theme) {
     if ($courseid) {
         $primarycolor = get_config("theme_degrade", "override_course_primarycolor_{$courseid}");
         if (isset($primarycolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $primarycolor)) {
-            $scss .= "
-                \$primary : {$primarycolor};";
+            $scss[] = "\$primary : {$primarycolor};";
         }
 
         $secondarycolor = get_config("theme_degrade", "override_course_secondarycolor_{$courseid}");
         if (isset($secondarycolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $secondarycolor)) {
-            $scss .= "
-                \$secondary : {$secondarycolor};";
+            $scss[] = "\$secondary : {$secondarycolor};";
         }
     } else if ($profileid) {
         $callbacks = get_plugins_with_function("krausthemes__get_pre_scss");
         foreach ($callbacks as $plugins) {
             foreach ($plugins as $callback) {
                 if ($newscss = $callback($profileid)) {
-                    $scss .= $newscss;
+                    $scss[] = $newscss;
                 }
             }
         }
@@ -261,9 +261,9 @@ function theme_degrade_get_pre_scss($theme) {
         $settingscss = new setting_scss("test", "test", "", "");
         $result = $settingscss->validate($theme->settings->scsspre);
         if ($result === true) {
-            $scss .= $theme->settings->scsspre;
+            $scss[] = $theme->settings->scsspre;
         } else {
-            $scss .= "
+            $scss[] = "
                 #page::before {
                     content: 'theme_degrade::scsspre Error: {$result}';
                     color: #c00;
@@ -274,11 +274,11 @@ function theme_degrade_get_pre_scss($theme) {
                     margin: 14px;
                     border-radius: 10px;
                     font-weight: bold;
-                } ";
+                }";
         }
     }
 
-    return $scss;
+    return implode("\n", $scss);
 }
 
 /**
