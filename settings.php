@@ -50,7 +50,7 @@ if ($ADMIN->fulltree) {
     require_once("settings/course.php");
     require_once("settings/breadcrumb.php");
     require_once("settings/footer.php");
-    require_once("settings/login.php");
+    require_once("settings/login_config.php");
 
     if (isset($PAGE)) {
         $PAGE->requires->js_call_amd("theme_degrade/settings", "form_hide");
