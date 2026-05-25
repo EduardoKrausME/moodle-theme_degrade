@@ -40,9 +40,9 @@ $htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/degrade/scs
 $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_degrade/settings/colors", [
         "footercolor" => true,
         "colors" => theme_degrade_colors(),
-        "defaultcolor" => theme_degrade_default("brandcolor", "#1a2a6c",
+        "defaultcolor" => theme_degrade_default("brandcolor", "#314755",
             '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/', "theme_boost"),
-        "defaultcolorfooter" => theme_degrade_default("footer_background_color", "#1a2a6c",
+        "defaultcolorfooter" => theme_degrade_default("footer_background_color", "#314755",
             '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/'),
         "navbar_layout_is_institutional" => get_config("theme_degrade", "navbarlayout") == "institutional",
         "secondary_color" => theme_degrade_secondary_color(),
@@ -50,7 +50,7 @@ $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_degrade/settings/co
 $setting = new admin_setting_configtext("theme_degrade/footer_background_color",
     get_string("footer_background_color", "theme_degrade"),
     get_string("footer_background_color_desc", "theme_degrade") . $htmlselect,
-    "#1a2a6c");
+    "#314755");
 $setting->set_updatedcallback("theme_reset_all_caches");
 $PAGE->requires->js_call_amd("theme_degrade/settings", "minicolors", [$setting->get_id()]);
 $setting->set_updatedcallback('theme_reset_all_caches');

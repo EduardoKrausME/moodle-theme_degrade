@@ -186,7 +186,7 @@ function theme_degrade_get_pre_scss($theme) {
 
     $scss = [];
 
-    $primarycolor = "#1a2a6c";
+    $primarycolor = "#314755";
     $brandcolor = get_config("theme_boost", "brandcolor");
     if (isset($brandcolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $brandcolor)) {
         $primarycolor = $brandcolor;
@@ -710,7 +710,7 @@ function theme_degrade_colors() {
     return [
         "#000428", // Azul Escuro.
         "#070000", // Preto.
-        "#1a2a6c", // Azul Escuro.
+        "#314755", // Azul Escuro.
         "#314755", // Cinza Escuro.
         "#007bc3", // Azul.
         "#007fff", // Azul Neon.

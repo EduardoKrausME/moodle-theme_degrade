@@ -172,7 +172,7 @@ function theme_degrade_settings_colors() {
             "name" => "red2",
             "primary" => "#b21f1f",
             "angle" => 135,
-            "gradient_1" => "#1a2a6c",
+            "gradient_1" => "#314755",
             "gradient_2" => "#b21f1f",
         ],
         [

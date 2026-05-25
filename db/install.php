@@ -46,7 +46,7 @@ function xmldb_theme_degrade_install() {
 
     $brandcolor = get_config("theme_boost", "brandcolor");
     if (isset($brandcolor[3]) && preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $brandcolor)) {
-        set_config("brandcolor", "#1a2a6c", "theme_boost");
+        set_config("brandcolor", "#314755", "theme_boost");
     }
 
     theme_degrade_set_config("secondary", "#ced4da", "theme_boost");
@@ -83,7 +83,7 @@ function xmldb_theme_degrade_install() {
     theme_degrade_set_config("breadcrumb_show_sections", 0);
     theme_degrade_set_config("breadcrumb_show_no_link_items", 0);
 
-    theme_degrade_set_config("footer_background_color", "#1a2a6c");
+    theme_degrade_set_config("footer_background_color", "#314755");
     theme_degrade_set_config("footer_title_1", "");
     theme_degrade_set_config("footer_html_1", "");
     theme_degrade_set_config("footer_title_2", "");
