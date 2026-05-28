@@ -107,7 +107,6 @@ $templatecontext = [
     "overflow" => $overflow,
     "headercontent" => $headercontent,
     "addblockbutton" => $addblockbutton,
-    "course_summary" => get_config("theme_degrade", "course_summary"),
     "scorm_autoenter" => get_config("theme_degrade", "scorm_autoenter"),
 ];
 
@@ -119,6 +118,7 @@ if (optional_param("embed-frame-top", 0, PARAM_INT)) {
         $templatecontext["hasnavbarcourse"] = true;
 
         if (strpos($requesturi, "course/view.php") !== false) {
+            $templatecontext["course_summary"] = get_config("theme_degrade", "course_summary");
             $templatecontext["course_summary_banner"] = get_config("theme_degrade", "course_summary_banner");
             if ($templatecontext["course_summary_banner"]) {
                 $options = ["context" => $PAGE->context];
