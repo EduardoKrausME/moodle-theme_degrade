@@ -205,6 +205,9 @@ function theme_degrade_get_pre_scss($theme) {
         $footercolor = footer_renderer::get_footer_color($footerbg, "#333333", "#ffffff");
         $scss[] = "\$footer-bg    : {$footerbg};";
         $scss[] = "\$footer-color : {$footercolor};\n";
+    } else {
+        $scss[] = "\$footer-bg    : {$primarycolor};";
+        $scss[] = "\$footer-color : {$primarycolor};\n";
     }
 
     if (get_config("theme_degrade", "navbarlayout") == "institutional") {
