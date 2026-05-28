@@ -474,7 +474,6 @@ $icon-link-icon-transform:    translate3d(.25em, 0, 0) !default;
 
 $paragraph-margin-bottom:   1rem !default;
 
-
 // Grid breakpoints
 //
 // Define the minimum dimensions at which your layout will change,
@@ -494,7 +493,6 @@ $grid-breakpoints: (
 @include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
 @include _assert-starts-at-zero($grid-breakpoints, "$grid-breakpoints");
 
-
 // Grid containers
 //
 // Define the maximum width of `.container` for different screen sizes.
@@ -511,7 +509,6 @@ $container-max-widths: (
 
 @include _assert-ascending($container-max-widths, "$container-max-widths");
 
-
 // Grid columns
 //
 // Set the number of columns and specify the width of the gutters.
@@ -523,7 +520,6 @@ $grid-row-columns:            6 !default;
 // Container padding
 
 $container-padding-x: $grid-gutter-width !default;
-
 
 // Components
 //
@@ -722,7 +718,6 @@ $mark-color:                  $body-color !default;
 $mark-bg:                     $yellow-100 !default;
 // scss-docs-end type-variables
 
-
 // Tables
 //
 // Customizes the `.table` component with basic values, each used across all table variations.
@@ -780,7 +775,6 @@ $table-variants: (
 ) !default;
 // scss-docs-end table-loop
 
-
 // Buttons + Forms
 //
 // Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
@@ -808,7 +802,6 @@ $input-btn-font-size-lg:      $font-size-lg !default;
 
 $input-btn-border-width:      var(--#{$prefix}border-width) !default;
 // scss-docs-end input-btn-variables
-
 
 // Buttons
 //
@@ -860,7 +853,6 @@ $btn-active-bg-tint-amount:       20% !default;
 $btn-active-border-shade-amount:  25% !default;
 $btn-active-border-tint-amount:   10% !default;
 // scss-docs-end btn-variables
-
 
 // Forms
 
@@ -1151,7 +1143,6 @@ $zindex-levels: (
 ) !default;
 // scss-docs-end zindex-levels-map
 
-
 // Navs
 
 // scss-docs-start nav-variables
@@ -1181,7 +1172,6 @@ $nav-underline-gap:                 1rem !default;
 $nav-underline-border-width:        .125rem !default;
 $nav-underline-link-active-color:   var(--#{$prefix}emphasis-color) !default;
 // scss-docs-end nav-variables
-
 
 // Navbar
 
@@ -1227,7 +1217,6 @@ $navbar-dark-toggler-border-color:  rgba($white, .1) !default;
 $navbar-dark-brand-color:           $navbar-dark-active-color !default;
 $navbar-dark-brand-hover-color:     $navbar-dark-active-color !default;
 // scss-docs-end navbar-dark-variables
-
 
 // Dropdowns
 //
@@ -1284,7 +1273,6 @@ $dropdown-dark-link-disabled-color: $gray-500 !default;
 $dropdown-dark-header-color:        $gray-500 !default;
 // scss-docs-end dropdown-dark-variables
 
-
 // Pagination
 
 // scss-docs-start pagination-variables
@@ -1326,7 +1314,6 @@ $pagination-transition:              color .15s ease-in-out, background-color .1
 $pagination-border-radius-sm:       var(--#{$prefix}border-radius-sm) !default;
 $pagination-border-radius-lg:       var(--#{$prefix}border-radius-lg) !default;
 // scss-docs-end pagination-variables
-
 
 // Placeholders
 
@@ -1427,7 +1414,6 @@ $form-feedback-tooltip-opacity:       $tooltip-opacity !default;
 $form-feedback-tooltip-border-radius: $tooltip-border-radius !default;
 // scss-docs-end tooltip-feedback-variables
 
-
 // Popovers
 
 // scss-docs-start popover-variables
@@ -1460,7 +1446,6 @@ $popover-arrow-color:               $popover-bg !default;
 $popover-arrow-outer-color:         var(--#{$prefix}border-color-translucent) !default;
 // fusv-enable
 
-
 // Toasts
 
 // scss-docs-start toast-variables
@@ -1481,7 +1466,6 @@ $toast-header-background-color:     rgba(var(--#{$prefix}body-bg-rgb), .85) !def
 $toast-header-border-color:         $toast-border-color !default;
 // scss-docs-end toast-variables
 
-
 // Badges
 
 // scss-docs-start badge-variables
@@ -1492,7 +1476,6 @@ $badge-padding-y:                   .35em !default;
 $badge-padding-x:                   .65em !default;
 $badge-border-radius:               var(--#{$prefix}border-radius) !default;
 // scss-docs-end badge-variables
-
 
 // Modals
 
@@ -1539,7 +1522,6 @@ $modal-transition:                  transform .3s ease-out !default;
 $modal-scale-transform:             scale(1.02) !default;
 // scss-docs-end modal-variables
 
-
 // Alerts
 //
 // Define alert colors, border radius, and padding.
@@ -1574,7 +1556,6 @@ $progress-bar-animation-timing:     1s linear infinite !default;
 $progress-bar-transition:           width .6s ease !default;
 // scss-docs-end progress-variables
 
-
 // List group
 
 // scss-docs-start list-group-variables
@@ -1606,7 +1587,6 @@ $list-group-action-active-color:    var(--#{$prefix}body-color) !default;
 $list-group-action-active-bg:       var(--#{$prefix}secondary-bg) !default;
 // scss-docs-end list-group-variables
 
-
 // Image thumbnails
 
 // scss-docs-start thumbnail-variables
@@ -1618,14 +1598,12 @@ $thumbnail-border-radius:           var(--#{$prefix}border-radius) !default;
 $thumbnail-box-shadow:              var(--#{$prefix}box-shadow-sm) !default;
 // scss-docs-end thumbnail-variables
 
-
 // Figures
 
 // scss-docs-start figure-variables
 $figure-caption-font-size:          $small-font-size !default;
 $figure-caption-color:              var(--#{$prefix}secondary-color) !default;
 // scss-docs-end figure-variables
-
 
 // Breadcrumbs
 
@@ -1681,7 +1659,6 @@ $carousel-dark-caption-color:        $black !default;
 $carousel-dark-control-icon-filter:  invert(1) grayscale(100) !default;
 // scss-docs-end carousel-dark-variables
 
-
 // Spinners
 
 // scss-docs-start spinner-variables
@@ -1695,7 +1672,6 @@ $spinner-width-sm:        1rem !default;
 $spinner-height-sm:       $spinner-width-sm !default;
 $spinner-border-width-sm: .2em !default;
 // scss-docs-end spinner-variables
-
 
 // Close
 
@@ -1713,7 +1689,6 @@ $btn-close-focus-opacity:    1 !default;
 $btn-close-disabled-opacity: .25 !default;
 $btn-close-white-filter:     invert(1) grayscale(100%) brightness(200%) !default;
 // scss-docs-end close-variables
-
 
 // Offcanvas
 

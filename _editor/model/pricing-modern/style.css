@@ -1,5 +1,5 @@
 .pricing-modern {
-  padding: 90px 20px;
+  padding: 70px 20px 40px;
 }
 .pricing-modern .section-header {
   max-width: 600px;
@@ -97,3 +97,5 @@
   border-radius: 20px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
+
+/*# sourceMappingURL=style.css.map */

@@ -88,7 +88,6 @@ $templatecontext = [
 
 $templatecontext = array_merge($templatecontext, footer_renderer::mustache_data());
 
-
 $editing = $PAGE->user_is_editing();
 if (get_config("theme_degrade", "homemode")) {
     $templatecontext["homemode_status"] = 1;

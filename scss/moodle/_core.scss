@@ -3032,7 +3032,6 @@ body.dragging {
     content: none;
 }
 
-
 // TODO: Check if these are still needed.
 .dropleft .dropdown-toggle::before {
     border: 0;
@@ -3057,7 +3056,6 @@ body.dragging {
 .dir-rtl .dropright .dropdown-toggle::after {
     content: fa-content($fa-var-chevron-left);
 }
-
 
 .dropup .dropdown-toggle::after {
     border: 0;

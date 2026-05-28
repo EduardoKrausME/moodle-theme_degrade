@@ -1,5 +1,5 @@
 .block_themeeditor.feature2-steps {
-  padding: 80px 20px 10px;
+  padding: 70px 20px 40px;
 }
 .block_themeeditor.feature2-steps .steps-wrapper {
   display: flex;
@@ -83,3 +83,5 @@
   margin-right: calc(50% + 50px);
   text-align: left;
 }
+
+/*# sourceMappingURL=style.css.map */

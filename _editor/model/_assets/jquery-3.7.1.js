@@ -54,7 +54,6 @@ var flat = arr.flat ? function( array ) {
 	return arr.concat.apply( [], array );
 };
 
-
 var push = arr.push;
 
 var indexOf = arr.indexOf;
@@ -84,15 +83,11 @@ var isFunction = function isFunction( obj ) {
 			typeof obj.item !== "function";
 	};
 
-
 var isWindow = function isWindow( obj ) {
 		return obj != null && obj === obj.window;
 	};
 
-
 var document = window.document;
-
-
 
 	var preservedScriptAttributes = {
 		type: true,
@@ -130,7 +125,6 @@ var document = window.document;
 		doc.head.appendChild( script ).parentNode.removeChild( script );
 	}
 
-
 function toType( obj ) {
 	if ( obj == null ) {
 		return obj + "";
@@ -144,8 +138,6 @@ function toType( obj ) {
 /* global Symbol */
 // Defining this global in .eslintrc.json would create a danger of using the global
 // unguarded in another place, it seems safer to define global only for this module
-
-
 
 var version = "3.7.1",
 
@@ -395,7 +387,6 @@ jQuery.extend( {
 		return obj;
 	},
 
-
 	// Retrieve the text value of an array of DOM nodes
 	text: function( elem ) {
 		var node,
@@ -560,7 +551,6 @@ function isArrayLike( obj ) {
 		typeof length === "number" && length > 0 && ( length - 1 ) in obj;
 }
 
-
 function nodeName( elem, name ) {
 
 	return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
@@ -568,23 +558,16 @@ function nodeName( elem, name ) {
 }
 var pop = arr.pop;
 
-
 var sort = arr.sort;
-
 
 var splice = arr.splice;
 
-
 var whitespace = "[\\x20\\t\\r\\n\\f]";
-
 
 var rtrimCSS = new RegExp(
 	"^" + whitespace + "+|((?:^|[^\\\\])(?:\\\\.)*)" + whitespace + "+$",
 	"g"
 );
-
-
-
 
 // Note: an element does not contain itself
 jQuery.contains = function( a, b ) {
@@ -599,9 +582,6 @@ jQuery.contains = function( a, b ) {
 			a.compareDocumentPosition && a.compareDocumentPosition( bup ) & 16
 	) );
 };
-
-
-
 
 // CSS string/identifier serialization
 // https://drafts.csswg.org/cssom/#common-serializing-idioms
@@ -626,9 +606,6 @@ function fcssescape( ch, asCodePoint ) {
 jQuery.escapeSelector = function( sel ) {
 	return ( sel + "" ).replace( rcssescape, fcssescape );
 };
-
-
-
 
 var preferredDoc = document,
 	pushNative = push;
@@ -1456,7 +1433,6 @@ find.contains = function( context, elem ) {
 	}
 	return jQuery.contains( context, elem );
 };
-
 
 find.attr = function( elem, name ) {
 
@@ -2722,7 +2698,6 @@ find.uniqueSort = jQuery.uniqueSort;
 
 } )();
 
-
 var dir = function( elem, dir, until ) {
 	var matched = [],
 		truncate = until !== undefined;
@@ -2738,7 +2713,6 @@ var dir = function( elem, dir, until ) {
 	return matched;
 };
 
-
 var siblings = function( n, elem ) {
 	var matched = [];
 
@@ -2751,12 +2725,9 @@ var siblings = function( n, elem ) {
 	return matched;
 };
 
-
 var rneedsContext = jQuery.expr.match.needsContext;
 
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
-
-
 
 // Implement the identical functionality for filter and not
 function winnow( elements, qualifier, not ) {
@@ -2844,9 +2815,7 @@ jQuery.fn.extend( {
 	}
 } );
 
-
 // Initialize a jQuery object
-
 
 // A central reference to the root jQuery(document)
 var rootjQuery,
@@ -2961,7 +2930,6 @@ init.prototype = jQuery.fn;
 
 // Initialize central reference
 rootjQuery = jQuery( document );
-
 
 var rparentsprev = /^(?:parents|prev(?:Until|All))/,
 
@@ -3143,8 +3111,6 @@ jQuery.each( {
 	};
 } );
 var rnothtmlwhite = ( /[^\x20\t\r\n\f]+/g );
-
-
 
 // Convert String-formatted options into Object-formatted ones
 function createOptions( options ) {
@@ -3370,7 +3336,6 @@ jQuery.Callbacks = function( options ) {
 
 	return self;
 };
-
 
 function Identity( v ) {
 	return v;
@@ -3767,7 +3732,6 @@ jQuery.extend( {
 	}
 } );
 
-
 // These usually indicate a programmer mistake during development,
 // warn about them ASAP rather than swallowing them by default.
 var rerrorNames = /^(Eval|Internal|Range|Reference|Syntax|Type|URI)Error$/;
@@ -3785,17 +3749,11 @@ jQuery.Deferred.exceptionHook = function( error, asyncError ) {
 	}
 };
 
-
-
-
 jQuery.readyException = function( error ) {
 	window.setTimeout( function() {
 		throw error;
 	} );
 };
-
-
-
 
 // The deferred used on DOM ready
 var readyList = jQuery.Deferred();
@@ -3873,9 +3831,6 @@ if ( document.readyState === "complete" ||
 	window.addEventListener( "load", completed );
 }
 
-
-
-
 // Multifunctional method to get and set values of a collection
 // The value/s can optionally be executed if it's a function
 var access = function( elems, fn, key, value, chainable, emptyGet, raw ) {
@@ -3937,7 +3892,6 @@ var access = function( elems, fn, key, value, chainable, emptyGet, raw ) {
 	return len ? fn( elems[ 0 ], key ) : emptyGet;
 };
 
-
 // Matches dashed string for camelizing
 var rmsPrefix = /^-ms-/,
 	rdashAlpha = /-([a-z])/g;
@@ -3963,9 +3917,6 @@ var acceptData = function( owner ) {
 	//    - Any
 	return owner.nodeType === 1 || owner.nodeType === 9 || !( +owner.nodeType );
 };
-
-
-
 
 function Data() {
 	this.expando = jQuery.expando + Data.uid++;
@@ -4120,8 +4071,6 @@ Data.prototype = {
 var dataPriv = new Data();
 
 var dataUser = new Data();
-
-
 
 //	Implementation Summary
 //
@@ -4291,7 +4240,6 @@ jQuery.fn.extend( {
 	}
 } );
 
-
 jQuery.extend( {
 	queue: function( elem, type, data ) {
 		var queue;
@@ -4429,12 +4377,9 @@ var pnum = ( /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/ ).source;
 
 var rcssNum = new RegExp( "^(?:([+-])=|)(" + pnum + ")([a-z%]*)$", "i" );
 
-
 var cssExpand = [ "Top", "Right", "Bottom", "Left" ];
 
 var documentElement = document.documentElement;
-
-
 
 	var isAttached = function( elem ) {
 			return jQuery.contains( elem.ownerDocument, elem );
@@ -4470,8 +4415,6 @@ var isHiddenWithinTree = function( elem, el ) {
 
 			jQuery.css( elem, "display" ) === "none";
 	};
-
-
 
 function adjustCSS( elem, prop, valueParts, tween ) {
 	var adjusted, scale,
@@ -4537,7 +4480,6 @@ function adjustCSS( elem, prop, valueParts, tween ) {
 	}
 	return adjusted;
 }
-
 
 var defaultDisplayMap = {};
 
@@ -4639,8 +4581,6 @@ var rtagName = ( /<([a-z][^\/\0>\x20\t\r\n\f]*)/i );
 
 var rscriptType = ( /^$|^module$|\/(?:java|ecma)script/i );
 
-
-
 ( function() {
 	var fragment = document.createDocumentFragment(),
 		div = fragment.appendChild( document.createElement( "div" ) ),
@@ -4672,7 +4612,6 @@ var rscriptType = ( /^$|^module$|\/(?:java|ecma)script/i );
 	support.option = !!div.lastChild;
 } )();
 
-
 // We have to close these tags to support XHTML (trac-13200)
 var wrapMap = {
 
@@ -4694,7 +4633,6 @@ wrapMap.th = wrapMap.td;
 if ( !support.option ) {
 	wrapMap.optgroup = wrapMap.option = [ 1, "<select multiple='multiple'>", "</select>" ];
 }
-
 
 function getAll( context, tag ) {
 
@@ -4719,7 +4657,6 @@ function getAll( context, tag ) {
 	return ret;
 }
 
-
 // Mark scripts as having already been evaluated
 function setGlobalEval( elems, refElements ) {
 	var i = 0,
@@ -4733,7 +4670,6 @@ function setGlobalEval( elems, refElements ) {
 		);
 	}
 }
-
 
 var rhtml = /<|&#?\w+;/;
 
@@ -4825,7 +4761,6 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 
 	return fragment;
 }
-
 
 var rtypenamespace = /^([^.]*)(?:\.(.+)|)/;
 
@@ -5776,7 +5711,6 @@ jQuery.fn.extend( {
 	}
 } );
 
-
 var
 
 	// Support: IE <=10 - 11, Edge 12 - 13 only
@@ -6233,7 +6167,6 @@ var rnumnonpx = new RegExp( "^(" + pnum + ")(?!px)[a-z%]+$", "i" );
 
 var rcustomProp = /^--/;
 
-
 var getStyles = function( elem ) {
 
 		// Support: IE <=11 only, Firefox <=30 (trac-15098, trac-14150)
@@ -6268,10 +6201,7 @@ var swap = function( elem, options, callback ) {
 	return ret;
 };
 
-
 var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
-
-
 
 ( function() {
 
@@ -6413,7 +6343,6 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 	} );
 } )();
 
-
 function curCSS( elem, name, computed ) {
 	var width, minWidth, maxWidth, ret,
 		isCustomProp = rcustomProp.test( name ),
@@ -6498,7 +6427,6 @@ function curCSS( elem, name, computed ) {
 		ret;
 }
 
-
 function addGetHookIf( conditionFn, hookFn ) {
 
 	// Define the hook, we'll check on the first run if it's really needed.
@@ -6517,7 +6445,6 @@ function addGetHookIf( conditionFn, hookFn ) {
 		}
 	};
 }
-
 
 var cssPrefixes = [ "Webkit", "Moz", "ms" ],
 	emptyStyle = document.createElement( "div" ).style,
@@ -6550,7 +6477,6 @@ function finalPropName( name ) {
 	}
 	return vendorProps[ name ] = vendorPropName( name ) || name;
 }
-
 
 var
 
@@ -6670,7 +6596,6 @@ function getWidthOrHeight( elem, dimension, extra ) {
 		}
 		val = "auto";
 	}
-
 
 	// Support: IE 9 - 11 only
 	// Use offsetWidth/offsetHeight for when box sizing is unreliable.
@@ -7031,7 +6956,6 @@ jQuery.fn.extend( {
 	}
 } );
 
-
 function Tween( elem, options, prop, end, easing ) {
 	return new Tween.prototype.init( elem, options, prop, end, easing );
 }
@@ -7146,9 +7070,6 @@ jQuery.fx = Tween.prototype.init;
 
 // Back compat <1.8 extension point
 jQuery.fx.step = {};
-
-
-
 
 var
 	fxNow, inProgress,
@@ -7825,7 +7746,6 @@ jQuery.fx.speeds = {
 	_default: 400
 };
 
-
 // Based off of the plugin by Clint Helfers, with permission.
 jQuery.fn.delay = function( time, type ) {
 	time = jQuery.fx ? jQuery.fx.speeds[ time ] || time : time;
@@ -7838,7 +7758,6 @@ jQuery.fn.delay = function( time, type ) {
 		};
 	} );
 };
-
 
 ( function() {
 	var input = document.createElement( "input" ),
@@ -7862,7 +7781,6 @@ jQuery.fn.delay = function( time, type ) {
 	input.type = "radio";
 	support.radioValue = input.value === "t";
 } )();
-
 
 var boolHook,
 	attrHandle = jQuery.expr.attrHandle;
@@ -7992,9 +7910,6 @@ jQuery.each( jQuery.expr.match.bool.source.match( /\w+/g ), function( _i, name )
 		return ret;
 	};
 } );
-
-
-
 
 var rfocusable = /^(?:input|select|textarea|button)$/i,
 	rclickable = /^(?:a|area)$/i;
@@ -8128,16 +8043,12 @@ jQuery.each( [
 	jQuery.propFix[ this.toLowerCase() ] = this;
 } );
 
-
-
-
 	// Strip and collapse whitespace according to HTML spec
 	// https://infra.spec.whatwg.org/#strip-and-collapse-ascii-whitespace
 	function stripAndCollapse( value ) {
 		var tokens = value.match( rnothtmlwhite ) || [];
 		return tokens.join( " " );
 	}
-
 
 function getClass( elem ) {
 	return elem.getAttribute && elem.getAttribute( "class" ) || "";
@@ -8310,9 +8221,6 @@ jQuery.fn.extend( {
 		return false;
 	}
 } );
-
-
-
 
 var rreturn = /\r/g;
 
@@ -8492,17 +8400,12 @@ jQuery.each( [ "radio", "checkbox" ], function() {
 	}
 } );
 
-
-
-
 // Return jQuery for attributes-only inclusion
 var location = window.location;
 
 var nonce = { guid: Date.now() };
 
 var rquery = ( /\?/ );
-
-
 
 // Cross-browser xml parsing
 jQuery.parseXML = function( data ) {
@@ -8529,7 +8432,6 @@ jQuery.parseXML = function( data ) {
 	}
 	return xml;
 };
-
 
 var rfocusMorph = /^(?:focusinfocus|focusoutblur)$/,
 	stopPropagationCallback = function( e ) {
@@ -8715,7 +8617,6 @@ jQuery.fn.extend( {
 	}
 } );
 
-
 var
 	rbracket = /\[\]$/,
 	rCRLF = /\r?\n/g,
@@ -8835,7 +8736,6 @@ jQuery.fn.extend( {
 		} ).get();
 	}
 } );
-
 
 var
 	r20 = /%20/g,
@@ -9693,7 +9593,6 @@ jQuery.ajaxPrefilter( function( s ) {
 	}
 } );
 
-
 jQuery._evalUrl = function( url, options, doc ) {
 	return jQuery.ajax( {
 		url: url,
@@ -9716,7 +9615,6 @@ jQuery._evalUrl = function( url, options, doc ) {
 		}
 	} );
 };
-
 
 jQuery.fn.extend( {
 	wrapAll: function( html ) {
@@ -9784,16 +9682,12 @@ jQuery.fn.extend( {
 	}
 } );
 
-
 jQuery.expr.pseudos.hidden = function( elem ) {
 	return !jQuery.expr.pseudos.visible( elem );
 };
 jQuery.expr.pseudos.visible = function( elem ) {
 	return !!( elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length );
 };
-
-
-
 
 jQuery.ajaxSettings.xhr = function() {
 	try {
@@ -9956,9 +9850,6 @@ jQuery.ajaxTransport( function( options ) {
 	}
 } );
 
-
-
-
 // Prevent auto-execution of scripts when no explicit dataType was provided (See gh-2432)
 jQuery.ajaxPrefilter( function( s ) {
 	if ( s.crossDomain ) {
@@ -10023,9 +9914,6 @@ jQuery.ajaxTransport( "script", function( s ) {
 		};
 	}
 } );
-
-
-
 
 var oldCallbacks = [],
 	rjsonp = /(=)\?(?=&|$)|\?\?/;
@@ -10119,9 +10007,6 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 	}
 } );
 
-
-
-
 // Support: Safari 8 only
 // In Safari 8 documents created via document.implementation.createHTMLDocument
 // collapse sibling forms: the second one becomes a child of the first one.
@@ -10132,7 +10017,6 @@ support.createHTMLDocument = ( function() {
 	body.innerHTML = "<form></form><form></form>";
 	return body.childNodes.length === 2;
 } )();
-
 
 // Argument "data" should be string of html
 // context (optional): If specified, the fragment will be created in this context,
@@ -10183,7 +10067,6 @@ jQuery.parseHTML = function( data, context, keepScripts ) {
 
 	return jQuery.merge( [], parsed.childNodes );
 };
-
 
 /**
  * Load a url into a page
@@ -10248,17 +10131,11 @@ jQuery.fn.load = function( url, params, callback ) {
 	return this;
 };
 
-
-
-
 jQuery.expr.pseudos.animated = function( elem ) {
 	return jQuery.grep( jQuery.timers, function( fn ) {
 		return elem === fn.elem;
 	} ).length;
 };
-
-
-
 
 jQuery.offset = {
 	setOffset: function( elem, options, i ) {
@@ -10472,7 +10349,6 @@ jQuery.each( [ "top", "left" ], function( _i, prop ) {
 	);
 } );
 
-
 // Create innerHeight, innerWidth, height, width, outerHeight and outerWidth methods
 jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
 	jQuery.each( {
@@ -10522,7 +10398,6 @@ jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
 	} );
 } );
 
-
 jQuery.each( [
 	"ajaxStart",
 	"ajaxStop",
@@ -10535,9 +10410,6 @@ jQuery.each( [
 		return this.on( type, fn );
 	};
 } );
-
-
-
 
 jQuery.fn.extend( {
 
@@ -10580,9 +10452,6 @@ jQuery.each(
 		};
 	}
 );
-
-
-
 
 // Support: Android <=4.0 only
 // Make sure we trim BOM and NBSP
@@ -10658,8 +10527,6 @@ jQuery.trim = function( text ) {
 		( text + "" ).replace( rtrim, "$1" );
 };
 
-
-
 // Register as a named AMD module, since jQuery can be concatenated with other
 // files that may use define, but not via a proper concatenation script that
 // understands anonymous AMD modules. A named AMD is safest and most robust
@@ -10678,9 +10545,6 @@ if ( typeof define === "function" && define.amd ) {
 		return jQuery;
 	} );
 }
-
-
-
 
 var
 
@@ -10708,9 +10572,6 @@ jQuery.noConflict = function( deep ) {
 if ( typeof noGlobal === "undefined" ) {
 	window.jQuery = window.$ = jQuery;
 }
-
-
-
 
 return jQuery;
 } );
