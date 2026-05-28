@@ -4,16 +4,193 @@
 define(["core/templates"], function (Templates) {
     return {
         init: function () {
+            degrade_track_vlibras_access_button();
             Templates.render('theme_degrade/settings/acctoolbar', {})
                 .then(function (html, js) {
                     window.micAccessTool = new degrade_AccessTool(html);
+                    degrade_track_toolbar_accessibility();
                 })
                 .fail(function (ex) {
                     console.error(ex);
                 });
         },
+        track_vlibras: function () {
+            degrade_track_vlibras_access_button();
+        },
     };
 });
+
+function degrade_get_accessibility_courseid() {
+    if (window.M && M.cfg && M.cfg.courseId) {
+        return M.cfg.courseId;
+    }
+
+    var body = document.body;
+    if (!body || !body.className) {
+        return 0;
+    }
+
+    var match = body.className.match(/\bcourse-(\d+)\b/);
+    return match ? match[1] : 0;
+}
+
+function degrade_get_accessibility_cmid() {
+    var body = document.body;
+    if (!body || !body.className) {
+        return 0;
+    }
+
+    var match = body.className.match(/\bcmid-(\d+)\b/);
+    return match ? match[1] : 0;
+}
+
+function degrade_get_accessibility_active_items_list() {
+    var state = window.degrade_toolboxAppstate || {};
+    var activeItems = [];
+
+    if (state.bodyClassList) {
+        for (var bodyClass in state.bodyClassList) {
+            if (Object.prototype.hasOwnProperty.call(state.bodyClassList, bodyClass) && state.bodyClassList[bodyClass]) {
+                activeItems.push(state.bodyClassList[bodyClass]);
+            }
+        }
+    }
+
+    if (Number(state.fontSize || 1) > 1) {
+        activeItems.push('font-size-' + state.fontSize);
+    }
+
+    if (state.imagesTitle && activeItems.indexOf('mic-toolbox-content-images') === -1) {
+        activeItems.push('mic-toolbox-content-images');
+    }
+
+    if (state.keyboardRoot && activeItems.indexOf('mic-toolbox-disable-buttons-keyboard') === -1) {
+        activeItems.push('mic-toolbox-disable-buttons-keyboard');
+    }
+
+    return activeItems;
+}
+
+function degrade_get_accessibility_active_items() {
+    return degrade_get_accessibility_active_items_list().join(', ');
+}
+
+function degrade_log_accessibility(action, item, status, activeItemsOverride, stateOverride) {
+    if (!window.M || !M.cfg || !M.cfg.wwwroot || !M.cfg.sesskey || typeof fetch === 'undefined') {
+        return;
+    }
+
+    var state = stateOverride || window.degrade_toolboxAppstate || {};
+    var params = new URLSearchParams();
+    params.append('sesskey', M.cfg.sesskey);
+    params.append('action', action || '');
+    params.append('item', item || '');
+    params.append('status', status || '');
+    params.append('courseid', degrade_get_accessibility_courseid());
+    params.append('cmid', degrade_get_accessibility_cmid());
+    params.append('pageurl', window.location.href);
+    params.append('activeitems', typeof activeItemsOverride === 'string' ? activeItemsOverride : degrade_get_accessibility_active_items());
+    params.append('statejson', JSON.stringify(state));
+
+    fetch(M.cfg.wwwroot + '/theme/degrade/accessibility-ajax.php', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        body: params.toString()
+    }).catch(function () {
+        // Logging must never block accessibility features.
+    });
+}
+
+function degrade_track_vlibras_access_button() {
+    if (window.degradeVlibraAccessButtonTracked) {
+        return;
+    }
+
+    window.degradeVlibraAccessButtonTracked = true;
+    document.addEventListener('click', function (event) {
+        var target = event.target;
+        if (!target || !target.closest) {
+            return;
+        }
+
+        if (target.closest('div[vw-access-button]')) {
+            degrade_log_accessibility('vlibras_tab_click', 'vw-access-button', 'clicked');
+        }
+    }, true);
+}
+
+function degrade_track_toolbar_accessibility() {
+    if (window.degradeToolbarAccessibilityTracked) {
+        return;
+    }
+
+    window.degradeToolbarAccessibilityTracked = true;
+
+    document.addEventListener('click', function (event) {
+        var target = event.target;
+        if (!target || !target.closest) {
+            return;
+        }
+
+        var toolbarButton = target.closest('#mic-access-tool-box button');
+        if (toolbarButton) {
+            window.degradeToolbarBeforeItems = degrade_get_accessibility_active_items_list();
+        }
+
+        var resetButton = target.closest('#mic-toolbox-disable-buttons-reset-all');
+        if (resetButton) {
+            degrade_log_accessibility('toolbar_reset', resetButton.id, 'disabled', '', {
+                bodyClassList: {},
+                fontSize: 1,
+                imagesTitle: false,
+                keyboardRoot: false,
+                initFontSize: false
+            });
+        }
+    }, true);
+
+    document.addEventListener('click', function (event) {
+        var target = event.target;
+        if (!target || !target.closest) {
+            return;
+        }
+
+        var openButton = target.closest('#mic-access-tool-general-button');
+        if (openButton) {
+            degrade_log_accessibility('toolbar_open', openButton.id, 'opened');
+            return;
+        }
+
+        var toolbarButton = target.closest('#mic-access-tool-box button');
+        if (!toolbarButton || toolbarButton.id === 'mic-access-tool-box-close-button' ||
+            toolbarButton.id === 'mic-toolbox-disable-buttons-reset-all') {
+            return;
+        }
+
+        var itemid = toolbarButton.id;
+        var beforeItems = window.degradeToolbarBeforeItems || degrade_get_accessibility_active_items_list();
+
+        setTimeout(function () {
+            var afterItems = degrade_get_accessibility_active_items_list();
+            var status = afterItems.indexOf(itemid) === -1 ? 'disabled' : 'enabled';
+
+            if (itemid === 'mic-toolbox-fonts-up' || itemid === 'mic-toolbox-fonts-down') {
+                status = Number((window.degrade_toolboxAppstate || {}).fontSize || 1) > 1 ? 'enabled' : 'disabled';
+            }
+
+            degrade_log_accessibility('toolbar_item', itemid, status);
+
+            beforeItems.forEach(function (previousItem) {
+                if (previousItem !== itemid && afterItems.indexOf(previousItem) === -1) {
+                    degrade_log_accessibility('toolbar_item', previousItem, 'disabled');
+                }
+            });
+        }, 0);
+    }, false);
+}
 
 function degrade_AccessTool(html) {
     this.init = {

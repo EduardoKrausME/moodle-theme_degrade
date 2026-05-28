@@ -350,6 +350,34 @@ function xmldb_theme_degrade_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2026030700, "theme", "degrade");
     }
 
+    if ($oldversion < 2026052800) {
+        $dbman = $DB->get_manager();
+
+        $table = new xmldb_table('theme_degrade_accesslog');
+        if (!$dbman->table_exists($table)) {
+            $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+            $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+            $table->add_field('courseid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+            $table->add_field('cmid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+            $table->add_field('action', XMLDB_TYPE_CHAR, '40', null, XMLDB_NOTNULL, null, null);
+            $table->add_field('item', XMLDB_TYPE_CHAR, '100', null, null, null, null);
+            $table->add_field('status', XMLDB_TYPE_CHAR, '20', null, null, null, null);
+            $table->add_field('activeitems', XMLDB_TYPE_TEXT, null, null, null, null, null);
+            $table->add_field('statejson', XMLDB_TYPE_TEXT, null, null, null, null, null);
+            $table->add_field('pageurl', XMLDB_TYPE_TEXT, null, null, null, null, null);
+            $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '20', null, XMLDB_NOTNULL, null, '0');
+
+            $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+            $table->add_index('userid', XMLDB_INDEX_NOTUNIQUE, ['userid']);
+            $table->add_index('action', XMLDB_INDEX_NOTUNIQUE, ['action']);
+            $table->add_index('timecreated', XMLDB_INDEX_NOTUNIQUE, ['timecreated']);
+
+            $dbman->create_table($table);
+        }
+
+        upgrade_plugin_savepoint(true, 2026052800, 'theme', 'degrade');
+    }
+
     return true;
 }
 

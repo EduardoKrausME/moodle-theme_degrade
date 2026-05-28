@@ -1,0 +1,214 @@
+{
+  "title": "lang::accessibilityreport_title::theme_degrade",
+  "description": "lang::accessibilityreport_description::theme_degrade",
+  "user_id": null,
+  "refkey": "theme_degrade_accessibility",
+  "sortorder": 10,
+  "category": {
+    "refkey": "theme_degrade",
+    "title": "lang::pluginname::theme_degrade",
+    "sortorder": 10,
+    "description": "lang::accessibilityreport_category_description::theme_degrade"
+  },
+  "blocks": [
+    {
+      "refkey": "theme_degrade_acc_blk_info",
+      "type": "block-3",
+      "sequence": 1,
+      "elements": [
+        {
+          "title": "lang::accessibilityreport_vlibras_clicks::theme_degrade",
+          "refkey": "theme_degrade_acc_vlibras_total",
+          "block_num": 1,
+          "type": "info",
+          "theme": "blue",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "SELECT COUNT(*) FROM mdl_theme_degrade_accesslog WHERE action = 'vlibras_tab_click'",
+          "cache": "15m",
+          "reload": "none",
+          "info": []
+        },
+        {
+          "title": "lang::accessibilityreport_toolbar_opens::theme_degrade",
+          "refkey": "theme_degrade_acc_toolbar_total",
+          "block_num": 2,
+          "type": "info",
+          "theme": "green",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "SELECT COUNT(*) FROM mdl_theme_degrade_accesslog WHERE action = 'toolbar_open'",
+          "cache": "15m",
+          "reload": "none",
+          "info": []
+        },
+        {
+          "title": "lang::accessibilityreport_users_with_interaction::theme_degrade",
+          "refkey": "theme_degrade_acc_users_total",
+          "block_num": 3,
+          "type": "info",
+          "theme": "purple",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "SELECT COUNT(DISTINCT userid) FROM mdl_theme_degrade_accesslog",
+          "cache": "15m",
+          "reload": "none",
+          "info": []
+        }
+      ]
+    },
+    {
+      "refkey": "theme_degrade_acc_blk_summary",
+      "type": "block-1",
+      "sequence": 2,
+      "elements": [
+        {
+          "title": "lang::accessibilityreport_summary_by_student::theme_degrade",
+          "refkey": "theme_degrade_acc_summary",
+          "block_num": 1,
+          "type": "table",
+          "theme": "light",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "SELECT u.id,\n       u.firstname,\n       u.lastname,\n       u.email,\n       COALESCE(SUM(CASE WHEN l.action = 'vlibras_tab_click' THEN 1 ELSE 0 END), 0) AS vlibras_clicks,\n       COALESCE(SUM(CASE WHEN l.action = 'toolbar_open' THEN 1 ELSE 0 END), 0) AS toolbar_opens,\n       COALESCE(SUM(CASE WHEN l.action = 'toolbar_item' AND l.status = 'enabled' THEN 1 ELSE 0 END), 0) AS activated_items,\n       COALESCE(SUM(CASE WHEN l.action = 'toolbar_item' AND l.status = 'disabled' THEN 1 ELSE 0 END), 0) AS deactivated_items,\n       MAX(l.timecreated) AS last_action,\n       COALESCE(lastlog.activeitems, '') AS current_active_items\nFROM mdl_user u\n       JOIN mdl_theme_degrade_accesslog l ON l.userid = u.id\n       LEFT JOIN mdl_theme_degrade_accesslog lastlog ON lastlog.id = (\n           SELECT MAX(l2.id)\n             FROM mdl_theme_degrade_accesslog l2\n            WHERE l2.userid = u.id\n              AND l2.action IN ('toolbar_item', 'toolbar_open', 'toolbar_reset')\n       )\nWHERE u.deleted = 0\nGROUP BY u.id, u.firstname, u.lastname, u.email, lastlog.activeitems\nORDER BY last_action DESC",
+          "cache": "15m",
+          "reload": "none",
+          "info": {
+            "column": {
+              "id": {
+                "key": "id",
+                "title": "#",
+                "type": "number",
+                "mustache": ""
+              },
+              "firstname": {
+                "key": "firstname",
+                "title": "lang::accessibilityreport_col_student::theme_degrade",
+                "type": "userfullname",
+                "mustache": "<a href=\"{{{config.wwwroot}}}/user/view.php?id={{{id}}}\" target=\"profile\">{{{u_fullname}}}</a>"
+              },
+              "lastname": {
+                "key": "lastname",
+                "title": "",
+                "type": "none",
+                "mustache": ""
+              },
+              "email": {
+                "key": "email",
+                "title": "lang::accessibilityreport_col_email::theme_degrade",
+                "type": "string",
+                "mustache": "<a href=\"mailto:{{{email}}}\">{{{email}}}</a>"
+              },
+              "vlibras_clicks": {
+                "key": "vlibras_clicks",
+                "title": "lang::accessibilityreport_vlibras_clicks::theme_degrade",
+                "type": "number",
+                "mustache": ""
+              },
+              "toolbar_opens": {
+                "key": "toolbar_opens",
+                "title": "lang::accessibilityreport_toolbar_opens::theme_degrade",
+                "type": "number",
+                "mustache": ""
+              },
+              "activated_items": {
+                "key": "activated_items",
+                "title": "lang::accessibilityreport_col_activations::theme_degrade",
+                "type": "number",
+                "mustache": ""
+              },
+              "deactivated_items": {
+                "key": "deactivated_items",
+                "title": "lang::accessibilityreport_col_deactivations::theme_degrade",
+                "type": "number",
+                "mustache": ""
+              },
+              "last_action": {
+                "key": "last_action",
+                "title": "lang::accessibilityreport_col_last_interaction::theme_degrade",
+                "type": "datetime",
+                "mustache": ""
+              },
+              "current_active_items": {
+                "key": "current_active_items",
+                "title": "lang::accessibilityreport_col_current_active_items::theme_degrade",
+                "type": "string",
+                "mustache": ""
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "refkey": "theme_degrade_acc_blk_current",
+      "type": "block-1",
+      "sequence": 3,
+      "elements": [
+        {
+          "title": "lang::accessibilityreport_active_items_by_student::theme_degrade",
+          "refkey": "theme_degrade_acc_current",
+          "block_num": 1,
+          "type": "table",
+          "theme": "light",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "SELECT u.id,\n       u.firstname,\n       u.lastname,\n       u.email,\n       COALESCE(lastlog.activeitems, '') AS active_items,\n       lastlog.timecreated AS last_update,\n       lastlog.pageurl\nFROM mdl_theme_degrade_accesslog lastlog\n       JOIN (\n           SELECT userid, MAX(id) AS lastid\n             FROM mdl_theme_degrade_accesslog\n            WHERE action IN ('toolbar_item', 'toolbar_open', 'toolbar_reset')\n            GROUP BY userid\n       ) latest ON latest.lastid = lastlog.id\n       JOIN mdl_user u ON u.id = lastlog.userid\nWHERE u.deleted = 0\nORDER BY lastlog.timecreated DESC",
+          "cache": "15m",
+          "reload": "none",
+          "info": {
+            "column": {
+              "id": {
+                "key": "id",
+                "title": "#",
+                "type": "number",
+                "mustache": ""
+              },
+              "firstname": {
+                "key": "firstname",
+                "title": "lang::accessibilityreport_col_student::theme_degrade",
+                "type": "userfullname",
+                "mustache": "<a href=\"{{{config.wwwroot}}}/user/view.php?id={{{id}}}\" target=\"profile\">{{{u_fullname}}}</a>"
+              },
+              "lastname": {
+                "key": "lastname",
+                "title": "",
+                "type": "none",
+                "mustache": ""
+              },
+              "email": {
+                "key": "email",
+                "title": "lang::accessibilityreport_col_email::theme_degrade",
+                "type": "string",
+                "mustache": "<a href=\"mailto:{{{email}}}\">{{{email}}}</a>"
+              },
+              "active_items": {
+                "key": "active_items",
+                "title": "lang::accessibilityreport_col_active_items::theme_degrade",
+                "type": "string",
+                "mustache": ""
+              },
+              "last_update": {
+                "key": "last_update",
+                "title": "lang::accessibilityreport_col_updated_at::theme_degrade",
+                "type": "datetime",
+                "mustache": ""
+              },
+              "pageurl": {
+                "key": "pageurl",
+                "title": "lang::accessibilityreport_col_page::theme_degrade",
+                "type": "string",
+                "mustache": "<a href=\"{{{pageurl}}}\" target=\"_blank\">lang::accessibilityreport_open_page::theme_degrade</a>"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

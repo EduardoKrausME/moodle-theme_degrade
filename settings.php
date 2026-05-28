@@ -35,6 +35,10 @@ if ($hassiteconfig) {
     $title = "{$pluginname} - " . get_string("quickstart_title", "theme_degrade");
     $url = new moodle_url("/theme/degrade/quickstart/");
     $ADMIN->add("themes", new admin_externalpage("theme_degrade_link2", $title, $url));
+
+    $title = "{$pluginname} - " . get_string("report_accessibility_title", "theme_degrade");
+    $url = new moodle_url("/theme/degrade/report.php");
+    $ADMIN->add("themes", new admin_externalpage("theme_degrade_report", $title, $url));
 }
 
 if ($ADMIN->fulltree) {

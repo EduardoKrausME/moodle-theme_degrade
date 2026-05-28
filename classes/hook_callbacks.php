@@ -145,10 +145,11 @@ class hook_callbacks {
      * @throws Exception
      */
     private static function vlibras(before_footer_html_generation $hook) {
-        global $CFG, $OUTPUT;
+        global $CFG, $OUTPUT, $PAGE;
 
         $vlibras = get_config("theme_degrade", "enable_vlibras") && $CFG->lang == "pt_br";
         if ($vlibras) {
+            $PAGE->requires->js_call_amd("theme_degrade/acctoolbar", "track_vlibras");
             $htmlvliras = $OUTPUT->render_from_template("theme_degrade/settings/vlibras", [
                 "position" => get_config("theme_degrade", "vlibras_position") ?: "R",
                 "avatar" => get_config("theme_degrade", "vlibras_avatar") ?: "icaro",
