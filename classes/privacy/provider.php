@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * phpcs:disable Universal.OOStructures.AlphabeticExtendsImplements.ImplementsWrongOrder
  * Privacy Subsystem implementation for theme_degrade.
  *
  * @package   theme_degrade
