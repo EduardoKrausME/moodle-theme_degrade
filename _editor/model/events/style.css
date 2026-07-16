@@ -1,5 +1,5 @@
 .block_themeeditor.events-block {
-  padding: 80px 20px 10px;
+  padding: 70px 20px 40px;
 }
 .block_themeeditor.events-block .event-card {
   background: #ffffff;
@@ -53,3 +53,5 @@
 .block_themeeditor.events-block .event-card .event-link:hover {
   text-decoration: underline;
 }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,5 +1,5 @@
 .block_themeeditor.testimonials-minimal {
-  padding: 80px 20px 10px;
+  padding: 70px 20px 40px;
 }
 .block_themeeditor.testimonials-minimal .testimonials-list {
   display: flex;
@@ -61,3 +61,5 @@
   line-height: 1.5;
   font-style: italic;
 }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .faq-modern {
-  padding: 90px 20px;
+  padding: 70px 20px 40px;
 }
 .faq-modern .container {
   max-width: 700px;
@@ -11,7 +11,6 @@
   border-bottom: 1px solid #e2e8f0;
   padding: 1rem 0;
   position: relative;
-  /* Quando o radio está marcado */
 }
 .faq-modern .faq-item input[type=radio] {
   display: none;
@@ -51,6 +50,9 @@
   color: #475569;
   line-height: 1.6;
 }
+.faq-modern .faq-item {
+  /* Quando o radio está marcado */
+}
 .faq-modern .faq-item input[type=radio]:checked + .faq-question {
   color: var(--bs-primary);
 }
@@ -64,3 +66,5 @@
   opacity: 1;
   margin-top: 0.5rem;
 }
+
+/*# sourceMappingURL=style.css.map */

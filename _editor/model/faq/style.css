@@ -1,5 +1,5 @@
 .faq-editor {
-  padding: 80px 20px 10px;
+  padding: 70px 20px 40px;
 }
 .faq-editor .accordion-button {
   background: #f8f9fa;
@@ -62,3 +62,5 @@
 .faq-editor .accordion-button:after {
   display: none;
 }
+
+/*# sourceMappingURL=style.css.map */

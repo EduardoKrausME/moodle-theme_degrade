@@ -1,0 +1,312 @@
+.block_themeeditor.hero-learning-modern {
+  --hero-surface: #f5f8ff;
+  position: relative;
+  overflow: hidden;
+  padding: clamp(72px, 9vw, 132px) 20px;
+  background: linear-gradient(135deg, #f8fbff 0%, #eef4ff 52%, #ffffff 100%);
+}
+
+.hero-learning-modern__container {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.98fr);
+  align-items: center;
+  gap: clamp(44px, 7vw, 100px);
+}
+
+.hero-learning-modern__content h1 {
+  max-width: 760px;
+  margin: 20px 0 24px;
+  color: #14213d;
+  font-size: clamp(2.55rem, 5vw, 4.9rem);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+  font-weight: 800;
+}
+
+.hero-learning-modern__content > p {
+  max-width: 650px;
+  margin: 0 0 34px;
+  color: #58657d;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  line-height: 1.75;
+}
+
+.hero-learning-modern__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  border: 1px solid rgba(var(--bs-primary-rgb), 0.17);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--bs-primary);
+  font-size: 0.88rem;
+  font-weight: 700;
+  box-shadow: 0 12px 35px rgba(33, 56, 99, 0.07);
+}
+
+.hero-learning-modern__eyebrow-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bs-primary);
+  box-shadow: 0 0 0 5px rgba(var(--bs-primary-rgb), 0.12);
+}
+
+.hero-learning-modern__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 22px;
+}
+
+.hero-learning-modern__actions .btn {
+  padding: 14px 25px;
+  border-radius: 14px;
+  font-weight: 700;
+  box-shadow: 0 15px 35px rgba(var(--bs-primary-rgb), 0.22);
+}
+
+.hero-learning-modern__secondary-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  color: #243552;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hero-learning-modern__play {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--bs-primary);
+  box-shadow: 0 10px 30px rgba(40, 58, 92, 0.14);
+  font-size: 0.78rem;
+}
+
+.hero-learning-modern__proof {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin-top: 42px;
+}
+
+.hero-learning-modern__proof strong, .hero-learning-modern__proof small {
+  display: block;
+}
+
+.hero-learning-modern__proof strong {
+  color: #1b2942;
+  font-size: 0.98rem;
+}
+
+.hero-learning-modern__proof small {
+  margin-top: 3px;
+  color: #7a8598;
+}
+
+.hero-learning-modern__avatars {
+  display: flex;
+  align-items: center;
+}
+
+.hero-learning-modern__avatars img, .hero-learning-modern__avatars span {
+  width: 43px;
+  height: 43px;
+  margin-left: -10px;
+  border: 3px solid #f7faff;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.hero-learning-modern__avatars img:first-child {
+  margin-left: 0;
+}
+
+.hero-learning-modern__avatars span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1f2d48;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.hero-learning-modern__visual {
+  position: relative;
+}
+
+.hero-learning-modern__image-card {
+  position: relative;
+  padding: 14px;
+  border-radius: 34px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 34px 80px rgba(29, 55, 100, 0.18);
+  backdrop-filter: blur(14px);
+}
+
+.hero-learning-modern__image-card > img {
+  width: 100%;
+  min-height: 520px;
+  max-height: 650px;
+  border-radius: 25px;
+  object-fit: cover;
+}
+
+.hero-learning-modern__progress-card, .hero-learning-modern__lesson-card {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 20px 45px rgba(25, 43, 75, 0.17);
+  backdrop-filter: blur(12px);
+}
+
+.hero-learning-modern__progress-card {
+  top: 40px;
+  left: -54px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 18px;
+  border-radius: 18px;
+}
+
+.hero-learning-modern__progress-icon {
+  display: flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: rgba(var(--bs-primary-rgb), 0.12);
+  color: var(--bs-primary);
+  font-weight: 900;
+}
+
+.hero-learning-modern__progress-card small, .hero-learning-modern__progress-card strong {
+  display: block;
+}
+
+.hero-learning-modern__progress-card small {
+  color: #79859a;
+  font-size: 0.75rem;
+}
+
+.hero-learning-modern__progress-card strong {
+  margin-top: 2px;
+  color: #20314d;
+  font-size: 0.93rem;
+}
+
+.hero-learning-modern__lesson-card {
+  right: -30px;
+  bottom: 38px;
+  width: min(290px, 70%);
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.hero-learning-modern__lesson-card span, .hero-learning-modern__lesson-card strong {
+  display: block;
+}
+
+.hero-learning-modern__lesson-card span {
+  color: var(--bs-primary);
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-learning-modern__lesson-card strong {
+  margin: 7px 0 10px;
+  color: #1f2d48;
+  line-height: 1.35;
+}
+
+.hero-learning-modern__lesson-meta {
+  color: #79859a;
+  font-size: 0.78rem;
+}
+
+.hero-learning-modern__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(10px);
+  opacity: 0.5;
+}
+
+.hero-learning-modern__glow--one {
+  top: -120px;
+  right: 18%;
+  width: 320px;
+  height: 320px;
+  background: rgba(var(--bs-primary-rgb), 0.16);
+}
+
+.hero-learning-modern__glow--two {
+  bottom: -180px;
+  left: -90px;
+  width: 360px;
+  height: 360px;
+  background: rgba(87, 194, 255, 0.14);
+}
+
+@media (max-width: 991.98px) {
+  .hero-learning-modern__container {
+    grid-template-columns: 1fr;
+  }
+  .hero-learning-modern__content {
+    text-align: center;
+  }
+  .hero-learning-modern__content h1, .hero-learning-modern__content > p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-learning-modern__actions, .hero-learning-modern__proof {
+    justify-content: center;
+  }
+  .hero-learning-modern__visual {
+    max-width: 680px;
+    margin: 10px auto 0;
+  }
+}
+@media (max-width: 575.98px) {
+  .block_themeeditor.hero-learning-modern {
+    padding: 64px 18px 78px;
+  }
+  .hero-learning-modern__content h1 {
+    font-size: 2.45rem;
+  }
+  .hero-learning-modern__actions {
+    flex-direction: column;
+  }
+  .hero-learning-modern__actions .btn {
+    width: 100%;
+  }
+  .hero-learning-modern__proof {
+    align-items: flex-start;
+  }
+  .hero-learning-modern__image-card > img {
+    min-height: 430px;
+  }
+  .hero-learning-modern__progress-card {
+    top: 22px;
+    left: 22px;
+  }
+  .hero-learning-modern__lesson-card {
+    right: 22px;
+    bottom: 22px;
+    width: calc(100% - 44px);
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

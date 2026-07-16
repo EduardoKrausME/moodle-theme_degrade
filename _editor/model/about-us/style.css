@@ -1,5 +1,5 @@
 .block_themeeditor.aboutus-section {
-  padding: 100px 20px;
+  padding: 70px 20px 40px;
 }
 .block_themeeditor.aboutus-section .about-image {
   position: relative;
@@ -69,3 +69,5 @@
     display: none;
   }
 }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,5 +1,5 @@
 .block_themeeditor.featured-style {
-  padding: 80px 20px 10px;
+  padding: 70px 20px 40px;
 }
 .block_themeeditor.featured-style .row {
   display: flex;
@@ -69,3 +69,5 @@
   background: linear-gradient(135deg, var(--bs-primary), color-mix(in srgb, var(--bs-primary) 80%, black));
   box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
 }
+
+/*# sourceMappingURL=style.css.map */

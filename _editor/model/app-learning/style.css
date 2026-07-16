@@ -1,0 +1,376 @@
+.block_themeeditor.app-learning {
+  padding: clamp(75px, 8vw, 120px) 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #eef4ff, #fff 60%);
+}
+
+.app-learning__layout {
+  display: grid;
+  grid-template-columns: minmax(350px, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(45px, 8vw, 110px);
+}
+
+.app-learning__visual {
+  position: relative;
+  min-height: 660px;
+}
+
+.app-learning__visual::before {
+  content: "";
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  width: 470px;
+  height: 470px;
+  border-radius: 50%;
+  background: rgba(var(--bs-primary-rgb), 0.11);
+  transform: translateX(-50%);
+}
+
+.app-learning__phone {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 50%;
+  width: 300px;
+  height: 620px;
+  padding: 13px;
+  border: 9px solid #15233d;
+  border-radius: 43px;
+  background: #15233d;
+  transform: translateX(-50%) rotate(-3deg);
+  box-shadow: 0 35px 75px rgba(25, 41, 70, 0.28);
+}
+
+.app-learning__phone-top {
+  position: absolute;
+  z-index: 3;
+  top: 9px;
+  left: 50%;
+  width: 98px;
+  height: 22px;
+  border-radius: 0 0 14px 14px;
+  background: #15233d;
+  transform: translateX(-50%);
+}
+
+.app-learning__screen {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 29px;
+  background: #f7f9fd;
+}
+
+.app-learning__screen-header {
+  padding: 46px 20px 20px;
+  background: #fff;
+}
+
+.app-learning__screen-header span, .app-learning__screen-header strong {
+  display: block;
+}
+
+.app-learning__screen-header span {
+  color: #8b95a6;
+  font-size: 0.73rem;
+}
+
+.app-learning__screen-header strong {
+  margin-top: 5px;
+  color: #192842;
+  font-size: 1.12rem;
+}
+
+.app-learning__course-image {
+  position: relative;
+  margin: 14px;
+  overflow: hidden;
+  border-radius: 17px;
+}
+
+.app-learning__course-image img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.app-learning__course-image span {
+  position: absolute;
+  right: 11px;
+  bottom: 10px;
+  display: flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  background: var(--bs-primary);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.app-learning__course-copy {
+  margin: 0 14px;
+  padding: 18px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(33, 51, 83, 0.07);
+}
+
+.app-learning__course-copy strong, .app-learning__course-copy small {
+  display: block;
+}
+
+.app-learning__course-copy strong {
+  color: #1b2b47;
+  font-size: 0.9rem;
+}
+
+.app-learning__course-copy small {
+  margin-top: 6px;
+  color: #818b9d;
+  font-size: 0.69rem;
+}
+
+.app-learning__course-copy > div {
+  height: 6px;
+  margin-top: 15px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #e7ebf2;
+}
+
+.app-learning__course-copy i {
+  display: block;
+  width: 42%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--bs-primary);
+}
+
+.app-learning__nav {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 16px 13px 19px;
+  border-top: 1px solid #e8ecf2;
+  background: #fff;
+  color: #929baa;
+}
+
+.app-learning__nav b:first-child {
+  color: var(--bs-primary);
+}
+
+.app-learning__floating {
+  position: absolute;
+  z-index: 3;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 18px 42px rgba(30, 48, 80, 0.16);
+  backdrop-filter: blur(12px);
+}
+
+.app-learning__floating--top {
+  top: 118px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 14px 17px;
+  border-radius: 17px;
+}
+
+.app-learning__floating--top > span {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  background: #e5f8ee;
+  color: #168653;
+  font-weight: 900;
+}
+
+.app-learning__floating--top strong, .app-learning__floating--top small {
+  display: block;
+}
+
+.app-learning__floating--top strong {
+  color: #22324d;
+  font-size: 0.82rem;
+}
+
+.app-learning__floating--top small {
+  margin-top: 3px;
+  color: #8992a1;
+  font-size: 0.67rem;
+}
+
+.app-learning__floating--bottom {
+  right: 0;
+  bottom: 82px;
+  min-width: 130px;
+  padding: 16px 19px;
+  border-radius: 17px;
+  text-align: center;
+}
+
+.app-learning__floating--bottom strong, .app-learning__floating--bottom span {
+  display: block;
+}
+
+.app-learning__floating--bottom strong {
+  color: var(--bs-primary);
+  font-size: 1.35rem;
+}
+
+.app-learning__floating--bottom span {
+  margin-top: 3px;
+  color: #7d8798;
+  font-size: 0.7rem;
+}
+
+.app-learning__eyebrow {
+  color: var(--bs-primary);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.app-learning__content h2 {
+  margin: 16px 0 20px;
+  color: #17253f;
+  font-size: clamp(2.1rem, 4vw, 3.65rem);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
+
+.app-learning__content > p {
+  max-width: 680px;
+  margin: 0;
+  color: #687488;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.app-learning__features {
+  display: grid;
+  gap: 18px;
+  margin: 31px 0;
+}
+
+.app-learning__features > div {
+  display: flex;
+  gap: 15px;
+}
+
+.app-learning__features > div > span {
+  display: flex;
+  flex: 0 0 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(var(--bs-primary-rgb), 0.1);
+  color: var(--bs-primary);
+  font-size: 0.76rem;
+  font-weight: 850;
+}
+
+.app-learning__features p, .app-learning__features small {
+  margin: 0;
+}
+
+.app-learning__features strong, .app-learning__features small {
+  display: block;
+}
+
+.app-learning__features strong {
+  color: #25354f;
+}
+
+.app-learning__features small {
+  margin-top: 4px;
+  color: #7b8596;
+  line-height: 1.5;
+}
+
+.app-learning__stores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.app-learning__stores a {
+  min-width: 160px;
+  padding: 11px 16px;
+  border: 1px solid #dfe5ee;
+  border-radius: 13px;
+  background: #fff;
+  color: #23344f;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(38, 56, 89, 0.06);
+}
+
+.app-learning__stores small, .app-learning__stores strong {
+  display: block;
+}
+
+.app-learning__stores small {
+  color: #8a94a4;
+  font-size: 0.65rem;
+}
+
+.app-learning__stores strong {
+  margin-top: 2px;
+  font-size: 0.93rem;
+}
+
+@media (max-width: 991.98px) {
+  .app-learning__layout {
+    grid-template-columns: 1fr;
+  }
+  .app-learning__visual {
+    max-width: 620px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 575.98px) {
+  .app-learning__visual {
+    min-height: 590px;
+  }
+  .app-learning__phone {
+    width: 270px;
+    height: 570px;
+  }
+  .app-learning__floating--top {
+    left: -5px;
+  }
+  .app-learning__floating--bottom {
+    right: -5px;
+    bottom: 50px;
+  }
+  .app-learning__content {
+    text-align: center;
+  }
+  .app-learning__features {
+    text-align: left;
+  }
+  .app-learning__stores {
+    justify-content: center;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

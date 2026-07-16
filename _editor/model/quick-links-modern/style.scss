@@ -1,0 +1,14 @@
+.block_themeeditor.quick-links-modern { padding: clamp(64px, 7vw, 96px) 20px; background: #fff; }
+.quick-links-modern__header { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 35px; }
+.quick-links-modern__header span { color: var(--bs-primary); font-size: .76rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.quick-links-modern__header h2 { margin: 10px 0 0; color: #192741; font-size: clamp(1.9rem, 3.5vw, 3rem); letter-spacing: -.035em; font-weight: 800; }
+.quick-links-modern__header p { max-width: 450px; margin: 0; color: #737e91; line-height: 1.65; }
+.quick-links-modern__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.quick-links-modern__item { display: grid; grid-template-columns: 56px 1fr auto; align-items: center; gap: 17px; padding: 23px; border: 1px solid #e4e9f1; border-radius: 18px; background: #f9fafc; color: inherit; text-decoration: none; transition: transform .3s ease, border-color .3s ease, background .3s ease, box-shadow .3s ease; }
+.quick-links-modern__item:hover { transform: translateY(-4px); border-color: rgba(var(--bs-primary-rgb), .25); background: #fff; box-shadow: 0 17px 38px rgba(35,52,83,.09); }
+.quick-links-modern__icon { display: flex; width: 56px; height: 56px; align-items: center; justify-content: center; border-radius: 16px; background: rgba(var(--bs-primary-rgb), .1); color: var(--bs-primary); font-weight: 900; }
+.quick-links-modern__item strong, .quick-links-modern__item small { display: block; }
+.quick-links-modern__item strong { color: #23334e; font-size: 1rem; } .quick-links-modern__item small { margin-top: 4px; color: #818b9c; font-size: .8rem; }
+.quick-links-modern__item > b { color: var(--bs-primary); font-size: 1.25rem; transition: transform .25s ease; } .quick-links-modern__item:hover > b { transform: translateX(5px); }
+@media (max-width: 767.98px) { .quick-links-modern__header { align-items: flex-start; flex-direction: column; gap: 16px; } .quick-links-modern__grid { grid-template-columns: 1fr; } }
+@media (max-width: 575.98px) { .quick-links-modern__item { grid-template-columns: 48px 1fr auto; padding: 18px; } .quick-links-modern__icon { width: 48px; height: 48px; } }

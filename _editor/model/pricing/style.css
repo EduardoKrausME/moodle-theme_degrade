@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .pricing-section {
-  padding: 80px 20px 10px;
+  padding: 70px 20px 40px;
 }
 .pricing-section .pricing-block {
   margin-bottom: 40px;
@@ -97,3 +97,5 @@
 .pricing-section .pricing-block:nth-child(2) .pricing-table:hover {
   transform: scale(1.08) translateY(-10px);
 }
+
+/*# sourceMappingURL=style.css.map */

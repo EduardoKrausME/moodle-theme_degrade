@@ -1,0 +1,14 @@
+.block_themeeditor.trust-partners { padding: clamp(66px, 7vw, 96px) 20px; background: #f8fafc; }
+.trust-partners__header { display: flex; align-items: end; justify-content: space-between; gap: 35px; margin-bottom: 40px; }
+.trust-partners__header span { flex: 0 0 auto; color: var(--bs-primary); font-size: .76rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.trust-partners__header h2 { max-width: 780px; margin: 0; color: #182640; font-size: clamp(1.8rem, 3.4vw, 3rem); line-height: 1.2; letter-spacing: -.03em; font-weight: 800; text-align: right; }
+.trust-partners__grid { display: grid; grid-template-columns: repeat(6, 1fr); border: 1px solid #e3e8f0; border-radius: 22px; overflow: hidden; background: #fff; box-shadow: 0 18px 45px rgba(35,52,83,.06); }
+.trust-partners__logo { display: flex; min-height: 145px; align-items: center; justify-content: center; gap: 11px; padding: 24px 16px; border-right: 1px solid #e8ecf2; color: #7b8596; filter: grayscale(1); opacity: .7; transition: opacity .3s ease, filter .3s ease, background .3s ease, color .3s ease; }
+.trust-partners__logo:last-child { border-right: 0; }
+.trust-partners__logo:hover { background: #f5f8ff; color: #243552; filter: none; opacity: 1; }
+.trust-partners__mark { display: flex; width: 42px; height: 42px; align-items: center; justify-content: center; border-radius: 13px; background: rgba(var(--bs-primary-rgb), .1); color: var(--bs-primary); font-size: 1.1rem; font-weight: 900; }
+.trust-partners__logo strong { font-size: 1.06rem; letter-spacing: -.02em; }
+.trust-partners__note { margin: 22px 0 0; color: #8490a2; font-size: .88rem; text-align: center; }
+@media (max-width: 991.98px) { .trust-partners__grid { grid-template-columns: repeat(3, 1fr); } .trust-partners__logo:nth-child(3) { border-right: 0; } .trust-partners__logo:nth-child(-n+3) { border-bottom: 1px solid #e8ecf2; } }
+@media (max-width: 767.98px) { .trust-partners__header { align-items: flex-start; flex-direction: column; } .trust-partners__header h2 { text-align: left; } }
+@media (max-width: 575.98px) { .trust-partners__grid { grid-template-columns: repeat(2, 1fr); } .trust-partners__logo { border-bottom: 1px solid #e8ecf2; } .trust-partners__logo:nth-child(odd) { border-right: 1px solid #e8ecf2; } .trust-partners__logo:nth-child(even) { border-right: 0; } .trust-partners__logo:nth-last-child(-n+2) { border-bottom: 0; } }

@@ -1,0 +1,180 @@
+.block_themeeditor.help-center-modern {
+  padding: clamp(72px, 8vw, 116px) 20px;
+  background: #fff;
+}
+
+.help-center-modern__hero {
+  padding: clamp(38px, 6vw, 70px);
+  border-radius: 30px;
+  background: linear-gradient(135deg, #eef4ff 0%, #f8faff 55%, #eef7ff 100%);
+  text-align: center;
+}
+
+.help-center-modern__hero > span {
+  color: var(--bs-primary);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.help-center-modern__hero h2 {
+  margin: 14px 0 13px;
+  color: #17253f;
+  font-size: clamp(2.2rem, 4.2vw, 3.8rem);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
+
+.help-center-modern__hero > p {
+  margin: 0 0 28px;
+  color: #6c788b;
+  font-size: 1.03rem;
+}
+
+.help-center-modern__search {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  align-items: center;
+  width: min(720px, 100%);
+  margin: auto;
+  padding: 7px;
+  border: 1px solid #dde4ee;
+  border-radius: 17px;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(38, 55, 85, 0.1);
+}
+
+.help-center-modern__search > span {
+  color: var(--bs-primary);
+  font-size: 1.45rem;
+}
+
+.help-center-modern__search input {
+  min-width: 0;
+  padding: 12px 4px;
+  border: 0;
+  outline: 0;
+  color: #24344f;
+  background: transparent;
+}
+
+.help-center-modern__search button {
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--bs-primary);
+  color: #fff;
+  font-weight: 750;
+}
+
+.help-center-modern__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.help-center-modern__card {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 15px;
+  align-items: center;
+  min-height: 145px;
+  padding: 24px;
+  border: 1px solid #e3e8f0;
+  border-radius: 21px;
+  background: #fff;
+  color: #1b2942;
+  text-decoration: none;
+  box-shadow: 0 12px 32px rgba(38, 55, 85, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.help-center-modern__card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(var(--bs-primary-rgb), 0.28);
+  box-shadow: 0 22px 48px rgba(38, 55, 85, 0.1);
+  color: #1b2942;
+  text-decoration: none;
+}
+
+.help-center-modern__icon {
+  display: flex;
+  width: 52px;
+  height: 52px;
+  grid-row: span 2;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(var(--bs-primary-rgb), 0.1);
+  color: var(--bs-primary);
+  font-size: 1.15rem;
+  font-weight: 850;
+}
+
+.help-center-modern__card strong, .help-center-modern__card small {
+  display: block;
+}
+
+.help-center-modern__card strong {
+  font-size: 1.02rem;
+}
+
+.help-center-modern__card small {
+  margin-top: 5px;
+  color: #828da0;
+  line-height: 1.4;
+}
+
+.help-center-modern__card > b {
+  grid-column: 2;
+  color: var(--bs-primary);
+  font-size: 0.7rem;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.help-center-modern__card--contact {
+  border-color: transparent;
+  background: #132a58;
+  color: #fff;
+}
+
+.help-center-modern__card--contact:hover {
+  color: #fff;
+}
+
+.help-center-modern__card--contact .help-center-modern__icon {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.help-center-modern__card--contact small {
+  color: #b9c7df;
+}
+
+.help-center-modern__card--contact > b {
+  color: #a9c4ff;
+}
+
+@media (max-width: 991.98px) {
+  .help-center-modern__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 575.98px) {
+  .help-center-modern__search {
+    grid-template-columns: 42px 1fr;
+  }
+  .help-center-modern__search button {
+    grid-column: 1/-1;
+    width: 100%;
+  }
+  .help-center-modern__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
