@@ -12,15 +12,15 @@ editor => {
         media: '<svg viewBox="0 0 24 24"><path d="M19,5H22V7H19V10H17V7H14V5H17V2H19V5M17,19V13H19V21H3V5H11V7H5V19H17Z" /></svg>',
         category: category,
         content: `
-            <div class="col-lg-3 col-md-6 col-sm-12 team-block">
-                <div class="inner-box text-center">
-                    <div class="image-box">
-                        <img src="https://randomuser.me/api/portraits/men/5.jpg" alt="Team Member">
-                    </div>
-                    <h4 class="name">New Person</h4>
-                    <div class="role">Team Member</div>
-                </div>
-            </div>`,
+<div class="col-lg-3 col-md-6 col-sm-12 team-block">
+<div class="inner-box text-center">
+<div class="image-box">
+<img alt="lang::team_1_team_member_7b9159" src="https://randomuser.me/api/portraits/men/5.jpg"/>
+</div>
+<h4 class="name">lang::teams_minimal_new_person_5e55a0</h4>
+<div class="role">lang::team_1_team_member_7b9159</div>
+</div>
+</div>`,
     }, {
         at: 0 // Let's place this block at the beginning of the list
     });

@@ -143,7 +143,7 @@
 }
 
 @media (min-width: 1071px) {
-  [data-themename=eadtraining] .block-home-banner-eadflix-op2:not(.editmode-page-item) {
+  [data-themename=degrade] .block-home-banner-eadflix-op2:not(.editmode-page-item) {
     width: calc(100% + 68px + 68px);
     margin-top: -48px;
     margin-left: -68px;
@@ -151,7 +151,7 @@
   }
 }
 @media (max-width: 1070px) {
-  [data-themename=eadtraining] .block-home-banner-eadflix-op2:not(.editmode-page-item) {
+  [data-themename=degrade] .block-home-banner-eadflix-op2:not(.editmode-page-item) {
     width: calc(100% + 56px + 56px);
     margin-top: -48px;
     margin-left: -56px;
@@ -159,7 +159,7 @@
   }
 }
 @media (max-width: 767px) {
-  [data-themename=eadtraining] .block-home-banner-eadflix-op2:not(.editmode-page-item) {
+  [data-themename=degrade] .block-home-banner-eadflix-op2:not(.editmode-page-item) {
     width: calc(100% + 8px + 8px);
     margin-top: -48px;
     margin-left: -8px;

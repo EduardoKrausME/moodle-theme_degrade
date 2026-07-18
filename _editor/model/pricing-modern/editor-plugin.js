@@ -12,22 +12,22 @@ editor => {
         media: '<svg viewBox="0 0 24 24"><path d="M19,5H22V7H19V10H17V7H14V5H17V2H19V5M17,19V13H19V21H3V5H11V7H5V19H17Z" /></svg>',
         category: category,
         content: `
-            <div class="pricing-card">
-                <div class="card-header">
-                    <h3>New plan</h3>
-                    <p>For companies and training teams</p>
-                </div>
-                <div class="card-price">
-                    <h2>$000 <span>/month</span></h2>
-                </div>
-                <ul class="card-features">
-                    <li>✔ Team management</li>
-                    <li>✔ Advanced analytics</li>
-                    <li>✔ Dedicated consultant</li>
-                    <li>✔ Custom integrations</li>
-                </ul>
-                <a href="#" class="btn btn-primary w-100">Contact Sales</a>
-            </div>`,
+<div class="pricing-card">
+<div class="card-header">
+<h3>lang::pricing_modern_new_plan_06a18c</h3>
+<p>lang::pricing_modern_companies_training_teams_3e58d1</p>
+</div>
+<div class="card-price">
+<h2>$000 <span>lang::pricing_modern_month_ab0cc3</span></h2>
+</div>
+<ul class="card-features">
+<li>lang::pricing_modern_team_management_8f1239</li>
+<li>lang::pricing_modern_advanced_analytics_a8e165</li>
+<li>lang::pricing_modern_dedicated_consultant_7d87fc</li>
+<li>lang::pricing_modern_custom_integrations_cd978d</li>
+</ul>
+<a class="btn btn-primary w-100" href="#">lang::pricing_modern_contact_sales_7a0a9b</a>
+</div>`,
     }, {
         at: 0 // Let's place this block at the beginning of the list
     });

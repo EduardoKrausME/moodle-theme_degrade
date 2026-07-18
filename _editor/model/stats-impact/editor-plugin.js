@@ -5,6 +5,6 @@ editor => {
         label: 'lang::new_statistic',
         media: '<svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"/></svg>',
         category,
-        content: `<div class="stats-impact__item"><div class="stats-impact__icon">+</div><strong>100+</strong><span>Novo indicador</span><small>descrição do resultado</small></div>`
+        content: `<div class="stats-impact__item"><div class="stats-impact__icon">+</div><strong>100+</strong><span>lang::new_statistic</span><small>lang::stats_impact_descricao_resultado_99495e</small></div>`
     }, { at: 0 });
 }

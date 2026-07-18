@@ -5,6 +5,6 @@ editor => {
         label: 'lang::new_category_card',
         media: '<svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"/></svg>',
         category,
-        content: `<a href="#" class="category-explorer-modern__card"><span class="category-explorer-modern__icon">✦</span><div><strong>Nova categoria</strong><small>10 cursos disponíveis</small></div><b>→</b></a>`
+        content: `<a class="category-explorer-modern__card" href="#"><span class="category-explorer-modern__icon">✦</span><div><strong>lang::new_category_card</strong><small>lang::category_explorer_modern_10_cursos_disponiveis_37b160</small></div><b>→</b></a>`
     }, { at: 0 });
 }

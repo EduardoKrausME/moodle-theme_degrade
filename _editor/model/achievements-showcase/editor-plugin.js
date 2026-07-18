@@ -5,6 +5,6 @@ editor => {
         label: 'lang::new_achievement',
         media: '<svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"/></svg>',
         category,
-        content: `<div class="achievements-showcase__item"><div class="achievements-showcase__badge">★</div><small>Nova conquista</small><strong>Título da conquista</strong><p>Descreva o objetivo alcançado pelo estudante.</p></div>`
+        content: `<div class="achievements-showcase__item"><div class="achievements-showcase__badge">★</div><small>lang::new_achievement</small><strong>lang::achievements_showcase_titulo_conquista_59c84c</strong><p>lang::achievements_showcase_descreva_objetivo_alcancado_pelo_estudante_79e3cf</p></div>`
     }, { at: 0 });
 }

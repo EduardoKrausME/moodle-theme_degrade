@@ -5,6 +5,6 @@ editor => {
         label: 'lang::new_faq_question',
         media: '<svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"/></svg>',
         category,
-        content: `<details><summary>Digite uma nova pergunta<span>+</span></summary><div>Adicione aqui a resposta completa para esta dúvida.</div></details>`
+        content: `<details><summary>lang::faq_support_modern_digite_nova_pergunta_b8b344<span>+</span></summary><div>lang::faq_support_modern_adicione_aqui_resposta_completa_esta_duvida_5d0a57</div></details>`
     }, { at: 0 });
 }

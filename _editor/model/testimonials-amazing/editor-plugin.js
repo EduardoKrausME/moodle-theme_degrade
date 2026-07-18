@@ -12,20 +12,18 @@ editor => {
         media: '<svg viewBox="0 0 24 24"><path d="M19,5H22V7H19V10H17V7H14V5H17V2H19V5M17,19V13H19V21H3V5H11V7H5V19H17Z" /></svg>',
         category: category,
         content: `
-            <div class="col-lg-4 col-md-6 col-sm-12 testimonial-block">
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        "Lorem ipsun..."
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="User 1">
-                        <div class="author-info">
-                            <h4>Student Name</h4>
-                            <span>Student ...</span>
-                        </div>
-                    </div>
-                </div>
-            </div>`,
+<div class="col-lg-4 col-md-6 col-sm-12 testimonial-block">
+<div class="testimonial-card">
+<div class="testimonial-text">Lorem ipsun</div>
+<div class="testimonial-author">
+<img alt="lang::testimonials_amazing_user_1_0521eb" src="https://randomuser.me/api/portraits/women/12.jpg"/>
+<div class="author-info">
+<h4>lang::testimonials_amazing_student_name_5a03c1</h4>
+<span>lang::testimonials_student_ec5236</span>
+</div>
+</div>
+</div>
+</div>`,
     }, {
         at: 0 // Let's place this block at the beginning of the list
     });

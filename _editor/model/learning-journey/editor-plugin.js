@@ -5,6 +5,6 @@ editor => {
         label: 'lang::new_journey_step',
         media: '<svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"/></svg>',
         category,
-        content: `<div class="learning-journey__step"><div class="learning-journey__number">05</div><div class="learning-journey__step-content"><span>Nova etapa</span><h3>Título da etapa</h3><p>Descreva o que acontece neste momento da jornada de aprendizagem.</p></div></div>`
+        content: `<div class="learning-journey__step"><div class="learning-journey__number">05</div><div class="learning-journey__step-content"><span>lang::learning_journey_nova_etapa_047076</span><h3>lang::learning_journey_titulo_etapa_43b7b9</h3><p>lang::learning_journey_descreva_acontece_neste_momento_jornada_aprendizagem_7d4371</p></div></div>`
     }, { at: 0 });
 }

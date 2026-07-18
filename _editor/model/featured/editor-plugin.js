@@ -12,19 +12,18 @@ editor => {
         media: '<svg viewBox="0 0 24 24"><path d="M19,5H22V7H19V10H17V7H14V5H17V2H19V5M17,19V13H19V21H3V5H11V7H5V19H17Z" /></svg>',
         category: category,
         content: `
-            <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
-                <div class="inner-box">
-                    <div data-type-icon class="gjs-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-                            <path fill="currentColor"
-                                  d="M160 64c0-35.3 28.7-64 64-64L576 0c35.3 0 64 28.7 64 64l0 288c0 35.3-28.7 64-64 64l-239.2 0c-11.8-25.5-29.9-47.5-52.4-64l99.6 0 0-32c0-17.7 14.3-32 32-32l64 0c17.7 0 32 14.3 32 32l0 32 64 0 0-288L224 64l0 49.1C205.2 102.2 183.3 96 160 96l0-32zm0 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM133.3 352l53.3 0C260.3 352 320 411.7 320 485.3c0 14.7-11.9 26.7-26.7 26.7L26.7 512C11.9 512 0 500.1 0 485.3C0 411.7 59.7 352 133.3 352z"/>
-                        </svg>
-                    </div>
-                    <h3>New Feature</h3>
-                    <p>Our courses are taught by experts with extensive academic and professional experience.</p>
-                    <div class="link"><a href="#"></a></div>
-                </div>
-            </div>`,
+<div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+<div class="inner-box">
+<div class="gjs-icon" data-type-icon="">
+<svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+<path d="M160 64c0-35.3 28.7-64 64-64L576 0c35.3 0 64 28.7 64 64l0 288c0 35.3-28.7 64-64 64l-239.2 0c-11.8-25.5-29.9-47.5-52.4-64l99.6 0 0-32c0-17.7 14.3-32 32-32l64 0c17.7 0 32 14.3 32 32l0 32 64 0 0-288L224 64l0 49.1C205.2 102.2 183.3 96 160 96l0-32zm0 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM133.3 352l53.3 0C260.3 352 320 411.7 320 485.3c0 14.7-11.9 26.7-26.7 26.7L26.7 512C11.9 512 0 500.1 0 485.3C0 411.7 59.7 352 133.3 352z" fill="currentColor"></path>
+</svg>
+</div>
+<h3>lang::featured_new_feature_8e3657</h3>
+<p>lang::differentials_courses_are_taught_by_experts_extensive_academic_386f3c</p>
+<div class="link"><a href="#"></a></div>
+</div>
+</div>`,
     }, {
         at: 0 // Let's place this block at the beginning of the list
     });

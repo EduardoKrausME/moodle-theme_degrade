@@ -12,13 +12,13 @@ editor => {
         media: '<svg viewBox="0 0 24 24"><path d="M19,5H22V7H19V10H17V7H14V5H17V2H19V5M17,19V13H19V21H3V5H11V7H5V19H17Z" /></svg>',
         category: category,
         content: `
-            <div class="col-lg-3 col-md-6 step-block">
-                <div class="inner-box text-center">
-                    <div class="step-number">N</div>
-                    <h4>New step</h4>
-                    <p>Lorem ipsun</p>
-                </div>
-            </div>`,
+<div class="col-lg-3 col-md-6 step-block">
+<div class="inner-box text-center">
+<div class="step-number">N</div>
+<h4>lang::steps_new_step_fe37aa</h4>
+<p>Lorem ipsun</p>
+</div>
+</div>`,
     }, {
         at: 0 // Let's place this block at the beginning of the list
     });

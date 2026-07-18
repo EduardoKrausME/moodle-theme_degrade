@@ -5,6 +5,6 @@ editor => {
         label: 'lang::new_resource',
         media: '<svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"/></svg>',
         category,
-        content: `<article class="resources-grid__card"><div class="resources-grid__image"><img src="https://picsum.photos/seed/new-resource/700/480" alt="Novo conteúdo"><span>Artigo</span></div><div class="resources-grid__body"><small>Categoria • 5 min</small><h3>Título do novo conteúdo</h3><a href="#">Ler conteúdo <b>→</b></a></div></article>`
+        content: `<article class="resources-grid__card"><div class="resources-grid__image"><img alt="lang::new_resource" src="https://picsum.photos/seed/new-resource/700/480"/><span>lang::resources_grid_artigo_059a22</span></div><div class="resources-grid__body"><small>lang::resources_grid_categoria_5_min_85f331</small><h3>lang::resources_grid_titulo_novo_conteudo_2bc28e</h3><a href="#">lang::resources_grid_ler_conteudo_33ff1c <b>→</b></a></div></article>`
     }, { at: 0 });
 }

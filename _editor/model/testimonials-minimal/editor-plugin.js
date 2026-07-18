@@ -12,14 +12,14 @@ editor => {
         media: '<svg viewBox="0 0 24 24"><path d="M19,5H22V7H19V10H17V7H14V5H17V2H19V5M17,19V13H19V21H3V5H11V7H5V19H17Z" /></svg>',
         category: category,
         content: `
-            <div class="col-lg-4 col-md-6 col-sm-12 testimonial-item">
-                <div class="avatar">
-                    <img src="https://randomuser.me/api/portraits/women/9.jpg" alt="Student photo">
-                </div>
-                <p class="quote">“Lorem Ipsun”</p>
-                <h4 class="name">Studet name</h4>
-                <span class="role">Student ...</span>
-            </div>`,
+<div class="col-lg-4 col-md-6 col-sm-12 testimonial-item">
+<div class="avatar">
+<img alt="lang::testimonials_minimal_student_photo_c55e32" src="https://randomuser.me/api/portraits/women/9.jpg"/>
+</div>
+<p class="quote">"Lorem Ipsun"</p>
+<h4 class="name">lang::testimonials_minimal_studet_name_091cb4</h4>
+<span class="role">lang::testimonials_student_ec5236</span>
+</div>`,
     }, {
         at: 0 // Let's place this block at the beginning of the list
     });

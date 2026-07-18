@@ -5,6 +5,6 @@ editor => {
         label: 'lang::new_quick_link',
         media: '<svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"/></svg>',
         category,
-        content: `<a href="#" class="quick-links-modern__item"><span class="quick-links-modern__icon">+</span><div><strong>Novo atalho</strong><small>Descrição do acesso</small></div><b>→</b></a>`
+        content: `<a class="quick-links-modern__item" href="#"><span class="quick-links-modern__icon">+</span><div><strong>lang::new_quick_link</strong><small>lang::quick_links_modern_descricao_acesso_c5d14b</small></div><b>→</b></a>`
     }, { at: 0 });
 }

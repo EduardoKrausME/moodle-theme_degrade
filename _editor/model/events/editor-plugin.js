@@ -12,17 +12,17 @@ editor => {
         media: '<svg viewBox="0 0 24 24"><path d="M19,5H22V7H19V10H17V7H14V5H17V2H19V5M17,19V13H19V21H3V5H11V7H5V19H17Z" /></svg>',
         category: category,
         content: `
-            <div class="col-lg-4 col-md-6 col-sm-12 event-block">
-                <div class="event-card">
-                    <div class="event-date">
-                        <span class="day">12</span>
-                        <span class="month">SEP</span>
-                    </div>
-                    <h3 class="event-title">Event name</h3>
-                    <p class="event-desc">A hands-on workshop exploring new approaches in digital education.</p>
-                    <a href="#" class="event-link">lang::learn_more →</a>
-                </div>
-            </div>`,
+<div class="col-lg-4 col-md-6 col-sm-12 event-block">
+<div class="event-card">
+<div class="event-date">
+<span class="day">12</span>
+<span class="month">lang::events_sep_492c5f</span>
+</div>
+<h3 class="event-title">lang::events_event_name_8e10d7</h3>
+<p class="event-desc">lang::events_hands_on_workshop_exploring_new_approaches_digital_36a5c2</p>
+<a class="event-link" href="#">lang::learn_more →</a>
+</div>
+</div>`,
     }, {
         at: 0 // Let's place this block at the beginning of the list
     });

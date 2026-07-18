@@ -5,6 +5,6 @@ editor => {
         label: 'lang::new_help_topic',
         media: '<svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"/></svg>',
         category,
-        content: `<a href="#" class="help-center-modern__card"><span class="help-center-modern__icon">?</span><div><strong>Novo assunto</strong><small>Breve descrição do conteúdo de ajuda</small></div><b>5 artigos</b></a>`
+        content: `<a class="help-center-modern__card" href="#"><span class="help-center-modern__icon">?</span><div><strong>lang::help_center_modern_novo_assunto_be40ca</strong><small>lang::help_center_modern_breve_descricao_conteudo_ajuda_534f81</small></div><b>lang::help_center_modern_5_artigos_d77457</b></a>`
     }, { at: 0 });
 }

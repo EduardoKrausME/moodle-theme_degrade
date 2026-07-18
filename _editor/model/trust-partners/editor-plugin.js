@@ -5,6 +5,6 @@ editor => {
         label: 'lang::new_partner',
         media: '<svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"/></svg>',
         category,
-        content: `<div class="trust-partners__logo"><span class="trust-partners__mark">P</span><strong>Parceiro</strong></div>`
+        content: `<div class="trust-partners__logo"><span class="trust-partners__mark">P</span><strong>lang::trust_partners_parceiro_9e7032</strong></div>`
     }, { at: 0 });
 }
