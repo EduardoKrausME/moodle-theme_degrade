@@ -1,0 +1,18 @@
+# (RFC §4.1). Authors update their listing with an ordinary commit; camp
+# ingests and hash-pins it at each tagged release. Listing for theme_degrade.
+
+name: "Degrade Theme"
+summary: "Elegant, responsive, and customizable theme with a distinctive visual identity."
+description: |
+  Elegant, responsive, and customizable theme with a distinctive visual identity.
+
+  Today I present the modification in Moodle to allow teachers to customize icons. From now on, the teacher can create an activity and choose the icon they want to display on the viewing page. This way, the Moodle™ Software provides the student with a more engaging experience, presenting an icon that precisely reflects the content of the activity.
+
+  Supported Moodle versions in the supplied plugin list: 4.0 - 5.0.
+
+labels:
+  - fully-free
+category: "themes"
+links:
+  docs: https://github.com/EduardoKrausME/moodle-theme_degrade#readme
+  issues: https://github.com/EduardoKrausME/moodle-theme_degrade/issues
