@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use theme_degrade\page_editor_manager;
+
 require_once("../../../config.php");
 require_once("editor-lib.php");
 
@@ -42,19 +44,43 @@ if (optional_param("delete", false, PARAM_INT)) {
     echo $OUTPUT->header();
     $confirm = md5($dataid . $CFG->wwwroot);
     if (optional_param("confirm", false, PARAM_TEXT) == $confirm) {
+        $deletedpage = $DB->get_record("theme_degrade_pages", ["id" => $dataid], "*", MUST_EXIST);
         $DB->delete_records("theme_degrade_pages", ["id" => $dataid]);
 
+        if (page_editor_manager::is_mod_page_editor_record($deletedpage)) {
+            $cmid = page_editor_manager::get_cmid_from_editor_record($deletedpage);
+            if ($cmid) {
+                page_editor_manager::sync_cmid_to_mod_page($cmid);
+            }
+        }
+
         \cache::make("theme_degrade", "frontpage_cache")->purge();
+        $returnurl = optional_param("returnurl", "", PARAM_LOCALURL);
+        if ($returnurl) {
+            redirect(new moodle_url($returnurl), get_string("delete_block_success", "theme_degrade"));
+        }
         redirect($CFG->wwwroot, get_string("delete_block_success", "theme_degrade"));
     } else {
+        $returnurl = optional_param("returnurl", "", PARAM_LOCALURL);
+        $deleteurl = new moodle_url("/theme/degrade/_editor/editor.php", [
+            "dataid" => $dataid,
+            "delete" => 1,
+            "confirm" => $confirm,
+        ]);
+        $cancelurl = $CFG->wwwroot;
+        if ($returnurl) {
+            $deleteurl->param("returnurl", $returnurl);
+            $cancelurl = (new moodle_url($returnurl))->out(false);
+        }
+
         echo "
             <p>" . get_string("delete_block_confirm", "theme_degrade") . "</p>
             <div class=\"d-flex\">
                 <a class=\"btn btn-danger me-3\"
-                   href=\"{$CFG->wwwroot}/theme/degrade/_editor/editor.php?dataid={$dataid}&delete=1&confirm={$confirm}\">
+                   href=\"" . $deleteurl->out(false) . "\">
                    " . get_string("yes") . "</a>
                 <a class=\"btn btn-info me-3\"
-                   href=\"{$CFG->wwwroot}/\">
+                   href=\"{$cancelurl}\">
                    " . get_string("no") . "</a>
             </div>";
     }
@@ -67,7 +93,12 @@ if (required_param("dataid", PARAM_TEXT) == "create") {
     $lang = required_param("lang", PARAM_TEXT);
     $local = required_param("local", PARAM_TEXT);
     $page = theme_degrade_editor_create_page($template, $lang, $local);
-    redirect("{$CFG->wwwroot}/theme/degrade/_editor/editor.php?dataid={$page->id}");
+    $params = ["dataid" => $page->id];
+    $returnurl = optional_param("returnurl", "", PARAM_LOCALURL);
+    if ($returnurl) {
+        $params["returnurl"] = $returnurl;
+    }
+    redirect(new moodle_url("/theme/degrade/_editor/editor.php", $params));
     die;
 }
 

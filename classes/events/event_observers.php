@@ -26,8 +26,11 @@ namespace theme_degrade\events;
 
 use cache;
 use core\event\base;
+use core\event\course_module_created;
 use core\event\course_module_deleted;
+use core\event\course_module_updated;
 use Exception;
+use theme_degrade\page_editor_manager;
 
 /**
  * Class event_observers
@@ -55,6 +58,63 @@ class event_observers {
     }
 
     /**
+     * Links a newly created Moodle page activity to the theme visual editor when requested.
+     *
+     * @param course_module_created $event
+     * @return void
+     * @throws \coding_exception
+     * @throws \core\exception\coding_exception
+     * @throws \core\exception\moodle_exception
+     * @throws \dml_exception
+     * @throws \Exception
+     */
+    public static function course_module_created(course_module_created $event): void {
+        if (!page_editor_manager::was_requested($event->objectid)) {
+            return;
+        }
+
+        $editorpage = page_editor_manager::create_or_update_for_cmid($event->objectid);
+        if (!$editorpage) {
+            return;
+        }
+
+        $redirecturl = page_editor_manager::get_builder_url($event->objectid)->out_as_local_url(false);
+        global $USER;
+        $USER->theme_degrade_redirect_to_editor = $redirecturl;
+    }
+
+    /**
+     * Keeps linked Moodle page activities locked to the visual editor.
+     *
+     * @param course_module_updated $event
+     * @return void
+     * @throws \coding_exception
+     * @throws \core\exception\coding_exception
+     * @throws \core\exception\moodle_exception
+     * @throws \dml_exception
+     * @throws \Exception
+     */
+    public static function course_module_updated(course_module_updated $event): void {
+        global $USER;
+
+        echo '<pre>';
+        print_r($event);
+        print_r($_POST);
+        echo '</pre>';
+
+        if (page_editor_manager::was_requested($event->objectid)) {
+            $editorpage = page_editor_manager::create_or_update_for_cmid($event->objectid);
+            if ($editorpage) {
+                $redirecturl = page_editor_manager::get_builder_url($event->objectid)->out_as_local_url(false);
+                $USER->theme_degrade_redirect_to_editor = $redirecturl;
+            }
+            return;
+        }
+
+        page_editor_manager::refresh_from_mod_page($event->objectid);
+    }
+
+    /**
      * Function course_module_deleted
      *
      * @param course_module_deleted $event
@@ -70,6 +130,7 @@ class event_observers {
 
         self::delete_coursemodule_filearea($cmid, "theme_degrade_customimage");
         self::delete_coursemodule_filearea($cmid, "theme_degrade_customicon");
+        page_editor_manager::delete_for_cmid($cmid);
 
         set_config("theme_degrade_customimage_{$cmid}", null, "theme_degrade");
         set_config("theme_degrade_customicon_{$cmid}", null, "theme_degrade");

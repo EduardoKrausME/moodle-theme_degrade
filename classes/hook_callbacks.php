@@ -92,6 +92,7 @@ class hook_callbacks {
         self::background_profile_image($hook);
         self::acctoolbar();
         self::vlibras($hook);
+        self::mod_page_editor_integration($hook);
 
         if ($COURSE->id == $SITE->id) {
             return;
@@ -241,7 +242,7 @@ class hook_callbacks {
                     $thumb = $block["thumb"];
                     $PAGE->requires->js_call_amd("theme_degrade/blocks", "create", [$cmid, $thumb]);
                 }
-                $PAGE->requires->js_call_amd("theme_degrade/blocks", "create_not_themeblock", []);
+                $PAGE->requires->js_call_amd("theme_degrade/blocks", "create_not_themeblock");
             }
         }
         foreach ($images["icons"] as $icons) {
@@ -280,7 +281,7 @@ class hook_callbacks {
                     $header->overviewfiles = $OUTPUT->get_course_image();
 
                     if (has_capability("moodle/category:manage", $PAGE->context)) {
-                        $cache = \cache::make("theme_degrade", "course_cache");
+                        $cache = cache::make("theme_degrade", "course_cache");
                         $cachekey = "header_details_{$PAGE->course->id}";
                         if ($cache->has($cachekey)) {
                             $header->details = json_decode($cache->get($cachekey));
@@ -318,15 +319,98 @@ class hook_callbacks {
     }
 
     /**
+     * Adds the visual-editor suggestion to the Moodle page activity form.
+     *
+     * @param \core\hook\output\before_footer_html_generation $hook
+     * @return void
+     * @throws \coding_exception
+     * @throws \core\exception\moodle_exception
+     * @throws \dml_exception
+     */
+    private static function mod_page_editor_integration(before_footer_html_generation $hook): void {
+        global $PAGE;
+
+        $config = page_editor_manager::get_current_modedit_data();
+        if ($config) {
+            $PAGE->requires->strings_for_js([
+                'pageeditor_title',
+                'pageeditor_suggestion',
+                'pageeditor_use',
+                'pageeditor_selected',
+                'pageeditor_linked',
+                'pageeditor_open',
+                'pageeditor_save_to_open',
+            ], 'theme_degrade');
+            $PAGE->requires->js_call_amd('theme_degrade/pageeditor', 'init', [$config]);
+        }
+
+        $viewconfig = page_editor_manager::get_current_view_data();
+        if (!$viewconfig) {
+            return;
+        }
+
+        $jseditorurl = json_encode($viewconfig['editorurl']);
+        $label = get_string('pageeditor_open_floating', 'theme_degrade');
+        $jslabel = json_encode(get_string('pageeditor_open_floating', 'theme_degrade'));
+        $title = get_string('pageeditor_title', 'theme_degrade');
+
+        $hook->add_html(
+            <<<HTML
+<style>
+.theme-degrade-pageeditor-floating {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 1040;
+    box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.22);
+}
+.theme-degrade-pageeditor-inline {
+    margin-bottom: 1rem;
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let href = {$jseditorurl};
+    let label = {$jslabel};
+    let button = document.createElement('a');
+    button.className = 'btn btn-primary theme-degrade-pageeditor-inline';
+    button.href = href;
+    button.textContent = label;
+    let target = document.querySelector('.activity-header') ||
+        document.querySelector('#page-header .header-actions') ||
+        document.querySelector('#region-main .box.generalbox') ||
+        document.querySelector('#region-main');
+    if (target) {
+        target.insertAdjacentElement(target.matches('#page-header .header-actions') ? 'afterbegin' : 'beforebegin', button);
+    }
+});
+</script>
+<a class="btn btn-primary theme-degrade-pageeditor-floating" href="{$viewconfig['editorurl']}" aria-label="{$title}">{$label}</a>
+HTML
+        );
+    }
+
+    /**
      * Function after_http_headers
      *
-     * @param \core\hook\output\after_http_headers $hooks
+     * @param \core\hook\output\before_http_headers $hooks
      * @return void
      * @throws \coding_exception
      * @throws \dml_exception
+     * @throws \moodle_exception
+     * @throws \core\exception\moodle_exception
      */
     public static function before_http_headers(before_http_headers $hooks) {
-        global $PAGE;
+        global $PAGE, $USER;
+
+        if (!empty($USER->theme_degrade_redirect_to_editor)) {
+            $redirecturl = $USER->theme_degrade_redirect_to_editor;
+            unset($USER->theme_degrade_redirect_to_editor);
+            if (is_numeric($redirecturl)) {
+                redirect(new moodle_url("/theme/degrade/_editor/editor.php", ["dataid" => $redirecturl]));
+            }
+            redirect(new moodle_url($redirecturl));
+        }
 
         $navbarlayout = get_config("theme_degrade", "navbarlayout");
         $PAGE->add_body_class("theme_degrade-layout-{$navbarlayout}");

@@ -30,7 +30,20 @@
  */
 function theme_degrade_actionurl($action) {
     global $local, $lang;
-    return "actions.php?action={$action}&local={$local}&lang={$lang}&sesskey=" . sesskey();
+
+    $params = [
+        'action' => $action,
+        'local' => $local,
+        'lang' => $lang,
+        'sesskey' => sesskey(),
+    ];
+
+    $returnurl = optional_param('returnurl', '', PARAM_LOCALURL);
+    if ($returnurl) {
+        $params['returnurl'] = $returnurl;
+    }
+
+    return 'actions.php?' . http_build_query($params, "", '&');
 }
 
 /**
@@ -110,7 +123,7 @@ function theme_degrade_compile_pages($pages, $lang, $editing) {
             $file = "/theme/degrade/_editor/model/{$page->template}/style.css";
             $localreturn->css["{$page->template}/style.css"] = $file;
 
-            if ($page->id == $previewdataid) {
+            if ($page->id == $previewdataid && isset($_POST["save"])) {
                 $html = required_param("html", PARAM_RAW);
                 $css = required_param("css", PARAM_RAW);
                 if (isset($html[3])) {
@@ -206,7 +219,7 @@ function theme_degrade_clear_params_array($in, $type) {
     } else if (is_string($in)) {
         try {
             return clean_param($in, $type);
-        } catch (\coding_exception $e) {
+        } catch (coding_exception $e) {
             debugging($e->getMessage());
         }
     } else {
@@ -379,253 +392,4 @@ function theme_degrade_list_templates_category() {
     $categorys = array_values($categorys);
 
     return $categorys;
-}
-
-class FormSaveValidator {
-    /**
-     * Validate the full $_POST["save"] payload based on $json->form->block and $json->form->blocks.
-     *
-     * - form->block   : single values in $_POST["save"][$key]
-     * - form->blocks  : repeatable rows in $_POST["save"][N][$key]
-     *
-     * Returns only valid items/rows (invalid ones are skipped), plus an error list.
-     */
-    public static function validate(\stdClass $json): stdClass {
-        $save = $_POST["save"];
-        $result = [];
-        $errors = [];
-
-        $form = isset($json->form) && is_object($json->form) ? $json->form : null;
-        if ($form === null) {
-            return (object) $result;
-        }
-
-        // 1) Validate single block fields: $_POST["save"][$key]
-        $blockOut = self::validateBlock($form->block ?? null, $save, $errors);
-        foreach ($blockOut as $k => $v) {
-            $result[$k] = $v;
-        }
-
-        // 2) Validate repeatable rows: $_POST["save"][N][$key]
-        $blocksOut = self::validateBlocks($form->blocks ?? null, $save, $errors);
-        foreach ($blocksOut as $index => $rowObj) {
-            // Keep numeric indexes as properties (prints as [0], [1], ...)
-            $result[$index] = $rowObj;
-        }
-
-        return (object) $result;
-    }
-
-    /**
-     * Validate $json->form->block definitions against $_POST["save"][$key].
-     * Returns only valid items.
-     */
-    public static function validateBlock($blockDef, array $save, array &$errors): array {
-        $out = [];
-
-        if ($blockDef === null) {
-            return $out;
-        }
-
-        $defs = self::objectToArray($blockDef);
-
-        foreach ($defs as $key => $fieldDef) {
-            if (!is_string($key) || $key === "") {
-                continue;
-            }
-
-            if (!is_object($fieldDef)) {
-                $errors[] = ["path" => "block." . $key, "reason" => "invalid_field_definition"];
-                continue;
-            }
-
-            $required = !empty($fieldDef->required);
-            $hasDefault = property_exists($fieldDef, "default_data");
-
-            $valueExists = array_key_exists($key, $save);
-            $value = $valueExists ? $save[$key] : null;
-
-            if (!$valueExists && $hasDefault) {
-                $value = $fieldDef->default_data;
-                $valueExists = true;
-            }
-
-            if (!$valueExists) {
-                if ($required) {
-                    $errors[] = ["path" => "block." . $key, "reason" => "required_missing"];
-                }
-                continue;
-            }
-
-            [$ok, $clean, $reason] = self::validateValueByFieldDef($value, $fieldDef);
-            if (!$ok) {
-                $errors[] = ["path" => "block." . $key, "reason" => $reason];
-                continue;
-            }
-
-            $out[$key] = $clean;
-        }
-
-        return $out;
-    }
-
-    /**
-     * Validate $json->form->blocks definitions against $_POST["save"][N][$key].
-     * A row is valid only if ALL defined keys are valid (and required keys exist).
-     * Returns only valid rows.
-     */
-    public static function validateBlocks($blocksDef, array $save, array &$errors): array {
-        $out = [];
-
-        if ($blocksDef === null) {
-            return $out;
-        }
-
-        $defs = self::objectToArray($blocksDef);
-
-        // Detect rows by numeric indexes in $save (0,1,2,... or "0","1"...)
-        foreach ($save as $idx => $row) {
-            if (!self::isNumericIndex($idx)) {
-                continue;
-            }
-
-            if (is_object($row)) {
-                $row = self::objectToArray($row);
-            }
-
-            if (!is_array($row)) {
-                $errors[] = ["path" => "blocks[" . $idx . "]", "reason" => "row_not_array"];
-                continue;
-            }
-
-            $rowOut = [];
-            $rowValid = true;
-
-            // Validate all defined fields for this row
-            foreach ($defs as $key => $fieldDef) {
-                if (!is_string($key) || $key === "") {
-                    continue;
-                }
-
-                if (!is_object($fieldDef)) {
-                    $errors[] = ["path" => "blocks[" . $idx . "]." . $key, "reason" => "invalid_field_definition"];
-                    $rowValid = false;
-                    break;
-                }
-
-                $required = !empty($fieldDef->required);
-                $hasDefault = property_exists($fieldDef, "default_data");
-
-                $valueExists = array_key_exists($key, $row);
-                $value = $valueExists ? $row[$key] : null;
-
-                if (!$valueExists && $hasDefault) {
-                    $value = $fieldDef->default_data;
-                    $valueExists = true;
-                }
-
-                if (!$valueExists) {
-                    if ($required) {
-                        $errors[] = ["path" => "blocks[" . $idx . "]." . $key, "reason" => "required_missing"];
-                        $rowValid = false;
-                        break;
-                    }
-                    // Not required and missing -> just skip
-                    continue;
-                }
-
-                [$ok, $clean, $reason] = self::validateValueByFieldDef($value, $fieldDef);
-                if (!$ok) {
-                    $errors[] = ["path" => "blocks[" . $idx . "]." . $key, "reason" => $reason];
-                    $rowValid = false;
-                    break;
-                }
-
-                $rowOut[$key] = $clean;
-            }
-
-            if (!$rowValid) {
-                // Entire row rejected
-                continue;
-            }
-
-            $out[$idx] = (object) $rowOut;
-        }
-
-        return $out;
-    }
-
-    /**
-     * Validate a single value using field definition.
-     * Supports valuetype=int|text (defaults to text).
-     */
-    private static function validateValueByFieldDef($value, \stdClass $fieldDef): array {
-        $valuetype = "text";
-        if (property_exists($fieldDef, "valuetype") && is_string($fieldDef->valuetype) && $fieldDef->valuetype !== "") {
-            $valuetype = strtolower(trim($fieldDef->valuetype));
-        }
-
-        if ($valuetype === "int") {
-            return self::validateInt($value);
-        }
-
-        // Default: treat as text
-        return self::validateText($value);
-    }
-
-    private static function validateInt($value): array {
-        if (is_int($value)) {
-            return [true, $value, ""];
-        }
-
-        if (is_bool($value) || is_array($value) || is_object($value)) {
-            return [false, null, "invalid_int"];
-        }
-
-        $filtered = filter_var($value, FILTER_VALIDATE_INT);
-        if ($filtered === false) {
-            return [false, null, "invalid_int"];
-        }
-
-        return [true, (int) $filtered, ""];
-    }
-
-    private static function validateText($value): array {
-        if (is_array($value) || is_object($value)) {
-            return [false, null, "invalid_text"];
-        }
-
-        $text = self::sanitizeText($value);
-
-        // If you want "required text" to reject empty strings:
-        // if ($text === "") { return [false, null, "empty_text"]; }
-
-        return [true, $text, ""];
-    }
-
-    private static function sanitizeText($value): string {
-        $text = trim((string) $value);
-
-        // Basic hardening: remove control chars (except \n and \t)
-        $text = preg_replace("/[\\x00-\\x08\\x0B\\x0C\\x0E-\\x1F\\x7F]/u", "", $text) ?? "";
-
-        return $text;
-    }
-
-    private static function objectToArray($obj): array {
-        if (!is_object($obj)) {
-            return [];
-        }
-        return get_object_vars($obj);
-    }
-
-    private static function isNumericIndex($idx): bool {
-        if (is_int($idx)) {
-            return $idx >= 0;
-        }
-        if (!is_string($idx)) {
-            return false;
-        }
-        return $idx !== "" && ctype_digit($idx);
-    }
 }

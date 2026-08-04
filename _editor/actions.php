@@ -22,6 +22,9 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use theme_degrade\form\form_save_validator;
+use theme_degrade\page_editor_manager;
+
 require_once('../../../config.php');
 require_once('../lib.php');
 require_once('editor-lib.php');
@@ -72,174 +75,198 @@ if ($action == "langedit") {
             header("Content-Type: application/json");
             echo json_encode(array_values($courses));
     }
-} else if ($action == "page-save") {
-    $dataid = required_param("dataid", PARAM_INT);
-    $page = $DB->get_record("theme_degrade_pages", ["id" => $dataid], "*", MUST_EXIST);
+} else {
+    if ($action == "page-save") {
+        $dataid = required_param("dataid", PARAM_INT);
+        $page = $DB->get_record("theme_degrade_pages", ["id" => $dataid], "*", MUST_EXIST);
 
-    switch ($page->type) {
-        case "html":
-        case "html-form":
-            $html = required_param("html", PARAM_RAW);
-            $css = required_param("css", PARAM_RAW);
-            if (isset($html[3])) {
-                if (preg_match('/<body[^>]*>(.*?)<\/body>/is', $html, $matches)) {
-                    $html = trim($matches[1]);
+        switch ($page->type) {
+            case "html":
+            case "html-form":
+                $html = required_param("html", PARAM_RAW);
+                $css = required_param("css", PARAM_RAW);
+                if (isset($html[3])) {
+                    if (preg_match('/<body[^>]*>(.*?)<\/body>/is', $html, $matches)) {
+                        $html = trim($matches[1]);
+                    }
+                    $html = preg_replace('/<style data-project-fonts.*?<\/style>/s', '', $html);
+
+                    $css = preg_replace('/\*.*?body\{.*?\}/s', '', $css);
+
+                    $page->html = "<style>{$css}</style>\n\n{$html}";
                 }
-                $html = preg_replace('/<style data-project-fonts.*?<\/style>/s', '', $html);
+            case "form":
+                break;
+            default:
+                throw new Exception("Type not found");
+        }
 
-                $css = preg_replace('/\*.*?body\{.*?\}/s', '', $css);
+        $info = json_decode($page->info);
+        if (isset($_POST["save"])) {
+            $info->savedata = form_save_validator::validate($info);
+        } else {
+            $info->savedata = [];
+        }
+        $page->info = json_encode($info, JSON_PRETTY_PRINT);
 
-                $page->html = "<style>{$css}</style>\n\n{$html}";
+        $DB->update_record("theme_degrade_pages", $page);
+
+        if (page_editor_manager::is_mod_page_editor_record($page)) {
+            page_editor_manager::sync_editor_record_to_mod_page($page);
+            $returnurl = optional_param("returnurl", "", PARAM_LOCALURL);
+            if ($returnurl) {
+                redirect(new moodle_url($returnurl));
             }
-        case "form":
-            break;
-        default:
-            throw new Exception("Type not found");
-    }
 
-    $info = json_decode($page->info);
-    if (isset($_POST["save"])) {
-        $info->savedata = FormSaveValidator::validate($info);
-    } else {
-        $info->savedata = [];
-    }
-    $page->info = json_encode($info, JSON_PRETTY_PRINT);
-
-    $DB->update_record("theme_degrade_pages", $page);
-
-    \cache::make("theme_degrade", "frontpage_cache")->purge();
-    if ($page->local == "home") {
-        redirect(new moodle_url("/", ["redirect" => 0]));
-    }
-    die;
-} else if ($action == "page-order") {
-    $orders = theme_degrade_clear_params_array($_POST["order"], PARAM_INT);
-
-    $pageorder = 0;
-    foreach ($orders as $pageid) {
-        if ($pageid) {
-            $page = (object) [
-                "id" => $pageid,
-                "sort" => $pageorder++,
-            ];
-            try {
-                $DB->update_record("theme_degrade_pages", $page);
-            } catch (dml_exception $e) {
-                error_log($e->getMessage());
+            $viewurl = page_editor_manager::get_view_url_from_editor_record($page);
+            if ($viewurl) {
+                redirect($viewurl);
             }
         }
-    }
 
-    \cache::make("theme_degrade", "frontpage_cache")->purge();
-    die("OK");
-} else if ($action == "file-upload") {
-    if (isset($_FILES['files']['name'])) {
-        $aloweb = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'webm', 'mp4', 'mp3', 'pdf', 'doc', 'docx'];
-
-        $extension = pathinfo($_FILES['files']['name'], PATHINFO_EXTENSION);
-        if (in_array($extension, $aloweb)) {
-            $fs = get_file_storage();
-            $filerecord = (object) [
-                "component" => $component,
-                "contextid" => $context->id,
-                "userid" => $USER->id,
-                "filearea" => $filearea,
-                "filepath" => '/',
-                "itemid" => time() - 1714787612,
-                "filename" => $_FILES['files']['name'],
-            ];
-            $fs->create_file_from_pathname($filerecord, $_FILES['files']['tmp_name']);
-
-            $url = moodle_url::make_pluginfile_url(
-                $context->id,
-                "theme_degrade",
-                $filerecord->filearea,
-                $filerecord->itemid,
-                $filerecord->filepath,
-                $filerecord->filename
-            );
-
-            echo json_encode(
-                [
-                    (object) [
-                        "name" => $_FILES['files']['name'],
-                        "type" => "image",
-                        "src" => $url->out(false),
-                        "size" => filesize($_FILES['files']['tmp_name']),
-                    ],
-                ]
-            );
-
-            die();
+        cache::make("theme_degrade", "frontpage_cache")->purge();
+        if ($page->local == "home") {
+            redirect(new moodle_url("/", ["redirect" => 0]));
         }
-    }
-} else if ($action == "file-delete") {
-    $fs = get_file_storage();
-    $files = $fs->get_area_files($context->id, $component, $filearea, false, $sort = "filename", false);
+        die;
+    } else if ($action == "page-order") {
+        $orders = theme_degrade_clear_params_array($_POST["order"], PARAM_INT);
 
-    $rawData = file_get_contents("php://input");
-    $data = json_decode($rawData);
-
-    /** @var stored_file $file */
-    foreach ($files as $file) {
-        if ($file->get_id() == $data->id) {
-            $file->delete();
+        $pageorder = 0;
+        foreach ($orders as $pageid) {
+            if ($pageid) {
+                $page = (object) [
+                    "id" => $pageid,
+                    "sort" => $pageorder++,
+                ];
+                try {
+                    $DB->update_record("theme_degrade_pages", $page);
+                } catch (dml_exception $e) {
+                    error_log($e->getMessage());
+                }
+            }
         }
-    }
-} else if ($action == "file-list") {
-    $fs = get_file_storage();
-    $files = $fs->get_area_files($context->id, $component, $filearea, false, $sort = "filename", false);
 
-    $items = [];
-    /** @var stored_file $file */
-    foreach ($files as $file) {
-        $url = moodle_url::make_pluginfile_url(
-            $context->id, "theme_degrade",
-            $file->get_filearea(),
-            $file->get_itemid(),
-            $file->get_filepath(),
-            $file->get_filename()
-        );
-        $items[] = [
-            "id" => $file->get_id(),
-            "name" => $file->get_filename(),
-            "type" => "image",
-            "src" => $url->out(false),
-            "size" => $file->get_filesize(),
-            "info" => "Upload file",
-            "delete" => true,
-        ];
-    }
+        cache::make("theme_degrade", "frontpage_cache")->purge();
 
-    $sql = "SELECT * FROM {course}";
-    $courses = $DB->get_records_sql($sql);
+        $syncpage = (object) ["local" => $local, "info" => ""];
+        if (page_editor_manager::is_mod_page_editor_record($syncpage)) {
+            $cmid = page_editor_manager::get_cmid_from_editor_record($syncpage);
+            if ($cmid) {
+                page_editor_manager::sync_cmid_to_mod_page($cmid);
+            }
+        }
 
-    foreach ($courses as $course) {
-        $courseobj = new core_course_list_element($course);
-        foreach ($courseobj->get_course_overviewfiles() as $file) {
-            $isimage = $file->is_valid_image();
-            if ($isimage) {
-                $courseimage = file_encode_url(
-                    "{$CFG->wwwroot}/pluginfile.php",
-                    "/{$file->get_contextid()}/{$file->get_component()}/" .
-                    "{$file->get_filearea()}{$file->get_filepath()}{$file->get_filename()}",
-                    !$isimage
+        die("OK");
+    } else if ($action == "file-upload") {
+        if (isset($_FILES['files']['name'])) {
+            $aloweb = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'webm', 'mp4', 'mp3', 'pdf', 'doc', 'docx'];
+
+            $extension = pathinfo($_FILES['files']['name'], PATHINFO_EXTENSION);
+            if (in_array($extension, $aloweb)) {
+                $fs = get_file_storage();
+                $filerecord = (object) [
+                    "component" => $component,
+                    "contextid" => $context->id,
+                    "userid" => $USER->id,
+                    "filearea" => $filearea,
+                    "filepath" => '/',
+                    "itemid" => time() - 1714787612,
+                    "filename" => $_FILES['files']['name'],
+                ];
+                $fs->create_file_from_pathname($filerecord, $_FILES['files']['tmp_name']);
+
+                $url = moodle_url::make_pluginfile_url(
+                    $context->id,
+                    "theme_degrade",
+                    $filerecord->filearea,
+                    $filerecord->itemid,
+                    $filerecord->filepath,
+                    $filerecord->filename
                 );
 
-                $items[] = [
-                    "id" => 2,
-                    "name" => $file->get_filename(),
-                    "type" => "image",
-                    "src" => $courseimage,
-                    "size" => $file->get_filesize(),
-                    "info" => "Course file",
-                    "delete" => false,
-                ];
+                echo json_encode(
+                    [
+                        (object) [
+                            "name" => $_FILES['files']['name'],
+                            "type" => "image",
+                            "src" => $url->out(false),
+                            "size" => filesize($_FILES['files']['tmp_name']),
+                        ],
+                    ]
+                );
+
+                die();
             }
         }
-    }
+    } else if ($action == "file-delete") {
+        $fs = get_file_storage();
+        $files = $fs->get_area_files($context->id, $component, $filearea, false, $sort = "filename", false);
 
-    header("Content-Type: application/json");
-    echo json_encode($items);
+        $rawData = file_get_contents("php://input");
+        $data = json_decode($rawData);
+
+        /** @var stored_file $file */
+        foreach ($files as $file) {
+            if ($file->get_id() == $data->id) {
+                $file->delete();
+            }
+        }
+    } else if ($action == "file-list") {
+        $fs = get_file_storage();
+        $files = $fs->get_area_files($context->id, $component, $filearea, false, $sort = "filename", false);
+
+        $items = [];
+        /** @var stored_file $file */
+        foreach ($files as $file) {
+            $url = moodle_url::make_pluginfile_url(
+                $context->id, "theme_degrade",
+                $file->get_filearea(),
+                $file->get_itemid(),
+                $file->get_filepath(),
+                $file->get_filename()
+            );
+            $items[] = [
+                "id" => $file->get_id(),
+                "name" => $file->get_filename(),
+                "type" => "image",
+                "src" => $url->out(false),
+                "size" => $file->get_filesize(),
+                "info" => "Upload file",
+                "delete" => true,
+            ];
+        }
+
+        $sql = "SELECT * FROM {course}";
+        $courses = $DB->get_records_sql($sql);
+
+        foreach ($courses as $course) {
+            $courseobj = new core_course_list_element($course);
+            foreach ($courseobj->get_course_overviewfiles() as $file) {
+                $isimage = $file->is_valid_image();
+                if ($isimage) {
+                    $courseimage = file_encode_url(
+                        "{$CFG->wwwroot}/pluginfile.php",
+                        "/{$file->get_contextid()}/{$file->get_component()}/" .
+                        "{$file->get_filearea()}{$file->get_filepath()}{$file->get_filename()}",
+                        !$isimage
+                    );
+
+                    $items[] = [
+                        "id" => 2,
+                        "name" => $file->get_filename(),
+                        "type" => "image",
+                        "src" => $courseimage,
+                        "size" => $file->get_filesize(),
+                        "info" => "Course file",
+                        "delete" => false,
+                    ];
+                }
+            }
+        }
+
+        header("Content-Type: application/json");
+        echo json_encode($items);
+    }
 }
 die();

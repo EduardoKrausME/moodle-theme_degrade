@@ -39,10 +39,10 @@
             {{#editing}}
                 <div class="d-flex align-items-center">
                     <a class="btn btn-lg btn-success me-3"
-                       href="{{{config.wwwroot}}}/theme/degrade/_editor/editor.php?dataid={{{id}}}"
+                       href="{{#editorurl}}{{{editorurl}}}{{/editorurl}}{{^editorurl}}{{{config.wwwroot}}}/theme/degrade/_editor/editor.php?dataid={{{id}}}{{/editorurl}}"
                         >{{#str}}edit_block, theme_degrade{{/str}}</a>
                     <a class="btn btn-lg btn-danger me-3"
-                       href="{{{config.wwwroot}}}/theme/degrade/_editor/editor.php?dataid={{{id}}}&delete=1"
+                       href="{{#deleteurl}}{{{deleteurl}}}{{/deleteurl}}{{^deleteurl}}{{{config.wwwroot}}}/theme/degrade/_editor/editor.php?dataid={{{id}}}&delete=1{{/deleteurl}}"
                         >{{#str}}delete{{/str}}</a>
 
                     <div class="d-flex align-items-center ms-5 gap-1">

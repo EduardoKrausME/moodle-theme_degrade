@@ -1,0 +1,47 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_degrade/page_builder
+
+    Page builder wrapper for Moodle page activities managed by the theme editor.
+
+    Example context (json):
+    {
+      "title": "Theme page editor",
+      "description": "Add, reorder and edit visual blocks for this Moodle page.",
+      "viewurl": "https://example.com/mod/page/view.php?id=2",
+      "editurl": "https://example.com/course/modedit.php?update=2",
+      "csslink": "<link rel=\"stylesheet\" href=\"/theme/degrade/_editor/model/_assets/style.css\">",
+      "editorcontext": {}
+    }
+}}
+<div class="theme-degrade-page-builder">
+    <div class="theme-degrade-page-builder-header mb-3">
+        <h2>{{title}}</h2>
+        <p class="text-muted">{{description}}</p>
+
+        <div class="mb-3 d-flex gap-2 flex-wrap">
+            <a class="btn btn-secondary" href="{{{viewurl}}}">{{#str}}pageeditor_view_page, theme_degrade{{/str}}</a>
+            <a class="btn btn-outline-secondary" href="{{{editurl}}}">{{#str}}pageeditor_activity_settings, theme_degrade{{/str}}</a>
+        </div>
+    </div>
+
+    {{{csslink}}}
+    {{#editorcontext}}
+        {{> theme_degrade/frontpage_editor }}
+    {{/editorcontext}}
+</div>

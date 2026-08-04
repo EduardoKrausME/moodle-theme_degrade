@@ -1,11 +1,23 @@
 define(["jquery", "core/notification"], function ($, Notification) {
     var frontpage = {
         lang: null,
+        local: "home",
+        returnurl: "",
 
-        add_block: function (lang) {
-            frontpage.lang = lang;
+        add_block: function (config) {
+            if (typeof config === "string") {
+                frontpage.lang = config;
+                frontpage.local = "home";
+                frontpage.returnurl = "";
+            } else {
+                config = config || {};
+                frontpage.lang = config.lang || M.cfg.lang || "en";
+                frontpage.local = config.local || "home";
+                frontpage.returnurl = config.returnurl || "";
+            }
+
             $("#editing-add-new-block").show();
-            $("#frontpage_add_block").click(frontpage.frontpage_add_block__click);
+            $("#frontpage_add_block").off("click").click(frontpage.frontpage_add_block__click);
         },
 
         frontpage_add_block__click: function () {
@@ -32,7 +44,7 @@ define(["jquery", "core/notification"], function ($, Notification) {
                         ModalFactory.create({
                             type: ModalFactory.types.DEFAULT,
                             title: $("#frontpage_add_block_modal").attr("data-title"),
-                            body: '<div id="lista-modelos" class="d-flex flex-wrap row"></div>',
+                            body: '<div id="list-models" class="d-flex flex-column"></div>',
                             footer: "",
                             removeOnClose: true,
                         }).done(function (modal) {
@@ -98,7 +110,7 @@ define(["jquery", "core/notification"], function ($, Notification) {
                                          class="img-fluid mb-2" style="width:100%;border-radius:8px;max-width:350px;">
                                     <div>
                                         <a class="btn btn-primary mb-2"
-                                           href="${M.cfg.wwwroot}/theme/degrade/_editor/editor.php?lang=${frontpage.lang}&local=home&dataid=create&template=${item.id}"
+                                           href="${frontpage.buildEditorCreateUrl(item.id)}"
                                            >${M.util.get_string("add_block_edit", "theme_degrade")}</a>
                                         <a class="btn btn-secondary mb-2"
                                            href="${item.preview}"
@@ -118,6 +130,21 @@ define(["jquery", "core/notification"], function ($, Notification) {
             loadFiles();
         },
 
+        buildEditorCreateUrl: function (template) {
+            const params = new URLSearchParams({
+                lang: frontpage.lang,
+                local: frontpage.local,
+                dataid: "create",
+                template: template,
+            });
+
+            if (frontpage.returnurl) {
+                params.set("returnurl", frontpage.returnurl);
+            }
+
+            return `${M.cfg.wwwroot}/theme/degrade/_editor/editor.php?${params.toString()}`;
+        },
+
         editingswitch: function () {
             $(".editmode-block-form")
                 .show(300, function () {
@@ -128,7 +155,8 @@ define(["jquery", "core/notification"], function ($, Notification) {
             });
         },
 
-        block_order: function () {
+        block_order: function (local) {
+            frontpage.local = local || frontpage.local || "home";
             // Butons move page.
             $(".homemode-pages .btn-move-up").click(function () {
                 let $item = $(this).closest(".editmode-page-item");
@@ -169,7 +197,7 @@ define(["jquery", "core/notification"], function ($, Notification) {
             });
 
             $.ajax({
-                url: `${M.cfg.wwwroot}/theme/degrade/_editor/actions.php?action=page-order&local=home`,
+                url: `${M.cfg.wwwroot}/theme/degrade/_editor/actions.php?action=page-order&local=${encodeURIComponent(frontpage.local)}`,
                 type: "POST",
                 data: {
                     order: order,
