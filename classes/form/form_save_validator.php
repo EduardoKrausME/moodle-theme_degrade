@@ -19,6 +19,8 @@ namespace theme_degrade\form;
 use stdClass;
 
 /**
+ * phpcs:disable Squiz.PHP.CommentedOutCode.Found
+ *
  * Class form_save_validator
  *
  * @package   theme_degrade
