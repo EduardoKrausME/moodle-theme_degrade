@@ -97,11 +97,6 @@ class event_observers {
     public static function course_module_updated(course_module_updated $event): void {
         global $USER;
 
-        echo '<pre>';
-        print_r($event);
-        print_r($_POST);
-        echo '</pre>';
-
         if (page_editor_manager::was_requested($event->objectid)) {
             $editorpage = page_editor_manager::create_or_update_for_cmid($event->objectid);
             if ($editorpage) {
