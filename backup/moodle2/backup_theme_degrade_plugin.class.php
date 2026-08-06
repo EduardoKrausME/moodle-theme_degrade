@@ -26,6 +26,37 @@
 require_once("{$CFG->dirroot}/backup/moodle2/backup_theme_plugin.class.php");
 
 /**
+ * Backup element that resolves the file context from the current module record.
+ */
+class backup_theme_degrade_module_element extends backup_nested_element {
+
+    /**
+     * Returns file annotations using the current module context.
+     *
+     * @return array
+     */
+    public function get_file_annotations() {
+        $annotations = parent::get_file_annotations();
+        $contextidelement = $this->get_final_element("contextid");
+
+        if (!$contextidelement || !$contextidelement->is_set()) {
+            return $annotations;
+        }
+
+        $contextid = (int) $contextidelement->get_value();
+        foreach ($annotations as $component => $fileareas) {
+            foreach ($fileareas as $filearea => $annotation) {
+                $annotation = clone $annotation;
+                $annotation->contextid = $contextid;
+                $annotations[$component][$filearea] = $annotation;
+            }
+        }
+
+        return $annotations;
+    }
+}
+
+/**
  * Class backup_theme_degrade_plugin
  */
 class backup_theme_degrade_plugin extends backup_theme_plugin {
@@ -93,7 +124,7 @@ class backup_theme_degrade_plugin extends backup_theme_plugin {
 
         // Course module visual customizations.
         $moduleopts = new backup_nested_element("moduleopts");
-        $moduleopt = new backup_nested_element("moduleopt", ["cmid"], [
+        $moduleopt = new backup_theme_degrade_module_element("moduleopt", ["cmid"], [
             "contextid",
             "customimage",
             "customicon",
@@ -159,15 +190,13 @@ class backup_theme_degrade_plugin extends backup_theme_plugin {
         $moduleopt->annotate_files(
             "theme_degrade",
             "theme_degrade_customimage",
-            "cmid",
-            "contextid"
+            "cmid"
         );
 
         $moduleopt->annotate_files(
             "theme_degrade",
             "theme_degrade_customicon",
-            "cmid",
-            "contextid"
+            "cmid"
         );
 
         return $plugin;
