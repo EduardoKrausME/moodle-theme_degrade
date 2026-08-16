@@ -385,7 +385,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-<a class="btn btn-primary theme-degrade-pageeditor-floating" href="{$viewconfig['editorurl']}" aria-label="{$title}">{$label}</a>
+<a class="btn btn-primary theme-degrade-pageeditor-floating"
+   href="{$viewconfig['editorurl']}" aria-label="{$title}">{$label}</a>
 HTML
         );
     }
