@@ -67,7 +67,7 @@
 <div class="loginform">
     {{#logourl}}
         <div id="loginlogo" class="login-logo">
-            <img id="logoimage" src="{{logourl}}" class="img-fluid" alt="{{sitename}}"/>
+            <img id="logoimage" src="{{{logourl}}}" class="img-fluid" alt="{{sitename}}"/>
             <h1 class="login-heading sr-only">{{#str}} loginto, core, {{sitename}} {{/str}}</h1>
         </div>
     {{/logourl}}
@@ -88,7 +88,7 @@
         <div class="alert alert-info" role="alert">{{info}}</div>
     {{/info}}
     {{#cansignup}}
-        <a href="{{signupurl}}" class="sr-only">{{#str}} tocreatenewaccount {{/str}}</a>
+        <a href="{{{signupurl}}}" class="sr-only">{{#str}} tocreatenewaccount {{/str}}</a>
     {{/cansignup}}
     {{#showloginform}}
         <form class="login-form" action="{{loginurl}}" method="post" id="login">
@@ -160,7 +160,7 @@
                 <button class="btn btn-primary btn-lg" type="submit" id="loginbtn">{{#str}}login{{/str}}</button>
             </div>
             <div class="login-form-forgotpassword mb-3">
-                <a href="{{forgotpasswordurl}}">{{#str}}forgotaccount{{/str}}</a>
+                <a href="{{{forgotpasswordurl}}}">{{#str}}forgotaccount{{/str}}</a>
             </div>
         </form>
     {{/showloginform}}
@@ -168,9 +168,9 @@
         <div class="login-identityproviders">
             <h2 class="login-heading">{{#str}} potentialidps, auth {{/str}}</h2>
             {{#identityproviders}}
-                <a class="btn login-identityprovider-btn btn-block" href="{{url}}">
+                <a class="btn login-identityprovider-btn btn-block" href="{{{url}}}">
                     {{#iconurl}}
-                        <img src="{{iconurl}}" alt="" width="24" height="24"/>
+                        <img src="{{{iconurl}}}" alt="" width="24" height="24"/>
                     {{/iconurl}}
                     {{name}}
                 </a>
@@ -186,7 +186,7 @@
     {{/hasinstructions}}
     {{#cansignup}}
         <div class="login-signup">
-            <a class="btn btn-secondary" href="{{signupurl}}">{{#str}}startsignup{{/str}}</a>
+            <a class="btn btn-secondary" href="{{{signupurl}}}">{{#str}}startsignup{{/str}}</a>
         </div>
     {{/cansignup}}
     {{#canloginasguest}}
