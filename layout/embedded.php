@@ -23,7 +23,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die;
 
 $fakeblockshtml = $OUTPUT->blocks("side-pre", [], "aside", true);
 $hasfakeblocks = strpos($fakeblockshtml, 'data-block="_fake"') !== false;

@@ -25,7 +25,7 @@
 
 use core\output\language_menu;
 
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die;
 
 $bodyattributes = $OUTPUT->body_attributes();
 

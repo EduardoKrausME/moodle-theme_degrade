@@ -27,7 +27,7 @@ use core\navigation\output\more_menu;
 use core\navigation\output\primary;
 use theme_degrade\output\footer_renderer;
 
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die;
 
 require_once("{$CFG->libdir}/behat/lib.php");
 
