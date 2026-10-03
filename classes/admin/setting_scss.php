@@ -31,6 +31,8 @@ use ScssPhp\ScssPhp\Compiler;
 use ScssPhp\ScssPhp\Exception\SassException;
 use Throwable;
 
+defined('MOODLE_INTERNAL') || die;
+
 require_once("{$CFG->dirroot}/lib/adminlib.php");
 
 /**

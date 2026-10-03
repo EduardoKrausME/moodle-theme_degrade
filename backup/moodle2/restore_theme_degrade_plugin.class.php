@@ -23,6 +23,8 @@
  */
 
 // phpcs:disable moodle.Files.MoodleInternal.MoodleInternalGlobalState
+defined('MOODLE_INTERNAL') || die;
+
 require_once("{$CFG->dirroot}/backup/moodle2/restore_theme_plugin.class.php");
 
 /**

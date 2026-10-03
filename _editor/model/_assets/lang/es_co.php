@@ -1,5 +1,7 @@
 <?php
 
+defined('MOODLE_INTERNAL') || die;
+
 $stringlang['learn_more'] = 'Saber más';
 $stringlang['row_before'] = 'Bloque alineado';
 $stringlang['row_col_before'] = 'Columna de contenido';

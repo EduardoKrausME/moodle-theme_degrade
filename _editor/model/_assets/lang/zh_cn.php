@@ -1,5 +1,7 @@
 <?php
 
+defined('MOODLE_INTERNAL') || die;
+
 $stringlang['learn_more'] = '了解更多';
 $stringlang['row_before'] = 'Aligned 区块';
 $stringlang['row_col_before'] = '内容列';

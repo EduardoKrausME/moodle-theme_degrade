@@ -1,5 +1,7 @@
 <?php
 
+defined('MOODLE_INTERNAL') || die;
+
 $stringlang['learn_more'] = 'اعرف المزيد';
 $stringlang['row_before'] = 'Aligned كتلة';
 $stringlang['row_col_before'] = 'عمود المحتوى';

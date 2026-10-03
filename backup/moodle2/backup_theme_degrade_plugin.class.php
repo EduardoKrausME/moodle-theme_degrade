@@ -24,6 +24,8 @@
 
 // phpcs:disable moodle.Files.MoodleInternal.MoodleInternalGlobalState
 // phpcs:disable PSR1.Classes.ClassDeclaration.MultipleClasses
+defined('MOODLE_INTERNAL') || die;
+
 require_once("{$CFG->dirroot}/backup/moodle2/backup_theme_plugin.class.php");
 
 /**
