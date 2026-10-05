@@ -67,7 +67,7 @@
 <div class="loginform">
     {{#logourl}}
         <div id="loginlogo" class="login-logo">
-            <img id="logoimage" src="{{{logourl}}}" class="img-fluid" alt="{{sitename}}"/>
+            <img id="logoimage" src="{{logourl}}" class="img-fluid" alt="{{sitename}}"/>
             <h1 class="login-heading sr-only">{{#str}} loginto, core, {{sitename}} {{/str}}</h1>
         </div>
     {{/logourl}}
@@ -170,7 +170,7 @@
             {{#identityproviders}}
                 <a class="btn login-identityprovider-btn btn-block" href="{{{url}}}">
                     {{#iconurl}}
-                        <img src="{{{iconurl}}}" alt="" width="24" height="24"/>
+                        <img src="{{iconurl}}" alt="" width="24" height="24"/>
                     {{/iconurl}}
                     {{name}}
                 </a>
