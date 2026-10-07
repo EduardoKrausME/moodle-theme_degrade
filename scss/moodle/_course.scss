@@ -1228,3 +1228,1063 @@ $divider-hover-color: $primary !default;
         width: (16 * $mod-indent-size);
     }
 }
+
+// The toggle is only rendered as a button since Moodle 5.3. Course formats and themes overriding the
+// core_courseformat/local/content template with an older version still render it as a link inside the
+// first section, and must keep the previous appearance.
+button.section-collapsemenu {
+    padding: map-get($spacers, 2) .75rem;
+    // The custom property, not the SCSS variable: this toggle sits on the page rather than in a card, and gray 600
+    // only reaches 3.35:1 there once the page is dark. The light value is unchanged.
+    color: var(--#{$prefix}gray-600);
+    line-height: 1;
+    background: none;
+    border: 0;
+
+    &:hover .collapsemenu-text {
+        text-decoration: underline;
+    }
+}
+
+// Deprecated since Moodle 5.3. Course formats and themes overriding the
+// core_courseformat/local/content/section/content template with a version older than Moodle 5.3 still
+// render the toggle inside the first section. Hide it when the section list is already preceded by the
+// toggle, so that it is not displayed twice.
+.section-list.has-collapsemenu .section-collapsemenu {
+    display: none;
+}
+
+@mixin collapsemenu-toggle {
+    .collapseall {
+        display: block;
+    }
+
+    .expandall {
+        display: none;
+    }
+
+    &.collapsed {
+        .collapseall {
+            display: none;
+        }
+
+        .expandall {
+            display: block;
+        }
+    }
+}
+// Expand all/Collapse all toggle in the course index drawer.
+.courseindex-collapsemenu {
+    @include collapsemenu-toggle;
+    color: var(--#{$prefix}gray-700);
+}
+
+// Max sections reached alert.
+.max-section-alert {
+    border-top: $divider-width solid $border-color;
+    font-size: $font-size-sm;
+    font-weight: normal;
+    color: var(--#{$prefix}gray-600);
+}
+
+/* Sections */
+
+.course-section {
+    list-style: none;
+    margin-top: map-get($spacers, 3);
+    // Custom styles for course sections while editing.
+    .editing & {
+        margin-top: map-get($spacers, 2);
+    }
+
+    .section-item {
+        border: $border-width solid var(--#{$prefix}gray-200);
+        @include border-radius($activity-border-radius);
+        background-color: var(--#{$prefix}white);
+
+        .course-section-header {
+            padding: map-get($spacers, 3);
+            @include border-radius($activity-border-radius);
+
+            .section-restrictionlock .icon {
+                color: var(--#{$prefix}gray-600);
+            }
+        }
+
+        .course-content-item-content {
+            // Direct child only, so the rule does not leak into nested subsections.
+            > [data-for="sectioninfo"] {
+                padding-left: map-get($spacers, 3);
+                padding-right: map-get($spacers, 3);
+                padding-bottom: map-get($spacers, 3);
+            }
+
+            .section-content-inner {
+                padding: 1rem;
+                border-top: $border-width solid var(--#{$prefix}gray-200);
+                background-color: var(--#{$prefix}gray-100);
+                @include border-bottom-radius($activity-border-radius);
+            }
+        }
+
+        // Align the section info with the section title when the header has a collapse toggle button.
+        .course-section-header:has(.icons-collapse-expand) ~ .course-content-item-content > [data-for="sectioninfo"] {
+            padding-left: calc(#{$icon-height} + #{map-get($spacers, 6)});
+        }
+    }
+
+    // Highlighted section.
+    &.current {
+        > .section-item {
+            position: relative;
+            &::before {
+                border-left: $primary 3px solid;
+                bottom: 0;
+                content: "";
+                left: -8px;
+                position: absolute;
+                top: 0;
+            }
+        }
+    }
+
+    .sectionname a {
+        color: var(--#{$prefix}gray-900);
+        font-size: $h5-font-size;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .sectionbadges .badge {
+        margin-left: map-get($spacers, 2);
+        font-weight: normal;
+        .icon {
+            font-size: 12px;
+            width: 12px;
+            height: 12px;
+        }
+    }
+
+    .course-section-header.draggable {
+        cursor: move;
+    }
+
+    .section_action_menu {
+        .dropdown-toggle::after {
+            display: none;
+        }
+    }
+
+    .summarytext {
+        color: var(--#{$prefix}gray-600);
+        // Add rounded borders to images.
+        img {
+            @include border-radius($activity-border-radius);
+        }
+    }
+
+    // Availability styles for both section and activities.
+    .availabilityinfo {
+        margin-top: map-get($spacers, 2);
+        padding: map-get($spacers, 3);
+        background-color: var(--#{$prefix}gray-200);
+        border: $border-width solid var(--#{$prefix}gray-300);
+        color: var(--#{$prefix}gray-700);
+        @include font-size($small-font-size);
+        @include border-radius($activity-border-radius);
+        .icon {
+            color: var(--#{$prefix}gray-600);
+        }
+        .editavailability {
+            a {
+                @include border-radius();
+                font-weight: bold;
+                &:hover {
+                    background-color: var(--#{$prefix}gray-400);
+                }
+                .icon {
+                    font-size: inherit;
+                    margin-right: map-get($spacers, 1);
+                }
+            }
+        }
+    }
+
+    // Override '.btn-icon' styles from buttons.scss to make section action menu icons bigger.
+    .section_action_menu > .action-menu {
+        .btn-icon {
+            font-size: $font-size-lg;
+        }
+    }
+
+    .section-summary-activities {
+        .icon {
+            width: inherit;
+            color: $primary;
+        }
+    }
+
+    .section-summary-activities + .section {
+        border-top: $border-width solid $border-color;
+        margin-top: map-get($spacers, 3) !important;  // stylelint-disable-line declaration-no-important
+        padding-top: map-get($spacers, 3) !important; // stylelint-disable-line declaration-no-important
+    }
+
+    .section_goto .icon {
+        font-size: $font-size-lg;
+        color: $primary;
+    }
+
+    // Add new z-index context for dnd overlay higher divider buttons and quick edit links.
+    .overlay-preview {
+        z-index: 5;
+    }
+}
+
+// Remove the first section's top margin only when the collapse/expand-all toggle is shown above it.
+.section-list.has-collapsemenu > .course-section:first-child {
+    margin-top: 0;
+}
+
+// Old movehere link styles.
+.section li.movehere a {
+    display: block;
+    width: 100%;
+    height: 2rem;
+    border: 2px dashed var(--#{$prefix}gray-800);
+}
+
+/* Activities */
+
+.activity {
+    list-style: none;
+    margin-top: 1rem;
+    &.indented {
+        .activity-item {
+            margin-left: map-get($spacers, 3);
+        }
+    }
+    // Custom styles for activity while editing and for the first activity card in the section.
+    .editing &,
+    .section &:first-child {
+        // Remove activity top spacing, while editing a separator is displayed.
+        padding-top: 0;
+        margin-top: 0;
+    }
+}
+
+.activity-item {
+    padding: $activity-item-padding;
+    @include border-radius($activity-border-radius);
+
+    border: 0.0625rem solid var(--mds-border-subtle);
+
+    background-color: var(--mds-bg-surface-subtle);
+
+    &:hover:not(:has(.delegated-section)) {
+        background-color: var(--mds-bg-surface-default);
+    }
+
+    &.hiddenactivity {
+        .activityiconcontainer {
+            mix-blend-mode: multiply;
+        }
+        .activity-name-area .activityname {
+            color: var(--mds-text-muted);
+            .aalink {
+                color: var(--mds-text-muted);
+            }
+        }
+        .badge {
+            background-color: transparent;
+            color: var(--#{$prefix}gray-700);
+            border: $border-width solid var(--#{$prefix}gray-300);
+        }
+        .activity-altcontent.activity-description {
+            color: var(--mds-text-muted);
+        }
+    }
+    // Custom styles for activity cards while editing.
+    .editing & {
+        cursor: move;
+        .a {
+            cursor: pointer;
+        }
+        // Add a border on hover to the activity card (avoiding hover effect in inner activities).
+        &:hover:not(:has(.activity:hover)),
+        &.selected {
+            .activityiconcontainer,
+            .badge {
+                mix-blend-mode: multiply;
+            }
+        }
+    }
+
+    // Activity card grid layout.
+    .activity-grid {
+        display: grid;
+        align-items: center;
+        grid-template-columns: min-content 1fr min-content min-content min-content;
+        grid-template-rows: 1fr repeat(5, min-content);
+        grid-template-areas:
+            "icon   name          groupmode      completion    actions"
+            "icon   altcontent    altcontent     altcontent    altcontent"
+            "icon   afterlink     afterlink      afterlink     afterlink"
+            "visibility   visibility   visibility     visibility    visibility"
+            "dates        dates        dates          dates         dates"
+            "availability availability availability   availability  availability";
+        @include media-breakpoint-down(sm) {
+            grid-template-columns: min-content 1fr min-content min-content min-content;
+            grid-template-rows: 1fr repeat(4, min-content);
+            grid-template-areas:
+                "icon          name          actions"
+                "altcontent    altcontent    altcontent"
+                "afterlink     afterlink     afterlink"
+                "visibility    visibility    visibility"
+                "dates         dates         dates"
+                "groupmode     groupmode     groupmode"
+                "completion    completion    completion"
+                "availability  availability  availability";
+        }
+    }
+    // Activity card specific grid layout for activities without name.
+    .activity-grid.noname-grid {
+        grid-template-columns: min-content 1fr min-content min-content;
+        grid-template-areas:
+            "visibility    groupmode        completion    actions"
+            "altcontent    altcontent       altcontent    altcontent"
+            "afterlink     afterlink        afterlink     afterlink"
+            "availability  availability     availability  availability";
+        @include media-breakpoint-down(sm) {
+            grid-template-columns: 1fr min-content;
+            grid-template-areas:
+                "visibility    actions"
+                "altcontent    altcontent"
+                "groupmode     groupmode"
+                "afterlink     afterlink"
+                "completion    completion"
+                "availability  availability";
+        }
+    }
+
+    .activity-actions {
+        grid-area: actions;
+        .actions {
+            position: relative;
+        }
+    }
+
+    .activity-icon {
+        grid-area: icon;
+    }
+
+    .activity-dates {
+        grid-area: dates;
+        @include font-size($small-font-size);
+        color: var(--#{$prefix}gray-700);
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 0.75rem;
+        @include media-breakpoint-down(sm) {
+            margin-top: map-get($spacers, 2);
+        }
+        .date-item-label {
+            font-weight: 600;
+            margin-right: map-get($spacers, 1);
+        }
+    }
+    .activity-name-area {
+        grid-area: name;
+        // Prevent bootstrap strech-link from covering the inplace editable button using z-index.
+        .activityname {
+            color: var(--#{$prefix}gray-700);
+            font-weight: $font-weight-medium;
+            .aalink {
+                color: var(--#{$prefix}gray-900);
+            }
+            .afterlink {
+                margin-left: map-get($spacers, 2);
+            }
+            .inplaceeditable .quickeditlink {
+                position: relative;
+                z-index: 2;
+                margin-left: map-get($spacers, 2);
+            }
+        }
+        .activitybadge {
+            &.badge-none {
+                font-weight: normal;
+                background-color: var(--#{$prefix}white);
+                color: var(--#{$prefix}gray-600);
+                border: $border-width solid var(--#{$prefix}gray-200);
+                font-size: 12px;
+                // Override the 'rounded-pill' class from the markup, which is shared with other badge styles.
+                border-radius: $border-radius-sm !important; // stylelint-disable-line declaration-no-important
+                padding: map-get($spacers, 1);
+            }
+        }
+    }
+
+    .activity-completion {
+        grid-area: completion;
+        justify-self: end;
+        button,
+        a[role="button"] {
+            min-height: map-get($iconsizes, 5);
+        }
+        @include media-breakpoint-down(sm) {
+            width: 100%;
+            margin-top: map-get($spacers, 2);
+            button {
+                width: 100%;
+            }
+        }
+        .completion-dialog {
+            color: var(--#{$prefix}gray-700);
+            font-size: $font-size-sm;
+            min-width: 12rem;
+            .icon {
+                font-size: $font-size-sm;
+                width: $font-size-sm;
+                height: $font-size-sm;
+                margin-right: map-get($spacers, 1);
+            }
+            .editcompletion a {
+                @include border-radius();
+                color: var(--#{$prefix}gray-700);
+                font-weight: bold;
+                text-decoration: none;
+                &:hover {
+                    background-color: var(--#{$prefix}gray-200);
+                }
+            }
+        }
+    }
+
+    .activity-groupmode-info {
+        grid-area: groupmode;
+        justify-self: end;
+        .groupmode-information {
+            height: map-get($iconsizes, 5);
+            width: map-get($iconsizes, 5);
+            @include border-radius();
+            .icon {
+                width: map-get($iconsizes, 3);
+                height: map-get($iconsizes, 3);
+            }
+        }
+        .groupmode-icon-info {
+            display: none;
+        }
+        @include media-breakpoint-down(sm) {
+            width: 100%;
+            margin-top: map-get($spacers, 2);
+            padding-top: map-get($spacers, 2);
+            border-top: $border-width solid $border-color;
+            .groupmode-information {
+                width: auto;
+                font-size: inherit;
+                padding: 0 map-get($spacers, 2);
+            }
+            .groupmode-icon-info {
+                display: inline;
+            }
+            // Disable v-parent-focus behaviour on small devices to always show the groupmode button.
+            .v-parent-focus {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+
+    .activity-badges {
+        grid-area: visibility;
+        .badge {
+            font-weight: normal;
+            .icon {
+                font-size: 12px;
+                width: 12px;
+                height: 12px;
+            }
+        }
+    }
+
+    .activity-altcontent {
+        grid-area: altcontent;
+        margin-top: map-get($spacers, 1);
+        &.activity-description {
+            color: var(--#{$prefix}gray-600);
+            @include font-size($small-font-size);
+            // Fix activity description bottom margin for first level-lists.
+            ul:not(.activity-description ul ul) {
+                margin-bottom: 1rem;
+            }
+        }
+        // Add rounded borders to images.
+        img {
+            @include border-radius($activity-border-radius);
+        }
+    }
+
+    .activity-availability {
+        grid-area: availability;
+    }
+
+    .activity-afterlink {
+        grid-area: afterlink;
+        margin-top: map-get($spacers, 2);
+        padding-top: map-get($spacers, 2);
+        border-top: $border-width solid $border-color;
+    }
+
+    .no-overflow {
+        width: 100%;
+    }
+}
+
+.section .draggable .activity-item .dragicon {
+    display: none;
+}
+
+/* Dividers */
+
+.course-content .divider {
+    position: relative;
+    hr {
+        width: 100%;
+        margin: map-get($spacers, 2) map-get($spacers, 1);
+        border-top: $divider-width solid $divider-color;
+        opacity: 1;
+        .changenumsections.disabled & {
+            border-top: $divider-width solid $divider-color;
+        }
+    }
+    .divider-content {
+        opacity: 0;
+        visibility: hidden;
+        transition: visibility 0.1s;
+        position: absolute;
+        background: linear-gradient(transparent 40%, var(--bs-gray-100) 40%, var(--bs-gray-100) 60%, transparent 60%);
+        .section.hidden & {
+            background: linear-gradient(transparent 40%, var(--bs-gray-100) 40%, var(--bs-gray-100) 60%, transparent 60%);
+        }
+    }
+    &.always-visible {
+        .divider-content {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    &.always-hidden {
+        hr {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+    &:hover,
+    &:focus,
+    &:focus-within {
+        .divider-content {
+            opacity: 1;
+            visibility: visible;
+        }
+        hr {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    // Style the hr divider when the "Add content" button is hovered.
+    &:has(.btn.add-content:hover) {
+        hr {
+            border-color: $divider-hover-color;
+            .changenumsections.disabled & {
+                border-color: var(--#{$prefix}gray-200);
+            }
+        }
+    }
+}
+
+// These styles will make the activity and section dividers buttons visible (but still without opacity) so
+// buttons can be keyboard focusable.
+.activity:focus-within + .activity .divider .divider-content,
+.course-section-header:focus-within + .content .section .activity:first-child .divider .divider-content,
+.content .section .activity:focus-within .divider .divider-content,
+.course-content:focus-within .changenumsections .divider .divider-content {
+    visibility: visible;
+}
+
+// Hide last section "Add section". It will rely on the course format general "Add section" button.
+.course-content ul.topics > li:last-child .changenumsections {
+    display: none;
+}
+
+// Custom buttons for dividers.
+.course-content .divider .btn.add-content {
+    position: relative;
+    z-index: 1;
+    @include border-radius($border-radius-lg);
+    color: var(--#{$prefix}gray-700);
+    background-color: var(--#{$prefix}gray-300);
+    padding: map-get($spacers, 2) ($spacer * 0.75);
+    line-height: 1;
+    &:hover,
+    &:focus {
+        color: color-contrast($primary);
+        background-color: $primary;
+    }
+    .icon {
+        width: 14px;
+        height: 14px;
+        font-size: 14px;
+    }
+    .changenumsections.disabled & {
+        color: var(--#{$prefix}gray-500);
+        background-color: var(--#{$prefix}gray-200);
+        outline: none;
+        box-shadow: none;
+        &:hover,
+        &:focus {
+            color: var(--#{$prefix}gray-500);
+            background-color: var(--#{$prefix}gray-200);
+            outline: none;
+            box-shadow: none;
+        }
+        pointer-events: auto; // Restore pointer events for the disabled button so we can see the tooltip.
+    }
+}
+
+/* Bulk editing */
+
+.bulkenabled {
+    .bulk-hidden {
+        display: none !important; // stylelint-disable-line declaration-no-important
+    }
+    .section {
+        margin-left: map-get($spacers, 3);
+        &:not(:first-child) {
+            margin-top: map-get($spacers, 4);
+        }
+    }
+    .activity {
+        margin-top: map-get($spacers, 2);
+        margin-left: 2rem;
+        padding-top: map-get($spacers, 2);
+        border-top: $divider-width solid $divider-color;
+    }
+    .activity-item {
+        .bulkselect {
+            float: left;
+            margin-left: calc(-#{$activity-item-padding} - 1.75rem);
+        }
+        // Delegated sections are not available for bulk editing.
+        &:has(.delegated-section):hover {
+            outline: none !important; // stylelint-disable-line declaration-no-important
+            box-shadow: none !important; // stylelint-disable-line declaration-no-important
+        }
+    }
+    .course-section-header .bulkselect {
+        left: -2.75rem;
+        position: relative;
+        width: 0;
+    }
+    @include media-breakpoint-down(md) {
+        .course-content {
+            margin-left: 2rem;
+        }
+    }
+    .sticky-footer-content.bulkactions {
+        .btn {
+            --bs-btn-disabled-border-color: transparent;
+            &:focus {
+                outline: 0;
+                box-shadow: $input-btn-focus-box-shadow;
+            }
+        }
+    }
+}
+
+// Custom styles for bulk actions sticky footer in small devices.
+.sticky-footer-content.bulkactions {
+    @include media-breakpoint-down(md) {
+        position: relative;
+        .form-check,
+        .bulkaction-name,
+        .bulkcount {
+            display: none;
+        }
+        .actions button {
+            padding: 0 map-get($spacers, 2);
+        }
+        .bulkcancel {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+}
+
+/* Single section page */
+
+.single-section {
+    // Revert main section's styles.
+    > ul > .course-section {
+        &.hidden .section-item {
+            background-color: inherit;
+        }
+        .section-item {
+            padding: 0;
+            border: none;
+            // No rounded borders
+            border-radius: 0;
+            background-color: transparent;
+
+            .course-section-header {
+                padding: 0;
+            }
+        }
+
+        .section_availability .availabilityinfo {
+            body:not(.editing) & {
+                margin-bottom: 1rem;
+            }
+        }
+
+        .sectionbadges .badge {
+            margin-left: 0;
+            margin-bottom: 1rem;
+        }
+
+        .delegated-section .sectionbadges .badge {
+            margin-left: map-get($spacers, 2);
+            margin-bottom: 0;
+        }
+    }
+}
+
+.single-section-page {
+    #page.drawers #topofscroll {
+        padding: 1rem;
+    }
+
+    #page-header {
+        padding: 0;
+    }
+
+    #page.drawers div[role="main"] {
+        padding: 0;
+    }
+
+    .header-action {
+        display: inline-block;
+    }
+    // Revert page header styles to avoid conflict with inplace editable.
+    .page-context-header {
+        overflow: visible;
+    }
+}
+
+/* Default activity completion page */
+
+.defaultactivitycompletion-item {
+    a {
+        color: var(--#{$prefix}black);
+        text-decoration: none;
+    }
+    .activityicon {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* Home page course */
+
+.sitetopic {
+    .section-item {
+        margin-bottom: map-get($spacers, 4);
+        @include border-radius();
+    }
+}
+
+/* Move activity and Move section modals */
+
+.move-activity-tree,
+.move-section-tree {
+    .collapse-list-item {
+        position: relative;
+        border: 2px solid transparent;
+        @include border-radius();
+
+        &:hover,
+        &:focus {
+            background-color: shift-color($primary, $alert-bg-scale);
+            border-color: transparent;
+
+            a {
+                color: shift-color($primary, $alert-color-scale);
+            }
+
+            // Add a bottom border to indicate the move target.
+            &:has(> .collapse-list-link.collapsed) {
+                border: 2px $border-style $primary;
+                &::after {
+                    content: none;
+                }
+            }
+            &::after {
+                content: "";
+                position: absolute;
+                left: .5rem;
+                right: .5rem;
+                bottom: -3px; // 2px for the border + 1px space.
+                border-bottom: 2px $border-style $primary;
+            }
+        }
+
+        a {
+            color: $list-group-action-active-color;
+
+            &:hover,
+            &:focus {
+                text-decoration: none;
+            }
+        }
+
+        a.disabled {
+            color: $list-group-disabled-color;
+        }
+    }
+
+    .collapse-list-item-content .collapse-list-item {
+        padding: $collapse-list-item-padding-y $collapse-list-item-padding-x;
+    }
+
+    ul {
+        margin-left: map-get($spacers, 4);
+    }
+
+    .collapse-list-link {
+        font-weight: bold;
+    }
+}
+
+/* Subsections */
+
+.activity.subsection {
+    > .activity-item {
+        padding: 0;
+        border: 0;
+
+        > .activity-grid > .activity-altcontent {
+            margin-top: 0;
+        }
+    }
+    .section {
+        margin-top: 0;
+        h4 {
+            font-size: $h5-font-size;
+        }
+        .section_action_menu > .action-menu .btn-icon {
+            font-size: inherit;
+        }
+    }
+    // Allow v-parent-focus only for closest acvitity (avoiding subsection).
+    .focus-control:not(:has(.focus-control)) {
+        &:focus-within .v-parent-focus,
+        &:hover .v-parent-focus {
+            opacity: 1 !important; // stylelint-disable-line declaration-no-important
+            visibility: visible !important; // stylelint-disable-line declaration-no-important
+        }
+    }
+    .focus-control:focus-within .focus-control .v-parent-focus,
+    .focus-control:hover .focus-control .v-parent-focus {
+        opacity: 0;
+        visibility: hidden;
+    }
+    body:not(.editing) & {
+        .section-item {
+            .section .activity:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+}
+
+/* Spinners */
+
+// Edit in progress spinner animation.
+@keyframes editinprogress-rotation {
+    0% {
+        opacity: 0;
+        transform: rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(359deg);
+    }
+}
+
+.editing {
+    // New editing in progress spinners.
+    .editinprogress {
+        position: relative;
+
+        & > * {
+            opacity: .4;
+        }
+
+        .corelightbox,
+        .lightbox {
+            display: none;
+        }
+
+        &:after {
+            font: var(--fa-font-solid);
+            position: absolute;
+            font-size: 20px;
+            color: var(--#{$prefix}gray-600);
+            content: fa-content($fa-var-spinner);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            left: calc(50% - 15px);
+            top: calc(50% - 15px);
+            animation: editinprogress-rotation 2s infinite linear;
+        }
+
+        // Prevent inner editingprogress.
+        .editinprogress {
+            &:after {
+                display: none;
+            }
+        }
+    }
+}
+
+/* Drag and drop */
+
+// Compensate for the border widths when dropzones are displayed.
+.course-content .section.dropready {
+
+    &.main.drop-down {
+        border-bottom: 1px solid $dropzone-border;
+    }
+
+    .course-section-header.dropready.drop-zone {
+        margin-top: -2px;
+    }
+
+    li.activity.dropready.drop-down {
+        border-bottom: 1px solid $dropzone-border;
+        margin-bottom: -1px;
+    }
+
+    li.activity.dropready.drop-up {
+        border-top: 1px solid $dropzone-border;
+        margin-top: -1px;
+    }
+
+    [data-for="sectioninfo"] {
+        // When a section is empty, the activity dropzone indicator is below
+        // the section info. This ensures the dropzone will not displace the content
+        // even if the section has no restrictions or info to display.
+        min-height: 1px;
+    }
+
+    [data-for="sectioninfo"].drop-down {
+        margin-top: -1px;
+    }
+}
+
+/* Course linear navigation footer. */
+
+.course-linear-navigation-footer-content {
+    .course-linear-navigation-link {
+        font-size: $font-size-base;
+        padding: $spacer * .25 0;
+
+        &:hover,
+        &:focus {
+            span {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+/* Old indentation styles */
+
+.mod-indent-outer {
+    display: table;
+}
+
+.mod-indent {
+    display: table-cell;
+}
+
+.label .mod-indent {
+    float: left;
+    padding-top: 20px;
+}
+
+.activity.label.modtype_label .mod-indent {
+    float: none;
+}
+
+@include media-breakpoint-up(sm) {
+    $mod-indent-size: 30px;
+    /* Creates a series of .mod-indent-# rule declarations based on indent size and number of indent levels. */
+
+    @for $i from 1 through 16 {
+        $width: ($i * $mod-indent-size);
+
+        .mod-indent-#{$i} {
+            width: $width;
+        }
+    }
+
+    .mod-indent-huge {
+        width: (16 * $mod-indent-size);
+    }
+}
+
+/* Temporary visual highlight for anchors. */
+$highlight-style: highlight-fade 2s ease-in-out;
+
+[id^="section-"]:target {
+    animation: $highlight-style;
+}
+[id^="module-"]:target {
+    body:not(.editing) &,
+    body.editing & .activity-item {
+        animation: $highlight-style;
+    }
+}
+
+#course-addsection {
+    .btn-add-content {
+        height: 112px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: $font-size-base;
+        @include border-radius($activity-border-radius);
+    }
+}
+
+/* Learning outcomes page */
+
+// This page reuses the activity item markup in a read-only context,
+// so suppress the editing-mode hover cursor/outline styles.
+body.editing#page-course-learningoutcomes .activity-item {
+    cursor: auto;
+    &:hover:not(:has(.activity:hover)),
+    &.selected {
+        outline: none;
+    }
+}
