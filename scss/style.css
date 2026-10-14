@@ -32761,6 +32761,889 @@ select#calendar-course-filter-1 {
     width: 480px;
   }
 }
+button.section-collapsemenu {
+  padding: 0.5rem 0.75rem;
+  color: var(--bs-gray-600);
+  line-height: 1;
+  background: none;
+  border: 0;
+}
+button.section-collapsemenu:hover .collapsemenu-text {
+  text-decoration: underline;
+}
+
+.section-list.has-collapsemenu .section-collapsemenu {
+  display: none;
+}
+
+.courseindex-collapsemenu .collapseall {
+  display: block;
+}
+.courseindex-collapsemenu .expandall {
+  display: none;
+}
+.courseindex-collapsemenu.collapsed .collapseall {
+  display: none;
+}
+.courseindex-collapsemenu.collapsed .expandall {
+  display: block;
+}
+.courseindex-collapsemenu {
+  color: var(--bs-gray-700);
+}
+
+.max-section-alert {
+  border-top: 2px solid #dee2e6;
+  font-size: 0.8203125rem;
+  font-weight: normal;
+  color: var(--bs-gray-600);
+}
+
+/* Sections */
+.course-section {
+  list-style: none;
+  margin-top: 1rem;
+}
+.editing .course-section {
+  margin-top: 0.5rem;
+}
+.course-section .section-item {
+  border: 1px solid var(--bs-gray-200);
+  border-radius: 1rem;
+  background-color: var(--bs-white);
+}
+.course-section .section-item .course-section-header {
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.course-section .section-item .course-section-header .section-restrictionlock .icon {
+  color: var(--bs-gray-600);
+}
+.course-section .section-item .course-content-item-content > [data-for=sectioninfo] {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+}
+.course-section .section-item .course-content-item-content .section-content-inner {
+  padding: 1rem;
+  border-top: 1px solid var(--bs-gray-200);
+  background-color: var(--bs-gray-100);
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+.course-section .section-item .course-section-header:has(.icons-collapse-expand) ~ .course-content-item-content > [data-for=sectioninfo] {
+  padding-left: calc(16px + 3rem);
+}
+.course-section.current > .section-item {
+  position: relative;
+}
+.course-section.current > .section-item::before {
+  border-left: #0f6cbf 3px solid;
+  bottom: 0;
+  content: "";
+  left: -8px;
+  position: absolute;
+  top: 0;
+}
+.course-section .sectionname a {
+  color: var(--bs-gray-900);
+  font-size: 1.171875rem;
+}
+.course-section .sectionname a:hover {
+  text-decoration: none;
+}
+.course-section .sectionbadges .badge {
+  margin-left: 0.5rem;
+  font-weight: normal;
+}
+.course-section .sectionbadges .badge .icon {
+  font-size: 12px;
+  width: 12px;
+  height: 12px;
+}
+.course-section .course-section-header.draggable {
+  cursor: move;
+}
+.course-section .section_action_menu .dropdown-toggle::after {
+  display: none;
+}
+.course-section .summarytext {
+  color: var(--bs-gray-600);
+}
+.course-section .summarytext img {
+  border-radius: 1rem;
+}
+.course-section .availabilityinfo {
+  margin-top: 0.5rem;
+  padding: 1rem;
+  background-color: var(--bs-gray-200);
+  border: 1px solid var(--bs-gray-300);
+  color: var(--bs-gray-700);
+  font-size: 0.875em;
+  border-radius: 1rem;
+}
+.course-section .availabilityinfo .icon {
+  color: var(--bs-gray-600);
+}
+.course-section .availabilityinfo .editavailability a {
+  border-radius: 0.5rem;
+  font-weight: bold;
+}
+.course-section .availabilityinfo .editavailability a:hover {
+  background-color: var(--bs-gray-400);
+}
+.course-section .availabilityinfo .editavailability a .icon {
+  font-size: inherit;
+  margin-right: 0.25rem;
+}
+.course-section .section_action_menu > .action-menu .btn-icon {
+  font-size: 1.171875rem;
+}
+.course-section .section-summary-activities .icon {
+  width: inherit;
+  color: #0f6cbf;
+}
+.course-section .section-summary-activities + .section {
+  border-top: 1px solid #dee2e6;
+  margin-top: 1rem !important;
+  padding-top: 1rem !important;
+}
+.course-section .section_goto .icon {
+  font-size: 1.171875rem;
+  color: #0f6cbf;
+}
+.course-section .overlay-preview {
+  z-index: 5;
+}
+
+.section-list.has-collapsemenu > .course-section:first-child {
+  margin-top: 0;
+}
+
+.section li.movehere a {
+  display: block;
+  width: 100%;
+  height: 2rem;
+  border: 2px dashed var(--bs-gray-800);
+}
+
+/* Activities */
+.activity {
+  list-style: none;
+  margin-top: 1rem;
+}
+.activity.indented .activity-item {
+  margin-left: 1rem;
+}
+.editing .activity, .section .activity:first-child {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.activity-item {
+  padding: 0.75rem;
+  border-radius: 1rem;
+  border: 0.0625rem solid var(--mds-border-subtle);
+  background-color: var(--mds-bg-surface-subtle);
+}
+.activity-item:hover:not(:has(.delegated-section)) {
+  background-color: var(--mds-bg-surface-default);
+}
+.activity-item.hiddenactivity .activityiconcontainer {
+  mix-blend-mode: multiply;
+}
+.activity-item.hiddenactivity .activity-name-area .activityname {
+  color: var(--mds-text-muted);
+}
+.activity-item.hiddenactivity .activity-name-area .activityname .aalink, .activity-item.hiddenactivity .activity-name-area .activityname a.autolink {
+  color: var(--mds-text-muted);
+}
+.activity-item.hiddenactivity .badge {
+  background-color: transparent;
+  color: var(--bs-gray-700);
+  border: 1px solid var(--bs-gray-300);
+}
+.activity-item.hiddenactivity .activity-altcontent.activity-description {
+  color: var(--mds-text-muted);
+}
+.editing .activity-item {
+  cursor: move;
+}
+.editing .activity-item .a {
+  cursor: pointer;
+}
+.editing .activity-item:hover:not(:has(.activity:hover)) .activityiconcontainer,
+.editing .activity-item:hover:not(:has(.activity:hover)) .badge, .editing .activity-item.selected .activityiconcontainer,
+.editing .activity-item.selected .badge {
+  mix-blend-mode: multiply;
+}
+.activity-item .activity-grid {
+  display: grid;
+  align-items: center;
+  grid-template-columns: min-content 1fr min-content min-content min-content;
+  grid-template-rows: 1fr repeat(5, min-content);
+  grid-template-areas: "icon   name          groupmode      completion    actions" "icon   altcontent    altcontent     altcontent    altcontent" "icon   afterlink     afterlink      afterlink     afterlink" "visibility   visibility   visibility     visibility    visibility" "dates        dates        dates          dates         dates" "availability availability availability   availability  availability";
+}
+@media (max-width: 767.98px) {
+  .activity-item .activity-grid {
+    grid-template-columns: min-content 1fr min-content min-content min-content;
+    grid-template-rows: 1fr repeat(4, min-content);
+    grid-template-areas: "icon          name          actions" "altcontent    altcontent    altcontent" "afterlink     afterlink     afterlink" "visibility    visibility    visibility" "dates         dates         dates" "groupmode     groupmode     groupmode" "completion    completion    completion" "availability  availability  availability";
+  }
+}
+.activity-item .activity-grid.noname-grid {
+  grid-template-columns: min-content 1fr min-content min-content;
+  grid-template-areas: "visibility    groupmode        completion    actions" "altcontent    altcontent       altcontent    altcontent" "afterlink     afterlink        afterlink     afterlink" "availability  availability     availability  availability";
+}
+@media (max-width: 767.98px) {
+  .activity-item .activity-grid.noname-grid {
+    grid-template-columns: 1fr min-content;
+    grid-template-areas: "visibility    actions" "altcontent    altcontent" "groupmode     groupmode" "afterlink     afterlink" "completion    completion" "availability  availability";
+  }
+}
+.activity-item .activity-actions {
+  grid-area: actions;
+}
+.activity-item .activity-actions .actions {
+  position: relative;
+}
+.activity-item .activity-icon {
+  grid-area: icon;
+}
+.activity-item .activity-dates {
+  grid-area: dates;
+  font-size: 0.875em;
+  color: var(--bs-gray-700);
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.75rem;
+}
+@media (max-width: 767.98px) {
+  .activity-item .activity-dates {
+    margin-top: 0.5rem;
+  }
+}
+.activity-item .activity-dates .date-item-label {
+  font-weight: 600;
+  margin-right: 0.25rem;
+}
+.activity-item .activity-name-area {
+  grid-area: name;
+}
+.activity-item .activity-name-area .activityname {
+  color: var(--bs-gray-700);
+  font-weight: 500;
+}
+.activity-item .activity-name-area .activityname .aalink, .activity-item .activity-name-area .activityname a.autolink {
+  color: var(--bs-gray-900);
+}
+.activity-item .activity-name-area .activityname .afterlink {
+  margin-left: 0.5rem;
+}
+.activity-item .activity-name-area .activityname .inplaceeditable .quickeditlink {
+  position: relative;
+  z-index: 2;
+  margin-left: 0.5rem;
+}
+.activity-item .activity-name-area .activitybadge.badge-none {
+  font-weight: normal;
+  background-color: var(--bs-white);
+  color: var(--bs-gray-600);
+  border: 1px solid var(--bs-gray-200);
+  font-size: 12px;
+  border-radius: 0.25rem !important;
+  padding: 0.25rem;
+}
+.activity-item .activity-completion {
+  grid-area: completion;
+  justify-self: end;
+}
+.activity-item .activity-completion button,
+.activity-item .activity-completion a[role=button] {
+  min-height: 32px;
+}
+@media (max-width: 767.98px) {
+  .activity-item .activity-completion {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  .activity-item .activity-completion button {
+    width: 100%;
+  }
+}
+.activity-item .activity-completion .completion-dialog {
+  color: var(--bs-gray-700);
+  font-size: 0.8203125rem;
+  min-width: 12rem;
+}
+.activity-item .activity-completion .completion-dialog .icon {
+  font-size: 0.8203125rem;
+  width: 0.8203125rem;
+  height: 0.8203125rem;
+  margin-right: 0.25rem;
+}
+.activity-item .activity-completion .completion-dialog .editcompletion a {
+  border-radius: 0.5rem;
+  color: var(--bs-gray-700);
+  font-weight: bold;
+  text-decoration: none;
+}
+.activity-item .activity-completion .completion-dialog .editcompletion a:hover {
+  background-color: var(--bs-gray-200);
+}
+.activity-item .activity-groupmode-info {
+  grid-area: groupmode;
+  justify-self: end;
+}
+.activity-item .activity-groupmode-info .groupmode-information {
+  height: 32px;
+  width: 32px;
+  border-radius: 0.5rem;
+}
+.activity-item .activity-groupmode-info .groupmode-information .icon {
+  width: 16px;
+  height: 16px;
+}
+.activity-item .activity-groupmode-info .groupmode-icon-info {
+  display: none;
+}
+@media (max-width: 767.98px) {
+  .activity-item .activity-groupmode-info {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #dee2e6;
+  }
+  .activity-item .activity-groupmode-info .groupmode-information {
+    width: auto;
+    font-size: inherit;
+    padding: 0 0.5rem;
+  }
+  .activity-item .activity-groupmode-info .groupmode-icon-info {
+    display: inline;
+  }
+  .activity-item .activity-groupmode-info .v-parent-focus {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+.activity-item .activity-badges {
+  grid-area: visibility;
+}
+.activity-item .activity-badges .badge {
+  font-weight: normal;
+}
+.activity-item .activity-badges .badge .icon {
+  font-size: 12px;
+  width: 12px;
+  height: 12px;
+}
+.activity-item .activity-altcontent {
+  grid-area: altcontent;
+  margin-top: 0.25rem;
+}
+.activity-item .activity-altcontent.activity-description {
+  color: var(--bs-gray-600);
+  font-size: 0.875em;
+}
+.activity-item .activity-altcontent.activity-description ul:not(.activity-description ul ul) {
+  margin-bottom: 1rem;
+}
+.activity-item .activity-altcontent img {
+  border-radius: 1rem;
+}
+.activity-item .activity-availability {
+  grid-area: availability;
+}
+.activity-item .activity-afterlink {
+  grid-area: afterlink;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #dee2e6;
+}
+.activity-item .no-overflow {
+  width: 100%;
+}
+
+.section .draggable .activity-item .dragicon {
+  display: none;
+}
+
+/* Dividers */
+.course-content .divider {
+  position: relative;
+}
+.course-content .divider hr {
+  width: 100%;
+  margin: 0.5rem 0.25rem;
+  border-top: 2px solid #dee2e6;
+  opacity: 1;
+}
+.changenumsections.disabled .course-content .divider hr {
+  border-top: 2px solid #dee2e6;
+}
+.course-content .divider .divider-content {
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.1s;
+  position: absolute;
+  background: linear-gradient(transparent 40%, var(--bs-gray-100) 40%, var(--bs-gray-100) 60%, transparent 60%);
+}
+.section.hidden .course-content .divider .divider-content {
+  background: linear-gradient(transparent 40%, var(--bs-gray-100) 40%, var(--bs-gray-100) 60%, transparent 60%);
+}
+.course-content .divider.always-visible .divider-content {
+  opacity: 1;
+  visibility: visible;
+}
+.course-content .divider.always-hidden hr {
+  opacity: 0;
+  visibility: hidden;
+}
+.course-content .divider:hover .divider-content, .course-content .divider:focus .divider-content, .course-content .divider:focus-within .divider-content {
+  opacity: 1;
+  visibility: visible;
+}
+.course-content .divider:hover hr, .course-content .divider:focus hr, .course-content .divider:focus-within hr {
+  opacity: 1;
+  visibility: visible;
+}
+.course-content .divider:has(.btn.add-content:hover) hr {
+  border-color: #0f6cbf;
+}
+.changenumsections.disabled .course-content .divider:has(.btn.add-content:hover) hr {
+  border-color: var(--bs-gray-200);
+}
+
+.activity:focus-within + .activity .divider .divider-content,
+.course-section-header:focus-within + .content .section .activity:first-child .divider .divider-content,
+.content .section .activity:focus-within .divider .divider-content,
+.course-content:focus-within .changenumsections .divider .divider-content {
+  visibility: visible;
+}
+
+.course-content ul.topics > li:last-child .changenumsections {
+  display: none;
+}
+
+.course-content .divider .btn.add-content {
+  position: relative;
+  z-index: 1;
+  border-radius: 0.6rem;
+  color: var(--bs-gray-700);
+  background-color: var(--bs-gray-300);
+  padding: 0.5rem 0.75rem;
+  line-height: 1;
+}
+.course-content .divider .btn.add-content:hover, .course-content .divider .btn.add-content:focus {
+  color: #fff;
+  background-color: #0f6cbf;
+}
+.course-content .divider .btn.add-content .icon {
+  width: 14px;
+  height: 14px;
+  font-size: 14px;
+}
+.changenumsections.disabled .course-content .divider .btn.add-content {
+  color: var(--bs-gray-500);
+  background-color: var(--bs-gray-200);
+  outline: none;
+  box-shadow: none;
+}
+.changenumsections.disabled .course-content .divider .btn.add-content:hover, .changenumsections.disabled .course-content .divider .btn.add-content:focus {
+  color: var(--bs-gray-500);
+  background-color: var(--bs-gray-200);
+  outline: none;
+  box-shadow: none;
+}
+.changenumsections.disabled .course-content .divider .btn.add-content {
+  pointer-events: auto;
+}
+
+/* Bulk editing */
+.bulkenabled .bulk-hidden {
+  display: none !important;
+}
+.bulkenabled .section {
+  margin-left: 1rem;
+}
+.bulkenabled .section:not(:first-child) {
+  margin-top: 1.5rem;
+}
+.bulkenabled .activity {
+  margin-top: 0.5rem;
+  margin-left: 2rem;
+  padding-top: 0.5rem;
+  border-top: 2px solid #dee2e6;
+}
+.bulkenabled .activity-item .bulkselect {
+  float: left;
+  margin-left: calc(-0.75rem - 1.75rem);
+}
+.bulkenabled .activity-item:has(.delegated-section):hover {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.bulkenabled .course-section-header .bulkselect {
+  left: -2.75rem;
+  position: relative;
+  width: 0;
+}
+@media (max-width: 991.98px) {
+  .bulkenabled .course-content {
+    margin-left: 2rem;
+  }
+}
+.bulkenabled .sticky-footer-content.bulkactions .btn {
+  --bs-btn-disabled-border-color: transparent;
+}
+.bulkenabled .sticky-footer-content.bulkactions .btn:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(15, 108, 191, 0.75);
+}
+
+@media (max-width: 991.98px) {
+  .sticky-footer-content.bulkactions {
+    position: relative;
+  }
+  .sticky-footer-content.bulkactions .form-check,
+  .sticky-footer-content.bulkactions .bulkaction-name,
+  .sticky-footer-content.bulkactions .bulkcount {
+    display: none;
+  }
+  .sticky-footer-content.bulkactions .actions button {
+    padding: 0 0.5rem;
+  }
+  .sticky-footer-content.bulkactions .bulkcancel {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+/* Single section page */
+.single-section > ul > .course-section.hidden .section-item {
+  background-color: inherit;
+}
+.single-section > ul > .course-section .section-item {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+}
+.single-section > ul > .course-section .section-item .course-section-header {
+  padding: 0;
+}
+body:not(.editing) .single-section > ul > .course-section .section_availability .availabilityinfo {
+  margin-bottom: 1rem;
+}
+.single-section > ul > .course-section .sectionbadges .badge {
+  margin-left: 0;
+  margin-bottom: 1rem;
+}
+.single-section > ul > .course-section .delegated-section .sectionbadges .badge {
+  margin-left: 0.5rem;
+  margin-bottom: 0;
+}
+
+.single-section-page #page.drawers #topofscroll {
+  padding: 1rem;
+}
+.single-section-page #page-header {
+  padding: 0;
+}
+.single-section-page #page.drawers div[role=main] {
+  padding: 0;
+}
+.single-section-page .header-action {
+  display: inline-block;
+}
+.single-section-page .page-context-header {
+  overflow: visible;
+}
+
+/* Default activity completion page */
+.defaultactivitycompletion-item a {
+  color: var(--bs-black);
+  text-decoration: none;
+}
+.defaultactivitycompletion-item .activityicon {
+  width: 32px;
+  height: 32px;
+}
+
+/* Home page course */
+.sitetopic .section-item {
+  margin-bottom: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+/* Move activity and Move section modals */
+.move-activity-tree .collapse-list-item,
+.move-section-tree .collapse-list-item {
+  position: relative;
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+}
+.move-activity-tree .collapse-list-item:hover, .move-activity-tree .collapse-list-item:focus,
+.move-section-tree .collapse-list-item:hover,
+.move-section-tree .collapse-list-item:focus {
+  background-color: rgb(207, 225.6, 242.2);
+  border-color: transparent;
+}
+.move-activity-tree .collapse-list-item:hover a, .move-activity-tree .collapse-list-item:focus a,
+.move-section-tree .collapse-list-item:hover a,
+.move-section-tree .collapse-list-item:focus a {
+  color: rgb(9, 64.8, 114.6);
+}
+.move-activity-tree .collapse-list-item:hover:has(> .collapse-list-link.collapsed), .move-activity-tree .collapse-list-item:focus:has(> .collapse-list-link.collapsed),
+.move-section-tree .collapse-list-item:hover:has(> .collapse-list-link.collapsed),
+.move-section-tree .collapse-list-item:focus:has(> .collapse-list-link.collapsed) {
+  border: 2px solid #0f6cbf;
+}
+.move-activity-tree .collapse-list-item:hover:has(> .collapse-list-link.collapsed)::after, .move-activity-tree .collapse-list-item:focus:has(> .collapse-list-link.collapsed)::after,
+.move-section-tree .collapse-list-item:hover:has(> .collapse-list-link.collapsed)::after,
+.move-section-tree .collapse-list-item:focus:has(> .collapse-list-link.collapsed)::after {
+  content: none;
+}
+.move-activity-tree .collapse-list-item:hover::after, .move-activity-tree .collapse-list-item:focus::after,
+.move-section-tree .collapse-list-item:hover::after,
+.move-section-tree .collapse-list-item:focus::after {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: -3px;
+  border-bottom: 2px solid #0f6cbf;
+}
+.move-activity-tree .collapse-list-item a,
+.move-section-tree .collapse-list-item a {
+  color: var(--bs-body-color);
+}
+.move-activity-tree .collapse-list-item a:hover, .move-activity-tree .collapse-list-item a:focus,
+.move-section-tree .collapse-list-item a:hover,
+.move-section-tree .collapse-list-item a:focus {
+  text-decoration: none;
+}
+.move-activity-tree .collapse-list-item a.disabled,
+.move-section-tree .collapse-list-item a.disabled {
+  color: var(--bs-secondary-color);
+}
+.move-activity-tree .collapse-list-item-content .collapse-list-item,
+.move-section-tree .collapse-list-item-content .collapse-list-item {
+  padding: 0.5rem 1rem;
+}
+.move-activity-tree ul,
+.move-section-tree ul {
+  margin-left: 1.5rem;
+}
+.move-activity-tree .collapse-list-link,
+.move-section-tree .collapse-list-link {
+  font-weight: bold;
+}
+
+/* Subsections */
+.activity.subsection > .activity-item {
+  padding: 0;
+  border: 0;
+}
+.activity.subsection > .activity-item > .activity-grid > .activity-altcontent {
+  margin-top: 0;
+}
+.activity.subsection .section {
+  margin-top: 0;
+}
+.activity.subsection .section h4 {
+  font-size: 1.171875rem;
+}
+.activity.subsection .section .section_action_menu > .action-menu .btn-icon {
+  font-size: inherit;
+}
+.activity.subsection .focus-control:not(:has(.focus-control)):focus-within .v-parent-focus, .activity.subsection .focus-control:not(:has(.focus-control)):hover .v-parent-focus {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.activity.subsection .focus-control:focus-within .focus-control .v-parent-focus,
+.activity.subsection .focus-control:hover .focus-control .v-parent-focus {
+  opacity: 0;
+  visibility: hidden;
+}
+body:not(.editing) .activity.subsection .section-item .section .activity:last-child {
+  border-bottom: none;
+}
+
+/* Spinners */
+@keyframes editinprogress-rotation {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(359deg);
+  }
+}
+.editing .editinprogress {
+  position: relative;
+}
+.editing .editinprogress > * {
+  opacity: 0.4;
+}
+.editing .editinprogress .corelightbox,
+.editing .editinprogress .lightbox {
+  display: none;
+}
+.editing .editinprogress:after {
+  font: var(--fa-font-solid);
+  position: absolute;
+  font-size: 20px;
+  color: var(--bs-gray-600);
+  content: "\f110";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  left: calc(50% - 15px);
+  top: calc(50% - 15px);
+  animation: editinprogress-rotation 2s infinite linear;
+}
+.editing .editinprogress .editinprogress:after {
+  display: none;
+}
+
+/* Drag and drop */
+.course-content .section.dropready.main.drop-down {
+  border-bottom: 1px solid #1d2125;
+}
+.course-content .section.dropready .course-section-header.dropready.drop-zone {
+  margin-top: -2px;
+}
+.course-content .section.dropready li.activity.dropready.drop-down {
+  border-bottom: 1px solid #1d2125;
+  margin-bottom: -1px;
+}
+.course-content .section.dropready li.activity.dropready.drop-up {
+  border-top: 1px solid #1d2125;
+  margin-top: -1px;
+}
+.course-content .section.dropready [data-for=sectioninfo] {
+  min-height: 1px;
+}
+.course-content .section.dropready [data-for=sectioninfo].drop-down {
+  margin-top: -1px;
+}
+
+/* Course linear navigation footer. */
+.course-linear-navigation-footer-content .course-linear-navigation-link {
+  font-size: 0.9375rem;
+  padding: 0.25rem 0;
+}
+.course-linear-navigation-footer-content .course-linear-navigation-link:hover span, .course-linear-navigation-footer-content .course-linear-navigation-link:focus span {
+  text-decoration: underline;
+}
+
+/* Old indentation styles */
+.mod-indent-outer {
+  display: table;
+}
+
+.mod-indent {
+  display: table-cell;
+}
+
+.label .mod-indent {
+  float: left;
+  padding-top: 20px;
+}
+
+.activity.label.modtype_label .mod-indent {
+  float: none;
+}
+
+@media (min-width: 576px) {
+  /* Creates a series of .mod-indent-# rule declarations based on indent size and number of indent levels. */
+  .mod-indent-1 {
+    width: 30px;
+  }
+  .mod-indent-2 {
+    width: 60px;
+  }
+  .mod-indent-3 {
+    width: 90px;
+  }
+  .mod-indent-4 {
+    width: 120px;
+  }
+  .mod-indent-5 {
+    width: 150px;
+  }
+  .mod-indent-6 {
+    width: 180px;
+  }
+  .mod-indent-7 {
+    width: 210px;
+  }
+  .mod-indent-8 {
+    width: 240px;
+  }
+  .mod-indent-9 {
+    width: 270px;
+  }
+  .mod-indent-10 {
+    width: 300px;
+  }
+  .mod-indent-11 {
+    width: 330px;
+  }
+  .mod-indent-12 {
+    width: 360px;
+  }
+  .mod-indent-13 {
+    width: 390px;
+  }
+  .mod-indent-14 {
+    width: 420px;
+  }
+  .mod-indent-15 {
+    width: 450px;
+  }
+  .mod-indent-16 {
+    width: 480px;
+  }
+  .mod-indent-huge {
+    width: 480px;
+  }
+}
+/* Temporary visual highlight for anchors. */
+[id^=section-]:target {
+  animation: highlight-fade 2s ease-in-out;
+}
+
+body:not(.editing) [id^=module-]:target, body.editing [id^=module-]:target .activity-item {
+  animation: highlight-fade 2s ease-in-out;
+}
+
+#course-addsection .btn-add-content {
+  height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9375rem;
+  border-radius: 1rem;
+}
+
+/* Learning outcomes page */
+body.editing#page-course-learningoutcomes .activity-item {
+  cursor: auto;
+}
+body.editing#page-course-learningoutcomes .activity-item:hover:not(:has(.activity:hover)), body.editing#page-course-learningoutcomes .activity-item.selected {
+  outline: none;
+}
+
 /*
  * Course management page styles.
  */
