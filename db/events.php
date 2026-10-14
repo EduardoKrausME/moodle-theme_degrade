@@ -22,35 +22,54 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use core\event\config_log_created;
+use core\event\course_created;
+use core\event\course_deleted;
+use core\event\course_module_created;
+use core\event\course_module_deleted;
+use core\event\course_module_updated;
+use core\event\course_updated;
+use core\event\user_enrolment_created;
+use core\event\user_enrolment_updated;
+use theme_degrade\events\event_observers;
+
 defined('MOODLE_INTERNAL') || die;
 
 $observers = [
     [
-        "eventname" => '\core\event\course_deleted',
-        "callback" => '\theme_degrade\events\event_observers::process_event',
+        "eventname" => course_deleted::class,
+        "callback" => [event_observers::class, "process_event"],
     ],
     [
-        "eventname" => '\core\event\course_updated',
-        "callback" => '\theme_degrade\events\event_observers::process_event',
+        "eventname" => course_updated::class,
+        "callback" => [event_observers::class, "process_event"],
     ],
     [
-        "eventname" => '\core\event\course_created',
-        "callback" => '\theme_degrade\events\event_observers::process_event',
+        "eventname" => course_created::class,
+        "callback" => [event_observers::class, "process_event"],
     ],
     [
-        "eventname" => '\core\event\config_log_created',
-        "callback" => '\theme_degrade\events\event_observers::process_event',
+        "eventname" => config_log_created::class,
+        "callback" => [event_observers::class, "process_event"],
     ],
     [
-        "eventname" => '\core\event\course_module_deleted',
-        "callback" => '\theme_degrade\events\event_observers::course_module_deleted',
+        "eventname" => course_module_deleted::class,
+        "callback" => [event_observers::class, "course_module_deleted"],
     ],
     [
-        "eventname" => '\core\event\user_enrolment_created',
-        "callback" => '\theme_degrade\events\event_observers::enrolment',
+        "eventname" => course_module_created::class,
+        "callback" => [event_observers::class, "course_module_created"],
     ],
     [
-        "eventname" => '\core\event\user_enrolment_updated',
-        "callback" => '\theme_degrade\events\event_observers::enrolment',
+        "eventname" => course_module_updated::class,
+        "callback" => [event_observers::class, "course_module_updated"],
+    ],
+    [
+        "eventname" => user_enrolment_created::class,
+        "callback" => [event_observers::class, "enrolment"],
+    ],
+    [
+        "eventname" => user_enrolment_updated::class,
+        "callback" => [event_observers::class, "enrolment"],
     ],
 ];

@@ -36,9 +36,17 @@ $definitions = [
     "frontpage_cache" => [
         "mode" => cache_store::MODE_APPLICATION,
         "ttl" => 1 * 24 * 60 * 60, // 1d.
+        'simplekeys' => true,
+        'simpledata' => true,
+        'staticacceleration' => true,
+        'staticaccelerationsize' => 30,
     ],
     "data_cache" => [
         "mode" => cache_store::MODE_APPLICATION,
         "ttl" => 5 * 24 * 60 * 60, // 5d.
+        'simplekeys' => true,
+        'simpledata' => true,
+        'staticacceleration' => true,
+        'staticaccelerationsize' => 30,
     ],
 ];
