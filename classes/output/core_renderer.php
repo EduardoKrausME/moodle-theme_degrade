@@ -119,7 +119,12 @@ class core_renderer extends \core_renderer {
             // If page context is NOT course, then check across all courses.
             $course = ($this->page->context->contextlevel == CONTEXT_COURSE) ? $this->page->course : null;
 
-            if (user_can_view_profile($user, $course)) {
+            if (method_exists(\core\user::class, 'can_view_profile')) {
+                $canviewprofile = \core\user::can_view_profile($user, $course);
+            } else {
+                $canviewprofile = user_can_view_profile($user, $course);
+            }
+            if ($canviewprofile) {
                 // Use the user's full name if the heading isn't set.
                 if (empty($heading)) {
                     $heading = fullname($user);
