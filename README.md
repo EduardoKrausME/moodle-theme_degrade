@@ -14,7 +14,6 @@ Outra vantagem deste tema é a sua responsividade, ou seja, ele é capaz de se a
 
 O "Degrade" também oferece recursos de personalização que permitem que os administradores do Moodle ajustem o tema de acordo com as necessidades da instituição. É possível escolher cores personalizadas, adicionar logos e modificar a disposição dos elementos da página.
 
-
 ![setting-01.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/setting-01.png)
 
 ![setting-02.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/setting-02.png)
@@ -30,9 +29,3 @@ O "Degrade" também oferece recursos de personalização que permitem que os adm
 ![setting-07.png](https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_degrade/master/pix/prints/setting-07.png)
 
 Em resumo, o tema "Degrade" é uma excelente opção para instituições de ensino que buscam um ambiente virtual de aprendizagem moderno, elegante e fácil de usar. Com sua estética minimalista e recursos de personalização, ele certamente proporcionará uma experiência de aprendizagem agradável e eficaz para os usuários do Moodle.
-
-## instalando
-
-Português: [Veja na Wiki o manual de instalação](https://github.com/EduardoKrausME/moodle-theme_degrade/wiki/BR-Instalando)
-
-English: [See the installation guide on the Wiki](https://github.com/EduardoKrausME/moodle-theme_degrade/wiki/EN-Installing)
