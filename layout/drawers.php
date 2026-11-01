@@ -62,6 +62,7 @@ if (!$courseindex) {
     $courseindexopen = false;
 }
 
+
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 $forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
 

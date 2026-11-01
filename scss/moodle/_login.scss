@@ -1305,3 +1305,63 @@
         max-width: 650px !important;
     }
 }
+
+
+// Signup forms must scroll with the document instead of a fixed-height login panel.
+// This keeps all fields and submit actions reachable by mouse, touch and keyboard.
+#page-login-signup {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .page-wrapper-login {
+        position: relative;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+        overflow: visible;
+    }
+
+    .page-wrapper-login .login-wrapper {
+        flex: 1 0 auto;
+        min-width: 0;
+        margin: 0;
+        padding: 2rem 1rem;
+    }
+
+    .page-wrapper-login .login-container {
+        box-sizing: border-box;
+        max-height: none;
+        overflow: visible;
+    }
+
+    .page-wrapper-login .loginfooter {
+        position: relative;
+        inset: auto;
+        flex-shrink: 0;
+        margin-top: auto;
+    }
+
+    @media (max-width: 576px) {
+        .page-wrapper-login .login-wrapper {
+            padding: 1rem 0.75rem;
+        }
+
+        .page-wrapper-login .login-container {
+            padding: 1.5rem;
+        }
+
+        .page-wrapper-login .loginfooter {
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+        }
+    }
+}

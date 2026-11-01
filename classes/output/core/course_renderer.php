@@ -54,7 +54,7 @@ class course_renderer extends \core_course_renderer {
      * @return string
      */
     private function get_class_row() {
-        return "card-grid mx-0 row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 ";
+        return "card-grid mx-0 row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-4 ";
     }
 
     /**
@@ -71,7 +71,7 @@ class course_renderer extends \core_course_renderer {
             require_once("{$CFG->dirroot}/theme/degrade/_editor/editor-lib.php");
 
             $editing = $this->page->user_is_editing();
-            $lang = $USER->lang ?? $CFG->lang;
+            $lang = current_language();
 
             $where = "local='home' AND lang IN(:lang, 'all')";
             $pages = $DB->get_records_select("theme_degrade_pages", $where, ['lang' => $lang], "sort ASC");
@@ -93,12 +93,12 @@ class course_renderer extends \core_course_renderer {
 
             $templatecontext["homemode_pages"] = $compiledpages->pages;
 
+            if (empty($compiledpages->pages) && has_capability("moodle/site:config", context_system::instance())) {
+                $templatecontext["homemode_page_warningnopages"] = true;
+            }
+
             if ($editing) {
                 $templatecontext["editing"] = true;
-
-                if (count($compiledpages->pages) == 0 && has_capability("moodle/site:config", context_system::instance())) {
-                    $templatecontext["homemode_page_warningnopages"] = true;
-                }
 
                 $this->page->requires->strings_for_js(["preview", "add_block_edit"], "theme_degrade");
                 $this->page->requires->js_call_amd("theme_degrade/frontpage", "add_block", [$lang]);

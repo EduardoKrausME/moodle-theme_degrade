@@ -16,9 +16,19 @@ function popular_number_eadflix_createblocks($page) {
 
     $num = 0;
     $blocks = "";
-    if (isset($page->info->savedata[0]->courseid)) {
-        foreach ($page->info->savedata as $course) {
-            $course = $DB->get_record("course", array("id" => $course->courseid));
+    if (isset($page->info->savedata) &&
+        (is_array($page->info->savedata) || is_object($page->info->savedata))) {
+        foreach ($page->info->savedata as $entry) {
+            if (!is_object($entry) || !isset($entry->courseid)) {
+                continue;
+            }
+
+            $courseid = filter_var($entry->courseid, FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]);
+            if ($courseid === false) {
+                continue;
+            }
+
+            $course = $DB->get_record("course", ["id" => $courseid]);
             if (!$course) {
                 continue;
             }

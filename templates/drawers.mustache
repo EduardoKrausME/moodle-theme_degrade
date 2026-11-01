@@ -271,14 +271,22 @@
     {{/mod_scorm_player}}
     (function () {
         const drawers = document.querySelectorAll(".drawer:not(.drawer-primary-mobile)");
-        const START_TOP = 90; // px
+        const navbar = document.querySelector(".navbar.fixed-top");
+        const desktop = window.matchMedia("(min-width: 992px)");
+        const START_TOP = 90; // Preserve the existing mobile drawer position.
         let drawer__lastTop = -1;
-        document.addEventListener("scroll", document_scroll_drawers);
+        document.addEventListener("scroll", document_scroll_drawers, {passive: true});
+        window.addEventListener("resize", document_scroll_drawers);
         document_scroll_drawers();
 
         function document_scroll_drawers() {
             const y = window.scrollY || document.documentElement.scrollTop;
-            const newTop = Math.max(START_TOP - y, 0); // clamp 90 → 0
+            // Desktop drawers must start below the visible navbar, including while it
+            // shrinks on scroll or uses the two-row institutional layout.
+            // Mobile drawers keep their existing overlay positioning.
+            const newTop = desktop.matches && navbar
+                ? Math.max(0, Math.ceil(navbar.getBoundingClientRect().bottom))
+                : Math.max(START_TOP - y, 0);
             if (drawer__lastTop !== newTop) {
                 drawer__lastTop = newTop;
                 drawers.forEach((drawer) => {

@@ -17,14 +17,13 @@
 {{!
     @template theme_degrade/primary-drawer-mobile
 
-    This template renders the mobile version of the top navbar menu in a drawer.
+    This template renders the mobile primary navigation, the course index on small screens,
+    and the site name instead of a logo in the drawer header.
 
     Example context (json):
     {
-        "output": {
-            "should_display_navbar_logo": true,
-            "get_compact_logo_url": "http://placekitten.com/50/50"
-        },
+        "sitename": "Example campus",
+        "config": {"homeurl": "/"},
         "mobileprimarynav": [
             {
                 "text": "Dashboard",
@@ -50,55 +49,134 @@
     {{$drawerclasses}}drawer drawer-left drawer-primary drawer-primary-mobile{{/drawerclasses}}
     {{$drawercloseonresize}}1{{/drawercloseonresize}}
     {{$drawerheading}}
-        {{# output.should_display_navbar_logo }}
-            <img src="{{{output.get_compact_logo_url}}}" class="logo py-1 h-100" alt="{{{sitename}}}">
-        {{/ output.should_display_navbar_logo }}
-        {{^ output.should_display_navbar_logo }}
-            <span class="sitename" title="{{{sitename}}}">{{{sitename}}}</span>
-        {{/ output.should_display_navbar_logo }}
+        {{! The mobile drawer always uses the site name, regardless of the navbar logo setting. }}
+        <a href="{{{ config.homeurl }}}"
+           data-region="site-home-link"
+           class="aabtn text-reset"
+           title="{{sitename}}">
+            <span class="sitename">{{{sitename}}}</span>
+        </a>
     {{/drawerheading}}
     {{$drawercontent}}
-        <div class="list-group">
-            {{#mobileprimarynav}}
-                {{#haschildren}}
-                    <a id="drop-down-{{{sort}}}" href="#"
-                       class="list-group-item list-group-item-action icons-collapse-expand {{^isopen}}collapsed {{/isopen}}d-flex"
-                       data-toggle="collapse" data-target="#drop-down-menu-{{{sort}}}"
-                       aria-expanded="{{#isopen}}true{{/isopen}}{{^isopen}}false{{/isopen}}"
-                       aria-controls="drop-down-menu-{{{sort}}}">
-                        {{{text}}}
-                        <span class="ms-auto expanded-icon icon-no-margin mx-2">
-                                {{#pix}} t/expanded, core {{/pix}}
-                            <span class="sr-only">
-                                {{#str}} collapse, core {{/str}}
-                            </span>
-                            </span>
-                        <span class="ms-auto collapsed-icon icon-no-margin mx-2">
-                                {{#pix}} t/collapsed, core {{/pix}}
-                            <span class="sr-only">
-                                {{#str}} expand, core {{/str}}
-                            </span>
-                            </span>
-                    </a>
-                    <div class="collapse {{#isopen}}show {{/isopen}}list-group-item p-0 border-0" role="menu"
-                         id="drop-down-menu-{{{sort}}}" aria-labelledby="drop-down-{{{sort}}}">
-                        {{#children}}
-                            {{^divider}}
-                                <a href="{{{url}}}"
-                                   class="ps-5 {{^isactive}}bg-light{{/isactive}}{{#isactive}}active{{/isactive}} list-group-item list-group-item-action">{{{text}}}</a>
-                            {{/divider}}
-                        {{/children}}
-                    </div>
-                {{/haschildren}}
-                {{^haschildren}}
-                    <a href="{{{url}}}"
-                       class="list-group-item list-group-item-action {{#isactive}}active{{/isactive}} {{#classes}}{{.}} {{/classes}}"
-                       {{#isactive}}aria-current="true"{{/isactive}}>
-                        {{{text}}}
-                    </a>
-                {{/haschildren}}
-            {{/mobileprimarynav}}
-        </div>
+        <nav class="mobile-primary-navigation" aria-label="{{#str}}navigation, core{{/str}}">
+            <div class="mobile-primary-navigation__caption" aria-hidden="true">
+                {{#str}}navigation, core{{/str}}
+            </div>
+            <ul class="mobile-primary-navigation__list">
+                {{#mobileprimarynav}}
+                    <li class="mobile-primary-navigation__item">
+                        {{#haschildren}}
+                            <button
+                                type="button"
+                                id="mobile-primary-nav-toggle-{{sort}}"
+                                class="mobile-primary-navigation__trigger {{#isactive}}is-active{{/isactive}}"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#mobile-primary-nav-panel-{{sort}}"
+                                aria-expanded="{{#isopen}}true{{/isopen}}{{^isopen}}false{{/isopen}}"
+                                aria-controls="mobile-primary-nav-panel-{{sort}}"
+                            >
+                                <span class="mobile-primary-navigation__label">{{{text}}}</span>
+                                <span class="mobile-primary-navigation__chevron" aria-hidden="true"></span>
+                            </button>
+                            <div
+                                id="mobile-primary-nav-panel-{{sort}}"
+                                class="collapse {{#isopen}}show{{/isopen}} mobile-primary-navigation__panel"
+                            >
+                                <ul class="mobile-primary-navigation__submenu">
+                                    {{#children}}
+                                        {{^divider}}
+                                            <li>
+                                                <a
+                                                    href="{{{url}}}"
+                                                    class="mobile-primary-navigation__sublink {{#isactive}}is-active{{/isactive}}"
+                                                    {{#isactive}}aria-current="page"{{/isactive}}
+                                                >{{{text}}}</a>
+                                            </li>
+                                        {{/divider}}
+                                    {{/children}}
+                                </ul>
+                            </div>
+                        {{/haschildren}}
+                        {{^haschildren}}
+                            <a
+                                href="{{{url}}}"
+                                class="mobile-primary-navigation__link {{#isactive}}is-active{{/isactive}} {{#classes}}{{.}} {{/classes}}"
+                                {{#isactive}}aria-current="page"{{/isactive}}
+                            >{{{text}}}</a>
+                        {{/haschildren}}
+                    </li>
+                {{/mobileprimarynav}}
+            </ul>
+        </nav>
+        {{! The course index is a single component: JS moves its existing DOM here on mobile. }}
+        {{#courseindex}}
+            <section class="mobile-primary-navigation__course" aria-labelledby="mobile-courseindex-heading">
+                <div id="mobile-courseindex-heading" class="mobile-primary-navigation__caption">
+                    {{#str}}courseindex, core_courseformat{{/str}}
+                </div>
+                <div id="mobile-courseindex-panel"
+                     class="mobile-primary-navigation__course-panel">
+                    <div data-region="mobile-courseindex-controls"></div>
+                    <div data-region="mobile-courseindex-content"></div>
+                </div>
+            </section>
+        {{/courseindex}}
     {{/drawercontent}}
     {{$drawerstate}}show-drawer-primary{{/drawerstate}}
 {{/ theme_degrade/drawer}}
+
+{{#courseindex}}
+{{#js}}
+require(['theme_boost/drawers'], function(Drawers) {
+    // Reuse the original DOM. Duplicating the HTML would duplicate courseindex IDs and reactive controls.
+    const courseIndex = document.getElementById('courseindex');
+    const courseControls = document.getElementById('courseindexdrawercontrols');
+    const desktopDrawer = document.getElementById('theme_degrade-drawers-courseindex');
+    const mobileIndexSlot = document.querySelector('[data-region="mobile-courseindex-content"]');
+    const mobileControlsSlot = document.querySelector('[data-region="mobile-courseindex-controls"]');
+
+    if (!courseIndex || !desktopDrawer || !mobileIndexSlot) {
+        return;
+    }
+
+    // Placeholders let us restore both elements to their exact original locations on desktop.
+    const originalIndexPosition = document.createComment('course-index-desktop-position');
+    const originalControlsPosition = courseControls ? document.createComment('course-controls-desktop-position') : null;
+    courseIndex.parentNode.insertBefore(originalIndexPosition, courseIndex);
+    if (courseControls && mobileControlsSlot) {
+        courseControls.parentNode.insertBefore(originalControlsPosition, courseControls);
+    }
+
+    const mobileViewport = window.matchMedia('(max-width: 767.98px)');
+    const updateCourseIndexLocation = () => {
+        if (mobileViewport.matches) {
+            // On mobile, the independent drawer must not open over the combined navigation.
+            const drawer = Drawers.getDrawerInstanceForNode(desktopDrawer);
+            if (drawer && drawer.isOpen) {
+                drawer.closeDrawer({focusOnOpenButton: false, updatePreferences: false});
+            }
+            if (courseControls && mobileControlsSlot && courseControls.parentNode !== mobileControlsSlot) {
+                mobileControlsSlot.appendChild(courseControls);
+            }
+            if (courseIndex.parentNode !== mobileIndexSlot) {
+                mobileIndexSlot.appendChild(courseIndex);
+            }
+        } else {
+            if (courseControls && originalControlsPosition && courseControls.parentNode !== originalControlsPosition.parentNode) {
+                originalControlsPosition.parentNode.insertBefore(courseControls, originalControlsPosition);
+            }
+            if (courseIndex.parentNode !== originalIndexPosition.parentNode) {
+                originalIndexPosition.parentNode.insertBefore(courseIndex, originalIndexPosition);
+            }
+        }
+    };
+
+    updateCourseIndexLocation();
+    if (typeof mobileViewport.addEventListener === 'function') {
+        mobileViewport.addEventListener('change', updateCourseIndexLocation);
+    } else {
+        mobileViewport.addListener(updateCourseIndexLocation);
+    }
+});
+{{/js}}
+{{/courseindex}}

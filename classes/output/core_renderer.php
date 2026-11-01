@@ -606,40 +606,27 @@ class core_renderer extends \core_renderer {
     }
 
     /**
-     * Return the site's compact logo URL, if any.
+     * Return the login logo from the active theme, falling back to degrade's image.
      *
-     * @param int $maxwidth The maximum width, or null when the maximum width does not matter.
-     * @param int $maxheight The maximum height, or null when the maximum height does not matter.
+     * A child theme can configure its own loginlogo without losing its branding.
+     * The setting name and file area must match the admin_setting_configstoredfile.
      *
      * @return moodle_url|false
-     *
-     * @throws Exception
      */
-    private function get_login_logo_url($maxwidth = 250, $maxheight = 130) {
-        static $return = null;
-        if ($return !== null) {
-            return $return;
+    private function get_login_logo_url() {
+        $logo = $this->page->theme->setting_file_url("loginlogo", "loginlogo");
+        if ($logo) {
+            return $logo;
         }
 
-        $logologin = get_config("theme_degrade", "logologin");
-        if (empty($logologin)) {
-            return false;
+        $logo = theme_degrade_setting_file_url("loginlogo");
+        if ($logo) {
+            return $logo;
         }
 
-        // Hide the requested size in the file path.
-        $filepath = "{$maxwidth}x{$maxheight}/";
-
-        // Use $CFG->themerev to prevent browser caching when the file changes.
-        return $return = moodle_url::make_pluginfile_url(
-            context_system::instance()->id,
-            "theme_degrade",
-            "logologin",
-            $filepath,
-            theme_get_revision(),
-            $logologin
-        );
+        // Support an existing legacy login-logo file, if present.
+        return theme_degrade_setting_file_url("logologin");
     }
-
     /**
      * The standard tags (meta tags, links to stylesheets and JavaScript, etc.)
      * that should be included in the <head> tag. Designed to be called in theme

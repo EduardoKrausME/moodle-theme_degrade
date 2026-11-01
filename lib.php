@@ -299,10 +299,15 @@ function theme_degrade_progress_content() {
     }
 
     if (!$completion->is_tracked_user($USER->id)) {
-        $SESSION->notifications[] = (object) [
-            "message" => get_string("notenrolledincourse", "theme_degrade"),
-            "type" => notification::NOTIFY_WARNING,
-        ];
+        // Not being tracked for completion does not mean the user is not enrolled.
+        // Teachers and other roles may be enrolled without completion tracking.
+        $context = context_course::instance($COURSE->id);
+        if (!is_enrolled($context, $USER->id, "", true)) {
+            $SESSION->notifications[] = (object) [
+                "message" => get_string("notenrolledincourse", "theme_degrade"),
+                "type" => notification::NOTIFY_WARNING,
+            ];
+        }
         return ["isprogress" => false];
     }
 

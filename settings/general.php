@@ -109,6 +109,7 @@ $setting = new admin_setting_configcheckbox(
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 
+
 // Top colors.
 $setting = new admin_setting_heading(
     "theme_degrade/top_color_heading",

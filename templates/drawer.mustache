@@ -34,7 +34,8 @@
         data-forceopen="{{$forceopen}}0{{/forceopen}}"
         data-close-on-resize="{{$drawercloseonresize}}0{{/drawercloseonresize}}">
     <div class="drawerheader">
-        <button class="btn drawertoggle icon-no-margin hidden"
+        {{$drawerheading}}{{/drawerheading}}
+        <button class="btn drawertoggle icon-no-margin"
                 data-toggler="drawers"
                 data-action="closedrawer"
                 data-target="{{$id}}{{/id}}"
@@ -43,13 +44,12 @@
                 title="{{$closebuttontext}}{{#str}}closedrawer, core{{/str}}{{/closebuttontext}}">
             {{#pix}} e/cancel, core {{/pix}}
         </button>
-        {{$drawerheading}}{{/drawerheading}}
-        <div class="course-progressbar-wrapper">
-            {{$drawershowprogress}}{{/drawershowprogress}}
-        </div>
-        <div class="drawerheadercontent hidden">
-            {{$drawerheadercontent}}{{/drawerheadercontent}}
-        </div>
+    </div>
+    <div class="course-progressbar-wrapper">
+        {{$drawershowprogress}}{{/drawershowprogress}}
+    </div>
+    <div class="drawerheadercontent hidden">
+        {{$drawerheadercontent}}{{/drawerheadercontent}}
     </div>
     <div class="drawercontent drag-container" data-usertour="scroller">
         {{$drawercontent}}{{/drawercontent}}

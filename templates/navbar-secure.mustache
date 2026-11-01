@@ -21,20 +21,13 @@
 
     Example context (json):
     {
-        "output": {
-            "should_display_navbar_logo": "true",
-            "get_compact_logo_url": "http://example.com/image.png"
-        },
         "sitename": "Moodle Site"
     }
 }}
 <nav class="navbar fixed-top navbar-light bg-white navbar-expand" aria-label="{{#str}}sitemenubar, admin{{/str}}">
     <div class="container-fluid">
         <div class="navbar-brand d-flex align-items-center m-0 p-0 aabtn">
-            {{# output.should_display_navbar_logo }}
-                <img src="{{{output.get_compact_logo_url}}}" class="logo me-1" alt="{{{sitename}}}">
-            {{/ output.should_display_navbar_logo }}
-            {{{sitename}}}
+            <span class="sitename">{{{sitename}}}</span>
         </div>
 
         {{# output.secure_layout_language_menu }}

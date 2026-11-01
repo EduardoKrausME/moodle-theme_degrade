@@ -216,14 +216,9 @@ $right-drawer-width: 320px;
 }
 @include media-breakpoint-up(lg) {
     .drawer {
-        // Workaround to display the skip link elements from the blocks drawer infront of the navbar.
-        // As the skip link is in a fixed position and z-index for this element is ignored
-        // then it is hidden behind the top navbar.
-        // The workaround is to actually give a z-index to the drawer so it appears in front of the
-        // navbar (https://developer.mozilla.org/en-US/docs/Web/CSS/z-index).
-        &#theme_degrade-drawers-blocks:focus-within {
-            z-index: $zindex-fixed + 1;
-        }
+        // Keep the drawer below the fixed navbar even while a close button or a skip link
+        // has focus. Its position follows the navbar in templates/drawers.mustache.
+        // Do not raise the entire blocks drawer on :focus-within: that hides the header.
         &.not-initialized {
             display: block;
         }

@@ -41,7 +41,11 @@ $options = [
     "serenity-med-red" => get_string("logintheme_serenity-med-red", "theme_degrade"),
 ];
 $mustachecontext = (object)[];
-$url = $OUTPUT->get_logo_url();
+// Show the configured login logo in the layout previews as well.
+$url = theme_degrade_setting_file_url("loginlogo");
+if (!$url) {
+    $url = $OUTPUT->get_logo_url();
+}
 $mustachecontext->logourl = $url ? $url->out(false) : null;
 $mustachecontext->sitename = format_string($SITE->fullname);
 $mustachecontext->themes = [];

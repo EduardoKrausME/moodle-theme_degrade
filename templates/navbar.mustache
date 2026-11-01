@@ -23,8 +23,6 @@
     Example context (json):
     {
         "output": {
-            "should_display_navbar_logo": true,
-            "get_compact_logo_url": "http://placekitten.com/50/50",
             "custom_menu": "<li>..</li>",
             "page_heading_menu": "<li>..</li>",
             "search_box": "<div><input type='text'></div>",
@@ -61,22 +59,17 @@
     <div class="container-fluid">
         {{#output.navbar_layout_is_institutional}}
             <div class="d-flex flex-column align-items-stretch w-100 p-0">
-                {{! First row: logo + usernavigation }}
+                {{! First row: site name + user navigation }}
                 <div class="navbar-row-top d-flex align-items-center w-100 px-2 px-md-3">
-                    <button class="navbar-toggler aabtn d-block d-md-none px-1 my-1 border-0 me-2"
+                    <button type="button"  class="navbar-toggler aabtn d-block d-md-none px-1 my-1 border-0 me-2"
                             data-toggler="drawers"
-                            data-action="toggle" data-target="theme_degrade-drawers-primary">
-                        <span class="navbar-toggler-icon"></span>
+                            data-action="toggle" data-target="theme_degrade-drawers-primary" aria-controls="theme_degrade-drawers-primary" aria-expanded="false">
+                        <span class="navbar-toggler-icon" aria-hidden="true"></span>
                         <span class="sr-only">{{#str}}sidepanel, core{{/str}}</span>
                     </button>
 
                     <a href="{{{ config.homeurl }}}" class="navbar-brand d-flex align-items-center m-0 me-3 p-0 aabtn">
-                        {{# output.should_display_navbar_logo }}
-                            <img src="{{{output.get_compact_logo_url}}}" class="logo me-1" alt="{{{sitename}}}">
-                        {{/ output.should_display_navbar_logo }}
-                        {{^ output.should_display_navbar_logo }}
-                            {{{sitename}}}
-                        {{/ output.should_display_navbar_logo }}
+                        <span class="sitename">{{{sitename}}}</span>
                     </a>
 
                     <div id="usernavigation" class="usernavigation navbar-nav ms-auto">
@@ -119,21 +112,16 @@
             </div>
         {{/output.navbar_layout_is_institutional}}
         {{^output.navbar_layout_is_institutional}}
-            <button class="navbar-toggler aabtn d-block d-md-none px-1 my-1 border-0" data-toggler="drawers"
-                    data-action="toggle" data-target="theme_degrade-drawers-primary">
-                <span class="navbar-toggler-icon"></span>
+            <button type="button"  class="navbar-toggler aabtn d-block d-md-none px-1 my-1 border-0" data-toggler="drawers"
+                    data-action="toggle" data-target="theme_degrade-drawers-primary" aria-controls="theme_degrade-drawers-primary" aria-expanded="false">
+                <span class="navbar-toggler-icon" aria-hidden="true"></span>
                 <span class="sr-only">{{#str}}sidepanel, core{{/str}}</span>
             </button>
 
             <a href="{{{ config.homeurl }}}"
                class="navbar-brand d-none d-md-flex align-items-center m-0 me-4 p-0 aabtn">
 
-                {{# output.should_display_navbar_logo }}
-                    <img src="{{{output.get_compact_logo_url}}}" class="logo me-1" alt="{{{sitename}}}">
-                {{/ output.should_display_navbar_logo }}
-                {{^ output.should_display_navbar_logo }}
-                    {{{sitename}}}
-                {{/ output.should_display_navbar_logo }}
+                <span class="sitename">{{{sitename}}}</span>
             </a>
             {{#primarymoremenu}}
                 <div class="primary-navigation">
@@ -168,6 +156,49 @@
 </nav>
 
 {{> theme_degrade/primary-drawer-mobile }}
+
+{{#js}}
+require(['theme_boost/drawers'], function(Drawers) {
+    // Keep the state of drawer controls in sync, including drawers which start open.
+    // This uses the existing drawer events and does not need an additional compiled AMD module.
+    const syncDrawerControls = drawer => {
+        if (!drawer || !drawer.id) {
+            return;
+        }
+        document.querySelectorAll('[data-toggler="drawers"][data-target]').forEach(button => {
+            if (button.dataset.target !== drawer.id ||
+                    !['toggle', 'opendrawer'].includes(button.dataset.action)) {
+                return;
+            }
+            button.setAttribute('aria-controls', drawer.id);
+            button.setAttribute('aria-expanded', drawer.classList.contains('show') ? 'true' : 'false');
+        });
+    };
+
+    document.querySelectorAll('[data-region="fixed-drawer"]').forEach(syncDrawerControls);
+    document.addEventListener(Drawers.eventTypes.drawerShown, event => syncDrawerControls(event.target));
+    document.addEventListener(Drawers.eventTypes.drawerHidden, event => syncDrawerControls(event.target));
+
+    // Allow keyboard users to dismiss the drawer without trapping focus inside it.
+    document.addEventListener('keydown', event => {
+        if (event.key !== 'Escape' || event.defaultPrevented) {
+            return;
+        }
+        if (!(event.target instanceof Element)) {
+            return;
+        }
+        const drawer = event.target.closest('[data-region="fixed-drawer"].show');
+        if (!drawer || event.target.closest('.dropdown-menu.show, [role="listbox"], [role="dialog"], input, select, textarea')) {
+            return;
+        }
+        const instance = Drawers.getDrawerInstanceForNode(drawer);
+        if (instance) {
+            event.preventDefault();
+            instance.closeDrawer();
+        }
+    });
+});
+{{/js}}
 
 <script>
 (function () {
