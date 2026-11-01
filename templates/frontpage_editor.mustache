@@ -79,8 +79,8 @@
          data-title="{{#str}}frontpage_add_block_title, theme_degrade{{/str}}">
     </div>
 {{/editing}}
-{{#homemode_page_warningnopages}}
-    <div class="alert alert-warning" role="status">
-        {{#str}}frontpage_page_warningnopages, theme_degrade{{/str}}
-    </div>
-{{/homemode_page_warningnopages}}
+{{^editing}}
+    {{#homemode_page_warningnopages}}
+        <div class="alert alert-warning">{{#str}}frontpage_enable_editing, theme_degrade{{/str}}</div>
+    {{/homemode_page_warningnopages}}
+{{/editing}}

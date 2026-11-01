@@ -65,37 +65,23 @@ if (optional_param("POST", false, PARAM_INT)) {
         }
     }
 
-    // Save homepage sections for the language used by the frontpage renderer.
-    // Keep existing records intact; Quick Start adds sections, the page editor removes them.
+    // Save banners home.
     require_once("../_editor/editor-lib.php");
-    $lang = current_language();
     $pages = $DB->get_records("theme_degrade_pages", ["local" => "home"]);
-    $availabletemplates = array_column(theme_degrade_list_templates(), "id");
-    $availabletemplates = array_fill_keys($availabletemplates, true);
-    $existingtemplates = [];
-    foreach ($pages as $page) {
-        if (!empty($page->template) && ($page->lang === $lang || $page->lang === "all")) {
-            $existingtemplates[$page->template] = true;
-        }
-    }
-
-    $failedtemplates = [];
     $homemodebanners = optional_param_array("homemode_banners", [], PARAM_TEXT);
     foreach ($homemodebanners as $template) {
-        if (!isset($availabletemplates[$template])) {
-            $failedtemplates[] = $template;
-            continue;
-        }
-        if (isset($existingtemplates[$template])) {
-            continue;
+        $located = false;
+        foreach ($pages as $page) {
+            if (isset($page->template[3]) && $page->template == $template) {
+                $located = true;
+            }
         }
 
-        try {
-            theme_degrade_editor_create_page($template, $lang, "home");
-            $existingtemplates[$template] = true;
-        } catch (\Throwable $e) {
-            error_log("theme_degrade Quick Start: could not create homepage section {$template}: " . $e->getMessage());
-            $failedtemplates[] = $template;
+        if (!$located) {
+            try {
+                theme_degrade_editor_create_page($template, $USER->lang, "home");
+            } catch (Exception $e) { // phpcs:disable
+            }
         }
     }
 
@@ -157,15 +143,6 @@ if (optional_param("POST", false, PARAM_INT)) {
 
     theme_reset_all_caches();
 
-    if ($failedtemplates) {
-        redirect(
-            new moodle_url("/theme/degrade/quickstart/index.php", ["section" => "home"]),
-            get_string("quickstart_home_savefailed", "theme_degrade", s(implode(", ", $failedtemplates))),
-            null,
-            \core\output\notification::NOTIFY_ERROR
-        );
-    }
-
     redirect(new moodle_url("/"), get_string("quickstart_banner-saved", "theme_degrade"));
 }
 
@@ -206,23 +183,17 @@ if ($savetheme == "degrade") {
 // Home.
 require_once(__DIR__ . "/../_editor/editor-lib.php");
 $pages = $DB->get_records("theme_degrade_pages", ["local" => "home"]);
-$lang = current_language();
 $templates = [];
 foreach ($pages as $page) {
-    if (!empty($page->template) && ($page->lang === $lang || $page->lang === "all")) {
+    if (isset($page->template[3])) {
         $templates[$page->template] = true;
-    }
-}
-$alltemplates = theme_degrade_list_templates_category();
-foreach ($alltemplates as $categorykey => $category) {
-    foreach ($category["itens"] as $itemkey => $item) {
-        $alltemplates[$categorykey]["itens"][$itemkey]["selected"] = isset($templates[$item["id"]]);
     }
 }
 $homemustache = [
     "homemode" => get_config("theme_degrade", "homemode"),
+    "templates" => $templates,
     "next" => "courses",
-    "all_templates" => $alltemplates,
+    "all_templates" => theme_degrade_list_templates_category(),
 ];
 echo $OUTPUT->render_from_template("theme_degrade/quickstart/home", $homemustache);
 
