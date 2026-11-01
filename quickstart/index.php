@@ -93,7 +93,8 @@ if (optional_param("POST", false, PARAM_INT)) {
             theme_degrade_editor_create_page($template, $lang, "home");
             $existingtemplates[$template] = true;
         } catch (\Throwable $e) {
-            debugging("theme_degrade Quick Start: could not create homepage section {$template}: " . $e->getMessage(), DEBUG_DEVELOPER);
+            debugging("theme_degrade Quick Start: could not create homepage section {$template}: " .
+                $e->getMessage(), DEBUG_DEVELOPER);
             $failedtemplates[] = $template;
         }
     }
