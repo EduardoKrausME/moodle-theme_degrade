@@ -246,6 +246,7 @@ $string['quickstart_course_choose_below'] = 'Or choose a banner below';
 $string['quickstart_course_upload_or_choose'] = 'Upload an image or choose the type of banner you want';
 $string['quickstart_home_pagebuilder'] = 'Home with Page Editor';
 $string['quickstart_home_pagebuilder_desc'] = 'Customizable interface with editable sections.';
+$string['quickstart_home_savefailed'] = 'Some homepage sections could not be created: {$a}. Existing sections were preserved; enable Moodle debugging and try again.';
 $string['quickstart_home_selectsections'] = 'Select the desired sections:';
 $string['quickstart_home_selectstyle'] = 'Choose the Home style';
 $string['quickstart_home_traditional'] = 'Traditional Moodle Home';
