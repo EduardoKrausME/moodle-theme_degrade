@@ -599,7 +599,7 @@ class core_renderer extends \core_renderer {
             $url = $this->get_logo_url();
         }
         if ($url) {
-            $mustachecontext->logourl = $url->out(false);
+            $mustachecontext->logourl = $url instanceof moodle_url ? $url->out(false) : (string) $url;
         }
 
         return $this->render_from_template("theme_degrade/core/theme_login_form", $mustachecontext);
