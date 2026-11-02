@@ -49,7 +49,7 @@ class hook_callbacks {
         global $CFG, $COURSE, $PAGE;
 
         if ($COURSE->id) {
-            self::$hasicons = (int) get_config("theme_degrade", "course_sections_icons_{$COURSE->id}");
+            self::$hasicons = (int)get_config("theme_degrade", "course_sections_icons_{$COURSE->id}");
             if (self::$hasicons && !$PAGE->user_is_editing()) {
                 $hook->add_attribute("data-hasicons", "yes");
             }
@@ -192,7 +192,9 @@ class hook_callbacks {
                     "/",
                     $customimage->filename
                 );
-                $images["blocks"][] = ["cmid" => $customimage->itemid, "thumb" => $imageurl->out()];
+                if ($imageurl) {
+                    $images["blocks"][] = ["cmid" => $customimage->itemid, "thumb" => $imageurl->out()];
+                }
             }
 
             // Icons modules.
@@ -212,8 +214,9 @@ class hook_callbacks {
                     "/",
                     $customicon->filename
                 );
-
-                $images["icons"][] = ["cmid" => $customicon->itemid, "thumb" => $imageurl->out()];
+                if ($imageurl) {
+                    $images["icons"][] = ["cmid" => $customicon->itemid, "thumb" => $imageurl->out()];
+                }
             }
 
             // Icons Color.
@@ -259,7 +262,7 @@ class hook_callbacks {
         $requesturi = $_SERVER["REQUEST_URI"];
         $hasuri = strpos($requesturi, "course/view.php") || strpos($requesturi, "course/section.php");
         if ($hasuri) {
-            $header = (object) [];
+            $header = (object)[];
             $header->headeractions_edit = false;
             $header->hasnavbarcourse = false;
             $header->hasbannercourse = false;
