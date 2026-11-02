@@ -47055,6 +47055,13 @@ body.mic-toolbox-content-images span.mic-toolbox-images-titles {
   display: none;
 }
 
+[data-basename=degrade][data-bs-theme=dark] #page.drawers div[role=main] {
+  background: rgba(255, 255, 255, 0.1411764706);
+}
+[data-basename=degrade][data-bs-theme=dark] .breadcrumb {
+  background-color: transparent !important;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

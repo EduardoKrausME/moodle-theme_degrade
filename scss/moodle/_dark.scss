@@ -1,0 +1,10 @@
+[data-basename=degrade][data-bs-theme=dark] {
+    #page.drawers {
+        div[role=main] {
+            background: #FFFFFF24;
+        }
+    }
+    .breadcrumb {
+        background-color: transparent !important;
+    }
+}
